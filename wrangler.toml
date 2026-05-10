@@ -1,0 +1,11 @@
+# ═══════════════════════════════════════════════════════════════
+# TyD 2º ESO · IES Jiménez de Quesada
+# Configuración de Cloudflare Workers Static Assets
+# ═══════════════════════════════════════════════════════════════
+
+name = "tyd2-ies-jdq"
+compatibility_date = "2026-05-10"
+
+# Sitio estático: servir todos los archivos del repo como assets
+[assets]
+directory = "./"

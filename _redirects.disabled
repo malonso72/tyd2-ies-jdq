@@ -1,0 +1,11 @@
+# ═══════════════════════════════════════════════════════════════
+# TyD 2º ESO · IES Jiménez de Quesada
+# Reglas de redirección compatibles con Cloudflare Pages y Netlify
+# (renombrado a .disabled — Workers Static Assets no las usa)
+# ═══════════════════════════════════════════════════════════════
+
+# Pretty URLs · permitir acceso sin extensión .html
+/unidades/:slug                /unidades/:slug/index.html      200
+/unidades/:slug/:page          /unidades/:slug/:page.html      200
+/herramientas/:slug            /herramientas/:slug.html        200
+/proyectos/:slug               /proyectos/:slug.html           200
