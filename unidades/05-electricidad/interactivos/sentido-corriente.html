@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sentido convencional vs. real de la corriente · 2º ESO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #f6f1e6;
+    --bg-card:  #fffaf0;
+    --ink:       #1d1d1f;
+    --ink-soft:  #4a4a4f;
+    --line:      #2a2a2e;
+    --conv:      #d63b2f;
+    --conv-soft: #fde2df;
+    --real:      #1d6fb8;
+    --real-soft: #dceaf6;
+    --bulb:      #f4b942;
+    --bulb-glow: #ffe183;
+    --ok:        #2e8b57;
+    --no:        #c0392b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    padding: 0;
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(214,59,47,0.04) 0%, transparent 40%),
+      radial-gradient(circle at 85% 85%, rgba(29,111,184,0.04) 0%, transparent 40%);
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 48px 28px 80px;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 56px;
+    padding-bottom: 40px;
+    border-bottom: 1px dashed rgba(0,0,0,0.15);
+  }
+  .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+  h1 .conv-text { color: var(--conv); }
+  h1 .real-text { color: var(--real); }
+  .subtitle {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  h2 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin-bottom: 18px;
+    letter-spacing: -0.01em;
+  }
+  h3 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  section { margin-bottom: 56px; }
+  p { margin-bottom: 12px; }
+  p:last-child { margin-bottom: 0; }
+
+  /* INTRO */
+  .intro p { font-size: 1.05rem; }
+  .intro strong { color: var(--ink); background: rgba(244,185,66,0.3); padding: 0 4px; border-radius: 3px; }
+
+  /* CIRCUITO */
+  .circuit-section {
+    background: var(--bg-card);
+    border: 2px solid var(--line);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 6px 6px 0 var(--line);
+  }
+  .circuit-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed rgba(0,0,0,0.15);
+  }
+  .btn {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 10px 18px;
+    border: 2px solid var(--line);
+    border-radius: 999px;
+    background: var(--bg-card);
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); box-shadow: 2px 2px 0 var(--line); }
+  .btn:active { transform: translateY(1px); box-shadow: none; }
+  .btn-primary {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+  }
+  .btn-primary:hover { background: #000; }
+  .btn-primary.real-mode { background: var(--real); border-color: var(--real); }
+  .btn-primary.conv-mode { background: var(--conv); border-color: var(--conv); }
+  .speed-control {
+    display: flex; align-items: center; gap: 10px;
+    margin-left: auto;
+    font-size: 0.85rem; color: var(--ink-soft);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .speed-control input[type=range] {
+    width: 110px;
+    accent-color: var(--ink);
+  }
+  .circuit-svg-wrap {
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.08);
+    padding: 8px;
+  }
+  svg.circuit { width: 100%; height: auto; display: block; }
+
+  .info-bar {
+    margin-top: 22px;
+    padding: 18px 22px;
+    border-radius: 10px;
+    display: flex; gap: 14px; align-items: flex-start;
+    background: var(--conv-soft);
+    border-left: 5px solid var(--conv);
+    transition: all 0.3s ease;
+  }
+  .info-bar.real-mode {
+    background: var(--real-soft);
+    border-left-color: var(--real);
+  }
+  .info-bar .icon {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--conv);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    display: grid; place-items: center;
+    border: 2px solid var(--conv);
+    border-radius: 50%;
+    background: #fff;
+  }
+  .info-bar.real-mode .icon { color: var(--real); border-color: var(--real); }
+  .info-bar .text { font-size: 0.98rem; }
+  .info-bar .text strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+
+  /* COMPARATIVA */
+  .grid-comp {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .card {
+    padding: 24px;
+    border-radius: 14px;
+    background: var(--bg-card);
+    border: 2px solid var(--line);
+  }
+  .card.conv-card { border-color: var(--conv); }
+  .card.real-card { border-color: var(--real); }
+  .card .badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    color: #fff;
+  }
+  .card.conv-card .badge { background: var(--conv); }
+  .card.real-card .badge { background: var(--real); }
+  .card ul { list-style: none; padding: 0; }
+  .card li {
+    padding: 8px 0 8px 24px;
+    position: relative;
+    font-size: 0.95rem;
+    border-bottom: 1px dotted rgba(0,0,0,0.1);
+  }
+  .card li:last-child { border-bottom: none; }
+  .card li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+  }
+  .card.conv-card li::before { color: var(--conv); }
+  .card.real-card li::before { color: var(--real); }
+
+  /* HISTORIA */
+  .timeline {
+    list-style: none;
+    padding: 0;
+    counter-reset: paso;
+  }
+  .timeline li {
+    position: relative;
+    padding: 18px 18px 18px 64px;
+    margin-bottom: 14px;
+    background: var(--bg-card);
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.1);
+    counter-increment: paso;
+  }
+  .timeline li::before {
+    content: counter(paso);
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px; height: 36px;
+    background: var(--ink);
+    color: #fff;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .timeline li strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .timeline .year {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  .callout {
+    margin-top: 24px;
+    padding: 22px 26px;
+    background: #fff7e0;
+    border: 2px solid var(--bulb);
+    border-radius: 12px;
+    font-size: 1rem;
+  }
+  .callout strong { color: #8b6914; }
+
+  /* QUIZ */
+  .quiz-question {
+    background: var(--bg-card);
+    border: 2px solid var(--line);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 18px;
+  }
+  .quiz-question .qnum {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .quiz-question .qtext {
+    font-weight: 600;
+    font-size: 1.08rem;
+    margin-bottom: 16px;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-option {
+    text-align: left;
+    padding: 12px 16px;
+    border: 2px solid rgba(0,0,0,0.15);
+    border-radius: 10px;
+    background: #fff;
+    cursor: pointer;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.95rem;
+    transition: all 0.15s ease;
+  }
+  .quiz-option:hover:not(:disabled) {
+    border-color: var(--ink);
+    transform: translateX(2px);
+  }
+  .quiz-option:disabled { cursor: default; }
+  .quiz-option.correct {
+    background: #e8f5ee;
+    border-color: var(--ok);
+    color: var(--ok);
+    font-weight: 600;
+  }
+  .quiz-option.wrong {
+    background: #fdecea;
+    border-color: var(--no);
+    color: var(--no);
+  }
+  .quiz-feedback {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background: #f0f0f0;
+    display: none;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.ok { background: #e8f5ee; color: var(--ok); }
+  .quiz-feedback.no { background: #fdecea; color: var(--no); }
+  .quiz-result {
+    text-align: center;
+    padding: 28px;
+    background: var(--bg-card);
+    border: 2px dashed var(--ink);
+    border-radius: 14px;
+    margin-top: 20px;
+    display: none;
+  }
+  .quiz-result.show { display: block; }
+  .quiz-result .score {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--ink);
+    margin: 8px 0;
+  }
+  .quiz-result .msg { color: var(--ink-soft); }
+  .reset-btn { margin-top: 16px; }
+
+  footer {
+    text-align: center;
+    padding-top: 32px;
+    margin-top: 40px;
+    border-top: 1px dashed rgba(0,0,0,0.15);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* PARTÍCULAS */
+  .particle {
+    transition: opacity 0.25s ease;
+  }
+  .bulb-glow {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .bulb-glow.on { opacity: 0.7; animation: flicker 2s ease-in-out infinite; }
+  @keyframes flicker {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 0.55; }
+  }
+
+  @media (max-width: 700px) {
+    .container { padding: 28px 16px 60px; }
+    .circuit-section { padding: 20px; box-shadow: 4px 4px 0 var(--line); }
+    .speed-control { margin-left: 0; width: 100%; justify-content: space-between; }
+    .grid-comp { grid-template-columns: 1fr; }
+    .timeline li { padding-left: 56px; }
+    .timeline li::before { left: 12px; width: 32px; height: 32px; font-size: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+  <p class="kicker">Tecnología y Digitalización · 2º ESO</p>
+  <h1>El sentido <span class="conv-text">convencional</span> vs.<br>el sentido <span class="real-text">real</span> de la corriente</h1>
+  <p class="subtitle">Dos formas de explicar el mismo fenómeno físico. ¿Por qué se siguen usando las dos? Aquí lo vas a entender de un vistazo.</p>
+</header>
+
+<main>
+
+<!-- INTRO -->
+<section class="intro">
+  <h2>¿Qué es la corriente eléctrica?</h2>
+  <p>La <strong>corriente eléctrica</strong> es el movimiento ordenado de cargas eléctricas a través de un material conductor (normalmente, los cables de cobre de un circuito). En los metales, las cargas que realmente se mueven son los <strong>electrones</strong> (carga negativa).</p>
+  <p>Pero hay un detalle curioso: en los esquemas eléctricos y en las fórmulas que vamos a usar todo el curso, la corriente <em>no</em> se representa en el sentido en el que se mueven los electrones. Veamos por qué.</p>
+</section>
+
+<!-- CIRCUITO INTERACTIVO -->
+<section class="circuit-section">
+  <h2 style="margin-bottom: 6px;">Circuito interactivo</h2>
+  <p style="color: var(--ink-soft); margin-bottom: 22px; font-size: 0.95rem;">Pulsa el botón para cambiar de vista. Las bolitas representan las cargas que se mueven por el circuito.</p>
+
+  <div class="circuit-controls">
+    <button id="btnDirection" class="btn btn-primary conv-mode">Ver sentido real (electrones) →</button>
+    <button id="btnPlay" class="btn">⏸ Pausar</button>
+    <div class="speed-control">
+      <span>Velocidad</span>
+      <input type="range" id="speedRange" min="0.3" max="2.5" step="0.1" value="1">
+    </div>
+  </div>
+
+  <div class="circuit-svg-wrap">
+    <svg class="circuit" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- Path invisible que define el recorrido del circuito (sentido horario empezando en + de la pila) -->
+      <!-- Pila izquierda (+ arriba): (80,130) → arriba (80,55) → derecha (540,55) → abajo (540,265) → izquierda (80,265) → cierra hasta (80,190) que es el - -->
+      <path id="wirePath"
+        d="M 80,130 L 80,55 L 540,55 L 540,265 L 80,265 L 80,190"
+        fill="none" stroke="none"/>
+
+      <!-- Cable visible (mismo recorrido, con stroke) -->
+      <path d="M 80,130 L 80,55 L 540,55 L 540,265 L 80,265 L 80,190"
+        fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+
+      <!-- HALO de la bombilla (debajo del símbolo) -->
+      <circle class="bulb-glow on" cx="540" cy="160" r="48" fill="var(--bulb-glow)"/>
+
+      <!-- PILA: dos rayas verticales en x=80, una larga (+) en y=130, una corta (-) en y=190 -->
+      <g id="pila">
+        <!-- Raya larga: + -->
+        <line x1="55" y1="130" x2="105" y2="130" stroke="#1d1d1f" stroke-width="4" stroke-linecap="round"/>
+        <!-- Raya corta: - -->
+        <line x1="68" y1="190" x2="92" y2="190" stroke="#1d1d1f" stroke-width="4" stroke-linecap="round"/>
+        <!-- Etiquetas -->
+        <text x="30" y="135" font-family="Bricolage Grotesque, sans-serif" font-size="22" font-weight="800" fill="var(--conv)">+</text>
+        <text x="34" y="197" font-family="Bricolage Grotesque, sans-serif" font-size="22" font-weight="800" fill="var(--real)">−</text>
+        <text x="30" y="240" font-family="JetBrains Mono, monospace" font-size="11" fill="#4a4a4f">PILA</text>
+      </g>
+
+      <!-- INTERRUPTOR cerrado en el cable superior, centrado en x=300, y=55 -->
+      <g id="interruptor">
+        <!-- Cubre un trozo de cable con blanco -->
+        <line x1="278" y1="55" x2="322" y2="55" stroke="#fff" stroke-width="6"/>
+        <!-- Pivote izquierdo -->
+        <circle cx="280" cy="55" r="4" fill="#1d1d1f"/>
+        <!-- Brazo cerrado -->
+        <line x1="280" y1="55" x2="320" y2="55" stroke="#1d1d1f" stroke-width="3" stroke-linecap="round"/>
+        <!-- Contacto derecho -->
+        <circle cx="320" cy="55" r="4" fill="#1d1d1f"/>
+        <text x="285" y="40" font-family="JetBrains Mono, monospace" font-size="11" fill="#4a4a4f">INTERRUPTOR</text>
+      </g>
+
+      <!-- BOMBILLA en el cable derecho, centrada en (540, 160) -->
+      <g id="bombilla">
+        <!-- Tapa el cable detrás -->
+        <line x1="540" y1="135" x2="540" y2="185" stroke="#fff" stroke-width="6"/>
+        <!-- Círculo principal -->
+        <circle cx="540" cy="160" r="22" fill="#fff" stroke="#1d1d1f" stroke-width="3"/>
+        <!-- Aspa de la bombilla -->
+        <line x1="524" y1="144" x2="556" y2="176" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="556" y1="144" x2="524" y2="176" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+        <text x="568" y="165" font-family="JetBrains Mono, monospace" font-size="11" fill="#4a4a4f">BOMBILLA</text>
+      </g>
+
+      <!-- Las partículas se inyectan dinámicamente desde JS dentro de este grupo -->
+      <g id="particlesGroup"></g>
+
+    </svg>
+  </div>
+
+  <div id="infoBar" class="info-bar">
+    <div class="icon">+</div>
+    <div class="text">
+      <strong>Sentido convencional</strong>
+      <span>Las cargas positivas (ficticias) se mueven del polo <b>+</b> al polo <b>−</b> a través del circuito exterior. Es el sentido que aparece en TODOS los esquemas y fórmulas.</span>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARATIVA -->
+<section>
+  <h2>Comparativa rápida</h2>
+  <div class="grid-comp">
+    <div class="card conv-card">
+      <span class="badge">Convencional</span>
+      <h3>Lo que dibujamos</h3>
+      <ul>
+        <li><b>Quién se mueve:</b> cargas positivas (ficticias)</li>
+        <li><b>Dirección:</b> de <b>+</b> a <b>−</b> por el exterior</li>
+        <li><b>Quién lo propuso:</b> Benjamin Franklin (s. XVIII)</li>
+        <li><b>Dónde se usa:</b> esquemas, libros de texto, fórmulas, normas técnicas</li>
+      </ul>
+    </div>
+    <div class="card real-card">
+      <span class="badge">Real</span>
+      <h3>Lo que pasa de verdad</h3>
+      <ul>
+        <li><b>Quién se mueve:</b> electrones (carga negativa)</li>
+        <li><b>Dirección:</b> de <b>−</b> a <b>+</b> por el exterior</li>
+        <li><b>Cuándo se descubrió:</b> J.J. Thomson, año 1897</li>
+        <li><b>Dónde se usa:</b> en explicaciones físicas y en electrónica avanzada</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORIA -->
+<section>
+  <h2>¿Y por qué seguimos usando el sentido convencional?</h2>
+  <ol class="timeline">
+    <li>
+      <strong>Franklin se "equivoca" <span class="year">(1750)</span></strong>
+      Benjamin Franklin, sin saber qué era realmente la electricidad, supuso que la corriente era un fluido que iba del <b>+</b> al <b>−</b>. Acertó al 50%: existe un sentido y una dirección, pero no acertó cuál.
+    </li>
+    <li>
+      <strong>El siglo XIX construye toda la teoría sobre esa base <span class="year">(1800–1890)</span></strong>
+      Volta, Ohm, Ampère, Kirchhoff, Faraday… todos formulan sus leyes y dibujan sus esquemas asumiendo que la corriente va de <b>+</b> a <b>−</b>. Se publican libros, se construyen fábricas, se forman ingenieros.
+    </li>
+    <li>
+      <strong>Thomson descubre el electrón <span class="year">(1897)</span></strong>
+      Resulta que las cargas que se mueven en un metal son negativas y van al revés de lo que se suponía. ¡Sorpresa!
+    </li>
+    <li>
+      <strong>La decisión: <em>no cambiar nada</em> <span class="year">(s. XX – hoy)</span></strong>
+      Cambiar el convenio habría supuesto reescribir todos los libros, planos, normas y fórmulas. Y, lo más importante: <b>los cálculos dan exactamente el mismo resultado</b> usando uno u otro sentido. Así que se mantuvo el de Franklin.
+    </li>
+  </ol>
+
+  <div class="callout">
+    💡 <strong>Idea clave para recordar:</strong> el sentido convencional es un <em>acuerdo histórico</em>, no un error. Es como conducir por la derecha o por la izquierda: es un convenio que todo el mundo respeta para que los esquemas se entiendan igual en cualquier país.
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section>
+  <h2>Mini-quiz</h2>
+  <p style="color: var(--ink-soft); margin-bottom: 20px;">3 preguntas rápidas para comprobar que lo has pillado.</p>
+  <div id="quizContainer"></div>
+  <div id="quizResult" class="quiz-result">
+    <div>Tu puntuación:</div>
+    <div class="score"><span id="scoreNum">0</span> / 3</div>
+    <div class="msg" id="scoreMsg"></div>
+    <button class="btn reset-btn" id="btnReset">Volver a intentarlo</button>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  IES Jiménez de Quesada · Tecnología y Digitalización · 2º ESO · v1
+</footer>
+
+</div>
+
+<script>
+// ============================================================
+// ANIMACIÓN DEL CIRCUITO
+// ============================================================
+const svgNS = "http://www.w3.org/2000/svg";
+const wirePath = document.getElementById('wirePath');
+const particlesGroup = document.getElementById('particlesGroup');
+const btnDir = document.getElementById('btnDirection');
+const btnPlay = document.getElementById('btnPlay');
+const speedRange = document.getElementById('speedRange');
+const infoBar = document.getElementById('infoBar');
+const bulbGlow = document.querySelector('.bulb-glow');
+
+const TOTAL_LEN = wirePath.getTotalLength();
+const N_PARTICLES = 14;
+const BASE_SPEED = 60; // unidades de path por segundo
+
+let mode = 'conv';   // 'conv' | 'real'
+let playing = true;
+let speedMul = 1;
+let lastTime = performance.now();
+
+// Crear las partículas
+const particles = [];
+for (let i = 0; i < N_PARTICLES; i++) {
+  const g = document.createElementNS(svgNS, 'g');
+  g.setAttribute('class', 'particle');
+
+  const circle = document.createElementNS(svgNS, 'circle');
+  circle.setAttribute('r', 11);
+  circle.setAttribute('stroke-width', 2);
+
+  const text = document.createElementNS(svgNS, 'text');
+  text.setAttribute('text-anchor', 'middle');
+  text.setAttribute('dominant-baseline', 'central');
+  text.setAttribute('font-family', 'Bricolage Grotesque, sans-serif');
+  text.setAttribute('font-weight', '800');
+  text.setAttribute('fill', '#fff');
+  text.setAttribute('pointer-events', 'none');
+
+  g.appendChild(circle);
+  g.appendChild(text);
+  particlesGroup.appendChild(g);
+
+  particles.push({
+    g: g, circle: circle, text: text,
+    offset: (i / N_PARTICLES) * TOTAL_LEN
+  });
+}
+
+function applyMode() {
+  const isConv = (mode === 'conv');
+  const color = isConv ? 'var(--conv)' : 'var(--real)';
+  const label = isConv ? '+' : 'e⁻';
+  const fontSize = isConv ? '14' : '11';
+
+  particles.forEach(p => {
+    p.circle.setAttribute('fill', color);
+    p.circle.setAttribute('stroke', color);
+    p.text.textContent = label;
+    p.text.setAttribute('font-size', fontSize);
+  });
+
+  // Actualizar UI
+  if (isConv) {
+    btnDir.textContent = 'Ver sentido real (electrones) →';
+    btnDir.classList.remove('real-mode');
+    btnDir.classList.add('conv-mode');
+    infoBar.classList.remove('real-mode');
+    infoBar.querySelector('.icon').textContent = '+';
+    infoBar.querySelector('.text').innerHTML = `
+      <strong>Sentido convencional</strong>
+      <span>Las cargas positivas (ficticias) se mueven del polo <b>+</b> al polo <b>−</b> a través del circuito exterior. Es el sentido que aparece en TODOS los esquemas y fórmulas.</span>
+    `;
+  } else {
+    btnDir.textContent = '← Ver sentido convencional';
+    btnDir.classList.remove('conv-mode');
+    btnDir.classList.add('real-mode');
+    infoBar.classList.add('real-mode');
+    infoBar.querySelector('.icon').textContent = 'e⁻';
+    infoBar.querySelector('.icon').style.fontSize = '0.9rem';
+    infoBar.querySelector('.text').innerHTML = `
+      <strong>Sentido real</strong>
+      <span>Los electrones (con carga negativa) se mueven del polo <b>−</b> al polo <b>+</b> a través del circuito exterior. Es lo que ocurre <em>de verdad</em> en el cable de cobre.</span>
+    `;
+  }
+}
+
+function tick(now) {
+  const dt = Math.min((now - lastTime) / 1000, 0.05);
+  lastTime = now;
+
+  if (playing) {
+    const dirSign = (mode === 'conv') ? 1 : -1;
+    const advance = BASE_SPEED * speedMul * dt * dirSign;
+
+    particles.forEach(p => {
+      p.offset = (p.offset + advance) % TOTAL_LEN;
+      if (p.offset < 0) p.offset += TOTAL_LEN;
+      const pt = wirePath.getPointAtLength(p.offset);
+      p.g.setAttribute('transform', `translate(${pt.x}, ${pt.y})`);
+    });
+  }
+
+  requestAnimationFrame(tick);
+}
+
+// Inicializar posiciones
+particles.forEach(p => {
+  const pt = wirePath.getPointAtLength(p.offset);
+  p.g.setAttribute('transform', `translate(${pt.x}, ${pt.y})`);
+});
+
+applyMode();
+requestAnimationFrame(now => { lastTime = now; tick(now); });
+
+// Listeners
+btnDir.addEventListener('click', () => {
+  mode = (mode === 'conv') ? 'real' : 'conv';
+  applyMode();
+});
+
+btnPlay.addEventListener('click', () => {
+  playing = !playing;
+  btnPlay.textContent = playing ? '⏸ Pausar' : '▶ Reanudar';
+  bulbGlow.classList.toggle('on', playing);
+});
+
+speedRange.addEventListener('input', e => {
+  speedMul = parseFloat(e.target.value);
+});
+
+// ============================================================
+// QUIZ
+// ============================================================
+const QUESTIONS = [
+  {
+    q: "¿En qué sentido circula la corriente <b>convencional</b> por el circuito exterior?",
+    options: [
+      { t: "Del polo positivo (+) al polo negativo (−)", ok: true,  fb: "¡Correcto! El sentido convencional va de + a − por fuera de la pila." },
+      { t: "Del polo negativo (−) al polo positivo (+)", ok: false, fb: "Esa es la dirección del sentido REAL (la de los electrones), no la convencional." },
+      { t: "En los dos sentidos a la vez",                ok: false, fb: "No: en un circuito de corriente continua la corriente tiene un único sentido." }
+    ]
+  },
+  {
+    q: "¿Quién propuso el sentido convencional de la corriente?",
+    options: [
+      { t: "Thomas Edison",     ok: false, fb: "Edison es famoso por la bombilla y la corriente continua, pero no fue quien fijó el convenio." },
+      { t: "Benjamin Franklin", ok: true,  fb: "¡Exacto! Lo propuso Franklin hacia 1750, mucho antes de que se descubriera el electrón." },
+      { t: "Nikola Tesla",      ok: false, fb: "Tesla trabajó con la corriente alterna, pero el convenio del sentido es muy anterior." }
+    ]
+  },
+  {
+    q: "Si los electrones se mueven realmente de − a +, ¿por qué seguimos usando el sentido convencional?",
+    options: [
+      { t: "Porque los electrones no se mueven realmente",                                                                                       ok: false, fb: "Sí se mueven, claro que sí. Justo es lo que descubrió Thomson en 1897." },
+      { t: "Porque las fórmulas y normas técnicas ya estaban hechas con ese criterio, y los cálculos dan el mismo resultado",                    ok: true,  fb: "¡Perfecto! Es un convenio histórico que se mantuvo porque cambiarlo no aportaba ninguna ventaja práctica." },
+      { t: "Porque la corriente convencional es más rápida que la real",                                                                          ok: false, fb: "No: es exactamente la misma corriente, solo cambia cómo la representamos." }
+    ]
+  }
+];
+
+const quizContainer = document.getElementById('quizContainer');
+const quizResult    = document.getElementById('quizResult');
+const scoreNum      = document.getElementById('scoreNum');
+const scoreMsg      = document.getElementById('scoreMsg');
+const btnReset      = document.getElementById('btnReset');
+
+let answered = 0;
+let score = 0;
+
+function buildQuiz() {
+  quizContainer.innerHTML = '';
+  quizResult.classList.remove('show');
+  answered = 0;
+  score = 0;
+
+  QUESTIONS.forEach((Q, qi) => {
+    const block = document.createElement('div');
+    block.className = 'quiz-question';
+    block.innerHTML = `
+      <div class="qnum">Pregunta ${qi+1} de ${QUESTIONS.length}</div>
+      <div class="qtext">${Q.q}</div>
+      <div class="quiz-options"></div>
+      <div class="quiz-feedback"></div>
+    `;
+    const optsBox = block.querySelector('.quiz-options');
+    const fbBox   = block.querySelector('.quiz-feedback');
+
+    Q.options.forEach((opt, oi) => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-option';
+      btn.textContent = opt.t;
+      btn.addEventListener('click', () => {
+        if (block.dataset.done === '1') return;
+        block.dataset.done = '1';
+        // Deshabilitar todas
+        optsBox.querySelectorAll('button').forEach(b => b.disabled = true);
+        // Marcar la elegida
+        if (opt.ok) {
+          btn.classList.add('correct');
+          fbBox.classList.add('ok', 'show');
+          score++;
+        } else {
+          btn.classList.add('wrong');
+          fbBox.classList.add('no', 'show');
+          // Marcar la correcta también
+          Q.options.forEach((o, i) => {
+            if (o.ok) optsBox.children[i].classList.add('correct');
+          });
+        }
+        fbBox.textContent = opt.fb;
+
+        answered++;
+        if (answered === QUESTIONS.length) {
+          showResult();
+        }
+      });
+      optsBox.appendChild(btn);
+    });
+
+    quizContainer.appendChild(block);
+  });
+}
+
+function showResult() {
+  scoreNum.textContent = score;
+  let msg = '';
+  if (score === 3)      msg = '¡Perfecto! Tienes el concepto totalmente claro. 🎯';
+  else if (score === 2) msg = '¡Muy bien! Repasa la pregunta que has fallado y lo bordas.';
+  else if (score === 1) msg = 'Casi: vuelve a leer la sección de la historia y reintenta.';
+  else                  msg = 'Sin problema: revisa el circuito y la comparativa, y vuelve a probar.';
+  scoreMsg.textContent = msg;
+  quizResult.classList.add('show');
+  quizResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+btnReset.addEventListener('click', buildQuiz);
+
+buildQuiz();
+</script>
+
+</body>
+</html>

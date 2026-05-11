@@ -168,4 +168,10 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <url><loc>https://tyd2-ies-jdq.malonso72.workers.dev/unidades/05-electricidad/libro-digital.html</loc></url>
+  <url><loc>https://tyd2-ies-jdq.malonso72.workers.dev/unidades/05-electricidad/interactivos/abierto-cerrado-cortocircuito.html</loc></url>
+  <url><loc>https://tyd2-ies-jdq.malonso72.workers.dev/unidades/05-electricidad/interactivos/sentido-corriente.html</loc></url>
+  <url><loc>https://tyd2-ies-jdq.malonso72.workers.dev/unidades/05-electricidad/interactivos/tipos-circuitos.html</loc></url>
+  <url><loc>https://tyd2-ies-jdq.malonso72.workers.dev/unidades/04-maquinas-simples/libro-digital.html</loc></url>
 </urlset>

@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Circuito abierto, cerrado y cortocircuito · 2º ESO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:         #f6f1e6;
+    --bg-card:    #fffaf0;
+    --ink:        #1d1d1f;
+    --ink-soft:   #4a4a4f;
+    --line:       #2a2a2e;
+    --closed:      #2e8b57;
+    --closed-soft: #e0f2e8;
+    --open:        #6b6b70;
+    --open-soft:   #e8e8eb;
+    --short:       #e63946;
+    --short-soft:  #fde2df;
+    --short-hot:   #ff8a3d;
+    --bulb:        #f4b942;
+    --bulb-glow:   #ffe183;
+    --ok:          #2e8b57;
+    --no:          #c0392b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(46,139,87,0.04) 0%, transparent 40%),
+      radial-gradient(circle at 85% 85%, rgba(230,57,70,0.04) 0%, transparent 40%);
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 48px 28px 80px;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 56px;
+    padding-bottom: 40px;
+    border-bottom: 1px dashed rgba(0,0,0,0.15);
+  }
+  .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+  h1 .closed-text { color: var(--closed); }
+  h1 .open-text   { color: var(--open); }
+  h1 .short-text  { color: var(--short); }
+  .subtitle {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  h2 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin-bottom: 18px;
+    letter-spacing: -0.01em;
+  }
+  h3 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  section { margin-bottom: 56px; }
+  p { margin-bottom: 12px; }
+  p:last-child { margin-bottom: 0; }
+
+  /* INTRO */
+  .intro p { font-size: 1.05rem; }
+  .intro strong { color: var(--ink); background: rgba(244,185,66,0.3); padding: 0 4px; border-radius: 3px; }
+
+  /* CIRCUITO */
+  .circuit-section {
+    background: var(--bg-card);
+    border: 2px solid var(--line);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 6px 6px 0 var(--line);
+  }
+
+  /* INDICADOR DE ESTADO grande */
+  .state-badge {
+    display: flex; align-items: center; justify-content: center;
+    gap: 12px;
+    padding: 14px 24px;
+    border-radius: 999px;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: 0.04em;
+    margin: 0 auto 22px;
+    width: fit-content;
+    border: 3px solid var(--closed);
+    background: var(--closed-soft);
+    color: var(--closed);
+    transition: all 0.3s ease;
+  }
+  .state-badge.open  { border-color: var(--open);  background: var(--open-soft);  color: var(--open); }
+  .state-badge.short { border-color: var(--short); background: var(--short-soft); color: var(--short); animation: pulseDanger 1s ease-in-out infinite; }
+  @keyframes pulseDanger {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(230,57,70,0.4); }
+    50%      { box-shadow: 0 0 0 8px rgba(230,57,70,0); }
+  }
+  .state-badge .dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: currentColor;
+  }
+
+  .circuit-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed rgba(0,0,0,0.15);
+  }
+  .btn {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 10px 18px;
+    border: 2px solid var(--line);
+    border-radius: 999px;
+    background: var(--bg-card);
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); box-shadow: 2px 2px 0 var(--line); }
+  .btn:active { transform: translateY(1px); box-shadow: none; }
+  .btn-state { border-width: 2px; }
+  .btn-state.active.closed { background: var(--closed); border-color: var(--closed); color: #fff; box-shadow: 2px 2px 0 var(--line); }
+  .btn-state.active.open   { background: var(--open);   border-color: var(--open);   color: #fff; box-shadow: 2px 2px 0 var(--line); }
+  .btn-state.active.short  { background: var(--short);  border-color: var(--short);  color: #fff; box-shadow: 2px 2px 0 var(--line); }
+
+  .circuit-svg-wrap {
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.08);
+    padding: 8px;
+  }
+  svg.circuit { width: 100%; height: auto; display: block; }
+  #interruptorGroup { cursor: pointer; }
+  #interruptorGroup:hover circle { fill: var(--ink); }
+  .switch-arm {
+    transform-origin: 280px 55px;
+    transition: transform 0.35s cubic-bezier(.5,1.6,.4,1);
+  }
+  .switch-arm.open { transform: rotate(-32deg); }
+
+  /* Cable de cortocircuito */
+  .short-wire {
+    opacity: 0;
+    stroke-dasharray: 220;
+    stroke-dashoffset: 220;
+    transition: opacity 0.3s ease, stroke-dashoffset 0.5s ease;
+  }
+  .short-wire.visible {
+    opacity: 1;
+    stroke-dashoffset: 0;
+    animation: hotWire 0.8s ease-in-out infinite alternate;
+  }
+  @keyframes hotWire {
+    from { stroke: var(--short); filter: drop-shadow(0 0 2px var(--short)); }
+    to   { stroke: var(--short-hot); filter: drop-shadow(0 0 8px var(--short-hot)); }
+  }
+
+  /* Hueco visible cuando está abierto: pequeñas marcas de "x" */
+  .open-marks {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .open-marks.visible { opacity: 1; }
+
+  .info-bar {
+    margin-top: 22px;
+    padding: 18px 22px;
+    border-radius: 10px;
+    display: flex; gap: 14px; align-items: flex-start;
+    background: var(--closed-soft);
+    border-left: 5px solid var(--closed);
+    transition: all 0.3s ease;
+  }
+  .info-bar.open  { background: var(--open-soft);  border-left-color: var(--open); }
+  .info-bar.short { background: var(--short-soft); border-left-color: var(--short); }
+  .info-bar .icon {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    line-height: 1;
+    flex-shrink: 0;
+    width: 36px; height: 36px;
+    display: grid; place-items: center;
+    border: 2px solid var(--closed);
+    border-radius: 50%;
+    background: #fff;
+    color: var(--closed);
+  }
+  .info-bar.open  .icon { color: var(--open);  border-color: var(--open); }
+  .info-bar.short .icon { color: var(--short); border-color: var(--short); }
+  .info-bar .text { font-size: 0.98rem; }
+  .info-bar .text strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+
+  .hint {
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    margin-top: 14px;
+    font-style: italic;
+  }
+
+  /* COMPARATIVA */
+  .grid-comp-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .card {
+    padding: 22px;
+    border-radius: 14px;
+    background: var(--bg-card);
+    border: 2px solid var(--line);
+  }
+  .card.closed-card { border-color: var(--closed); }
+  .card.open-card   { border-color: var(--open); }
+  .card.short-card  { border-color: var(--short); }
+  .card .badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    color: #fff;
+  }
+  .card.closed-card .badge { background: var(--closed); }
+  .card.open-card   .badge { background: var(--open); }
+  .card.short-card  .badge { background: var(--short); }
+  .card ul { list-style: none; padding: 0; }
+  .card li {
+    padding: 8px 0 8px 22px;
+    position: relative;
+    font-size: 0.93rem;
+    border-bottom: 1px dotted rgba(0,0,0,0.1);
+  }
+  .card li:last-child { border-bottom: none; }
+  .card li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+  }
+  .card.closed-card li::before { color: var(--closed); }
+  .card.open-card   li::before { color: var(--open); }
+  .card.short-card  li::before { color: var(--short); }
+
+  /* MUNDO REAL */
+  .grid-real {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  .real-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 12px;
+    padding: 22px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .real-card .icon-box {
+    flex-shrink: 0;
+    width: 56px; height: 56px;
+    background: #fff;
+    border: 2px solid var(--line);
+    border-radius: 10px;
+    display: grid; place-items: center;
+  }
+  .real-card .icon-box svg { width: 32px; height: 32px; }
+  .real-card .text { flex: 1; }
+  .real-card .text strong { display: block; font-size: 1.05rem; margin-bottom: 4px; font-family: 'Bricolage Grotesque', sans-serif; }
+  .real-card .text p { font-size: 0.92rem; color: var(--ink-soft); margin: 0; }
+
+  /* QUIZ */
+  .quiz-question {
+    background: var(--bg-card);
+    border: 2px solid var(--line);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 18px;
+  }
+  .quiz-question .qnum {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .quiz-question .qtext {
+    font-weight: 600;
+    font-size: 1.08rem;
+    margin-bottom: 16px;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-option {
+    text-align: left;
+    padding: 12px 16px;
+    border: 2px solid rgba(0,0,0,0.15);
+    border-radius: 10px;
+    background: #fff;
+    cursor: pointer;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.95rem;
+    transition: all 0.15s ease;
+  }
+  .quiz-option:hover:not(:disabled) {
+    border-color: var(--ink);
+    transform: translateX(2px);
+  }
+  .quiz-option:disabled { cursor: default; }
+  .quiz-option.correct {
+    background: #e8f5ee;
+    border-color: var(--ok);
+    color: var(--ok);
+    font-weight: 600;
+  }
+  .quiz-option.wrong {
+    background: #fdecea;
+    border-color: var(--no);
+    color: var(--no);
+  }
+  .quiz-feedback {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background: #f0f0f0;
+    display: none;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.ok { background: #e8f5ee; color: var(--ok); }
+  .quiz-feedback.no { background: #fdecea; color: var(--no); }
+  .quiz-result {
+    text-align: center;
+    padding: 28px;
+    background: var(--bg-card);
+    border: 2px dashed var(--ink);
+    border-radius: 14px;
+    margin-top: 20px;
+    display: none;
+  }
+  .quiz-result.show { display: block; }
+  .quiz-result .score {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--ink);
+    margin: 8px 0;
+  }
+  .quiz-result .msg { color: var(--ink-soft); }
+  .reset-btn { margin-top: 16px; }
+
+  footer {
+    text-align: center;
+    padding-top: 32px;
+    margin-top: 40px;
+    border-top: 1px dashed rgba(0,0,0,0.15);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .bulb-glow {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .bulb-glow.on { opacity: 0.7; animation: flicker 2s ease-in-out infinite; }
+  @keyframes flicker {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 0.55; }
+  }
+
+  @media (max-width: 760px) {
+    .container { padding: 28px 16px 60px; }
+    .circuit-section { padding: 20px; box-shadow: 4px 4px 0 var(--line); }
+    .grid-comp-3 { grid-template-columns: 1fr; }
+    .grid-real { grid-template-columns: 1fr; }
+    .state-badge { font-size: 1.05rem; padding: 10px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+  <p class="kicker">Tecnología y Digitalización · 2º ESO</p>
+  <h1>Circuito <span class="closed-text">cerrado</span>, <span class="open-text">abierto</span> y <span class="short-text">cortocircuito</span></h1>
+  <p class="subtitle">Tres situaciones distintas de un mismo circuito. Aprende a distinguirlas, entender qué pasa en cada una y por qué una de ellas es peligrosa.</p>
+</header>
+
+<main>
+
+<!-- INTRO -->
+<section class="intro">
+  <h2>La idea clave: el camino de los electrones</h2>
+  <p>Para que la corriente eléctrica pueda <strong>circular</strong>, los electrones necesitan un <strong>camino completo</strong> por el que dar la vuelta entera, desde el polo negativo de la pila hasta el positivo (pasando por la bombilla u otros componentes).</p>
+  <p>Si en algún punto ese camino se rompe, la corriente <strong>no puede circular</strong>. Y si en algún punto el camino se "acorta" demasiado y se salta los componentes, ocurre un <strong>cortocircuito</strong>. Veámoslo en directo:</p>
+</section>
+
+<!-- CIRCUITO INTERACTIVO -->
+<section class="circuit-section">
+  <h2 style="margin-bottom: 6px; text-align: center;">Circuito interactivo</h2>
+  <p style="color: var(--ink-soft); margin-bottom: 22px; font-size: 0.95rem; text-align: center;">Cambia entre los tres estados con los botones. <b>O haz clic directamente sobre el interruptor</b> del circuito.</p>
+
+  <div id="stateBadge" class="state-badge">
+    <span class="dot"></span>
+    <span id="stateText">CIRCUITO CERRADO</span>
+  </div>
+
+  <div class="circuit-controls">
+    <button class="btn btn-state active closed" data-state="closed">✓ Cerrado</button>
+    <button class="btn btn-state open"          data-state="open">✗ Abierto</button>
+    <button class="btn btn-state short"         data-state="short">⚠ Cortocircuito</button>
+  </div>
+
+  <div class="circuit-svg-wrap">
+    <svg class="circuit" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- Paths invisibles que definen los recorridos de las partículas -->
+      <path id="wirePathNormal" d="M 80,130 L 80,55 L 540,55 L 540,265 L 80,265 L 80,190" fill="none" stroke="none"/>
+      <path id="wirePathShort"  d="M 80,130 L 80,55 L 480,55 L 480,265 L 80,265 L 80,190" fill="none" stroke="none"/>
+
+      <!-- Cable visible normal -->
+      <path d="M 80,130 L 80,55 L 540,55 L 540,265 L 80,265 L 80,190"
+        fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+
+      <!-- Cable de CORTOCIRCUITO (atajo en x=480) -->
+      <line id="shortWire" class="short-wire" x1="480" y1="55" x2="480" y2="265"
+        stroke="var(--short)" stroke-width="5" stroke-linecap="round"/>
+
+      <!-- HALO bombilla -->
+      <circle id="bulbGlow" class="bulb-glow on" cx="540" cy="160" r="48" fill="var(--bulb-glow)"/>
+
+      <!-- PILA -->
+      <g id="pila">
+        <line x1="55" y1="130" x2="105" y2="130" stroke="#1d1d1f" stroke-width="4" stroke-linecap="round"/>
+        <line x1="68" y1="190" x2="92" y2="190" stroke="#1d1d1f" stroke-width="4" stroke-linecap="round"/>
+        <text x="30" y="135" font-family="Bricolage Grotesque, sans-serif" font-size="22" font-weight="800" fill="#d63b2f">+</text>
+        <text x="34" y="197" font-family="Bricolage Grotesque, sans-serif" font-size="22" font-weight="800" fill="#1d6fb8">−</text>
+        <text x="30" y="240" font-family="JetBrains Mono, monospace" font-size="11" fill="#4a4a4f">PILA</text>
+      </g>
+
+      <!-- INTERRUPTOR (clicable) -->
+      <g id="interruptorGroup">
+        <!-- Tapa el cable detrás del interruptor con blanco -->
+        <line x1="276" y1="55" x2="324" y2="55" stroke="#fff" stroke-width="6"/>
+        <!-- Pivote izquierdo -->
+        <circle cx="280" cy="55" r="5" fill="#1d1d1f"/>
+        <!-- Brazo (rota cuando está abierto) -->
+        <line id="switchArm" class="switch-arm" x1="280" y1="55" x2="320" y2="55"
+              stroke="#1d1d1f" stroke-width="3" stroke-linecap="round"/>
+        <!-- Contacto derecho -->
+        <circle cx="320" cy="55" r="5" fill="#1d1d1f"/>
+        <!-- Marcas de hueco visibles cuando está abierto -->
+        <g id="openMarks" class="open-marks">
+          <text x="295" y="78" font-family="Bricolage Grotesque, sans-serif" font-size="16" font-weight="800" fill="var(--short)" text-anchor="middle">✗</text>
+        </g>
+        <text x="285" y="34" font-family="JetBrains Mono, monospace" font-size="11" fill="#4a4a4f">INTERRUPTOR</text>
+        <!-- Área grande clicable invisible para facilitar el toque -->
+        <rect x="265" y="20" width="70" height="50" fill="transparent"/>
+      </g>
+
+      <!-- BOMBILLA -->
+      <g id="bombilla">
+        <line x1="540" y1="135" x2="540" y2="185" stroke="#fff" stroke-width="6"/>
+        <circle cx="540" cy="160" r="22" fill="#fff" stroke="#1d1d1f" stroke-width="3"/>
+        <line x1="524" y1="144" x2="556" y2="176" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="556" y1="144" x2="524" y2="176" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+        <text x="568" y="165" font-family="JetBrains Mono, monospace" font-size="11" fill="#4a4a4f">BOMBILLA</text>
+      </g>
+
+      <!-- Partículas (electrones) inyectadas por JS -->
+      <g id="particlesGroup"></g>
+
+    </svg>
+  </div>
+
+  <p class="hint">💡 Truco: pulsa directamente sobre el interruptor para abrirlo o cerrarlo.</p>
+
+  <div id="infoBar" class="info-bar">
+    <div class="icon" id="infoIcon">✓</div>
+    <div class="text" id="infoText">
+      <strong>Circuito cerrado</strong>
+      <span>El interruptor está cerrado. La corriente puede dar la vuelta completa: los electrones circulan por el cable y la bombilla luce.</span>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARATIVA -->
+<section>
+  <h2>Comparativa de los tres estados</h2>
+  <div class="grid-comp-3">
+    <div class="card closed-card">
+      <span class="badge">Cerrado ✓</span>
+      <h3>Funciona bien</h3>
+      <ul>
+        <li><b>Camino:</b> completo, sin interrupciones</li>
+        <li><b>Corriente:</b> circula con normalidad</li>
+        <li><b>Bombilla:</b> luce</li>
+        <li><b>Estado del interruptor:</b> cerrado</li>
+      </ul>
+    </div>
+    <div class="card open-card">
+      <span class="badge">Abierto ✗</span>
+      <h3>No funciona</h3>
+      <ul>
+        <li><b>Camino:</b> roto en algún punto</li>
+        <li><b>Corriente:</b> NO circula (es nula)</li>
+        <li><b>Bombilla:</b> apagada</li>
+        <li><b>Estado del interruptor:</b> abierto</li>
+      </ul>
+    </div>
+    <div class="card short-card">
+      <span class="badge">Cortocircuito ⚠</span>
+      <h3>¡Peligro!</h3>
+      <ul>
+        <li><b>Camino:</b> hay un atajo sin resistencia</li>
+        <li><b>Corriente:</b> muy alta (descontrolada)</li>
+        <li><b>Bombilla:</b> apagada (la corriente la esquiva)</li>
+        <li><b>Riesgo:</b> los cables se calientan → puede haber incendio</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- MUNDO REAL -->
+<section>
+  <h2>En el mundo real</h2>
+  <p style="color: var(--ink-soft); margin-bottom: 20px;">Cuatro ejemplos cotidianos donde estos conceptos están actuando.</p>
+  <div class="grid-real">
+
+    <div class="real-card">
+      <div class="icon-box">
+        <svg viewBox="0 0 32 32" fill="none" stroke="#1d1d1f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="4" width="14" height="24" rx="2"/>
+          <circle cx="16" cy="11" r="2.2" fill="#1d1d1f"/>
+          <line x1="13" y1="20" x2="19" y2="20"/>
+        </svg>
+      </div>
+      <div class="text">
+        <strong>Interruptor de luz de casa</strong>
+        <p>Lo subes y se queda en esa posición: <b>circuito cerrado</b>. Lo bajas y se queda abajo: <b>circuito abierto</b>. La luz permanece encendida o apagada hasta que lo cambias de nuevo.</p>
+      </div>
+    </div>
+
+    <div class="real-card">
+      <div class="icon-box">
+        <svg viewBox="0 0 32 32" fill="none" stroke="#1d1d1f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="16" cy="16" r="11"/>
+          <circle cx="16" cy="16" r="5" fill="#1d1d1f"/>
+        </svg>
+      </div>
+      <div class="text">
+        <strong>Pulsador de timbre</strong>
+        <p>Solo cierra el circuito <b>mientras lo mantienes apretado</b>. Cuando lo sueltas, vuelve por sí solo a circuito abierto y el timbre deja de sonar.</p>
+      </div>
+    </div>
+
+    <div class="real-card">
+      <div class="icon-box">
+        <svg viewBox="0 0 32 32" fill="none" stroke="#1d1d1f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="6" y="4" width="20" height="24" rx="3"/>
+          <line x1="16" y1="9" x2="16" y2="15"/>
+          <path d="M 11 12 A 6 6 0 1 0 21 12" />
+        </svg>
+      </div>
+      <div class="text">
+        <strong>Botón de encendido del móvil</strong>
+        <p>Es un <b>pulsador electrónico</b>: lo presionas un instante, se cierra el circuito el tiempo justo para enviar una señal y vuelve a abrirse. La señal hace el resto.</p>
+      </div>
+    </div>
+
+    <div class="real-card">
+      <div class="icon-box">
+        <svg viewBox="0 0 32 32" fill="none" stroke="#1d1d1f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M 18 3 L 8 17 L 15 17 L 13 29 L 24 14 L 17 14 Z" fill="#f4b942" stroke="#1d1d1f"/>
+        </svg>
+      </div>
+      <div class="text">
+        <strong>Fusible o magnetotérmico</strong>
+        <p>Cuando se produce un <b>cortocircuito</b>, este dispositivo <b>abre el circuito automáticamente</b> para cortar la corriente y proteger la instalación. Por eso "salta el plomo" cuando algo va mal en casa.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section>
+  <h2>Mini-quiz</h2>
+  <p style="color: var(--ink-soft); margin-bottom: 20px;">3 preguntas rápidas para comprobar que lo has pillado.</p>
+  <div id="quizContainer"></div>
+  <div id="quizResult" class="quiz-result">
+    <div>Tu puntuación:</div>
+    <div class="score"><span id="scoreNum">0</span> / 3</div>
+    <div class="msg" id="scoreMsg"></div>
+    <button class="btn reset-btn" id="btnReset">Volver a intentarlo</button>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  IES Jiménez de Quesada · Tecnología y Digitalización · 2º ESO · v1
+</footer>
+
+</div>
+
+<script>
+// ============================================================
+// ANIMACIÓN DEL CIRCUITO
+// ============================================================
+const svgNS = "http://www.w3.org/2000/svg";
+
+const wirePathNormal = document.getElementById('wirePathNormal');
+const wirePathShort  = document.getElementById('wirePathShort');
+const particlesGroup = document.getElementById('particlesGroup');
+
+const stateBadge   = document.getElementById('stateBadge');
+const stateText    = document.getElementById('stateText');
+const infoBar      = document.getElementById('infoBar');
+const infoIcon     = document.getElementById('infoIcon');
+const infoText     = document.getElementById('infoText');
+const switchArm    = document.getElementById('switchArm');
+const openMarks    = document.getElementById('openMarks');
+const shortWire    = document.getElementById('shortWire');
+const bulbGlow     = document.getElementById('bulbGlow');
+const interruptorGroup = document.getElementById('interruptorGroup');
+
+const N_PARTICLES = 14;
+const BASE_SPEED = 60;
+
+const STATES = {
+  closed: {
+    label: 'CIRCUITO CERRADO',
+    icon: '✓',
+    title: 'Circuito cerrado',
+    desc: 'El interruptor está cerrado. La corriente puede dar la vuelta completa: los electrones circulan por el cable y la bombilla luce.',
+    speedMul: 1.0,
+    bulbOn: true,
+    switchOpen: false,
+    shortVisible: false,
+    path: wirePathNormal
+  },
+  open: {
+    label: 'CIRCUITO ABIERTO',
+    icon: '✗',
+    title: 'Circuito abierto',
+    desc: 'El interruptor está abierto: el camino está cortado. Los electrones no pueden dar la vuelta, así que NO hay corriente y la bombilla está apagada.',
+    speedMul: 0,
+    bulbOn: false,
+    switchOpen: true,
+    shortVisible: false,
+    path: wirePathNormal
+  },
+  short: {
+    label: 'CORTOCIRCUITO',
+    icon: '⚠',
+    title: '¡Cortocircuito!',
+    desc: 'Un cable conecta directamente los dos polos sin pasar por la bombilla. La corriente toma ese atajo, se vuelve enorme, los cables se calientan y pueden incendiarse. Por eso saltan los fusibles.',
+    speedMul: 2.6,
+    bulbOn: false,
+    switchOpen: false,
+    shortVisible: true,
+    path: wirePathShort
+  }
+};
+
+let currentState = 'closed';
+let currentPath  = wirePathNormal;
+let totalLen     = currentPath.getTotalLength();
+let lastTime     = performance.now();
+
+// Crear las partículas
+const particles = [];
+for (let i = 0; i < N_PARTICLES; i++) {
+  const g = document.createElementNS(svgNS, 'g');
+  const circle = document.createElementNS(svgNS, 'circle');
+  circle.setAttribute('r', 11);
+  circle.setAttribute('fill', 'var(--real)');
+  circle.setAttribute('stroke', 'var(--real)');
+  circle.setAttribute('stroke-width', 2);
+  circle.setAttribute('fill', '#1d6fb8');
+
+  const text = document.createElementNS(svgNS, 'text');
+  text.setAttribute('text-anchor', 'middle');
+  text.setAttribute('dominant-baseline', 'central');
+  text.setAttribute('font-family', 'Bricolage Grotesque, sans-serif');
+  text.setAttribute('font-weight', '800');
+  text.setAttribute('font-size', '11');
+  text.setAttribute('fill', '#fff');
+  text.setAttribute('pointer-events', 'none');
+  text.textContent = 'e⁻';
+
+  g.appendChild(circle);
+  g.appendChild(text);
+  particlesGroup.appendChild(g);
+
+  particles.push({
+    g: g, circle: circle, text: text,
+    norm: i / N_PARTICLES   // posición normalizada (0..1) en el path
+  });
+}
+
+function applyState(newState) {
+  const prevPath = currentPath;
+  currentState = newState;
+  const s = STATES[newState];
+
+  // Cambiar path si toca y conservar posiciones normalizadas
+  if (s.path !== currentPath) {
+    currentPath = s.path;
+    totalLen = currentPath.getTotalLength();
+  }
+
+  // Badge grande
+  stateBadge.classList.remove('closed', 'open', 'short');
+  stateBadge.classList.add(newState);
+  stateText.textContent = s.label;
+
+  // Botones
+  document.querySelectorAll('.btn-state').forEach(b => {
+    b.classList.toggle('active', b.dataset.state === newState);
+  });
+
+  // Info bar
+  infoBar.classList.remove('open', 'short');
+  if (newState !== 'closed') infoBar.classList.add(newState);
+  infoIcon.textContent = s.icon;
+  infoText.innerHTML = `<strong>${s.title}</strong><span>${s.desc}</span>`;
+
+  // Interruptor visual
+  switchArm.classList.toggle('open', s.switchOpen);
+  openMarks.classList.toggle('visible', s.switchOpen);
+
+  // Cable de cortocircuito
+  shortWire.classList.toggle('visible', s.shortVisible);
+
+  // Bombilla
+  bulbGlow.classList.toggle('on', s.bulbOn);
+
+  // Color de partículas según estado
+  const partColor = (newState === 'short') ? '#e63946' : '#1d6fb8';
+  particles.forEach(p => {
+    p.circle.setAttribute('fill', partColor);
+    p.circle.setAttribute('stroke', partColor);
+    // Atenuar ligeramente cuando está abierto
+    p.g.style.opacity = (newState === 'open') ? 0.45 : 1;
+  });
+
+  // Reposicionar inmediatamente en el nuevo path
+  particles.forEach(p => {
+    const off = p.norm * totalLen;
+    const pt = currentPath.getPointAtLength(off);
+    p.g.setAttribute('transform', `translate(${pt.x}, ${pt.y})`);
+  });
+}
+
+function tick(now) {
+  const dt = Math.min((now - lastTime) / 1000, 0.05);
+  lastTime = now;
+
+  const s = STATES[currentState];
+  if (s.speedMul > 0) {
+    const advance = (BASE_SPEED * s.speedMul * dt) / totalLen; // en unidades normalizadas
+    particles.forEach(p => {
+      p.norm = (p.norm + advance) % 1;
+      const pt = currentPath.getPointAtLength(p.norm * totalLen);
+      p.g.setAttribute('transform', `translate(${pt.x}, ${pt.y})`);
+    });
+  }
+  requestAnimationFrame(tick);
+}
+
+// Listeners
+document.querySelectorAll('.btn-state').forEach(btn => {
+  btn.addEventListener('click', () => applyState(btn.dataset.state));
+});
+
+interruptorGroup.addEventListener('click', () => {
+  // El interruptor solo alterna entre cerrado y abierto.
+  // Si estamos en cortocircuito, lo dejamos pasar a cerrado.
+  if (currentState === 'closed') applyState('open');
+  else applyState('closed');
+});
+
+// Init
+applyState('closed');
+requestAnimationFrame(now => { lastTime = now; tick(now); });
+
+// ============================================================
+// QUIZ
+// ============================================================
+const QUESTIONS = [
+  {
+    q: "¿Qué necesita un circuito para que la corriente pueda circular?",
+    options: [
+      { t: "Que esté completo y cerrado, sin interrupciones",     ok: true,  fb: "¡Correcto! Sin un camino completo, los electrones no pueden dar la vuelta." },
+      { t: "Que tenga al menos un interruptor abierto",            ok: false, fb: "Justo al revés: si hay un interruptor abierto, el camino está roto y no circula corriente." },
+      { t: "Que tenga muchas bombillas conectadas",                ok: false, fb: "El número de bombillas no es lo que permite que circule la corriente, sino que el camino esté cerrado." }
+    ]
+  },
+  {
+    q: "¿Qué hace un fusible (o un magnetotérmico) cuando se produce un cortocircuito?",
+    options: [
+      { t: "Cierra el circuito para que pase aún más corriente",                    ok: false, fb: "No: si lo cerrara más, el problema empeoraría. Hace lo contrario." },
+      { t: "Abre el circuito automáticamente para protegerlo",                      ok: true,  fb: "¡Exacto! Corta la corriente para evitar que los cables se calienten o se incendien." },
+      { t: "Hace que la bombilla brille con más intensidad",                         ok: false, fb: "El fusible no afecta al brillo: su trabajo es cortar la corriente cuando hay peligro." }
+    ]
+  },
+  {
+    q: "¿Por qué un cortocircuito es peligroso?",
+    options: [
+      { t: "Porque la corriente se queda parada en el cable",                                                                ok: false, fb: "Es lo contrario: en un cortocircuito pasa MUCHÍSIMA corriente, no se queda parada." },
+      { t: "Porque pasa muy poca corriente y los aparatos se rompen por falta de electricidad",                              ok: false, fb: "Al revés: pasa demasiada corriente, no demasiado poca." },
+      { t: "Porque la corriente toma un atajo sin resistencia, se calienta mucho y puede provocar un incendio",              ok: true,  fb: "¡Perfecto! Sin resistencia que la frene, la corriente es enorme y los cables se calientan hasta el punto de poder arder." }
+    ]
+  }
+];
+
+const quizContainer = document.getElementById('quizContainer');
+const quizResult    = document.getElementById('quizResult');
+const scoreNum      = document.getElementById('scoreNum');
+const scoreMsg      = document.getElementById('scoreMsg');
+const btnReset      = document.getElementById('btnReset');
+
+let answered = 0;
+let score = 0;
+
+function buildQuiz() {
+  quizContainer.innerHTML = '';
+  quizResult.classList.remove('show');
+  answered = 0;
+  score = 0;
+
+  QUESTIONS.forEach((Q, qi) => {
+    const block = document.createElement('div');
+    block.className = 'quiz-question';
+    block.innerHTML = `
+      <div class="qnum">Pregunta ${qi+1} de ${QUESTIONS.length}</div>
+      <div class="qtext">${Q.q}</div>
+      <div class="quiz-options"></div>
+      <div class="quiz-feedback"></div>
+    `;
+    const optsBox = block.querySelector('.quiz-options');
+    const fbBox   = block.querySelector('.quiz-feedback');
+
+    Q.options.forEach((opt, oi) => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-option';
+      btn.textContent = opt.t;
+      btn.addEventListener('click', () => {
+        if (block.dataset.done === '1') return;
+        block.dataset.done = '1';
+        optsBox.querySelectorAll('button').forEach(b => b.disabled = true);
+        if (opt.ok) {
+          btn.classList.add('correct');
+          fbBox.classList.add('ok', 'show');
+          score++;
+        } else {
+          btn.classList.add('wrong');
+          fbBox.classList.add('no', 'show');
+          Q.options.forEach((o, i) => {
+            if (o.ok) optsBox.children[i].classList.add('correct');
+          });
+        }
+        fbBox.textContent = opt.fb;
+        answered++;
+        if (answered === QUESTIONS.length) showResult();
+      });
+      optsBox.appendChild(btn);
+    });
+
+    quizContainer.appendChild(block);
+  });
+}
+
+function showResult() {
+  scoreNum.textContent = score;
+  let msg = '';
+  if (score === 3)      msg = '¡Perfecto! Tienes los tres conceptos totalmente claros. 🎯';
+  else if (score === 2) msg = '¡Muy bien! Repasa la pregunta que has fallado y lo bordas.';
+  else if (score === 1) msg = 'Casi: vuelve al circuito interactivo y prueba los tres estados otra vez.';
+  else                  msg = 'Sin problema: revisa la comparativa y los ejemplos del mundo real, y vuelve a intentarlo.';
+  scoreMsg.textContent = msg;
+  quizResult.classList.add('show');
+  quizResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+btnReset.addEventListener('click', buildQuiz);
+buildQuiz();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tipos de circuitos · 2º ESO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:         #f6f1e6;
+    --bg-card:    #fffaf0;
+    --ink:        #1d1d1f;
+    --ink-soft:   #4a4a4f;
+    --line:       #2a2a2e;
+    --accent:     #1d6fb8;
+    --accent-soft:#dceaf6;
+    --on:         #2e8b57;
+    --on-soft:    #e0f2e8;
+    --off:        #6b6b70;
+    --off-soft:   #e8e8eb;
+    --danger:     #c0392b;
+    --bulb:       #f4b942;
+    --bulb-glow:  #ffe183;
+    --ok:         #2e8b57;
+    --no:         #c0392b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(29,111,184,0.04) 0%, transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(244,185,66,0.05) 0%, transparent 40%);
+    min-height: 100vh;
+  }
+  .container { max-width: 1080px; margin: 0 auto; padding: 48px 28px 80px; }
+
+  header { text-align: center; margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px dashed rgba(0,0,0,0.15); }
+  .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.18em;
+    color: var(--ink-soft); margin-bottom: 16px;
+  }
+  h1 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 14px;
+  }
+  .subtitle { font-size: 1.05rem; color: var(--ink-soft); max-width: 640px; margin: 0 auto; }
+
+  /* TABS */
+  .tabs {
+    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+    margin-bottom: 32px;
+  }
+  .tab {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600; font-size: 0.92rem;
+    padding: 9px 16px;
+    border: 2px solid var(--line);
+    border-radius: 999px;
+    background: var(--bg-card);
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .tab:hover { transform: translateY(-1px); box-shadow: 2px 2px 0 var(--line); }
+  .tab.active {
+    background: var(--ink); color: #fff; border-color: var(--ink);
+    box-shadow: 2px 2px 0 var(--line);
+  }
+  .tab-num {
+    display: inline-grid; place-items: center;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.08);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; font-weight: 700;
+  }
+  .tab.active .tab-num { background: rgba(255,255,255,0.18); }
+
+  /* PANELES */
+  .panel {
+    background: var(--bg-card);
+    border: 2px solid var(--line);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 6px 6px 0 var(--line);
+    margin-bottom: 56px;
+  }
+  .panel[hidden] { display: none; }
+  .panel h2 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 700; font-size: clamp(1.4rem, 3vw, 1.85rem);
+    margin-bottom: 8px; letter-spacing: -0.01em;
+  }
+  .panel .symbol-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    background: var(--ink); color: #fff;
+    padding: 3px 10px; border-radius: 4px;
+    margin-bottom: 12px;
+  }
+  .panel .desc { color: var(--ink-soft); margin-bottom: 22px; font-size: 1rem; }
+  .panel .desc b { color: var(--ink); }
+
+  .svg-wrap {
+    width: 100%; background: #fff;
+    border-radius: 10px; border: 1px solid rgba(0,0,0,0.08);
+    padding: 8px;
+  }
+  svg.circuit { width: 100%; height: auto; display: block; user-select: none; }
+
+  /* INFO BAR */
+  .info-bar {
+    margin-top: 22px;
+    padding: 16px 20px;
+    border-radius: 10px;
+    display: flex; gap: 14px; align-items: flex-start;
+    background: var(--on-soft);
+    border-left: 5px solid var(--on);
+    transition: all 0.3s ease;
+  }
+  .info-bar.off { background: var(--off-soft); border-left-color: var(--off); }
+  .info-bar.partial { background: #fff7e0; border-left-color: var(--bulb); }
+  .info-bar .icon {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800; font-size: 1.3rem;
+    width: 34px; height: 34px;
+    display: grid; place-items: center;
+    border: 2px solid var(--on); border-radius: 50%;
+    background: #fff; color: var(--on); flex-shrink: 0;
+  }
+  .info-bar.off .icon { color: var(--off); border-color: var(--off); }
+  .info-bar.partial .icon { color: #b8860b; border-color: var(--bulb); }
+  .info-bar .text { font-size: 0.96rem; }
+  .info-bar .text strong { display: block; margin-bottom: 3px; font-size: 1.02rem; }
+
+  /* CONTROLES */
+  .controls {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    align-items: center; justify-content: center;
+    margin-top: 18px;
+  }
+  .btn {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600; font-size: 0.9rem;
+    padding: 8px 16px;
+    border: 2px solid var(--line); border-radius: 999px;
+    background: var(--bg-card); color: var(--ink);
+    cursor: pointer; transition: all 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); box-shadow: 2px 2px 0 var(--line); }
+  .btn:active { transform: translateY(1px); box-shadow: none; }
+
+  .hint {
+    text-align: center; color: var(--ink-soft);
+    font-size: 0.85rem; margin-top: 12px; font-style: italic;
+  }
+
+  /* COMPONENTES INTERACTIVOS DEL SVG */
+  .clickable { cursor: pointer; }
+  .switch-arm { transform-box: fill-box; transform-origin: 0% 50%; transition: transform 0.3s cubic-bezier(.5,1.6,.4,1); }
+  .switch-arm.open { transform: rotate(-32deg); }
+
+  .pulsador-bridge {
+    transition: opacity 0.12s ease;
+  }
+  .pulsador-button { transition: transform 0.12s ease; }
+  .pulsador-button.pressed { transform: translateY(5px); }
+
+  .conmutador-arm {
+    transform-box: fill-box;
+    transform-origin: 0% 50%;
+    transition: transform 0.3s cubic-bezier(.5,1.6,.4,1);
+  }
+
+  .bulb-glow {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .bulb-glow.on { opacity: 0.7; animation: flicker 2s ease-in-out infinite; }
+  @keyframes flicker { 0%,100% { opacity: 0.7; } 50% { opacity: 0.55; } }
+
+  .bulb-glass { transition: fill 0.25s ease; }
+  .bulb-blown { fill: #4a4a4f !important; }
+  .bulb-blown-x { opacity: 0; transition: opacity 0.25s ease; }
+  .bulb-blown-x.show { opacity: 1; }
+
+  /* QUIZ */
+  .quiz-section h2 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 600; font-size: clamp(1.5rem, 3vw, 2rem);
+    margin-bottom: 18px; letter-spacing: -0.01em;
+  }
+  .quiz-question {
+    background: var(--bg-card);
+    border: 2px solid var(--line); border-radius: 14px;
+    padding: 22px 24px; margin-bottom: 18px;
+  }
+  .qnum {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; font-weight: 700; color: var(--ink-soft);
+    margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.1em;
+  }
+  .qtext { font-weight: 600; font-size: 1.05rem; margin-bottom: 14px; }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-option {
+    text-align: left; padding: 11px 16px;
+    border: 2px solid rgba(0,0,0,0.15); border-radius: 10px;
+    background: #fff; cursor: pointer;
+    font-family: 'Manrope', sans-serif; font-size: 0.93rem;
+    transition: all 0.15s ease;
+  }
+  .quiz-option:hover:not(:disabled) { border-color: var(--ink); transform: translateX(2px); }
+  .quiz-option:disabled { cursor: default; }
+  .quiz-option.correct { background: #e8f5ee; border-color: var(--ok); color: var(--ok); font-weight: 600; }
+  .quiz-option.wrong { background: #fdecea; border-color: var(--no); color: var(--no); }
+  .quiz-feedback {
+    margin-top: 12px; padding: 10px 14px; border-radius: 8px;
+    font-size: 0.88rem; background: #f0f0f0; display: none;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.ok { background: #e8f5ee; color: var(--ok); }
+  .quiz-feedback.no { background: #fdecea; color: var(--no); }
+  .quiz-result {
+    text-align: center; padding: 28px;
+    background: var(--bg-card);
+    border: 2px dashed var(--ink); border-radius: 14px;
+    margin-top: 20px; display: none;
+  }
+  .quiz-result.show { display: block; }
+  .quiz-result .score {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 2.4rem; font-weight: 800;
+    color: var(--ink); margin: 8px 0;
+  }
+  .reset-btn { margin-top: 16px; }
+
+  footer {
+    text-align: center; padding-top: 32px; margin-top: 40px;
+    border-top: 1px dashed rgba(0,0,0,0.15);
+    font-size: 0.85rem; color: var(--ink-soft);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  @media (max-width: 760px) {
+    .container { padding: 28px 14px 60px; }
+    .panel { padding: 20px; box-shadow: 4px 4px 0 var(--line); }
+    .tabs { gap: 6px; }
+    .tab { font-size: 0.85rem; padding: 7px 12px; }
+    .tab-num { width: 19px; height: 19px; font-size: 0.65rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+  <p class="kicker">Tecnología y Digitalización · 2º ESO</p>
+  <h1>Tipos de circuitos eléctricos</h1>
+  <p class="subtitle">Componentes de mando (interruptor, pulsadores, conmutador) y configuraciones de bombillas (serie y paralelo). Pulsa cada pestaña, juega con el circuito y observa qué pasa.</p>
+</header>
+
+<!-- TABS -->
+<nav class="tabs" id="tabs">
+  <button class="tab active" data-tab="interruptor"><span class="tab-num">1</span>Interruptor</button>
+  <button class="tab" data-tab="pulsador_na"><span class="tab-num">2</span>Pulsador NA</button>
+  <button class="tab" data-tab="pulsador_nc"><span class="tab-num">3</span>Pulsador NC</button>
+  <button class="tab" data-tab="conmutador"><span class="tab-num">4</span>Conmutador</button>
+  <button class="tab" data-tab="serie"><span class="tab-num">5</span>3 en serie</button>
+  <button class="tab" data-tab="paralelo"><span class="tab-num">6</span>3 en paralelo</button>
+</nav>
+
+<main>
+
+<!-- ============================================================ -->
+<!-- 1. INTERRUPTOR -->
+<!-- ============================================================ -->
+<div class="panel" data-panel="interruptor">
+  <span class="symbol-tag">Componente de mando</span>
+  <h2>Interruptor</h2>
+  <p class="desc">El <b>interruptor</b> es un componente que abre o cierra el circuito y <b>mantiene su estado</b> hasta que vuelves a accionarlo. Es el elemento de mando más común: cuando le das, se queda en esa posición. Ejemplo cotidiano: el interruptor de la luz de una habitación.</p>
+
+  <div class="svg-wrap">
+    <svg class="circuit" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg" id="svg-interruptor">
+      <path id="int-path" d="M 80,130 L 80,55 L 540,55 L 540,265 L 80,265 L 80,190" fill="none" stroke="none"/>
+      <path d="M 80,130 L 80,55 L 540,55 L 540,265 L 80,265 L 80,190" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+
+      <circle id="int-bulb-glow" class="bulb-glow on" cx="540" cy="160" r="48" fill="var(--bulb-glow)"/>
+
+      <!-- PILA -->
+      <g>
+        <line x1="55" y1="130" x2="105" y2="130" stroke="#1d1d1f" stroke-width="4" stroke-linecap="round"/>
+        <line x1="68" y1="190" x2="92" y2="190" stroke="#1d1d1f" stroke-width="4" stroke-linecap="round"/>
+        <text x="30" y="135" font-family="Bricolage Grotesque, sans-serif" font-size="22" font-weight="800" fill="#d63b2f">+</text>
+        <text x="34" y="197" font-family="Bricolage Grotesque, sans-serif" font-size="22" font-weight="800" fill="#1d6fb8">−</text>
+        <text x="30" y="240" font-family="JetBrains Mono, monospace" font-size="11" fill="#4a4a4f">PILA</text>
+      </g>
+
+      <!-- INTERRUPTOR -->
+      <g class="clickable" id="int-switch">
+        <line x1="276" y1="55" x2="324" y2="55" stroke="#fff" stroke-width="6"/>
+        <circle cx="280" cy="55" r="5" fill="#1d1d1f"/>
+        <line id="int-arm" class="switch-arm" x1="280" y1="55" x2="320" y2="55"
+              stroke="#1d1d1f" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="320" cy="55" r="5" fill="#1d1d1f"/>
+        <text x="290" y="33" font-family="JetBrains Mono, monospace" font-size="11" fill="#4a4a4f" text-anchor="middle">INTERRUPTOR</text>
+        <rect x="265" y="20" width="70" height="50" fill="transparent"/>
+      </g>
+
+      <!-- BOMBILLA -->
+      <g>
+        <line x1="540" y1="135" x2="540" y2="185" stroke="#fff" stroke-width="6"/>
+        <circle cx="540" cy="160" r="22" fill="#fff" stroke="#1d1d1f" stroke-width="3"/>
+        <line x1="524" y1="144" x2="556" y2="176" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="556" y1="144" x2="524" y2="176" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+      </g>
+
+      <g id="int-particles"></g>
+    </svg>
+  </div>
+
+  <p class="hint">💡 Pulsa sobre el interruptor para abrirlo o cerrarlo.</p>
+
+  <div id="int-info" class="info-bar">
+    <div class="icon">✓</div>
+    <div class="text">
+      <strong>Cerrado</strong><span>El circuito está completo y la corriente circula. La bombilla luce.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 2. PULSADOR NA -->
+<!-- ============================================================ -->
+<div class="panel" data-panel="pulsador_na" hidden>
+  <span class="symbol-tag">Componente de mando</span>
+  <h2>Pulsador Normalmente Abierto (NA)</h2>
+  <p class="desc">El <b>pulsador NA</b> está <b>abierto en reposo</b>: solo cierra el circuito <b>mientras lo mantienes pulsado</b>. En cuanto lo sueltas, vuelve solo a su posición de abierto. Ejemplo cotidiano: el pulsador del timbre de una puerta.</p>
+
+  <div class="svg-wrap">
+    <svg class="circuit" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+      <path id="na-path" d="M 80,130 L 80,55 L 540,55 L 540,265 L 80,265 L 80,190" fill="none" stroke="none"/>
+      <path d="M 80,130 L 80,55 L 540,55 L 540,265 L 80,265 L 80,190" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+
+      <circle id="na-bulb-glow" class="bulb-glow" cx="540" cy="160" r="48" fill="var(--bulb-glow)"/>
+
+      <g>
+        <line x1="55" y1="130" x2="105" y2="130" stroke="#1d1d1f" stroke-width="4" stroke-linecap="round"/>
+        <line x1="68" y1="190" x2="92" y2="190" stroke="#1d1d1f" stroke-width="4" stroke-linecap="round"/>
+        <text x="30" y="135" font-family="Bricolage Grotesque, sans-serif" font-size="22" font-weight="800" fill="#d63b2f">+</text>
+        <text x="34" y="197" font-family="Bricolage Grotesque, sans-serif" font-size="22" font-weight="800" fill="#1d6fb8">−</text>
+        <text x="30" y="240" font-family="JetBrains Mono, monospace" font-size="11" fill="#4a4a4f">PILA</text>
+      </g>
+
+      <!-- PULSADOR NA -->
+      <g class="clickable" id="na-button">
+        <line x1="276" y1="55" x2="324" y2="55" stroke="#fff" stroke-width="6"/>
+        <circle cx="280" cy="55" r="5" fill="#1d1d1f"/>
+        <circle cx="320" cy="55" r="5" fill="#1d1d1f"/>
+        <!-- Puente conductor (visible solo cuando está pulsado) -->
+        <line id="na-bridge" class="pulsador-bridge" x1="278" y1="55" x2="322" y2="55"
+              stroke="#1d1d1f" stroke-width="3" stroke-linecap="round" opacity="0"/>
+        <!-- Botón cuadrado encima -->
+        <g id="na-btn-visual" class="pulsador-button">
+          <rect x="288" y="20" width="24" height="14" rx="2" fill="#1d1d1f"/>
+          <line x1="300" y1="34" x2="300" y2="48" stroke="#1d1d1f" stroke-width="2"/>
+          <text x="300" y="14" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#4a4a4f" text-anchor="middle">NA</text>
+        </g>
+        <rect x="265" y="10" width="70" height="55" fill="transparent"/>
+      </g>
+
+      <g>
+        <line x1="540" y1="135" x2="540" y2="185" stroke="#fff" stroke-width="6"/>
+        <circle cx="540" cy="160" r="22" fill="#fff" stroke="#1d1d1f" stroke-width="3"/>
+        <line x1="524" y1="144" x2="556" y2="176" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="556" y1="144" x2="524" y2="176" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+      </g>
+
+      <g id="na-particles"></g>
+    </svg>
+  </div>
+
+  <p class="hint">💡 <b>Mantén pulsado</b> el botón (no solo un click): mientras lo aprietas, el circuito se cierra.</p>
+
+  <div id="na-info" class="info-bar off">
+    <div class="icon">✗</div>
+    <div class="text">
+      <strong>Abierto (en reposo)</strong><span>El pulsador NA está abierto por defecto. La bombilla está apagada hasta que lo mantengas pulsado.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 3. PULSADOR NC -->
+<!-- ============================================================ -->
+<div class="panel" data-panel="pulsador_nc" hidden>
+  <span class="symbol-tag">Componente de mando</span>
+  <h2>Pulsador Normalmente Cerrado (NC)</h2>
+  <p class="desc">El <b>pulsador NC</b> es justo lo contrario: en reposo está <b>cerrado</b> y solo abre el circuito <b>mientras lo mantienes pulsado</b>. Es el componente típico de los <b>sistemas de seguridad</b>: setas de emergencia, paros de máquina… si dejas de pulsarlo (o se rompe el cable), el circuito vuelve a su estado seguro.</p>
+
+  <div class="svg-wrap">
+    <svg class="circuit" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+      <path id="nc-path" d="M 80,130 L 80,55 L 540,55 L 540,265 L 80,265 L 80,190" fill="none" stroke="none"/>
+      <path d="M 80,130 L 80,55 L 540,55 L 540,265 L 80,265 L 80,190" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+
+      <circle id="nc-bulb-glow" class="bulb-glow on" cx="540" cy="160" r="48" fill="var(--bulb-glow)"/>
+
+      <g>
+        <line x1="55" y1="130" x2="105" y2="130" stroke="#1d1d1f" stroke-width="4" stroke-linecap="round"/>
+        <line x1="68" y1="190" x2="92" y2="190" stroke="#1d1d1f" stroke-width="4" stroke-linecap="round"/>
+        <text x="30" y="135" font-family="Bricolage Grotesque, sans-serif" font-size="22" font-weight="800" fill="#d63b2f">+</text>
+        <text x="34" y="197" font-family="Bricolage Grotesque, sans-serif" font-size="22" font-weight="800" fill="#1d6fb8">−</text>
+        <text x="30" y="240" font-family="JetBrains Mono, monospace" font-size="11" fill="#4a4a4f">PILA</text>
+      </g>
+
+      <!-- PULSADOR NC -->
+      <g class="clickable" id="nc-button">
+        <line x1="276" y1="55" x2="324" y2="55" stroke="#fff" stroke-width="6"/>
+        <circle cx="280" cy="55" r="5" fill="#1d1d1f"/>
+        <circle cx="320" cy="55" r="5" fill="#1d1d1f"/>
+        <!-- Puente conductor (visible normalmente, oculto al pulsar) -->
+        <line id="nc-bridge" class="pulsador-bridge" x1="278" y1="55" x2="322" y2="55"
+              stroke="#1d1d1f" stroke-width="3" stroke-linecap="round" opacity="1"/>
+        <g id="nc-btn-visual" class="pulsador-button">
+          <rect x="288" y="20" width="24" height="14" rx="2" fill="#1d1d1f"/>
+          <line x1="300" y1="34" x2="300" y2="48" stroke="#1d1d1f" stroke-width="2"/>
+          <text x="300" y="14" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#4a4a4f" text-anchor="middle">NC</text>
+        </g>
+        <rect x="265" y="10" width="70" height="55" fill="transparent"/>
+      </g>
+
+      <g>
+        <line x1="540" y1="135" x2="540" y2="185" stroke="#fff" stroke-width="6"/>
+        <circle cx="540" cy="160" r="22" fill="#fff" stroke="#1d1d1f" stroke-width="3"/>
+        <line x1="524" y1="144" x2="556" y2="176" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="556" y1="144" x2="524" y2="176" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+      </g>
+
+      <g id="nc-particles"></g>
+    </svg>
+  </div>
+
+  <p class="hint">💡 <b>Mantén pulsado</b> el botón: el circuito se abre y la bombilla se apaga. Al soltar, vuelve sola a encenderse.</p>
+
+  <div id="nc-info" class="info-bar">
+    <div class="icon">✓</div>
+    <div class="text">
+      <strong>Cerrado (en reposo)</strong><span>El pulsador NC está cerrado por defecto. La bombilla luce hasta que lo mantengas pulsado.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 4. CONMUTADOR -->
+<!-- ============================================================ -->
+<div class="panel" data-panel="conmutador" hidden>
+  <span class="symbol-tag">Componente de mando</span>
+  <h2>Conmutador</h2>
+  <p class="desc">El <b>conmutador</b> permite <b>elegir entre dos caminos</b> distintos para la corriente. Tiene un terminal común y dos posibles destinos: cuando está en una posición, conduce hacia uno; cuando está en la otra, hacia el opuesto. Ejemplo cotidiano: las <b>luces de escalera</b> que se encienden y apagan desde dos sitios distintos.</p>
+
+  <div class="svg-wrap">
+    <svg class="circuit" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+      <!-- Cables principales -->
+      <!-- + → arriba → conmutador -->
+      <path d="M 80,130 L 80,55 L 280,55 L 280,160" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+      <!-- Contactos del conmutador a las bombillas -->
+      <path d="M 340,110 L 480,110" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linecap="round"/>
+      <path d="M 340,210 L 480,210" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linecap="round"/>
+      <!-- Bombillas a retorno común -->
+      <path d="M 480,110 L 540,110 L 540,265 L 80,265 L 80,190" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+      <path d="M 480,210 L 540,210" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linecap="round"/>
+
+      <!-- Paths invisibles para las dos posiciones -->
+      <path id="conm-path-A" d="M 80,130 L 80,55 L 280,55 L 280,160 L 340,110 L 540,110 L 540,265 L 80,265 L 80,190" fill="none" stroke="none"/>
+      <path id="conm-path-B" d="M 80,130 L 80,55 L 280,55 L 280,160 L 340,210 L 540,210 L 540,265 L 80,265 L 80,190" fill="none" stroke="none"/>
+
+      <circle id="conm-glow-A" class="bulb-glow on" cx="480" cy="110" r="42" fill="var(--bulb-glow)"/>
+      <circle id="conm-glow-B" class="bulb-glow"    cx="480" cy="210" r="42" fill="var(--bulb-glow)"/>
+
+      <g>
+        <line x1="55" y1="130" x2="105" y2="130" stroke="#1d1d1f" stroke-width="4" stroke-linecap="round"/>
+        <line x1="68" y1="190" x2="92" y2="190" stroke="#1d1d1f" stroke-width="4" stroke-linecap="round"/>
+        <text x="30" y="135" font-family="Bricolage Grotesque, sans-serif" font-size="22" font-weight="800" fill="#d63b2f">+</text>
+        <text x="34" y="197" font-family="Bricolage Grotesque, sans-serif" font-size="22" font-weight="800" fill="#1d6fb8">−</text>
+        <text x="30" y="240" font-family="JetBrains Mono, monospace" font-size="11" fill="#4a4a4f">PILA</text>
+      </g>
+
+      <!-- CONMUTADOR -->
+      <g class="clickable" id="conm-switch">
+        <text x="280" y="148" font-family="JetBrains Mono, monospace" font-size="10" fill="#4a4a4f" text-anchor="end">CONM.</text>
+        <!-- Pivote común -->
+        <circle cx="280" cy="160" r="6" fill="#1d1d1f"/>
+        <!-- Brazo conmutador (apunta a A o a B) -->
+        <line id="conm-arm" class="conmutador-arm" x1="280" y1="160" x2="340" y2="110"
+              stroke="#1d1d1f" stroke-width="3" stroke-linecap="round"/>
+        <!-- Contactos A y B -->
+        <circle cx="340" cy="110" r="5" fill="#1d1d1f"/>
+        <circle cx="340" cy="210" r="5" fill="#1d1d1f"/>
+        <text x="350" y="100" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#4a4a4f">A</text>
+        <text x="350" y="225" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#4a4a4f">B</text>
+        <rect x="265" y="100" width="80" height="120" fill="transparent"/>
+      </g>
+
+      <!-- BOMBILLA A -->
+      <g>
+        <line x1="480" y1="90" x2="480" y2="130" stroke="#fff" stroke-width="6"/>
+        <circle cx="480" cy="110" r="20" fill="#fff" stroke="#1d1d1f" stroke-width="3"/>
+        <line x1="465" y1="95" x2="495" y2="125" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="495" y1="95" x2="465" y2="125" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+        <text x="510" y="115" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#4a4a4f">A</text>
+      </g>
+      <!-- BOMBILLA B -->
+      <g>
+        <line x1="480" y1="190" x2="480" y2="230" stroke="#fff" stroke-width="6"/>
+        <circle cx="480" cy="210" r="20" fill="#fff" stroke="#1d1d1f" stroke-width="3"/>
+        <line x1="465" y1="195" x2="495" y2="225" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="495" y1="195" x2="465" y2="225" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+        <text x="510" y="215" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#4a4a4f">B</text>
+      </g>
+
+      <g id="conm-particles"></g>
+    </svg>
+  </div>
+
+  <p class="hint">💡 Pulsa sobre el conmutador para cambiar entre la bombilla A y la B.</p>
+
+  <div id="conm-info" class="info-bar">
+    <div class="icon">A</div>
+    <div class="text">
+      <strong>Posición A — bombilla A encendida</strong><span>El conmutador conduce la corriente hacia la bombilla A. La B está apagada porque su camino está cortado.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 5. SERIE -->
+<!-- ============================================================ -->
+<div class="panel" data-panel="serie" hidden>
+  <span class="symbol-tag">Configuración de carga</span>
+  <h2>3 bombillas en serie</h2>
+  <p class="desc">En una <b>conexión en serie</b> las bombillas están conectadas <b>una detrás de otra</b>, formando un único camino para la corriente. Si una se funde, <b>se rompe el camino y se apagan todas</b>. Además, el brillo se reparte entre las tres (lucen menos que si estuviera una sola).</p>
+
+  <div class="svg-wrap">
+    <svg class="circuit" viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg">
+      <path id="se-path" d="M 80,130 L 80,55 L 640,55 L 640,265 L 80,265 L 80,190" fill="none" stroke="none"/>
+      <path d="M 80,130 L 80,55 L 640,55 L 640,265 L 80,265 L 80,190" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+
+      <!-- Glow halos por bombilla -->
+      <circle id="se-glow-1" class="bulb-glow on" cx="340" cy="55" r="38" fill="var(--bulb-glow)"/>
+      <circle id="se-glow-2" class="bulb-glow on" cx="450" cy="55" r="38" fill="var(--bulb-glow)"/>
+      <circle id="se-glow-3" class="bulb-glow on" cx="560" cy="55" r="38" fill="var(--bulb-glow)"/>
+
+      <g>
+        <line x1="55" y1="130" x2="105" y2="130" stroke="#1d1d1f" stroke-width="4" stroke-linecap="round"/>
+        <line x1="68" y1="190" x2="92" y2="190" stroke="#1d1d1f" stroke-width="4" stroke-linecap="round"/>
+        <text x="30" y="135" font-family="Bricolage Grotesque, sans-serif" font-size="22" font-weight="800" fill="#d63b2f">+</text>
+        <text x="34" y="197" font-family="Bricolage Grotesque, sans-serif" font-size="22" font-weight="800" fill="#1d6fb8">−</text>
+        <text x="30" y="240" font-family="JetBrains Mono, monospace" font-size="11" fill="#4a4a4f">PILA</text>
+      </g>
+
+      <!-- INTERRUPTOR (siempre cerrado en este panel) -->
+      <g>
+        <line x1="196" y1="55" x2="244" y2="55" stroke="#fff" stroke-width="6"/>
+        <circle cx="200" cy="55" r="5" fill="#1d1d1f"/>
+        <line x1="200" y1="55" x2="240" y2="55" stroke="#1d1d1f" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="240" cy="55" r="5" fill="#1d1d1f"/>
+      </g>
+
+      <!-- BOMBILLA 1 -->
+      <g class="clickable" data-bulb="1">
+        <line x1="340" y1="33" x2="340" y2="77" stroke="#fff" stroke-width="6"/>
+        <circle id="se-bulb-1" class="bulb-glass" cx="340" cy="55" r="20" fill="#fff" stroke="#1d1d1f" stroke-width="3"/>
+        <line x1="326" y1="41" x2="354" y2="69" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="354" y1="41" x2="326" y2="69" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+        <g id="se-x-1" class="bulb-blown-x">
+          <line x1="328" y1="43" x2="352" y2="67" stroke="#c0392b" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="352" y1="43" x2="328" y2="67" stroke="#c0392b" stroke-width="3.5" stroke-linecap="round"/>
+        </g>
+        <text x="340" y="100" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#4a4a4f" text-anchor="middle">L1</text>
+      </g>
+
+      <!-- BOMBILLA 2 -->
+      <g class="clickable" data-bulb="2">
+        <line x1="450" y1="33" x2="450" y2="77" stroke="#fff" stroke-width="6"/>
+        <circle id="se-bulb-2" class="bulb-glass" cx="450" cy="55" r="20" fill="#fff" stroke="#1d1d1f" stroke-width="3"/>
+        <line x1="436" y1="41" x2="464" y2="69" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="464" y1="41" x2="436" y2="69" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+        <g id="se-x-2" class="bulb-blown-x">
+          <line x1="438" y1="43" x2="462" y2="67" stroke="#c0392b" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="462" y1="43" x2="438" y2="67" stroke="#c0392b" stroke-width="3.5" stroke-linecap="round"/>
+        </g>
+        <text x="450" y="100" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#4a4a4f" text-anchor="middle">L2</text>
+      </g>
+
+      <!-- BOMBILLA 3 -->
+      <g class="clickable" data-bulb="3">
+        <line x1="560" y1="33" x2="560" y2="77" stroke="#fff" stroke-width="6"/>
+        <circle id="se-bulb-3" class="bulb-glass" cx="560" cy="55" r="20" fill="#fff" stroke="#1d1d1f" stroke-width="3"/>
+        <line x1="546" y1="41" x2="574" y2="69" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="574" y1="41" x2="546" y2="69" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+        <g id="se-x-3" class="bulb-blown-x">
+          <line x1="548" y1="43" x2="572" y2="67" stroke="#c0392b" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="572" y1="43" x2="548" y2="67" stroke="#c0392b" stroke-width="3.5" stroke-linecap="round"/>
+        </g>
+        <text x="560" y="100" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#4a4a4f" text-anchor="middle">L3</text>
+      </g>
+
+      <g id="se-particles"></g>
+    </svg>
+  </div>
+
+  <div class="controls">
+    <button class="btn" id="se-reset">🔧 Reparar todas</button>
+  </div>
+
+  <p class="hint">💡 Haz clic sobre cualquier bombilla para fundirla y observa qué le pasa al circuito.</p>
+
+  <div id="se-info" class="info-bar">
+    <div class="icon">✓</div>
+    <div class="text">
+      <strong>Las tres bombillas lucen</strong><span>El camino está completo. La corriente atraviesa las tres bombillas, una tras otra.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 6. PARALELO -->
+<!-- ============================================================ -->
+<div class="panel" data-panel="paralelo" hidden>
+  <span class="symbol-tag">Configuración de carga</span>
+  <h2>3 bombillas en paralelo</h2>
+  <p class="desc">En una <b>conexión en paralelo</b> cada bombilla tiene <b>su propio camino</b> para la corriente. Si una se funde, las demás <b>siguen luciendo con normalidad</b>. Además, todas reciben la misma tensión que la pila, así que brillan al máximo. Es la conexión que se usa en las casas: enchufes y luces son independientes entre sí.</p>
+
+  <div class="svg-wrap">
+    <svg class="circuit" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+      <!-- Cables comunes superior e inferior -->
+      <path d="M 80,130 L 80,55 L 540,55" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+      <path d="M 540,265 L 80,265 L 80,190" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+      <!-- Tres ramas verticales -->
+      <line x1="240" y1="55" x2="240" y2="265" stroke="#1d1d1f" stroke-width="3"/>
+      <line x1="370" y1="55" x2="370" y2="265" stroke="#1d1d1f" stroke-width="3"/>
+      <line x1="500" y1="55" x2="500" y2="265" stroke="#1d1d1f" stroke-width="3"/>
+
+      <!-- Paths invisibles para cada rama -->
+      <!-- Cada rama: parte de + (80,130), sube, va horizontal hasta x_rama, baja por la rama hasta 265, vuelve a la izquierda hasta (80,265), sube hasta 190 -->
+      <path id="pa-path-1" d="M 80,130 L 80,55 L 240,55 L 240,265 L 80,265 L 80,190" fill="none" stroke="none"/>
+      <path id="pa-path-2" d="M 80,130 L 80,55 L 370,55 L 370,265 L 80,265 L 80,190" fill="none" stroke="none"/>
+      <path id="pa-path-3" d="M 80,130 L 80,55 L 500,55 L 500,265 L 80,265 L 80,190" fill="none" stroke="none"/>
+
+      <circle id="pa-glow-1" class="bulb-glow on" cx="240" cy="160" r="38" fill="var(--bulb-glow)"/>
+      <circle id="pa-glow-2" class="bulb-glow on" cx="370" cy="160" r="38" fill="var(--bulb-glow)"/>
+      <circle id="pa-glow-3" class="bulb-glow on" cx="500" cy="160" r="38" fill="var(--bulb-glow)"/>
+
+      <g>
+        <line x1="55" y1="130" x2="105" y2="130" stroke="#1d1d1f" stroke-width="4" stroke-linecap="round"/>
+        <line x1="68" y1="190" x2="92" y2="190" stroke="#1d1d1f" stroke-width="4" stroke-linecap="round"/>
+        <text x="30" y="135" font-family="Bricolage Grotesque, sans-serif" font-size="22" font-weight="800" fill="#d63b2f">+</text>
+        <text x="34" y="197" font-family="Bricolage Grotesque, sans-serif" font-size="22" font-weight="800" fill="#1d6fb8">−</text>
+        <text x="30" y="240" font-family="JetBrains Mono, monospace" font-size="11" fill="#4a4a4f">PILA</text>
+      </g>
+
+      <!-- BOMBILLA 1 (rama 1) -->
+      <g class="clickable" data-bulb="1">
+        <line x1="240" y1="138" x2="240" y2="182" stroke="#fff" stroke-width="6"/>
+        <circle id="pa-bulb-1" class="bulb-glass" cx="240" cy="160" r="20" fill="#fff" stroke="#1d1d1f" stroke-width="3"/>
+        <line x1="226" y1="146" x2="254" y2="174" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="254" y1="146" x2="226" y2="174" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+        <g id="pa-x-1" class="bulb-blown-x">
+          <line x1="228" y1="148" x2="252" y2="172" stroke="#c0392b" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="252" y1="148" x2="228" y2="172" stroke="#c0392b" stroke-width="3.5" stroke-linecap="round"/>
+        </g>
+        <text x="240" y="205" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#4a4a4f" text-anchor="middle">L1</text>
+      </g>
+
+      <!-- BOMBILLA 2 (rama 2) -->
+      <g class="clickable" data-bulb="2">
+        <line x1="370" y1="138" x2="370" y2="182" stroke="#fff" stroke-width="6"/>
+        <circle id="pa-bulb-2" class="bulb-glass" cx="370" cy="160" r="20" fill="#fff" stroke="#1d1d1f" stroke-width="3"/>
+        <line x1="356" y1="146" x2="384" y2="174" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="384" y1="146" x2="356" y2="174" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+        <g id="pa-x-2" class="bulb-blown-x">
+          <line x1="358" y1="148" x2="382" y2="172" stroke="#c0392b" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="382" y1="148" x2="358" y2="172" stroke="#c0392b" stroke-width="3.5" stroke-linecap="round"/>
+        </g>
+        <text x="370" y="205" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#4a4a4f" text-anchor="middle">L2</text>
+      </g>
+
+      <!-- BOMBILLA 3 (rama 3) -->
+      <g class="clickable" data-bulb="3">
+        <line x1="500" y1="138" x2="500" y2="182" stroke="#fff" stroke-width="6"/>
+        <circle id="pa-bulb-3" class="bulb-glass" cx="500" cy="160" r="20" fill="#fff" stroke="#1d1d1f" stroke-width="3"/>
+        <line x1="486" y1="146" x2="514" y2="174" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="514" y1="146" x2="486" y2="174" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round"/>
+        <g id="pa-x-3" class="bulb-blown-x">
+          <line x1="488" y1="148" x2="512" y2="172" stroke="#c0392b" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="512" y1="148" x2="488" y2="172" stroke="#c0392b" stroke-width="3.5" stroke-linecap="round"/>
+        </g>
+        <text x="500" y="205" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#4a4a4f" text-anchor="middle">L3</text>
+      </g>
+
+      <g id="pa-particles-1"></g>
+      <g id="pa-particles-2"></g>
+      <g id="pa-particles-3"></g>
+    </svg>
+  </div>
+
+  <div class="controls">
+    <button class="btn" id="pa-reset">🔧 Reparar todas</button>
+  </div>
+
+  <p class="hint">💡 Haz clic sobre cualquier bombilla para fundirla. ¡Observa que las demás siguen funcionando!</p>
+
+  <div id="pa-info" class="info-bar">
+    <div class="icon">✓</div>
+    <div class="text">
+      <strong>Las tres bombillas lucen</strong><span>Cada bombilla tiene su propio camino para la corriente. Las tres son independientes.</span>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- QUIZ -->
+<section class="quiz-section">
+  <h2>Mini-quiz</h2>
+  <p style="color: var(--ink-soft); margin-bottom: 20px;">5 preguntas rápidas para repasar lo aprendido en los 6 circuitos.</p>
+  <div id="quizContainer"></div>
+  <div id="quizResult" class="quiz-result">
+    <div>Tu puntuación:</div>
+    <div class="score"><span id="scoreNum">0</span> / 5</div>
+    <div class="msg" id="scoreMsg"></div>
+    <button class="btn reset-btn" id="btnQuizReset">Volver a intentarlo</button>
+  </div>
+</section>
+
+<footer>
+  IES Jiménez de Quesada · Tecnología y Digitalización · 2º ESO · v1
+</footer>
+
+</div>
+
+<script>
+// ============================================================
+// COMÚN
+// ============================================================
+const svgNS = "http://www.w3.org/2000/svg";
+const SPEED = 55;       // unidades de path por segundo
+const N_PER_PATH = 12;  // número de partículas por path
+
+function createParticle() {
+  const g = document.createElementNS(svgNS, 'g');
+  const c = document.createElementNS(svgNS, 'circle');
+  c.setAttribute('r', 10);
+  c.setAttribute('fill', '#1d6fb8');
+  c.setAttribute('stroke', '#1d6fb8');
+  c.setAttribute('stroke-width', 2);
+  const t = document.createElementNS(svgNS, 'text');
+  t.setAttribute('text-anchor', 'middle');
+  t.setAttribute('dominant-baseline', 'central');
+  t.setAttribute('font-family', 'Bricolage Grotesque, sans-serif');
+  t.setAttribute('font-weight', '800');
+  t.setAttribute('font-size', '10');
+  t.setAttribute('fill', '#fff');
+  t.setAttribute('pointer-events', 'none');
+  t.textContent = 'e⁻';
+  g.appendChild(c);
+  g.appendChild(t);
+  return g;
+}
+
+function makeParticles(group, path, n) {
+  const totalLen = path.getTotalLength();
+  const arr = [];
+  for (let i = 0; i < n; i++) {
+    const el = createParticle();
+    group.appendChild(el);
+    const norm = i / n;
+    const pt = path.getPointAtLength(norm * totalLen);
+    el.setAttribute('transform', `translate(${pt.x}, ${pt.y})`);
+    arr.push({ el, norm });
+  }
+  return arr;
+}
+
+function moveParticles(particles, path, dt, speedMul = 1) {
+  if (speedMul <= 0) return;
+  const totalLen = path.getTotalLength();
+  const adv = (SPEED * speedMul * dt) / totalLen;
+  particles.forEach(p => {
+    p.norm = (p.norm + adv) % 1;
+    const pt = path.getPointAtLength(p.norm * totalLen);
+    p.el.setAttribute('transform', `translate(${pt.x}, ${pt.y})`);
+  });
+}
+
+function setInfo(infoEl, mode, icon, title, body) {
+  infoEl.classList.remove('off', 'partial');
+  if (mode === 'off') infoEl.classList.add('off');
+  if (mode === 'partial') infoEl.classList.add('partial');
+  infoEl.querySelector('.icon').textContent = icon;
+  infoEl.querySelector('.text').innerHTML = `<strong>${title}</strong><span>${body}</span>`;
+}
+
+// ============================================================
+// 1. INTERRUPTOR
+// ============================================================
+const interruptor = (() => {
+  const path = document.getElementById('int-path');
+  const particles = makeParticles(document.getElementById('int-particles'), path, N_PER_PATH);
+  const arm = document.getElementById('int-arm');
+  const glow = document.getElementById('int-bulb-glow');
+  const info = document.getElementById('int-info');
+  const sw = document.getElementById('int-switch');
+  let closed = true;
+
+  function update() {
+    arm.classList.toggle('open', !closed);
+    glow.classList.toggle('on', closed);
+    if (closed) {
+      setInfo(info, 'on', '✓', 'Cerrado', 'El circuito está completo y la corriente circula. La bombilla luce.');
+    } else {
+      setInfo(info, 'off', '✗', 'Abierto', 'El interruptor está abierto: el camino está cortado. La bombilla está apagada.');
+    }
+  }
+  sw.addEventListener('click', () => { closed = !closed; update(); });
+  update();
+
+  return { tick: dt => moveParticles(particles, path, dt, closed ? 1 : 0) };
+})();
+
+// ============================================================
+// 2. PULSADOR NA
+// ============================================================
+const pulsadorNA = (() => {
+  const path = document.getElementById('na-path');
+  const particles = makeParticles(document.getElementById('na-particles'), path, N_PER_PATH);
+  const bridge = document.getElementById('na-bridge');
+  const btnVisual = document.getElementById('na-btn-visual');
+  const glow = document.getElementById('na-bulb-glow');
+  const info = document.getElementById('na-info');
+  const btn = document.getElementById('na-button');
+  let pressed = false;
+
+  function update() {
+    bridge.setAttribute('opacity', pressed ? '1' : '0');
+    btnVisual.classList.toggle('pressed', pressed);
+    glow.classList.toggle('on', pressed);
+    if (pressed) {
+      setInfo(info, 'on', '✓', 'Pulsado → cerrado', 'Mientras lo mantienes pulsado, el puente conecta los contactos. Pasa corriente y la bombilla luce.');
+    } else {
+      setInfo(info, 'off', '✗', 'Abierto (en reposo)', 'El pulsador NA está abierto por defecto. La bombilla está apagada hasta que lo mantengas pulsado.');
+    }
+  }
+  function down(e) { e.preventDefault(); pressed = true; update(); }
+  function up()    { if (!pressed) return; pressed = false; update(); }
+  btn.addEventListener('pointerdown', down);
+  btn.addEventListener('pointerup', up);
+  btn.addEventListener('pointerleave', up);
+  btn.addEventListener('pointercancel', up);
+  update();
+
+  return { tick: dt => moveParticles(particles, path, dt, pressed ? 1 : 0) };
+})();
+
+// ============================================================
+// 3. PULSADOR NC
+// ============================================================
+const pulsadorNC = (() => {
+  const path = document.getElementById('nc-path');
+  const particles = makeParticles(document.getElementById('nc-particles'), path, N_PER_PATH);
+  const bridge = document.getElementById('nc-bridge');
+  const btnVisual = document.getElementById('nc-btn-visual');
+  const glow = document.getElementById('nc-bulb-glow');
+  const info = document.getElementById('nc-info');
+  const btn = document.getElementById('nc-button');
+  let pressed = false;
+
+  function update() {
+    // En NC: en reposo (no pressed) el puente está VISIBLE; al pulsar, desaparece
+    bridge.setAttribute('opacity', pressed ? '0' : '1');
+    btnVisual.classList.toggle('pressed', pressed);
+    glow.classList.toggle('on', !pressed);
+    if (pressed) {
+      setInfo(info, 'off', '✗', 'Pulsado → abierto', 'Mientras lo mantienes pulsado, el puente se separa de los contactos. La corriente no pasa y la bombilla se apaga.');
+    } else {
+      setInfo(info, 'on', '✓', 'Cerrado (en reposo)', 'El pulsador NC está cerrado por defecto. La bombilla luce hasta que lo mantengas pulsado.');
+    }
+  }
+  function down(e) { e.preventDefault(); pressed = true; update(); }
+  function up()    { if (!pressed) return; pressed = false; update(); }
+  btn.addEventListener('pointerdown', down);
+  btn.addEventListener('pointerup', up);
+  btn.addEventListener('pointerleave', up);
+  btn.addEventListener('pointercancel', up);
+  update();
+
+  return { tick: dt => moveParticles(particles, path, dt, pressed ? 0 : 1) };
+})();
+
+// ============================================================
+// 4. CONMUTADOR
+// ============================================================
+const conmutador = (() => {
+  const pathA = document.getElementById('conm-path-A');
+  const pathB = document.getElementById('conm-path-B');
+  const arm = document.getElementById('conm-arm');
+  const glowA = document.getElementById('conm-glow-A');
+  const glowB = document.getElementById('conm-glow-B');
+  const info = document.getElementById('conm-info');
+  const sw = document.getElementById('conm-switch');
+  let pos = 'A';
+  let particles = makeParticles(document.getElementById('conm-particles'), pathA, N_PER_PATH);
+  let currentPath = pathA;
+
+  function update() {
+    if (pos === 'A') {
+      arm.setAttribute('x2', 340);
+      arm.setAttribute('y2', 110);
+      glowA.classList.add('on');
+      glowB.classList.remove('on');
+      currentPath = pathA;
+      setInfo(info, 'on', 'A', 'Posición A — bombilla A encendida', 'El conmutador conduce la corriente hacia la bombilla A. La B está apagada porque su camino está cortado.');
+    } else {
+      arm.setAttribute('x2', 340);
+      arm.setAttribute('y2', 210);
+      glowA.classList.remove('on');
+      glowB.classList.add('on');
+      currentPath = pathB;
+      setInfo(info, 'on', 'B', 'Posición B — bombilla B encendida', 'El conmutador conduce ahora la corriente hacia la bombilla B. La A está apagada.');
+    }
+    // Reposicionar partículas en el nuevo path manteniendo su norm
+    const len = currentPath.getTotalLength();
+    particles.forEach(p => {
+      const pt = currentPath.getPointAtLength(p.norm * len);
+      p.el.setAttribute('transform', `translate(${pt.x}, ${pt.y})`);
+    });
+  }
+  sw.addEventListener('click', () => { pos = (pos === 'A') ? 'B' : 'A'; update(); });
+  update();
+
+  return { tick: dt => moveParticles(particles, currentPath, dt, 1) };
+})();
+
+// ============================================================
+// 5. SERIE
+// ============================================================
+const serie = (() => {
+  const path = document.getElementById('se-path');
+  const particles = makeParticles(document.getElementById('se-particles'), path, 16);
+  const info = document.getElementById('se-info');
+  const bulbs = [
+    { glass: document.getElementById('se-bulb-1'), x: document.getElementById('se-x-1'), glow: document.getElementById('se-glow-1'), ok: true },
+    { glass: document.getElementById('se-bulb-2'), x: document.getElementById('se-x-2'), glow: document.getElementById('se-glow-2'), ok: true },
+    { glass: document.getElementById('se-bulb-3'), x: document.getElementById('se-x-3'), glow: document.getElementById('se-glow-3'), ok: true }
+  ];
+
+  function update() {
+    const allOk = bulbs.every(b => b.ok);
+    bulbs.forEach(b => {
+      b.glass.classList.toggle('bulb-blown', !b.ok);
+      b.x.classList.toggle('show', !b.ok);
+      // En serie: solo lucen si TODAS están bien
+      b.glow.classList.toggle('on', allOk);
+    });
+    const broken = bulbs.filter(b => !b.ok).map((b,i) => bulbs.indexOf(b)+1);
+    if (allOk) {
+      setInfo(info, 'on', '✓', 'Las tres bombillas lucen', 'El camino está completo. La corriente atraviesa las tres bombillas, una tras otra.');
+    } else {
+      const fundidas = bulbs.map((b,i) => b.ok ? null : `L${i+1}`).filter(x => x).join(', ');
+      setInfo(info, 'off', '✗', `Bombilla fundida: ${fundidas}`, 'Al fundirse una sola bombilla, el camino se rompe. Como están en serie, las otras también se apagan aunque estén perfectamente.');
+    }
+  }
+  bulbs.forEach((b, i) => {
+    document.querySelector(`[data-panel="serie"] [data-bulb="${i+1}"]`).addEventListener('click', () => {
+      b.ok = !b.ok;
+      update();
+    });
+  });
+  document.getElementById('se-reset').addEventListener('click', () => {
+    bulbs.forEach(b => b.ok = true);
+    update();
+  });
+  update();
+
+  return {
+    tick: dt => {
+      const allOk = bulbs.every(b => b.ok);
+      moveParticles(particles, path, dt, allOk ? 1 : 0);
+    }
+  };
+})();
+
+// ============================================================
+// 6. PARALELO
+// ============================================================
+const paralelo = (() => {
+  const paths = [
+    document.getElementById('pa-path-1'),
+    document.getElementById('pa-path-2'),
+    document.getElementById('pa-path-3')
+  ];
+  const groups = [
+    document.getElementById('pa-particles-1'),
+    document.getElementById('pa-particles-2'),
+    document.getElementById('pa-particles-3')
+  ];
+  const particlesPerBranch = paths.map((p, i) => makeParticles(groups[i], p, 8));
+  const info = document.getElementById('pa-info');
+  const bulbs = [
+    { glass: document.getElementById('pa-bulb-1'), x: document.getElementById('pa-x-1'), glow: document.getElementById('pa-glow-1'), ok: true },
+    { glass: document.getElementById('pa-bulb-2'), x: document.getElementById('pa-x-2'), glow: document.getElementById('pa-glow-2'), ok: true },
+    { glass: document.getElementById('pa-bulb-3'), x: document.getElementById('pa-x-3'), glow: document.getElementById('pa-glow-3'), ok: true }
+  ];
+
+  function update() {
+    bulbs.forEach((b, i) => {
+      b.glass.classList.toggle('bulb-blown', !b.ok);
+      b.x.classList.toggle('show', !b.ok);
+      b.glow.classList.toggle('on', b.ok);
+    });
+    const fundidasArr = bulbs.map((b,i) => b.ok ? null : `L${i+1}`).filter(x => x);
+    if (fundidasArr.length === 0) {
+      setInfo(info, 'on', '✓', 'Las tres bombillas lucen', 'Cada bombilla tiene su propio camino para la corriente. Las tres son independientes.');
+    } else if (fundidasArr.length === 3) {
+      setInfo(info, 'off', '✗', 'Las tres están fundidas', 'No queda ninguna bombilla operativa. El circuito sigue conectado, pero no hay nada que se ilumine.');
+    } else {
+      setInfo(info, 'partial', '!', `Bombilla fundida: ${fundidasArr.join(', ')}`,
+        `Las demás siguen luciendo con normalidad porque cada una tiene su propio camino. Esa es la gran ventaja del paralelo.`);
+    }
+  }
+  bulbs.forEach((b, i) => {
+    document.querySelector(`[data-panel="paralelo"] [data-bulb="${i+1}"]`).addEventListener('click', () => {
+      b.ok = !b.ok;
+      update();
+    });
+  });
+  document.getElementById('pa-reset').addEventListener('click', () => {
+    bulbs.forEach(b => b.ok = true);
+    update();
+  });
+  update();
+
+  return {
+    tick: dt => {
+      bulbs.forEach((b, i) => {
+        moveParticles(particlesPerBranch[i], paths[i], dt, b.ok ? 1 : 0);
+      });
+    }
+  };
+})();
+
+// ============================================================
+// LOOP DE ANIMACIÓN GLOBAL
+// ============================================================
+const MODULES = { interruptor, pulsador_na: pulsadorNA, pulsador_nc: pulsadorNC, conmutador, serie, paralelo };
+let activeTab = 'interruptor';
+let lastTime = performance.now();
+
+function loop(now) {
+  const dt = Math.min((now - lastTime) / 1000, 0.05);
+  lastTime = now;
+  // Solo animamos el circuito visible (mejor rendimiento)
+  if (MODULES[activeTab]) MODULES[activeTab].tick(dt);
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(now => { lastTime = now; loop(now); });
+
+// ============================================================
+// TABS
+// ============================================================
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    const target = t.dataset.tab;
+    document.querySelectorAll('.tab').forEach(x => x.classList.toggle('active', x === t));
+    document.querySelectorAll('.panel').forEach(p => {
+      p.hidden = (p.dataset.panel !== target);
+    });
+    activeTab = target;
+  });
+});
+
+// ============================================================
+// QUIZ (5 preguntas)
+// ============================================================
+const QUESTIONS = [
+  {
+    q: "¿Cuál es la diferencia principal entre un interruptor y un pulsador?",
+    options: [
+      { t: "El pulsador solo está activo mientras lo mantienes pulsado; el interruptor mantiene su estado", ok: true,  fb: "¡Correcto! El interruptor se queda en la posición que le dejes; el pulsador vuelve solo a su posición de reposo." },
+      { t: "El pulsador es siempre más grande que un interruptor",                                            ok: false, fb: "El tamaño no tiene nada que ver. La diferencia está en si mantienen el estado o no." },
+      { t: "El interruptor es eléctrico y el pulsador no",                                                    ok: false, fb: "Los dos son componentes eléctricos: ambos abren y cierran circuitos." }
+    ]
+  },
+  {
+    q: "¿Para qué se usa típicamente un pulsador <b>normalmente cerrado</b> (NC)?",
+    options: [
+      { t: "Para timbres de puerta y claxons de coche",                                       ok: false, fb: "Esos casos usan un pulsador NA (cerrado solo mientras pulsas)." },
+      { t: "Para sistemas de seguridad como las setas de paro de emergencia",                 ok: true,  fb: "¡Exacto! En seguridad interesa que el circuito esté cerrado por defecto y se abra al pulsar (o al fallar)." },
+      { t: "Para encender la luz de las habitaciones",                                         ok: false, fb: "Para eso se usa un interruptor convencional, no un pulsador." }
+    ]
+  },
+  {
+    q: "Si en una conexión <b>en serie</b> de tres bombillas se funde una de ellas, ¿qué pasa?",
+    options: [
+      { t: "Las otras dos siguen luciendo con normalidad",                                          ok: false, fb: "Eso pasaría si estuvieran en paralelo, no en serie." },
+      { t: "Se apagan las tres porque se rompe el camino único de la corriente",                     ok: true,  fb: "¡Perfecto! En serie hay un único camino: si se interrumpe en cualquier punto, no pasa corriente por nadie." },
+      { t: "Las otras dos brillan más para compensar",                                              ok: false, fb: "No: si una se funde, sencillamente no hay corriente, así que las otras se apagan." }
+    ]
+  },
+  {
+    q: "Si en una conexión <b>en paralelo</b> de tres bombillas se funde una, ¿qué pasa?",
+    options: [
+      { t: "Se apagan las tres",                                                                    ok: false, fb: "No: cada bombilla tiene su propio camino. Que falle una no afecta a las otras." },
+      { t: "Las otras dos siguen luciendo igual de bien",                                           ok: true,  fb: "¡Correcto! Esa es la gran ventaja del paralelo: independencia entre cargas." },
+      { t: "Se produce un cortocircuito",                                                            ok: false, fb: "Una bombilla fundida deja de conducir. No es un cortocircuito (que sería un atajo sin resistencia)." }
+    ]
+  },
+  {
+    q: "¿Cómo están conectadas las bombillas y enchufes de las distintas habitaciones de una casa?",
+    options: [
+      { t: "En serie, para ahorrar cable",                                                          ok: false, fb: "Si fuera así, al apagar una luz se apagarían todas las demás. ¡Sería un caos!" },
+      { t: "En paralelo, para que cada uno funcione de forma independiente",                        ok: true,  fb: "¡Correcto! Así puedes encender la luz del salón sin que se apague la de la cocina." },
+      { t: "En cortocircuito permanente",                                                            ok: false, fb: "Eso quemaría toda la instalación. El cortocircuito siempre es algo a evitar." }
+    ]
+  }
+];
+
+const quizContainer = document.getElementById('quizContainer');
+const quizResult    = document.getElementById('quizResult');
+const scoreNum      = document.getElementById('scoreNum');
+const scoreMsg      = document.getElementById('scoreMsg');
+const btnQuizReset  = document.getElementById('btnQuizReset');
+
+let answered = 0, score = 0;
+
+function buildQuiz() {
+  quizContainer.innerHTML = '';
+  quizResult.classList.remove('show');
+  answered = 0; score = 0;
+
+  QUESTIONS.forEach((Q, qi) => {
+    const block = document.createElement('div');
+    block.className = 'quiz-question';
+    block.innerHTML = `
+      <div class="qnum">Pregunta ${qi+1} de ${QUESTIONS.length}</div>
+      <div class="qtext">${Q.q}</div>
+      <div class="quiz-options"></div>
+      <div class="quiz-feedback"></div>
+    `;
+    const optsBox = block.querySelector('.quiz-options');
+    const fbBox   = block.querySelector('.quiz-feedback');
+
+    Q.options.forEach((opt, oi) => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-option';
+      btn.textContent = opt.t;
+      btn.addEventListener('click', () => {
+        if (block.dataset.done === '1') return;
+        block.dataset.done = '1';
+        optsBox.querySelectorAll('button').forEach(b => b.disabled = true);
+        if (opt.ok) {
+          btn.classList.add('correct');
+          fbBox.classList.add('ok', 'show');
+          score++;
+        } else {
+          btn.classList.add('wrong');
+          fbBox.classList.add('no', 'show');
+          Q.options.forEach((o, i) => {
+            if (o.ok) optsBox.children[i].classList.add('correct');
+          });
+        }
+        fbBox.textContent = opt.fb;
+        answered++;
+        if (answered === QUESTIONS.length) showResult();
+      });
+      optsBox.appendChild(btn);
+    });
+    quizContainer.appendChild(block);
+  });
+}
+
+function showResult() {
+  scoreNum.textContent = score;
+  let msg = '';
+  if (score === 5)      msg = '¡Excelente! Tienes los 6 circuitos perfectamente claros. 🎯';
+  else if (score === 4) msg = '¡Muy bien! Repasa la pregunta que has fallado y lo dejas redondo.';
+  else if (score >= 2)  msg = 'Buen comienzo. Vuelve a las pestañas correspondientes y prueba otra vez.';
+  else                  msg = 'Sin prisa: revisa los circuitos uno por uno y reinténtalo.';
+  scoreMsg.textContent = msg;
+  quizResult.classList.add('show');
+  quizResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+btnQuizReset.addEventListener('click', buildQuiz);
+buildQuiz();
+</script>
+
+</body>
+</html>
