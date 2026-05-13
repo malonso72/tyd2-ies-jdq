@@ -1,9 +1,520 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Autocomprobación · En desarrollo</title>
-<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/hub.css">
-</head><body>
-<div class="hub-main" id="main-content">
-<section class="unidad-titulo-hero"><h1>✅ Autocomprobación</h1><div class="duracion">Este recurso está previsto dentro de la arquitectura de la unidad.</div></section>
-<div class="bg"><a class="bc" href="../index.html"><span class="bi">⬅️</span><span class="bk">Volver a la unidad</span><span class="bn">Este apartado se completará progresivamente</span></a></div>
-</div></body></html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Autocomprobación · U05 Electricidad · TyD 2º ESO</title>
+<meta name="description" content="Autocomprobación de la unidad 05 · Electricidad. Circuitos eléctricos · 18 preguntas con feedback inmediato · TyD 2º ESO · IES Jiménez de Quesada.">
+
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/05-electricidad/autocomprobacion/">
+
+<meta property="og:title" content="Autocomprobación · U05 Electricidad · TyD 2º ESO">
+<meta property="og:description" content="18 preguntas para repasar lo esencial de la unidad de electricidad. Feedback inmediato y enlace al libro digital en cada pregunta.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/05-electricidad/autocomprobacion/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+/* ── Estilos específicos de la autocomprobación ───────────────────── */
+.ac-hero{max-width:1100px;margin:22px auto 8px;padding:0 20px;text-align:center}
+.ac-hero h1{font-family:var(--cond);font-size:1.9rem;color:var(--principal);margin:0 0 6px;letter-spacing:.5px}
+.ac-hero .subt{font-size:.95rem;color:var(--texto2);margin:0 0 16px}
+.ac-camino{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;font-family:var(--cond);font-size:.78rem;letter-spacing:.4px;margin-bottom:10px}
+.ac-camino span{padding:4px 12px;border-radius:14px;background:#F4F6F9;color:#8C97A8;border:1px solid #D8DDE5}
+.ac-camino span.activo{background:linear-gradient(135deg,var(--principal),var(--principal2));color:#fff;border-color:var(--principal)}
+.ac-camino .sep{background:transparent;border:none;color:#B8C0CC;padding:4px 2px}
+
+.ac-instrucciones{max-width:900px;margin:0 auto 18px;padding:14px 20px;background:#FFF8F0;border-left:4px solid var(--principal);border-radius:6px;font-size:.92rem;color:var(--texto2);line-height:1.55}
+.ac-instrucciones strong{color:var(--principal)}
+
+.ac-wrap{max-width:900px;margin:0 auto;padding:0 16px 50px}
+
+.bloque-encabezado{display:flex;align-items:baseline;gap:10px;margin:22px 0 6px;padding:0 4px}
+.bloque-encabezado .num{font-family:var(--cond);font-size:1.05rem;background:var(--principal);color:#fff;padding:3px 11px;border-radius:14px}
+.bloque-encabezado h2{font-family:var(--cond);font-size:1.4rem;color:var(--texto);margin:0;flex:1}
+.bloque-encabezado .meta{font-size:.8rem;color:var(--texto2)}
+
+.bloque-ancla{font-size:.88rem;color:var(--texto2);margin:0 4px 10px}
+.bloque-ancla a{color:var(--principal2);text-decoration:none;border-bottom:1px dotted var(--principal2)}
+.bloque-ancla a:hover{color:var(--principal)}
+
+.bloque-marcador{margin-top:8px;padding:9px 14px;background:#F4F6F9;border-radius:6px;font-size:.88rem;color:var(--texto2);display:none;text-align:right;font-family:var(--cond);letter-spacing:.3px}
+.bloque-marcador.activo{display:block}
+.bloque-marcador .acierto{color:var(--verde);font-weight:600}
+.bloque-marcador .fallo{color:var(--rojo);font-weight:600}
+
+.test-q .test-num{display:inline-block;font-family:var(--cond);font-size:.78rem;color:var(--principal);background:var(--principal-bg);padding:2px 8px;border-radius:10px;margin-right:7px;vertical-align:1px}
+.test-q .test-tipo-tag{display:inline-block;font-family:var(--cond);font-size:.7rem;color:var(--texto2);background:#EEF1F5;padding:2px 7px;border-radius:10px;margin-left:6px;vertical-align:1px}
+
+.ac-resumen{max-width:900px;margin:28px auto 0;padding:22px 24px;background:linear-gradient(180deg,#FFF8F0,#fff);border:2px solid var(--principal);border-radius:10px;text-align:center}
+.ac-resumen h2{font-family:var(--cond);font-size:1.5rem;color:var(--principal);margin:0 0 8px}
+.ac-resumen .puntuacion{font-family:var(--cond);font-size:2.3rem;color:var(--texto);margin:6px 0}
+.ac-resumen .puntuacion .num-grande{color:var(--principal);font-size:3rem}
+.ac-resumen .veredicto{font-size:1rem;color:var(--texto2);margin:0 0 14px;min-height:1.4em}
+.ac-resumen .progreso-barra{height:14px;background:#F4F6F9;border-radius:7px;overflow:hidden;margin:14px 0;border:1px solid #E0E5EC}
+.ac-resumen .progreso-barra-fill{height:100%;background:linear-gradient(90deg,var(--principal),var(--principal2));width:0;transition:width .5s ease}
+.ac-resumen .acciones{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.ac-resumen button,.ac-resumen .btn-link{font-family:var(--cond);font-size:.88rem;letter-spacing:.5px;padding:9px 18px;border-radius:20px;cursor:pointer;border:1.5px solid var(--principal);background:#fff;color:var(--principal);text-decoration:none;transition:all .15s}
+.ac-resumen button:hover,.ac-resumen .btn-link:hover{background:var(--principal);color:#fff}
+.ac-resumen button.primario{background:var(--principal);color:#fff}
+.ac-resumen button.primario:hover{background:var(--principal2)}
+.ac-resumen button:disabled{opacity:.4;cursor:not-allowed}
+.ac-resumen button:disabled:hover{background:#fff;color:var(--principal)}
+
+@media(max-width:640px){
+  .ac-hero h1{font-size:1.5rem}
+  .bloque-encabezado{flex-wrap:wrap}
+  .ac-resumen .puntuacion .num-grande{font-size:2.4rem}
+}
+
+/* ── Impresión: solo enunciados + opciones + soluciones ─────────── */
+@media print{
+  .curso-hd,.curso-navcross,.ac-camino,.ac-instrucciones,.ac-resumen{display:none!important}
+  .test-q{break-inside:avoid;border:1px solid #999;margin-bottom:8px}
+  .test-fb{display:block!important;background:#f6f6f6;color:#333;border-left:3px solid #999}
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <a href="../../../index.html" class="curso-lg">TyD 2º ESO</a>
+  <span class="curso-sb">U05 · Electricidad · Autocomprobación</span>
+  <a href="../../../index.html" class="curso-home-btn">🏠 Inicio</a>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U05</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../actividades/index.html"><span>✏️</span><span class="nc-lbl">Actividades</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>✅</span><span class="nc-lbl">Autocomprobación</span></span>
+</nav>
+
+<main id="main-content">
+
+<section class="ac-hero">
+  <div class="ac-camino" aria-label="Camino de aprendizaje">
+    <span>📖 Aprende</span>
+    <span class="sep">▸</span>
+    <span>✏️ Practica</span>
+    <span class="sep">▸</span>
+    <span class="activo">✅ Comprueba</span>
+    <span class="sep">▸</span>
+    <span>🔁 Repasa</span>
+  </div>
+  <h1>✅ Autocomprobación · U05 Electricidad</h1>
+  <p class="subt">18 preguntas para comprobar si lo has entendido · 10-15 minutos</p>
+</section>
+
+<div class="ac-instrucciones">
+  <p>Lee con calma cada pregunta y pulsa la respuesta que creas correcta. <strong>Solo tienes una oportunidad por pregunta</strong>: al pulsar, el botón se quedará verde (acierto) o rojo (fallo) y aparecerá una pequeña explicación con un enlace al apartado del libro digital donde puedes repasarlo.</p>
+  <p style="margin-bottom:0">Al final tendrás tu puntuación total y podrás <strong>reintentar solo las falladas</strong>. No hay nota: es solo para que sepas dónde estás antes del examen.</p>
+</div>
+
+<div class="ac-wrap">
+
+<!-- ════════ BLOQUE 1: LA CORRIENTE ELÉCTRICA ════════ -->
+<div class="bloque-encabezado">
+  <span class="num">B1</span>
+  <h2>La corriente eléctrica</h2>
+  <span class="meta">4 preguntas</span>
+</div>
+<p class="bloque-ancla">📖 Si dudas, repasa el apartado <a href="../libro-digital.html#parte-1">«La electricidad y el circuito»</a> del libro digital.</p>
+
+<section class="test-section" data-bloque="1">
+  <p class="test-sub">Átomos, partículas y tipos de corriente.</p>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P1</span>¿Cuál de las partículas del átomo se mueve por los cables para que haya corriente eléctrica? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Los protones</button>
+      <button class="test-opt" data-opt="b">Los electrones</button>
+      <button class="test-opt" data-opt="c">Los neutrones</button>
+      <button class="test-opt" data-opt="d">El núcleo entero</button>
+    </div>
+    <div class="test-fb">Los <strong>electrones</strong> tienen carga negativa y son las partículas que se mueven por los conductores. Los protones y neutrones se quedan en el núcleo. <a href="../libro-digital.html#parte-1">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P2</span>«La electricidad estática es un movimiento continuo de electrones por un cable». <span class="test-tipo-tag">verdadero / falso</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Verdadero</button>
+      <button class="test-opt" data-opt="b">Falso</button>
+    </div>
+    <div class="test-fb"><strong>Falso.</strong> La electricidad estática es una <em>acumulación</em> de cargas en un objeto (por ejemplo, cuando frotas un boli con un jersey). El movimiento continuo de electrones por un cable es la <strong>corriente eléctrica</strong>. <a href="../libro-digital.html#parte-1">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="a">
+    <p class="test-qtext"><span class="test-num">P3</span>Conectas una pila normal a un circuito. ¿Qué tipo de corriente lo recorre? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Corriente continua (CC): los electrones van siempre en el mismo sentido</button>
+      <button class="test-opt" data-opt="b">Corriente alterna (CA): los electrones cambian de sentido constantemente</button>
+      <button class="test-opt" data-opt="c">Ningún tipo, las pilas no producen corriente</button>
+      <button class="test-opt" data-opt="d">Corriente estática</button>
+    </div>
+    <div class="test-fb">Las pilas producen <strong>corriente continua (CC)</strong>: los electrones salen siempre del polo negativo y vuelven al positivo. <a href="../libro-digital.html#parte-1">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P4</span>El enchufe de tu casa te da... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Corriente continua (como una pila)</button>
+      <button class="test-opt" data-opt="b">Corriente alterna (los electrones cambian de sentido 50 veces por segundo)</button>
+      <button class="test-opt" data-opt="c">Electricidad estática</button>
+      <button class="test-opt" data-opt="d">No hay corriente, solo voltaje</button>
+    </div>
+    <div class="test-fb">La red eléctrica española es <strong>corriente alterna (CA) a 230 V y 50 Hz</strong>. Por eso un cargador de móvil siempre lleva un adaptador: convierte CA a CC, que es lo que necesita el móvil. <a href="../libro-digital.html#parte-1">Repasar →</a></div>
+  </div>
+
+  <div class="bloque-marcador" data-bloque="1"></div>
+</section>
+
+
+<!-- ════════ BLOQUE 2: EL CIRCUITO Y SUS COMPONENTES ════════ -->
+<div class="bloque-encabezado">
+  <span class="num">B2</span>
+  <h2>El circuito y sus componentes</h2>
+  <span class="meta">5 preguntas</span>
+</div>
+<p class="bloque-ancla">📖 Si dudas, repasa el apartado <a href="../libro-digital.html#parte-2">«Componentes de un circuito»</a> del libro digital.</p>
+
+<section class="test-section" data-bloque="2">
+  <p class="test-sub">Elementos básicos, materiales, símbolos y mandos.</p>
+
+  <div class="test-q" data-answer="c">
+    <p class="test-qtext"><span class="test-num">P5</span>De estos cuatro elementos, ¿cuál NO es imprescindible para que un circuito eléctrico básico funcione? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Un generador (pila, batería…)</button>
+      <button class="test-opt" data-opt="b">Cables conductores</button>
+      <button class="test-opt" data-opt="c">Un fusible</button>
+      <button class="test-opt" data-opt="d">Un receptor (bombilla, motor…)</button>
+    </div>
+    <div class="test-fb">El <strong>fusible</strong> es muy útil para proteger el circuito, pero no es imprescindible para que funcione. Lo imprescindible son: <em>generador + cables + receptor</em> (y un interruptor si quieres controlarlo). <a href="../libro-digital.html#parte-2">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P6</span>Un circuito <strong>abierto</strong> es aquel en el que... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">La corriente recorre todo el circuito sin parar</button>
+      <button class="test-opt" data-opt="b">La corriente no puede pasar (por ejemplo, con el interruptor abierto)</button>
+      <button class="test-opt" data-opt="c">Hay un cortocircuito</button>
+      <button class="test-opt" data-opt="d">Tiene dos generadores</button>
+    </div>
+    <div class="test-fb">«Abierto» significa que la corriente <strong>no puede dar la vuelta</strong> porque hay un hueco (un interruptor en posición OFF, un cable suelto, una bombilla fundida…). Si quieres que pase corriente, tiene que estar <em>cerrado</em>. <a href="../libro-digital.html#parte-2">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="c">
+    <p class="test-qtext"><span class="test-num">P7</span>¿Cuál de estos materiales es <strong>aislante</strong>? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Cobre</button>
+      <button class="test-opt" data-opt="b">Aluminio</button>
+      <button class="test-opt" data-opt="c">Plástico</button>
+      <button class="test-opt" data-opt="d">Hierro</button>
+    </div>
+    <div class="test-fb">Los <strong>plásticos</strong> (PVC, caucho, goma) son aislantes: no dejan pasar la electricidad. Por eso recubren los cables. Los metales (cobre, aluminio, hierro) son conductores. <a href="../libro-digital.html#parte-2">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P8</span>¿Qué dispositivo te permite encender o apagar una bombilla y, una vez accionado, <em>se queda</em> en la posición que has elegido (no vuelve solo)? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Un pulsador</button>
+      <button class="test-opt" data-opt="b">Un interruptor</button>
+      <button class="test-opt" data-opt="c">Un fusible</button>
+      <button class="test-opt" data-opt="d">Un generador</button>
+    </div>
+    <div class="test-fb">El <strong>interruptor</strong> mantiene la posición (ON / OFF). El <em>pulsador</em>, en cambio, solo está activo mientras lo aprietas (como el timbre del portero). <a href="../libro-digital.html#parte-2">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="a">
+    <p class="test-qtext"><span class="test-num">P9</span>De estas bombillas, ¿cuál consume menos energía para dar la misma luz? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">LED</button>
+      <button class="test-opt" data-opt="b">Incandescente clásica</button>
+      <button class="test-opt" data-opt="c">Halógena</button>
+      <button class="test-opt" data-opt="d">Las tres consumen lo mismo</button>
+    </div>
+    <div class="test-fb">Las <strong>LED</strong> son las más eficientes: para la misma luz pueden consumir 10 veces menos que una incandescente. Por eso son las que se recomiendan hoy. <a href="../libro-digital.html#parte-2">Repasar →</a></div>
+  </div>
+
+  <div class="bloque-marcador" data-bloque="2"></div>
+</section>
+
+
+<!-- ════════ BLOQUE 3: MAGNITUDES Y LEY DE OHM ════════ -->
+<div class="bloque-encabezado">
+  <span class="num">B3</span>
+  <h2>Magnitudes y ley de Ohm</h2>
+  <span class="meta">5 preguntas</span>
+</div>
+<p class="bloque-ancla">📖 Si dudas, repasa el apartado <a href="../libro-digital.html#parte-3">«Magnitudes y ley de Ohm»</a> del libro digital.</p>
+
+<section class="test-section" data-bloque="3">
+  <p class="test-sub">Voltaje, intensidad, resistencia y la fórmula que las relaciona.</p>
+
+  <div class="test-q" data-answer="c">
+    <p class="test-qtext"><span class="test-num">P10</span>¿Cómo llamamos a <em>«lo que empuja a los electrones para que se muevan por un cable»</em>? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Intensidad eléctrica</button>
+      <button class="test-opt" data-opt="b">Resistencia eléctrica</button>
+      <button class="test-opt" data-opt="c">Tensión o voltaje</button>
+      <button class="test-opt" data-opt="d">Potencia eléctrica</button>
+    </div>
+    <div class="test-fb">La <strong>tensión</strong> (o <em>voltaje</em>) es la «fuerza» que empuja a los electrones. Se mide en <strong>voltios (V)</strong>. Pensad en una manguera: la tensión sería la presión del agua. <a href="../libro-digital.html#parte-3">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="c">
+    <p class="test-qtext"><span class="test-num">P11</span>La <strong>intensidad eléctrica</strong> mide la cantidad de electrones que pasan por un cable cada segundo. ¿Cuál es su unidad? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Voltio (V)</button>
+      <button class="test-opt" data-opt="b">Ohmio (Ω)</button>
+      <button class="test-opt" data-opt="c">Amperio (A)</button>
+      <button class="test-opt" data-opt="d">Vatio (W)</button>
+    </div>
+    <div class="test-fb">La intensidad se mide en <strong>amperios (A)</strong>. El voltio mide voltaje, el ohmio mide resistencia y el vatio mide potencia. <a href="../libro-digital.html#parte-3">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P12</span>La <strong>ley de Ohm</strong> relaciona tres magnitudes. ¿Cuáles? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Potencia, voltaje e intensidad</button>
+      <button class="test-opt" data-opt="b">Voltaje (V), intensidad (I) y resistencia (R)</button>
+      <button class="test-opt" data-opt="c">Consumo, tiempo y potencia</button>
+      <button class="test-opt" data-opt="d">Energía, voltaje y tiempo</button>
+    </div>
+    <div class="test-fb">La fórmula es <strong>V = I · R</strong> (o, despejando: I = V/R y R = V/I). Es la fórmula más importante de la unidad. <a href="../libro-digital.html#parte-3">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="c">
+    <p class="test-qtext"><span class="test-num">P13</span>Si por una resistencia hay una tensión de <strong>V = 12 V</strong> y una intensidad de <strong>I = 0,5 A</strong>, ¿cuánto vale la resistencia? <span class="test-tipo-tag">cálculo</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">6 Ω</button>
+      <button class="test-opt" data-opt="b">12 Ω</button>
+      <button class="test-opt" data-opt="c">24 Ω</button>
+      <button class="test-opt" data-opt="d">60 Ω</button>
+    </div>
+    <div class="test-fb">Despejando de V = I·R → <strong>R = V / I = 12 / 0,5 = 24 Ω</strong>. Truco: dividir entre 0,5 es lo mismo que multiplicar por 2. <a href="../libro-digital.html#parte-3">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P14</span>En un circuito con una resistencia de <strong>R = 100 Ω</strong> conectada a la red (<strong>V = 230 V</strong>), ¿cuánto vale la intensidad aproximadamente? <span class="test-tipo-tag">cálculo</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">23 A</button>
+      <button class="test-opt" data-opt="b">2,3 A</button>
+      <button class="test-opt" data-opt="c">0,23 A</button>
+      <button class="test-opt" data-opt="d">23 000 A</button>
+    </div>
+    <div class="test-fb">Despejando de V = I·R → <strong>I = V / R = 230 / 100 = 2,3 A</strong>. Mucho ojo con la coma: 23 A sería brutalísimo (saltaría el diferencial). <a href="../libro-digital.html#parte-3">Repasar →</a></div>
+  </div>
+
+  <div class="bloque-marcador" data-bloque="3"></div>
+</section>
+
+
+<!-- ════════ BLOQUE 4: ASOCIACIONES Y CONSUMO ════════ -->
+<div class="bloque-encabezado">
+  <span class="num">B4</span>
+  <h2>Asociaciones y consumo</h2>
+  <span class="meta">4 preguntas</span>
+</div>
+<p class="bloque-ancla">📖 Si dudas, repasa el apartado <a href="../libro-digital.html#parte-4">«Asociaciones y consumo»</a> del libro digital.</p>
+
+<section class="test-section" data-bloque="4">
+  <p class="test-sub">Serie, paralelo, potencia y ahorro de energía.</p>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P15</span>Tienes dos bombillas conectadas <strong>en serie</strong>. Una se funde. ¿Qué le pasa a la otra? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Brilla exactamente igual</button>
+      <button class="test-opt" data-opt="b">Se apaga (deja de pasar corriente por el circuito)</button>
+      <button class="test-opt" data-opt="c">Brilla más</button>
+      <button class="test-opt" data-opt="d">Brilla menos pero no se apaga</button>
+    </div>
+    <div class="test-fb">En <strong>serie</strong> los componentes están «en fila»: si uno se rompe, se corta el camino y nada funciona. Por eso los guirnaldas de Navidad antiguas dejaban de funcionar todas si una bombilla se fundía. <a href="../libro-digital.html#parte-4">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P16</span>Tienes dos bombillas conectadas <strong>en paralelo</strong>. Una se funde. ¿Qué le pasa a la otra? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Se apaga también</button>
+      <button class="test-opt" data-opt="b">Sigue encendida con normalidad</button>
+      <button class="test-opt" data-opt="c">Explota</button>
+      <button class="test-opt" data-opt="d">Cambia de color</button>
+    </div>
+    <div class="test-fb">En <strong>paralelo</strong>, cada bombilla tiene su propio camino. Si una se rompe, las demás siguen funcionando. Por eso en las casas todas las luces están en paralelo: si se funde una bombilla del salón, no se apaga toda la casa. <a href="../libro-digital.html#parte-4">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P17</span>La <strong>potencia eléctrica (P)</strong> de un aparato se calcula con la fórmula... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">P = V / I</button>
+      <button class="test-opt" data-opt="b">P = V · I</button>
+      <button class="test-opt" data-opt="c">P = I / V</button>
+      <button class="test-opt" data-opt="d">P = V + I</button>
+    </div>
+    <div class="test-fb"><strong>P = V · I</strong> (tensión multiplicada por intensidad). Se mide en <strong>vatios (W)</strong>. Por ejemplo, una bombilla de 230 V que circula 0,04 A → P = 230 · 0,04 ≈ 9 W (típico de una LED). <a href="../libro-digital.html#parte-4">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="a">
+    <p class="test-qtext"><span class="test-num">P18</span>De estas afirmaciones sobre <strong>ahorro energético</strong>, ¿cuál es cierta? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Cambiar bombillas incandescentes por bombillas LED reduce el consumo de electricidad</button>
+      <button class="test-opt" data-opt="b">La etiqueta energética de los electrodomésticos no influye en el consumo real</button>
+      <button class="test-opt" data-opt="c">Un aparato en <em>stand-by</em> (modo espera) no consume nada</button>
+      <button class="test-opt" data-opt="d">Da igual la potencia, todos los aparatos gastan lo mismo</button>
+    </div>
+    <div class="test-fb">Las <strong>bombillas LED</strong> consumen unas 10 veces menos que las incandescentes para dar la misma luz. La etiqueta energética sí orienta (un frigorífico A consume mucho menos que uno F a lo largo del año). Y los aparatos en <em>stand-by</em> sí gastan, aunque poco. <a href="../libro-digital.html#parte-4">Repasar →</a></div>
+  </div>
+
+  <div class="bloque-marcador" data-bloque="4"></div>
+</section>
+
+
+<!-- ════════ RESUMEN FINAL ════════ -->
+<section class="ac-resumen" id="ac-resumen">
+  <h2 id="ac-resumen-titulo">Resultado de la autocomprobación</h2>
+  <div class="puntuacion"><span class="num-grande" id="ac-aciertos">0</span> / <span id="ac-total">18</span> aciertos</div>
+  <div class="progreso-barra"><div class="progreso-barra-fill" id="ac-bar"></div></div>
+  <p class="veredicto" id="ac-veredicto">Responde las preguntas para ver tu resultado.</p>
+  <div class="acciones">
+    <button id="ac-reintentar" class="primario" disabled>🔁 Reintentar las falladas</button>
+    <button id="ac-todo" disabled>🔄 Empezar de nuevo</button>
+    <a class="btn-link" href="../libro-digital.html">📖 Ir al libro digital</a>
+    <a class="btn-link" href="../index.html">📋 Volver al hub U05</a>
+  </div>
+</section>
+
+</div><!-- /.ac-wrap -->
+
+</main>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+
+<script>
+/* ── Lógica de marcadores parciales, resumen global y reintento ─────
+   Convive con initMiniTest() de common.js: ese script ya maneja el
+   click y añade .correct / .wrong / .answered. Aquí solo observamos. */
+(function(){
+  'use strict';
+
+  var qs = document.querySelectorAll('.test-q');
+  var totalEl = document.getElementById('ac-total');
+  var aciertosEl = document.getElementById('ac-aciertos');
+  var barEl = document.getElementById('ac-bar');
+  var veredictoEl = document.getElementById('ac-veredicto');
+  var btnReintentar = document.getElementById('ac-reintentar');
+  var btnTodo = document.getElementById('ac-todo');
+  totalEl.textContent = qs.length;
+
+  function refrescar(){
+    var aciertos = 0, contestadas = 0, falladas = 0;
+    var porBloque = {};
+    qs.forEach(function(q){
+      var b = q.closest('.test-section').dataset.bloque;
+      if(!porBloque[b]) porBloque[b] = {ok:0, ko:0, total:0};
+      porBloque[b].total++;
+      if(q.classList.contains('answered')){
+        contestadas++;
+        var ok = q.querySelector('.test-opt.correct') && !q.querySelector('.test-opt.wrong');
+        if(ok){ aciertos++; porBloque[b].ok++; }
+        else  { falladas++; porBloque[b].ko++; }
+      }
+    });
+
+    // Marcador global
+    aciertosEl.textContent = aciertos;
+    var pct = Math.round((aciertos / qs.length) * 100);
+    barEl.style.width = pct + '%';
+
+    if(contestadas === 0){
+      veredictoEl.textContent = 'Responde las preguntas para ver tu resultado.';
+    } else if(contestadas < qs.length){
+      veredictoEl.innerHTML = 'Llevas <strong>' + contestadas + '</strong> de ' + qs.length + ' preguntas respondidas.';
+    } else {
+      // Todas contestadas: dar veredicto
+      var msg = '';
+      if(pct >= 90)       msg = '🌟 ¡Excelente! Dominas la unidad de electricidad.';
+      else if(pct >= 75)  msg = '👍 Muy bien. Repasa los puntos fallados y estarás listo para el examen.';
+      else if(pct >= 50)  msg = '🙂 Vas por buen camino, pero conviene volver al libro digital y al apartado donde hayas tenido más fallos.';
+      else                msg = '📚 Tranquilo: repasa con calma el libro digital y vuelve a probar. La electricidad necesita varias vueltas para entenderse del todo.';
+      veredictoEl.innerHTML = msg + '<br><small>' + aciertos + ' aciertos · ' + falladas + ' fallos · ' + pct + '%</small>';
+    }
+
+    // Botones
+    btnReintentar.disabled = (falladas === 0);
+    btnTodo.disabled = (contestadas === 0);
+
+    // Marcadores parciales por bloque
+    Object.keys(porBloque).forEach(function(b){
+      var m = document.querySelector('.bloque-marcador[data-bloque="'+b+'"]');
+      var p = porBloque[b];
+      var done = p.ok + p.ko;
+      if(done === 0){ m.classList.remove('activo'); return; }
+      m.classList.add('activo');
+      if(done < p.total){
+        m.innerHTML = 'Bloque ' + b + ': ' + done + ' / ' + p.total + ' respondidas';
+      } else {
+        m.innerHTML = 'Bloque ' + b + ': <span class="acierto">' + p.ok + ' acierto' + (p.ok===1?'':'s') + '</span> · <span class="fallo">' + p.ko + ' fallo' + (p.ko===1?'':'s') + '</span>';
+      }
+    });
+  }
+
+  // Observar clicks (delegación, así no hay que tocar common.js)
+  document.addEventListener('click', function(e){
+    if(e.target.classList && e.target.classList.contains('test-opt')){
+      // Esperamos un tick a que common.js añada las clases
+      setTimeout(refrescar, 0);
+    }
+  });
+
+  // Reset selectivo (solo falladas) o total
+  function resetPregunta(q){
+    q.classList.remove('answered');
+    q.querySelectorAll('.test-opt').forEach(function(b){
+      b.classList.remove('correct','wrong');
+      b.disabled = false;
+    });
+  }
+
+  btnReintentar.addEventListener('click', function(){
+    qs.forEach(function(q){
+      if(q.classList.contains('answered')){
+        var hayFallo = q.querySelector('.test-opt.wrong');
+        if(hayFallo) resetPregunta(q);
+      }
+    });
+    refrescar();
+    // Llevar al primer no respondido
+    var primera = document.querySelector('.test-q:not(.answered)');
+    if(primera) primera.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  btnTodo.addEventListener('click', function(){
+    if(!confirm('¿Seguro que quieres empezar de nuevo? Se borrarán todas tus respuestas.')) return;
+    qs.forEach(resetPregunta);
+    refrescar();
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  // Render inicial
+  refrescar();
+})();
+</script>
+</body>
+</html>
