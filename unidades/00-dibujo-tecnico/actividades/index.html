@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Actividades · U00 Dibujo técnico · TyD 2º ESO</title>
+<meta name="description" content="Actividades interactivas de dibujo técnico para 2º ESO con autocorrección: vistas, perspectiva caballera, escuadra y cartabón, escalas, acotación y CAD.">
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/00-dibujo-tecnico/actividades/">
+
+<!-- ══ Open Graph ══ -->
+<meta property="og:title" content="Actividades · U00 Dibujo técnico · TyD 2º ESO">
+<meta property="og:description" content="Actividades interactivas de dibujo técnico para 2º ESO con autocorrección.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/00-dibujo-tecnico/actividades/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+
+<!-- ══ Twitter Card ══ -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Actividades · U00 Dibujo técnico · TyD 2º ESO">
+<meta name="twitter:description" content="Actividades interactivas de dibujo técnico para 2º ESO con autocorrección.">
+<meta name="twitter:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+/* ════════════════════════════════════════════════════════════════
+   Activity-specific styles (uses site palette: #D4700A + #1B4F8A)
+   ════════════════════════════════════════════════════════════════ */
+:root {
+  --act-ok: #2e7d4f;
+  --act-err: #c44536;
+  --act-warn: #e8b647;
+  --act-card-bg: #fafafa;
+  --act-border: #e3e3e3;
+}
+
+.bloque-titulo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--principal, #D4700A);
+  margin: 2.5rem 0 0.4rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 3px solid var(--principal, #D4700A);
+  letter-spacing: 0.5px;
+}
+.bloque-intro {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 1.2rem;
+  font-style: italic;
+}
+
+.activity-card {
+  background: var(--act-card-bg);
+  border: 1px solid var(--act-border);
+  border-left: 4px solid var(--principal, #D4700A);
+  border-radius: 10px;
+  padding: 1.2rem 1.4rem;
+  margin: 1rem 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+.activity-card.solved {
+  border-left-color: var(--act-ok);
+  background: #f4faf6;
+}
+.activity-card.wrong {
+  border-left-color: var(--act-err);
+  background: #fdf6f5;
+}
+
+.act-num {
+  display: inline-block;
+  background: var(--principal, #D4700A);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-right: 8px;
+  letter-spacing: 0.5px;
+}
+.activity-card.solved .act-num { background: var(--act-ok); }
+.activity-card.wrong .act-num { background: var(--act-err); }
+
+.statement {
+  font-size: 1rem;
+  color: #222;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+.statement strong { color: #111; }
+
+.data-pill {
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 2px 8px;
+  margin: 0 3px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--secundario, #1B4F8A);
+}
+
+/* ─── Options (radio / multi) ─── */
+.options {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0.8rem 0;
+}
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.6rem 0.8rem;
+  background: #fff;
+  border: 1px solid var(--act-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 0.95rem;
+}
+.option:hover { background: #fffaf3; border-color: var(--principal, #D4700A); }
+.option input { margin-top: 3px; cursor: pointer; flex-shrink: 0; }
+.option input:checked + .option-label { color: var(--secundario, #1B4F8A); font-weight: 600; }
+.options.cols2 { grid-template-columns: 1fr 1fr; }
+.options.cols3 { grid-template-columns: 1fr 1fr 1fr; }
+.options.visual { grid-template-columns: 1fr 1fr 1fr; gap: 0.8rem; }
+.options.visual .option { flex-direction: column; align-items: center; padding: 1rem 0.5rem 0.5rem; }
+.options.visual .option svg { margin-bottom: 0.4rem; max-width: 100%; height: auto; }
+.options.visual .option .option-label { font-weight: 700; font-size: 0.95rem; color: #555; }
+
+/* ─── Numeric input ─── */
+.answer-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.8rem 0;
+  flex-wrap: wrap;
+}
+.answer-box label { font-weight: 600; color: #444; font-size: 0.95rem; }
+.answer-box input[type="number"],
+.answer-box input[type="text"] {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.45rem 0.7rem;
+  border: 2px solid var(--act-border);
+  border-radius: 8px;
+  width: 110px;
+  background: #fff;
+  color: var(--secundario, #1B4F8A);
+}
+.answer-box input:focus {
+  outline: none;
+  border-color: var(--principal, #D4700A);
+  box-shadow: 0 0 0 3px rgba(212,112,10,0.15);
+}
+.answer-box .unit {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  color: #666;
+  font-weight: 500;
+}
+
+/* ─── Botón comprobar ─── */
+.check-btn {
+  background: var(--principal, #D4700A);
+  color: #fff;
+  border: none;
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  letter-spacing: 0.3px;
+}
+.check-btn:hover { background: #b85e08; transform: translateY(-1px); }
+.check-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* ─── Feedback ─── */
+.feedback {
+  margin-top: 0.7rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.93rem;
+  font-weight: 600;
+  display: none;
+}
+.feedback.show { display: block; }
+.feedback.ok {
+  background: #dff2e6;
+  color: var(--act-ok);
+  border-left: 4px solid var(--act-ok);
+}
+.feedback.err {
+  background: #fce4e1;
+  color: var(--act-err);
+  border-left: 4px solid var(--act-err);
+}
+.feedback .icon { margin-right: 6px; font-size: 1.1rem; }
+
+/* ─── Solución desplegable ─── */
+details.solution {
+  margin-top: 0.9rem;
+  background: #fffaf3;
+  border: 1px dashed #d4a373;
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+}
+details.solution > summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--principal, #D4700A);
+  font-size: 0.92rem;
+  list-style: none;
+  user-select: none;
+}
+details.solution > summary::before {
+  content: "▸ ";
+  display: inline-block;
+  transition: transform 0.15s;
+}
+details.solution[open] > summary::before { content: "▾ "; }
+details.solution > summary:hover { text-decoration: underline; }
+details.solution .sol-body {
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px dashed #d4a373;
+  font-size: 0.92rem;
+  color: #444;
+  line-height: 1.55;
+}
+details.solution .steps-sol {
+  display: grid;
+  gap: 0.4rem;
+  counter-reset: stp;
+  margin-top: 0.4rem;
+}
+details.solution .step-sol {
+  position: relative;
+  padding: 0.4rem 0.5rem 0.4rem 1.9rem;
+  background: #fff;
+  border-radius: 6px;
+  border: 1px solid #f0e6d3;
+  font-size: 0.9rem;
+}
+details.solution .step-sol::before {
+  counter-increment: stp;
+  content: counter(stp);
+  position: absolute;
+  left: 0.4rem;
+  top: 0.45rem;
+  width: 18px;
+  height: 18px;
+  background: var(--principal, #D4700A);
+  color: #fff;
+  border-radius: 50%;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+
+/* ─── Mini SVG figures inline ─── */
+.fig-mini {
+  background: #fff;
+  border: 1px solid var(--act-border);
+  border-radius: 8px;
+  padding: 0.6rem;
+  margin: 0.6rem 0;
+  text-align: center;
+}
+.fig-mini svg { max-width: 100%; height: auto; }
+
+.fig-svg .main { stroke: #1a2238; stroke-width: 2; fill: none; stroke-linejoin: round; stroke-linecap: round; }
+.fig-svg .thin { stroke: #1a2238; stroke-width: 1; fill: none; }
+.fig-svg .aux { stroke: #1a2238; stroke-width: 1; fill: none; stroke-dasharray: 3 2; opacity: 0.5; }
+.fig-svg .fill { fill: #f0e6d3; }
+.fig-svg .fill-bad { fill: #fce4e1; }
+.fig-svg .label { fill: #1a2238; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; }
+.fig-svg .label-err { fill: #c44536; }
+.fig-svg .arrow { fill: #1a2238; }
+.fig-svg .arrow-err { fill: #c44536; }
+
+/* ─── Progreso global ─── */
+.progreso {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  border-bottom: 2px solid var(--principal, #D4700A);
+  padding: 0.6rem 1rem;
+  margin-bottom: 1.5rem;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.92rem;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.progreso .bar-wrap {
+  flex: 1;
+  margin: 0 1rem;
+  background: #eee;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progreso .bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--principal, #D4700A), #e89947);
+  width: 0%;
+  transition: width 0.4s ease;
+}
+.progreso .stat { font-weight: 600; color: var(--secundario, #1B4F8A); }
+.progreso .stat strong { color: var(--principal, #D4700A); }
+.progreso .reset-btn {
+  background: transparent;
+  border: 1px solid #ccc;
+  color: #666;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  font-family: 'Barlow', sans-serif;
+}
+.progreso .reset-btn:hover { border-color: var(--principal, #D4700A); color: var(--principal, #D4700A); }
+
+@media (max-width: 720px) {
+  .options.cols2, .options.cols3 { grid-template-columns: 1fr; }
+  .options.visual { grid-template-columns: 1fr 1fr; }
+  .progreso { flex-wrap: wrap; gap: 0.5rem; }
+  .progreso .bar-wrap { margin: 0; order: 99; flex-basis: 100%; }
+}
+
+@media print {
+  .progreso, .check-btn, .reset-btn { display: none; }
+  .feedback.show { display: block !important; }
+  details.solution { background: #fff; }
+  details.solution > summary { display: none; }
+  details.solution > .sol-body { display: block !important; }
+  details.solution[open] > .sol-body,
+  details.solution > .sol-body { display: block !important; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U00 · Dibujo técnico · Actividades</span>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Inicio</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U00</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📘</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>📝</span><span class="nc-lbl">Actividades</span></span>
+</nav>
+
+<div class="unidad-layout">
+
+<aside class="sb-side">
+  <h3>Bloques</h3>
+  <a href="#bloque-a">A · Dibujo técnico</a>
+  <a href="#bloque-b">B · Boceto · croquis · plano</a>
+  <a href="#bloque-c">C · Las tres vistas</a>
+  <a href="#bloque-d">D · Caballera</a>
+  <a href="#bloque-e">E · Instrumentos</a>
+  <a href="#bloque-f">F · Escalas</a>
+  <a href="#bloque-g">G · Acotación</a>
+  <a href="#bloque-h">H · CAD</a>
+</aside>
+
+<main class="ct" id="main-content">
+
+<h1 class="unidad-titulo">Actividades · Dibujo técnico</h1>
+<p class="unidad-subt">Ejercicios con comprobación automática y solución paso a paso. Hay <strong>37 actividades</strong> repartidas en 8 bloques. Puedes resolverlas en cualquier orden y consultar el <a href="../libro-digital.html">libro digital</a> cuando necesites repasar.</p>
+
+<div class="progreso" id="progreso">
+  <span class="stat"><strong id="prog-num">0</strong> / <span id="prog-total">37</span> resueltas</span>
+  <div class="bar-wrap"><div class="bar" id="prog-bar"></div></div>
+  <span class="stat">Aciertos: <strong id="prog-ok">0</strong></span>
+  <button class="reset-btn" onclick="resetAll()">↺ Reiniciar</button>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE A · DIBUJO TÉCNICO Y NORMALIZACIÓN
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-a">
+  <h2 class="bloque-titulo">A · Dibujo técnico y normalización</h2>
+  <p class="bloque-intro">Conceptos básicos: diferencia entre dibujo técnico y artístico, formatos DIN y cajetín.</p>
+
+  <!-- A1 -->
+  <article class="activity-card" data-type="radio" data-id="A1">
+    <p class="statement"><span class="act-num">A1</span>¿Cuál es la <strong>principal característica</strong> que diferencia el dibujo técnico del dibujo artístico?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="A1"><span class="option-label">El dibujo técnico se hace siempre a color y el artístico en blanco y negro.</span></label>
+      <label class="option"><input type="radio" name="A1" data-correct="true"><span class="option-label">El dibujo técnico sigue normas universales para que cualquier persona pueda interpretarlo igual.</span></label>
+      <label class="option"><input type="radio" name="A1"><span class="option-label">El dibujo técnico solo se puede hacer con ordenador, el artístico se hace a mano.</span></label>
+      <label class="option"><input type="radio" name="A1"><span class="option-label">El dibujo técnico es más rápido y el artístico necesita más tiempo.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El dibujo técnico tiene como finalidad <strong>transmitir información objetiva</strong> sobre un objeto. Para que esa información sea entendida en cualquier país, se rige por <strong>normas internacionales</strong>. El dibujo artístico, en cambio, busca expresar emociones e ideas y no tiene normas: cada artista elige su estilo.</div></details>
+  </article>
+
+  <!-- A2 -->
+  <article class="activity-card" data-type="radio" data-id="A2">
+    <p class="statement"><span class="act-num">A2</span>El formato <span class="data-pill">DIN A4</span> es el más común en clase. ¿Cuáles son sus dimensiones?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="A2"><span class="option-label">148 × 210 mm</span></label>
+      <label class="option"><input type="radio" name="A2" data-correct="true"><span class="option-label">210 × 297 mm</span></label>
+      <label class="option"><input type="radio" name="A2"><span class="option-label">297 × 420 mm</span></label>
+      <label class="option"><input type="radio" name="A2"><span class="option-label">420 × 594 mm</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La serie DIN parte del A0 (841 × 1189 mm, área 1 m²). Cada formato siguiente es la mitad del anterior: A1 (594×841), A2 (420×594), A3 (297×420), <strong>A4 (210×297)</strong>, A5 (148×210)…</div></details>
+  </article>
+
+  <!-- A3 -->
+  <article class="activity-card" data-type="radio" data-id="A3">
+    <p class="statement"><span class="act-num">A3</span>¿En qué lugar de la lámina se coloca el <strong>cajetín</strong>?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="A3"><span class="option-label">Esquina superior izquierda</span></label>
+      <label class="option"><input type="radio" name="A3"><span class="option-label">Esquina superior derecha</span></label>
+      <label class="option"><input type="radio" name="A3"><span class="option-label">Centro inferior</span></label>
+      <label class="option"><input type="radio" name="A3" data-correct="true"><span class="option-label">Esquina inferior derecha</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El cajetín se coloca por norma en la <strong>esquina inferior derecha</strong>. Su función es identificar el plano: autor, fecha, escala, número de plano, centro o empresa, etc.</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE B · BOCETO, CROQUIS Y PLANO
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-b">
+  <h2 class="bloque-titulo">B · Boceto, croquis y plano</h2>
+  <p class="bloque-intro">Las tres fases del dibujo técnico, ordenadas de menos a más precisión.</p>
+
+  <!-- B1 -->
+  <article class="activity-card" data-type="radio" data-id="B1">
+    <p class="statement"><span class="act-num">B1</span>Estás pensando una idea para un mueble nuevo y haces un dibujo rápido a mano alzada, sin medidas, solo para capturar la forma. ¿Cómo se llama esa fase?</p>
+    <div class="options cols3">
+      <label class="option"><input type="radio" name="B1" data-correct="true"><span class="option-label">Boceto</span></label>
+      <label class="option"><input type="radio" name="B1"><span class="option-label">Croquis</span></label>
+      <label class="option"><input type="radio" name="B1"><span class="option-label">Plano</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El <strong>boceto</strong> es la primera fase: dibujo a mano alzada, rápido, sin medidas. Sirve para capturar una idea. Cuando se le añaden las medidas (todavía a mano alzada), pasa a llamarse <strong>croquis</strong>. Cuando se hace ya definitivo, a escala y con instrumentos, es el <strong>plano</strong>.</div></details>
+  </article>
+
+  <!-- B2 -->
+  <article class="activity-card" data-type="radio" data-id="B2">
+    <p class="statement"><span class="act-num">B2</span>¿Cuál es el <strong>orden correcto</strong> de las fases del dibujo técnico, de la primera a la última?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="B2"><span class="option-label">Croquis → Boceto → Plano</span></label>
+      <label class="option"><input type="radio" name="B2" data-correct="true"><span class="option-label">Boceto → Croquis → Plano</span></label>
+      <label class="option"><input type="radio" name="B2"><span class="option-label">Plano → Croquis → Boceto</span></label>
+      <label class="option"><input type="radio" name="B2"><span class="option-label">Boceto → Plano → Croquis</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Va de <strong>menos precisión a más</strong>: primero el boceto (idea suelta, sin medidas), luego el croquis (con medidas pero a mano alzada) y por último el plano (con instrumentos o CAD, a escala, con cotas y normas).</div></details>
+  </article>
+
+  <!-- B3 -->
+  <article class="activity-card" data-type="radio" data-id="B3">
+    <p class="statement"><span class="act-num">B3</span>¿Cuál de estos dibujos sirve para que un fabricante construya la pieza con exactitud?</p>
+    <div class="options cols3">
+      <label class="option"><input type="radio" name="B3"><span class="option-label">El boceto</span></label>
+      <label class="option"><input type="radio" name="B3"><span class="option-label">El croquis</span></label>
+      <label class="option"><input type="radio" name="B3" data-correct="true"><span class="option-label">El plano</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Solo el <strong>plano</strong> está a escala, con todas las cotas y cumpliendo las normas. Es el único que tiene la precisión necesaria para fabricar la pieza.</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE C · LAS TRES VISTAS
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-c">
+  <h2 class="bloque-titulo">C · Las tres vistas (sistema diédrico)</h2>
+  <p class="bloque-intro">Alzado, planta y perfil. Aprende a identificar y dibujar las vistas de un objeto.</p>
+
+  <!-- C1 -->
+  <article class="activity-card" data-type="radio" data-id="C1">
+    <p class="statement"><span class="act-num">C1</span>El <strong>alzado</strong> de un objeto es la vista que se obtiene mirando…</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="C1"><span class="option-label">Desde arriba</span></label>
+      <label class="option"><input type="radio" name="C1" data-correct="true"><span class="option-label">De frente</span></label>
+      <label class="option"><input type="radio" name="C1"><span class="option-label">Desde el lado izquierdo</span></label>
+      <label class="option"><input type="radio" name="C1"><span class="option-label">Desde abajo</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El <strong>alzado</strong> es la vista frontal (la que más detalles muestra y por eso es la principal). La <strong>planta</strong> se obtiene mirando desde arriba. El <strong>perfil</strong> se obtiene mirando desde el lado (normalmente desde el izquierdo).</div></details>
+  </article>
+
+  <!-- C2 -->
+  <article class="activity-card" data-type="radio" data-id="C2">
+    <p class="statement"><span class="act-num">C2</span>El <strong>alzado y la planta</strong> de cualquier objeto comparten siempre la misma medida. ¿Cuál?</p>
+    <div class="options cols3">
+      <label class="option"><input type="radio" name="C2" data-correct="true"><span class="option-label">La anchura</span></label>
+      <label class="option"><input type="radio" name="C2"><span class="option-label">La altura</span></label>
+      <label class="option"><input type="radio" name="C2"><span class="option-label">La profundidad</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Las correspondencias entre vistas son la clave del sistema diédrico:
+    <ul style="margin:8px 0 0 18px;">
+      <li><strong>Alzado y planta</strong> → misma <strong>anchura</strong></li>
+      <li><strong>Alzado y perfil</strong> → misma <strong>altura</strong></li>
+      <li><strong>Planta y perfil</strong> → misma <strong>profundidad</strong></li>
+    </ul></div></details>
+  </article>
+
+  <!-- C3: visual — identify alzado of a simple L piece -->
+  <article class="activity-card" data-type="radio" data-id="C3">
+    <p class="statement"><span class="act-num">C3</span>Observa la siguiente pieza con forma de "L" (la flecha indica desde dónde se mira el alzado). ¿Cuál es su <strong>alzado</strong> correcto?</p>
+
+    <div class="fig-mini">
+      <svg class="fig-svg" viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg" aria-label="Pieza en L">
+        <!-- isométrico de una pieza L (base 3, escalón 2x2) -->
+        <polygon points="40,120 160,120 200,100 80,100" class="main fill"/>
+        <polygon points="40,120 40,80 80,60 80,100" class="main" fill="#e0d8c2"/>
+        <polygon points="160,120 200,100 200,60 160,80" class="main" fill="#d6c9ad"/>
+        <polygon points="40,80 80,60 200,60 160,80" class="main" fill="#fff"/>
+        <!-- escalón superior izquierda (más alto) -->
+        <polygon points="40,80 40,40 80,20 80,60" class="main" fill="#e0d8c2"/>
+        <polygon points="40,40 80,20 120,20 80,40" class="main" fill="#fff"/>
+        <polygon points="80,20 120,20 120,60 80,60" class="main" fill="#fff"/>
+        <polygon points="80,40 120,20 120,60 80,60" class="main" fill="none"/>
+        <line x1="80" y1="40" x2="120" y2="20" class="main"/>
+        <line x1="80" y1="40" x2="80" y2="60" class="main"/>
+        <line x1="120" y1="20" x2="120" y2="60" class="main"/>
+        <line x1="80" y1="60" x2="120" y2="60" class="main"/>
+        <line x1="120" y1="60" x2="160" y2="80" class="aux"/>
+        <!-- flecha de alzado -->
+        <polygon points="125,140 145,150 145,130" fill="#D4700A"/>
+        <line x1="100" y1="140" x2="130" y2="140" stroke="#D4700A" stroke-width="2"/>
+        <text x="80" y="155" font-size="11" font-weight="700" fill="#D4700A">alzado</text>
+      </svg>
+    </div>
+
+    <div class="options visual">
+      <label class="option"><input type="radio" name="C3" data-correct="true">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" class="fig-svg">
+          <rect x="10" y="20" width="60" height="40" class="thin fill"/>
+          <rect x="10" y="10" width="30" height="10" class="thin fill"/>
+          <line x1="40" y1="20" x2="40" y2="60" class="thin"/>
+          <line x1="10" y1="20" x2="10" y2="10" class="main"/>
+          <line x1="10" y1="10" x2="40" y2="10" class="main"/>
+          <line x1="40" y1="10" x2="40" y2="20" class="main"/>
+          <line x1="40" y1="20" x2="70" y2="20" class="main"/>
+          <line x1="70" y1="20" x2="70" y2="60" class="main"/>
+          <line x1="10" y1="60" x2="70" y2="60" class="main"/>
+          <line x1="10" y1="20" x2="10" y2="60" class="main"/>
+        </svg>
+        <span class="option-label">A</span></label>
+
+      <label class="option"><input type="radio" name="C3">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" class="fig-svg">
+          <rect x="10" y="20" width="60" height="40" class="main fill"/>
+        </svg>
+        <span class="option-label">B</span></label>
+
+      <label class="option"><input type="radio" name="C3">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" class="fig-svg">
+          <rect x="10" y="10" width="30" height="50" class="thin fill"/>
+          <rect x="40" y="30" width="30" height="30" class="thin fill"/>
+          <line x1="10" y1="10" x2="40" y2="10" class="main"/>
+          <line x1="40" y1="10" x2="40" y2="30" class="main"/>
+          <line x1="40" y1="30" x2="70" y2="30" class="main"/>
+          <line x1="70" y1="30" x2="70" y2="60" class="main"/>
+          <line x1="10" y1="60" x2="70" y2="60" class="main"/>
+          <line x1="10" y1="10" x2="10" y2="60" class="main"/>
+        </svg>
+        <span class="option-label">C</span></label>
+    </div>
+
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La opción <strong>A</strong> es correcta. Mirando de frente, vemos el escalón a la izquierda (la parte alta) y la base más ancha en la zona inferior. La opción B sería el alzado de un simple cubo y la C es el perfil (vista desde el lado).</div></details>
+  </article>
+
+  <!-- C4: identify planta -->
+  <article class="activity-card" data-type="radio" data-id="C4">
+    <p class="statement"><span class="act-num">C4</span>Para la misma pieza del ejercicio anterior, ¿cuál es su <strong>planta</strong> correcta?</p>
+
+    <div class="options visual">
+      <label class="option"><input type="radio" name="C4">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" class="fig-svg">
+          <rect x="10" y="30" width="60" height="20" class="main fill"/>
+        </svg>
+        <span class="option-label">A</span></label>
+
+      <label class="option"><input type="radio" name="C4" data-correct="true">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" class="fig-svg">
+          <rect x="10" y="20" width="60" height="40" class="main fill"/>
+          <line x1="40" y1="20" x2="40" y2="60" class="thin" stroke-dasharray="3 2"/>
+        </svg>
+        <span class="option-label">B</span></label>
+
+      <label class="option"><input type="radio" name="C4">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" class="fig-svg">
+          <rect x="10" y="10" width="60" height="60" class="main fill"/>
+          <rect x="10" y="10" width="30" height="30" class="thin"/>
+        </svg>
+        <span class="option-label">C</span></label>
+    </div>
+
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La opción <strong>B</strong> es correcta. Mirando desde arriba, la pieza tiene un contorno rectangular (la base sigue siendo de la misma longitud que vista de frente: misma anchura). La línea discontinua del medio representa la arista interior del escalón (que queda oculta vista desde arriba).</div></details>
+  </article>
+
+  <!-- C5 -->
+  <article class="activity-card" data-type="radio" data-id="C5">
+    <p class="statement"><span class="act-num">C5</span>Cuando representamos las tres vistas, ¿dónde se coloca el <strong>alzado</strong>?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="C5" data-correct="true"><span class="option-label">Arriba a la izquierda</span></label>
+      <label class="option"><input type="radio" name="C5"><span class="option-label">Arriba a la derecha</span></label>
+      <label class="option"><input type="radio" name="C5"><span class="option-label">Abajo a la izquierda</span></label>
+      <label class="option"><input type="radio" name="C5"><span class="option-label">Abajo a la derecha</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Por norma (sistema europeo, el que usamos en España): el <strong>alzado va arriba a la izquierda</strong>, la <strong>planta debajo</strong> del alzado y el <strong>perfil a la derecha</strong> del alzado.</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE D · PERSPECTIVA CABALLERA
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-d">
+  <h2 class="bloque-titulo">D · Perspectiva caballera</h2>
+  <p class="bloque-intro">Ángulos, coeficiente de reducción y construcción a partir de vistas.</p>
+
+  <!-- D1 -->
+  <article class="activity-card" data-type="radio" data-id="D1">
+    <p class="statement"><span class="act-num">D1</span>En la perspectiva caballera, los ejes X y Z son <strong>perpendiculares</strong> entre sí (90°). ¿Qué ángulo forma habitualmente el eje Y con la horizontal?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="D1"><span class="option-label">15°</span></label>
+      <label class="option"><input type="radio" name="D1"><span class="option-label">30°</span></label>
+      <label class="option"><input type="radio" name="D1" data-correct="true"><span class="option-label">45°</span></label>
+      <label class="option"><input type="radio" name="D1"><span class="option-label">120°</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Los ángulos típicos del eje Y en caballera son <strong>30°, 45° o 60°</strong>. En clase usaremos el más habitual, <strong>45°</strong>, porque se traza directamente con la hipotenusa de la escuadra.</div></details>
+  </article>
+
+  <!-- D2: numeric -->
+  <article class="activity-card" data-type="number" data-id="D2" data-answer="30" data-tol="0">
+    <p class="statement"><span class="act-num">D2</span>Una pieza tiene una <strong>profundidad real de 60 mm</strong>. Al dibujarla en perspectiva caballera con coeficiente de reducción <span class="data-pill">0,5</span>, ¿cuántos milímetros mediremos sobre el eje Y en el papel?</p>
+    <div class="answer-box">
+      <label>Profundidad en caballera =</label>
+      <input type="number" step="any">
+      <span class="unit">mm</span>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El coeficiente de reducción <strong>0,5</strong> significa que medimos en el papel <strong>la mitad</strong> de la profundidad real:
+    <div class="steps-sol">
+      <div class="step-sol">Profundidad real: 60 mm</div>
+      <div class="step-sol">Aplicamos el coeficiente: 60 × 0,5 = <strong>30 mm</strong></div>
+      <div class="step-sol">En el papel, la arista en Y mide <strong>30 mm</strong> a 45°.</div>
+    </div></div></details>
+  </article>
+
+  <!-- D3 -->
+  <article class="activity-card" data-type="number" data-id="D3" data-answer="40" data-tol="0">
+    <p class="statement"><span class="act-num">D3</span>Misma fórmula al revés. Sobre una caballera, la arista a 45° mide <span class="data-pill">20 mm</span> en el papel. Con coeficiente <span class="data-pill">0,5</span>, ¿cuál es la <strong>profundidad real</strong> de esa arista?</p>
+    <div class="answer-box">
+      <label>Profundidad real =</label>
+      <input type="number" step="any">
+      <span class="unit">mm</span>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Si en el papel ya está reducido al 50%, para obtener la profundidad real <strong>dividimos entre el coeficiente</strong> (o multiplicamos por 2):
+    <div class="steps-sol">
+      <div class="step-sol">Medida en caballera: 20 mm</div>
+      <div class="step-sol">Profundidad real: 20 ÷ 0,5 = 20 × 2 = <strong>40 mm</strong></div>
+    </div></div></details>
+  </article>
+
+  <!-- D4: visual identification -->
+  <article class="activity-card" data-type="radio" data-id="D4">
+    <p class="statement"><span class="act-num">D4</span>¿Cuál de estas tres perspectivas representa un <strong>cubo</strong> correctamente en perspectiva caballera (45°, coef 0,5)?</p>
+
+    <div class="options visual">
+      <!-- A: caballera correcta (cara frontal cuadrada, profundidad reducida 50%) -->
+      <label class="option"><input type="radio" name="D4" data-correct="true">
+        <svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg" class="fig-svg">
+          <rect x="15" y="30" width="50" height="50" class="main fill"/>
+          <line x1="15" y1="30" x2="35" y2="10" class="main"/>
+          <line x1="65" y1="30" x2="85" y2="10" class="main"/>
+          <line x1="65" y1="80" x2="85" y2="60" class="main"/>
+          <line x1="35" y1="10" x2="85" y2="10" class="main"/>
+          <line x1="85" y1="10" x2="85" y2="60" class="main"/>
+          <line x1="15" y1="80" x2="35" y2="60" class="aux"/>
+          <line x1="35" y1="10" x2="35" y2="60" class="aux"/>
+          <line x1="35" y1="60" x2="85" y2="60" class="aux"/>
+        </svg>
+        <span class="option-label">A</span></label>
+
+      <!-- B: isométrica (no es caballera) -->
+      <label class="option"><input type="radio" name="D4">
+        <svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg" class="fig-svg">
+          <polygon points="20,60 50,75 80,60 50,45" class="main fill"/>
+          <polygon points="20,60 20,30 50,15 50,45" class="main" fill="#fff"/>
+          <polygon points="50,45 80,30 80,60 50,75" class="main" fill="#e0d8c2"/>
+          <polygon points="20,30 50,15 80,30 50,45" class="main" fill="#fff"/>
+        </svg>
+        <span class="option-label">B</span></label>
+
+      <!-- C: caballera con profundidad NO reducida (mal) -->
+      <label class="option"><input type="radio" name="D4">
+        <svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg" class="fig-svg">
+          <rect x="10" y="40" width="40" height="40" class="main fill"/>
+          <line x1="10" y1="40" x2="50" y2="10" class="main"/>
+          <line x1="50" y1="40" x2="90" y2="10" class="main"/>
+          <line x1="50" y1="80" x2="90" y2="50" class="main"/>
+          <line x1="50" y1="10" x2="90" y2="10" class="main"/>
+          <line x1="90" y1="10" x2="90" y2="50" class="main"/>
+          <line x1="10" y1="80" x2="50" y2="50" class="aux"/>
+          <line x1="50" y1="10" x2="50" y2="50" class="aux"/>
+          <line x1="50" y1="50" x2="90" y2="50" class="aux"/>
+        </svg>
+        <span class="option-label">C</span></label>
+    </div>
+
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La opción <strong>A</strong>: cara frontal cuadrada (sin deformar) y aristas en Y a 45° con la mitad de longitud que las del frente. La <strong>B</strong> es perspectiva isométrica (ejes a 120°). La <strong>C</strong> es caballera pero <strong>sin reducir</strong> la profundidad — se ve un cubo "estirado" hacia atrás, que es justo lo que el coeficiente 0,5 evita.</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE E · INSTRUMENTOS · ESCUADRA Y CARTABÓN
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-e">
+  <h2 class="bloque-titulo">E · Instrumentos · escuadra y cartabón</h2>
+  <p class="bloque-intro">Identifica instrumentos y combina ángulos.</p>
+
+  <!-- E1 -->
+  <article class="activity-card" data-type="radio" data-id="E1">
+    <p class="statement"><span class="act-num">E1</span>¿Qué <strong>ángulos</strong> tiene la <strong>escuadra</strong>?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="E1"><span class="option-label">30°, 60° y 90°</span></label>
+      <label class="option"><input type="radio" name="E1" data-correct="true"><span class="option-label">45°, 45° y 90°</span></label>
+      <label class="option"><input type="radio" name="E1"><span class="option-label">60°, 60° y 60°</span></label>
+      <label class="option"><input type="radio" name="E1"><span class="option-label">15°, 75° y 90°</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La <strong>escuadra</strong> es un triángulo isósceles rectángulo: <strong>45° – 45° – 90°</strong>. El <strong>cartabón</strong>, en cambio, es un triángulo escaleno: 30° – 60° – 90°.</div></details>
+  </article>
+
+  <!-- E2 -->
+  <article class="activity-card" data-type="radio" data-id="E2">
+    <p class="statement"><span class="act-num">E2</span>¿Qué instrumento se utiliza para <strong>medir y trazar ángulos</strong> con precisión?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="E2"><span class="option-label">El compás</span></label>
+      <label class="option"><input type="radio" name="E2"><span class="option-label">La regla</span></label>
+      <label class="option"><input type="radio" name="E2" data-correct="true"><span class="option-label">El transportador</span></label>
+      <label class="option"><input type="radio" name="E2"><span class="option-label">La escuadra</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El <strong>transportador</strong> (graduado de 0° a 180°) sirve para medir y dibujar ángulos cualesquiera. La escuadra y el cartabón también dibujan ángulos, pero solo los suyos fijos (45°/90°, 30°/60°/90°) o las combinaciones de los dos.</div></details>
+  </article>
+
+  <!-- E3 -->
+  <article class="activity-card" data-type="radio" data-id="E3">
+    <p class="statement"><span class="act-num">E3</span>Quieres dibujar una recta a <strong>75°</strong> sobre la horizontal usando solo escuadra y cartabón. ¿Cómo lo consigues?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="E3"><span class="option-label">Usando solo la hipotenusa de la escuadra.</span></label>
+      <label class="option"><input type="radio" name="E3" data-correct="true"><span class="option-label">Sumando 45° (escuadra) + 30° (cartabón) = 75°.</span></label>
+      <label class="option"><input type="radio" name="E3"><span class="option-label">Sumando 60° (cartabón) + 30° (cartabón) = 90°. No se puede hacer 75°.</span></label>
+      <label class="option"><input type="radio" name="E3"><span class="option-label">Usando solo el cateto largo del cartabón.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La gracia de tener escuadra y cartabón es que se pueden <strong>sumar y restar</strong> sus ángulos. 45° + 30° = <strong>75°</strong>. También se obtienen 15° (45°−30°), 105° (45°+60°), etc.</div></details>
+  </article>
+
+  <!-- E4 -->
+  <article class="activity-card" data-type="radio" data-id="E4">
+    <p class="statement"><span class="act-num">E4</span>Para trazar <strong>rectas paralelas</strong> con escuadra y cartabón, ¿qué instrumento hace de <strong>guía fija</strong>?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="E4" data-correct="true"><span class="option-label">El cartabón (queda fijo y la escuadra desliza sobre él)</span></label>
+      <label class="option"><input type="radio" name="E4"><span class="option-label">La escuadra (queda fija y el cartabón desliza sobre ella)</span></label>
+      <label class="option"><input type="radio" name="E4"><span class="option-label">Ninguno: los dos se mueven a la vez</span></label>
+      <label class="option"><input type="radio" name="E4"><span class="option-label">La regla, no se usa el cartabón</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El <strong>cartabón se sujeta firme con la mano izquierda</strong> (hace de raíl). La <strong>escuadra desliza</strong> a lo largo de su hipotenusa con la mano derecha. En cada posición, el cateto de la escuadra dibuja una paralela.</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE F · ESCALAS
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-f">
+  <h2 class="bloque-titulo">F · Escalas</h2>
+  <p class="bloque-intro">Bloque numérico. Conversión entre medida real y medida en el dibujo.</p>
+
+  <!-- F1 -->
+  <article class="activity-card" data-type="number" data-id="F1" data-answer="25" data-tol="0">
+    <p class="statement"><span class="act-num">F1</span>Tienes una pieza de <span class="data-pill">50 mm</span> de longitud real. La dibujas a escala <span class="data-pill">1:2</span>. ¿Cuántos mm medirá en el dibujo?</p>
+    <div class="answer-box">
+      <label>Dibujo =</label>
+      <input type="number" step="any">
+      <span class="unit">mm</span>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Escala <strong>1:2</strong> → reducción a la mitad. Aplicamos <em>dibujo = real × escala</em>:
+    <div class="steps-sol">
+      <div class="step-sol">Real: 50 mm</div>
+      <div class="step-sol">Dibujo = 50 × (1/2) = <strong>25 mm</strong></div>
+    </div></div></details>
+  </article>
+
+  <!-- F2 -->
+  <article class="activity-card" data-type="number" data-id="F2" data-answer="60" data-tol="0">
+    <p class="statement"><span class="act-num">F2</span>Una pieza pequeña mide <span class="data-pill">30 mm</span> reales. La quieres dibujar ampliada a escala <span class="data-pill">2:1</span> para que se vea mejor. ¿Cuántos mm medirá en el dibujo?</p>
+    <div class="answer-box">
+      <label>Dibujo =</label>
+      <input type="number" step="any">
+      <span class="unit">mm</span>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Escala <strong>2:1</strong> → ampliación al doble. Aplicamos <em>dibujo = real × escala</em>:
+    <div class="steps-sol">
+      <div class="step-sol">Real: 30 mm</div>
+      <div class="step-sol">Dibujo = 30 × (2/1) = 30 × 2 = <strong>60 mm</strong></div>
+    </div></div></details>
+  </article>
+
+  <!-- F3 -->
+  <article class="activity-card" data-type="number" data-id="F3" data-answer="200" data-tol="0">
+    <p class="statement"><span class="act-num">F3</span>En un plano a escala <span class="data-pill">1:5</span>, una pieza mide <span class="data-pill">40 mm</span> en el dibujo. ¿Cuánto mide en realidad?</p>
+    <div class="answer-box">
+      <label>Real =</label>
+      <input type="number" step="any">
+      <span class="unit">mm</span>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Aplicamos <em>real = dibujo / escala</em>:
+    <div class="steps-sol">
+      <div class="step-sol">Dibujo: 40 mm · Escala 1:5</div>
+      <div class="step-sol">Real = 40 ÷ (1/5) = 40 × 5 = <strong>200 mm</strong></div>
+      <div class="step-sol">(Eso son 20 cm.)</div>
+    </div></div></details>
+  </article>
+
+  <!-- F4 -->
+  <article class="activity-card" data-type="number" data-id="F4" data-answer="8" data-tol="0">
+    <p class="statement"><span class="act-num">F4</span>El aula de tecnología mide <span class="data-pill">8 metros</span> de largo. Quieres dibujar su plano a escala <span class="data-pill">1:100</span>. ¿Cuántos cm medirá el aula en el papel?</p>
+    <div class="answer-box">
+      <label>Dibujo =</label>
+      <input type="number" step="any">
+      <span class="unit">cm</span>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Aplicamos <em>dibujo = real × escala</em>, pero ojo a las <strong>unidades</strong>:
+    <div class="steps-sol">
+      <div class="step-sol">Pasamos la medida real a cm: 8 m = 800 cm</div>
+      <div class="step-sol">Aplicamos la escala: 800 × (1/100) = <strong>8 cm</strong></div>
+      <div class="step-sol">El aula medirá <strong>8 cm</strong> en el papel.</div>
+    </div></div></details>
+  </article>
+
+  <!-- F5 -->
+  <article class="activity-card" data-type="number" data-id="F5" data-answer="3" data-tol="0">
+    <p class="statement"><span class="act-num">F5</span>Un microchip mide <span class="data-pill">10 mm</span> reales. En el dibujo aparece de <span class="data-pill">30 mm</span>. ¿Qué escala se ha utilizado? Escribe solo <strong>el numerador</strong> de la escala N:1.</p>
+    <div class="answer-box">
+      <label>Escala =</label>
+      <input type="number" step="any">
+      <span class="unit">: 1</span>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La escala es la relación <em>dibujo / real</em>:
+    <div class="steps-sol">
+      <div class="step-sol">Escala = dibujo / real = 30 / 10 = 3</div>
+      <div class="step-sol">Como 3 &gt; 1, es una <strong>ampliación</strong>: la escala es <strong>3:1</strong>.</div>
+      <div class="step-sol">Significa que <strong>3 mm en el dibujo equivalen a 1 mm en la realidad</strong>.</div>
+    </div></div></details>
+  </article>
+
+  <!-- F6 -->
+  <article class="activity-card" data-type="number" data-id="F6" data-answer="1.25" data-tol="0.01">
+    <p class="statement"><span class="act-num">F6</span>En un mapa con escala <span class="data-pill">1:25 000</span>, la distancia entre dos puntos es de <span class="data-pill">5 cm</span> en el papel. ¿Cuál es la distancia real en <strong>km</strong>?</p>
+    <div class="answer-box">
+      <label>Distancia real =</label>
+      <input type="number" step="any">
+      <span class="unit">km</span>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Pasos:
+    <div class="steps-sol">
+      <div class="step-sol">Real = dibujo × N → 5 × 25 000 = 125 000 cm</div>
+      <div class="step-sol">Pasamos a metros: 125 000 cm = 1 250 m</div>
+      <div class="step-sol">Pasamos a km: 1 250 m = <strong>1,25 km</strong></div>
+    </div></div></details>
+  </article>
+
+  <!-- F7 -->
+  <article class="activity-card" data-type="radio" data-id="F7">
+    <p class="statement"><span class="act-num">F7</span>¿Cuál de estas afirmaciones sobre las escalas es <strong>correcta</strong>?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="F7"><span class="option-label">La escala 2:1 reduce el tamaño del objeto a la mitad.</span></label>
+      <label class="option"><input type="radio" name="F7" data-correct="true"><span class="option-label">La escala 1:50 hace que el dibujo sea 50 veces más pequeño que la realidad.</span></label>
+      <label class="option"><input type="radio" name="F7"><span class="option-label">La escala 1:1 significa que el dibujo está duplicado.</span></label>
+      <label class="option"><input type="radio" name="F7"><span class="option-label">Las escalas solo se usan para reducir, nunca para ampliar.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El primer número es siempre el del <strong>dibujo</strong>, el segundo el de la <strong>realidad</strong>:
+    <ul style="margin:8px 0 0 18px;">
+      <li><strong>1:N</strong> con N&gt;1 → reducción (dibujo más pequeño)</li>
+      <li><strong>N:1</strong> con N&gt;1 → ampliación (dibujo más grande)</li>
+      <li><strong>1:1</strong> → escala natural (dibujo = realidad)</li>
+    </ul></div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE G · ACOTACIÓN
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-g">
+  <h2 class="bloque-titulo">G · Acotación</h2>
+  <p class="bloque-intro">Reglas básicas, identificación de errores y símbolos especiales. Mismo formato que el examen de la unidad.</p>
+
+  <!-- G1 -->
+  <article class="activity-card" data-type="radio" data-id="G1">
+    <p class="statement"><span class="act-num">G1</span>En el dibujo técnico, las <strong>cifras de cota</strong> se expresan habitualmente en…</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="G1" data-correct="true"><span class="option-label">Milímetros (mm)</span></label>
+      <label class="option"><input type="radio" name="G1"><span class="option-label">Centímetros (cm)</span></label>
+      <label class="option"><input type="radio" name="G1"><span class="option-label">Decímetros (dm)</span></label>
+      <label class="option"><input type="radio" name="G1"><span class="option-label">Metros (m)</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Por norma se utilizan los <strong>milímetros</strong> (sin escribir la unidad). Si excepcionalmente se usa otra unidad, debe indicarse expresamente.</div></details>
+  </article>
+
+  <!-- G2 -->
+  <article class="activity-card" data-type="radio" data-id="G2">
+    <p class="statement"><span class="act-num">G2</span>¿Qué <strong>símbolo</strong> se utiliza para indicar el <strong>diámetro</strong> de una circunferencia?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="G2"><span class="option-label">R</span></label>
+      <label class="option"><input type="radio" name="G2" data-correct="true"><span class="option-label">Ø</span></label>
+      <label class="option"><input type="radio" name="G2"><span class="option-label">□</span></label>
+      <label class="option"><input type="radio" name="G2"><span class="option-label">π</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body"><strong>Ø</strong> indica diámetro · <strong>R</strong> indica radio · <strong>□</strong> indica sección cuadrada.</div></details>
+  </article>
+
+  <!-- G3: visual identification — bien vs mal acotado -->
+  <article class="activity-card" data-type="radio" data-id="G3">
+    <p class="statement"><span class="act-num">G3</span>Marca la <strong>acotación correcta</strong> de este rectángulo:</p>
+
+    <div class="options visual">
+      <!-- A: bien (cota fuera, cifra encima de la línea, centrada) -->
+      <label class="option"><input type="radio" name="G3" data-correct="true">
+        <svg viewBox="0 0 130 90" xmlns="http://www.w3.org/2000/svg" class="fig-svg">
+          <rect x="20" y="40" width="90" height="40" class="main fill"/>
+          <line x1="20" y1="40" x2="20" y2="15" class="thin"/>
+          <line x1="110" y1="40" x2="110" y2="15" class="thin"/>
+          <line x1="20" y1="25" x2="110" y2="25" class="thin"/>
+          <polygon points="20,25 28,22 28,28" class="arrow"/>
+          <polygon points="110,25 102,22 102,28" class="arrow"/>
+          <text x="65" y="22" text-anchor="middle" class="label">90</text>
+        </svg>
+        <span class="option-label">A</span></label>
+
+      <!-- B: mal (línea de cota DENTRO de la figura) -->
+      <label class="option"><input type="radio" name="G3">
+        <svg viewBox="0 0 130 90" xmlns="http://www.w3.org/2000/svg" class="fig-svg">
+          <rect x="20" y="25" width="90" height="50" class="main fill"/>
+          <line x1="20" y1="50" x2="110" y2="50" class="thin" stroke="#c44536"/>
+          <polygon points="20,50 28,47 28,53" class="arrow-err"/>
+          <polygon points="110,50 102,47 102,53" class="arrow-err"/>
+          <text x="65" y="47" text-anchor="middle" class="label label-err">90</text>
+        </svg>
+        <span class="option-label">B</span></label>
+
+      <!-- C: mal (cifra mal colocada — al lado, no encima) -->
+      <label class="option"><input type="radio" name="G3">
+        <svg viewBox="0 0 130 90" xmlns="http://www.w3.org/2000/svg" class="fig-svg">
+          <rect x="20" y="40" width="90" height="40" class="main fill"/>
+          <line x1="20" y1="40" x2="20" y2="15" class="thin"/>
+          <line x1="110" y1="40" x2="110" y2="15" class="thin"/>
+          <line x1="20" y1="25" x2="110" y2="25" class="thin"/>
+          <polygon points="20,25 28,22 28,28" class="arrow"/>
+          <polygon points="110,25 102,22 102,28" class="arrow"/>
+          <text x="20" y="33" class="label label-err">90</text>
+        </svg>
+        <span class="option-label">C</span></label>
+    </div>
+
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La opción <strong>A</strong>: la cota está <strong>fuera del dibujo</strong>, la cifra está <strong>encima de la línea de cota</strong> y <strong>centrada</strong>. La opción B pisa la figura (cota dentro). La opción C tiene la cifra mal colocada (no centrada, no encima).</div></details>
+  </article>
+
+  <!-- G4 -->
+  <article class="activity-card" data-type="radio" data-id="G4">
+    <p class="statement"><span class="act-num">G4</span>Tienes una figura con cuatro lados. ¿Cuántas cotas hacen falta como <strong>mínimo</strong> para dejarla definida si es un cuadrado?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="G4" data-correct="true"><span class="option-label">1 cota</span></label>
+      <label class="option"><input type="radio" name="G4"><span class="option-label">2 cotas</span></label>
+      <label class="option"><input type="radio" name="G4"><span class="option-label">3 cotas</span></label>
+      <label class="option"><input type="radio" name="G4"><span class="option-label">4 cotas</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Norma: <strong>las cotas no se repiten</strong>. Como un cuadrado tiene los cuatro lados iguales, basta con <strong>una sola cota</strong> y el símbolo □ delante (o indicando "cuadrado"). Acotar los cuatro lados es redundante.</div></details>
+  </article>
+
+  <!-- G5 -->
+  <article class="activity-card" data-type="radio" data-id="G5">
+    <p class="statement"><span class="act-num">G5</span>La <strong>línea de cota</strong>:</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="G5"><span class="option-label">Debe coincidir con una arista del objeto siempre que sea posible.</span></label>
+      <label class="option"><input type="radio" name="G5" data-correct="true"><span class="option-label">No debe coincidir nunca con una arista ni con un eje de simetría.</span></label>
+      <label class="option"><input type="radio" name="G5"><span class="option-label">Se dibuja sobre la propia figura, atravesándola.</span></label>
+      <label class="option"><input type="radio" name="G5"><span class="option-label">Se dibuja con la misma gruesa que las aristas del objeto.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La línea de cota es <strong>siempre fina</strong> y va <strong>fuera</strong> de la pieza. Nunca debe coincidir con aristas o ejes para evitar confusión visual.</div></details>
+  </article>
+
+  <!-- G6 — copia del examen estilo Manuel -->
+  <article class="activity-card" data-type="radio" data-id="G6">
+    <p class="statement"><span class="act-num">G6</span>Observa el siguiente dibujo. ¿Está <strong>bien o mal</strong> acotado?</p>
+
+    <div class="fig-mini">
+      <svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg" class="fig-svg" style="max-width:240px;">
+        <rect x="40" y="50" width="120" height="60" class="main fill"/>
+        <!-- cota superior 25 -->
+        <line x1="40" y1="50" x2="40" y2="25" class="thin"/>
+        <line x1="160" y1="50" x2="160" y2="25" class="thin"/>
+        <line x1="40" y1="35" x2="160" y2="35" class="thin"/>
+        <polygon points="40,35 48,32 48,38" class="arrow"/>
+        <polygon points="160,35 152,32 152,38" class="arrow"/>
+        <text x="100" y="32" text-anchor="middle" class="label">25</text>
+        <!-- cota lateral derecha 15 -->
+        <line x1="160" y1="50" x2="185" y2="50" class="thin"/>
+        <line x1="160" y1="110" x2="185" y2="110" class="thin"/>
+        <line x1="175" y1="50" x2="175" y2="110" class="thin"/>
+        <polygon points="175,50 172,58 178,58" class="arrow"/>
+        <polygon points="175,110 172,102 178,102" class="arrow"/>
+        <text x="180" y="85" class="label">15</text>
+      </svg>
+    </div>
+
+    <div class="options">
+      <label class="option"><input type="radio" name="G6" data-correct="true"><span class="option-label">Bien acotado: están todas las medidas necesarias (anchura y altura).</span></label>
+      <label class="option"><input type="radio" name="G6"><span class="option-label">Mal acotado: falta repetir las cotas en los otros lados.</span></label>
+      <label class="option"><input type="radio" name="G6"><span class="option-label">Mal acotado: las cifras deberían ir en cm, no en mm.</span></label>
+      <label class="option"><input type="radio" name="G6"><span class="option-label">Mal acotado: las líneas de cota están demasiado cerca de la figura.</span></label>
+    </div>
+
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Está <strong>bien acotado</strong>: aparecen las dos cotas necesarias (anchura y altura), están fuera de la figura, las cifras encima de la línea de cota y centradas. <strong>Repetir las cotas sería un error</strong> (las cotas no se repiten).</div></details>
+  </article>
+
+  <!-- G7 -->
+  <article class="activity-card" data-type="radio" data-id="G7">
+    <p class="statement"><span class="act-num">G7</span>¿Cómo deben colocarse las <strong>cotas en serie</strong> (varias seguidas)?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="G7" data-correct="true"><span class="option-label">Alineadas, todas a la misma altura.</span></label>
+      <label class="option"><input type="radio" name="G7"><span class="option-label">Cada una a una altura distinta, en escalera.</span></label>
+      <label class="option"><input type="radio" name="G7"><span class="option-label">Solo se acota la primera, las demás se deducen.</span></label>
+      <label class="option"><input type="radio" name="G7"><span class="option-label">Pisando ligeramente la figura.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Las cotas en serie deben estar <strong>perfectamente alineadas</strong> (a la misma altura). Si están a diferentes alturas hablaríamos de acotación en paralelo o mixta, pero no "en serie".</div></details>
+  </article>
+
+  <!-- G8 — sobre arcos -->
+  <article class="activity-card" data-type="radio" data-id="G8">
+    <p class="statement"><span class="act-num">G8</span>Para acotar un <strong>arco de menos de 180°</strong> (por ejemplo, una esquina redondeada de una pieza), se utiliza…</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="G8" data-correct="true"><span class="option-label">El radio (R)</span></label>
+      <label class="option"><input type="radio" name="G8"><span class="option-label">El diámetro (Ø)</span></label>
+      <label class="option"><input type="radio" name="G8"><span class="option-label">La sección cuadrada (□)</span></label>
+      <label class="option"><input type="radio" name="G8"><span class="option-label">La longitud del arco</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Norma: arcos <strong>menores</strong> de 180° → se acotan con el <strong>radio (R)</strong>. Arcos <strong>mayores</strong> de 180° (más de media circunferencia) → se acotan con el <strong>diámetro (Ø)</strong>.</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE H · CAD
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-h">
+  <h2 class="bloque-titulo">H · Diseño asistido por ordenador (CAD)</h2>
+  <p class="bloque-intro">Programas y conceptos básicos de CAD 2D y 3D.</p>
+
+  <!-- H1 -->
+  <article class="activity-card" data-type="radio" data-id="H1">
+    <p class="statement"><span class="act-num">H1</span>¿Qué significan las siglas <strong>CAD</strong>?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="H1"><span class="option-label">Computer Aided Drawing (Dibujo Asistido por Computadora)</span></label>
+      <label class="option"><input type="radio" name="H1" data-correct="true"><span class="option-label">Computer Aided Design (Diseño Asistido por Ordenador)</span></label>
+      <label class="option"><input type="radio" name="H1"><span class="option-label">Centro de Aprendizaje Digital</span></label>
+      <label class="option"><input type="radio" name="H1"><span class="option-label">Cálculo Automatizado de Dibujos</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">CAD = <strong>Computer Aided Design</strong> (diseño asistido por ordenador). Es el conjunto de programas que sustituyen al lápiz, escuadra y regla para hacer planos en el ordenador.</div></details>
+  </article>
+
+  <!-- H2 -->
+  <article class="activity-card" data-type="radio" data-id="H2">
+    <p class="statement"><span class="act-num">H2</span>¿Cuál de estos programas se utiliza para <strong>modelado 3D online</strong>, sin necesidad de instalación?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="H2"><span class="option-label">LibreCAD</span></label>
+      <label class="option"><input type="radio" name="H2"><span class="option-label">AutoCAD</span></label>
+      <label class="option"><input type="radio" name="H2" data-correct="true"><span class="option-label">Tinkercad</span></label>
+      <label class="option"><input type="radio" name="H2"><span class="option-label">Photoshop</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body"><strong>Tinkercad</strong> es CAD 3D online, gratuito y muy sencillo: arrastras formas básicas (cubo, cilindro, esfera) y las combinas. <strong>LibreCAD</strong> es CAD 2D (necesita instalación). <strong>AutoCAD</strong> es profesional (de pago). Photoshop no es CAD, sirve para editar imágenes.</div></details>
+  </article>
+
+  <!-- H3 -->
+  <article class="activity-card" data-type="radio" data-id="H3">
+    <p class="statement"><span class="act-num">H3</span>¿Qué <strong>ventaja</strong> tiene dibujar con CAD frente a dibujar a mano con lápiz?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="H3"><span class="option-label">El CAD es siempre más bonito.</span></label>
+      <label class="option"><input type="radio" name="H3" data-correct="true"><span class="option-label">Permite modificar el dibujo sin borrar, con precisión milimétrica y se puede exportar.</span></label>
+      <label class="option"><input type="radio" name="H3"><span class="option-label">No hace falta saber dibujar a mano.</span></label>
+      <label class="option"><input type="radio" name="H3"><span class="option-label">No requiere conocer las normas del dibujo técnico.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Las normas y los conceptos son <strong>los mismos</strong>: el CAD solo cambia la herramienta. Las verdaderas ventajas son la <strong>facilidad de modificación</strong>, la <strong>precisión</strong>, la <strong>exportación</strong> (PDF, impresión 3D…) y el uso de <strong>capas</strong> para organizar el dibujo.</div></details>
+  </article>
+</section>
+
+<p style="margin-top:3rem; text-align:center; color:#666; font-size:0.92rem; font-style:italic;">¿Las has acabado todas? Repasa el <a href="../libro-digital.html">libro digital</a> o continúa con los <a href="../index.html">interactivos de la unidad</a>.</p>
+
+<footer class="unidad-foot">
+  IES Jiménez de Quesada · Santa Fe (Granada)<br>
+  TyD 2º ESO · Curso 2025-26 · Manuel Alonso Herrera<br>
+  <a href="../index.html">← Volver al hub</a> · <a href="../libro-digital.html">📘 Libro digital</a>
+  <br><span class="version">Actividades v1.0</span>
+</footer>
+
+</main>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     SCRIPT · autocorrección + progreso
+     ════════════════════════════════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  // Estado: cuántas resueltas y cuántas correctas
+  const totalEl = document.getElementById('prog-total');
+  const numEl = document.getElementById('prog-num');
+  const okEl = document.getElementById('prog-ok');
+  const barEl = document.getElementById('prog-bar');
+  const cards = document.querySelectorAll('.activity-card');
+  totalEl.textContent = cards.length;
+
+  function updateProgress() {
+    const resueltas = document.querySelectorAll('.activity-card.solved, .activity-card.wrong').length;
+    const aciertos = document.querySelectorAll('.activity-card.solved').length;
+    numEl.textContent = resueltas;
+    okEl.textContent = aciertos;
+    const pct = cards.length ? (resueltas / cards.length) * 100 : 0;
+    barEl.style.width = pct + '%';
+  }
+
+  function normalize(str) {
+    return String(str).trim().replace(',', '.').toLowerCase();
+  }
+
+  window.check = function(btn) {
+    const card = btn.closest('.activity-card');
+    const type = card.dataset.type;
+    const feedback = card.querySelector('.feedback');
+    let correct = false;
+    let msg = '';
+
+    if (type === 'radio') {
+      const checked = card.querySelector('input[type=radio]:checked');
+      if (!checked) {
+        feedback.className = 'feedback err show';
+        feedback.innerHTML = '<span class="icon">⚠️</span>Selecciona una opción antes de comprobar.';
+        return;
+      }
+      correct = checked.dataset.correct === 'true';
+      msg = correct
+        ? '<span class="icon">✓</span>¡Correcto! Bien razonado.'
+        : '<span class="icon">✗</span>No es la opción correcta. Mira la solución para entender por qué.';
+    }
+    else if (type === 'number') {
+      const input = card.querySelector('input[type=number]');
+      const raw = normalize(input.value);
+      if (raw === '') {
+        feedback.className = 'feedback err show';
+        feedback.innerHTML = '<span class="icon">⚠️</span>Escribe una respuesta antes de comprobar.';
+        return;
+      }
+      const num = parseFloat(raw);
+      if (isNaN(num)) {
+        feedback.className = 'feedback err show';
+        feedback.innerHTML = '<span class="icon">⚠️</span>La respuesta debe ser un número.';
+        return;
+      }
+      const expected = parseFloat(card.dataset.answer);
+      const tol = parseFloat(card.dataset.tol || '0');
+      correct = Math.abs(num - expected) <= tol + 1e-9;
+      msg = correct
+        ? '<span class="icon">✓</span>¡Correcto! Resultado: ' + expected + '.'
+        : '<span class="icon">✗</span>No es el resultado esperado. Revisa el cálculo o consulta la solución.';
+    }
+
+    // marca la card como resuelta o errónea
+    card.classList.remove('solved', 'wrong');
+    card.classList.add(correct ? 'solved' : 'wrong');
+    feedback.className = 'feedback ' + (correct ? 'ok' : 'err') + ' show';
+    feedback.innerHTML = msg;
+    updateProgress();
+  };
+
+  window.resetAll = function() {
+    if (!confirm('¿Reiniciar todas las actividades? Se perderán las respuestas marcadas.')) return;
+    cards.forEach(card => {
+      card.classList.remove('solved', 'wrong');
+      const fb = card.querySelector('.feedback');
+      if (fb) { fb.className = 'feedback'; fb.innerHTML = ''; }
+      card.querySelectorAll('input[type=radio], input[type=checkbox]').forEach(inp => inp.checked = false);
+      card.querySelectorAll('input[type=number], input[type=text]').forEach(inp => inp.value = '');
+      card.querySelectorAll('details.solution').forEach(d => d.open = false);
+    });
+    updateProgress();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  };
+
+  // primer pintado
+  updateProgress();
+})();
+</script>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Actividades · U01 Proceso tecnológico · TyD 2º ESO</title>
+<meta name="description" content="Actividades interactivas sobre la tecnología y el proceso tecnológico para 2º ESO con autocorrección: tecnología, historia, 6 fases del proceso, proyecto, memoria, fabricación y medio ambiente.">
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/01-tecnologia-proceso/actividades/">
+
+<!-- ══ Open Graph ══ -->
+<meta property="og:title" content="Actividades · U01 Proceso tecnológico · TyD 2º ESO">
+<meta property="og:description" content="Actividades interactivas sobre la tecnología y el proceso tecnológico para 2º ESO con autocorrección.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/01-tecnologia-proceso/actividades/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Actividades · U01 Proceso tecnológico · TyD 2º ESO">
+<meta name="twitter:description" content="Actividades interactivas sobre la tecnología y el proceso tecnológico para 2º ESO con autocorrección.">
+<meta name="twitter:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+/* ════════════════════════════════════════════════════════════════
+   Activity-specific styles (uses site palette: #D4700A + #1B4F8A)
+   ════════════════════════════════════════════════════════════════ */
+:root {
+  --act-ok: #2e7d4f;
+  --act-err: #c44536;
+  --act-warn: #e8b647;
+  --act-card-bg: #fafafa;
+  --act-border: #e3e3e3;
+}
+
+.bloque-titulo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--principal, #D4700A);
+  margin: 2.5rem 0 0.4rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 3px solid var(--principal, #D4700A);
+  letter-spacing: 0.5px;
+}
+.bloque-intro {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 1.2rem;
+  font-style: italic;
+}
+
+.activity-card {
+  background: var(--act-card-bg);
+  border: 1px solid var(--act-border);
+  border-left: 4px solid var(--principal, #D4700A);
+  border-radius: 10px;
+  padding: 1.2rem 1.4rem;
+  margin: 1rem 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+.activity-card.solved {
+  border-left-color: var(--act-ok);
+  background: #f4faf6;
+}
+.activity-card.wrong {
+  border-left-color: var(--act-err);
+  background: #fdf6f5;
+}
+
+.act-num {
+  display: inline-block;
+  background: var(--principal, #D4700A);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-right: 8px;
+  letter-spacing: 0.5px;
+}
+.activity-card.solved .act-num { background: var(--act-ok); }
+.activity-card.wrong .act-num { background: var(--act-err); }
+
+.statement {
+  font-size: 1rem;
+  color: #222;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+.statement strong { color: #111; }
+.statement em { color: var(--secundario, #1B4F8A); font-style: italic; }
+
+.data-pill {
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 2px 8px;
+  margin: 0 3px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--secundario, #1B4F8A);
+}
+
+/* ─── Options (radio / multi) ─── */
+.options {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0.8rem 0;
+}
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.6rem 0.8rem;
+  background: #fff;
+  border: 1px solid var(--act-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 0.95rem;
+}
+.option:hover { background: #fffaf3; border-color: var(--principal, #D4700A); }
+.option input { margin-top: 3px; cursor: pointer; flex-shrink: 0; }
+.option input:checked + .option-label { color: var(--secundario, #1B4F8A); font-weight: 600; }
+.options.cols2 { grid-template-columns: 1fr 1fr; }
+.options.cols3 { grid-template-columns: 1fr 1fr 1fr; }
+
+/* ─── Numeric input ─── */
+.answer-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.8rem 0;
+  flex-wrap: wrap;
+}
+.answer-box label { font-weight: 600; color: #444; font-size: 0.95rem; }
+.answer-box input[type="number"],
+.answer-box input[type="text"] {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.45rem 0.7rem;
+  border: 2px solid var(--act-border);
+  border-radius: 8px;
+  width: 110px;
+  background: #fff;
+  color: var(--secundario, #1B4F8A);
+}
+.answer-box input:focus {
+  outline: none;
+  border-color: var(--principal, #D4700A);
+  box-shadow: 0 0 0 3px rgba(212,112,10,0.15);
+}
+.answer-box .unit {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  color: #666;
+  font-weight: 500;
+}
+
+/* ─── Ordenar fases (input numérico por cada elemento) ─── */
+.order-list {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0.8rem 0;
+}
+.order-item {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 0.7rem;
+  align-items: center;
+  padding: 0.6rem 0.9rem;
+  background: #fff;
+  border: 1px solid var(--act-border);
+  border-radius: 8px;
+}
+.order-item input {
+  width: 50px;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.35rem;
+  border: 2px solid var(--act-border);
+  border-radius: 6px;
+  color: var(--principal, #D4700A);
+}
+.order-item input:focus { outline: none; border-color: var(--principal, #D4700A); }
+.order-item input.ok-input { background: #dff2e6; border-color: var(--act-ok); }
+.order-item input.err-input { background: #fce4e1; border-color: var(--act-err); }
+.order-item .order-text {
+  font-size: 0.95rem;
+  color: #333;
+  font-weight: 500;
+}
+.order-item .order-text strong { color: #111; }
+
+/* ─── Match (emparejar) ─── */
+.match-list {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0.8rem 0;
+}
+.match-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.8rem;
+  align-items: center;
+  padding: 0.6rem 0.9rem;
+  background: #fff;
+  border: 1px solid var(--act-border);
+  border-radius: 8px;
+}
+.match-item .match-text {
+  font-size: 0.95rem;
+  color: #333;
+  font-weight: 500;
+}
+.match-item select {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.92rem;
+  padding: 0.35rem 0.5rem;
+  border: 2px solid var(--act-border);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  min-width: 160px;
+  font-weight: 500;
+}
+.match-item select.ok-input { background: #dff2e6; border-color: var(--act-ok); color: var(--act-ok); }
+.match-item select.err-input { background: #fce4e1; border-color: var(--act-err); color: var(--act-err); }
+
+/* ─── Botón comprobar ─── */
+.check-btn {
+  background: var(--principal, #D4700A);
+  color: #fff;
+  border: none;
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  letter-spacing: 0.3px;
+}
+.check-btn:hover { background: #b85e08; transform: translateY(-1px); }
+.check-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* ─── Feedback ─── */
+.feedback {
+  margin-top: 0.7rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.93rem;
+  font-weight: 600;
+  display: none;
+}
+.feedback.show { display: block; }
+.feedback.ok {
+  background: #dff2e6;
+  color: var(--act-ok);
+  border-left: 4px solid var(--act-ok);
+}
+.feedback.err {
+  background: #fce4e1;
+  color: var(--act-err);
+  border-left: 4px solid var(--act-err);
+}
+.feedback .icon { margin-right: 6px; font-size: 1.1rem; }
+
+/* ─── Solución desplegable ─── */
+details.solution {
+  margin-top: 0.9rem;
+  background: #fffaf3;
+  border: 1px dashed #d4a373;
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+}
+details.solution > summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--principal, #D4700A);
+  font-size: 0.92rem;
+  list-style: none;
+  user-select: none;
+}
+details.solution > summary::before {
+  content: "▸ ";
+  display: inline-block;
+  transition: transform 0.15s;
+}
+details.solution[open] > summary::before { content: "▾ "; }
+details.solution > summary:hover { text-decoration: underline; }
+details.solution .sol-body {
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px dashed #d4a373;
+  font-size: 0.92rem;
+  color: #444;
+  line-height: 1.55;
+}
+details.solution .steps-sol {
+  display: grid;
+  gap: 0.4rem;
+  counter-reset: stp;
+  margin-top: 0.4rem;
+}
+details.solution .step-sol {
+  position: relative;
+  padding: 0.4rem 0.5rem 0.4rem 1.9rem;
+  background: #fff;
+  border-radius: 6px;
+  border: 1px solid #f0e6d3;
+  font-size: 0.9rem;
+}
+details.solution .step-sol::before {
+  counter-increment: stp;
+  content: counter(stp);
+  position: absolute;
+  left: 0.4rem;
+  top: 0.45rem;
+  width: 18px;
+  height: 18px;
+  background: var(--principal, #D4700A);
+  color: #fff;
+  border-radius: 50%;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+
+/* ─── Progreso global ─── */
+.progreso {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  border-bottom: 2px solid var(--principal, #D4700A);
+  padding: 0.6rem 1rem;
+  margin-bottom: 1.5rem;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.92rem;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.progreso .bar-wrap {
+  flex: 1;
+  margin: 0 1rem;
+  background: #eee;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progreso .bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--principal, #D4700A), #e89947);
+  width: 0%;
+  transition: width 0.4s ease;
+}
+.progreso .stat { font-weight: 600; color: var(--secundario, #1B4F8A); }
+.progreso .stat strong { color: var(--principal, #D4700A); }
+.progreso .reset-btn {
+  background: transparent;
+  border: 1px solid #ccc;
+  color: #666;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  font-family: 'Barlow', sans-serif;
+}
+.progreso .reset-btn:hover { border-color: var(--principal, #D4700A); color: var(--principal, #D4700A); }
+
+@media (max-width: 720px) {
+  .options.cols2, .options.cols3 { grid-template-columns: 1fr; }
+  .progreso { flex-wrap: wrap; gap: 0.5rem; }
+  .progreso .bar-wrap { margin: 0; order: 99; flex-basis: 100%; }
+  .order-item { grid-template-columns: 45px 1fr; }
+  .match-item { grid-template-columns: 1fr; }
+  .match-item select { min-width: 0; width: 100%; }
+}
+
+@media print {
+  .progreso, .check-btn, .reset-btn { display: none; }
+  .feedback.show { display: block !important; }
+  details.solution { background: #fff; }
+  details.solution > summary { display: none; }
+  details.solution > .sol-body { display: block !important; }
+  details.solution[open] > .sol-body,
+  details.solution > .sol-body { display: block !important; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U01 · Proceso tecnológico · Actividades</span>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Inicio</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U01</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📘</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>📝</span><span class="nc-lbl">Actividades</span></span>
+</nav>
+
+<div class="unidad-layout">
+
+<aside class="sb-side">
+  <h3>Bloques</h3>
+  <a href="#bloque-a">A · La tecnología</a>
+  <a href="#bloque-b">B · Historia de la tecnología</a>
+  <a href="#bloque-c">C · El proceso tecnológico</a>
+  <a href="#bloque-d">D · El proyecto tecnológico</a>
+  <a href="#bloque-e">E · Memoria y plan de trabajo</a>
+  <a href="#bloque-f">F · Fabricación de productos</a>
+  <a href="#bloque-g">G · Tecnología y medio ambiente</a>
+</aside>
+
+<main class="ct" id="main-content">
+
+<h1 class="unidad-titulo">Actividades · U01 Proceso tecnológico</h1>
+<p class="unidad-subt">Ejercicios con comprobación automática y solución paso a paso. Hay <strong>35 actividades</strong> repartidas en 7 bloques. Puedes resolverlas en cualquier orden y consultar el <a href="../libro-digital.html">libro digital</a> cuando necesites repasar.</p>
+
+<div class="progreso" id="progreso">
+  <span class="stat"><strong id="prog-num">0</strong> / <span id="prog-total">35</span> resueltas</span>
+  <div class="bar-wrap"><div class="bar" id="prog-bar"></div></div>
+  <span class="stat">Aciertos: <strong id="prog-ok">0</strong></span>
+  <button class="reset-btn" onclick="resetAll()">↺ Reiniciar</button>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE A · LA TECNOLOGÍA
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-a">
+  <h2 class="bloque-titulo">A · La tecnología</h2>
+  <p class="bloque-intro">Definición de tecnología, su origen etimológico y la diferencia entre tecnología humana y animal.</p>
+
+  <!-- A1 -->
+  <article class="activity-card" data-type="radio" data-id="A1">
+    <p class="statement"><span class="act-num">A1</span>La palabra <em>tecnología</em> procede de dos términos griegos. ¿Cuáles?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="A1"><span class="option-label">tele (lejos) + logos (estudio)</span></label>
+      <label class="option"><input type="radio" name="A1" data-correct="true"><span class="option-label">techne (técnica, arte, oficio) + logos (estudio, tratado)</span></label>
+      <label class="option"><input type="radio" name="A1"><span class="option-label">tecno (máquina) + filos (amor)</span></label>
+      <label class="option"><input type="radio" name="A1"><span class="option-label">techne (técnica) + gramma (escritura)</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El término <strong>tecnología</strong> combina <em>techne</em> (técnica, arte u oficio) con <em>logos</em> (estudio o tratado). Significa por tanto el <strong>estudio de las técnicas</strong>, aunque hoy hace referencia también a los productos que se fabrican con esas técnicas.</div></details>
+  </article>
+
+  <!-- A2 -->
+  <article class="activity-card" data-type="radio" data-id="A2">
+    <p class="statement"><span class="act-num">A2</span>¿Cuál es la <strong>definición más completa</strong> de tecnología?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="A2"><span class="option-label">El conjunto de máquinas que usa la humanidad.</span></label>
+      <label class="option"><input type="radio" name="A2"><span class="option-label">Cualquier objeto que funcione con electricidad.</span></label>
+      <label class="option"><input type="radio" name="A2" data-correct="true"><span class="option-label">Conjunto de conocimientos y procedimientos que se aplican para fabricar objetos o sistemas con los que satisfacer necesidades.</span></label>
+      <label class="option"><input type="radio" name="A2"><span class="option-label">El estudio teórico de las ciencias aplicadas.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La tecnología combina <strong>conocimientos</strong> (saber cómo funciona algo) y <strong>procedimientos</strong> (saber hacerlo) con un objetivo concreto: <strong>satisfacer necesidades</strong>. No tiene por qué incluir electricidad: un lápiz, una silla o un destornillador también son tecnología.</div></details>
+  </article>
+
+  <!-- A3 -->
+  <article class="activity-card" data-type="radio" data-id="A3">
+    <p class="statement"><span class="act-num">A3</span>¿Qué diferencia <strong>fundamental</strong> hay entre el uso humano de la tecnología y el uso animal de instrumentos?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="A3"><span class="option-label">Los animales no tienen inteligencia.</span></label>
+      <label class="option"><input type="radio" name="A3" data-correct="true"><span class="option-label">Los humanos diseñamos, modificamos y fabricamos nuestros instrumentos; los animales suelen usarlos tal cual los encuentran.</span></label>
+      <label class="option"><input type="radio" name="A3"><span class="option-label">Los animales solo usan piedras y los humanos usamos metales.</span></label>
+      <label class="option"><input type="radio" name="A3"><span class="option-label">Los humanos somos los únicos seres vivos que usan tecnología.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Los animales <strong>sí</strong> usan tecnología (escarabajos, simios, delfines…), pero casi siempre usan los instrumentos <em>tal cual los encuentran</em> en la naturaleza. Los humanos, en cambio, <strong>diseñamos, modificamos y fabricamos</strong> deliberadamente nuestros instrumentos. Esa capacidad de transformar el entorno es la gran diferencia.</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE B · HISTORIA DE LA TECNOLOGÍA
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-b">
+  <h2 class="bloque-titulo">B · Historia de la tecnología</h2>
+  <p class="bloque-intro">Las grandes épocas, las necesidades humanas y la tecnoética.</p>
+
+  <!-- B1 -->
+  <article class="activity-card" data-type="radio" data-id="B1">
+    <p class="statement"><span class="act-num">B1</span>¿Cuál se considera el <strong>primer gran invento tecnológico</strong> de la humanidad?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="B1"><span class="option-label">La rueda</span></label>
+      <label class="option"><input type="radio" name="B1" data-correct="true"><span class="option-label">El dominio del fuego</span></label>
+      <label class="option"><input type="radio" name="B1"><span class="option-label">El arado</span></label>
+      <label class="option"><input type="radio" name="B1"><span class="option-label">La escritura</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El <strong>dominio del fuego</strong> marcó un antes y un después en la historia humana: permitió cocinar alimentos, iluminarse, calentarse, fabricar herramientas (cerámica, metales) e incluso defenderse de los depredadores.</div></details>
+  </article>
+
+  <!-- B2 -->
+  <article class="activity-card" data-type="match" data-id="B2"
+    data-pairs='[
+      {"item":"Máquina de vapor","correct":"Revolución Industrial"},
+      {"item":"Imprenta","correct":"Edad Media"},
+      {"item":"Internet","correct":"Actualidad"},
+      {"item":"Arado","correct":"Edad Antigua"}
+    ]'
+    data-options='["Prehistoria","Edad Antigua","Edad Media","Edad Moderna","Revolución Industrial","Actualidad"]'>
+    <p class="statement"><span class="act-num">B2</span>Empareja cada <strong>invento</strong> con la <strong>época histórica</strong> en la que se desarrolló.</p>
+    <div class="match-list" id="A_B2"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body"><strong>Máquina de vapor</strong> → Revolución Industrial · <strong>Imprenta</strong> → Edad Media · <strong>Internet</strong> → Actualidad · <strong>Arado</strong> → Edad Antigua. Estos cuatro inventos son hitos: cada uno cambió completamente la forma en que los humanos vivían.</div></details>
+  </article>
+
+  <!-- B3 -->
+  <article class="activity-card" data-type="radio" data-id="B3">
+    <p class="statement"><span class="act-num">B3</span>¿Cuál de estas necesidades es <strong>primaria</strong>?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="B3"><span class="option-label">Tener un móvil de última generación</span></label>
+      <label class="option"><input type="radio" name="B3" data-correct="true"><span class="option-label">Alimentarse adecuadamente</span></label>
+      <label class="option"><input type="radio" name="B3"><span class="option-label">Viajar al extranjero en verano</span></label>
+      <label class="option"><input type="radio" name="B3"><span class="option-label">Ir al cine los fines de semana</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Las necesidades <strong>primarias</strong> son las imprescindibles para sobrevivir: alimentación, agua, vestido, refugio. Las otras tres opciones son necesidades <strong>secundarias</strong>: aumentan el bienestar pero no son esenciales para la vida.</div></details>
+  </article>
+
+  <!-- B4 -->
+  <article class="activity-card" data-type="radio" data-id="B4">
+    <p class="statement"><span class="act-num">B4</span>La <strong>tecnoética</strong> es…</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="B4"><span class="option-label">El estudio de la electrónica y las máquinas.</span></label>
+      <label class="option"><input type="radio" name="B4" data-correct="true"><span class="option-label">La reflexión sobre las consecuencias éticas y sociales de la tecnología.</span></label>
+      <label class="option"><input type="radio" name="B4"><span class="option-label">Un conjunto de normas para fabricar productos sin errores.</span></label>
+      <label class="option"><input type="radio" name="B4"><span class="option-label">El estudio de los aparatos electrónicos antiguos.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La <strong>tecnoética</strong> reflexiona sobre las consecuencias éticas y sociales de la tecnología. La pregunta clave no es <em>"¿puedo hacerlo?"</em> sino <em>"¿debo hacerlo?"</em>. Ejemplos: ¿debemos crear armas con IA? ¿hasta dónde llega la privacidad en redes? ¿es ético programar móviles para que duren poco?</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE C · EL PROCESO TECNOLÓGICO
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-c">
+  <h2 class="bloque-titulo">C · El proceso tecnológico</h2>
+  <p class="bloque-intro">Las 6 fases en orden, su aplicación y errores comunes. Es la parte más importante de la unidad.</p>
+
+  <!-- C1 -->
+  <article class="activity-card" data-type="radio" data-id="C1">
+    <p class="statement"><span class="act-num">C1</span>¿Cuántas fases tiene el proceso tecnológico?</p>
+    <div class="options cols3">
+      <label class="option"><input type="radio" name="C1"><span class="option-label">4</span></label>
+      <label class="option"><input type="radio" name="C1"><span class="option-label">5</span></label>
+      <label class="option"><input type="radio" name="C1" data-correct="true"><span class="option-label">6</span></label>
+      <label class="option"><input type="radio" name="C1"><span class="option-label">8</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Las <strong>6 fases</strong> son: requerimiento o necesidad · pensar en posibles soluciones · selección de la solución · diseño y planificación · construcción · evaluación.</div></details>
+  </article>
+
+  <!-- C2 -->
+  <article class="activity-card" data-type="radio" data-id="C2">
+    <p class="statement"><span class="act-num">C2</span>¿Cuál es la <strong>primera fase</strong> del proceso tecnológico?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="C2"><span class="option-label">Diseño y planificación</span></label>
+      <label class="option"><input type="radio" name="C2"><span class="option-label">Construcción</span></label>
+      <label class="option"><input type="radio" name="C2" data-correct="true"><span class="option-label">Requerimiento o necesidad</span></label>
+      <label class="option"><input type="radio" name="C2"><span class="option-label">Evaluación</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Todo proceso tecnológico empieza identificando <strong>la necesidad</strong> que se debe satisfacer o el <strong>problema</strong> que se quiere resolver. Sin pregunta clara no hay respuesta útil.</div></details>
+  </article>
+
+  <!-- C3 ORDER -->
+  <article class="activity-card" data-type="order" data-id="C3"
+    data-items='[
+      {"text":"Construcción","correct":5},
+      {"text":"Evaluación","correct":6},
+      {"text":"Requerimiento o necesidad","correct":1},
+      {"text":"Selección de la solución","correct":3},
+      {"text":"Diseño y planificación","correct":4},
+      {"text":"Pensar en posibles soluciones","correct":2}
+    ]'>
+    <p class="statement"><span class="act-num">C3</span>Ordena las <strong>6 fases</strong> del proceso tecnológico escribiendo el número (1-6) que corresponde a cada una.</p>
+    <div class="order-list" id="A_C3"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El orden correcto es:
+    <div class="steps-sol">
+      <div class="step-sol"><strong>Requerimiento o necesidad</strong> — identificar el problema.</div>
+      <div class="step-sol"><strong>Pensar en posibles soluciones</strong> — buscar info y generar ideas.</div>
+      <div class="step-sol"><strong>Selección de la solución</strong> — elegir la más adecuada.</div>
+      <div class="step-sol"><strong>Diseño y planificación</strong> — cómo se va a hacer (planos, plan de trabajo).</div>
+      <div class="step-sol"><strong>Construcción</strong> — elaborar el objeto siguiendo el plan.</div>
+      <div class="step-sol"><strong>Evaluación</strong> — comprobar si funciona y proponer mejoras.</div>
+    </div></div></details>
+  </article>
+
+  <!-- C4 -->
+  <article class="activity-card" data-type="radio" data-id="C4">
+    <p class="statement"><span class="act-num">C4</span>Pedro tiene una caja muy pesada que tiene que mover por su casa. Después de pensarlo, decide hacer un carrito con ruedas. ¿En qué <strong>fase</strong> del proceso tecnológico se encuentra?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="C4"><span class="option-label">Fase 1 · Requerimiento</span></label>
+      <label class="option"><input type="radio" name="C4"><span class="option-label">Fase 2 · Posibles soluciones</span></label>
+      <label class="option"><input type="radio" name="C4" data-correct="true"><span class="option-label">Fase 3 · Selección de la solución</span></label>
+      <label class="option"><input type="radio" name="C4"><span class="option-label">Fase 5 · Construcción</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Pedro ya ha identificado la necesidad (mover la caja, fase 1), ha pensado posibilidades (fase 2: ¿llamar a alguien? ¿arrastrarla? ¿un carrito?...) y ahora <strong>ha elegido la solución concreta</strong>: hacer un carrito con ruedas. Eso es la <strong>fase 3</strong>. Todavía no la ha diseñado (fase 4) ni la ha construido (fase 5).</div></details>
+  </article>
+
+  <!-- C5 -->
+  <article class="activity-card" data-type="radio" data-id="C5">
+    <p class="statement"><span class="act-num">C5</span>En la <strong>fase de evaluación</strong>, ¿qué nos preguntamos?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="C5"><span class="option-label">¿Qué materiales necesitamos comprar?</span></label>
+      <label class="option"><input type="radio" name="C5"><span class="option-label">¿Cómo va a quedar el dibujo del proyecto?</span></label>
+      <label class="option"><input type="radio" name="C5" data-correct="true"><span class="option-label">¿El objeto resuelve la necesidad? ¿Hay posibles mejoras?</span></label>
+      <label class="option"><input type="radio" name="C5"><span class="option-label">¿Cuánto tiempo nos va a llevar la construcción?</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La fase de <strong>evaluación</strong> (la sexta y última) consiste en analizar si el objeto resuelve la necesidad planteada al principio (fase 1) y plantear <strong>posibles mejoras</strong> para futuras versiones. Es la fase que cierra el ciclo.</div></details>
+  </article>
+
+  <!-- C6 -->
+  <article class="activity-card" data-type="radio" data-id="C6">
+    <p class="statement"><span class="act-num">C6</span>¿Cuál de estos <strong>NO</strong> es un error típico al aplicar el proceso tecnológico?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="C6"><span class="option-label">Empezar a construir antes de haber diseñado nada.</span></label>
+      <label class="option"><input type="radio" name="C6"><span class="option-label">Quedarse con la primera idea sin explorar más opciones.</span></label>
+      <label class="option"><input type="radio" name="C6"><span class="option-label">No documentar nada del trabajo realizado.</span></label>
+      <label class="option"><input type="radio" name="C6" data-correct="true"><span class="option-label">Plantear varias soluciones antes de elegir una.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Plantear varias soluciones es justo lo que pide la <strong>fase 2</strong>: cuantas más ideas, mejor. Los otros tres son errores típicos: saltarse el diseño (fase 4), no explorar opciones (fase 2 a medias) y no documentar (impide evaluar después).</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE D · EL PROYECTO TECNOLÓGICO
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-d">
+  <h2 class="bloque-titulo">D · El proyecto tecnológico</h2>
+  <p class="bloque-intro">Condicionantes, dimensiones y herramientas del taller.</p>
+
+  <!-- D1 -->
+  <article class="activity-card" data-type="radio" data-id="D1">
+    <p class="statement"><span class="act-num">D1</span>¿Cuáles son las <strong>tres dimensiones</strong> de cualquier proyecto tecnológico?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="D1"><span class="option-label">Altura, anchura y profundidad</span></label>
+      <label class="option"><input type="radio" name="D1" data-correct="true"><span class="option-label">Material, forma y función</span></label>
+      <label class="option"><input type="radio" name="D1"><span class="option-label">Idea, diseño y construcción</span></label>
+      <label class="option"><input type="radio" name="D1"><span class="option-label">Coste, calidad y tiempo</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Las tres dimensiones a considerar al diseñar son:
+    <ul style="margin:8px 0 0 18px;">
+      <li><strong>Material</strong> · ¿de qué se hace?</li>
+      <li><strong>Forma</strong> · ¿qué aspecto tiene?</li>
+      <li><strong>Función</strong> · ¿para qué sirve?</li>
+    </ul></div></details>
+  </article>
+
+  <!-- D2 -->
+  <article class="activity-card" data-type="radio" data-id="D2">
+    <p class="statement"><span class="act-num">D2</span>Estás diseñando una silla. ¿Cuál de estos aspectos pertenece a la dimensión <strong>"forma"</strong>?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="D2"><span class="option-label">Está hecha de roble macizo.</span></label>
+      <label class="option"><input type="radio" name="D2"><span class="option-label">Sirve para sentarse cómodamente.</span></label>
+      <label class="option"><input type="radio" name="D2" data-correct="true"><span class="option-label">Tiene un respaldo curvado y patas ergonómicas.</span></label>
+      <label class="option"><input type="radio" name="D2"><span class="option-label">Soporta hasta 120 kg de peso.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La <strong>forma</strong> abarca la estética, la ergonomía y las medidas. El respaldo curvado y las patas ergonómicas son rasgos de forma. Las opciones de roble macizo (material), sentarse (función) y soportar peso (función/material) corresponden a otras dimensiones.</div></details>
+  </article>
+
+  <!-- D3 -->
+  <article class="activity-card" data-type="match" data-id="D3"
+    data-pairs='[
+      {"item":"Tener 50 € para los materiales","correct":"Presupuesto económico"},
+      {"item":"Entregar el proyecto antes del 15 de junio","correct":"Plazos de entrega"},
+      {"item":"En el taller solo hay una sierra de calar","correct":"Condiciones técnicas"},
+      {"item":"Un miembro del equipo se pone enfermo","correct":"Aspectos personales"}
+    ]'
+    data-options='["Presupuesto económico","Plazos de entrega","Condiciones técnicas","Aspectos personales"]'>
+    <p class="statement"><span class="act-num">D3</span>Empareja cada <strong>situación real</strong> con el tipo de <strong>condicionante</strong> al que afecta.</p>
+    <div class="match-list" id="A_D3"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Los 4 grandes condicionantes son <strong>presupuesto</strong>, <strong>plazos</strong>, <strong>condiciones técnicas</strong> (materiales, máquinas, técnicas) y <strong>aspectos personales</strong> (cooperación, salud, conflictos del equipo). Identificarlos al principio del proyecto evita sorpresas a mitad de camino.</div></details>
+  </article>
+
+  <!-- D4 -->
+  <article class="activity-card" data-type="radio" data-id="D4">
+    <p class="statement"><span class="act-num">D4</span>La <strong>ergonomía</strong> estudia…</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="D4"><span class="option-label">El coste de fabricación de los productos.</span></label>
+      <label class="option"><input type="radio" name="D4" data-correct="true"><span class="option-label">Cómo adaptar los objetos al cuerpo humano para que sean cómodos y seguros.</span></label>
+      <label class="option"><input type="radio" name="D4"><span class="option-label">La forma de optimizar el tiempo de trabajo en una fábrica.</span></label>
+      <label class="option"><input type="radio" name="D4"><span class="option-label">La diferencia entre productos artesanales e industriales.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La <strong>ergonomía</strong> adapta los objetos al cuerpo y capacidades humanas. Un teclado ergonómico, una silla de oficina o un ratón de ordenador están pensados ergonómicamente para evitar lesiones por uso prolongado.</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE E · MEMORIA TÉCNICA Y PLAN DE TRABAJO
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-e">
+  <h2 class="bloque-titulo">E · Memoria técnica y plan de trabajo</h2>
+  <p class="bloque-intro">Documentación del proyecto: partes de la memoria y plan de trabajo antes/durante.</p>
+
+  <!-- E1 -->
+  <article class="activity-card" data-type="radio" data-id="E1">
+    <p class="statement"><span class="act-num">E1</span>¿Cómo debe ser la redacción de la <strong>memoria técnica</strong>?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="E1"><span class="option-label">Larga y muy detallada para mostrar todo el trabajo</span></label>
+      <label class="option"><input type="radio" name="E1"><span class="option-label">Solo gráficos, sin texto</span></label>
+      <label class="option"><input type="radio" name="E1" data-correct="true"><span class="option-label">Clara y concisa</span></label>
+      <label class="option"><input type="radio" name="E1"><span class="option-label">Con lenguaje técnico difícil para que parezca profesional</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La memoria técnica debe ser <strong>clara</strong> (que se entienda a la primera) y <strong>concisa</strong> (sin paja innecesaria). Tiene que incluir toda la información importante para comprender el proyecto, pero sin alargarse en lo que no aporta.</div></details>
+  </article>
+
+  <!-- E2 -->
+  <article class="activity-card" data-type="radio" data-id="E2">
+    <p class="statement"><span class="act-num">E2</span>¿Cuántas partes principales tiene la <strong>memoria técnica</strong>?</p>
+    <div class="options cols3">
+      <label class="option"><input type="radio" name="E2"><span class="option-label">5</span></label>
+      <label class="option"><input type="radio" name="E2"><span class="option-label">6</span></label>
+      <label class="option"><input type="radio" name="E2" data-correct="true"><span class="option-label">7</span></label>
+      <label class="option"><input type="radio" name="E2"><span class="option-label">10</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Las 7 partes son: <strong>portada · índice · cuerpo de la memoria · planos · presupuesto · bibliografía · anexos</strong>.</div></details>
+  </article>
+
+  <!-- E3 ORDER -->
+  <article class="activity-card" data-type="order" data-id="E3"
+    data-items='[
+      {"text":"Presupuesto","correct":5},
+      {"text":"Portada","correct":1},
+      {"text":"Bibliografía","correct":6},
+      {"text":"Anexos","correct":7},
+      {"text":"Cuerpo de la memoria","correct":3},
+      {"text":"Índice","correct":2},
+      {"text":"Planos","correct":4}
+    ]'>
+    <p class="statement"><span class="act-num">E3</span>Ordena las <strong>7 partes</strong> de la memoria técnica escribiendo el número (1-7) que corresponde a cada una.</p>
+    <div class="order-list" id="A_E3"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El orden lógico es: <strong>1 Portada → 2 Índice → 3 Cuerpo → 4 Planos → 5 Presupuesto → 6 Bibliografía → 7 Anexos</strong>. La memoria se lee en ese orden: primero la identificación del proyecto, luego cómo se ha hecho, después los dibujos, los costes, las fuentes y por último el material complementario.</div></details>
+  </article>
+
+  <!-- E4 -->
+  <article class="activity-card" data-type="radio" data-id="E4">
+    <p class="statement"><span class="act-num">E4</span>El <strong>plan de trabajo</strong> tiene dos partes diferenciadas. ¿Cuáles?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="E4"><span class="option-label">Una parte teórica y otra práctica</span></label>
+      <label class="option"><input type="radio" name="E4" data-correct="true"><span class="option-label">Una parte que se rellena antes de la construcción y otra durante la construcción</span></label>
+      <label class="option"><input type="radio" name="E4"><span class="option-label">Una parte individual y otra grupal</span></label>
+      <label class="option"><input type="radio" name="E4"><span class="option-label">Una parte de texto y otra de dibujos</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El plan de trabajo se usa <strong>dos veces</strong>: <strong>antes</strong> de construir, como planificación (tareas, herramientas, materiales, plazos, reparto, presupuesto); y <strong>durante</strong> la construcción, como diario de incidencias, problemas, soluciones y cambios respecto al plan inicial.</div></details>
+  </article>
+
+  <!-- E5 -->
+  <article class="activity-card" data-type="match" data-id="E5"
+    data-pairs='[
+      {"item":"Reparto de tareas entre el equipo","correct":"Antes"},
+      {"item":"Tiempo previsto para cada tarea","correct":"Antes"},
+      {"item":"Cambio de material porque el original se rompió","correct":"Durante"},
+      {"item":"Lista de herramientas necesarias","correct":"Antes"},
+      {"item":"Incidencias y problemas surgidos","correct":"Durante"}
+    ]'
+    data-options='["Antes","Durante"]'>
+    <p class="statement"><span class="act-num">E5</span>Clasifica cada elemento del plan de trabajo en <strong>"Antes"</strong> (planificación previa) o <strong>"Durante"</strong> (diario de construcción).</p>
+    <div class="match-list" id="A_E5"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">En <strong>"Antes"</strong> va todo lo que se planifica: tareas, herramientas, materiales, tiempos, reparto, presupuesto. En <strong>"Durante"</strong> va todo lo que sucede en la realidad: incidencias, problemas, soluciones improvisadas y cambios respecto al plan original.</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE F · FABRICACIÓN DE PRODUCTOS
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-f">
+  <h2 class="bloque-titulo">F · Fabricación de productos</h2>
+  <p class="bloque-intro">Artesanía vs industria. Talleres y fábricas. Producción en serie.</p>
+
+  <!-- F1 -->
+  <article class="activity-card" data-type="radio" data-id="F1">
+    <p class="statement"><span class="act-num">F1</span>¿Cuál es la <strong>diferencia principal</strong> entre artesanía e industria?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="F1"><span class="option-label">La industria produce objetos buenos, la artesanía produce objetos malos.</span></label>
+      <label class="option"><input type="radio" name="F1" data-correct="true"><span class="option-label">La artesanía produce pocas piezas de manera manual; la industria produce grandes cantidades con máquinas complejas.</span></label>
+      <label class="option"><input type="radio" name="F1"><span class="option-label">La artesanía no usa ninguna herramienta, la industria sí.</span></label>
+      <label class="option"><input type="radio" name="F1"><span class="option-label">La industria es más antigua que la artesanía.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La diferencia clave está en <strong>la escala</strong> (pocas piezas vs muchas), el <strong>método</strong> (manual vs maquinaria compleja) y el <strong>personal</strong> (reducido vs numeroso y especializado). Tanto artesanía como industria producen objetos de calidad: ninguna es "mejor" que la otra, solo distintas.</div></details>
+  </article>
+
+  <!-- F2 -->
+  <article class="activity-card" data-type="radio" data-id="F2">
+    <p class="statement"><span class="act-num">F2</span>Una <strong>jarra de barro hecha en un taller alfarero</strong> es un producto:</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="F2" data-correct="true"><span class="option-label">Artesanal</span></label>
+      <label class="option"><input type="radio" name="F2"><span class="option-label">Industrial</span></label>
+      <label class="option"><input type="radio" name="F2"><span class="option-label">Mixto</span></label>
+      <label class="option"><input type="radio" name="F2"><span class="option-label">Ninguno de los anteriores</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Una jarra alfarera se hace <strong>a mano</strong> en un <strong>taller</strong>, por <strong>una sola persona</strong> (o muy pocas), y cada pieza resulta ligeramente distinta a la anterior. Cumple todos los rasgos de la producción <strong>artesanal</strong>.</div></details>
+  </article>
+
+  <!-- F3 -->
+  <article class="activity-card" data-type="radio" data-id="F3">
+    <p class="statement"><span class="act-num">F3</span>¿Cómo se llama el sistema industrial que <strong>fabrica muchas piezas iguales</strong> usando una cadena de montaje?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="F3"><span class="option-label">Producción artesanal</span></label>
+      <label class="option"><input type="radio" name="F3" data-correct="true"><span class="option-label">Producción en serie</span></label>
+      <label class="option"><input type="radio" name="F3"><span class="option-label">Producción individual</span></label>
+      <label class="option"><input type="radio" name="F3"><span class="option-label">Producción manual</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La <strong>producción en serie</strong> (o "en cadena") es el sistema industrial moderno: muchas piezas idénticas, fabricadas en una secuencia de pasos por máquinas y operarios especializados. Es el sistema que abarata enormemente el coste por unidad.</div></details>
+  </article>
+
+  <!-- F4 -->
+  <article class="activity-card" data-type="match" data-id="F4"
+    data-pairs='[
+      {"item":"Botellas de refresco","correct":"Industrial"},
+      {"item":"Joyería hecha a medida","correct":"Artesanal"},
+      {"item":"Móviles","correct":"Industrial"},
+      {"item":"Mueble de carpintero personalizado","correct":"Artesanal"},
+      {"item":"Galletas de marca en envase","correct":"Industrial"}
+    ]'
+    data-options='["Artesanal","Industrial"]'>
+    <p class="statement"><span class="act-num">F4</span>Clasifica cada producto según el tipo de <strong>fabricación</strong>.</p>
+    <div class="match-list" id="A_F4"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Como regla práctica: si el producto se vende en <strong>millones de unidades idénticas</strong> en supermercados o tiendas, es <strong>industrial</strong>. Si es una pieza <strong>única o personalizada</strong> hecha por un especialista, es <strong>artesanal</strong>.</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE G · TECNOLOGÍA Y MEDIO AMBIENTE
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-g">
+  <h2 class="bloque-titulo">G · Tecnología y medio ambiente</h2>
+  <p class="bloque-intro">Impacto ambiental, las 3 R y obsolescencia programada.</p>
+
+  <!-- G1 -->
+  <article class="activity-card" data-type="radio" data-id="G1">
+    <p class="statement"><span class="act-num">G1</span>¿En qué <strong>orden de prioridad</strong> se aplican las 3 R?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="G1"><span class="option-label">Reciclar → Reutilizar → Reducir</span></label>
+      <label class="option"><input type="radio" name="G1"><span class="option-label">Reutilizar → Reducir → Reciclar</span></label>
+      <label class="option"><input type="radio" name="G1" data-correct="true"><span class="option-label">Reducir → Reutilizar → Reciclar</span></label>
+      <label class="option"><input type="radio" name="G1"><span class="option-label">El orden no importa, todas son igual de efectivas.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El orden importa porque indica <strong>prioridad ecológica</strong>: primero <strong>reducir</strong> el consumo (la mejor: lo que no compras no contamina); si has comprado algo, <strong>reutilízalo</strong> (dale más vidas); y solo cuando ya no sirve, <strong>recíclalo</strong> (transformar el material para fabricar otro nuevo, lo que aún requiere energía).</div></details>
+  </article>
+
+  <!-- G2 -->
+  <article class="activity-card" data-type="match" data-id="G2"
+    data-pairs='[
+      {"item":"Llevar una botella reutilizable en vez de comprar agua embotellada","correct":"Reducir"},
+      {"item":"Convertir un frasco de mermelada en un portalápices","correct":"Reutilizar"},
+      {"item":"Tirar el papel viejo al contenedor azul para que vuelva a ser papel","correct":"Reciclar"},
+      {"item":"Heredar la ropa del hermano mayor","correct":"Reutilizar"},
+      {"item":"Imprimir solo cuando sea necesario","correct":"Reducir"}
+    ]'
+    data-options='["Reducir","Reutilizar","Reciclar"]'>
+    <p class="statement"><span class="act-num">G2</span>Clasifica cada acción según la <strong>R</strong> a la que corresponde.</p>
+    <div class="match-list" id="A_G2"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body"><strong>Reducir</strong>: no consumir o consumir menos (la botella reutilizable evita comprar muchas; imprimir menos). <strong>Reutilizar</strong>: dar otra vida al mismo objeto sin transformarlo (frasco → portalápices; ropa heredada). <strong>Reciclar</strong>: el material se transforma industrialmente para fabricar uno nuevo (papel viejo → papel nuevo).</div></details>
+  </article>
+
+  <!-- G3 -->
+  <article class="activity-card" data-type="radio" data-id="G3">
+    <p class="statement"><span class="act-num">G3</span>¿Qué es la <strong>obsolescencia programada</strong>?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="G3"><span class="option-label">Programar el reciclaje de un producto desde su fabricación.</span></label>
+      <label class="option"><input type="radio" name="G3" data-correct="true"><span class="option-label">Diseñar productos para que dejen de funcionar o queden obsoletos en un tiempo determinado, forzando al consumidor a comprar uno nuevo.</span></label>
+      <label class="option"><input type="radio" name="G3"><span class="option-label">El envejecimiento natural y normal de cualquier objeto.</span></label>
+      <label class="option"><input type="radio" name="G3"><span class="option-label">Las actualizaciones de software de los móviles.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La <strong>obsolescencia programada</strong> es una práctica de la industria moderna que diseña a propósito una vida útil corta para los productos (impresoras que dejan de funcionar a los X usos, móviles que se quedan "lentos", baterías no reemplazables…). Es perjudicial para el medio ambiente y para el bolsillo del consumidor.</div></details>
+  </article>
+
+  <!-- G4 -->
+  <article class="activity-card" data-type="radio" data-id="G4">
+    <p class="statement"><span class="act-num">G4</span>El <strong>efecto invernadero</strong>…</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="G4"><span class="option-label">Es un invento humano nuevo que está calentando el planeta.</span></label>
+      <label class="option"><input type="radio" name="G4" data-correct="true"><span class="option-label">Es un fenómeno natural debido a los gases atmosféricos que retienen el calor del Sol; el problema es que la actividad humana lo ha intensificado.</span></label>
+      <label class="option"><input type="radio" name="G4"><span class="option-label">Solo ocurre en zonas tropicales y selvas.</span></label>
+      <label class="option"><input type="radio" name="G4"><span class="option-label">Es perjudicial por sí mismo y debería eliminarse completamente.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El efecto invernadero <strong>es natural</strong>: sin él la temperatura media de la Tierra sería bajísima. El problema es que la actividad humana (centrales eléctricas, vehículos de combustión, ganadería) <strong>ha multiplicado las emisiones</strong> de gases de efecto invernadero, intensificándolo hasta provocar el <strong>cambio climático</strong>.</div></details>
+  </article>
+
+  <!-- G5 -->
+  <article class="activity-card" data-type="radio" data-id="G5">
+    <p class="statement"><span class="act-num">G5</span>¿Por qué se considera que los <strong>centros de datos</strong> que sostienen internet son una fuente importante de impacto ambiental?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="G5"><span class="option-label">Porque generan basura física en grandes cantidades.</span></label>
+      <label class="option"><input type="radio" name="G5" data-correct="true"><span class="option-label">Porque consumen enormes cantidades de energía y agua para funcionar y refrigerarse.</span></label>
+      <label class="option"><input type="radio" name="G5"><span class="option-label">Porque obligan a fabricar muchos satélites contaminantes.</span></label>
+      <label class="option"><input type="radio" name="G5"><span class="option-label">Porque ocupan mucho espacio en las ciudades.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Los centros de datos (donde se almacenan todos los servicios de internet: redes sociales, vídeos, IA, búsquedas) consumen <strong>enormes cantidades de electricidad y agua</strong> para mantener los servidores funcionando y refrigerados. Una búsqueda en internet, un vídeo o una imagen generada con IA tienen un coste energético real para el planeta.</div></details>
+  </article>
+</section>
+
+<p style="margin-top:3rem; text-align:center; color:#666; font-size:0.92rem; font-style:italic;">¿Las has acabado todas? Repasa el <a href="../libro-digital.html">libro digital</a> o continúa con los <a href="../index.html">interactivos de la unidad</a>.</p>
+
+<footer class="unidad-foot">
+  IES Jiménez de Quesada · Santa Fe (Granada)<br>
+  TyD 2º ESO · Curso 2025-26 · Manuel Alonso Herrera<br>
+  <a href="../index.html">← Volver al hub</a> · <a href="../libro-digital.html">📘 Libro digital</a>
+  <br><span class="version">Actividades v1.0</span>
+</footer>
+
+</main>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     SCRIPT · autocorrección + progreso
+     ════════════════════════════════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  const totalEl = document.getElementById('prog-total');
+  const numEl = document.getElementById('prog-num');
+  const okEl = document.getElementById('prog-ok');
+  const barEl = document.getElementById('prog-bar');
+  const cards = document.querySelectorAll('.activity-card');
+  totalEl.textContent = cards.length;
+
+  // ─── Renderizar tipos especiales: order, match ───
+  cards.forEach(card => {
+    const type = card.dataset.type;
+    const id = card.dataset.id;
+
+    if (type === 'order') {
+      const items = JSON.parse(card.dataset.items);
+      const container = card.querySelector('.order-list');
+      // Mostrar en orden aleatorio fijo (no el correcto)
+      items.forEach((it, idx) => {
+        const div = document.createElement('div');
+        div.className = 'order-item';
+        div.innerHTML = `<input type="number" min="1" max="${items.length}" data-correct="${it.correct}" aria-label="Orden de ${it.text}"><span class="order-text">${it.text}</span>`;
+        container.appendChild(div);
+      });
+    }
+
+    else if (type === 'match') {
+      const pairs = JSON.parse(card.dataset.pairs);
+      const options = JSON.parse(card.dataset.options);
+      const container = card.querySelector('.match-list');
+      pairs.forEach((p, idx) => {
+        const div = document.createElement('div');
+        div.className = 'match-item';
+        let opts = '<option value="">— elige —</option>';
+        options.forEach(o => opts += `<option value="${o}">${o}</option>`);
+        div.innerHTML = `<span class="match-text">${p.item}</span><select data-correct="${p.correct}" aria-label="Categoría de ${p.item}">${opts}</select>`;
+        container.appendChild(div);
+      });
+    }
+  });
+
+  function updateProgress() {
+    const resueltas = document.querySelectorAll('.activity-card.solved, .activity-card.wrong').length;
+    const aciertos = document.querySelectorAll('.activity-card.solved').length;
+    numEl.textContent = resueltas;
+    okEl.textContent = aciertos;
+    const pct = cards.length ? (resueltas / cards.length) * 100 : 0;
+    barEl.style.width = pct + '%';
+  }
+
+  function normalize(str) {
+    return String(str).trim().replace(',', '.').toLowerCase();
+  }
+
+  window.check = function(btn) {
+    const card = btn.closest('.activity-card');
+    const type = card.dataset.type;
+    const feedback = card.querySelector('.feedback');
+    let correct = false;
+    let msg = '';
+
+    if (type === 'radio') {
+      const checked = card.querySelector('input[type=radio]:checked');
+      if (!checked) {
+        feedback.className = 'feedback err show';
+        feedback.innerHTML = '<span class="icon">⚠️</span>Selecciona una opción antes de comprobar.';
+        return;
+      }
+      correct = checked.dataset.correct === 'true';
+      msg = correct
+        ? '<span class="icon">✓</span>¡Correcto! Bien razonado.'
+        : '<span class="icon">✗</span>No es la opción correcta. Mira la solución para entender por qué.';
+    }
+    else if (type === 'number') {
+      const input = card.querySelector('input[type=number]');
+      const raw = normalize(input.value);
+      if (raw === '') {
+        feedback.className = 'feedback err show';
+        feedback.innerHTML = '<span class="icon">⚠️</span>Escribe una respuesta antes de comprobar.';
+        return;
+      }
+      const num = parseFloat(raw);
+      if (isNaN(num)) {
+        feedback.className = 'feedback err show';
+        feedback.innerHTML = '<span class="icon">⚠️</span>La respuesta debe ser un número.';
+        return;
+      }
+      const expected = parseFloat(card.dataset.answer);
+      const tol = parseFloat(card.dataset.tol || '0');
+      correct = Math.abs(num - expected) <= tol + 1e-9;
+      msg = correct
+        ? '<span class="icon">✓</span>¡Correcto! Resultado: ' + expected + '.'
+        : '<span class="icon">✗</span>No es el resultado esperado. Revisa el cálculo o consulta la solución.';
+    }
+    else if (type === 'order') {
+      const inputs = card.querySelectorAll('.order-item input');
+      let allFilled = true;
+      let allCorrect = true;
+      inputs.forEach(inp => {
+        inp.classList.remove('ok-input', 'err-input');
+        const val = parseInt(inp.value);
+        const exp = parseInt(inp.dataset.correct);
+        if (isNaN(val)) { allFilled = false; return; }
+        if (val === exp) { inp.classList.add('ok-input'); }
+        else { inp.classList.add('err-input'); allCorrect = false; }
+      });
+      if (!allFilled) {
+        feedback.className = 'feedback err show';
+        feedback.innerHTML = '<span class="icon">⚠️</span>Asigna un número a cada elemento antes de comprobar.';
+        return;
+      }
+      correct = allCorrect;
+      msg = correct
+        ? '<span class="icon">✓</span>¡Todas las posiciones correctas!'
+        : '<span class="icon">✗</span>Algunas posiciones son incorrectas. Repasa la solución.';
+    }
+    else if (type === 'match') {
+      const selects = card.querySelectorAll('.match-item select');
+      let allFilled = true;
+      let allCorrect = true;
+      selects.forEach(sel => {
+        sel.classList.remove('ok-input', 'err-input');
+        if (sel.value === '') { allFilled = false; return; }
+        if (sel.value === sel.dataset.correct) { sel.classList.add('ok-input'); }
+        else { sel.classList.add('err-input'); allCorrect = false; }
+      });
+      if (!allFilled) {
+        feedback.className = 'feedback err show';
+        feedback.innerHTML = '<span class="icon">⚠️</span>Elige una opción en cada elemento antes de comprobar.';
+        return;
+      }
+      correct = allCorrect;
+      msg = correct
+        ? '<span class="icon">✓</span>¡Todas las parejas correctas!'
+        : '<span class="icon">✗</span>Algunas parejas son incorrectas. Revisa la solución.';
+    }
+
+    card.classList.remove('solved', 'wrong');
+    card.classList.add(correct ? 'solved' : 'wrong');
+    feedback.className = 'feedback ' + (correct ? 'ok' : 'err') + ' show';
+    feedback.innerHTML = msg;
+    updateProgress();
+  };
+
+  window.resetAll = function() {
+    if (!confirm('¿Reiniciar todas las actividades? Se perderán las respuestas marcadas.')) return;
+    cards.forEach(card => {
+      card.classList.remove('solved', 'wrong');
+      const fb = card.querySelector('.feedback');
+      if (fb) { fb.className = 'feedback'; fb.innerHTML = ''; }
+      card.querySelectorAll('input[type=radio], input[type=checkbox]').forEach(inp => inp.checked = false);
+      card.querySelectorAll('input[type=number], input[type=text]').forEach(inp => {
+        inp.value = '';
+        inp.classList.remove('ok-input', 'err-input');
+      });
+      card.querySelectorAll('select').forEach(sel => {
+        sel.value = '';
+        sel.classList.remove('ok-input', 'err-input');
+      });
+      card.querySelectorAll('details.solution').forEach(d => d.open = false);
+    });
+    updateProgress();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  };
+
+  updateProgress();
+})();
+</script>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

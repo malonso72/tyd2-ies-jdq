@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Línea del tiempo de la tecnología · U01 · TyD 2º ESO</title>
+<meta name="description" content="Línea del tiempo interactiva de la historia de la tecnología: 7 épocas con sus inventos y necesidades cubiertas. Modo explorar + 2 modos de quiz. TyD 2º ESO.">
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/01-tecnologia-proceso/interactivos/linea-tiempo.html">
+
+<meta property="og:title" content="Línea del tiempo de la tecnología · U01 · TyD 2º ESO">
+<meta property="og:description" content="Recorre las 7 grandes épocas de la tecnología y los inventos más importantes de cada una. TyD 2º ESO.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/01-tecnologia-proceso/interactivos/linea-tiempo.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Línea del tiempo de la tecnología · U01 · TyD 2º ESO">
+<meta name="twitter:description" content="Recorre las 7 grandes épocas de la tecnología y los inventos más importantes de cada una.">
+<meta name="twitter:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+:root {
+  --tl-ok: #2e7d4f;
+  --tl-err: #c44536;
+  --tl-warn: #e8b647;
+}
+
+.modo-toggle {
+  display: flex;
+  gap: 0.4rem;
+  background: #f0f0f0;
+  padding: 4px;
+  border-radius: 10px;
+  margin: 1rem 0 1.4rem;
+  flex-wrap: wrap;
+}
+.modo-toggle button {
+  flex: 1;
+  min-width: 130px;
+  background: transparent;
+  border: none;
+  padding: 0.6rem 0.8rem;
+  border-radius: 7px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.15s;
+}
+.modo-toggle button.active {
+  background: var(--principal, #D4700A);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(212,112,10,0.3);
+}
+
+/* ─── Modo explorar: línea visual ─── */
+.timeline-wrap {
+  position: relative;
+  margin: 1.5rem 0;
+  padding: 1rem 0;
+}
+.timeline-line {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  position: relative;
+}
+.timeline-line::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: 5%;
+  right: 5%;
+  height: 4px;
+  background: linear-gradient(90deg, #D4700A, #e89947, #1B4F8A);
+  border-radius: 2px;
+  z-index: 0;
+}
+.epoca-card {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 10px;
+  padding: 56px 8px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  position: relative;
+  font-size: 0.85rem;
+  z-index: 1;
+}
+.epoca-card::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 22px;
+  background: #fff;
+  border: 4px solid var(--principal, #D4700A);
+  border-radius: 50%;
+  z-index: 2;
+  transition: all 0.18s;
+}
+.epoca-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); border-color: var(--principal, #D4700A); }
+.epoca-card:hover::before { background: var(--principal, #D4700A); }
+.epoca-card.active { background: #fffaf3; border-color: var(--principal, #D4700A); box-shadow: 0 4px 14px rgba(212,112,10,0.15); }
+.epoca-card.active::before { background: var(--principal, #D4700A); transform: translateX(-50%) scale(1.15); }
+.epoca-card .nombre {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--principal, #D4700A);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.epoca-card .periodo {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: #888;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 880px) {
+  .timeline-line { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+  .timeline-line::before { display: none; }
+}
+@media (max-width: 480px) {
+  .timeline-line { grid-template-columns: 1fr; }
+}
+
+/* ─── Detalle de la época seleccionada ─── */
+.epoca-detail {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 14px;
+  padding: 0;
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+.epoca-detail-header {
+  background: linear-gradient(135deg, var(--principal, #D4700A), #e89947);
+  color: #fff;
+  padding: 1.2rem 1.6rem;
+}
+.epoca-detail-header h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  margin: 0 0 0.2rem;
+  letter-spacing: 0.5px;
+}
+.epoca-detail-header .periodo-big {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  opacity: 0.95;
+  letter-spacing: 1px;
+}
+.epoca-detail-body {
+  padding: 1.4rem 1.6rem;
+}
+.epoca-detail-body .descripcion {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+}
+.epoca-detail-body h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--secundario, #1B4F8A);
+  margin: 1.1rem 0 0.5rem;
+  letter-spacing: 0.5px;
+}
+.invento-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.7rem;
+}
+.invento-card {
+  background: #fafafa;
+  border: 1px solid #e3e3e3;
+  border-left: 3px solid var(--principal, #D4700A);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.9rem;
+}
+.invento-card .icono { font-size: 1.4rem; margin-right: 6px; display: block; margin-bottom: 4px; }
+.invento-card strong { color: #222; display: block; font-size: 0.95rem; }
+.invento-card span { color: #666; font-size: 0.8rem; }
+.necesidad-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.necesidad-pill {
+  background: #fff;
+  border: 1px solid var(--secundario, #1B4F8A);
+  color: var(--secundario, #1B4F8A);
+  border-radius: 999px;
+  padding: 0.25rem 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.nav-arrows {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid #eee;
+}
+.nav-arrow {
+  background: transparent;
+  border: 1px solid #ccc;
+  color: #555;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.nav-arrow:hover:not(:disabled) { border-color: var(--principal, #D4700A); color: var(--principal, #D4700A); }
+.nav-arrow:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* ─── Modo Quiz ─── */
+.quiz-wrap {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 14px;
+  padding: 1.6rem 1.8rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+.quiz-progress {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 0.92rem;
+  color: #555;
+}
+.quiz-progress strong { color: var(--principal, #D4700A); font-family: 'JetBrains Mono', monospace; }
+.quiz-progress .score {
+  background: var(--principal, #D4700A);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.quiz-prompt {
+  background: #fffaf3;
+  border-left: 4px solid var(--principal, #D4700A);
+  border-radius: 0 10px 10px 0;
+  padding: 1.1rem 1.4rem;
+  margin-bottom: 1.2rem;
+}
+.quiz-prompt .pregunta {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--principal, #D4700A);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.quiz-prompt .objeto {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: #111;
+  line-height: 1.2;
+}
+.quiz-prompt .objeto .icono-big { font-size: 1.8rem; margin-right: 8px; }
+.quiz-opciones {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.6rem;
+}
+.quiz-opcion {
+  background: #fafafa;
+  border: 2px solid #e3e3e3;
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+  cursor: pointer;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #444;
+  transition: all 0.15s;
+  text-align: left;
+}
+.quiz-opcion:hover:not(:disabled) { background: #fffaf3; border-color: var(--principal, #D4700A); }
+.quiz-opcion.correct { background: #dff2e6; border-color: var(--tl-ok); color: var(--tl-ok); }
+.quiz-opcion.wrong { background: #fce4e1; border-color: var(--tl-err); color: var(--tl-err); }
+.quiz-opcion:disabled { cursor: not-allowed; opacity: 0.85; }
+
+.quiz-feedback {
+  margin-top: 1rem;
+  padding: 0.8rem 1.1rem;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  display: none;
+}
+.quiz-feedback.show { display: block; }
+.quiz-feedback.ok { background: #dff2e6; color: var(--tl-ok); border-left: 4px solid var(--tl-ok); }
+.quiz-feedback.err { background: #fce4e1; color: var(--tl-err); border-left: 4px solid var(--tl-err); }
+
+.quiz-controls {
+  margin-top: 1.2rem;
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-next, .btn-restart {
+  background: var(--principal, #D4700A);
+  color: #fff;
+  border: none;
+  padding: 0.55rem 1.4rem;
+  border-radius: 8px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-next:hover, .btn-restart:hover { background: #b85e08; }
+.btn-restart {
+  background: #fff;
+  color: #444;
+  border: 1px solid #ccc;
+}
+.btn-restart:hover { border-color: var(--principal, #D4700A); color: var(--principal, #D4700A); background: #fff; }
+
+/* Quiz final */
+.quiz-final {
+  text-align: center;
+  padding: 1.5rem;
+}
+.quiz-final h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+  color: var(--principal, #D4700A);
+}
+.quiz-final .nota {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0.5rem 0;
+}
+.quiz-final .nota .total { color: #999; font-size: 1.5rem; }
+.quiz-final .comentario { color: #555; font-size: 1rem; margin-bottom: 1.4rem; font-style: italic; }
+
+@media print {
+  .modo-toggle, .nav-arrows, .quiz-controls { display: none; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U01 · Proceso tecnológico · Línea del tiempo</span>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Inicio</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U01</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📘</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>⏳</span><span class="nc-lbl">Línea del tiempo</span></span>
+</nav>
+
+<div class="unidad-layout">
+
+<aside class="sb-side">
+  <h3>Modos</h3>
+  <p style="padding: 0.5rem 1rem; font-size:0.88rem; color:#555; line-height:1.55;">
+    <strong>Explorar:</strong> haz clic en cada época para ver sus inventos y necesidades cubiertas.<br><br>
+    <strong>Quiz invento→época:</strong> te muestran un invento y debes adivinar la época.<br><br>
+    <strong>Quiz época→invento:</strong> te muestran una época y debes elegir el invento correcto.
+  </p>
+  <h3>Lo que aprenderás</h3>
+  <ul style="font-size:0.88rem; color:#555; padding:0 1rem 0 2rem;">
+    <li>Las 7 grandes épocas tecnológicas.</li>
+    <li>Inventos clave de cada época.</li>
+    <li>Necesidades que cubrieron.</li>
+  </ul>
+</aside>
+
+<main class="ct" id="main-content">
+
+<h1 class="unidad-titulo">⏳ Línea del tiempo de la tecnología</h1>
+<p class="unidad-subt">Recorre las grandes épocas de la historia humana y descubre los inventos que cambiaron el mundo. Elige un modo para empezar.</p>
+
+<div class="modo-toggle" role="tablist" aria-label="Modo de práctica">
+  <button id="modo-explorar" class="active" onclick="setModo('explorar')">🔍 Explorar</button>
+  <button id="modo-quiz1" onclick="setModo('quiz1')">❓ Quiz invento → época</button>
+  <button id="modo-quiz2" onclick="setModo('quiz2')">⚙️ Quiz época → invento</button>
+</div>
+
+<!-- ════ MODO EXPLORAR ════ -->
+<section id="vista-explorar">
+  <div class="timeline-wrap">
+    <div class="timeline-line" id="timeline-line"></div>
+  </div>
+  <div class="epoca-detail" id="epoca-detail"></div>
+</section>
+
+<!-- ════ MODO QUIZ ════ -->
+<section id="vista-quiz" style="display:none;">
+  <div class="quiz-wrap" id="quiz-wrap"></div>
+</section>
+
+<footer class="unidad-foot">
+  IES Jiménez de Quesada · Santa Fe (Granada)<br>
+  TyD 2º ESO · Curso 2025-26 · Manuel Alonso Herrera<br>
+  <a href="../index.html">← Volver al hub</a> · <a href="../libro-digital.html">📘 Libro digital</a>
+  <br><span class="version">Línea del tiempo v1.0</span>
+</footer>
+
+</main>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // ════════════════════════════════════════════════════════════════
+  // Datos: 7 épocas, cada una con inventos y necesidades
+  // ════════════════════════════════════════════════════════════════
+  const EPOCAS = [
+    {
+      id: 0,
+      nombre: 'Prehistoria',
+      periodo: 'hasta 3000 a.C.',
+      descripcion: 'La etapa más larga de la historia humana. El control del fuego y la fabricación de las primeras herramientas de piedra marcan el inicio de la tecnología.',
+      inventos: [
+        {nombre: 'Fuego', icono: '🔥', desc: 'Calor, luz, cocina, defensa'},
+        {nombre: 'Lascas de piedra', icono: '🪨', desc: 'Primeras herramientas y armas'},
+        {nombre: 'Rueda', icono: '⚙️', desc: 'Transporte y maquinaria'},
+        {nombre: 'Hueso tallado', icono: '🦴', desc: 'Agujas, anzuelos'},
+        {nombre: 'Pintura rupestre', icono: '🖼️', desc: 'Comunicación visual'}
+      ],
+      necesidades: ['Alimentación', 'Refugio', 'Defensa', 'Comunicación']
+    },
+    {
+      id: 1,
+      nombre: 'Edad Antigua',
+      periodo: '3000 a.C. – 476 d.C.',
+      descripcion: 'Surgen las grandes civilizaciones (Mesopotamia, Egipto, Grecia, Roma). La invención de la escritura y la metalurgia abren nuevas posibilidades.',
+      inventos: [
+        {nombre: 'Escritura', icono: '📜', desc: 'Registro y transmisión del saber'},
+        {nombre: 'Arado', icono: '🐂', desc: 'Agricultura intensiva'},
+        {nombre: 'Bronce y hierro', icono: '⚔️', desc: 'Armas y herramientas más resistentes'},
+        {nombre: 'Acueductos', icono: '🌊', desc: 'Transporte de agua'},
+        {nombre: 'Polea', icono: '🪢', desc: 'Levantar cargas pesadas'}
+      ],
+      necesidades: ['Alimentación', 'Agua', 'Comunicación escrita', 'Defensa']
+    },
+    {
+      id: 2,
+      nombre: 'Edad Media',
+      periodo: '476 – 1492',
+      descripcion: 'Tras la caída del Imperio Romano, el centro tecnológico se traslada al mundo islámico y, ya al final, vuelve a Europa con grandes inventos como la imprenta.',
+      inventos: [
+        {nombre: 'Brújula', icono: '🧭', desc: 'Navegación marítima'},
+        {nombre: 'Imprenta', icono: '📖', desc: 'Difusión masiva de libros (Gutenberg)'},
+        {nombre: 'Molino', icono: '🌬️', desc: 'Energía eólica e hidráulica'},
+        {nombre: 'Pólvora', icono: '💥', desc: 'Armas de fuego'},
+        {nombre: 'Reloj mecánico', icono: '⏰', desc: 'Medida precisa del tiempo'}
+      ],
+      necesidades: ['Comunicación', 'Transporte', 'Trabajo agrícola', 'Defensa']
+    },
+    {
+      id: 3,
+      nombre: 'Edad Moderna',
+      periodo: '1492 – 1789',
+      descripcion: 'Renacimiento, descubrimiento de América y revolución científica. Los instrumentos ópticos (telescopio, microscopio) abren nuevos mundos al conocimiento.',
+      inventos: [
+        {nombre: 'Telescopio', icono: '🔭', desc: 'Observación astronómica'},
+        {nombre: 'Microscopio', icono: '🔬', desc: 'Estudio de lo invisible'},
+        {nombre: 'Termómetro', icono: '🌡️', desc: 'Medición precisa de temperatura'},
+        {nombre: 'Pararrayos', icono: '⚡', desc: 'Protección contra rayos'},
+        {nombre: 'Globo aerostático', icono: '🎈', desc: 'Primer vuelo humano'}
+      ],
+      necesidades: ['Investigación científica', 'Navegación', 'Salud', 'Conocimiento']
+    },
+    {
+      id: 4,
+      nombre: 'Revolución Industrial',
+      periodo: '1760 – 1840',
+      descripcion: 'Las máquinas de vapor sustituyen al trabajo manual. Nacen las fábricas y la producción en serie. Cambia completamente la forma de vivir y trabajar.',
+      inventos: [
+        {nombre: 'Máquina de vapor', icono: '🚂', desc: 'Energía mecánica masiva (Watt)'},
+        {nombre: 'Tren', icono: '🚆', desc: 'Transporte rápido de mercancías y personas'},
+        {nombre: 'Telar mecánico', icono: '🧶', desc: 'Producción textil en serie'},
+        {nombre: 'Hilatura industrial', icono: '🏭', desc: 'Fábricas a gran escala'},
+        {nombre: 'Cosechadora', icono: '🌾', desc: 'Mecanización del campo'}
+      ],
+      necesidades: ['Producción masiva', 'Transporte', 'Trabajo industrial']
+    },
+    {
+      id: 5,
+      nombre: 'Siglos XIX y XX',
+      periodo: '1800 – 2000',
+      descripcion: 'La era de la electricidad, los motores de combustión, la electrónica y los ordenadores. La tecnología llega a los hogares y transforma la vida cotidiana.',
+      inventos: [
+        {nombre: 'Electricidad', icono: '💡', desc: 'Iluminación, motores, electrónica'},
+        {nombre: 'Coche', icono: '🚗', desc: 'Motor de combustión interna'},
+        {nombre: 'Teléfono', icono: '☎️', desc: 'Comunicación a distancia'},
+        {nombre: 'Avión', icono: '✈️', desc: 'Transporte aéreo'},
+        {nombre: 'Ordenador', icono: '💻', desc: 'Procesamiento de información'},
+        {nombre: 'Televisión', icono: '📺', desc: 'Comunicación audiovisual masiva'}
+      ],
+      necesidades: ['Comunicación', 'Transporte rápido', 'Ocio', 'Información']
+    },
+    {
+      id: 6,
+      nombre: 'Actualidad',
+      periodo: 'desde 2000',
+      descripcion: 'Internet móvil, inteligencia artificial e impresión 3D están cambiando el mundo en tiempo real. La tecnología es global, inmediata e invisible.',
+      inventos: [
+        {nombre: 'Móvil con internet', icono: '📱', desc: 'Conexión global de bolsillo'},
+        {nombre: 'Inteligencia artificial', icono: '🤖', desc: 'Máquinas que aprenden'},
+        {nombre: 'Impresión 3D', icono: '🖨️', desc: 'Fabricación bajo demanda'},
+        {nombre: 'Energías renovables', icono: '☀️', desc: 'Solar, eólica, geotérmica'},
+        {nombre: 'Realidad virtual', icono: '🕶️', desc: 'Experiencias inmersivas'},
+        {nombre: 'Vehículo eléctrico', icono: '🔋', desc: 'Transporte sin emisiones'}
+      ],
+      necesidades: ['Comunicación instantánea', 'Sostenibilidad', 'Ocio digital', 'Salud']
+    }
+  ];
+
+  // ════════════════════════════════════════════════════════════════
+  // Estado
+  // ════════════════════════════════════════════════════════════════
+  let modo = 'explorar';
+  let epocaIdx = 0;
+
+  // Quiz state
+  let quizMode = null;       // 'quiz1' o 'quiz2'
+  let quizQuestions = [];
+  let quizCurrent = 0;
+  let quizScore = 0;
+  let quizAnswered = false;
+
+  // ════════════════════════════════════════════════════════════════
+  // Modo EXPLORAR
+  // ════════════════════════════════════════════════════════════════
+  const timelineLine = document.getElementById('timeline-line');
+  const epocaDetail = document.getElementById('epoca-detail');
+
+  function renderTimeline() {
+    timelineLine.innerHTML = '';
+    EPOCAS.forEach(ep => {
+      const card = document.createElement('div');
+      card.className = 'epoca-card' + (ep.id === epocaIdx ? ' active' : '');
+      card.innerHTML = `<div class="nombre">${ep.nombre}</div><div class="periodo">${ep.periodo}</div>`;
+      card.addEventListener('click', () => { epocaIdx = ep.id; renderTimeline(); renderEpoca(); });
+      timelineLine.appendChild(card);
+    });
+  }
+
+  function renderEpoca() {
+    const ep = EPOCAS[epocaIdx];
+    const inventos = ep.inventos.map(i => 
+      `<div class="invento-card"><span class="icono">${i.icono}</span><strong>${i.nombre}</strong><span>${i.desc}</span></div>`
+    ).join('');
+    const nec = ep.necesidades.map(n => `<li class="necesidad-pill">${n}</li>`).join('');
+
+    epocaDetail.innerHTML = `
+      <div class="epoca-detail-header">
+        <h2>${ep.nombre}</h2>
+        <div class="periodo-big">${ep.periodo}</div>
+      </div>
+      <div class="epoca-detail-body">
+        <p class="descripcion">${ep.descripcion}</p>
+
+        <h3>🛠️ Inventos clave</h3>
+        <div class="invento-grid">${inventos}</div>
+
+        <h3>🎯 Necesidades cubiertas</h3>
+        <ul class="necesidad-list">${nec}</ul>
+
+        <div class="nav-arrows">
+          <button class="nav-arrow" onclick="goEpoca(-1)" ${epocaIdx === 0 ? 'disabled' : ''}>← Anterior</button>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#999;">${epocaIdx + 1} / ${EPOCAS.length}</span>
+          <button class="nav-arrow" onclick="goEpoca(1)" ${epocaIdx === EPOCAS.length - 1 ? 'disabled' : ''}>Siguiente →</button>
+        </div>
+      </div>
+    `;
+  }
+
+  window.goEpoca = function(delta) {
+    epocaIdx = Math.max(0, Math.min(EPOCAS.length - 1, epocaIdx + delta));
+    renderTimeline();
+    renderEpoca();
+  };
+
+  // ════════════════════════════════════════════════════════════════
+  // Modo QUIZ
+  // ════════════════════════════════════════════════════════════════
+  const quizWrap = document.getElementById('quiz-wrap');
+
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function generarQuiz1() {
+    // Quiz 1: dado un invento, ¿en qué época? Generamos 10 preguntas.
+    const todos = [];
+    EPOCAS.forEach(ep => ep.inventos.forEach(inv => todos.push({inv, ep})));
+    return shuffle(todos).slice(0, 10).map(item => {
+      const correctEp = item.ep;
+      const otras = shuffle(EPOCAS.filter(e => e.id !== correctEp.id)).slice(0, 3);
+      const opciones = shuffle([correctEp, ...otras]);
+      return {
+        prompt: 'En qué época se inventó / desarrolló:',
+        objeto: `<span class="icono-big">${item.inv.icono}</span>${item.inv.nombre}`,
+        opciones: opciones.map(e => e.nombre),
+        correcta: correctEp.nombre,
+        explicacion: `${item.inv.nombre} corresponde a la ${correctEp.nombre} (${correctEp.periodo}). ${item.inv.desc}.`
+      };
+    });
+  }
+
+  function generarQuiz2() {
+    // Quiz 2: dada una época, ¿qué invento le corresponde? Generamos 10 preguntas.
+    const preguntas = [];
+    const epocasCopiaShuffle = shuffle(EPOCAS.slice()).slice(0, 7);
+    epocasCopiaShuffle.forEach(ep => {
+      // 1-2 preguntas por época
+      const inventosDeEsta = shuffle(ep.inventos).slice(0, 2);
+      inventosDeEsta.forEach(inv => preguntas.push({ep, inv}));
+    });
+    return shuffle(preguntas).slice(0, 10).map(item => {
+      const correctaInv = item.inv;
+      // 3 inventos de OTRAS épocas
+      const otras = EPOCAS.filter(e => e.id !== item.ep.id);
+      const inventosOtros = [];
+      while (inventosOtros.length < 3) {
+        const ep = otras[Math.floor(Math.random() * otras.length)];
+        const inv = ep.inventos[Math.floor(Math.random() * ep.inventos.length)];
+        if (!inventosOtros.find(x => x.nombre === inv.nombre) && inv.nombre !== correctaInv.nombre) {
+          inventosOtros.push(inv);
+        }
+      }
+      const opciones = shuffle([correctaInv, ...inventosOtros]);
+      return {
+        prompt: `Qué invento corresponde a esta época:`,
+        objeto: `${item.ep.nombre} <span style="font-size:1rem;font-weight:400;color:#888;font-family:'JetBrains Mono',monospace;display:block;margin-top:4px;">${item.ep.periodo}</span>`,
+        opciones: opciones.map(i => `${i.icono} ${i.nombre}`),
+        correcta: `${correctaInv.icono} ${correctaInv.nombre}`,
+        explicacion: `${correctaInv.nombre} se desarrolló en la época ${item.ep.nombre} (${item.ep.periodo}). ${correctaInv.desc}.`
+      };
+    });
+  }
+
+  function startQuiz(which) {
+    quizMode = which;
+    quizQuestions = which === 'quiz1' ? generarQuiz1() : generarQuiz2();
+    quizCurrent = 0;
+    quizScore = 0;
+    quizAnswered = false;
+    renderQuiz();
+  }
+
+  function renderQuiz() {
+    if (quizCurrent >= quizQuestions.length) {
+      renderQuizFinal();
+      return;
+    }
+    const q = quizQuestions[quizCurrent];
+    const opcionesHTML = q.opciones.map(op => 
+      `<button class="quiz-opcion" data-op="${op.replace(/"/g, '&quot;')}" onclick="responder(this)">${op}</button>`
+    ).join('');
+
+    quizWrap.innerHTML = `
+      <div class="quiz-progress">
+        <span>Pregunta <strong>${quizCurrent + 1}</strong> de <strong>${quizQuestions.length}</strong></span>
+        <span class="score">${quizScore} / ${quizCurrent}</span>
+      </div>
+      <div class="quiz-prompt">
+        <div class="pregunta">${q.prompt}</div>
+        <div class="objeto">${q.objeto}</div>
+      </div>
+      <div class="quiz-opciones">${opcionesHTML}</div>
+      <div class="quiz-feedback" id="quiz-feedback"></div>
+      <div class="quiz-controls" id="quiz-controls"></div>
+    `;
+    quizAnswered = false;
+  }
+
+  window.responder = function(btn) {
+    if (quizAnswered) return;
+    quizAnswered = true;
+    const op = btn.dataset.op;
+    const q = quizQuestions[quizCurrent];
+    const correct = op === q.correcta;
+    if (correct) quizScore++;
+
+    // marcar visualmente
+    const allBtns = document.querySelectorAll('.quiz-opcion');
+    allBtns.forEach(b => {
+      b.disabled = true;
+      if (b.dataset.op === q.correcta) b.classList.add('correct');
+      else if (b.dataset.op === op) b.classList.add('wrong');
+    });
+
+    // feedback
+    const fb = document.getElementById('quiz-feedback');
+    fb.className = 'quiz-feedback ' + (correct ? 'ok' : 'err') + ' show';
+    fb.innerHTML = (correct ? '✓ ¡Correcto! ' : '✗ Incorrecto. ') + q.explicacion;
+
+    // mostrar botón siguiente
+    const ctrls = document.getElementById('quiz-controls');
+    ctrls.innerHTML = `<button class="btn-next" onclick="siguienteQuiz()">${quizCurrent + 1 < quizQuestions.length ? 'Siguiente →' : 'Ver resultado'}</button>`;
+
+    // actualizar progreso
+    document.querySelector('.score').textContent = quizScore + ' / ' + (quizCurrent + 1);
+  };
+
+  window.siguienteQuiz = function() {
+    quizCurrent++;
+    renderQuiz();
+  };
+
+  function renderQuizFinal() {
+    const pct = (quizScore / quizQuestions.length) * 100;
+    let comentario = '';
+    if (pct === 100) comentario = '🏆 ¡Perfecto! Te sabes la historia de la tecnología al dedillo.';
+    else if (pct >= 80) comentario = '🌟 ¡Muy bien! Casi todo correcto.';
+    else if (pct >= 50) comentario = '👍 Aprobado. Repasa las épocas que se te resistieron en el modo Explorar.';
+    else comentario = '🤔 Necesitas más práctica. Vuelve al modo Explorar para repasar.';
+
+    quizWrap.innerHTML = `
+      <div class="quiz-final">
+        <h3>Resultado</h3>
+        <div class="nota">${quizScore}<span class="total"> / ${quizQuestions.length}</span></div>
+        <p class="comentario">${comentario}</p>
+        <div class="quiz-controls">
+          <button class="btn-next" onclick="startQuizAgain()">↻ Repetir quiz</button>
+          <button class="btn-restart" onclick="setModo('explorar')">🔍 Volver a explorar</button>
+        </div>
+      </div>
+    `;
+  }
+
+  window.startQuizAgain = function() {
+    startQuiz(quizMode);
+  };
+
+  // ════════════════════════════════════════════════════════════════
+  // Modo toggle
+  // ════════════════════════════════════════════════════════════════
+  window.setModo = function(m) {
+    modo = m;
+    document.getElementById('modo-explorar').classList.toggle('active', m === 'explorar');
+    document.getElementById('modo-quiz1').classList.toggle('active', m === 'quiz1');
+    document.getElementById('modo-quiz2').classList.toggle('active', m === 'quiz2');
+    if (m === 'explorar') {
+      document.getElementById('vista-explorar').style.display = '';
+      document.getElementById('vista-quiz').style.display = 'none';
+    } else {
+      document.getElementById('vista-explorar').style.display = 'none';
+      document.getElementById('vista-quiz').style.display = '';
+      startQuiz(m);
+    }
+  };
+
+  // ── INIT ──
+  renderTimeline();
+  renderEpoca();
+})();
+</script>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

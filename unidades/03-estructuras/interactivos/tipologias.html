@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Tipos de estructuras · U03 · TyD 2º ESO</title>
+<meta name="description" content="Interactivo de tipologías estructurales: 24 ejemplos cotidianos y patrimoniales en 6 familias. Aprende a reconocerlas a primera vista. TyD 2º ESO.">
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/03-estructuras/interactivos/tipologias.html">
+
+<meta property="og:title" content="Tipos de estructuras · U03 · TyD 2º ESO">
+<meta property="og:description" content="24 ejemplos cotidianos en 6 familias estructurales. Aprende a reconocerlas a primera vista.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/03-estructuras/interactivos/tipologias.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tipos de estructuras · U03 · TyD 2º ESO">
+<meta name="twitter:description" content="24 ejemplos cotidianos en 6 familias estructurales.">
+<meta name="twitter:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+:root {
+  --ok: #2e7d4f;
+  --err: #c44536;
+  --warn: #e8b647;
+  --tip-masiva: #7a5a3a;
+  --tip-abovedada: #c87f2c;
+  --tip-entramada: #5e88b2;
+  --tip-triangulada: #c44a3a;
+  --tip-colgante: #6b4e9a;
+  --tip-neumatica: #4d8474;
+}
+
+.modo-toggle {
+  display: flex;
+  gap: 0.4rem;
+  background: #f0f0f0;
+  padding: 4px;
+  border-radius: 10px;
+  margin: 1rem 0 1.4rem;
+}
+.modo-toggle button {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 0.6rem 0.8rem;
+  border-radius: 7px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.15s;
+}
+.modo-toggle button.active {
+  background: var(--principal, #D4700A);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(212,112,10,0.3);
+}
+
+.bloque {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 14px;
+  padding: 1.4rem 1.6rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+.bloque h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--principal, #D4700A);
+  margin: 0 0 0.5rem;
+  border-bottom: 2px solid var(--principal, #D4700A);
+  padding-bottom: 0.4rem;
+}
+.bloque p.descripcion { color: #555; margin-bottom: 1rem; font-size: 0.95rem; }
+
+.tip-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 1rem 0;
+}
+.tip-filtros button {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  border: 2px solid #ddd;
+  background: #fff;
+  color: #555;
+  padding: 0.4rem 0.9rem;
+  border-radius: 18px;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.tip-filtros button:hover { border-color: #aaa; }
+.tip-filtros button.active {
+  background: var(--principal, #D4700A);
+  border-color: var(--principal, #D4700A);
+  color: #fff;
+}
+.tip-filtros .dot { width: 10px; height: 10px; border-radius: 50%; }
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
+  gap: 12px;
+  margin: 1rem 0;
+}
+.obj-card {
+  background: #fafafa;
+  border: 2px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 14px 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s;
+}
+.obj-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--principal, #D4700A);
+  box-shadow: 0 4px 14px rgba(212,112,10,0.15);
+}
+.obj-card.active {
+  border-color: var(--principal, #D4700A);
+  background: #fff7eb;
+}
+.obj-card .obj-emoji { font-size: 2.2rem; line-height: 1; margin-bottom: 8px; }
+.obj-card .obj-nombre {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: #333;
+  line-height: 1.2;
+}
+.obj-card .tip-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-top: 6px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #fff;
+}
+.tip-tag.masiva { background: var(--tip-masiva); }
+.tip-tag.abovedada { background: var(--tip-abovedada); }
+.tip-tag.entramada { background: var(--tip-entramada); }
+.tip-tag.triangulada { background: var(--tip-triangulada); }
+.tip-tag.colgante { background: var(--tip-colgante); }
+.tip-tag.neumatica { background: var(--tip-neumatica); }
+
+.ficha {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-left: 5px solid var(--principal, #D4700A);
+  border-radius: 12px;
+  padding: 1.4rem 1.6rem;
+  margin: 1rem 0;
+  display: none;
+}
+.ficha.visible { display: block; }
+.ficha-hd {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+.ficha-hd .em { font-size: 2.6rem; line-height: 1; }
+.ficha-hd h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin: 0;
+  color: #222;
+}
+.ficha-hd .tip-pill {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #fff;
+  margin-top: 4px;
+}
+.tip-pill.masiva { background: var(--tip-masiva); }
+.tip-pill.abovedada { background: var(--tip-abovedada); }
+.tip-pill.entramada { background: var(--tip-entramada); }
+.tip-pill.triangulada { background: var(--tip-triangulada); }
+.tip-pill.colgante { background: var(--tip-colgante); }
+.tip-pill.neumatica { background: var(--tip-neumatica); }
+
+.ficha-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.ficha-item {
+  background: #fafafa;
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+}
+.ficha-item h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem;
+  color: var(--principal, #D4700A);
+  margin: 0 0 4px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.ficha-item p { font-size: 0.92rem; color: #444; margin: 0; line-height: 1.45; }
+.ficha-item.full { grid-column: 1 / -1; }
+.ficha-cierre { text-align: right; margin-top: 12px; }
+.ficha-cierre button {
+  background: transparent; border: 1px solid #ccc; border-radius: 6px;
+  padding: 0.3rem 0.8rem; font-family: 'Barlow', sans-serif;
+  font-size: 0.85rem; cursor: pointer; color: #666;
+}
+.ficha-cierre button:hover { background: #f0f0f0; }
+
+.id-hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 1rem;
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+}
+.id-hud .hud-item {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.78rem;
+  color: #888;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+.id-hud .hud-item strong {
+  font-size: 1.4rem;
+  color: var(--principal, #D4700A);
+  font-weight: 700;
+}
+.id-hud .hud-item.aciertos strong { color: var(--ok); }
+.id-hud .hud-item.fallos strong { color: var(--err); }
+.id-hud .hud-progress {
+  flex: 1; height: 8px; background: #f0f0f0; border-radius: 4px; overflow: hidden;
+}
+.id-hud .hud-progress .bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--principal, #D4700A), #f0a040);
+  transition: width 0.3s;
+  width: 0%;
+}
+
+.id-obj {
+  background: #fff;
+  border: 2px solid var(--principal, #D4700A);
+  border-radius: 14px;
+  padding: 2rem 1.6rem;
+  text-align: center;
+  margin: 1.4rem 0;
+}
+.id-obj .obj-em-big { font-size: 5rem; line-height: 1; margin-bottom: 14px; }
+.id-obj .obj-pregunta {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.1rem;
+  color: #888;
+  margin-bottom: 4px;
+  letter-spacing: 0.4px;
+}
+.id-obj .obj-nombre-big {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #222;
+  margin-bottom: 6px;
+}
+.id-obj .obj-hint {
+  font-size: 0.88rem;
+  color: #999;
+  font-style: italic;
+}
+
+.id-botonera {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin: 1.2rem 0;
+}
+.id-bt {
+  background: #fff;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 0.9rem 0.4rem;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: #333;
+}
+.id-bt .bt-em { font-size: 1.6rem; line-height: 1; }
+.id-bt:hover:not(:disabled) {
+  border-color: var(--principal, #D4700A);
+  background: #fff7eb;
+}
+.id-bt:disabled { cursor: not-allowed; opacity: 0.5; }
+.id-bt.correcto { background: #dff2e6; border-color: var(--ok); color: var(--ok); }
+.id-bt.incorrecto { background: #fce4e1; border-color: var(--err); color: var(--err); }
+
+.id-feedback {
+  background: #fafafa;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 1rem 0;
+  display: none;
+  border-left: 4px solid #ccc;
+}
+.id-feedback.visible { display: block; }
+.id-feedback.ok { background: #ecf8ef; border-color: var(--ok); }
+.id-feedback.err { background: #fdedea; border-color: var(--err); }
+.id-feedback h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem;
+  margin: 0 0 6px;
+  color: #333;
+  letter-spacing: 0.3px;
+}
+.id-feedback.ok h4 { color: var(--ok); }
+.id-feedback.err h4 { color: var(--err); }
+.id-feedback p { font-size: 0.92rem; color: #555; margin: 0; line-height: 1.5; }
+
+.id-controles { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 0.6rem; }
+.btn-primary {
+  background: var(--principal, #D4700A); color: #fff;
+  border: none; border-radius: 8px;
+  padding: 0.7rem 1.4rem; font-family: 'Barlow', sans-serif;
+  font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.15s;
+}
+.btn-primary:hover:not(:disabled) { background: #b85d08; }
+.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-secondary {
+  background: #fff; color: #666; border: 1px solid #ccc; border-radius: 8px;
+  padding: 0.7rem 1.2rem; font-family: 'Barlow', sans-serif;
+  font-weight: 600; font-size: 0.95rem; cursor: pointer;
+}
+.btn-secondary:hover { background: #f5f5f5; }
+
+.resultado {
+  background: linear-gradient(135deg, #fff7eb, #ffeed4);
+  border: 2px solid var(--principal, #D4700A);
+  border-radius: 14px;
+  padding: 1.8rem;
+  margin: 1.4rem 0;
+  text-align: center;
+  display: none;
+}
+.resultado.visible { display: block; }
+.resultado .res-emoji { font-size: 4rem; line-height: 1; margin-bottom: 10px; }
+.resultado h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.8rem;
+  color: var(--principal, #D4700A);
+  margin: 0 0 6px;
+}
+.resultado .res-score {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #222;
+  margin: 0.4rem 0;
+}
+.resultado .res-msg { color: #555; font-size: 1rem; margin-bottom: 1rem; }
+.resultado .res-detalle { font-size: 0.85rem; color: #888; margin-top: 0.6rem; }
+
+@media (max-width: 700px) {
+  .ficha-body { grid-template-columns: 1fr; }
+  .id-obj .obj-em-big { font-size: 4rem; }
+  .id-obj .obj-nombre-big { font-size: 1.4rem; }
+  .galeria { grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); }
+  .obj-card .obj-emoji { font-size: 1.8rem; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U03 · Estructuras · Tipologías</span>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Inicio</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U03</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📘</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🏛️</span><span class="nc-lbl">Tipologías</span></span>
+</nav>
+
+<div class="unidad-layout">
+
+<aside class="sb-side">
+  <h3>Cómo usarlo</h3>
+  <p style="padding: 0.6rem 1rem; font-size:0.88rem; color:#555; line-height:1.55;">
+    <strong>Modo 1 (Aprender):</strong> haz clic en cualquier ejemplo para ver de qué tipología es y por qué.<br><br>
+    <strong>Modo 2 (Identificar):</strong> ronda de 12 ejemplos al azar. Pulsa la tipología correcta.
+  </p>
+  <h3>Las 6 tipologías</h3>
+  <ul style="font-size:0.82rem; color:#555; padding:0 1rem 0 0.6rem; line-height:1.7; list-style:none;">
+    <li><span style="display:inline-block;width:10px;height:10px;background:var(--tip-masiva);border-radius:50%;vertical-align:middle;"></span> Masivas · mucho material</li>
+    <li><span style="display:inline-block;width:10px;height:10px;background:var(--tip-abovedada);border-radius:50%;vertical-align:middle;"></span> Abovedadas · arcos y cúpulas</li>
+    <li><span style="display:inline-block;width:10px;height:10px;background:var(--tip-entramada);border-radius:50%;vertical-align:middle;"></span> Entramadas · pilares y vigas</li>
+    <li><span style="display:inline-block;width:10px;height:10px;background:var(--tip-triangulada);border-radius:50%;vertical-align:middle;"></span> Trianguladas · barras en triángulo</li>
+    <li><span style="display:inline-block;width:10px;height:10px;background:var(--tip-colgante);border-radius:50%;vertical-align:middle;"></span> Colgantes · de cables</li>
+    <li><span style="display:inline-block;width:10px;height:10px;background:var(--tip-neumatica);border-radius:50%;vertical-align:middle;"></span> Neumáticas · de aire a presión</li>
+  </ul>
+</aside>
+
+<main class="ct" id="main-content">
+
+<h1 class="unidad-titulo">🏛️ Tipos de estructuras</h1>
+<p class="unidad-subt">24 ejemplos cotidianos y patrimoniales en 6 familias. Aprende a reconocerlas a primera vista.</p>
+
+<div class="modo-toggle" role="tablist" aria-label="Modo de práctica">
+  <button id="modo-aprender" class="active" onclick="setModo('aprender')">📖 Aprender (galería)</button>
+  <button id="modo-identificar" onclick="setModo('identificar')">🎯 Identificar (ronda 12)</button>
+</div>
+
+<!-- ════ MODO APRENDER ════ -->
+<section id="vista-aprender">
+  <div class="bloque">
+    <h2>Explora los 24 ejemplos</h2>
+    <p class="descripcion">Filtra por tipología o haz clic directamente en cualquier ejemplo para abrir su ficha.</p>
+
+    <div class="tip-filtros" id="tip-filtros">
+      <button class="active" data-filter="all">Todas (24)</button>
+      <button data-filter="masiva"><span class="dot" style="background:var(--tip-masiva)"></span>Masivas</button>
+      <button data-filter="abovedada"><span class="dot" style="background:var(--tip-abovedada)"></span>Abovedadas</button>
+      <button data-filter="entramada"><span class="dot" style="background:var(--tip-entramada)"></span>Entramadas</button>
+      <button data-filter="triangulada"><span class="dot" style="background:var(--tip-triangulada)"></span>Trianguladas</button>
+      <button data-filter="colgante"><span class="dot" style="background:var(--tip-colgante)"></span>Colgantes</button>
+      <button data-filter="neumatica"><span class="dot" style="background:var(--tip-neumatica)"></span>Neumáticas</button>
+    </div>
+
+    <div class="galeria" id="galeria"></div>
+  </div>
+
+  <div class="ficha" id="ficha">
+    <div class="ficha-hd">
+      <span class="em" id="f-emoji">📦</span>
+      <div>
+        <h3 id="f-nombre">Nombre</h3>
+        <span class="tip-pill" id="f-pill">Tipología</span>
+      </div>
+    </div>
+    <div class="ficha-body">
+      <div class="ficha-item">
+        <h4>Características</h4>
+        <p id="f-caract">—</p>
+      </div>
+      <div class="ficha-item">
+        <h4>Esfuerzo principal</h4>
+        <p id="f-esfuerzo">—</p>
+      </div>
+      <div class="ficha-item full">
+        <h4>Por qué es de esta tipología</h4>
+        <p id="f-justificacion">—</p>
+      </div>
+    </div>
+    <div class="ficha-cierre"><button onclick="cerrarFicha()">✕ Cerrar ficha</button></div>
+  </div>
+</section>
+
+<!-- ════ MODO IDENTIFICAR ════ -->
+<section id="vista-identificar" style="display:none;">
+  <div class="id-hud">
+    <div class="hud-item">
+      <span>Ronda</span>
+      <strong id="id-num">1<span style="font-size:0.9rem; color:#aaa; font-weight:400;">/12</span></strong>
+    </div>
+    <div class="hud-progress"><div class="bar" id="id-bar"></div></div>
+    <div class="hud-item aciertos">
+      <span>Aciertos</span><strong id="id-ok">0</strong>
+    </div>
+    <div class="hud-item fallos">
+      <span>Fallos</span><strong id="id-err">0</strong>
+    </div>
+  </div>
+
+  <div class="id-obj" id="id-obj">
+    <div class="obj-em-big" id="id-em">📦</div>
+    <div class="obj-pregunta">¿De qué tipología es esta estructura?</div>
+    <div class="obj-nombre-big" id="id-name">—</div>
+    <div class="obj-hint">Piensa en cómo se transmite el peso al suelo.</div>
+  </div>
+
+  <div class="id-botonera" id="id-bots">
+    <button class="id-bt" data-tip="masiva"><span class="bt-em">🏔️</span>Masiva</button>
+    <button class="id-bt" data-tip="abovedada"><span class="bt-em">🕌</span>Abovedada</button>
+    <button class="id-bt" data-tip="entramada"><span class="bt-em">🏢</span>Entramada</button>
+    <button class="id-bt" data-tip="triangulada"><span class="bt-em">🗼</span>Triangulada</button>
+    <button class="id-bt" data-tip="colgante"><span class="bt-em">🌉</span>Colgante</button>
+    <button class="id-bt" data-tip="neumatica"><span class="bt-em">🎈</span>Neumática</button>
+  </div>
+
+  <div class="id-feedback" id="id-feedback">
+    <h4 id="id-fb-titulo">¡Correcto!</h4>
+    <p id="id-fb-texto">—</p>
+  </div>
+
+  <div class="id-controles">
+    <button class="btn-primary" id="id-next" onclick="siguienteEjemplo()" disabled>Siguiente →</button>
+    <button class="btn-secondary" onclick="reiniciarRonda()">↺ Reiniciar ronda</button>
+  </div>
+
+  <div class="resultado" id="id-resultado">
+    <div class="res-emoji" id="res-emoji">🎉</div>
+    <h3 id="res-titulo">¡Ronda terminada!</h3>
+    <div class="res-score" id="res-score">0/12</div>
+    <p class="res-msg" id="res-msg">—</p>
+    <button class="btn-primary" onclick="reiniciarRonda()">↺ Nueva ronda</button>
+    <p class="res-detalle">Cada ronda se sortean 12 ejemplos diferentes entre los 24 disponibles.</p>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════
+//  CATÁLOGO DE 24 EJEMPLOS · 4 por tipología
+// ══════════════════════════════════════════════════════════
+const EJEMPLOS = [
+  // ── Masivas (4) ──
+  { id:'piramide', em:'🔺', nombre:'Pirámide de Egipto', tip:'masiva',
+    caract:'Bloques de piedra apilados formando un sólido de base ancha y vértice estrecho. Apenas hay espacio interior.',
+    esfuerzo:'Compresión. Cada bloque aplasta a los inferiores.',
+    justif:'Es el ejemplo arquetípico de estructura masiva: aguantan miles de años porque tienen tanto material que ningún punto sufre demasiado.' },
+  { id:'castillo', em:'🏰', nombre:'Castillo medieval', tip:'masiva',
+    caract:'Muros muy gruesos de piedra con pocas aberturas. Torres macizas. Pocos espacios interiores en relación al volumen.',
+    esfuerzo:'Compresión, sobre todo en los muros.',
+    justif:'Los castillos se construían masivos a propósito: aguantar asedios, golpes de ariete y catapultas. Toda su solidez viene de la cantidad de piedra, no de un diseño geométrico inteligente.' },
+  { id:'presa', em:'🌊', nombre:'Presa hidráulica', tip:'masiva',
+    caract:'Bloque de hormigón triangular en sección, muy ancho en la base. Aguanta enormes cantidades de agua acumulada.',
+    esfuerzo:'Compresión por el peso propio + tracción inducida por el empuje del agua.',
+    justif:'La forma triangular y la enorme masa de hormigón hacen que ningún punto reciba un esfuerzo excesivo. Es el equivalente moderno de una pirámide rellena de agua a un lado.' },
+  { id:'muralla', em:'🧱', nombre:'Muralla romana', tip:'masiva',
+    caract:'Muro continuo de ladrillo, piedra u hormigón romano de gran espesor y altura, sin huecos relevantes.',
+    esfuerzo:'Compresión en toda su altura.',
+    justif:'Las murallas funcionan sin trucos geométricos: cantidad de material y bien apoyada en el suelo. Las de Lugo, Ávila o Tarragona llevan 2000 años en pie por eso.' },
+
+  // ── Abovedadas (4) ──
+  { id:'coliseo', em:'🏟️', nombre:'Coliseo de Roma', tip:'abovedada',
+    caract:'Anillo de tres niveles de arcos superpuestos. Las gradas se sostienen sobre bóvedas internas.',
+    esfuerzo:'Compresión en arcos y dovelas. Las cargas se transmiten lateralmente hasta el suelo.',
+    justif:'Los romanos perfeccionaron el arco y la bóveda: por eso pudieron construir un anfiteatro para 50.000 personas con materiales que aguantan mal la tracción.' },
+  { id:'mezquita', em:'🕌', nombre:'Mezquita-Catedral de Córdoba', tip:'abovedada',
+    caract:'Doble arcada con arcos de herradura y de medio punto. Columnas como esqueleto, arcos que cierran el techo.',
+    esfuerzo:'Compresión pura en los arcos. Las columnas transmiten el peso al suelo.',
+    justif:'Los maestros andalusíes apilaron dos arcadas superpuestas para conseguir más altura. Toda la geometría trabaja a compresión, perfecto para ladrillo y piedra.' },
+  { id:'panteon', em:'🏛️', nombre:'Panteón de Roma', tip:'abovedada',
+    caract:'Edificio circular cubierto por una cúpula semiesférica de hormigón con un óculo central abierto.',
+    esfuerzo:'Compresión. La cúpula reparte su peso radialmente hasta los muros.',
+    justif:'Una cúpula es una bóveda esférica: la quintaesencia de la estructura abovedada. La del Panteón ha sido la cúpula de hormigón sin armar más grande del mundo durante casi 2000 años.' },
+  { id:'catedral', em:'⛪', nombre:'Catedral gótica', tip:'abovedada',
+    caract:'Naves muy altas cubiertas con bóvedas de crucería. Arcos apuntados, arbotantes y contrafuertes exteriores.',
+    esfuerzo:'Compresión en arcos. Los arbotantes recogen el empuje lateral y lo llevan al suelo.',
+    justif:'La catedral gótica es abovedada sofisticada: usa arcos apuntados (más esbeltos) y arbotantes exteriores para llevar al suelo el empuje lateral de las bóvedas. Toda la teoría andalusí llevada al límite.' },
+
+  // ── Entramadas (4) ──
+  { id:'edif-pisos', em:'🏢', nombre:'Edificio de pisos', tip:'entramada',
+    caract:'Esqueleto regular de pilares verticales y vigas horizontales. Las fachadas son cerramientos: pueden tener grandes ventanales.',
+    esfuerzo:'Pilares a compresión, vigas a flexión.',
+    justif:'Casi todos los edificios modernos son entramados de hormigón armado: el peso descansa en pilares interiores, así las paredes exteriores no soportan carga y pueden ser de vidrio o ladrillo fino.' },
+  { id:'casa-uni', em:'🏠', nombre:'Casa unifamiliar moderna', tip:'entramada',
+    caract:'Esqueleto de hormigón armado de una o dos plantas. Forjados horizontales y pilares verticales en las esquinas.',
+    esfuerzo:'Pilares a compresión, vigas a flexión.',
+    justif:'Las casas modernas siguen el mismo principio que los rascacielos: un esqueleto que sostiene el peso y unos cerramientos que solo aíslan del exterior. Por eso pueden tener ventanas grandes.' },
+  { id:'centro-com', em:'🏬', nombre:'Centro comercial', tip:'entramada',
+    caract:'Edificio bajo y muy ancho. Grandes pilares interiores y vigas largas que cubren espacios sin muros intermedios.',
+    esfuerzo:'Pilares a compresión, vigas a flexión.',
+    justif:'Los centros comerciales necesitan plantas diáfanas (sin muros que estorben las tiendas). Solo el entramado lo permite: los pilares se distribuyen estratégicamente y las vigas cubren grandes vanos.' },
+  { id:'en-obra', em:'🏗️', nombre:'Edificio en construcción', tip:'entramada',
+    caract:'Se ve el esqueleto sin recubrir: pilares y vigas de hormigón armado o acero, antes de poner los cerramientos.',
+    esfuerzo:'Mismo que el edificio terminado: pilares a compresión, vigas a flexión.',
+    justif:'Antes de poner las paredes, una obra deja ver claramente la estructura entramada. Es el mejor momento para entender cómo se sostiene cualquier edificio moderno.' },
+
+  // ── Trianguladas (4) ──
+  { id:'eiffel', em:'🗼', nombre:'Torre Eiffel', tip:'triangulada',
+    caract:'300 m de altura formados por un esqueleto de hierro con miles de barras unidas en triángulos.',
+    esfuerzo:'Cada barra trabaja a tracción o compresión pura: las diagonales descomponen los esfuerzos.',
+    justif:'Es el ejemplo más famoso de estructura triangulada. Con 7300 toneladas de hierro hace lo que una pirámide haría con millones de toneladas de piedra.' },
+  { id:'antena', em:'📡', nombre:'Antena de comunicaciones', tip:'triangulada',
+    caract:'Torre alta y delgada formada por una celosía de barras de acero en patrón triangular. Aguanta viento y antenas en lo alto.',
+    esfuerzo:'Las diagonales convierten el viento en pares de tracción y compresión repartidos.',
+    justif:'Sin triangulación, una torre de 60 m vencería al primer viento fuerte. La triangulación permite usar barras finísimas y conseguir una torre ligera pero muy rígida.' },
+  { id:'nave-cercha', em:'🏭', nombre:'Nave industrial con cercha', tip:'triangulada',
+    caract:'Tejado a dos aguas sostenido por cerchas (estructuras planas trianguladas). Pilares laterales y vigas trianguladas en la cubierta.',
+    esfuerzo:'Las cerchas convierten el peso del tejado y la nieve en compresiones y tracciones en barras pequeñas.',
+    justif:'Si miras al techo de un polideportivo o de una nave de Mercadona, ves cerchas trianguladas: son la solución más eficiente para cubrir grandes vanos con poco material.' },
+  { id:'puente-fc', em:'🚂', nombre:'Puente metálico de ferrocarril', tip:'triangulada',
+    caract:'Tablero del puente sostenido por dos vigas laterales en celosía: largueros horizontales unidos por diagonales formando triángulos.',
+    esfuerzo:'Cada diagonal y cada larguero trabajan a tracción o compresión pura.',
+    justif:'Los puentes ferroviarios soportan trenes pesadísimos. La triangulación es la solución más segura: si una barra falla, las demás siguen funcionando.' },
+
+  // ── Colgantes (4) ──
+  { id:'golden', em:'🌁', nombre:'Puente colgante (Golden Gate)', tip:'colgante',
+    caract:'Dos torres altas y un cable principal en forma de catenaria del que cuelgan, mediante cables verticales, el tablero del puente.',
+    esfuerzo:'Tracción pura en los cables. Compresión en las torres.',
+    justif:'En los puentes colgantes, el tablero no se apoya: cuelga. Los cables transmiten todo el peso a las torres y, desde estas, al suelo. Por eso pueden cubrir más de 2 km entre apoyos.' },
+  { id:'centenario', em:'🌉', nombre:'Puente del Centenario (Sevilla)', tip:'colgante',
+    caract:'Tablero sostenido por tirantes que parten directamente de dos torres laterales. Se diferencia del colgante en que los tirantes son rectos.',
+    esfuerzo:'Tracción en los tirantes. Compresión en las torres.',
+    justif:'Es un puente atirantado: variante moderna de los colgantes. Inaugurado para la Expo\'92, cruza el Guadalquivir con un tablero de 945 m de longitud.' },
+  { id:'telecabina', em:'🚡', nombre:'Telecabina aérea', tip:'colgante',
+    caract:'Cabina suspendida de un cable que va de una estación a otra, recorriendo el cable propulsada por un motor.',
+    esfuerzo:'Tracción pura en el cable.',
+    justif:'En cualquier estación de esquí o atracción turística, las cabinas cuelgan de un cable. El cable trabaja a tracción y los postes intermedios o las torres terminales lo aguantan.' },
+  { id:'tirolina', em:'🪀', nombre:'Tirolina', tip:'colgante',
+    caract:'Cable tenso entre dos puntos (alto y bajo). El usuario se cuelga con un arnés y se desliza por el cable.',
+    esfuerzo:'Tracción pura en el cable.',
+    justif:'La tirolina es la estructura colgante más simple: un solo cable tenso por el que se desliza la carga. Funciona porque el cable transmite el peso a los dos anclajes.' },
+
+  // ── Neumáticas (4) ──
+  { id:'pelota', em:'⚽', nombre:'Pelota de fútbol', tip:'neumatica',
+    caract:'Capa exterior de cuero o sintético rellena de aire a presión. La forma esférica se mantiene gracias al aire interior.',
+    esfuerzo:'Tracción en la superficie por la presión del aire interior.',
+    justif:'Sin aire dentro, la pelota se aplasta. La estructura no es la capa exterior: es el aire que hay dentro. Es estructura neumática pura.' },
+  { id:'neumatico', em:'🛞', nombre:'Neumático de coche', tip:'neumatica',
+    caract:'Carcasa de caucho rellena de aire a presión. La forma toroidal solo se mantiene mientras haya aire dentro.',
+    esfuerzo:'Tracción en la carcasa por la presión interior.',
+    justif:'Un neumático pinchado se aplasta: ya no es estructura neumática, es solo goma blanda. Lo que aguanta el peso del coche es realmente el aire a presión.' },
+  { id:'salvavidas', em:'🛟', nombre:'Salvavidas hinchable', tip:'neumatica',
+    caract:'Anillo o flotador inflable que mantiene su forma por la presión del aire interior.',
+    esfuerzo:'Tracción en la tela por la presión interior.',
+    justif:'Sin aire, es solo un trozo de plástico inservible. Con aire, se vuelve un objeto rígido capaz de flotar y soportar el peso de una persona.' },
+  { id:'globo', em:'🎈', nombre:'Globo aerostático', tip:'neumatica',
+    caract:'Envoltura de tela ligera mantenida en forma esférica por el aire caliente del interior.',
+    esfuerzo:'Tracción en la tela por la presión interior + flotabilidad por la densidad del aire caliente.',
+    justif:'El globo aerostático combina dos ideas: estructura neumática (la tela se mantiene en forma por presión interna) + ingeniería aerostática (vuela porque el aire caliente pesa menos).' }
+];
+
+const TIP_INFO = {
+  masiva:      { nombre: 'Masivas',      em: '🏔️' },
+  abovedada:   { nombre: 'Abovedadas',   em: '🕌' },
+  entramada:   { nombre: 'Entramadas',   em: '🏢' },
+  triangulada: { nombre: 'Trianguladas', em: '🗼' },
+  colgante:    { nombre: 'Colgantes',    em: '🌉' },
+  neumatica:   { nombre: 'Neumáticas',   em: '🎈' }
+};
+
+// ══════════════════════════════════════════════════════════
+//  MODO TOGGLE
+// ══════════════════════════════════════════════════════════
+function setModo(modo) {
+  document.getElementById('vista-aprender').style.display = (modo === 'aprender') ? '' : 'none';
+  document.getElementById('vista-identificar').style.display = (modo === 'identificar') ? '' : 'none';
+  document.getElementById('modo-aprender').classList.toggle('active', modo === 'aprender');
+  document.getElementById('modo-identificar').classList.toggle('active', modo === 'identificar');
+  if (modo === 'identificar' && rondaActiva === null) iniciarRonda();
+}
+
+// ══════════════════════════════════════════════════════════
+//  MODO APRENDER
+// ══════════════════════════════════════════════════════════
+let filtroActual = 'all';
+
+function renderGaleria() {
+  const gal = document.getElementById('galeria');
+  const lista = (filtroActual === 'all') ? EJEMPLOS : EJEMPLOS.filter(e => e.tip === filtroActual);
+  gal.innerHTML = lista.map(e => `
+    <div class="obj-card" data-id="${e.id}" onclick="abrirFicha('${e.id}')">
+      <div class="obj-emoji">${e.em}</div>
+      <div class="obj-nombre">${e.nombre}</div>
+      <span class="tip-tag ${e.tip}">${TIP_INFO[e.tip].nombre}</span>
+    </div>
+  `).join('');
+}
+
+function abrirFicha(id) {
+  const e = EJEMPLOS.find(x => x.id === id);
+  if (!e) return;
+  document.getElementById('f-emoji').textContent = e.em;
+  document.getElementById('f-nombre').textContent = e.nombre;
+  const pill = document.getElementById('f-pill');
+  pill.textContent = TIP_INFO[e.tip].nombre;
+  pill.className = 'tip-pill ' + e.tip;
+  document.getElementById('f-caract').textContent = e.caract;
+  document.getElementById('f-esfuerzo').textContent = e.esfuerzo;
+  document.getElementById('f-justificacion').textContent = e.justif;
+  document.getElementById('ficha').classList.add('visible');
+  document.querySelectorAll('.obj-card').forEach(c => c.classList.toggle('active', c.dataset.id === id));
+  document.getElementById('ficha').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function cerrarFicha() {
+  document.getElementById('ficha').classList.remove('visible');
+  document.querySelectorAll('.obj-card').forEach(c => c.classList.remove('active'));
+}
+
+document.querySelectorAll('#tip-filtros button').forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll('#tip-filtros button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    filtroActual = b.dataset.filter;
+    renderGaleria();
+    cerrarFicha();
+  };
+});
+
+// ══════════════════════════════════════════════════════════
+//  MODO IDENTIFICAR · ronda de 12
+// ══════════════════════════════════════════════════════════
+let rondaActiva = null;
+let rondaList = [];
+let rondaIdx = 0;
+let aciertos = 0;
+let fallos = 0;
+
+function iniciarRonda() {
+  const porTip = {};
+  Object.keys(TIP_INFO).forEach(t => porTip[t] = EJEMPLOS.filter(e => e.tip === t).slice());
+  const seleccion = [];
+  // 1 obligatorio por tipología (6) + 1 extra de cada (otra ronda = 12)
+  Object.keys(TIP_INFO).forEach(t => {
+    const arr = porTip[t];
+    const i = Math.floor(Math.random() * arr.length);
+    seleccion.push(arr.splice(i, 1)[0]);
+    if (arr.length > 0) {
+      const j = Math.floor(Math.random() * arr.length);
+      seleccion.push(arr.splice(j, 1)[0]);
+    }
+  });
+  // mezclar
+  for (let i = seleccion.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [seleccion[i], seleccion[j]] = [seleccion[j], seleccion[i]];
+  }
+  rondaList = seleccion.slice(0, 12);
+  rondaIdx = 0; aciertos = 0; fallos = 0;
+  rondaActiva = true;
+  document.getElementById('id-resultado').classList.remove('visible');
+  document.getElementById('id-obj').style.display = '';
+  document.getElementById('id-bots').style.display = '';
+  document.getElementById('id-feedback').classList.remove('visible');
+  document.getElementById('id-next').disabled = true;
+  pintarEjemplo();
+  actualizarHud();
+}
+
+function pintarEjemplo() {
+  const e = rondaList[rondaIdx];
+  document.getElementById('id-em').textContent = e.em;
+  document.getElementById('id-name').textContent = e.nombre;
+  document.querySelectorAll('.id-bt').forEach(b => {
+    b.classList.remove('correcto', 'incorrecto');
+    b.disabled = false;
+  });
+  document.getElementById('id-feedback').classList.remove('visible');
+  document.getElementById('id-next').disabled = true;
+}
+
+function actualizarHud() {
+  document.getElementById('id-num').innerHTML = (rondaIdx + 1) + '<span style="font-size:0.9rem; color:#aaa; font-weight:400;">/12</span>';
+  document.getElementById('id-ok').textContent = aciertos;
+  document.getElementById('id-err').textContent = fallos;
+  document.getElementById('id-bar').style.width = (rondaIdx / 12 * 100) + '%';
+}
+
+document.querySelectorAll('.id-bt').forEach(b => {
+  b.onclick = () => {
+    if (b.disabled) return;
+    const tip = b.dataset.tip;
+    const e = rondaList[rondaIdx];
+    const correcto = (tip === e.tip);
+    document.querySelectorAll('.id-bt').forEach(x => x.disabled = true);
+    document.querySelector(`.id-bt[data-tip="${e.tip}"]`).classList.add('correcto');
+    if (!correcto) b.classList.add('incorrecto');
+    const fb = document.getElementById('id-feedback');
+    fb.classList.add('visible');
+    fb.classList.toggle('ok', correcto);
+    fb.classList.toggle('err', !correcto);
+    if (correcto) {
+      aciertos++;
+      document.getElementById('id-fb-titulo').textContent = '✅ ¡Correcto!';
+      document.getElementById('id-fb-texto').innerHTML = `<strong>${e.nombre}</strong> es una estructura <strong>${TIP_INFO[e.tip].nombre.toLowerCase()}</strong>. ${e.justif}`;
+    } else {
+      fallos++;
+      document.getElementById('id-fb-titulo').textContent = '❌ No es correcto';
+      document.getElementById('id-fb-texto').innerHTML = `<strong>${e.nombre}</strong> es en realidad una estructura <strong>${TIP_INFO[e.tip].nombre.toLowerCase()}</strong>. ${e.justif}`;
+    }
+    document.getElementById('id-next').disabled = false;
+  };
+});
+
+function siguienteEjemplo() {
+  rondaIdx++;
+  if (rondaIdx >= rondaList.length) { mostrarResultado(); return; }
+  pintarEjemplo();
+  actualizarHud();
+}
+
+function mostrarResultado() {
+  document.getElementById('id-obj').style.display = 'none';
+  document.getElementById('id-bots').style.display = 'none';
+  document.getElementById('id-feedback').classList.remove('visible');
+  document.getElementById('id-next').disabled = true;
+  const res = document.getElementById('id-resultado');
+  res.classList.add('visible');
+  document.getElementById('id-bar').style.width = '100%';
+  const score = aciertos;
+  document.getElementById('res-score').textContent = score + '/12';
+  let emoji, titulo, msg;
+  if (score === 12) { emoji='🏆'; titulo='¡Perfecto!'; msg='Ya reconoces las 6 tipologías sin titubear. Eres un escáner de estructuras andante.'; }
+  else if (score >= 10) { emoji='🎉'; titulo='¡Muy bien!'; msg='Casi perfecto. Las que has fallado suelen ser las más confusas: ¿entramada o triangulada?'; }
+  else if (score >= 7) { emoji='👍'; titulo='Aprobado'; msg='Vas por buen camino. Repasa las diferencias entre abovedadas y trianguladas.'; }
+  else if (score >= 5) { emoji='🤔'; titulo='Hay que repasar'; msg='Conviene volver al modo Aprender y leer la justificación de cada ejemplo.'; }
+  else { emoji='📚'; titulo='Vuelve al libro'; msg='Secciones 6, 7 y 8 del libro digital. Mira los ejemplos uno por uno antes de volver.'; }
+  document.getElementById('res-emoji').textContent = emoji;
+  document.getElementById('res-titulo').textContent = titulo;
+  document.getElementById('res-msg').textContent = msg;
+}
+
+function reiniciarRonda() { iniciarRonda(); }
+
+// ══════════════════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════════════════
+renderGaleria();
+</script>
+
+<footer style="text-align:center; padding:2rem 1rem 1rem; color:#888; font-size:0.85rem;">
+  <p>🏛️ Tipos de estructuras · TyD 2º ESO · Unidad 3</p>
+  <p><a href="../index.html" style="color:#D4700A; text-decoration:none;">← Volver al hub de la unidad</a></p>
+  <p style="margin-top:8px; font-family:'JetBrains Mono', monospace; font-size:0.72rem; opacity:0.6;">v1.0</p>
+</footer>
+
+</body>
+</html>

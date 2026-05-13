@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test de repaso · CGMP · 2º ESO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3ecdb;
+  --paper:#fffaef;
+  --paper-2:#fbf3df;
+  --ink:#2a1f10;
+  --ink-soft:#5a4f3a;
+  --line:#d8d0b8;
+  --accent:#d9531e;
+  --accent-2:#c8911a;
+  --ok:#27a96b;
+  --warn:#e8b923;
+  --bad:#d23a2e;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;min-height:100vh;font-family:"Fraunces",Georgia,serif;color:var(--ink)}
+body{
+  background:
+    radial-gradient(900px 500px at 85% -10%, rgba(217,83,30,.08), transparent 60%),
+    radial-gradient(700px 400px at 10% 110%, rgba(31,78,163,.06), transparent 60%),
+    linear-gradient(180deg,#f3ecdb,#fbf6e8 60%,#f3ecdb);
+}
+
+.wrap{max-width:920px;margin:0 auto;padding:24px;}
+
+header{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding-bottom:14px;margin-bottom:22px;border-bottom:1px solid var(--line);flex-wrap:wrap;
+}
+header h1{
+  margin:0;font-family:"Fraunces",serif;font-weight:800;font-size:clamp(22px,2.4vw,32px);
+  letter-spacing:-0.02em;line-height:1;color:#2a1f10;
+}
+header h1 em{font-style:italic;color:var(--accent-2)}
+.header-links{display:flex;gap:8px;flex-wrap:wrap}
+.back-link{
+  display:inline-flex;align-items:center;gap:6px;text-decoration:none;
+  background:#fff;color:var(--ink-soft);border:1.5px solid var(--line);
+  padding:8px 14px;border-radius:999px;font-family:"JetBrains Mono",monospace;
+  font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  transition:all .2s;
+}
+.back-link:hover{background:#fff5dc;border-color:var(--accent-2);color:#7a4a05}
+
+/* PROGRESO */
+.progress-bar{
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  height:14px;margin-bottom:24px;overflow:hidden;position:relative;
+}
+.progress-fill{
+  height:100%;background:linear-gradient(90deg,#f0c060,#d9531e);
+  transition:width .4s ease;width:0%;
+}
+.progress-label{
+  display:flex;justify-content:space-between;font-family:"JetBrains Mono",monospace;
+  font-size:11px;color:var(--ink-soft);letter-spacing:.1em;margin-bottom:6px;text-transform:uppercase;
+}
+.progress-label b{color:var(--accent);font-weight:700}
+
+/* CARD DE PREGUNTA */
+.question-card{
+  background:linear-gradient(180deg,#ffffff,#fdf9ec);
+  border:1px solid var(--line);border-radius:14px;padding:28px 30px;
+  box-shadow:0 18px 40px -14px rgba(80,60,30,.18), 0 6px 16px -8px rgba(80,60,30,.12);
+  margin-bottom:18px;
+}
+.q-num{
+  font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--accent-2);
+  letter-spacing:.2em;font-weight:700;text-transform:uppercase;margin-bottom:6px;
+}
+.q-text{
+  font-family:"Fraunces",serif;font-size:22px;font-weight:600;line-height:1.3;
+  margin:0 0 22px;color:#1a1410;
+}
+.q-text b{color:var(--accent);font-weight:800}
+
+/* OPCIONES */
+.options{display:flex;flex-direction:column;gap:10px}
+.option{
+  appearance:none;text-align:left;
+  background:#fff;border:1.5px solid var(--line);
+  padding:14px 18px;border-radius:10px;cursor:pointer;
+  font-family:"Fraunces",serif;font-size:16px;color:var(--ink);
+  display:flex;align-items:center;gap:14px;
+  transition:all .2s;line-height:1.4;
+}
+.option:hover:not(:disabled){
+  border-color:var(--accent-2);background:#fff5dc;transform:translateX(2px);
+  box-shadow:0 4px 10px -4px rgba(217,135,5,.25);
+}
+.option .letter{
+  flex-shrink:0;width:30px;height:30px;border-radius:50%;
+  background:#fbf3df;border:1.5px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  font-family:"JetBrains Mono",monospace;font-weight:700;font-size:14px;color:var(--ink-soft);
+  transition:all .2s;
+}
+.option:hover:not(:disabled) .letter{background:#fff;border-color:var(--accent-2);color:var(--accent-2)}
+.option:disabled{cursor:default;opacity:1}
+
+.option.correct{
+  background:linear-gradient(180deg,#e3f4ea,#c4e6d0);
+  border-color:var(--ok);color:#0f3a23;animation:correctIn .4s;
+}
+.option.correct .letter{background:var(--ok);color:#fff;border-color:#0f3a23}
+.option.wrong{
+  background:linear-gradient(180deg,#fde7e4,#f9c8c2);
+  border-color:var(--bad);color:#5a1a14;animation:wrongShake .4s;
+}
+.option.wrong .letter{background:var(--bad);color:#fff;border-color:#5a1a14}
+.option.greyed{opacity:.45}
+
+@keyframes correctIn{
+  0%{transform:scale(.98)}
+  50%{transform:scale(1.02)}
+  100%{transform:scale(1)}
+}
+@keyframes wrongShake{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-6px)}
+  40%{transform:translateX(6px)}
+  60%{transform:translateX(-4px)}
+  80%{transform:translateX(4px)}
+}
+
+/* FEEDBACK */
+.feedback{
+  margin-top:18px;padding:16px 20px;border-radius:10px;
+  font-size:15px;line-height:1.5;display:none;animation:feedbackIn .35s ease;
+}
+.feedback.show{display:block}
+.feedback.ok{background:#e3f4ea;border-left:4px solid var(--ok);color:#0f3a23}
+.feedback.bad{background:#fde7e4;border-left:4px solid var(--bad);color:#5a1a14}
+.feedback b{font-weight:700}
+.feedback .ico{font-size:24px;margin-right:4px}
+@keyframes feedbackIn{
+  from{opacity:0;transform:translateY(-6px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* CONTROLES */
+.controls{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+}
+.btn{
+  appearance:none;border:1.5px solid var(--line);background:#fff;
+  padding:11px 22px;border-radius:10px;font-family:"JetBrains Mono",monospace;
+  font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--ink);
+  cursor:pointer;transition:all .15s;text-transform:uppercase;
+}
+.btn:hover:not(:disabled){border-color:var(--accent-2);background:#fff5dc;transform:translateY(-1px)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.primary{
+  background:linear-gradient(180deg,#f06b32,#d9531e);color:#fff;border-color:#b8431a;
+  box-shadow:0 4px 10px -3px rgba(217,83,30,.4);
+}
+.btn.primary:hover:not(:disabled){background:linear-gradient(180deg,#f78845,#e8602a);box-shadow:0 6px 14px -4px rgba(217,83,30,.5)}
+.btn.primary:disabled{background:#ccc;border-color:#aaa;box-shadow:none}
+
+.score{
+  font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-soft);
+  letter-spacing:.1em;text-transform:uppercase;
+}
+.score b{color:var(--ok);font-size:16px}
+
+/* PANTALLA FINAL */
+.results{
+  text-align:center;padding:50px 30px;
+  background:linear-gradient(180deg,#ffffff,#fdf9ec);
+  border:1px solid var(--line);border-radius:14px;
+  box-shadow:0 18px 40px -14px rgba(80,60,30,.18);
+}
+.results h2{
+  font-family:"Fraunces",serif;font-size:48px;font-weight:800;margin:0 0 4px;
+  letter-spacing:-0.02em;line-height:1;
+}
+.results .verdict{
+  font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink-soft);margin-bottom:20px;
+}
+.results .score-display{
+  font-family:"Fraunces",serif;font-size:96px;font-weight:800;
+  background:linear-gradient(135deg,#d9531e,#c8911a);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  line-height:1;margin:20px 0;
+}
+.results .score-fraction{
+  font-family:"JetBrains Mono",monospace;font-size:18px;color:var(--ink-soft);
+  letter-spacing:.1em;
+}
+.results .badge{
+  display:inline-block;padding:8px 20px;border-radius:999px;margin-top:20px;
+  font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.16em;
+  text-transform:uppercase;font-weight:700;
+}
+.badge.excelente{background:#e3f4ea;color:#0f3a23;border:2px solid var(--ok)}
+.badge.bien{background:#fff5dc;color:#7a4a05;border:2px solid var(--accent-2)}
+.badge.flojo{background:#fde7e4;color:#5a1a14;border:2px solid var(--bad)}
+.results .actions{margin-top:32px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.review-list{margin-top:32px;text-align:left}
+.review-list h3{
+  font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink-soft);margin:0 0 12px;
+}
+.review-item{
+  padding:10px 14px;border-radius:8px;margin-bottom:6px;font-size:13px;
+  font-family:"Fraunces",serif;display:flex;gap:10px;align-items:flex-start;
+}
+.review-item.ok{background:#e3f4ea;color:#0f3a23}
+.review-item.bad{background:#fde7e4;color:#5a1a14}
+.review-item .icon{flex-shrink:0;font-size:16px}
+.review-item .q{flex:1}
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+
+  <header>
+    <h1>Test de repaso · <em>CGMP</em></h1>
+    <div class="header-links">
+      <a class="back-link" href="../index.html" style="background:#fef4e9;border-color:#d4700a;color:#7a4a05">← Unidad 5</a>
+      <a class="back-link" href="cgmp-mecanismos.html">🔬 Mecanismos</a>
+      <a class="back-link" href="cgmp.html">← Volver al cuadro</a>
+    </div>
+  </header>
+
+  <div id="quiz-area">
+    <!-- Renderiza el cuestionario aquí -->
+  </div>
+
+</div>
+
+<script>
+/* ===========================================================
+   PREGUNTAS — 15 cuestiones progresivas
+=========================================================== */
+const PREGUNTAS = [
+  // --- BLOQUE 1: Identificación ---
+  {
+    pregunta: "¿Cuál es la función principal del <b>Cuadro General de Mando y Protección</b>?",
+    opciones: [
+      "Solo encender y apagar la luz de toda la casa",
+      "Repartir la corriente a los circuitos y proteger ante averías",
+      "Medir la corriente que consumen los electrodomésticos",
+      "Almacenar electricidad para cuando se va la luz"
+    ],
+    correcta: 1,
+    explicacion: "El CGMP tiene <b>dos funciones</b>: mando (poder cortar la corriente cuando queremos) y protección (cortarla automáticamente si algo va mal)."
+  },
+  {
+    pregunta: "El <b>ICP</b> (Interruptor de Control de Potencia) lo instala:",
+    opciones: [
+      "Cualquier electricista del barrio",
+      "El propietario de la vivienda",
+      "La compañía eléctrica",
+      "El ayuntamiento del municipio"
+    ],
+    correcta: 2,
+    explicacion: "El ICP es el <b>único elemento del cuadro que pertenece a la compañía eléctrica</b>. Suele estar integrado en el contador digital del portal. Su función es controlar que no superes la potencia contratada."
+  },
+  {
+    pregunta: "¿Cuál de estos elementos del CGMP <b>salva vidas</b> al detectar fugas de corriente a tierra?",
+    opciones: [
+      "El ICP",
+      "El IGA",
+      "El interruptor diferencial (ID)",
+      "Los PIAs"
+    ],
+    correcta: 2,
+    explicacion: "El <b>diferencial (ID)</b> detecta diferencias entre la corriente que entra por la fase y la que sale por el neutro. Si una persona toca un cable, parte de la corriente se va por su cuerpo a tierra y el ID corta en menos de 30 ms."
+  },
+
+  // --- BLOQUE 2: Asociación circuito-aparato ---
+  {
+    pregunta: "Si la <b>vitrocerámica</b> deja de funcionar pero el resto de la casa va bien, ¿qué automático ha saltado?",
+    opciones: [
+      "El IGA (general)",
+      "El ID (diferencial)",
+      "El PIA del circuito C3 (cocina)",
+      "El PIA del circuito C1 (iluminación)"
+    ],
+    correcta: 2,
+    explicacion: "El circuito <b>C3</b> alimenta los grandes electrodomésticos de cocina: vitrocerámica y horno. Suele llevar un PIA de 25 A. Si salta solo este y el resto va bien, el problema está en su circuito."
+  },
+  {
+    pregunta: "Las <b>bombillas</b> de toda la casa están alimentadas por el circuito:",
+    opciones: [
+      "C1 — Iluminación (10 A)",
+      "C2 — Enchufes (16 A)",
+      "C4 — Lavadora (20 A)",
+      "C5 — Baño (16 A)"
+    ],
+    correcta: 0,
+    explicacion: "El <b>C1</b> es el circuito de iluminación. Como las bombillas (sobre todo LED) consumen poca corriente, basta con un PIA de 10 A y cable de 1,5 mm²."
+  },
+
+  // --- BLOQUE 3: Mecanismos internos ---
+  {
+    pregunta: "Dentro de un magnetotérmico, la <b>lámina bimetálica</b> sirve para detectar:",
+    opciones: [
+      "Cortocircuitos instantáneos",
+      "Sobrecargas que duran un rato",
+      "Diferencias entre fase y neutro",
+      "Cuando se va la luz del barrio"
+    ],
+    correcta: 1,
+    explicacion: "La lámina bimetálica es <b>dos metales pegados</b> que se dilatan distinto. Al pasar corriente excesiva durante varios segundos, se calienta, se curva y dispara el mecanismo. Es el <b>efecto térmico</b>."
+  },
+  {
+    pregunta: "¿Cuál es la <b>diferencia principal</b> entre el efecto térmico y el efecto magnético del PIA?",
+    opciones: [
+      "Uno sirve para fase y otro para neutro",
+      "El térmico es lento (segundos), el magnético es instantáneo (milisegundos)",
+      "El térmico cuesta más dinero",
+      "Solo el magnético protege a las personas"
+    ],
+    correcta: 1,
+    explicacion: "El <b>efecto térmico</b> actúa lento ante sobrecargas (deja un margen para apagar aparatos). El <b>efecto magnético</b> actúa instantáneo ante cortocircuitos (la corriente es tan grande que no se puede esperar)."
+  },
+  {
+    pregunta: "El diferencial detecta que algo va mal porque:",
+    opciones: [
+      "La corriente que entra por fase y la que sale por neutro <b>no son iguales</b>",
+      "La temperatura del cuadro sube demasiado",
+      "Suena una alarma cuando hay derivación",
+      "Mide directamente si hay alguien tocando un cable"
+    ],
+    correcta: 0,
+    explicacion: "El toroidal del diferencial compara constantemente la corriente que entra (fase) con la que vuelve (neutro). En condiciones normales son iguales. Si difieren en más de <b>30 mA</b>, parte de la corriente se está \"fugando\" por algún sitio (por ejemplo, por una persona)."
+  },
+
+  // --- BLOQUE 4: Aplicación / casos ---
+  {
+    pregunta: "Tienes contratados <b>4,6 kW</b>. Conectas: vitrocerámica (3500 W) + horno (2500 W). ¿Qué pasa?",
+    opciones: [
+      "Todo funciona normalmente",
+      "Salta el PIA del C3 (cocina)",
+      "Salta el diferencial",
+      "Salta el ICP y se va toda la casa"
+    ],
+    correcta: 3,
+    explicacion: "3500 + 2500 = <b>6000 W</b>, muy por encima de los 4600 W contratados. El <b>ICP</b> detecta exceso de potencia y corta toda la vivienda. Distingue muy bien el ICP del PIA: el ICP corta TODO; el PIA solo SU circuito."
+  },
+  {
+    pregunta: "Salta un PIA. Lo subes y <b>vuelve a saltar inmediatamente</b>. ¿Qué es más probable?",
+    opciones: [
+      "Hay una sobrecarga: hay demasiados aparatos enchufados",
+      "Hay un cortocircuito en el circuito",
+      "Se ha fundido una bombilla",
+      "Se ha estropeado el contador"
+    ],
+    correcta: 1,
+    explicacion: "Si salta <b>al instante</b> (sin tiempo para calentarse), está actuando el <b>efecto magnético</b>, que responde a cortocircuitos. Si fuese sobrecarga, tardaría unos segundos en saltar otra vez. <b>No conviene rearmar sin investigar la causa</b>."
+  },
+  {
+    pregunta: "Un niño toca con un dedo mojado el interior de un enchufe estropeado. ¿Qué le salva?",
+    opciones: [
+      "El ICP, porque corta cuando hay mucha corriente",
+      "El PIA del circuito, por su efecto térmico",
+      "El diferencial, por detectar la fuga a tierra",
+      "Ningún elemento del cuadro puede protegerle"
+    ],
+    correcta: 2,
+    explicacion: "La corriente que pasa por el cuerpo del niño hacia tierra hace que la corriente de la fase y del neutro <b>ya no sean iguales</b>. El <b>diferencial detecta esa diferencia de 30 mA</b> y corta en menos de 30 ms. Una descarga peligrosa dura más, así que evita la electrocución."
+  },
+  {
+    pregunta: "¿Cada cuánto conviene pulsar el botón <b>TEST</b> del diferencial?",
+    opciones: [
+      "Cada día",
+      "Una vez al mes",
+      "Una vez al año",
+      "Solo cuando salta la luz"
+    ],
+    correcta: 1,
+    explicacion: "El botón TEST simula una pequeña derivación para comprobar que el ID funciona bien. Se recomienda pulsarlo <b>una vez al mes</b>. Si al pulsarlo no salta, hay que llamar a un electricista urgentemente."
+  },
+
+  // --- BLOQUE 5: Conceptos finales ---
+  {
+    pregunta: "¿Por qué la <b>vitrocerámica</b> tiene su propio circuito con un PIA de 25 A y cable de 6 mm²?",
+    opciones: [
+      "Porque es muy cara",
+      "Porque consume mucha corriente y necesita una línea robusta",
+      "Porque la cocina está siempre lejos del cuadro",
+      "Porque solo así puede ser inducción"
+    ],
+    correcta: 1,
+    explicacion: "La vitro consume mucha potencia (hasta 3500 W = unos 15 A) y de forma sostenida. Necesita un PIA grande y cable grueso (6 mm²) para que no se caliente. Por eso tiene un circuito <b>independiente</b>."
+  },
+  {
+    pregunta: "Cuando salta el <b>IGA</b>, te quedas sin luz en:",
+    opciones: [
+      "Solo el circuito averiado",
+      "Solo la cocina",
+      "Toda la vivienda",
+      "Toda la escalera del edificio"
+    ],
+    correcta: 2,
+    explicacion: "El IGA es el interruptor general: corta la <b>fase y el neutro de toda la vivienda</b>. Lo mismo pasa con el ICP y el ID. Los PIAs, en cambio, solo cortan su circuito específico."
+  },
+  {
+    pregunta: "¿Cuál es el orden correcto de los elementos desde el contador hacia los circuitos?",
+    opciones: [
+      "Contador → PIAs → IGA → ID → ICP → circuitos",
+      "Contador → ID → IGA → ICP → PIAs → circuitos",
+      "Contador → ICP → IGA → ID → PIAs → circuitos",
+      "Contador → IGA → ICP → PIAs → ID → circuitos"
+    ],
+    correcta: 2,
+    explicacion: "El orden estándar es <b>ICP → IGA → ID → PIAs</b>. Primero el control de potencia (compañía), luego el general del usuario, después el protector de personas y, finalmente, los PIAs de cada circuito específico."
+  }
+];
+
+/* ===========================================================
+   ESTADO
+=========================================================== */
+const STATE = {
+  index: 0,
+  aciertos: 0,
+  respuestas: [],   // array de {pregunta, correcta, dada, ok}
+  bloqueado: false
+};
+
+const $area = document.getElementById('quiz-area');
+
+/* ===========================================================
+   RENDER PREGUNTA
+=========================================================== */
+function renderQ(){
+  if(STATE.index >= PREGUNTAS.length){
+    renderResultado();
+    return;
+  }
+  const q = PREGUNTAS[STATE.index];
+  const total = PREGUNTAS.length;
+  const pct = Math.round((STATE.index / total) * 100);
+  const letras = ['A','B','C','D'];
+
+  $area.innerHTML = `
+    <div class="progress-label">
+      <span>Pregunta <b>${STATE.index + 1}</b> de ${total}</span>
+      <span>Aciertos: <b>${STATE.aciertos}</b></span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width:${pct}%"></div>
+    </div>
+
+    <div class="question-card">
+      <div class="q-num">Pregunta ${STATE.index + 1}</div>
+      <h2 class="q-text">${q.pregunta}</h2>
+      <div class="options" id="options">
+        ${q.opciones.map((op,i) => `
+          <button class="option" data-i="${i}">
+            <span class="letter">${letras[i]}</span>
+            <span>${op}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div class="feedback" id="feedback"></div>
+    </div>
+
+    <div class="controls">
+      <span class="score">${STATE.aciertos > 0 ? `Llevas <b>${STATE.aciertos}</b> aciertos` : 'Elige tu respuesta'}</span>
+      <button class="btn primary" id="btn-next" disabled>Siguiente ▶</button>
+    </div>
+  `;
+
+  STATE.bloqueado = false;
+
+  // Listeners de opciones
+  $area.querySelectorAll('.option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if(STATE.bloqueado) return;
+      const i = parseInt(btn.dataset.i, 10);
+      seleccionar(i);
+    });
+  });
+
+  // Siguiente
+  document.getElementById('btn-next').addEventListener('click', () => {
+    STATE.index++;
+    renderQ();
+  });
+}
+
+function seleccionar(i){
+  STATE.bloqueado = true;
+  const q = PREGUNTAS[STATE.index];
+  const correcta = q.correcta;
+  const ok = i === correcta;
+  if(ok) STATE.aciertos++;
+
+  STATE.respuestas.push({
+    pregunta: q.pregunta,
+    correcta: q.opciones[correcta],
+    dada: q.opciones[i],
+    ok: ok
+  });
+
+  // Marcar visualmente
+  const $options = $area.querySelectorAll('.option');
+  $options.forEach((btn, idx) => {
+    btn.disabled = true;
+    if(idx === correcta){
+      btn.classList.add('correct');
+    } else if(idx === i && !ok){
+      btn.classList.add('wrong');
+    } else {
+      btn.classList.add('greyed');
+    }
+  });
+
+  // Feedback
+  const $fb = document.getElementById('feedback');
+  $fb.className = 'feedback show ' + (ok ? 'ok' : 'bad');
+  $fb.innerHTML = `
+    <span class="ico">${ok ? '✅' : '❌'}</span>
+    <b>${ok ? '¡Correcto!' : 'No es esa.'}</b> ${q.explicacion}
+  `;
+
+  // Activar botón siguiente
+  document.getElementById('btn-next').disabled = false;
+  const $btnNext = document.getElementById('btn-next');
+  if(STATE.index === PREGUNTAS.length - 1){
+    $btnNext.textContent = 'Ver resultados ▶';
+  }
+}
+
+/* ===========================================================
+   RESULTADO FINAL
+=========================================================== */
+function renderResultado(){
+  const total = PREGUNTAS.length;
+  const aciertos = STATE.aciertos;
+  const pct = Math.round((aciertos / total) * 100);
+  let badge, verdict;
+  if(pct >= 80){ badge = 'excelente'; verdict = 'Dominio excelente'; }
+  else if(pct >= 55){ badge = 'bien'; verdict = 'Bien encaminado'; }
+  else { badge = 'flojo'; verdict = 'A repasar el cuadro'; }
+
+  $area.innerHTML = `
+    <div class="results">
+      <div class="verdict">Test completado</div>
+      <div class="score-display">${pct}%</div>
+      <div class="score-fraction">${aciertos} / ${total} correctas</div>
+      <div class="badge ${badge}">${verdict}</div>
+
+      <div class="actions">
+        <button class="btn primary" onclick="reiniciar()">↻ Repetir test</button>
+        <a class="btn" href="cgmp.html">↩ Volver al cuadro</a>
+        <a class="btn" href="cgmp-mecanismos.html">🔬 Repasar mecanismos</a>
+      </div>
+
+      <div class="review-list">
+        <h3>Repaso de tus respuestas</h3>
+        ${STATE.respuestas.map((r, i) => `
+          <div class="review-item ${r.ok ? 'ok' : 'bad'}">
+            <span class="icon">${r.ok ? '✓' : '✗'}</span>
+            <div class="q"><b>P${i+1}:</b> ${stripHtml(r.pregunta)}${!r.ok ? `<br><span style="font-size:12px;opacity:.85">Respuesta correcta: <b>${stripHtml(r.correcta)}</b></span>` : ''}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function reiniciar(){
+  STATE.index = 0;
+  STATE.aciertos = 0;
+  STATE.respuestas = [];
+  renderQ();
+}
+
+function stripHtml(s){
+  const tmp = document.createElement('div');
+  tmp.innerHTML = s;
+  return tmp.textContent || tmp.innerText || '';
+}
+
+// Inicializar
+renderQ();
+</script>
+</body>
+</html>

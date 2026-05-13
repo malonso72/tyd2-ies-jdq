@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Practica acotación · U00 Dibujo técnico · TyD 2º ESO</title>
+<meta name="description" content="Interactivo para practicar acotación: identifica cotas correctas e incorrectas sobre figuras reales. TyD 2º ESO.">
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/00-dibujo-tecnico/interactivos/acotacion.html">
+
+<meta property="og:title" content="Practica acotación · U00 Dibujo técnico · TyD 2º ESO">
+<meta property="og:description" content="Interactivo para practicar acotación: identifica cotas correctas e incorrectas sobre figuras reales.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/00-dibujo-tecnico/interactivos/acotacion.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Practica acotación · U00 Dibujo técnico · TyD 2º ESO">
+<meta name="twitter:description" content="Interactivo para practicar acotación.">
+<meta name="twitter:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+:root {
+  --aco-ok: #2e7d4f;
+  --aco-err: #c44536;
+  --aco-warn: #e8b647;
+}
+
+.figura-nav {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+.fig-tab {
+  flex: 1;
+  min-width: 110px;
+  background: transparent;
+  border: none;
+  padding: 0.55rem 0.8rem;
+  border-radius: 7px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.15s;
+  text-align: center;
+}
+.fig-tab:hover { background: rgba(212,112,10,0.1); color: var(--principal, #D4700A); }
+.fig-tab.active {
+  background: var(--principal, #D4700A);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(212,112,10,0.3);
+}
+.fig-tab.completed::after { content: ' ✓'; color: var(--aco-ok); font-weight: 700; }
+.fig-tab.active.completed::after { color: #fff; }
+
+.figura-box {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 12px;
+  padding: 1.4rem;
+  margin: 1rem 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.fig-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--principal, #D4700A);
+  margin-bottom: 0.3rem;
+  border-bottom: 2px solid var(--principal, #D4700A);
+  padding-bottom: 0.3rem;
+}
+.fig-instructions {
+  background: #fffaf3;
+  border-left: 4px solid var(--principal, #D4700A);
+  border-radius: 0 8px 8px 0;
+  padding: 0.8rem 1rem;
+  margin: 0.8rem 0 1rem;
+  font-size: 0.93rem;
+  color: #444;
+  line-height: 1.55;
+}
+.fig-instructions strong { color: var(--principal, #D4700A); }
+
+.svg-canvas {
+  background: linear-gradient(to bottom, #fafafa, #fff);
+  border: 1px dashed #ccc;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  position: relative;
+  margin-bottom: 1rem;
+}
+.svg-canvas svg { max-width: 100%; height: auto; }
+
+/* ─── Estilo de las cotas interactivas ─── */
+.cota {
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.cota:hover .cota-bg { fill: rgba(212,112,10,0.15); }
+.cota.selected .cota-bg { fill: rgba(212,112,10,0.3); stroke: var(--principal, #D4700A); stroke-width: 2; }
+.cota.solved-ok .cota-bg { fill: rgba(46,125,79,0.18); stroke: var(--aco-ok); stroke-width: 2; }
+.cota.solved-err .cota-bg { fill: rgba(196,69,54,0.18); stroke: var(--aco-err); stroke-width: 2; }
+.cota.solved-miss .cota-bg { fill: rgba(232,182,71,0.25); stroke: var(--aco-warn); stroke-width: 2; stroke-dasharray: 3 3; }
+
+.cota-bg {
+  fill: transparent;
+  stroke: transparent;
+  rx: 4;
+}
+
+/* Iconos resultado */
+.cota .icon-result {
+  display: none;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  pointer-events: none;
+}
+.cota.solved-ok .icon-result, .cota.solved-err .icon-result, .cota.solved-miss .icon-result {
+  display: block;
+}
+.cota.solved-ok .icon-result { fill: var(--aco-ok); }
+.cota.solved-err .icon-result { fill: var(--aco-err); }
+.cota.solved-miss .icon-result { fill: #8a6d1a; }
+
+/* ─── Controles ─── */
+.controles {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+.btn-comprobar, .btn-resetear, .btn-pista {
+  border: none;
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-comprobar {
+  background: var(--principal, #D4700A);
+  color: #fff;
+}
+.btn-comprobar:hover { background: #b85e08; transform: translateY(-1px); }
+.btn-resetear {
+  background: #fff;
+  border: 1px solid #ccc;
+  color: #666;
+}
+.btn-resetear:hover { border-color: var(--principal, #D4700A); color: var(--principal, #D4700A); }
+.btn-pista {
+  background: var(--secundario, #1B4F8A);
+  color: #fff;
+}
+.btn-pista:hover { background: #163d6e; }
+
+/* ─── Score / feedback global ─── */
+.score-box {
+  background: #f0f0f0;
+  border-radius: 10px;
+  padding: 0.8rem 1.2rem;
+  margin: 1rem 0;
+  display: none;
+  border-left: 4px solid var(--principal, #D4700A);
+}
+.score-box.show { display: block; }
+.score-box.perfect { border-left-color: var(--aco-ok); background: #f4faf6; }
+.score-box.partial { border-left-color: var(--aco-warn); background: #fffbf0; }
+.score-box.fail { border-left-color: var(--aco-err); background: #fdf6f5; }
+.score-titulo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+}
+.score-box.perfect .score-titulo { color: var(--aco-ok); }
+.score-box.partial .score-titulo { color: #8a6d1a; }
+.score-box.fail .score-titulo { color: var(--aco-err); }
+.score-stats {
+  display: flex;
+  gap: 1.2rem;
+  font-size: 0.92rem;
+  color: #444;
+  flex-wrap: wrap;
+}
+.score-stats strong { color: #111; }
+
+/* ─── Lista de errores explicados ─── */
+.errores-explicacion {
+  margin-top: 1rem;
+  display: none;
+}
+.errores-explicacion.show { display: block; }
+.errores-explicacion h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--principal, #D4700A);
+  margin-bottom: 0.5rem;
+}
+.error-item {
+  background: #fff;
+  border: 1px solid #f0e6d3;
+  border-left: 4px solid var(--aco-err);
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+  margin: 0.4rem 0;
+  font-size: 0.92rem;
+  color: #444;
+  line-height: 1.5;
+}
+.error-item.ok { border-left-color: var(--aco-ok); }
+.error-item.miss { border-left-color: var(--aco-warn); }
+.error-item .err-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-right: 0.5rem;
+  letter-spacing: 0.5px;
+}
+.error-item .err-tag.err { background: var(--aco-err); color: #fff; }
+.error-item .err-tag.ok-tag { background: var(--aco-ok); color: #fff; }
+.error-item .err-tag.miss-tag { background: var(--aco-warn); color: #5a4a0e; }
+
+/* ─── Modo / dificultad ─── */
+.modo-toggle {
+  display: flex;
+  gap: 0.4rem;
+  background: #f0f0f0;
+  padding: 4px;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+.modo-toggle button {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 0.5rem 0.8rem;
+  border-radius: 7px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  color: #666;
+}
+.modo-toggle button.active {
+  background: var(--principal, #D4700A);
+  color: #fff;
+}
+
+/* ─── SVG figure base styles ─── */
+.fig-svg .pieza-bg { fill: rgba(44,95,141,0.18); stroke: #1a2238; stroke-width: 2.5; stroke-linejoin: round; }
+.fig-svg .cota-line { stroke: #1a2238; stroke-width: 1; fill: none; }
+.fig-svg .cota-aux { stroke: #1a2238; stroke-width: 1; fill: none; }
+.fig-svg .cota-arrow { fill: #1a2238; }
+.fig-svg .cota-text { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; fill: #1a2238; }
+.fig-svg .axis { stroke: #1a2238; stroke-width: 0.8; fill: none; stroke-dasharray: 8 2 2 2; }
+
+/* En modo ayuda: tooltips */
+.help-toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a2238;
+  color: #fff;
+  padding: 0.7rem 1.2rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  max-width: 90%;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+.help-toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U00 · Dibujo técnico · Practica acotación</span>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Inicio</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U00</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📘</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>📐</span><span class="nc-lbl">Practica acotación</span></span>
+</nav>
+
+<div class="unidad-layout">
+
+<aside class="sb-side">
+  <h3>Cómo se juega</h3>
+  <p style="padding: 0.6rem 1rem; font-size:0.88rem; color:#555; line-height:1.55;">
+    <strong>1.</strong> Mira las cotas de la figura.<br>
+    <strong>2.</strong> <strong>Haz clic</strong> sobre las que creas que están <strong>mal</strong>.<br>
+    <strong>3.</strong> Pulsa <em>Comprobar</em>. Verás qué fallaste y por qué.
+  </p>
+  <h3>Códigos de color</h3>
+  <p style="padding: 0.5rem 1rem; font-size:0.86rem; color:#555; line-height:1.7;">
+    🟢 verde · acierto<br>
+    🔴 rojo · cota mal marcada<br>
+    🟡 amarillo · cota errónea que se te escapó
+  </p>
+  <h3>Las 6 normas</h3>
+  <ul style="font-size:0.83rem; color:#555; padding:0 1rem 0 2rem;">
+    <li>Cotas <strong>necesarias</strong> y sin repetir.</li>
+    <li>En la <strong>vista que mejor</strong> define la medida.</li>
+    <li><strong>Misma unidad</strong> (mm).</li>
+    <li>Se leen <strong>desde abajo</strong> y desde la derecha.</li>
+    <li>Cifras <strong>encima</strong> de la línea de cota.</li>
+    <li><strong>Fuera</strong> de la figura.</li>
+  </ul>
+</aside>
+
+<main class="ct" id="main-content">
+
+<h1 class="unidad-titulo">📐 Practica acotación</h1>
+<p class="unidad-subt">Cuatro figuras con cotas. Algunas están bien acotadas, otras tienen errores. <strong>Haz clic sobre las cotas erróneas</strong> y luego pulsa <em>Comprobar</em>.</p>
+
+<div class="modo-toggle" role="tablist" aria-label="Modo de práctica">
+  <button id="modo-aprender" class="active" onclick="setModo('aprender')">📚 Modo aprender</button>
+  <button id="modo-examen" onclick="setModo('examen')">🎯 Modo examen</button>
+</div>
+
+<div class="figura-nav" id="fig-nav">
+  <button class="fig-tab active" data-fig="0">F1 · Rectángulo</button>
+  <button class="fig-tab" data-fig="1">F2 · Pieza en L</button>
+  <button class="fig-tab" data-fig="2">F3 · Cuadrado</button>
+  <button class="fig-tab" data-fig="3">F4 · Pieza con redondeo</button>
+</div>
+
+<div class="figura-box" id="figura-box">
+  <h2 class="fig-title" id="fig-title"></h2>
+  <div class="fig-instructions" id="fig-instructions"></div>
+
+  <div class="svg-canvas" id="svg-canvas">
+    <!-- SVG inyectado por JS -->
+  </div>
+
+  <div class="controles">
+    <button class="btn-pista" onclick="darPista()">💡 Pista</button>
+    <button class="btn-comprobar" onclick="comprobar()">✅ Comprobar</button>
+    <button class="btn-resetear" onclick="resetear()">↺ Reintentar</button>
+  </div>
+
+  <div class="score-box" id="score-box">
+    <div class="score-titulo" id="score-titulo"></div>
+    <div class="score-stats" id="score-stats"></div>
+  </div>
+
+  <div class="errores-explicacion" id="errores-box">
+    <h3>Explicación de cada cota</h3>
+    <div id="errores-list"></div>
+  </div>
+</div>
+
+<div id="help-toast" class="help-toast"></div>
+
+<footer class="unidad-foot">
+  IES Jiménez de Quesada · Santa Fe (Granada)<br>
+  TyD 2º ESO · Curso 2025-26 · Manuel Alonso Herrera<br>
+  <a href="../index.html">← Volver al hub</a> · <a href="../libro-digital.html">📘 Libro digital</a>
+  <br><span class="version">Practica acotación v1.0</span>
+</footer>
+
+</main>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  // ════════════════════════════════════════════════════════════════
+  // DEFINICIÓN DE FIGURAS
+  // Cada cota es un grupo SVG con:
+  //   - bg rect invisible (para hover/click)
+  //   - elementos visibles
+  //   - data-error: true/false
+  //   - data-msg: explicación del error o de por qué es correcta
+  // ════════════════════════════════════════════════════════════════
+
+  const figuras = [
+    // ─────────── F1 · Rectángulo simple ───────────
+    {
+      title: 'Figura 1 · Rectángulo simple',
+      instructions: 'Un rectángulo con varias cotas. Detecta cuáles están <strong>mal acotadas</strong> según las normas y márcalas haciendo clic.',
+      viewBox: '0 0 480 280',
+      svg: `
+        <!-- Pieza: rectángulo 200×100 -->
+        <rect x="120" y="100" width="200" height="100" class="pieza-bg"/>
+
+        <!-- C1: cota superior 200 → BIEN -->
+        <g class="cota" data-id="c1" data-error="false" data-msg="Cota correcta: está fuera del dibujo, la cifra está centrada y encima de la línea de cota.">
+          <rect class="cota-bg" x="115" y="48" width="210" height="42"/>
+          <line x1="120" y1="100" x2="120" y2="65" class="cota-aux"/>
+          <line x1="320" y1="100" x2="320" y2="65" class="cota-aux"/>
+          <line x1="120" y1="75" x2="320" y2="75" class="cota-line"/>
+          <polygon points="120,75 130,71 130,79" class="cota-arrow"/>
+          <polygon points="320,75 310,71 310,79" class="cota-arrow"/>
+          <text x="220" y="72" text-anchor="middle" class="cota-text">200</text>
+          <text class="icon-result" x="220" y="60" text-anchor="middle">✓</text>
+        </g>
+
+        <!-- C2: cota lateral 100 → BIEN -->
+        <g class="cota" data-id="c2" data-error="false" data-msg="Cota correcta: la altura está acotada fuera de la pieza, perpendicular al lado medido.">
+          <rect class="cota-bg" x="330" y="95" width="50" height="110"/>
+          <line x1="320" y1="100" x2="365" y2="100" class="cota-aux"/>
+          <line x1="320" y1="200" x2="365" y2="200" class="cota-aux"/>
+          <line x1="355" y1="100" x2="355" y2="200" class="cota-line"/>
+          <polygon points="355,100 351,110 359,110" class="cota-arrow"/>
+          <polygon points="355,200 351,190 359,190" class="cota-arrow"/>
+          <text x="365" y="155" class="cota-text">100</text>
+          <text class="icon-result" x="370" y="155">✓</text>
+        </g>
+
+        <!-- C3: cota REPETIDA (también 200) en la parte inferior → MAL -->
+        <g class="cota" data-id="c3" data-error="true" data-msg="Cota repetida: la anchura ya está acotada arriba (200). Por norma, las cotas no se repiten.">
+          <rect class="cota-bg" x="115" y="215" width="210" height="42"/>
+          <line x1="120" y1="200" x2="120" y2="235" class="cota-aux"/>
+          <line x1="320" y1="200" x2="320" y2="235" class="cota-aux"/>
+          <line x1="120" y1="225" x2="320" y2="225" class="cota-line"/>
+          <polygon points="120,225 130,221 130,229" class="cota-arrow"/>
+          <polygon points="320,225 310,221 310,229" class="cota-arrow"/>
+          <text x="220" y="245" text-anchor="middle" class="cota-text">200</text>
+          <text class="icon-result" x="220" y="265" text-anchor="middle">✗</text>
+        </g>
+
+        <!-- C4: cota DENTRO de la pieza (anchura 200) → MAL -->
+        <g class="cota" data-id="c4" data-error="true" data-msg="Cota dentro de la figura. Las cotas deben dibujarse SIEMPRE fuera del dibujo.">
+          <rect class="cota-bg" x="115" y="140" width="210" height="20"/>
+          <line x1="125" y1="150" x2="315" y2="150" class="cota-line"/>
+          <polygon points="125,150 135,146 135,154" class="cota-arrow"/>
+          <polygon points="315,150 305,146 305,154" class="cota-arrow"/>
+          <text x="220" y="147" text-anchor="middle" class="cota-text">200</text>
+          <text class="icon-result" x="220" y="165" text-anchor="middle">✗</text>
+        </g>
+      `
+    },
+
+    // ─────────── F2 · Pieza en L ───────────
+    {
+      title: 'Figura 2 · Pieza en L',
+      instructions: 'Una pieza con forma de L. Tiene varias cotas, fíjate especialmente en <strong>la posición de las cifras</strong> y en si se acumulan en el mismo sitio.',
+      viewBox: '0 0 540 320',
+      svg: `
+        <!-- Pieza en L (rect 180×100 + rect 80×60 encima a la izq) -->
+        <path d="M 100 200 L 100 100 L 220 100 L 220 160 L 320 160 L 320 200 Z" class="pieza-bg"/>
+
+        <!-- C1: cota total anchura 220 (de 100 a 320) → BIEN -->
+        <g class="cota" data-id="c1" data-error="false" data-msg="Cota correcta: anchura total de la pieza, alineada en serie, fuera de la figura.">
+          <rect class="cota-bg" x="95" y="225" width="230" height="42"/>
+          <line x1="100" y1="200" x2="100" y2="245" class="cota-aux"/>
+          <line x1="320" y1="200" x2="320" y2="245" class="cota-aux"/>
+          <line x1="100" y1="235" x2="320" y2="235" class="cota-line"/>
+          <polygon points="100,235 110,231 110,239" class="cota-arrow"/>
+          <polygon points="320,235 310,231 310,239" class="cota-arrow"/>
+          <text x="210" y="253" text-anchor="middle" class="cota-text">220</text>
+          <text class="icon-result" x="210" y="273" text-anchor="middle">✓</text>
+        </g>
+
+        <!-- C2: cota parcial 120 (escalón izq) en serie debajo → BIEN -->
+        <g class="cota" data-id="c2" data-error="false" data-msg="Cota correcta: anchura del escalón superior, en serie con la cota total y bien alineada.">
+          <rect class="cota-bg" x="95" y="265" width="135" height="42"/>
+          <line x1="220" y1="200" x2="220" y2="285" class="cota-aux"/>
+          <line x1="100" y1="275" x2="220" y2="275" class="cota-line"/>
+          <polygon points="100,275 110,271 110,279" class="cota-arrow"/>
+          <polygon points="220,275 210,271 210,279" class="cota-arrow"/>
+          <text x="160" y="293" text-anchor="middle" class="cota-text">120</text>
+          <text class="icon-result" x="160" y="307" text-anchor="middle">✓</text>
+        </g>
+
+        <!-- C3: cota lateral altura total 100 → BIEN -->
+        <g class="cota" data-id="c3" data-error="false" data-msg="Cota correcta: altura total acotada en la vista que mejor define la magnitud.">
+          <rect class="cota-bg" x="40" y="95" width="50" height="115"/>
+          <line x1="100" y1="100" x2="65" y2="100" class="cota-aux"/>
+          <line x1="100" y1="200" x2="65" y2="200" class="cota-aux"/>
+          <line x1="75" y1="100" x2="75" y2="200" class="cota-line"/>
+          <polygon points="75,100 71,110 79,110" class="cota-arrow"/>
+          <polygon points="75,200 71,190 79,190" class="cota-arrow"/>
+          <text x="55" y="155" text-anchor="end" class="cota-text">100</text>
+          <text class="icon-result" x="42" y="155" text-anchor="end">✓</text>
+        </g>
+
+        <!-- C4: cota altura escalón 40 — MAL, cifra colocada al lado en vez de encima -->
+        <g class="cota" data-id="c4" data-error="true" data-msg="La cifra está mal colocada: debe ir encima de la línea de cota y centrada, no al lado.">
+          <rect class="cota-bg" x="335" y="155" width="60" height="55"/>
+          <line x1="320" y1="160" x2="365" y2="160" class="cota-aux"/>
+          <line x1="320" y1="200" x2="365" y2="200" class="cota-aux"/>
+          <line x1="355" y1="160" x2="355" y2="200" class="cota-line"/>
+          <polygon points="355,160 351,170 359,170" class="cota-arrow"/>
+          <polygon points="355,200 351,190 359,190" class="cota-arrow"/>
+          <text x="365" y="200" class="cota-text">40</text>
+          <text class="icon-result" x="385" y="180">✗</text>
+        </g>
+
+        <!-- C5: línea de cota PISA una arista del objeto — MAL -->
+        <g class="cota" data-id="c5" data-error="true" data-msg="La línea de cota coincide con una arista de la pieza. Norma: la línea de cota nunca debe coincidir con aristas ni con ejes de simetría.">
+          <rect class="cota-bg" x="215" y="125" width="115" height="50"/>
+          <line x1="220" y1="160" x2="320" y2="160" class="cota-line"/>
+          <polygon points="220,160 230,156 230,164" class="cota-arrow"/>
+          <polygon points="320,160 310,156 310,164" class="cota-arrow"/>
+          <text x="270" y="156" text-anchor="middle" class="cota-text">100</text>
+          <text class="icon-result" x="270" y="135" text-anchor="middle">✗</text>
+        </g>
+      `
+    },
+
+    // ─────────── F3 · Cuadrado ───────────
+    {
+      title: 'Figura 3 · Cuadrado',
+      instructions: 'Un cuadrado. <strong>¿Cuántas cotas necesita realmente para quedar definido?</strong> Recuerda: las cotas no se repiten.',
+      viewBox: '0 0 440 260',
+      svg: `
+        <!-- Cuadrado 120×120 -->
+        <rect x="160" y="80" width="120" height="120" class="pieza-bg"/>
+
+        <!-- C1: cota superior 120 → BIEN -->
+        <g class="cota" data-id="c1" data-error="false" data-msg="Cota correcta: define la anchura del cuadrado. Con esta sola cota (y sabiendo que es un cuadrado) la pieza queda definida.">
+          <rect class="cota-bg" x="155" y="30" width="130" height="42"/>
+          <line x1="160" y1="80" x2="160" y2="48" class="cota-aux"/>
+          <line x1="280" y1="80" x2="280" y2="48" class="cota-aux"/>
+          <line x1="160" y1="58" x2="280" y2="58" class="cota-line"/>
+          <polygon points="160,58 170,54 170,62" class="cota-arrow"/>
+          <polygon points="280,58 270,54 270,62" class="cota-arrow"/>
+          <text x="220" y="55" text-anchor="middle" class="cota-text">120</text>
+          <text class="icon-result" x="220" y="42" text-anchor="middle">✓</text>
+        </g>
+
+        <!-- C2: cota lateral 120 también — INNECESARIA porque ya está definida -->
+        <g class="cota" data-id="c2" data-error="true" data-msg="Cota innecesaria: como ya sabemos que es un cuadrado, basta con UNA cota. Si se pone otra repitiendo la medida, sobra. Bastaría con añadir el símbolo ▢ a la cota superior.">
+          <rect class="cota-bg" x="290" y="75" width="55" height="130"/>
+          <line x1="280" y1="80" x2="325" y2="80" class="cota-aux"/>
+          <line x1="280" y1="200" x2="325" y2="200" class="cota-aux"/>
+          <line x1="315" y1="80" x2="315" y2="200" class="cota-line"/>
+          <polygon points="315,80 311,90 319,90" class="cota-arrow"/>
+          <polygon points="315,200 311,190 319,190" class="cota-arrow"/>
+          <text x="325" y="145" class="cota-text">120</text>
+          <text class="icon-result" x="345" y="145">✗</text>
+        </g>
+
+        <!-- C3: cota INFERIOR repetida (también 120) — MAL -->
+        <g class="cota" data-id="c3" data-error="true" data-msg="Cota repetida: la anchura ya está acotada arriba. Por norma, las cotas no se repiten.">
+          <rect class="cota-bg" x="155" y="215" width="130" height="42"/>
+          <line x1="160" y1="200" x2="160" y2="235" class="cota-aux"/>
+          <line x1="280" y1="200" x2="280" y2="235" class="cota-aux"/>
+          <line x1="160" y1="225" x2="280" y2="225" class="cota-line"/>
+          <polygon points="160,225 170,221 170,229" class="cota-arrow"/>
+          <polygon points="280,225 270,221 270,229" class="cota-arrow"/>
+          <text x="220" y="245" text-anchor="middle" class="cota-text">120</text>
+          <text class="icon-result" x="220" y="245" text-anchor="middle" style="transform:translateX(40px)">✗</text>
+        </g>
+      `
+    },
+
+    // ─────────── F4 · Pieza con redondeo ───────────
+    {
+      title: 'Figura 4 · Pieza con redondeo',
+      instructions: 'Una pieza con una esquina redondeada y un agujero circular. Atención a los <strong>símbolos R y Ø</strong> y a la línea de cota de los redondos.',
+      viewBox: '0 0 500 320',
+      svg: `
+        <!-- Pieza: rectángulo 180×120 con esquina sup-der redondeada R30 y agujero Ø40 -->
+        <path d="M 120 100 L 270 100 A 30 30 0 0 1 300 130 L 300 220 L 120 220 Z" class="pieza-bg"/>
+        <circle cx="180" cy="170" r="20" fill="#fff" stroke="#1a2238" stroke-width="2"/>
+        <line x1="180" y1="135" x2="180" y2="205" class="axis"/>
+        <line x1="145" y1="170" x2="215" y2="170" class="axis"/>
+
+        <!-- C1: anchura total 180 — BIEN -->
+        <g class="cota" data-id="c1" data-error="false" data-msg="Cota correcta: anchura total de la pieza acotada fuera y bien presentada.">
+          <rect class="cota-bg" x="115" y="245" width="195" height="42"/>
+          <line x1="120" y1="220" x2="120" y2="265" class="cota-aux"/>
+          <line x1="300" y1="220" x2="300" y2="265" class="cota-aux"/>
+          <line x1="120" y1="255" x2="300" y2="255" class="cota-line"/>
+          <polygon points="120,255 130,251 130,259" class="cota-arrow"/>
+          <polygon points="300,255 290,251 290,259" class="cota-arrow"/>
+          <text x="210" y="252" text-anchor="middle" class="cota-text">180</text>
+          <text class="icon-result" x="210" y="278" text-anchor="middle">✓</text>
+        </g>
+
+        <!-- C2: altura 120 — BIEN -->
+        <g class="cota" data-id="c2" data-error="false" data-msg="Cota correcta: altura total de la pieza.">
+          <rect class="cota-bg" x="320" y="95" width="50" height="135"/>
+          <line x1="300" y1="100" x2="350" y2="100" class="cota-aux"/>
+          <line x1="300" y1="220" x2="350" y2="220" class="cota-aux"/>
+          <line x1="340" y1="100" x2="340" y2="220" class="cota-line"/>
+          <polygon points="340,100 336,110 344,110" class="cota-arrow"/>
+          <polygon points="340,220 336,210 344,210" class="cota-arrow"/>
+          <text x="350" y="165" class="cota-text">120</text>
+          <text class="icon-result" x="370" y="165">✓</text>
+        </g>
+
+        <!-- C3: radio R30 desde el centro — BIEN -->
+        <g class="cota" data-id="c3" data-error="false" data-msg="Cota correcta del radio: la línea parte del centro del arco y lleva el símbolo R delante de la cifra.">
+          <rect class="cota-bg" x="265" y="55" width="80" height="80"/>
+          <circle cx="270" cy="130" r="2" fill="#1a2238"/>
+          <line x1="270" y1="130" x2="305" y2="95" class="cota-line"/>
+          <polygon points="305,95 299,95 303,100" class="cota-arrow"/>
+          <text x="310" y="90" class="cota-text">R30</text>
+          <text class="icon-result" x="335" y="78">✓</text>
+        </g>
+
+        <!-- C4: diámetro Ø40 SOBRE EL EJE — MAL -->
+        <g class="cota" data-id="c4" data-error="true" data-msg="La línea de cota del diámetro coincide con un eje de simetría. Por norma debe estar inclinada para no confundirse con los ejes.">
+          <rect class="cota-bg" x="140" y="160" width="80" height="22"/>
+          <line x1="160" y1="170" x2="200" y2="170" class="cota-line"/>
+          <polygon points="160,170 168,166 168,174" class="cota-arrow"/>
+          <polygon points="200,170 192,166 192,174" class="cota-arrow"/>
+          <text x="180" y="183" text-anchor="middle" class="cota-text">Ø40</text>
+          <text class="icon-result" x="180" y="155" text-anchor="middle">✗</text>
+        </g>
+
+        <!-- C5: cota sin símbolo (40) para el agujero — MAL -->
+        <g class="cota" data-id="c5" data-error="true" data-msg="Falta el símbolo Ø delante de la cifra: cuando se acota una circunferencia hay que indicar que es un diámetro.">
+          <rect class="cota-bg" x="55" y="155" width="65" height="42"/>
+          <line x1="160" y1="170" x2="70" y2="170" class="cota-aux"/>
+          <line x1="80" y1="180" x2="80" y2="195" class="cota-line"/>
+          <polygon points="80,170 76,178 84,178" class="cota-arrow"/>
+          <text x="80" y="178" text-anchor="middle" class="cota-text">40</text>
+          <text class="icon-result" x="80" y="208" text-anchor="middle">✗</text>
+        </g>
+      `
+    }
+  ];
+
+  // ── Estado ─────────────────────────────────────────────
+  let figIdx = 0;
+  let modo = 'aprender';
+  const completed = new Set();
+
+  const canvas = document.getElementById('svg-canvas');
+  const figTitle = document.getElementById('fig-title');
+  const figInstr = document.getElementById('fig-instructions');
+  const scoreBox = document.getElementById('score-box');
+  const scoreTitulo = document.getElementById('score-titulo');
+  const scoreStats = document.getElementById('score-stats');
+  const erroresBox = document.getElementById('errores-box');
+  const erroresList = document.getElementById('errores-list');
+  const tabs = document.querySelectorAll('.fig-tab');
+  const helpToast = document.getElementById('help-toast');
+
+  function renderFigura() {
+    const fig = figuras[figIdx];
+    figTitle.textContent = fig.title;
+    figInstr.innerHTML = fig.instructions;
+
+    canvas.innerHTML = `<svg viewBox="${fig.viewBox}" xmlns="http://www.w3.org/2000/svg" class="fig-svg" style="max-width:680px;">${fig.svg}</svg>`;
+
+    // bind clics
+    canvas.querySelectorAll('.cota').forEach(g => {
+      g.addEventListener('click', () => toggleCota(g));
+      // tooltip on hover in modo aprender
+      if (modo === 'aprender') {
+        g.addEventListener('mouseenter', e => mostrarTooltip(g));
+        g.addEventListener('mouseleave', () => ocultarTooltip());
+      }
+    });
+
+    scoreBox.classList.remove('show', 'perfect', 'partial', 'fail');
+    erroresBox.classList.remove('show');
+    erroresList.innerHTML = '';
+  }
+
+  function toggleCota(g) {
+    if (g.classList.contains('solved-ok') || g.classList.contains('solved-err') || g.classList.contains('solved-miss')) return;
+    g.classList.toggle('selected');
+  }
+
+  function mostrarTooltip(g) {
+    // Solo si está sin comprobar y la cota tiene mensaje
+    if (g.classList.contains('solved-ok') || g.classList.contains('solved-err') || g.classList.contains('solved-miss')) return;
+    // No mostrar tooltip en modo aprender hasta que haya pista activa
+  }
+  function ocultarTooltip() {
+    helpToast.classList.remove('show');
+  }
+
+  function toast(msg, ms = 2800) {
+    helpToast.textContent = msg;
+    helpToast.classList.add('show');
+    clearTimeout(toast._tm);
+    toast._tm = setTimeout(() => helpToast.classList.remove('show'), ms);
+  }
+
+  window.darPista = function() {
+    const fig = figuras[figIdx];
+    const cotas = canvas.querySelectorAll('.cota');
+    const erroneasNoMarcadas = Array.from(cotas).filter(c => c.dataset.error === 'true' && !c.classList.contains('selected') && !c.classList.contains('solved-ok'));
+    if (erroneasNoMarcadas.length === 0) {
+      toast('No hay más cotas erróneas sin detectar. Pulsa comprobar.');
+      return;
+    }
+    if (modo === 'examen') {
+      toast('💡 No hay pistas en modo examen. Cambia al modo aprender para ver las pistas.');
+      return;
+    }
+    // Resaltar una cota errónea aleatoria
+    const c = erroneasNoMarcadas[Math.floor(Math.random() * erroneasNoMarcadas.length)];
+    // pulse
+    const bg = c.querySelector('.cota-bg');
+    const original = bg.getAttribute('fill');
+    let blinks = 0;
+    const blink = setInterval(() => {
+      bg.style.fill = blinks % 2 === 0 ? 'rgba(232,182,71,0.55)' : 'transparent';
+      blinks++;
+      if (blinks > 5) {
+        clearInterval(blink);
+        bg.style.fill = '';
+      }
+    }, 250);
+    toast('💡 Hay una cota con error que se te escapa. Mírala con atención.');
+  };
+
+  window.comprobar = function() {
+    const cotas = canvas.querySelectorAll('.cota');
+    let aciertos = 0, falsosPositivos = 0, perdidos = 0, totalErrores = 0;
+    const detail = [];
+
+    cotas.forEach(c => {
+      const esError = c.dataset.error === 'true';
+      const marcada = c.classList.contains('selected');
+      const msg = c.dataset.msg;
+      c.classList.remove('selected');
+
+      if (esError) totalErrores++;
+      if (esError && marcada) {
+        c.classList.add('solved-ok');
+        aciertos++;
+        detail.push({tipo: 'ok', id: c.dataset.id, msg: msg});
+      } else if (!esError && marcada) {
+        c.classList.add('solved-err');
+        falsosPositivos++;
+        detail.push({tipo: 'falso', id: c.dataset.id, msg: msg});
+      } else if (esError && !marcada) {
+        c.classList.add('solved-miss');
+        perdidos++;
+        detail.push({tipo: 'miss', id: c.dataset.id, msg: msg});
+      }
+    });
+
+    // Score
+    const totalEval = aciertos + falsosPositivos + perdidos;
+    let nota = '';
+    let scoreClass = '';
+    if (falsosPositivos === 0 && perdidos === 0) {
+      nota = '🎉 ¡Perfecto! Has acertado todas las cotas erróneas sin marcar ninguna correcta.';
+      scoreClass = 'perfect';
+      completed.add(figIdx);
+      tabs[figIdx].classList.add('completed');
+    } else if (aciertos > 0 && (perdidos + falsosPositivos) <= 1) {
+      nota = '👍 Casi: revisa las cotas marcadas en amarillo y rojo y vuelve a intentarlo.';
+      scoreClass = 'partial';
+    } else {
+      nota = '🤔 Quedan errores por detectar o has marcado cotas correctas como mal. Lee las explicaciones.';
+      scoreClass = 'fail';
+    }
+    scoreBox.classList.remove('perfect', 'partial', 'fail');
+    scoreBox.classList.add('show', scoreClass);
+    scoreTitulo.textContent = nota;
+    scoreStats.innerHTML = `
+      <span><strong>${aciertos}</strong> aciertos sobre <strong>${totalErrores}</strong> cotas erróneas</span>
+      <span style="color:#c44536;"><strong>${falsosPositivos}</strong> cotas correctas marcadas como mal</span>
+      <span style="color:#8a6d1a;"><strong>${perdidos}</strong> errores no detectados</span>
+    `;
+
+    // Explicación detallada
+    erroresList.innerHTML = '';
+    detail.forEach(d => {
+      const div = document.createElement('div');
+      div.className = 'error-item ' + (d.tipo === 'ok' ? 'ok' : d.tipo === 'miss' ? 'miss' : '');
+      const tag = d.tipo === 'ok' ? '<span class="err-tag ok-tag">ACIERTO</span>' :
+                  d.tipo === 'miss' ? '<span class="err-tag miss-tag">SE TE ESCAPÓ</span>' :
+                  '<span class="err-tag err">CORRECTA, NO ES ERROR</span>';
+      div.innerHTML = `${tag} <strong>Cota ${d.id.toUpperCase()}:</strong> ${d.msg}`;
+      erroresList.appendChild(div);
+    });
+    erroresBox.classList.add('show');
+  };
+
+  window.resetear = function() {
+    canvas.querySelectorAll('.cota').forEach(c => {
+      c.classList.remove('selected', 'solved-ok', 'solved-err', 'solved-miss');
+    });
+    scoreBox.classList.remove('show');
+    erroresBox.classList.remove('show');
+    erroresList.innerHTML = '';
+  };
+
+  window.setModo = function(m) {
+    modo = m;
+    document.getElementById('modo-aprender').classList.toggle('active', m === 'aprender');
+    document.getElementById('modo-examen').classList.toggle('active', m === 'examen');
+    // Re-render to update event listeners
+    resetear();
+    renderFigura();
+    toast(m === 'aprender' ? '📚 Modo aprender: tienes pistas y explicación detallada.' : '🎯 Modo examen: sin pistas. ¡Suerte!');
+  };
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => {
+      figIdx = i;
+      tabs.forEach((t, j) => t.classList.toggle('active', j === i));
+      renderFigura();
+    });
+  });
+
+  renderFigura();
+})();
+</script>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

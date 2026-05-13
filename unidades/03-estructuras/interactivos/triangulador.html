@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Triangulador · U03 · TyD 2º ESO</title>
+<meta name="description" content="Interactivo del triangulador: comprueba visualmente cómo una diagonal convierte un cuadrado deformable en una estructura rígida. TyD 2º ESO.">
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/03-estructuras/interactivos/triangulador.html">
+
+<meta property="og:title" content="Triangulador · U03 · TyD 2º ESO">
+<meta property="og:description" content="Comprueba visualmente cómo una diagonal convierte un cuadrado en una estructura rígida.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/03-estructuras/interactivos/triangulador.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Triangulador · U03 · TyD 2º ESO">
+<meta name="twitter:description" content="Cómo una diagonal convierte un cuadrado en estructura rígida.">
+<meta name="twitter:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+:root {
+  --ok: #2e7d4f;
+  --err: #c44536;
+  --warn: #e8b647;
+}
+
+.bloque {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 14px;
+  padding: 1.4rem 1.6rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+.bloque h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--principal, #D4700A);
+  margin: 0 0 0.5rem;
+  border-bottom: 2px solid var(--principal, #D4700A);
+  padding-bottom: 0.4rem;
+}
+.bloque p.descripcion {
+  color: #555;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+/* ════ SECCIÓN 1 · CUADRADO DEFORMABLE ════ */
+.lab-area {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 1.5rem;
+  margin: 1rem 0;
+  align-items: start;
+}
+
+.lab-svg-wrap {
+  background: #f8f5ec;
+  border: 1px solid #e0d6b8;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+}
+.lab-svg-wrap svg {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+}
+
+.lab-controles {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lab-slider {
+  background: #fafafa;
+  border: 1px solid #e3e3e3;
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.lab-slider label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 0.78rem;
+  color: #888;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  display: block;
+}
+.lab-slider .valor {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--principal, #D4700A);
+}
+.lab-slider input[type="range"] {
+  width: 100%;
+  margin-top: 8px;
+  accent-color: var(--principal, #D4700A);
+}
+.lab-slider input[type="range"]:disabled { opacity: 0.4; }
+
+.lab-estado {
+  background: #fff;
+  border: 2px solid #e3e3e3;
+  border-radius: 10px;
+  padding: 12px 14px;
+  text-align: center;
+}
+.lab-estado.deformable {
+  background: #fef4eb;
+  border-color: var(--warn);
+}
+.lab-estado.rigido {
+  background: #ecf8ef;
+  border-color: var(--ok);
+}
+.lab-estado .et {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 4px;
+}
+.lab-estado .val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #222;
+}
+.lab-estado.deformable .val { color: #8a6d1a; }
+.lab-estado.rigido .val { color: var(--ok); }
+
+.btn-primary {
+  background: var(--principal, #D4700A);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.2rem;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-primary:hover:not(:disabled) { background: #b85d08; }
+.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-secondary {
+  background: #fff;
+  color: #666;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0.7rem 1.2rem;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.btn-secondary:hover:not(:disabled) { background: #f5f5f5; }
+.btn-secondary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.lab-callout {
+  background: #fff7eb;
+  border-left: 4px solid var(--principal, #D4700A);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 0.92rem;
+  color: #555;
+  line-height: 1.5;
+  margin-top: 1rem;
+}
+.lab-callout strong { color: #333; }
+
+/* ════ SECCIÓN 2 · LA NAVE ════ */
+.nave-area {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 1.5rem;
+  margin: 1rem 0;
+  align-items: start;
+}
+
+.nave-svg-wrap {
+  background: linear-gradient(to bottom, #e8f1f8 0%, #d5e3ed 60%, #b8a374 60%, #d4be86 100%);
+  border: 1px solid #c5b89f;
+  border-radius: 12px;
+  padding: 1.4rem;
+  text-align: center;
+}
+.nave-svg-wrap svg {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+}
+
+.nave-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nave-hud {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.nave-hud-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.95rem;
+}
+.nave-hud-row span:first-child { color: #666; }
+.nave-hud-row strong {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--principal, #D4700A);
+}
+
+.nave-mensaje {
+  background: #f5f5f5;
+  border-left: 4px solid #aaa;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 0.92rem;
+  color: #555;
+  line-height: 1.45;
+  min-height: 70px;
+}
+.nave-mensaje.ok {
+  background: #ecf8ef;
+  border-color: var(--ok);
+  color: #1a5c34;
+}
+.nave-mensaje.err {
+  background: #fce4e1;
+  border-color: var(--err);
+  color: #7a2a22;
+}
+.nave-mensaje strong { font-weight: 700; }
+
+.nave-hint {
+  font-size: 0.84rem;
+  color: #888;
+  font-style: italic;
+  text-align: center;
+}
+
+/* SVG components */
+.bar-elastic { stroke: #444; stroke-width: 3; stroke-linecap: round; fill: none; transition: all 0.3s ease; }
+.bar-rigid { stroke: var(--ok); stroke-width: 3; stroke-linecap: round; fill: none; transition: all 0.3s ease; }
+.diag-line { stroke: var(--principal, #D4700A); stroke-width: 3; stroke-linecap: round; fill: none; }
+.diag-line.adding { stroke-dasharray: 4 4; opacity: 0.5; }
+.node { fill: #222; stroke: #fff; stroke-width: 1.5; }
+.node-fixed { fill: #444; }
+
+.cuad-clickable {
+  cursor: pointer;
+  fill: rgba(212,112,10,0.05);
+  stroke: rgba(212,112,10,0.3);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 3;
+  transition: all 0.15s;
+}
+.cuad-clickable:hover {
+  fill: rgba(212,112,10,0.18);
+  stroke-dasharray: 0;
+}
+.cuad-triangulado .cuad-clickable {
+  fill: rgba(46,125,79,0.08);
+  stroke: rgba(46,125,79,0.5);
+  stroke-dasharray: 0;
+}
+
+@media (max-width: 700px) {
+  .lab-area, .nave-area { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U03 · Estructuras · Triangulador</span>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Inicio</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U03</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📘</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>📐</span><span class="nc-lbl">Triangulador</span></span>
+</nav>
+
+<div class="unidad-layout">
+
+<aside class="sb-side">
+  <h3>Cómo usarlo</h3>
+  <p style="padding: 0.6rem 1rem; font-size:0.88rem; color:#555; line-height:1.55;">
+    <strong>Sección 1 (Laboratorio):</strong> juega con el slider para deformar un cuadrado. Añade la diagonal y comprueba cómo se rigidiza.<br><br>
+    <strong>Sección 2 (Reto):</strong> aparece una nave industrial con 4 cuadrados. Marca dónde triangular y aplica la carga: si falta alguno, la nave se deforma.
+  </p>
+  <h3>La idea clave</h3>
+  <p style="padding: 0.6rem 1rem; font-size:0.86rem; color:#555; line-height:1.55;">
+    Un <strong>cuadrado</strong> con barras articuladas se deforma fácilmente.<br>
+    Un <strong>triángulo</strong> es <strong>indeformable</strong>: una vez fijadas las tres longitudes, la forma queda determinada.<br>
+    Por eso, añadir una diagonal a un cuadrado lo descompone en dos triángulos rígidos.
+  </p>
+</aside>
+
+<main class="ct" id="main-content">
+
+<h1 class="unidad-titulo">📐 Triangulador</h1>
+<p class="unidad-subt">Por qué la triangulación es el truco más potente para rigidizar una estructura.</p>
+
+<!-- ════ SECCIÓN 1 ════ -->
+<div class="bloque">
+  <h2>1 · Por qué triangulamos · el laboratorio</h2>
+  <p class="descripcion">Mueve el slider para empujar lateralmente un cuadrado con barras articuladas. Verás cómo se deforma. Después pulsa "<strong>Añadir diagonal</strong>" y comprueba que ya no se puede deformar: se ha convertido en dos triángulos.</p>
+
+  <div class="lab-area">
+    <div class="lab-svg-wrap">
+      <svg viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" aria-label="Cuadrado deformable con diagonal opcional">
+        <!-- Suelo (referencia) -->
+        <line x1="20" y1="320" x2="340" y2="320" stroke="#bbb" stroke-width="2" stroke-dasharray="3 3"/>
+        <text x="180" y="345" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-size="13" fill="#888">suelo (referencia)</text>
+
+        <!-- Cuadrado -->
+        <g id="cuad-deform">
+          <!-- Barras -->
+          <line id="bar-bottom" class="bar-elastic" x1="80" y1="300" x2="280" y2="300"/>
+          <line id="bar-left" class="bar-elastic" x1="80" y1="300" x2="80" y2="100"/>
+          <line id="bar-right" class="bar-elastic" x1="280" y1="300" x2="280" y2="100"/>
+          <line id="bar-top" class="bar-elastic" x1="80" y1="100" x2="280" y2="100"/>
+          <!-- Diagonal (oculta inicialmente) -->
+          <line id="bar-diag" class="diag-line" x1="80" y1="300" x2="280" y2="100" style="display:none"/>
+          <!-- Nodos -->
+          <circle id="nodo-bl" class="node-fixed" cx="80" cy="300" r="6"/>
+          <circle id="nodo-br" class="node-fixed" cx="280" cy="300" r="6"/>
+          <circle id="nodo-tl" class="node" cx="80" cy="100" r="6"/>
+          <circle id="nodo-tr" class="node" cx="280" cy="100" r="6"/>
+        </g>
+
+        <!-- Etiquetas -->
+        <text x="180" y="380" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-size="11" fill="#888" id="lbl-svg">Cuadrado deformable (sin diagonal)</text>
+      </svg>
+    </div>
+
+    <div class="lab-controles">
+      <div class="lab-slider">
+        <label>Empuje lateral</label>
+        <div class="valor"><span id="slider-val">0</span>°</div>
+        <input type="range" id="slider-deform" min="0" max="45" value="0" step="1">
+      </div>
+
+      <div class="lab-estado deformable" id="lab-estado">
+        <div class="et">Estado</div>
+        <div class="val" id="lab-estado-txt">Deformable · cuadrado</div>
+      </div>
+
+      <button class="btn-primary" id="btn-diag" onclick="toggleDiag()">🔧 Añadir diagonal</button>
+      <button class="btn-secondary" onclick="reset()">↺ Volver a 0°</button>
+    </div>
+  </div>
+
+  <div class="lab-callout" id="lab-callout">
+    <strong>Pista:</strong> sin diagonal, cualquier empuje lateral convierte el cuadrado en un rombo. Con diagonal, el cuadrado se descompone en <strong>dos triángulos</strong> y queda indeformable.
+  </div>
+</div>
+
+<!-- ════ SECCIÓN 2 · NAVE ════ -->
+<div class="bloque">
+  <h2>2 · El reto · la nave industrial</h2>
+  <p class="descripcion">Esta es la sección lateral de una nave industrial entramada con <strong>4 cuadrados</strong>. Sin triangular, los cuadrados se deformarán al recibir viento o nieve. Haz clic en cada cuadrado para añadirle una diagonal. Cuando creas que está lista, pulsa "<strong>Aplicar carga</strong>".</p>
+
+  <div class="nave-area">
+    <div class="nave-svg-wrap">
+      <svg viewBox="0 0 440 360" xmlns="http://www.w3.org/2000/svg" aria-label="Nave industrial 2x2 con cuadrados triangulables">
+        <!-- Cielo y suelo ya están en el fondo del wrap -->
+        <g id="nave">
+          <!-- Pilares verticales (3 columnas) -->
+          <g id="pilares">
+            <line id="p-l-bot" x1="60" y1="300" x2="60" y2="180" class="bar-elastic"/>
+            <line id="p-m-bot" x1="220" y1="300" x2="220" y2="180" class="bar-elastic"/>
+            <line id="p-r-bot" x1="380" y1="300" x2="380" y2="180" class="bar-elastic"/>
+            <line id="p-l-top" x1="60" y1="180" x2="60" y2="60" class="bar-elastic"/>
+            <line id="p-m-top" x1="220" y1="180" x2="220" y2="60" class="bar-elastic"/>
+            <line id="p-r-top" x1="380" y1="180" x2="380" y2="60" class="bar-elastic"/>
+          </g>
+          <!-- Vigas horizontales (3 niveles) -->
+          <g id="vigas">
+            <line id="v-bot-l" x1="60" y1="300" x2="220" y2="300" class="bar-elastic"/>
+            <line id="v-bot-r" x1="220" y1="300" x2="380" y2="300" class="bar-elastic"/>
+            <line id="v-mid-l" x1="60" y1="180" x2="220" y2="180" class="bar-elastic"/>
+            <line id="v-mid-r" x1="220" y1="180" x2="380" y2="180" class="bar-elastic"/>
+            <line id="v-top-l" x1="60" y1="60" x2="220" y2="60" class="bar-elastic"/>
+            <line id="v-top-r" x1="220" y1="60" x2="380" y2="60" class="bar-elastic"/>
+          </g>
+          <!-- Diagonales (ocultas) -->
+          <g id="diagonales">
+            <line id="d-bl" x1="60" y1="300" x2="220" y2="180" class="diag-line" style="display:none"/>
+            <line id="d-br" x1="220" y1="300" x2="380" y2="180" class="diag-line" style="display:none"/>
+            <line id="d-tl" x1="60" y1="180" x2="220" y2="60" class="diag-line" style="display:none"/>
+            <line id="d-tr" x1="220" y1="180" x2="380" y2="60" class="diag-line" style="display:none"/>
+          </g>
+          <!-- Cuadrados clicables (overlay para activar) -->
+          <g id="cuadros-click">
+            <rect class="cuad-clickable" data-c="bl" x="60" y="180" width="160" height="120" onclick="toggleCuadro('bl')"/>
+            <rect class="cuad-clickable" data-c="br" x="220" y="180" width="160" height="120" onclick="toggleCuadro('br')"/>
+            <rect class="cuad-clickable" data-c="tl" x="60" y="60" width="160" height="120" onclick="toggleCuadro('tl')"/>
+            <rect class="cuad-clickable" data-c="tr" x="220" y="60" width="160" height="120" onclick="toggleCuadro('tr')"/>
+          </g>
+          <!-- Nodos en cada esquina -->
+          <g id="nodos-nave">
+            <circle cx="60" cy="300" r="5" class="node-fixed"/>
+            <circle cx="220" cy="300" r="5" class="node-fixed"/>
+            <circle cx="380" cy="300" r="5" class="node-fixed"/>
+            <circle cx="60" cy="180" r="5" class="node"/>
+            <circle cx="220" cy="180" r="5" class="node"/>
+            <circle cx="380" cy="180" r="5" class="node"/>
+            <circle cx="60" cy="60" r="5" class="node"/>
+            <circle cx="220" cy="60" r="5" class="node"/>
+            <circle cx="380" cy="60" r="5" class="node"/>
+          </g>
+        </g>
+        <!-- Viento (decorativo, aparece al aplicar carga) -->
+        <g id="viento" style="display:none">
+          <text x="410" y="120" text-anchor="end" font-family="Barlow Condensed, sans-serif" font-size="14" fill="#2c5f8d" font-weight="700">💨 viento →</text>
+          <line x1="410" y1="135" x2="430" y2="135" stroke="#2c5f8d" stroke-width="2"/>
+          <polygon points="430,135 425,131 425,139" fill="#2c5f8d"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="nave-info">
+      <div class="nave-hud">
+        <div class="nave-hud-row">
+          <span>Triangulados</span>
+          <strong><span id="nave-count">0</span>/4</strong>
+        </div>
+        <div class="nave-hud-row">
+          <span>Faltan</span>
+          <strong id="nave-faltan">4</strong>
+        </div>
+      </div>
+
+      <button class="btn-primary" id="btn-carga" onclick="aplicarCarga()">💨 Aplicar carga (viento)</button>
+      <button class="btn-secondary" onclick="resetNave()">↺ Reiniciar nave</button>
+
+      <div class="nave-mensaje" id="nave-mensaje">
+        Pulsa los cuadrados para añadirles una diagonal. Luego aplica la carga.
+      </div>
+
+      <p class="nave-hint">Mira el icono del viento al aplicar la carga: ahí va a llegar la fuerza.</p>
+    </div>
+  </div>
+
+  <div class="lab-callout">
+    <strong>Por qué hay que triangular todos:</strong> en una estructura entramada, una sola sección sin triangular es el "eslabón débil". El viento la empuja, ese cuadrado se deforma y arrastra al resto. <strong>Basta con que falte un triángulo</strong> para que la nave entera ceda. Por eso, en las naves industriales reales, todos los pórticos llevan diagonales o cruces de San Andrés.
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════
+//  SECCIÓN 1 · CUADRADO DEFORMABLE
+// ══════════════════════════════════════════════════════════
+let diagAdded = false;
+const slider = document.getElementById('slider-deform');
+const sliderVal = document.getElementById('slider-val');
+const labEstado = document.getElementById('lab-estado');
+const labEstadoTxt = document.getElementById('lab-estado-txt');
+const btnDiag = document.getElementById('btn-diag');
+const lblSvg = document.getElementById('lbl-svg');
+const labCallout = document.getElementById('lab-callout');
+
+const barTop = document.getElementById('bar-top');
+const barLeft = document.getElementById('bar-left');
+const barRight = document.getElementById('bar-right');
+const barDiag = document.getElementById('bar-diag');
+const nodoTL = document.getElementById('nodo-tl');
+const nodoTR = document.getElementById('nodo-tr');
+
+function actualizarCuadrado() {
+  const ang = parseFloat(slider.value);
+  sliderVal.textContent = ang;
+  // Las esquinas superiores se desplazan hacia la derecha en función del ángulo
+  // base = 80, 280 a y=100 (cuadrado en reposo)
+  // con shear: x_top = x_base + h * tan(ang)
+  const h = 200; // altura del cuadrado
+  const dx = h * Math.tan(ang * Math.PI / 180);
+  const x_tl = 80 + dx;
+  const x_tr = 280 + dx;
+
+  barTop.setAttribute('x1', x_tl);
+  barTop.setAttribute('x2', x_tr);
+  barLeft.setAttribute('x2', x_tl);
+  barRight.setAttribute('x2', x_tr);
+  nodoTL.setAttribute('cx', x_tl);
+  nodoTR.setAttribute('cx', x_tr);
+
+  if (diagAdded) {
+    barDiag.setAttribute('x2', x_tr);
+  }
+
+  // Actualizar estado
+  if (diagAdded) {
+    labEstado.className = 'lab-estado rigido';
+    labEstadoTxt.textContent = 'Rígido · 2 triángulos';
+    lblSvg.textContent = 'Cuadrado con diagonal · INDEFORMABLE';
+  } else {
+    labEstado.className = 'lab-estado deformable';
+    if (ang === 0) {
+      labEstadoTxt.textContent = 'Deformable · cuadrado';
+      lblSvg.textContent = 'Cuadrado deformable (sin diagonal)';
+    } else {
+      labEstadoTxt.textContent = `Deformado · ${ang}° de inclinación`;
+      lblSvg.textContent = `Paralelogramo · ${ang}° (cualquier empuje lo deforma)`;
+    }
+  }
+}
+
+slider.addEventListener('input', () => {
+  if (diagAdded) {
+    // Si hay diagonal, fijar slider en 0
+    slider.value = 0;
+  }
+  actualizarCuadrado();
+});
+
+function toggleDiag() {
+  diagAdded = !diagAdded;
+  if (diagAdded) {
+    // Reset slider a 0 al añadir diagonal
+    slider.value = 0;
+    slider.disabled = true;
+    barDiag.style.display = '';
+    btnDiag.textContent = '✂️ Quitar diagonal';
+    btnDiag.style.background = '#6a6a6a';
+    labCallout.innerHTML = '<strong>Ahora es indeformable.</strong> El cuadrado se ha descompuesto en dos triángulos. Como un triángulo está definido al fijar sus tres lados, ya no puede cambiar de forma sin que se rompa una barra. Intenta mover el slider: no responde.';
+  } else {
+    slider.disabled = false;
+    barDiag.style.display = 'none';
+    btnDiag.textContent = '🔧 Añadir diagonal';
+    btnDiag.style.background = '';
+    labCallout.innerHTML = '<strong>Pista:</strong> sin diagonal, cualquier empuje lateral convierte el cuadrado en un rombo. Con diagonal, el cuadrado se descompone en <strong>dos triángulos</strong> y queda indeformable.';
+  }
+  actualizarCuadrado();
+}
+
+function reset() {
+  slider.value = 0;
+  actualizarCuadrado();
+}
+
+actualizarCuadrado();
+
+// ══════════════════════════════════════════════════════════
+//  SECCIÓN 2 · LA NAVE
+// ══════════════════════════════════════════════════════════
+const cuadros = { bl: false, br: false, tl: false, tr: false };
+let cargaAplicada = false;
+
+function toggleCuadro(id) {
+  if (cargaAplicada) return; // bloqueado tras aplicar carga
+  cuadros[id] = !cuadros[id];
+  const diag = document.getElementById('d-' + id);
+  diag.style.display = cuadros[id] ? '' : 'none';
+  const rect = document.querySelector(`rect[data-c="${id}"]`);
+  rect.parentElement.classList.toggle('cuad-triangulado-' + id, cuadros[id]);
+  // Apply class to the rect itself for visual feedback
+  if (cuadros[id]) {
+    rect.style.fill = 'rgba(46,125,79,0.10)';
+    rect.style.stroke = 'rgba(46,125,79,0.5)';
+    rect.style.strokeDasharray = '0';
+  } else {
+    rect.style.fill = '';
+    rect.style.stroke = '';
+    rect.style.strokeDasharray = '';
+  }
+  actualizarHudNave();
+}
+
+function actualizarHudNave() {
+  const total = Object.values(cuadros).filter(Boolean).length;
+  document.getElementById('nave-count').textContent = total;
+  document.getElementById('nave-faltan').textContent = 4 - total;
+}
+
+function aplicarCarga() {
+  if (cargaAplicada) return;
+  cargaAplicada = true;
+  document.getElementById('viento').style.display = '';
+
+  const total = Object.values(cuadros).filter(Boolean).length;
+  const msg = document.getElementById('nave-mensaje');
+
+  if (total === 4) {
+    msg.className = 'nave-mensaje ok';
+    msg.innerHTML = '<strong>✓ La nave aguanta.</strong> Con los 4 cuadrados triangulados, la estructura es completamente rígida. El viento empuja pero no consigue deformarla.';
+    // Cambiar barras a color "rígido"
+    document.querySelectorAll('.bar-elastic').forEach(b => b.setAttribute('class', 'bar-rigid'));
+    document.getElementById('btn-carga').disabled = true;
+    document.getElementById('btn-carga').textContent = '✓ Estructura rígida';
+  } else {
+    msg.className = 'nave-mensaje err';
+    const faltan = 4 - total;
+    msg.innerHTML = `<strong>✗ La nave se deforma.</strong> Falta${faltan > 1 ? 'n' : ''} <strong>${faltan} cuadrado${faltan > 1 ? 's' : ''}</strong> por triangular. Aunque triangules tres de cuatro, el que falte arrastra al resto y la nave cede. Reinicia y vuelve a intentarlo.`;
+    // Animar deformación de la nave: trasladar los nodos superiores hacia la derecha
+    animarDeformacion();
+    document.getElementById('btn-carga').disabled = true;
+    document.getElementById('btn-carga').textContent = '✗ Estructura inestable';
+  }
+}
+
+function animarDeformacion() {
+  // Por cada cuadrado sin triangular, los nodos superiores se desplazan a la derecha
+  // Simplificación: aplicamos un shear global proporcional a los faltantes
+  const faltan = Object.values(cuadros).filter(v => !v).length;
+  const shear = Math.min(faltan * 8, 35); // grados
+  const dx = 120 * Math.tan(shear * Math.PI / 180); // altura por nivel = 120
+
+  // Calcular nuevas posiciones — los pilares de izquierda y centro y derecha en el nivel medio
+  // y los del nivel superior se desplazan más
+  // dependerá de qué cuadrados están sin triangular, pero para simplificar:
+  // si los inferiores (bl o br) están sin triangular, todo el nivel medio y superior se desplaza
+  // si solo faltan los superiores, solo el nivel superior se desplaza
+
+  const inferiorMal = !cuadros.bl || !cuadros.br;
+  const superiorMal = !cuadros.tl || !cuadros.tr;
+
+  let dxMid = 0, dxTop = 0;
+  if (inferiorMal && superiorMal) {
+    dxMid = dx * 0.5;
+    dxTop = dx;
+  } else if (inferiorMal) {
+    dxMid = dx;
+    dxTop = dx;
+  } else if (superiorMal) {
+    dxMid = 0;
+    dxTop = dx;
+  }
+
+  // Aplicar transformación con animación CSS
+  // Trasladar los pilares y vigas afectados
+  const nodes = {
+    mid: [{cx:60,cy:180},{cx:220,cy:180},{cx:380,cy:180}],
+    top: [{cx:60,cy:60},{cx:220,cy:60},{cx:380,cy:60}]
+  };
+
+  // Mover nodos del nivel medio
+  const nodos = document.querySelectorAll('#nodos-nave circle');
+  // Indexación: 0,1,2 = bot; 3,4,5 = mid; 6,7,8 = top
+  setTimeout(() => {
+    [3,4,5].forEach(i => nodos[i].setAttribute('cx', parseFloat(nodos[i].getAttribute('cx')) + dxMid));
+    [6,7,8].forEach(i => nodos[i].setAttribute('cx', parseFloat(nodos[i].getAttribute('cx')) + dxTop));
+
+    // Mover extremos de los pilares
+    ['p-l-bot','p-m-bot','p-r-bot'].forEach(id => {
+      const e = document.getElementById(id);
+      e.setAttribute('x2', parseFloat(e.getAttribute('x2')) + dxMid);
+    });
+    ['p-l-top','p-m-top','p-r-top'].forEach(id => {
+      const e = document.getElementById(id);
+      e.setAttribute('x1', parseFloat(e.getAttribute('x1')) + dxMid);
+      e.setAttribute('x2', parseFloat(e.getAttribute('x2')) + dxTop);
+    });
+    // Mover vigas
+    ['v-mid-l','v-mid-r'].forEach(id => {
+      const e = document.getElementById(id);
+      e.setAttribute('x1', parseFloat(e.getAttribute('x1')) + dxMid);
+      e.setAttribute('x2', parseFloat(e.getAttribute('x2')) + dxMid);
+    });
+    ['v-top-l','v-top-r'].forEach(id => {
+      const e = document.getElementById(id);
+      e.setAttribute('x1', parseFloat(e.getAttribute('x1')) + dxTop);
+      e.setAttribute('x2', parseFloat(e.getAttribute('x2')) + dxTop);
+    });
+    // Mover diagonales que sí están (sus extremos)
+    if (cuadros.bl) {
+      const d = document.getElementById('d-bl');
+      d.setAttribute('x2', parseFloat(d.getAttribute('x2')) + dxMid);
+    }
+    if (cuadros.br) {
+      const d = document.getElementById('d-br');
+      d.setAttribute('x1', parseFloat(d.getAttribute('x1')) + dxMid);
+      d.setAttribute('x2', parseFloat(d.getAttribute('x2')) + dxMid);
+    }
+    if (cuadros.tl) {
+      const d = document.getElementById('d-tl');
+      d.setAttribute('x1', parseFloat(d.getAttribute('x1')) + dxMid);
+      d.setAttribute('x2', parseFloat(d.getAttribute('x2')) + dxTop);
+    }
+    if (cuadros.tr) {
+      const d = document.getElementById('d-tr');
+      d.setAttribute('x1', parseFloat(d.getAttribute('x1')) + dxMid);
+      d.setAttribute('x2', parseFloat(d.getAttribute('x2')) + dxTop);
+    }
+    // También mover los rect-clickable
+    document.querySelectorAll('rect[data-c]').forEach(r => {
+      const c = r.getAttribute('data-c');
+      // Los rect tienen x e y como inicio y width/height fijos. Para la animación de deformación
+      // los dejamos como están (no afectan visualmente al pintado de las barras)
+      // Pero podemos darles opacity reducida para que no estorben
+      r.style.opacity = 0.3;
+    });
+  }, 100);
+}
+
+function resetNave() {
+  Object.keys(cuadros).forEach(k => {
+    cuadros[k] = false;
+    document.getElementById('d-' + k).style.display = 'none';
+    const rect = document.querySelector(`rect[data-c="${k}"]`);
+    rect.style.fill = '';
+    rect.style.stroke = '';
+    rect.style.strokeDasharray = '';
+    rect.style.opacity = '';
+  });
+  cargaAplicada = false;
+  document.getElementById('viento').style.display = 'none';
+  // Restaurar posiciones originales
+  const orig = {
+    'p-l-bot': {x1:60,y1:300,x2:60,y2:180},
+    'p-m-bot': {x1:220,y1:300,x2:220,y2:180},
+    'p-r-bot': {x1:380,y1:300,x2:380,y2:180},
+    'p-l-top': {x1:60,y1:180,x2:60,y2:60},
+    'p-m-top': {x1:220,y1:180,x2:220,y2:60},
+    'p-r-top': {x1:380,y1:180,x2:380,y2:60},
+    'v-bot-l': {x1:60,y1:300,x2:220,y2:300},
+    'v-bot-r': {x1:220,y1:300,x2:380,y2:300},
+    'v-mid-l': {x1:60,y1:180,x2:220,y2:180},
+    'v-mid-r': {x1:220,y1:180,x2:380,y2:180},
+    'v-top-l': {x1:60,y1:60,x2:220,y2:60},
+    'v-top-r': {x1:220,y1:60,x2:380,y2:60},
+    'd-bl': {x1:60,y1:300,x2:220,y2:180},
+    'd-br': {x1:220,y1:300,x2:380,y2:180},
+    'd-tl': {x1:60,y1:180,x2:220,y2:60},
+    'd-tr': {x1:220,y1:180,x2:380,y2:60}
+  };
+  Object.keys(orig).forEach(id => {
+    const e = document.getElementById(id);
+    if (!e) return;
+    Object.keys(orig[id]).forEach(k => e.setAttribute(k, orig[id][k]));
+    e.setAttribute('class', e.getAttribute('class').replace('bar-rigid', 'bar-elastic'));
+  });
+  // Restaurar nodos
+  const nodoPos = [
+    {cx:60,cy:300},{cx:220,cy:300},{cx:380,cy:300},
+    {cx:60,cy:180},{cx:220,cy:180},{cx:380,cy:180},
+    {cx:60,cy:60},{cx:220,cy:60},{cx:380,cy:60}
+  ];
+  const nodos = document.querySelectorAll('#nodos-nave circle');
+  nodos.forEach((n,i) => { n.setAttribute('cx', nodoPos[i].cx); n.setAttribute('cy', nodoPos[i].cy); });
+
+  document.getElementById('nave-mensaje').className = 'nave-mensaje';
+  document.getElementById('nave-mensaje').innerHTML = 'Pulsa los cuadrados para añadirles una diagonal. Luego aplica la carga.';
+  document.getElementById('btn-carga').disabled = false;
+  document.getElementById('btn-carga').textContent = '💨 Aplicar carga (viento)';
+  actualizarHudNave();
+}
+
+actualizarHudNave();
+</script>
+
+<footer style="text-align:center; padding:2rem 1rem 1rem; color:#888; font-size:0.85rem;">
+  <p>📐 Triangulador · TyD 2º ESO · Unidad 3</p>
+  <p><a href="../index.html" style="color:#D4700A; text-decoration:none;">← Volver al hub de la unidad</a></p>
+  <p style="margin-top:8px; font-family:'JetBrains Mono', monospace; font-size:0.72rem; opacity:0.6;">v1.0</p>
+</footer>
+
+</body>
+</html>

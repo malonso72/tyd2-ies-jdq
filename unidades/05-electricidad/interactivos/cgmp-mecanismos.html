@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cómo funciona por dentro · CGMP · 2º ESO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3ecdb;
+  --paper:#fffaef;
+  --paper-2:#fbf3df;
+  --ink:#2a1f10;
+  --ink-soft:#5a4f3a;
+  --line:#d8d0b8;
+  --accent:#d9531e;        /* naranja */
+  --accent-2:#c8911a;      /* amarillo cálido */
+  --ok:#27a96b;
+  --warn:#e8b923;
+  --bad:#d23a2e;
+  --wire-live:#d23a2e;
+  --wire-neutral:#1f4ea3;
+  --wire-earth:#27a96b;
+  --hot:#ff6a3d;           /* color de "caliente" */
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;height:100%;overflow:hidden;font-family:"Fraunces",Georgia,serif}
+body{
+  background:
+    radial-gradient(900px 500px at 85% -10%, rgba(217,83,30,.10), transparent 60%),
+    radial-gradient(700px 400px at 10% 110%, rgba(31,78,163,.08), transparent 60%),
+    linear-gradient(180deg,#f3ecdb,#fbf6e8 60%,#f3ecdb);
+  color:var(--ink);
+}
+
+.wrap{
+  max-width:1860px;margin:0 auto;padding:14px 22px;height:100vh;
+  display:flex;flex-direction:column;gap:12px;
+}
+
+/* HEADER */
+header{
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  padding-bottom:8px;border-bottom:1px solid var(--line);flex-shrink:0;
+}
+header h1{
+  margin:0;font-family:"Fraunces",serif;font-weight:800;font-size:clamp(22px,2.4vw,32px);
+  letter-spacing:-0.02em;line-height:1;color:#2a1f10;
+}
+header h1 em{font-style:italic;color:var(--accent-2)}
+.back-link{
+  display:inline-flex;align-items:center;gap:6px;text-decoration:none;
+  background:#fff;color:var(--ink-soft);border:1.5px solid var(--line);
+  padding:9px 16px;border-radius:999px;font-family:"JetBrains Mono",monospace;
+  font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  transition:all .2s;
+}
+.back-link:hover{background:#fff5dc;border-color:var(--accent-2);color:#7a4a05}
+
+/* TABS */
+.tabs{
+  display:flex;gap:8px;flex-shrink:0;
+}
+.tab{
+  flex:1;appearance:none;border:1.5px solid var(--line);background:#fff;cursor:pointer;
+  padding:12px 16px;border-radius:12px;font-family:"JetBrains Mono",monospace;
+  display:flex;flex-direction:column;align-items:flex-start;gap:3px;
+  transition:all .2s;color:var(--ink);text-align:left;
+}
+.tab:hover{border-color:var(--accent-2);background:#fff5dc;transform:translateY(-1px)}
+.tab.active{
+  background:linear-gradient(180deg,#fff5dc,#ffe8b0);
+  border-color:var(--accent-2);
+  box-shadow:0 6px 16px -6px rgba(217,135,5,.4);
+}
+.tab .num{font-size:10px;letter-spacing:.18em;color:var(--accent-2);font-weight:700}
+.tab .ttl{font-family:"Fraunces",serif;font-size:17px;font-weight:800;letter-spacing:-0.01em;line-height:1.1}
+.tab .sub{font-size:10px;color:var(--ink-soft);letter-spacing:.05em;line-height:1.2}
+.tab.active .ttl{color:#7a4a05}
+.tab.active .sub{color:#5a3505}
+
+/* STAGE */
+.stage{
+  flex:1;min-height:0;display:grid;grid-template-columns: 1fr 380px;gap:14px;
+}
+.canvas{
+  background:linear-gradient(180deg,#ffffff,#fdf9ec);
+  border:1px solid var(--line);border-radius:14px;padding:16px;
+  box-shadow:0 18px 40px -14px rgba(80,60,30,.18), 0 6px 16px -8px rgba(80,60,30,.12);
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.canvas svg{width:100%;height:100%;max-height:100%}
+
+/* PANEL DE EXPLICACIÓN */
+.panel{
+  background:linear-gradient(180deg,#fffaef,#fbf3df);
+  border:1px solid var(--line);border-radius:14px;
+  box-shadow:0 8px 20px -10px rgba(80,60,30,.15);
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.panel-head{
+  background:var(--ink);color:#fffaef;padding:12px 16px;
+  border-bottom:3px solid var(--accent-2);
+}
+.panel-head .crumb{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.22em;color:#d4c89a;text-transform:uppercase}
+.panel-head h2{margin:4px 0 0;font-family:"Fraunces",serif;font-size:22px;font-weight:800;letter-spacing:-0.02em;line-height:1}
+.panel-head h2 em{font-style:italic;color:var(--accent-2)}
+.panel-body{padding:14px 18px;flex:1;overflow-y:auto;font-size:14px;line-height:1.5;color:var(--ink)}
+.panel-body p{margin:8px 0}
+.panel-body .step{
+  display:flex;gap:10px;margin:10px 0;padding:10px 12px;
+  background:#fff;border-radius:8px;border-left:3px solid var(--accent-2);
+  transition:all .25s;
+}
+.panel-body .step.current{
+  background:#fff5dc;border-left-color:var(--accent);
+  box-shadow:0 4px 10px -4px rgba(217,135,5,.3);transform:translateX(2px);
+}
+.panel-body .step .n{
+  flex-shrink:0;width:24px;height:24px;border-radius:50%;
+  background:var(--ink);color:#fff5dc;display:flex;align-items:center;justify-content:center;
+  font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;
+}
+.panel-body .step.current .n{background:var(--accent);animation:stepPulse .8s ease}
+@keyframes stepPulse{0%{transform:scale(.85)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
+.panel-body .step .txt{flex:1;font-size:13.5px}
+.panel-body .step b{color:var(--ink)}
+
+.panel-foot{
+  padding:10px 14px;border-top:1px dashed var(--line);background:#fbf3df;
+  display:flex;align-items:center;justify-content:space-between;gap:8px;flex-shrink:0;
+}
+.btn{
+  appearance:none;border:1.5px solid var(--line);background:#fff;
+  padding:8px 14px;border-radius:8px;font-family:"JetBrains Mono",monospace;
+  font-size:11px;font-weight:700;letter-spacing:.05em;color:var(--ink);
+  cursor:pointer;transition:all .15s;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.btn:hover:not(:disabled){border-color:var(--accent-2);background:#fff5dc;transform:translateY(-1px)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.primary{
+  background:linear-gradient(180deg,#f06b32,#d9531e);color:#fff;border-color:#b8431a;
+  box-shadow:0 3px 8px -2px rgba(217,83,30,.4);
+}
+.btn.primary:hover:not(:disabled){background:linear-gradient(180deg,#f78845,#e8602a);box-shadow:0 5px 12px -3px rgba(217,83,30,.5)}
+.progress{
+  font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-soft);
+  letter-spacing:.1em;
+}
+.progress b{color:var(--accent);font-weight:700}
+
+/* SVG estilos */
+.label-tech{font-family:"JetBrains Mono",monospace;font-size:11px;fill:#3b3522;font-weight:700;letter-spacing:.05em}
+.label-small{font-family:"JetBrains Mono",monospace;font-size:9px;fill:#5a4f3a;letter-spacing:.04em}
+.value-display{font-family:"Fraunces",serif;font-weight:800;font-size:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Cómo funcionan <em>por dentro</em> · Mecanismos de protección</h1>
+    <div style="display:flex;gap:10px;align-items:center">
+      <a class="back-link" href="../index.html" style="background:#fef4e9;border-color:#d4700a;color:#7a4a05">← Unidad 5</a>
+      <a class="back-link" href="cgmp-test.html" target="_blank" style="background:#fff5dc;border-color:#e8b923;color:#7a4a05">📝 Test de repaso</a>
+      <a class="back-link" href="cgmp.html">← Volver al cuadro</a>
+    </div>
+  </header>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" data-scene="termico">
+      <span class="num">01 · Magnetotérmico</span>
+      <span class="ttl">Efecto térmico</span>
+      <span class="sub">Sobrecarga · lámina bimetálica</span>
+    </button>
+    <button class="tab" data-scene="magnetico">
+      <span class="num">02 · Magnetotérmico</span>
+      <span class="ttl">Efecto magnético</span>
+      <span class="sub">Cortocircuito · bobina electroimán</span>
+    </button>
+    <button class="tab" data-scene="diferencial">
+      <span class="num">03 · Diferencial</span>
+      <span class="ttl">Toroidal protector</span>
+      <span class="sub">Derivación · compara fase y neutro</span>
+    </button>
+  </div>
+
+  <!-- STAGE -->
+  <div class="stage">
+    <div class="canvas" id="canvas">
+      <!-- Aquí se renderiza la escena -->
+    </div>
+
+    <!-- PANEL -->
+    <aside class="panel">
+      <div class="panel-head">
+        <div class="crumb" id="crumb">01 · Magnetotérmico</div>
+        <h2 id="ptitle">Efecto <em>térmico</em></h2>
+      </div>
+      <div class="panel-body" id="pbody"></div>
+      <div class="panel-foot">
+        <button class="btn" id="btn-prev" disabled>◀ Anterior</button>
+        <span class="progress">Paso <b id="step-n">1</b> / <span id="step-total">5</span></span>
+        <button class="btn primary" id="btn-next">Siguiente ▶</button>
+      </div>
+    </aside>
+  </div>
+
+</div>
+
+<script>
+/* ===========================================================
+   CONFIGURACIÓN DE ESCENAS
+=========================================================== */
+
+const ESCENAS = {
+  termico: {
+    crumb: "01 · Magnetotérmico",
+    titulo: 'Efecto <em>térmico</em>',
+    pasos: [
+      {
+        n:1,
+        txt:`La corriente entra al PIA y pasa por una <b>lámina bimetálica</b> (dos metales pegados). La lámina está recta y toca un contacto fijo: <b>el circuito está cerrado</b>, la corriente fluye.`
+      },
+      {
+        n:2,
+        txt:`Conectamos demasiados aparatos: la corriente <b>sube</b>. El bimetal se calienta. Como sus dos metales se dilatan distinto, la lámina <b>se va curvando</b>.`
+      },
+      {
+        n:3,
+        txt:`La lámina se ha curvado tanto que <b>se separa del contacto</b>. El circuito queda abierto y la corriente se corta. ✂️`
+      }
+    ]
+  },
+
+  magnetico: {
+    crumb: "02 · Magnetotérmico",
+    titulo: 'Efecto <em>magnético</em>',
+    pasos: [
+      {
+        n:1,
+        txt:`La corriente entra al PIA y pasa por una <b>pieza de hierro</b> apoyada en un contacto fijo. Justo al lado hay una <b>bobina</b>. Con corriente normal todo está tranquilo: <b>el circuito está cerrado</b>.`
+      },
+      {
+        n:2,
+        txt:`<b>¡Cortocircuito!</b> La fase y el neutro se tocan en algún sitio. La corriente se dispara a cientos de amperios. La bobina se convierte en un <b>electroimán muy potente</b>.`
+      },
+      {
+        n:3,
+        txt:`El electroimán <b>tira con fuerza de la pieza de hierro</b> y la arranca del contacto. El circuito se abre <b>al instante</b>. ⚡✂️`
+      }
+    ]
+  },
+
+  diferencial: {
+    crumb: "03 · Diferencial",
+    titulo: 'Toroidal <em>protector</em>',
+    pasos: [
+      {
+        n:1,
+        txt:`Por el diferencial pasan los dos cables: <b style="color:#d23a2e">fase</b> (corriente que entra a tu casa) y <b style="color:#1f4ea3">neutro</b> (corriente que vuelve).`
+      },
+      {
+        n:2,
+        txt:`Los dos cables pasan por dentro de un anillo de hierro llamado <b>toroidal</b>. Si la corriente que entra es igual a la que vuelve, no pasa nada raro.`
+      },
+      {
+        n:3,
+        txt:`<b>¡Avería!</b> Una persona toca un aparato con la carcasa derivada. Una pequeña corriente se va por su cuerpo hacia tierra (30 mA).`
+      },
+      {
+        n:4,
+        txt:`Ahora la corriente que entra por la fase ya <b>no es igual</b> a la que vuelve por el neutro. Hay una <b>diferencia de 30 mA</b>.`
+      },
+      {
+        n:5,
+        txt:`El toroidal detecta esa diferencia y dispara una bobina interna que <b>abre los contactos en menos de 30 ms</b>. ¡La persona se salva! 💚`
+      }
+    ]
+  }
+};
+
+/* ===========================================================
+   ESTADO
+=========================================================== */
+const STATE = {
+  scene: 'termico',
+  paso: 1
+};
+
+const $canvas = document.getElementById('canvas');
+const $crumb = document.getElementById('crumb');
+const $ptitle = document.getElementById('ptitle');
+const $pbody = document.getElementById('pbody');
+const $stepN = document.getElementById('step-n');
+const $stepTotal = document.getElementById('step-total');
+const $btnPrev = document.getElementById('btn-prev');
+const $btnNext = document.getElementById('btn-next');
+
+/* ===========================================================
+   RENDER PANEL
+=========================================================== */
+function renderPanel(){
+  const esc = ESCENAS[STATE.scene];
+  $crumb.textContent = esc.crumb;
+  $ptitle.innerHTML = esc.titulo;
+  $stepTotal.textContent = esc.pasos.length;
+  $stepN.textContent = STATE.paso;
+  $pbody.innerHTML = esc.pasos.map((p,i) => `
+    <div class="step ${i+1 === STATE.paso ? 'current' : ''}">
+      <div class="n">${p.n}</div>
+      <div class="txt">${p.txt}</div>
+    </div>
+  `).join('');
+  $btnPrev.disabled = STATE.paso === 1;
+  $btnNext.disabled = STATE.paso === esc.pasos.length;
+  $btnNext.textContent = STATE.paso === esc.pasos.length ? '↻ Reiniciar' : 'Siguiente ▶';
+  $btnNext.disabled = false;
+}
+
+/* ===========================================================
+   ESCENA 1: EFECTO TÉRMICO
+=========================================================== */
+function svgTermico(paso){
+  // PASOS:
+  // 1: bimetal recto, tocando el contacto fijo, circuito cerrado, I=16A
+  // 2: bimetal calentándose y curvándose, todavía toca, I=25A
+  // 3: bimetal muy curvado, separado del contacto, circuito abierto, I=0
+
+  const I = paso === 1 ? 16 : paso === 2 ? 25 : 0;
+  const curvatura = paso === 1 ? 0 : paso === 2 ? 18 : 55;   // px que se desplaza la punta
+  const tempColor1 = paso === 1 ? '#8a98a8' : paso === 2 ? '#e8a020' : '#8a98a8';
+  const tempColor2 = paso === 1 ? '#c8a070' : paso === 2 ? '#d23a2e' : '#c8a070';
+  const tempLabel = paso === 1 ? 'FRÍO · recto' : paso === 2 ? '¡CALIENTE! · curvándose' : 'Enfriado · pero ya disparó';
+  const tempLabelColor = paso === 1 ? '#5a4f3a' : paso === 2 ? '#d23a2e' : '#5a4f3a';
+  const cerrado = paso < 3;
+  const speed = I === 0 ? 0 : Math.max(0.5, 3 - I/12);
+
+  // Bimetal:
+  //   - Anclaje inferior en x=380..420, y=440 (rectangulo)
+  //   - Lámina A (metal interior, más dilatable): x=395, va de y=440 a y=240
+  //   - Lámina B (metal exterior): x=405, va de y=440 a y=240
+  //   - Al calentarse, el metal A se dilata más → la lámina se curva alejándose de A (hacia la derecha)
+  //   - Punta del bimetal en estado recto: (400, 240)
+  //   - Punta en curvado: (400 + curvatura, 240)
+  // Contacto fijo a la izquierda del bimetal:
+  //   - Su extremo derecho está en x=400, y=230..250
+  //   - Cuando el bimetal está recto, su punta toca el contacto en (400, 240)
+  //   - Cuando se curva, la punta se va a (400+curvatura, 240) y deja de tocar
+
+  // Path del bimetal: usando bezier cuadrática
+  // M (ancla) Q (control) (punta)
+  const punta_x = 400 + curvatura;
+  const pathA = `M 395 440 Q ${395 + curvatura*0.4} 340, ${395 + curvatura} 240`;
+  const pathB = `M 405 440 Q ${405 + curvatura*0.4} 340, ${405 + curvatura} 240`;
+
+  return `<svg viewBox="0 0 900 540" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#f8f4e8"/>
+        <stop offset="1" stop-color="#d8cfa8"/>
+      </linearGradient>
+      <radialGradient id="heatGlow">
+        <stop offset="0" stop-color="#ff6a3d" stop-opacity=".5"/>
+        <stop offset="1" stop-color="#ff6a3d" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="electron">
+        <stop offset="0" stop-color="#ffe27a"/>
+        <stop offset="1" stop-color="#ffe27a" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+
+    <!-- Título -->
+    <text x="450" y="32" text-anchor="middle" font-family="Fraunces, serif" font-size="20" font-weight="800" fill="#2a1f10">EFECTO TÉRMICO — el bimetal abre el circuito al calentarse</text>
+
+    <!-- Carcasa del PIA -->
+    <rect x="180" y="60" width="540" height="440" rx="14" fill="url(#bodyGrad)" stroke="#8c8676" stroke-width="2"/>
+    <rect x="200" y="78" width="500" height="36" rx="4" fill="#1a1a1a"/>
+    <text x="450" y="103" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="18" font-weight="700" fill="#e8b923">PIA · vista interior</text>
+
+    <!-- Cable de entrada (arriba, viene horizontal) -->
+    <text x="100" y="195" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="#3b3522" letter-spacing="2">ENTRADA</text>
+    <path d="M 30 210 L 200 210 L 360 210 L 360 220" stroke="${cerrado ? 'var(--wire-live)' : '#bbb'}" stroke-width="6" fill="none" stroke-linecap="round" opacity="${cerrado ? 1 : .4}"/>
+
+    <!-- Contacto fijo (rectángulo dorado) -->
+    <rect x="340" y="220" width="60" height="20" rx="2" fill="#d4a040" stroke="#7a5c10" stroke-width="1.5"/>
+    <text x="370" y="216" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#5a4f3a">CONTACTO FIJO</text>
+
+    <!-- Halo de calor alrededor del bimetal cuando se calienta -->
+    ${paso === 2 ? `<circle cx="${400 + curvatura/2}" cy="340" r="80" fill="url(#heatGlow)"><animate attributeName="opacity" values=".5;.9;.5" dur="0.8s" repeatCount="indefinite"/></circle>` : ''}
+
+    <!-- BIMETAL (dos láminas pegadas) -->
+    <g style="transition:none">
+      <!-- Lámina A (interior, metal más dilatable) -->
+      <path d="${pathA}" stroke="${tempColor2}" stroke-width="8" fill="none" stroke-linecap="round" style="transition:d 1s ease, stroke .6s ease"/>
+      <!-- Lámina B (exterior) -->
+      <path d="${pathB}" stroke="${tempColor1}" stroke-width="8" fill="none" stroke-linecap="round" style="transition:d 1s ease, stroke .6s ease"/>
+    </g>
+
+    <!-- Punta del bimetal (que toca o no toca el contacto) -->
+    <circle cx="${punta_x}" cy="240" r="6" fill="${cerrado ? '#7a5c10' : '#999'}" style="transition:cx 1s ease"/>
+
+    <!-- Anclaje inferior del bimetal -->
+    <rect x="380" y="440" width="40" height="18" rx="2" fill="#7a7060" stroke="#3a3a3a"/>
+    <text x="430" y="455" font-family="JetBrains Mono, monospace" font-size="10" fill="#5a4f3a">anclaje</text>
+
+    <!-- Etiqueta "LÁMINA BIMETÁLICA" -->
+    <line x1="${440 + curvatura}" y1="340" x2="540" y2="340" stroke="#5a4f3a" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="548" y="338" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="#3b3522">LÁMINA BIMETÁLICA</text>
+    <text x="548" y="354" font-family="JetBrains Mono, monospace" font-size="10" fill="#5a4f3a">dos metales pegados</text>
+    <text x="548" y="368" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="${tempLabelColor}">${tempLabel}</text>
+
+    <!-- Cable de salida (sale del anclaje hacia abajo y luego a la izquierda) -->
+    <path d="M 400 458 L 400 490 L 30 490" stroke="${cerrado ? 'var(--wire-live)' : '#bbb'}" stroke-width="6" fill="none" stroke-linecap="round" opacity="${cerrado ? 1 : .4}"/>
+    <text x="100" y="510" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="#3b3522" letter-spacing="2">SALIDA</text>
+
+    <!-- Indicador de "CIRCUITO ABIERTO / CERRADO" -->
+    <g transform="translate(540, 200)">
+      <rect x="0" y="0" width="160" height="32" rx="6" fill="${cerrado ? '#27a96b' : '#d23a2e'}" stroke="${cerrado ? '#0f6b3a' : '#7a1a14'}" stroke-width="2"/>
+      <text x="80" y="22" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="#fff" letter-spacing="2">${cerrado ? 'CIRCUITO CERRADO ✓' : 'CIRCUITO ABIERTO'}</text>
+    </g>
+
+    <!-- Amperímetro -->
+    <g transform="translate(540, 400)">
+      <rect x="0" y="0" width="160" height="90" rx="10" fill="#1a1a1a" stroke="#5a4f3a" stroke-width="2"/>
+      <text x="80" y="20" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#bbb" letter-spacing="2">CORRIENTE</text>
+      <text x="80" y="62" text-anchor="middle" font-family="Fraunces" font-weight="800" font-size="36" fill="${I === 0 ? '#999' : I > 20 ? '#ff6a3d' : '#7adb9a'}">${I} A</text>
+      <text x="80" y="80" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#bbb">${I === 0 ? '(cortada)' : I > 20 ? '¡sobrecarga!' : 'normal'}</text>
+    </g>
+
+    <!-- Electrones animados -->
+    ${I > 0 && cerrado ? `
+    <g>
+      ${[0,1,2].map(k => `
+        <circle r="4" fill="url(#electron)">
+          <animateMotion dur="${speed}s" begin="${(speed/3)*k}s" repeatCount="indefinite"
+            path="M 30 210 L 360 210 L 360 220 L 400 240 L ${punta_x} 240 L 400 440 L 400 490 L 30 490"/>
+        </circle>
+      `).join('')}
+    </g>
+    ` : ''}
+  </svg>`;
+}
+
+/* ===========================================================
+   ESCENA 2: EFECTO MAGNÉTICO
+=========================================================== */
+function svgMagnetico(paso){
+  // PASOS:
+  // 1: corriente normal 16A pasa por bobina; bobina apenas magnetiza; hierro pegado al contacto; circuito cerrado
+  // 2: cortocircuito 320A pasa por bobina; bobina se vuelve electroimán potente; hierro siendo atraído
+  // 3: hierro arrancado y subido hacia la bobina; circuito abierto; I=0
+
+  const I = paso === 1 ? 16 : paso === 2 ? 320 : 0;
+  const bobinaActiva = paso === 2;
+  const hierroAtraido = paso === 3;
+  const cerrado = paso < 3;
+  const speed = I === 0 ? 0 : I > 100 ? 0.35 : 2.4;
+
+  // Geometría:
+  //   Cable entrada: (30,160) -> (240,160) -> sube a la bobina (270,140)
+  //   Bobina horizontal: eje y=140, x=270..600, 8 espiras verticales
+  //   Cable sale bobina por la derecha (600,140) -> baja (620,140)->(620,310)->(490,310)
+  //   Contacto fijo: rect (440,300) width=50 height=20 — el cable llega a su lado derecho (x=490)
+  //   Hierro móvil: inicialmente rect (330,300) width=110 height=20 — su extremo derecho (x=440) toca el contacto fijo
+  //   Cable de salida sale del hierro por su lado izquierdo: (330, 310) -> (330, 440) -> (30, 440)
+  //   Cuando se activa la bobina: el hierro sube hacia la bobina (translate Y -40)
+  //     -> nuevo extremo derecho del hierro: (440, 260), ya no toca el contacto fijo (que está en y=300-320)
+
+  const hierroDy = hierroAtraido ? -40 : 0;
+
+  return `<svg viewBox="0 0 900 540" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="bodyGradM" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#f8f4e8"/>
+        <stop offset="1" stop-color="#d8cfa8"/>
+      </linearGradient>
+      <radialGradient id="magField">
+        <stop offset="0" stop-color="#1f4ea3" stop-opacity=".55"/>
+        <stop offset="1" stop-color="#1f4ea3" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="electronM">
+        <stop offset="0" stop-color="#ffe27a"/>
+        <stop offset="1" stop-color="#ffe27a" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+
+    <!-- Título -->
+    <text x="450" y="32" text-anchor="middle" font-family="Fraunces, serif" font-size="20" font-weight="800" fill="#2a1f10">EFECTO MAGNÉTICO — la bobina tira del hierro y abre el circuito</text>
+
+    <!-- Carcasa del PIA -->
+    <rect x="180" y="60" width="540" height="440" rx="14" fill="url(#bodyGradM)" stroke="#8c8676" stroke-width="2"/>
+
+    <!-- Cable de entrada (izquierda, sube a la bobina) -->
+    <text x="100" y="146" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="#3b3522" letter-spacing="2">ENTRADA</text>
+    <path d="M 30 160 L 240 160 L 270 160 L 270 140" stroke="${cerrado ? 'var(--wire-live)' : '#bbb'}" stroke-width="6" fill="none" stroke-linecap="round" opacity="${cerrado ? 1 : .4}"/>
+
+    <!-- BOBINA HORIZONTAL ARRIBA (la corriente la atraviesa) -->
+    <g>
+      <!-- Halo magnético cuando está activa -->
+      ${bobinaActiva ? `
+        <ellipse cx="435" cy="200" rx="220" ry="120" fill="url(#magField)">
+          <animate attributeName="ry" values="80;160;80" dur="0.5s" repeatCount="indefinite"/>
+        </ellipse>
+      ` : ''}
+
+      <!-- Cable horizontal que entra y sale de la bobina -->
+      <line x1="270" y1="140" x2="600" y2="140" stroke="${cerrado ? 'var(--wire-live)' : '#bbb'}" stroke-width="6" stroke-linecap="round" opacity="${cerrado ? 1 : .4}"/>
+
+      <!-- Espiras de la bobina (rectángulos verticales que envuelven el cable) -->
+      ${[0,1,2,3,4,5,6,7].map(i => `
+        <ellipse cx="${290 + i*42}" cy="140" rx="9" ry="32" fill="none"
+          stroke="${bobinaActiva ? 'var(--accent)' : '#8a6a30'}" stroke-width="4"
+          style="transition:stroke .3s"/>
+      `).join('')}
+
+      <text x="435" y="92" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="14" font-weight="700" fill="${bobinaActiva ? 'var(--accent)' : '#3b3522'}">BOBINA</text>
+      <text x="435" y="108" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="${bobinaActiva ? 'var(--accent)' : '#5a4f3a'}">${bobinaActiva ? '¡ELECTROIMÁN POTENTE!' : '(corriente normal · imán débil)'}</text>
+    </g>
+
+    <!-- Cable sale de la bobina por la derecha y baja al contacto fijo -->
+    <path d="M 600 140 L 620 140 L 620 310 L 490 310" stroke="${cerrado ? 'var(--wire-live)' : '#bbb'}" stroke-width="6" fill="none" stroke-linecap="round" opacity="${cerrado ? 1 : .4}"/>
+
+    <!-- Contacto fijo -->
+    <rect x="440" y="300" width="50" height="20" rx="2" fill="#d4a040" stroke="#7a5c10" stroke-width="1.5"/>
+    <text x="465" y="338" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#5a4f3a">CONTACTO FIJO</text>
+
+    <!-- PIEZA DE HIERRO MÓVIL (a la izquierda del contacto, su extremo derecho lo toca) -->
+    <g transform="translate(0, ${hierroDy})" style="transition:transform .15s cubic-bezier(.7,.05,.3,1.5)">
+      <rect x="330" y="300" width="110" height="20" rx="2" fill="#6a6a78" stroke="#3a3a3a" stroke-width="1.5"/>
+      <!-- Rallado para indicar "hierro" -->
+      ${[0,1,2,3,4,5,6,7,8,9].map(i => `<line x1="${340 + i*10}" y1="305" x2="${340 + i*10}" y2="315" stroke="#3a3a3a" stroke-width="1"/>`).join('')}
+      <text x="385" y="293" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#3b3522">PIEZA DE HIERRO</text>
+    </g>
+
+    <!-- Cable de salida (sale por el lado izquierdo del hierro, hacia abajo y a la izquierda) -->
+    <path d="M 330 ${320 + hierroDy} L 330 440 L 30 440" stroke="${cerrado ? 'var(--wire-live)' : '#bbb'}" stroke-width="6" fill="none" stroke-linecap="round" opacity="${cerrado ? 1 : .4}" style="transition:d .15s"/>
+    <text x="100" y="460" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="#3b3522" letter-spacing="2">SALIDA</text>
+
+    <!-- Flechas de atracción hacia arriba cuando la bobina está activa -->
+    ${bobinaActiva ? `
+      <g stroke="var(--accent)" stroke-width="3" fill="var(--accent)">
+        <line x1="385" y1="298" x2="385" y2="165" stroke-linecap="round" stroke-dasharray="6 4">
+          <animate attributeName="opacity" values=".2;1;.2" dur="0.3s" repeatCount="indefinite"/>
+        </line>
+        <polygon points="378,172 385,158 392,172">
+          <animate attributeName="opacity" values=".2;1;.2" dur="0.3s" repeatCount="indefinite"/>
+        </polygon>
+        <text x="395" y="240" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700">¡ATRAE!</text>
+      </g>
+    ` : ''}
+
+    <!-- Flecha indicando que el hierro se ha movido -->
+    ${hierroAtraido ? `
+      <g>
+        <line x1="465" y1="280" x2="465" y2="305" stroke="#999" stroke-width="2" stroke-dasharray="3 3"/>
+        <text x="500" y="288" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#5a4f3a">hueco</text>
+      </g>
+    ` : ''}
+
+    <!-- Indicador de "CIRCUITO ABIERTO / CERRADO" -->
+    <g transform="translate(540, 400)">
+      <rect x="0" y="0" width="160" height="32" rx="6" fill="${cerrado ? '#27a96b' : '#d23a2e'}" stroke="${cerrado ? '#0f6b3a' : '#7a1a14'}" stroke-width="2"/>
+      <text x="80" y="22" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="#fff" letter-spacing="2">${cerrado ? 'CIRCUITO CERRADO ✓' : 'CIRCUITO ABIERTO'}</text>
+    </g>
+
+    <!-- Amperímetro -->
+    <g transform="translate(30, 50)">
+      <rect x="0" y="0" width="160" height="76" rx="10" fill="#1a1a1a" stroke="#5a4f3a" stroke-width="2"/>
+      <text x="80" y="18" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#bbb" letter-spacing="2">CORRIENTE</text>
+      <text x="80" y="54" text-anchor="middle" font-family="Fraunces" font-weight="800" font-size="${I > 100 ? 26 : 32}" fill="${I === 0 ? '#999' : I > 100 ? '#ff6a3d' : '#7adb9a'}">${I} A</text>
+      <text x="80" y="70" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#bbb">${I === 0 ? '(cortada)' : I > 100 ? '¡muy alta!' : 'normal'}</text>
+    </g>
+
+    <!-- Electrones animados a lo largo de todo el circuito -->
+    ${I > 0 && cerrado ? `
+    <g>
+      ${[0,1,2,3,4].map(k => `
+        <circle r="4" fill="url(#electronM)">
+          <animateMotion dur="${speed}s" begin="${(speed/5)*k}s" repeatCount="indefinite"
+            path="M 30 160 L 270 160 L 270 140 L 600 140 L 620 140 L 620 310 L 490 310 L 440 310 L 330 310 L 330 440 L 30 440"/>
+        </circle>
+      `).join('')}
+    </g>
+    ` : ''}
+  </svg>`;
+}
+
+/* ===========================================================
+   ESCENA 3: DIFERENCIAL
+=========================================================== */
+function svgDiferencial(paso){
+  // Paso 1: fase y neutro pasando normalmente
+  // Paso 2: toroidal mostrado, campos se anulan
+  // Paso 3: avería - persona toca cable, derivación
+  // Paso 4: diferencia detectada
+  // Paso 5: diferencial dispara
+
+  const fase = paso >= 3 ? 16 : 16;       // siempre entra 16A
+  const neutro = paso >= 3 ? 15.97 : 16;  // sale solo 15.97A (faltan 30mA)
+  const derivacion = paso >= 3 ? 0.03 : 0;
+  const desbalance = paso >= 3;
+  const dispara = paso === 5;
+  const showPersona = paso >= 3;
+
+  return `<svg viewBox="0 0 900 540" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="bodyGrad3" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#f8f4e8"/>
+        <stop offset="1" stop-color="#d8cfa8"/>
+      </linearGradient>
+      <radialGradient id="toroBalance">
+        <stop offset="0" stop-color="#27a96b" stop-opacity=".4"/>
+        <stop offset="1" stop-color="#27a96b" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="toroAlerta">
+        <stop offset="0" stop-color="#d23a2e" stop-opacity=".5"/>
+        <stop offset="1" stop-color="#d23a2e" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="electronF">
+        <stop offset="0" stop-color="#ffb0a8"/>
+        <stop offset="1" stop-color="#ffb0a8" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="electronN">
+        <stop offset="0" stop-color="#a8c0ff"/>
+        <stop offset="1" stop-color="#a8c0ff" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+
+    <!-- Título -->
+    <text x="450" y="35" text-anchor="middle" font-family="Fraunces, serif" font-size="18" font-weight="800" fill="#2a1f10">DIFERENCIAL — Derivación a tierra</text>
+
+    <!-- Carcasa del ID -->
+    <rect x="160" y="60" width="580" height="380" rx="14" fill="url(#bodyGrad3)" stroke="#8c8676" stroke-width="2"/>
+    <rect x="180" y="80" width="540" height="36" rx="4" fill="#1a1a1a"/>
+    <text x="450" y="105" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700" fill="#27a96b">DIFERENCIAL — Vista interior</text>
+
+    <!-- Toroidal -->
+    <g transform="translate(450, 260)" style="transition:all .4s">
+      <!-- Halo de estado -->
+      ${desbalance && !dispara ? `<circle r="120" fill="url(#toroAlerta)"><animate attributeName="opacity" values=".4;.9;.4" dur="0.5s" repeatCount="indefinite"/></circle>` :
+        paso === 2 ? `<circle r="100" fill="url(#toroBalance)"/>` : ''}
+
+      <!-- Toroidal (anillo) -->
+      <circle r="68" fill="none" stroke="#3a3a3a" stroke-width="14"/>
+      <circle r="68" fill="none" stroke="${desbalance ? 'var(--bad)' : '#5a5a5a'}" stroke-width="3" stroke-dasharray="${desbalance ? '4 4' : '0'}"/>
+      <text y="-90" text-anchor="middle" class="label-tech">TOROIDAL</text>
+      <text y="92" text-anchor="middle" class="label-small">${desbalance ? 'DETECTA DIFERENCIA' : 'COMPARA F y N'}</text>
+
+      <!-- Bobina secundaria que dispara -->
+      ${desbalance ? `
+        <g transform="translate(75, -20)">
+          <rect x="0" y="0" width="40" height="40" rx="3" fill="${dispara ? 'var(--bad)' : '#f0c060'}" stroke="#5a4f3a">
+            <animate attributeName="opacity" values=".6;1;.6" dur="0.4s" repeatCount="indefinite"/>
+          </rect>
+          <text x="20" y="58" text-anchor="middle" class="label-small">BOBINA</text>
+        </g>
+      ` : ''}
+    </g>
+
+    <!-- Cables FASE (rojo) atraviesa toroidal -->
+    <path d="M 60 220 L 380 220 L 450 220" stroke="${dispara ? '#999' : 'var(--wire-live)'}" stroke-width="7" fill="none" stroke-linecap="round" opacity="${dispara ? .35 : 1}"/>
+    <path d="M 520 220 L 600 220 L 840 220" stroke="${dispara ? '#999' : 'var(--wire-live)'}" stroke-width="7" fill="none" stroke-linecap="round" opacity="${dispara ? .35 : 1}"/>
+    <text x="80" y="208" class="label-small" fill="#d23a2e" font-weight="700">FASE (entra)</text>
+
+    <!-- Cables NEUTRO (azul) atraviesa toroidal -->
+    <path d="M 840 300 L 600 300 L 520 300" stroke="${dispara ? '#999' : 'var(--wire-neutral)'}" stroke-width="7" fill="none" stroke-linecap="round" opacity="${dispara ? .35 : 1}"/>
+    <path d="M 450 300 L 380 300 L 60 300" stroke="${dispara ? '#999' : 'var(--wire-neutral)'}" stroke-width="7" fill="none" stroke-linecap="round" opacity="${dispara ? .35 : 1}"/>
+    <text x="80" y="320" class="label-small" fill="#1f4ea3" font-weight="700">NEUTRO (vuelve)</text>
+
+    <!-- Aparato (al final, derecha) -->
+    <g transform="translate(770, 230)">
+      <rect x="0" y="0" width="60" height="80" rx="6" fill="#e0d8c0" stroke="#8c8676" stroke-width="2"/>
+      <circle cx="30" cy="40" r="20" fill="none" stroke="#5a4f3a" stroke-width="2"/>
+      <text x="30" y="100" text-anchor="middle" class="label-small">APARATO</text>
+    </g>
+
+    <!-- Persona tocando el aparato (solo si paso >= 3) -->
+    ${showPersona ? `
+      <g transform="translate(790, 360)" style="${paso === 5 ? 'opacity:.7' : ''}">
+        <!-- Persona -->
+        <circle cx="20" cy="0" r="12" fill="#f0c89a" stroke="#5a4f3a" stroke-width="1.5"/>
+        <rect x="14" y="12" width="12" height="30" rx="3" fill="#5a7aa0" stroke="#3a4a6a"/>
+        <line x1="14" y1="20" x2="0" y2="10" stroke="#5a7aa0" stroke-width="3" stroke-linecap="round"/>
+        <line x1="26" y1="20" x2="40" y2="10" stroke="#5a7aa0" stroke-width="3" stroke-linecap="round"/>
+        <line x1="17" y1="42" x2="13" y2="65" stroke="#3a3a3a" stroke-width="3" stroke-linecap="round"/>
+        <line x1="23" y1="42" x2="27" y2="65" stroke="#3a3a3a" stroke-width="3" stroke-linecap="round"/>
+        <!-- Mano toca el aparato (línea naranja con animación) -->
+        <line x1="0" y1="10" x2="-30" y2="-50" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-dasharray="3 3">
+          <animate attributeName="opacity" values=".5;1;.5" dur="0.4s" repeatCount="indefinite"/>
+        </line>
+        <text x="20" y="80" text-anchor="middle" class="label-small">${paso === 5 ? '✓ SALVADA' : 'PERSONA'}</text>
+      </g>
+
+      <!-- Corriente hacia tierra (30 mA) -->
+      <path d="M 800 410 L 800 470" stroke="var(--wire-earth)" stroke-width="3" fill="none" stroke-dasharray="4 3" opacity="${paso === 5 ? .4 : 1}">
+        <animate attributeName="stroke-dashoffset" values="0;-14" dur="0.6s" repeatCount="indefinite"/>
+      </path>
+      <g transform="translate(790,475)" stroke="#27a96b" stroke-width="2" fill="none">
+        <line x1="0" y1="0" x2="20" y2="0"/>
+        <line x1="3" y1="5" x2="17" y2="5"/>
+        <line x1="6" y1="10" x2="14" y2="10"/>
+      </g>
+      <text x="820" y="445" class="label-small" fill="var(--bad)" font-weight="700">30 mA →</text>
+    ` : ''}
+
+    <!-- Amperímetro de FASE (izquierda) -->
+    <g transform="translate(30, 130)">
+      <rect x="0" y="0" width="120" height="60" rx="8" fill="#1a1a1a" stroke="#5a4f3a"/>
+      <text x="60" y="16" text-anchor="middle" class="label-small" fill="#d4c89a">ENTRA (F)</text>
+      <text x="60" y="46" text-anchor="middle" font-family="Fraunces" font-weight="800" font-size="22" fill="#ff8a7a">${fase.toFixed(2)} A</text>
+    </g>
+
+    <!-- Amperímetro de NEUTRO (derecha) -->
+    <g transform="translate(750, 130)">
+      <rect x="0" y="0" width="120" height="60" rx="8" fill="#1a1a1a" stroke="#5a4f3a"/>
+      <text x="60" y="16" text-anchor="middle" class="label-small" fill="#d4c89a">VUELVE (N)</text>
+      <text x="60" y="46" text-anchor="middle" font-family="Fraunces" font-weight="800" font-size="22" fill="${desbalance ? '#a8c0ff' : '#a8c0ff'}">${neutro.toFixed(2)} A</text>
+    </g>
+
+    <!-- Diferencia (en el centro abajo) -->
+    <g transform="translate(390, 410)">
+      <rect x="0" y="0" width="120" height="60" rx="8" fill="${desbalance ? '#5a1014' : '#1a3a24'}" stroke="${desbalance ? 'var(--bad)' : 'var(--ok)'}" stroke-width="2"/>
+      <text x="60" y="16" text-anchor="middle" class="label-small" fill="#d4c89a">DIFERENCIA</text>
+      <text x="60" y="46" text-anchor="middle" font-family="Fraunces" font-weight="800" font-size="22" fill="${desbalance ? '#ffb0a8' : '#a8e0c0'}">${(derivacion*1000).toFixed(0)} mA</text>
+    </g>
+
+    <!-- Electrones FASE -->
+    ${!dispara ? `
+      <g>
+        ${[0,1,2].map(i => `
+          <circle r="4" fill="url(#electronF)">
+            <animateMotion dur="2s" begin="${i*0.66}s" repeatCount="indefinite"
+              path="M 60 220 L 380 220 L 450 220 L 520 220 L 600 220 L 770 220"/>
+          </circle>
+        `).join('')}
+      </g>
+      <!-- Electrones NEUTRO -->
+      <g>
+        ${[0,1,2].map(i => `
+          <circle r="4" fill="url(#electronN)">
+            <animateMotion dur="2s" begin="${i*0.66}s" repeatCount="indefinite"
+              path="M 800 310 L 600 300 L 520 300 L 450 300 L 380 300 L 60 300"/>
+          </circle>
+        `).join('')}
+      </g>
+    ` : ''}
+
+    ${dispara ? `<text x="450" y="510" text-anchor="middle" font-family="Fraunces" font-size="22" font-weight="800" fill="var(--ok)">¡PROTECCIÓN! Diferencial cortó en &lt; 30 ms</text>` : ''}
+  </svg>`;
+}
+
+/* ===========================================================
+   RENDER ESCENA
+=========================================================== */
+function renderEscena(){
+  let svg = '';
+  if(STATE.scene === 'termico') svg = svgTermico(STATE.paso);
+  else if(STATE.scene === 'magnetico') svg = svgMagnetico(STATE.paso);
+  else if(STATE.scene === 'diferencial') svg = svgDiferencial(STATE.paso);
+  $canvas.innerHTML = svg;
+  renderPanel();
+}
+
+/* ===========================================================
+   NAVEGACIÓN
+=========================================================== */
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    STATE.scene = t.dataset.scene;
+    STATE.paso = 1;
+    renderEscena();
+  });
+});
+
+$btnPrev.addEventListener('click', () => {
+  if(STATE.paso > 1){ STATE.paso--; renderEscena(); }
+});
+$btnNext.addEventListener('click', () => {
+  const total = ESCENAS[STATE.scene].pasos.length;
+  if(STATE.paso < total){
+    STATE.paso++;
+  } else {
+    STATE.paso = 1; // reiniciar
+  }
+  renderEscena();
+});
+
+// Teclas flecha
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'ArrowRight') $btnNext.click();
+  if(e.key === 'ArrowLeft' && !$btnPrev.disabled) $btnPrev.click();
+});
+
+// Inicializar
+renderEscena();
+</script>
+</body>
+</html>

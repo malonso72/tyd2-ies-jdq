@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Identificador de esfuerzos · U03 · TyD 2º ESO</title>
+<meta name="description" content="Interactivo del identificador de esfuerzos: 20 elementos cotidianos y 5 esfuerzos. Explora primero, identifica después. TyD 2º ESO.">
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/03-estructuras/interactivos/esfuerzos.html">
+
+<meta property="og:title" content="Identificador de esfuerzos · U03 · TyD 2º ESO">
+<meta property="og:description" content="20 elementos cotidianos y 5 esfuerzos. Explora primero, identifica después.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/03-estructuras/interactivos/esfuerzos.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Identificador de esfuerzos · U03 · TyD 2º ESO">
+<meta name="twitter:description" content="20 elementos cotidianos y 5 esfuerzos.">
+<meta name="twitter:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+:root {
+  --ok: #2e7d4f;
+  --err: #c44536;
+  --warn: #e8b647;
+  --esf-traccion: #2c5f8d;
+  --esf-compresion: #c44a3a;
+  --esf-flexion: #c87f2c;
+  --esf-torsion: #6b4e9a;
+  --esf-cortadura: #4d8474;
+}
+
+.modo-toggle {
+  display: flex;
+  gap: 0.4rem;
+  background: #f0f0f0;
+  padding: 4px;
+  border-radius: 10px;
+  margin: 1rem 0 1.4rem;
+}
+.modo-toggle button {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 0.6rem 0.8rem;
+  border-radius: 7px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.15s;
+}
+.modo-toggle button.active {
+  background: var(--principal, #D4700A);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(212,112,10,0.3);
+}
+
+.bloque {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 14px;
+  padding: 1.4rem 1.6rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+.bloque h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--principal, #D4700A);
+  margin: 0 0 0.5rem;
+  border-bottom: 2px solid var(--principal, #D4700A);
+  padding-bottom: 0.4rem;
+}
+.bloque p.descripcion { color: #555; margin-bottom: 1rem; font-size: 0.95rem; }
+
+.esf-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 1rem 0;
+}
+.esf-filtros button {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  border: 2px solid #ddd;
+  background: #fff;
+  color: #555;
+  padding: 0.4rem 0.9rem;
+  border-radius: 18px;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.esf-filtros button:hover { border-color: #aaa; }
+.esf-filtros button.active {
+  background: var(--principal, #D4700A);
+  border-color: var(--principal, #D4700A);
+  color: #fff;
+}
+.esf-filtros .dot { width: 10px; height: 10px; border-radius: 50%; }
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
+  gap: 12px;
+  margin: 1rem 0;
+}
+.obj-card {
+  background: #fafafa;
+  border: 2px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 14px 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s;
+}
+.obj-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--principal, #D4700A);
+  box-shadow: 0 4px 14px rgba(212,112,10,0.15);
+}
+.obj-card.active {
+  border-color: var(--principal, #D4700A);
+  background: #fff7eb;
+}
+.obj-card .obj-emoji { font-size: 2.2rem; line-height: 1; margin-bottom: 8px; }
+.obj-card .obj-nombre {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: #333;
+  line-height: 1.2;
+}
+.obj-card .esf-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-top: 6px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #fff;
+}
+.esf-tag.traccion { background: var(--esf-traccion); }
+.esf-tag.compresion { background: var(--esf-compresion); }
+.esf-tag.flexion { background: var(--esf-flexion); }
+.esf-tag.torsion { background: var(--esf-torsion); }
+.esf-tag.cortadura { background: var(--esf-cortadura); }
+
+.ficha {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-left: 5px solid var(--principal, #D4700A);
+  border-radius: 12px;
+  padding: 1.4rem 1.6rem;
+  margin: 1rem 0;
+  display: none;
+}
+.ficha.visible { display: block; }
+.ficha-hd {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+.ficha-hd .em { font-size: 2.6rem; line-height: 1; }
+.ficha-hd h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin: 0;
+  color: #222;
+}
+.ficha-hd .esf-pill {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #fff;
+  margin-top: 4px;
+}
+.esf-pill.traccion { background: var(--esf-traccion); }
+.esf-pill.compresion { background: var(--esf-compresion); }
+.esf-pill.flexion { background: var(--esf-flexion); }
+.esf-pill.torsion { background: var(--esf-torsion); }
+.esf-pill.cortadura { background: var(--esf-cortadura); }
+
+.ficha-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.ficha-item {
+  background: #fafafa;
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+}
+.ficha-item h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem;
+  color: var(--principal, #D4700A);
+  margin: 0 0 4px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.ficha-item p { font-size: 0.92rem; color: #444; margin: 0; line-height: 1.45; }
+.ficha-item.full { grid-column: 1 / -1; }
+.ficha-cierre { text-align: right; margin-top: 12px; }
+.ficha-cierre button {
+  background: transparent; border: 1px solid #ccc; border-radius: 6px;
+  padding: 0.3rem 0.8rem; font-family: 'Barlow', sans-serif;
+  font-size: 0.85rem; cursor: pointer; color: #666;
+}
+.ficha-cierre button:hover { background: #f0f0f0; }
+
+/* ════ MODO IDENTIFICAR ════ */
+.id-hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 1rem;
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+}
+.id-hud .hud-item {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.78rem;
+  color: #888;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+.id-hud .hud-item strong {
+  font-size: 1.4rem;
+  color: var(--principal, #D4700A);
+  font-weight: 700;
+}
+.id-hud .hud-item.aciertos strong { color: var(--ok); }
+.id-hud .hud-item.fallos strong { color: var(--err); }
+.id-hud .hud-progress {
+  flex: 1;
+  height: 8px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.id-hud .hud-progress .bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--principal, #D4700A), #f0a040);
+  transition: width 0.3s;
+  width: 0%;
+}
+
+.id-obj {
+  background: #fff;
+  border: 2px solid var(--principal, #D4700A);
+  border-radius: 14px;
+  padding: 2rem 1.6rem;
+  text-align: center;
+  margin: 1.4rem 0;
+}
+.id-obj .obj-em-big { font-size: 5rem; line-height: 1; margin-bottom: 14px; }
+.id-obj .obj-pregunta {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.1rem;
+  color: #888;
+  margin-bottom: 4px;
+  letter-spacing: 0.4px;
+}
+.id-obj .obj-nombre-big {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #222;
+  margin-bottom: 6px;
+}
+.id-obj .obj-hint {
+  font-size: 0.88rem;
+  color: #999;
+  font-style: italic;
+}
+
+.id-botonera {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin: 1.2rem 0;
+}
+.id-bt {
+  background: #fff;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 1rem 0.6rem;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.96rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: #333;
+}
+.id-bt .bt-em { font-size: 1.6rem; line-height: 1; }
+.id-bt:hover:not(:disabled) {
+  border-color: var(--principal, #D4700A);
+  background: #fff7eb;
+}
+.id-bt:disabled { cursor: not-allowed; opacity: 0.5; }
+.id-bt.correcto {
+  background: #dff2e6;
+  border-color: var(--ok);
+  color: var(--ok);
+}
+.id-bt.incorrecto {
+  background: #fce4e1;
+  border-color: var(--err);
+  color: var(--err);
+}
+
+.id-feedback {
+  background: #fafafa;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 1rem 0;
+  display: none;
+  border-left: 4px solid #ccc;
+}
+.id-feedback.visible { display: block; }
+.id-feedback.ok { background: #ecf8ef; border-color: var(--ok); }
+.id-feedback.err { background: #fdedea; border-color: var(--err); }
+.id-feedback h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem;
+  margin: 0 0 6px;
+  color: #333;
+  letter-spacing: 0.3px;
+}
+.id-feedback.ok h4 { color: var(--ok); }
+.id-feedback.err h4 { color: var(--err); }
+.id-feedback p { font-size: 0.92rem; color: #555; margin: 0; line-height: 1.5; }
+
+.id-controles { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 0.6rem; }
+.btn-primary {
+  background: var(--principal, #D4700A); color: #fff;
+  border: none; border-radius: 8px;
+  padding: 0.7rem 1.4rem; font-family: 'Barlow', sans-serif;
+  font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.15s;
+}
+.btn-primary:hover { background: #b85d08; }
+.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-secondary {
+  background: #fff; color: #666; border: 1px solid #ccc; border-radius: 8px;
+  padding: 0.7rem 1.2rem; font-family: 'Barlow', sans-serif;
+  font-weight: 600; font-size: 0.95rem; cursor: pointer;
+}
+.btn-secondary:hover { background: #f5f5f5; }
+
+.resultado {
+  background: linear-gradient(135deg, #fff7eb, #ffeed4);
+  border: 2px solid var(--principal, #D4700A);
+  border-radius: 14px;
+  padding: 1.8rem;
+  margin: 1.4rem 0;
+  text-align: center;
+  display: none;
+}
+.resultado.visible { display: block; }
+.resultado .res-emoji { font-size: 4rem; line-height: 1; margin-bottom: 10px; }
+.resultado h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.8rem;
+  color: var(--principal, #D4700A);
+  margin: 0 0 6px;
+}
+.resultado .res-score {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #222;
+  margin: 0.4rem 0;
+}
+.resultado .res-msg { color: #555; font-size: 1rem; margin-bottom: 1rem; }
+.resultado .res-detalle { font-size: 0.85rem; color: #888; margin-top: 0.6rem; }
+
+@media (max-width: 700px) {
+  .ficha-body { grid-template-columns: 1fr; }
+  .id-obj .obj-em-big { font-size: 4rem; }
+  .id-obj .obj-nombre-big { font-size: 1.4rem; }
+  .galeria { grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); }
+  .obj-card .obj-emoji { font-size: 1.8rem; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U03 · Estructuras · Identificador de esfuerzos</span>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Inicio</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U03</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📘</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🎯</span><span class="nc-lbl">Esfuerzos</span></span>
+</nav>
+
+<div class="unidad-layout">
+
+<aside class="sb-side">
+  <h3>Cómo usarlo</h3>
+  <p style="padding: 0.6rem 1rem; font-size:0.88rem; color:#555; line-height:1.55;">
+    <strong>Modo 1 (Aprender):</strong> haz clic en cualquier elemento para ver qué esfuerzo sufre y por qué.<br><br>
+    <strong>Modo 2 (Identificar):</strong> ronda de 10 elementos al azar. Pulsa el esfuerzo correcto.
+  </p>
+  <h3>Los 5 esfuerzos</h3>
+  <ul style="font-size:0.84rem; color:#555; padding:0 1rem 0 0.6rem; line-height:1.7; list-style:none;">
+    <li><span style="display:inline-block;width:10px;height:10px;background:var(--esf-traccion);border-radius:50%;vertical-align:middle;"></span> Tracción · estira</li>
+    <li><span style="display:inline-block;width:10px;height:10px;background:var(--esf-compresion);border-radius:50%;vertical-align:middle;"></span> Compresión · aplasta</li>
+    <li><span style="display:inline-block;width:10px;height:10px;background:var(--esf-flexion);border-radius:50%;vertical-align:middle;"></span> Flexión · curva</li>
+    <li><span style="display:inline-block;width:10px;height:10px;background:var(--esf-torsion);border-radius:50%;vertical-align:middle;"></span> Torsión · retuerce</li>
+    <li><span style="display:inline-block;width:10px;height:10px;background:var(--esf-cortadura);border-radius:50%;vertical-align:middle;"></span> Cortadura · cizalla</li>
+  </ul>
+</aside>
+
+<main class="ct" id="main-content">
+
+<h1 class="unidad-titulo">🎯 Identificador de esfuerzos</h1>
+<p class="unidad-subt">20 elementos cotidianos y 5 esfuerzos. Primero aprende a leerlos, luego identifícalos al vuelo.</p>
+
+<div class="modo-toggle" role="tablist" aria-label="Modo de práctica">
+  <button id="modo-aprender" class="active" onclick="setModo('aprender')">📖 Aprender (galería)</button>
+  <button id="modo-identificar" onclick="setModo('identificar')">🎯 Identificar (ronda 10)</button>
+</div>
+
+<!-- ════ MODO 1 · APRENDER ════ -->
+<section id="vista-aprender">
+  <div class="bloque">
+    <h2>Explora los 20 elementos</h2>
+    <p class="descripcion">Filtra por esfuerzo para verlos por familias o haz clic directamente en cualquier elemento para abrir su ficha.</p>
+
+    <div class="esf-filtros" id="esf-filtros">
+      <button class="active" data-filter="all">Todos (20)</button>
+      <button data-filter="traccion"><span class="dot" style="background:var(--esf-traccion)"></span>Tracción</button>
+      <button data-filter="compresion"><span class="dot" style="background:var(--esf-compresion)"></span>Compresión</button>
+      <button data-filter="flexion"><span class="dot" style="background:var(--esf-flexion)"></span>Flexión</button>
+      <button data-filter="torsion"><span class="dot" style="background:var(--esf-torsion)"></span>Torsión</button>
+      <button data-filter="cortadura"><span class="dot" style="background:var(--esf-cortadura)"></span>Cortadura</button>
+    </div>
+
+    <div class="galeria" id="galeria"></div>
+  </div>
+
+  <div class="ficha" id="ficha">
+    <div class="ficha-hd">
+      <span class="em" id="f-emoji">📦</span>
+      <div>
+        <h3 id="f-nombre">Nombre del elemento</h3>
+        <span class="esf-pill" id="f-pill">Esfuerzo</span>
+      </div>
+    </div>
+    <div class="ficha-body">
+      <div class="ficha-item">
+        <h4>Qué hace la fuerza</h4>
+        <p id="f-accion">—</p>
+      </div>
+      <div class="ficha-item">
+        <h4>Cómo responde el material</h4>
+        <p id="f-respuesta">—</p>
+      </div>
+      <div class="ficha-item full">
+        <h4>Por qué este esfuerzo</h4>
+        <p id="f-justificacion">—</p>
+      </div>
+    </div>
+    <div class="ficha-cierre"><button onclick="cerrarFicha()">✕ Cerrar ficha</button></div>
+  </div>
+</section>
+
+<!-- ════ MODO 2 · IDENTIFICAR ════ -->
+<section id="vista-identificar" style="display:none;">
+  <div class="id-hud">
+    <div class="hud-item">
+      <span>Ronda</span>
+      <strong id="id-num">1<span style="font-size:0.9rem; color:#aaa; font-weight:400;">/10</span></strong>
+    </div>
+    <div class="hud-progress"><div class="bar" id="id-bar"></div></div>
+    <div class="hud-item aciertos">
+      <span>Aciertos</span>
+      <strong id="id-ok">0</strong>
+    </div>
+    <div class="hud-item fallos">
+      <span>Fallos</span>
+      <strong id="id-err">0</strong>
+    </div>
+  </div>
+
+  <div class="id-obj" id="id-obj">
+    <div class="obj-em-big" id="id-em">📦</div>
+    <div class="obj-pregunta">¿Qué esfuerzo sufre principalmente este elemento?</div>
+    <div class="obj-nombre-big" id="id-name">—</div>
+    <div class="obj-hint">Piensa en cómo actúan las fuerzas sobre la pieza.</div>
+  </div>
+
+  <div class="id-botonera" id="id-bots">
+    <button class="id-bt" data-esf="traccion"><span class="bt-em">↔️</span>Tracción</button>
+    <button class="id-bt" data-esf="compresion"><span class="bt-em">⬇️</span>Compresión</button>
+    <button class="id-bt" data-esf="flexion"><span class="bt-em">🌉</span>Flexión</button>
+    <button class="id-bt" data-esf="torsion"><span class="bt-em">🌀</span>Torsión</button>
+    <button class="id-bt" data-esf="cortadura"><span class="bt-em">✂️</span>Cortadura</button>
+  </div>
+
+  <div class="id-feedback" id="id-feedback">
+    <h4 id="id-fb-titulo">¡Correcto!</h4>
+    <p id="id-fb-texto">Mensaje de feedback</p>
+  </div>
+
+  <div class="id-controles">
+    <button class="btn-primary" id="id-next" onclick="siguienteElemento()" disabled>Siguiente →</button>
+    <button class="btn-secondary" onclick="reiniciarRonda()">↺ Reiniciar ronda</button>
+  </div>
+
+  <div class="resultado" id="id-resultado">
+    <div class="res-emoji" id="res-emoji">🎉</div>
+    <h3 id="res-titulo">¡Ronda terminada!</h3>
+    <div class="res-score" id="res-score">0/10</div>
+    <p class="res-msg" id="res-msg">—</p>
+    <button class="btn-primary" onclick="reiniciarRonda()">↺ Nueva ronda</button>
+    <p class="res-detalle">Cada ronda se sortean 10 elementos diferentes entre los 20 disponibles.</p>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════
+//  CATÁLOGO DE 20 ELEMENTOS · 4 por esfuerzo
+// ══════════════════════════════════════════════════════════
+const ELEMENTOS = [
+  // ── Tracción (4) ──
+  { id:'cable-ascensor', em:'🛗', nombre:'Cable de un ascensor', esf:'traccion',
+    accion:'El peso de la cabina tira del cable hacia abajo; el motor lo sujeta arriba.',
+    respuesta:'El cable se estira ligeramente y mantiene unidos los dos extremos.',
+    justif:'Dos fuerzas opuestas tiran del cable en sentidos contrarios: tracción pura. Por eso los cables se fabrican de acero, un material excelente a tracción.' },
+  { id:'cuerda-tender', em:'🧺', nombre:'Cuerda de tender ropa', esf:'traccion',
+    accion:'El peso de la ropa cuelga de la cuerda y tira hacia abajo desde varios puntos.',
+    respuesta:'La cuerda se tensa entre los dos amarres y se curva ligeramente.',
+    justif:'Aunque parezca obvio, la cuerda está sometida a tracción: las dos sujeciones tiran de ella en sentidos opuestos para mantenerla tirante.' },
+  { id:'tirante-puente', em:'🌉', nombre:'Tirante de un puente atirantado', esf:'traccion',
+    accion:'El tablero del puente cuelga de los tirantes que parten de la torre.',
+    respuesta:'El tirante se estira por la carga del tablero y tira de la torre hacia abajo.',
+    justif:'Los puentes atirantados, como el del Centenario en Sevilla, transmiten el peso del tablero a las torres mediante cables tensados: tracción pura.' },
+  { id:'cuerda-comba', em:'🤸', nombre:'Cuerda al saltar a la comba', esf:'traccion',
+    accion:'Las dos personas tiran de los extremos hacia ellas mientras la cuerda gira.',
+    respuesta:'La cuerda se estira y mantiene su forma curva mientras gira.',
+    justif:'Las dos manos tiran de la cuerda en sentidos opuestos: aunque la cuerda gire, el esfuerzo principal sigue siendo tracción.' },
+
+  // ── Compresión (4) ──
+  { id:'pilar-edificio', em:'🏛️', nombre:'Pilar de un edificio', esf:'compresion',
+    accion:'El peso de los pisos superiores empuja el pilar hacia abajo; el suelo lo empuja hacia arriba.',
+    respuesta:'El pilar se acorta de forma imperceptible, sosteniendo todo el peso.',
+    justif:'Es el ejemplo más clásico de compresión: dos fuerzas opuestas empujan al elemento desde sus extremos hacia el centro. Por eso los pilares se hacen de hormigón, excelente a compresión.' },
+  { id:'pata-mesa', em:'🪑', nombre:'Pata de mesa con libros encima', esf:'compresion',
+    accion:'El peso de los libros y de la propia mesa empuja la pata hacia abajo; el suelo la empuja hacia arriba.',
+    respuesta:'La pata se acorta imperceptiblemente y se mantiene rígida.',
+    justif:'Igual que un pilar pero a pequeña escala. Las cuatro patas se reparten el peso del tablero y de lo que tenga encima: compresión pura.' },
+  { id:'caja-apilada', em:'📦', nombre:'Caja de cartón bajo otras', esf:'compresion',
+    accion:'El peso de las cajas superiores empuja hacia abajo; el suelo o las cajas inferiores empujan hacia arriba.',
+    respuesta:'Las paredes verticales de la caja resisten el peso. Si son débiles, se aplastan.',
+    justif:'Por eso las cajas grandes llevan refuerzos en las esquinas y el cartón ondulado tiene rizo interior: para aguantar mejor la compresión vertical.' },
+  { id:'columna-mezquita', em:'🕌', nombre:'Columna de la Mezquita de Córdoba', esf:'compresion',
+    accion:'Los arcos y la cubierta superior empujan hacia abajo sobre la columna.',
+    respuesta:'La columna de piedra apenas se deforma y transmite el peso al suelo.',
+    justif:'Las columnas que verás en la Mezquita-Catedral de Córdoba llevan más de 1000 años trabajando a compresión: la piedra y el mármol aguantan estupendamente este esfuerzo.' },
+
+  // ── Flexión (4) ──
+  { id:'balda-libros', em:'📚', nombre:'Balda de una estantería con libros', esf:'flexion',
+    accion:'El peso de los libros empuja la balda hacia abajo por el centro; los apoyos la sujetan por los lados.',
+    respuesta:'La balda se curva hacia abajo en su centro (a veces se nota a simple vista).',
+    justif:'Es flexión clásica: las fibras superiores se comprimen, las inferiores se estiran (tracción). Por eso una balda muy cargada se "vence" por el medio.' },
+  { id:'tablero-puente', em:'🚗', nombre:'Tablero de un puente con coches', esf:'flexion',
+    accion:'El peso de los vehículos empuja el tablero hacia abajo entre los apoyos.',
+    respuesta:'El tablero se curva ligeramente hacia abajo y vuelve a su forma cuando los coches pasan.',
+    justif:'El tablero de cualquier puente trabaja principalmente a flexión: una viga apoyada en dos puntos con carga en el medio. Por eso los tableros se hacen de hormigón armado o vigas metálicas.' },
+  { id:'trampolin', em:'🏊', nombre:'Trampolín de piscina con saltador', esf:'flexion',
+    accion:'El peso del nadador empuja el extremo libre del trampolín hacia abajo.',
+    respuesta:'El trampolín se curva visiblemente y, al despegarse el saltador, recupera la forma haciéndolo saltar.',
+    justif:'Caso especial: viga empotrada por un extremo, libre por el otro (voladizo). La flexión es máxima en el empotramiento. El trampolín está hecho de un material elástico para devolver la energía.' },
+  { id:'rama-arbol', em:'🌳', nombre:'Rama de árbol con fruta', esf:'flexion',
+    accion:'El peso de las frutas (o de un pájaro) empuja la rama hacia abajo desde su extremo.',
+    respuesta:'La rama se curva hacia abajo, a veces de forma muy visible si la carga es grande.',
+    justif:'Otro caso de viga en voladizo. Las ramas largas con mucha fruta se curvan tanto que a veces se rompen: es el límite de la flexión.' },
+
+  // ── Torsión (4) ──
+  { id:'destornillador', em:'🔩', nombre:'Destornillador apretando un tornillo', esf:'torsion',
+    accion:'La mano gira el mango; la punta queda atrapada en el tornillo y opone resistencia.',
+    respuesta:'El cuerpo del destornillador se retuerce ligeramente sobre su eje.',
+    justif:'Dos pares de fuerzas opuestas (la mano giro arriba, el tornillo resistiendo abajo) retuercen el destornillador alrededor de su eje. Si aprietas mucho con uno barato, puedes torcerlo permanentemente.' },
+  { id:'eje-motor', em:'⚙️', nombre:'Eje de un motor en marcha', esf:'torsion',
+    accion:'Un extremo del eje gira impulsado por el motor; el otro extremo arrastra la carga (rueda, hélice…) que ofrece resistencia.',
+    respuesta:'El eje se retuerce ligeramente bajo el par de fuerzas opuestas.',
+    justif:'La torsión es el esfuerzo característico de todos los ejes giratorios. Para resistirla se usan aceros especiales y se diseña el eje con suficiente diámetro.' },
+  { id:'volante-coche', em:'🚙', nombre:'Eje del volante al girar el coche', esf:'torsion',
+    accion:'El conductor gira el volante; las ruedas oponen resistencia a girar.',
+    respuesta:'El eje que une el volante con la dirección se retuerce mientras se gira.',
+    justif:'Toda la cadena de dirección de un coche (eje del volante, cremallera, ejes de transmisión) trabaja a torsión: dos extremos que giran en sentidos opuestos o uno que resiste.' },
+  { id:'llave-tornillo', em:'🔧', nombre:'Llave fija apretando una tuerca', esf:'torsion',
+    accion:'La mano fuerza la llave en un sentido; la tuerca resiste girar en el otro.',
+    respuesta:'El cuerpo de la llave se retuerce. Si la llave es de mala calidad, se deforma permanentemente.',
+    justif:'Misma idea que el destornillador. La forma alargada de las llaves multiplica el par (fuerza × distancia) que se aplica a la tuerca, pero también la torsión que sufre la propia llave.' },
+
+  // ── Cortadura (4) ──
+  { id:'papel-tijeras', em:'✂️', nombre:'Papel cortado por unas tijeras', esf:'cortadura',
+    accion:'Las dos hojas de las tijeras presionan el papel en sentidos opuestos a muy poca distancia entre sí.',
+    respuesta:'Las fibras del papel ceden por el plano donde se cruzan las hojas: corte limpio.',
+    justif:'Es la imagen canónica de la cortadura: dos fuerzas paralelas y opuestas, muy próximas, que cizallan el material. Por eso al esfuerzo también se le llama "cizalladura".' },
+  { id:'pan-cuchillo', em:'🍞', nombre:'Pan rebanado por un cuchillo', esf:'cortadura',
+    accion:'El cuchillo presiona hacia abajo sobre el pan, que apoya en la tabla.',
+    respuesta:'La miga del pan cede por el plano donde la hoja la corta.',
+    justif:'El cuchillo aplica fuerza concentrada en una línea fina, generando cortadura en el pan. Por eso afilamos los cuchillos: para concentrar más la fuerza y cortar mejor.' },
+  { id:'tornillo-bisagra', em:'🚪', nombre:'Tornillo de una bisagra de puerta', esf:'cortadura',
+    accion:'La puerta tira del tornillo hacia un lado; el marco lo retiene en sentido opuesto a poca distancia.',
+    respuesta:'El tornillo aguanta el peso de la puerta resistiendo cortadura en el plano entre la puerta y el marco.',
+    justif:'Cuando un tornillo une dos piezas que tiran en sentidos opuestos perpendiculares al eje del tornillo, el tornillo trabaja a cortadura. Por eso las bisagras pesadas llevan tornillos gruesos.' },
+  { id:'pasador-cadena', em:'⛓️', nombre:'Pasador de un eslabón de cadena', esf:'cortadura',
+    accion:'Los dos eslabones adyacentes tiran del pasador en sentidos opuestos.',
+    respuesta:'El pasador aguanta cortadura en los dos planos donde se cruzan los eslabones.',
+    justif:'Las cadenas (de bicicleta, de motor, de transporte) trabajan a tracción como conjunto, pero cada pasador interior trabaja a cortadura. Si un pasador falla, falla la cadena entera.' }
+];
+
+const ESF_INFO = {
+  traccion:   { nombre: 'Tracción',   em: '↔️' },
+  compresion: { nombre: 'Compresión', em: '⬇️' },
+  flexion:    { nombre: 'Flexión',    em: '🌉' },
+  torsion:    { nombre: 'Torsión',    em: '🌀' },
+  cortadura:  { nombre: 'Cortadura',  em: '✂️' }
+};
+
+// ══════════════════════════════════════════════════════════
+//  MODO TOGGLE
+// ══════════════════════════════════════════════════════════
+function setModo(modo) {
+  document.getElementById('vista-aprender').style.display = (modo === 'aprender') ? '' : 'none';
+  document.getElementById('vista-identificar').style.display = (modo === 'identificar') ? '' : 'none';
+  document.getElementById('modo-aprender').classList.toggle('active', modo === 'aprender');
+  document.getElementById('modo-identificar').classList.toggle('active', modo === 'identificar');
+  if (modo === 'identificar' && rondaActiva === null) iniciarRonda();
+}
+
+// ══════════════════════════════════════════════════════════
+//  MODO APRENDER · galería y ficha
+// ══════════════════════════════════════════════════════════
+let filtroActual = 'all';
+
+function renderGaleria() {
+  const gal = document.getElementById('galeria');
+  const lista = (filtroActual === 'all') ? ELEMENTOS : ELEMENTOS.filter(e => e.esf === filtroActual);
+  gal.innerHTML = lista.map(e => `
+    <div class="obj-card" data-id="${e.id}" onclick="abrirFicha('${e.id}')">
+      <div class="obj-emoji">${e.em}</div>
+      <div class="obj-nombre">${e.nombre}</div>
+      <span class="esf-tag ${e.esf}">${ESF_INFO[e.esf].nombre}</span>
+    </div>
+  `).join('');
+}
+
+function abrirFicha(id) {
+  const e = ELEMENTOS.find(x => x.id === id);
+  if (!e) return;
+  document.getElementById('f-emoji').textContent = e.em;
+  document.getElementById('f-nombre').textContent = e.nombre;
+  const pill = document.getElementById('f-pill');
+  pill.textContent = ESF_INFO[e.esf].nombre;
+  pill.className = 'esf-pill ' + e.esf;
+  document.getElementById('f-accion').textContent = e.accion;
+  document.getElementById('f-respuesta').textContent = e.respuesta;
+  document.getElementById('f-justificacion').textContent = e.justif;
+  document.getElementById('ficha').classList.add('visible');
+  document.querySelectorAll('.obj-card').forEach(c => c.classList.toggle('active', c.dataset.id === id));
+  document.getElementById('ficha').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function cerrarFicha() {
+  document.getElementById('ficha').classList.remove('visible');
+  document.querySelectorAll('.obj-card').forEach(c => c.classList.remove('active'));
+}
+
+document.querySelectorAll('#esf-filtros button').forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll('#esf-filtros button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    filtroActual = b.dataset.filter;
+    renderGaleria();
+    cerrarFicha();
+  };
+});
+
+// ══════════════════════════════════════════════════════════
+//  MODO IDENTIFICAR · ronda de 10
+// ══════════════════════════════════════════════════════════
+let rondaActiva = null;
+let rondaList = [];
+let rondaIdx = 0;
+let aciertos = 0;
+let fallos = 0;
+
+function iniciarRonda() {
+  const porEsf = {};
+  Object.keys(ESF_INFO).forEach(k => porEsf[k] = ELEMENTOS.filter(e => e.esf === k).slice());
+  const seleccion = [];
+  // 1 obligatorio de cada esfuerzo (5)
+  Object.keys(ESF_INFO).forEach(k => {
+    const arr = porEsf[k];
+    const i = Math.floor(Math.random() * arr.length);
+    seleccion.push(arr.splice(i, 1)[0]);
+  });
+  // Completar hasta 10
+  const restantes = Object.values(porEsf).flat();
+  while (seleccion.length < 10 && restantes.length > 0) {
+    const i = Math.floor(Math.random() * restantes.length);
+    seleccion.push(restantes.splice(i, 1)[0]);
+  }
+  // Mezcla
+  for (let i = seleccion.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [seleccion[i], seleccion[j]] = [seleccion[j], seleccion[i]];
+  }
+  rondaList = seleccion;
+  rondaIdx = 0; aciertos = 0; fallos = 0;
+  rondaActiva = true;
+  document.getElementById('id-resultado').classList.remove('visible');
+  document.getElementById('id-obj').style.display = '';
+  document.getElementById('id-bots').style.display = '';
+  document.getElementById('id-feedback').classList.remove('visible');
+  document.getElementById('id-next').disabled = true;
+  pintarElemento();
+  actualizarHud();
+}
+
+function pintarElemento() {
+  const e = rondaList[rondaIdx];
+  document.getElementById('id-em').textContent = e.em;
+  document.getElementById('id-name').textContent = e.nombre;
+  document.querySelectorAll('.id-bt').forEach(b => {
+    b.classList.remove('correcto', 'incorrecto');
+    b.disabled = false;
+  });
+  document.getElementById('id-feedback').classList.remove('visible');
+  document.getElementById('id-next').disabled = true;
+}
+
+function actualizarHud() {
+  document.getElementById('id-num').innerHTML = (rondaIdx + 1) + '<span style="font-size:0.9rem; color:#aaa; font-weight:400;">/10</span>';
+  document.getElementById('id-ok').textContent = aciertos;
+  document.getElementById('id-err').textContent = fallos;
+  document.getElementById('id-bar').style.width = (rondaIdx / 10 * 100) + '%';
+}
+
+document.querySelectorAll('.id-bt').forEach(b => {
+  b.onclick = () => {
+    if (b.disabled) return;
+    const esf = b.dataset.esf;
+    const e = rondaList[rondaIdx];
+    const correcto = (esf === e.esf);
+    document.querySelectorAll('.id-bt').forEach(x => x.disabled = true);
+    document.querySelector(`.id-bt[data-esf="${e.esf}"]`).classList.add('correcto');
+    if (!correcto) b.classList.add('incorrecto');
+    const fb = document.getElementById('id-feedback');
+    fb.classList.add('visible');
+    fb.classList.toggle('ok', correcto);
+    fb.classList.toggle('err', !correcto);
+    if (correcto) {
+      aciertos++;
+      document.getElementById('id-fb-titulo').textContent = '✅ ¡Correcto!';
+      document.getElementById('id-fb-texto').innerHTML = `<strong>${e.nombre}</strong> sufre <strong>${ESF_INFO[e.esf].nombre.toLowerCase()}</strong>. ${e.justif}`;
+    } else {
+      fallos++;
+      document.getElementById('id-fb-titulo').textContent = '❌ No es correcto';
+      document.getElementById('id-fb-texto').innerHTML = `<strong>${e.nombre}</strong> sufre en realidad <strong>${ESF_INFO[e.esf].nombre.toLowerCase()}</strong>. ${e.justif}`;
+    }
+    document.getElementById('id-next').disabled = false;
+  };
+});
+
+function siguienteElemento() {
+  rondaIdx++;
+  if (rondaIdx >= rondaList.length) { mostrarResultado(); return; }
+  pintarElemento();
+  actualizarHud();
+}
+
+function mostrarResultado() {
+  document.getElementById('id-obj').style.display = 'none';
+  document.getElementById('id-bots').style.display = 'none';
+  document.getElementById('id-feedback').classList.remove('visible');
+  document.getElementById('id-next').disabled = true;
+  const res = document.getElementById('id-resultado');
+  res.classList.add('visible');
+  document.getElementById('id-bar').style.width = '100%';
+  const score = aciertos;
+  document.getElementById('res-score').textContent = score + '/10';
+  let emoji, titulo, msg;
+  if (score === 10) { emoji='🏆'; titulo='¡Perfecto!'; msg='Identificas los esfuerzos al vuelo. La unidad 3 ya es tuya.'; }
+  else if (score >= 8) { emoji='🎉'; titulo='¡Muy bien!'; msg='Casi perfecto. Mira los que has fallado y la diferencia entre flexión y compresión.'; }
+  else if (score >= 6) { emoji='👍'; titulo='Aprobado'; msg='Vas bien. Revisa los esfuerzos compuestos (flexión) y vuelve a intentarlo.'; }
+  else if (score >= 4) { emoji='🤔'; titulo='Hay que repasar'; msg='Conviene volver al modo Aprender y leer la justificación de cada elemento.'; }
+  else { emoji='📚'; titulo='Vuelve al libro'; msg='Sección 3 del libro digital. Lee de nuevo las definiciones y vuelve.'; }
+  document.getElementById('res-emoji').textContent = emoji;
+  document.getElementById('res-titulo').textContent = titulo;
+  document.getElementById('res-msg').textContent = msg;
+}
+
+function reiniciarRonda() { iniciarRonda(); }
+
+// ══════════════════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════════════════
+renderGaleria();
+</script>
+
+<footer style="text-align:center; padding:2rem 1rem 1rem; color:#888; font-size:0.85rem;">
+  <p>🎯 Identificador de esfuerzos · TyD 2º ESO · Unidad 3</p>
+  <p><a href="../index.html" style="color:#D4700A; text-decoration:none;">← Volver al hub de la unidad</a></p>
+  <p style="margin-top:8px; font-family:'JetBrains Mono', monospace; font-size:0.72rem; opacity:0.6;">v1.0</p>
+</footer>
+
+</body>
+</html>

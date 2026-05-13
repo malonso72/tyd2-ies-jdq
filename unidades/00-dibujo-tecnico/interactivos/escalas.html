@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Calculadora de escalas · U00 Dibujo técnico · TyD 2º ESO</title>
+<meta name="description" content="Calculadora interactiva de escalas para dibujo técnico de 2º ESO: convierte entre medida real y medida en el dibujo con cualquier escala.">
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/00-dibujo-tecnico/interactivos/escalas.html">
+
+<meta property="og:title" content="Calculadora de escalas · U00 Dibujo técnico · TyD 2º ESO">
+<meta property="og:description" content="Calculadora interactiva de escalas para dibujo técnico de 2º ESO.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/00-dibujo-tecnico/interactivos/escalas.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Calculadora de escalas · U00 Dibujo técnico · TyD 2º ESO">
+<meta name="twitter:description" content="Calculadora interactiva de escalas para dibujo técnico de 2º ESO.">
+<meta name="twitter:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+:root {
+  --calc-ok: #2e7d4f;
+  --calc-err: #c44536;
+  --calc-bg: #fafafa;
+  --calc-border: #e3e3e3;
+}
+
+.calc-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+@media (max-width: 880px) { .calc-wrap { grid-template-columns: 1fr; } }
+
+.calc-panel {
+  background: #fff;
+  border: 1px solid var(--calc-border);
+  border-radius: 12px;
+  padding: 1.4rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.calc-panel h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--principal, #D4700A);
+  margin-bottom: 0.4rem;
+  border-bottom: 2px solid var(--principal, #D4700A);
+  padding-bottom: 0.3rem;
+}
+.calc-panel .panel-sub {
+  color: #555;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.calc-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.7rem 0;
+  flex-wrap: wrap;
+}
+.calc-row label {
+  font-weight: 600;
+  color: #333;
+  min-width: 90px;
+  font-size: 0.95rem;
+}
+.calc-row input[type="number"] {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.5rem 0.7rem;
+  border: 2px solid var(--calc-border);
+  border-radius: 8px;
+  width: 130px;
+  background: #fff;
+  color: var(--secundario, #1B4F8A);
+}
+.calc-row input[type="number"]:focus {
+  outline: none;
+  border-color: var(--principal, #D4700A);
+  box-shadow: 0 0 0 3px rgba(212,112,10,0.15);
+}
+.calc-row input[type="number"].locked {
+  background: #f3eee2;
+  color: var(--principal, #D4700A);
+  border-color: #e89947;
+}
+.calc-row select {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.7rem;
+  border: 2px solid var(--calc-border);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* ─── Escala selector ─── */
+.escala-display {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--principal, #D4700A);
+  text-align: center;
+  padding: 1rem;
+  background: #fffaf3;
+  border: 2px dashed var(--principal, #D4700A);
+  border-radius: 12px;
+  margin: 0.8rem 0;
+  letter-spacing: 2px;
+}
+.escala-display .tag {
+  display: block;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #666;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+.escala-display.amp .tag { color: var(--calc-ok); }
+.escala-display.red .tag { color: var(--secundario, #1B4F8A); }
+.escala-display.nat .tag { color: #888; }
+
+.escala-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.6rem 0 1rem;
+}
+.preset-btn {
+  background: #fff;
+  border: 1px solid var(--calc-border);
+  color: #444;
+  padding: 0.4rem 0.7rem;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.preset-btn:hover { background: var(--principal, #D4700A); color: #fff; border-color: var(--principal, #D4700A); }
+.preset-btn.active { background: var(--principal, #D4700A); color: #fff; border-color: var(--principal, #D4700A); }
+
+.escala-custom {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+  font-family: 'JetBrains Mono', monospace;
+}
+.escala-custom input {
+  width: 80px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.45rem 0.6rem;
+  border: 2px solid var(--calc-border);
+  border-radius: 8px;
+  text-align: center;
+  color: var(--secundario, #1B4F8A);
+}
+.escala-custom input:focus { outline: none; border-color: var(--principal, #D4700A); }
+.escala-custom .sep { font-size: 1.3rem; font-weight: 700; color: var(--principal, #D4700A); }
+
+/* ─── Pasos del cálculo ─── */
+.pasos {
+  background: #fffaf3;
+  border: 1px solid #e89947;
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  margin-top: 0.8rem;
+  font-size: 0.92rem;
+}
+.pasos h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--principal, #D4700A);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+}
+.paso {
+  margin: 0.35rem 0;
+  padding-left: 1.2rem;
+  position: relative;
+  color: #444;
+  line-height: 1.5;
+}
+.paso::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--principal, #D4700A);
+  font-weight: 700;
+}
+.paso .calc-op {
+  font-family: 'JetBrains Mono', monospace;
+  background: #fff;
+  border: 1px solid #f0e6d3;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: var(--secundario, #1B4F8A);
+}
+.paso strong { color: var(--principal, #D4700A); }
+
+.modo-toggle {
+  display: flex;
+  gap: 0.4rem;
+  background: #f0f0f0;
+  padding: 4px;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+.modo-toggle button {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 0.5rem 0.8rem;
+  border-radius: 7px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.15s;
+}
+.modo-toggle button.active {
+  background: var(--principal, #D4700A);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(212,112,10,0.3);
+}
+
+/* ─── Comparativa visual ─── */
+.compara-wrap {
+  background: #fff;
+  border: 1px solid var(--calc-border);
+  border-radius: 12px;
+  padding: 1.2rem;
+  margin-top: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.compara-wrap h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--principal, #D4700A);
+  margin-bottom: 0.4rem;
+  border-bottom: 2px solid var(--principal, #D4700A);
+  padding-bottom: 0.3rem;
+}
+.compara-wrap .panel-sub {
+  color: #555; font-size: 0.9rem; margin-bottom: 1rem; font-style: italic;
+}
+
+.compara-svg {
+  background: linear-gradient(to bottom, #fafafa, #fff);
+  border: 1px dashed #ccc;
+  border-radius: 10px;
+  padding: 1.2rem;
+  margin-top: 0.6rem;
+  text-align: center;
+  min-height: 200px;
+}
+.compara-svg svg { max-width: 100%; height: auto; }
+.compara-leyenda {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 0.8rem;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+.leyenda-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+.leyenda-swatch {
+  width: 18px;
+  height: 12px;
+  border-radius: 3px;
+  border: 1px solid #333;
+}
+.leyenda-real .leyenda-swatch { background: rgba(44,95,141,0.4); border-color: var(--secundario, #1B4F8A); }
+.leyenda-dibujo .leyenda-swatch { background: rgba(212,112,10,0.45); border-color: var(--principal, #D4700A); }
+
+/* ─── Ayudas ─── */
+.tip-card {
+  background: #fffaf3;
+  border-left: 4px solid var(--principal, #D4700A);
+  border-radius: 0 10px 10px 0;
+  padding: 0.9rem 1.1rem;
+  margin: 1.5rem 0;
+  font-size: 0.93rem;
+  color: #444;
+}
+.tip-card strong { color: var(--principal, #D4700A); }
+.tip-card .tip-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--principal, #D4700A);
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+@media print {
+  .escala-presets, .modo-toggle, .preset-btn { display: none; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U00 · Dibujo técnico · Calculadora de escalas</span>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Inicio</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U00</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📘</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>📏</span><span class="nc-lbl">Calculadora de escalas</span></span>
+</nav>
+
+<div class="unidad-layout">
+
+<aside class="sb-side">
+  <h3>Cómo usarlo</h3>
+  <p style="padding: 0.6rem 1rem; font-size:0.88rem; color:#555; line-height:1.55;">
+    <strong>1.</strong> Elige la <strong>escala</strong> (presets o personalizada).<br>
+    <strong>2.</strong> Selecciona el modo: pasar de <em>real a dibujo</em> o al revés.<br>
+    <strong>3.</strong> Introduce la medida conocida. La otra se calcula al instante.<br>
+    <strong>4.</strong> Mira los pasos para entender el cálculo.
+  </p>
+  <h3>Lo que aprenderás</h3>
+  <ul style="font-size:0.88rem; color:#555; padding:0 1rem 0 2rem;">
+    <li>Diferenciar reducción, natural y ampliación.</li>
+    <li>Convertir medidas entre realidad y dibujo.</li>
+    <li>Trabajar con unidades coherentes.</li>
+  </ul>
+</aside>
+
+<main class="ct" id="main-content">
+
+<h1 class="unidad-titulo">📏 Calculadora de escalas</h1>
+<p class="unidad-subt">Convierte entre medida real y medida en el dibujo con cualquier escala. Comprueba los cálculos paso a paso y visualiza la diferencia de tamaños.</p>
+
+<!-- ─── Selector de escala ─── -->
+<section class="calc-panel">
+  <h2>Paso 1 · Elige la escala</h2>
+  <p class="panel-sub">Usa un preset o configura una escala personalizada.</p>
+
+  <div class="escala-presets" id="escala-presets">
+    <button class="preset-btn" data-num="1" data-den="2">1:2</button>
+    <button class="preset-btn" data-num="1" data-den="5">1:5</button>
+    <button class="preset-btn" data-num="1" data-den="10">1:10</button>
+    <button class="preset-btn" data-num="1" data-den="20">1:20</button>
+    <button class="preset-btn" data-num="1" data-den="50">1:50</button>
+    <button class="preset-btn active" data-num="1" data-den="100">1:100</button>
+    <button class="preset-btn" data-num="1" data-den="1000">1:1000</button>
+    <button class="preset-btn" data-num="1" data-den="25000">1:25 000</button>
+    <button class="preset-btn" data-num="1" data-den="1">1:1</button>
+    <button class="preset-btn" data-num="2" data-den="1">2:1</button>
+    <button class="preset-btn" data-num="5" data-den="1">5:1</button>
+    <button class="preset-btn" data-num="10" data-den="1">10:1</button>
+  </div>
+
+  <div class="escala-custom">
+    <label style="font-size:0.92rem; font-weight:600; color:#444; margin-right: 0.4rem;">Personalizada:</label>
+    <input type="number" id="num-input" value="1" min="1" step="1" aria-label="Numerador de la escala">
+    <span class="sep">:</span>
+    <input type="number" id="den-input" value="100" min="1" step="1" aria-label="Denominador de la escala">
+  </div>
+
+  <div class="escala-display nat" id="escala-display">
+    <span id="escala-text">1 : 100</span>
+    <span class="tag" id="escala-tag">Escala de reducción · ÷100</span>
+  </div>
+</section>
+
+<!-- ─── Calculadora ─── -->
+<section class="calc-panel" style="margin-top: 1.5rem;">
+  <h2>Paso 2 · Calcula</h2>
+
+  <div class="modo-toggle" role="tablist" aria-label="Modo de cálculo">
+    <button id="modo-real" class="active" onclick="setModo('real')">📐 Real → Dibujo</button>
+    <button id="modo-dibujo" onclick="setModo('dibujo')">✏️ Dibujo → Real</button>
+  </div>
+
+  <div class="calc-row">
+    <label for="real-input" id="real-label">Medida real:</label>
+    <input type="number" id="real-input" step="any" value="9" aria-label="Medida real">
+    <select id="real-unit" aria-label="Unidad de la medida real">
+      <option value="mm">mm</option>
+      <option value="cm">cm</option>
+      <option value="m" selected>m</option>
+      <option value="km">km</option>
+    </select>
+  </div>
+
+  <div class="calc-row">
+    <label for="dibujo-input" id="dibujo-label">Medida dibujo:</label>
+    <input type="number" id="dibujo-input" step="any" readonly class="locked" aria-label="Medida en el dibujo">
+    <select id="dibujo-unit" aria-label="Unidad de la medida en el dibujo">
+      <option value="mm">mm</option>
+      <option value="cm" selected>cm</option>
+      <option value="m">m</option>
+    </select>
+  </div>
+
+  <div class="pasos" id="pasos-box">
+    <h3>Pasos del cálculo</h3>
+    <div id="pasos-content"></div>
+  </div>
+</section>
+
+<!-- ─── Comparativa visual ─── -->
+<section class="compara-wrap">
+  <h2>Comparativa visual</h2>
+  <p class="panel-sub">Una línea representa el objeto a tamaño real, la otra el dibujo. La proporción entre ellas es la escala.</p>
+  <div class="compara-svg">
+    <svg id="compara-svg" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <!-- dibujado por JS -->
+    </svg>
+  </div>
+  <div class="compara-leyenda">
+    <span class="leyenda-item leyenda-real"><span class="leyenda-swatch"></span><span>Tamaño real</span></span>
+    <span class="leyenda-item leyenda-dibujo"><span class="leyenda-swatch"></span><span>Tamaño en el dibujo</span></span>
+  </div>
+</section>
+
+<div class="tip-card">
+  <div class="tip-title">⚠️ Cuidado con las unidades</div>
+  Antes de comparar medidas, las dos tienen que estar en la misma unidad. La calculadora hace la conversión por ti, pero a mano siempre conviene <strong>pasar primero todo a la misma unidad</strong> (mm, cm, m o km) y luego aplicar la escala.
+</div>
+
+<div class="tip-card">
+  <div class="tip-title">💡 ¿Qué significa cada escala?</div>
+  La escala <strong>1:N</strong> significa <em>"1 en el dibujo por cada N en la realidad"</em> → el dibujo es <strong>más pequeño</strong> (reducción).<br>
+  La escala <strong>N:1</strong> significa <em>"N en el dibujo por cada 1 en la realidad"</em> → el dibujo es <strong>más grande</strong> (ampliación).<br>
+  La escala <strong>1:1</strong> es la natural: el dibujo tiene el mismo tamaño que la realidad.
+</div>
+
+<footer class="unidad-foot">
+  IES Jiménez de Quesada · Santa Fe (Granada)<br>
+  TyD 2º ESO · Curso 2025-26 · Manuel Alonso Herrera<br>
+  <a href="../index.html">← Volver al hub</a> · <a href="../libro-digital.html">📘 Libro digital</a>
+  <br><span class="version">Calculadora de escalas v1.0</span>
+</footer>
+
+</main>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // ── Conversión a mm como unidad base ───────────────────
+  const U = { mm: 1, cm: 10, m: 1000, km: 1000000 };
+
+  // ── Estado ─────────────────────────────────────────────
+  let num = 1, den = 100;
+  let modo = 'real';   // 'real' (real → dibujo) o 'dibujo' (dibujo → real)
+
+  // ── Elementos ──────────────────────────────────────────
+  const numIn = document.getElementById('num-input');
+  const denIn = document.getElementById('den-input');
+  const escalaText = document.getElementById('escala-text');
+  const escalaTag = document.getElementById('escala-tag');
+  const escalaDisplay = document.getElementById('escala-display');
+  const presets = document.querySelectorAll('.preset-btn');
+  const realIn = document.getElementById('real-input');
+  const dibujoIn = document.getElementById('dibujo-input');
+  const realUnit = document.getElementById('real-unit');
+  const dibujoUnit = document.getElementById('dibujo-unit');
+  const realLabel = document.getElementById('real-label');
+  const dibujoLabel = document.getElementById('dibujo-label');
+  const pasosContent = document.getElementById('pasos-content');
+  const compareSvg = document.getElementById('compara-svg');
+
+  function fmt(n) {
+    if (!isFinite(n)) return '—';
+    if (Math.abs(n) >= 1000) return n.toLocaleString('es-ES', {maximumFractionDigits: 2});
+    if (Math.abs(n) < 0.01) return n.toExponential(2);
+    return (Math.round(n * 1000) / 1000).toString().replace('.', ',');
+  }
+
+  function actualizarEscalaDisplay() {
+    let nFmt = num >= 1000 ? num.toLocaleString('es-ES') : num;
+    let dFmt = den >= 1000 ? den.toLocaleString('es-ES') : den;
+    escalaText.textContent = `${nFmt} : ${dFmt}`;
+
+    escalaDisplay.classList.remove('amp', 'red', 'nat');
+    if (num === den) {
+      escalaTag.textContent = 'Escala natural · ×1';
+      escalaDisplay.classList.add('nat');
+    } else if (num < den) {
+      const r = den / num;
+      escalaTag.textContent = `Escala de reducción · ÷${fmt(r)}`;
+      escalaDisplay.classList.add('red');
+    } else {
+      const r = num / den;
+      escalaTag.textContent = `Escala de ampliación · ×${fmt(r)}`;
+      escalaDisplay.classList.add('amp');
+    }
+  }
+
+  function setEscala(n, d) {
+    num = n; den = d;
+    numIn.value = n;
+    denIn.value = d;
+    // marca el preset activo
+    presets.forEach(b => {
+      b.classList.toggle('active',
+        parseInt(b.dataset.num) === n && parseInt(b.dataset.den) === d);
+    });
+    actualizarEscalaDisplay();
+    calcular();
+  }
+
+  function setModo(m) {
+    modo = m;
+    document.getElementById('modo-real').classList.toggle('active', m === 'real');
+    document.getElementById('modo-dibujo').classList.toggle('active', m === 'dibujo');
+    if (m === 'real') {
+      realIn.readOnly = false;
+      realIn.classList.remove('locked');
+      dibujoIn.readOnly = true;
+      dibujoIn.classList.add('locked');
+      realLabel.textContent = 'Medida real:';
+      dibujoLabel.textContent = 'Medida dibujo:';
+    } else {
+      realIn.readOnly = true;
+      realIn.classList.add('locked');
+      dibujoIn.readOnly = false;
+      dibujoIn.classList.remove('locked');
+      realLabel.textContent = 'Medida real:';
+      dibujoLabel.textContent = 'Medida dibujo:';
+    }
+    // Cuando se cambia de modo, vacía y deja un valor de partida
+    if (m === 'real') {
+      if (!realIn.value || realIn.value === '0') realIn.value = '9';
+    } else {
+      if (!dibujoIn.value || dibujoIn.value === '0') dibujoIn.value = '9';
+    }
+    calcular();
+  }
+  window.setModo = setModo;
+
+  function calcular() {
+    let pasosHTML = '';
+    const ru = realUnit.value, du = dibujoUnit.value;
+
+    if (modo === 'real') {
+      const real = parseFloat(realIn.value);
+      if (isNaN(real) || real <= 0) {
+        dibujoIn.value = '';
+        pasosContent.innerHTML = '<div class="paso">Introduce una medida real positiva para calcular.</div>';
+        dibujarComparativa(null, null);
+        return;
+      }
+      // pasar a mm
+      const realMm = real * U[ru];
+      // aplicar escala
+      const dibujoMm = realMm * num / den;
+      // pasar a unidad seleccionada del dibujo
+      const dibujo = dibujoMm / U[du];
+      dibujoIn.value = Math.round(dibujo * 1000) / 1000;
+
+      pasosHTML += `<div class="paso"><strong>Dato:</strong> medida real = <span class="calc-op">${fmt(real)} ${ru}</span></div>`;
+      if (ru !== 'mm') {
+        pasosHTML += `<div class="paso">Paso a milímetros: <span class="calc-op">${fmt(real)} ${ru} × ${U[ru]} = ${fmt(realMm)} mm</span></div>`;
+      }
+      pasosHTML += `<div class="paso">Aplico la escala (dibujo = real × escala): <span class="calc-op">${fmt(realMm)} × (${num}/${den}) = ${fmt(dibujoMm)} mm</span></div>`;
+      if (du !== 'mm') {
+        pasosHTML += `<div class="paso">Paso a ${du}: <span class="calc-op">${fmt(dibujoMm)} mm ÷ ${U[du]} = ${fmt(dibujo)} ${du}</span></div>`;
+      }
+      pasosHTML += `<div class="paso"><strong>Resultado:</strong> en el dibujo medirá <span class="calc-op">${fmt(dibujo)} ${du}</span></div>`;
+      dibujarComparativa(realMm, dibujoMm);
+
+    } else {
+      const dibujo = parseFloat(dibujoIn.value);
+      if (isNaN(dibujo) || dibujo <= 0) {
+        realIn.value = '';
+        pasosContent.innerHTML = '<div class="paso">Introduce una medida positiva en el dibujo para calcular.</div>';
+        dibujarComparativa(null, null);
+        return;
+      }
+      const dibujoMm = dibujo * U[du];
+      const realMm = dibujoMm * den / num;
+      const real = realMm / U[ru];
+      realIn.value = Math.round(real * 1000) / 1000;
+
+      pasosHTML += `<div class="paso"><strong>Dato:</strong> medida en el dibujo = <span class="calc-op">${fmt(dibujo)} ${du}</span></div>`;
+      if (du !== 'mm') {
+        pasosHTML += `<div class="paso">Paso a milímetros: <span class="calc-op">${fmt(dibujo)} ${du} × ${U[du]} = ${fmt(dibujoMm)} mm</span></div>`;
+      }
+      pasosHTML += `<div class="paso">Aplico la escala (real = dibujo ÷ escala): <span class="calc-op">${fmt(dibujoMm)} × (${den}/${num}) = ${fmt(realMm)} mm</span></div>`;
+      if (ru !== 'mm') {
+        pasosHTML += `<div class="paso">Paso a ${ru}: <span class="calc-op">${fmt(realMm)} mm ÷ ${U[ru]} = ${fmt(real)} ${ru}</span></div>`;
+      }
+      pasosHTML += `<div class="paso"><strong>Resultado:</strong> en la realidad mide <span class="calc-op">${fmt(real)} ${ru}</span></div>`;
+      dibujarComparativa(realMm, dibujoMm);
+    }
+    pasosContent.innerHTML = pasosHTML;
+  }
+
+  function dibujarComparativa(realMm, dibujoMm) {
+    // Limpiar
+    while (compareSvg.firstChild) compareSvg.removeChild(compareSvg.firstChild);
+    if (realMm === null || dibujoMm === null) {
+      const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      t.setAttribute('x', 300); t.setAttribute('y', 100);
+      t.setAttribute('text-anchor', 'middle');
+      t.setAttribute('fill', '#888');
+      t.setAttribute('font-family', 'Barlow, sans-serif');
+      t.setAttribute('font-size', '14');
+      t.textContent = 'Introduce una medida para ver la comparativa';
+      compareSvg.appendChild(t);
+      return;
+    }
+    // Normalizar a anchura del SVG (≤500 px útil de 600 viewBox)
+    const maxLen = 480;
+    const bigger = Math.max(realMm, dibujoMm);
+    const real_px = (realMm / bigger) * maxLen;
+    const dib_px = (dibujoMm / bigger) * maxLen;
+
+    const ns = 'http://www.w3.org/2000/svg';
+    const startX = 60;
+
+    function rect(x, y, w, h, fill, stroke) {
+      const r = document.createElementNS(ns, 'rect');
+      r.setAttribute('x', x); r.setAttribute('y', y);
+      r.setAttribute('width', w); r.setAttribute('height', h);
+      r.setAttribute('fill', fill); r.setAttribute('stroke', stroke);
+      r.setAttribute('stroke-width', '2');
+      r.setAttribute('rx', '3');
+      compareSvg.appendChild(r);
+    }
+    function txt(x, y, content, opts = {}) {
+      const t = document.createElementNS(ns, 'text');
+      t.setAttribute('x', x); t.setAttribute('y', y);
+      t.setAttribute('text-anchor', opts.anchor || 'start');
+      t.setAttribute('fill', opts.fill || '#333');
+      t.setAttribute('font-family', 'Barlow, sans-serif');
+      t.setAttribute('font-size', opts.size || '13');
+      t.setAttribute('font-weight', opts.weight || '600');
+      t.textContent = content;
+      compareSvg.appendChild(t);
+    }
+    function line(x1, y1, x2, y2, stroke) {
+      const l = document.createElementNS(ns, 'line');
+      l.setAttribute('x1', x1); l.setAttribute('y1', y1);
+      l.setAttribute('x2', x2); l.setAttribute('y2', y2);
+      l.setAttribute('stroke', stroke); l.setAttribute('stroke-width', '1');
+      compareSvg.appendChild(l);
+    }
+
+    // Real (azul, arriba)
+    rect(startX, 40, real_px, 30, 'rgba(44,95,141,0.4)', '#1B4F8A');
+    txt(startX, 32, 'TAMAÑO REAL', {fill: '#1B4F8A', size: '11', weight: '700'});
+    txt(startX + real_px + 8, 60, fmt(realMm) + ' mm', {fill: '#1B4F8A'});
+
+    // Dibujo (naranja, abajo)
+    rect(startX, 110, dib_px, 30, 'rgba(212,112,10,0.45)', '#D4700A');
+    txt(startX, 102, 'TAMAÑO EN EL DIBUJO', {fill: '#D4700A', size: '11', weight: '700'});
+    txt(startX + dib_px + 8, 130, fmt(dibujoMm) + ' mm', {fill: '#D4700A'});
+
+    // línea de referencia
+    line(startX, 75, startX, 105, '#aaa');
+
+    // Indicador de proporción
+    const factor = dibujoMm / realMm;
+    let factorStr;
+    if (factor === 1) factorStr = 'Tamaño natural · ×1';
+    else if (factor < 1) factorStr = 'Reducción · ×' + fmt(factor);
+    else factorStr = 'Ampliación · ×' + fmt(factor);
+    txt(300, 180, factorStr, {anchor: 'middle', fill: '#666', size: '13', weight: '500'});
+  }
+
+  // ── Event listeners ────────────────────────────────────
+  presets.forEach(b => b.addEventListener('click', () => {
+    setEscala(parseInt(b.dataset.num), parseInt(b.dataset.den));
+  }));
+  numIn.addEventListener('input', () => {
+    const n = parseInt(numIn.value);
+    if (n && n > 0) {
+      num = n;
+      presets.forEach(b => b.classList.toggle('active',
+        parseInt(b.dataset.num) === num && parseInt(b.dataset.den) === den));
+      actualizarEscalaDisplay();
+      calcular();
+    }
+  });
+  denIn.addEventListener('input', () => {
+    const d = parseInt(denIn.value);
+    if (d && d > 0) {
+      den = d;
+      presets.forEach(b => b.classList.toggle('active',
+        parseInt(b.dataset.num) === num && parseInt(b.dataset.den) === den));
+      actualizarEscalaDisplay();
+      calcular();
+    }
+  });
+  realIn.addEventListener('input', () => { if (modo === 'real') calcular(); });
+  dibujoIn.addEventListener('input', () => { if (modo === 'dibujo') calcular(); });
+  realUnit.addEventListener('change', calcular);
+  dibujoUnit.addEventListener('change', calcular);
+
+  // Init
+  actualizarEscalaDisplay();
+  calcular();
+})();
+</script>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

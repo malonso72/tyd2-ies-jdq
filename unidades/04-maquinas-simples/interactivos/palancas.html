@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Calculadora de palancas · U04 · TyD 2º ESO</title>
+<meta name="description" content="Interactivo de cálculo de palancas: tres tipos, introduce fuerzas y distancias y comprueba el equilibrio. TyD 2º ESO.">
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/04-maquinas-simples/interactivos/palancas.html">
+
+<meta property="og:title" content="Calculadora de palancas · U04 · TyD 2º ESO">
+<meta property="og:description" content="3 tipos de palanca, cálculo de equilibrio y ventaja mecánica.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/04-maquinas-simples/interactivos/palancas.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Calculadora de palancas · U04 · TyD 2º ESO">
+<meta name="twitter:description" content="3 tipos de palanca, cálculo de equilibrio y ventaja mecánica.">
+<meta name="twitter:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+:root {
+  --ok: #2e7d4f;
+  --err: #c44536;
+  --warn: #e8b647;
+  --beam: #8a6a3a;
+  --fuerza: #c44a3a;
+  --resistencia: #2c5f8d;
+  --apoyo: #444;
+}
+
+.tipos-tabs {
+  display: flex;
+  gap: 0.4rem;
+  background: #f0f0f0;
+  padding: 4px;
+  border-radius: 10px;
+  margin: 1rem 0 1.4rem;
+}
+.tipos-tabs button {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 0.7rem 0.5rem;
+  border-radius: 7px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.15s;
+}
+.tipos-tabs button.active {
+  background: var(--principal, #D4700A);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(212,112,10,0.3);
+}
+.tipos-tabs button .tab-em { display: block; font-size: 1.2rem; margin-bottom: 4px; }
+
+.bloque {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 14px;
+  padding: 1.4rem 1.6rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+.bloque h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--principal, #D4700A);
+  margin: 0 0 0.5rem;
+  border-bottom: 2px solid var(--principal, #D4700A);
+  padding-bottom: 0.4rem;
+}
+.bloque p.descripcion { color: #555; margin-bottom: 1rem; font-size: 0.95rem; }
+
+.tipo-info {
+  background: #fafafa;
+  border-left: 4px solid var(--principal, #D4700A);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 1rem 0;
+}
+.tipo-info h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.15rem;
+  color: #222;
+  margin: 0 0 6px;
+}
+.tipo-info p { font-size: 0.93rem; color: #555; margin: 0 0 6px; line-height: 1.5; }
+.tipo-info .ejs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+.tipo-info .ejs span {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  padding: 3px 10px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.calc-area {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 1.4rem;
+  margin: 1rem 0;
+  align-items: start;
+}
+
+.svg-wrap {
+  background: linear-gradient(to bottom, #fafafa 0%, #fafafa 70%, #c8b58b 70%, #d4be86 100%);
+  border: 1px solid #d6c9ad;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+}
+.svg-wrap svg { width: 100%; max-width: 480px; height: auto; }
+
+.controles {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.input-row {
+  background: #fafafa;
+  border: 1px solid #e3e3e3;
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: grid;
+  grid-template-columns: 1fr 110px;
+  gap: 8px;
+  align-items: center;
+}
+.input-row.fuerza { border-left: 4px solid var(--fuerza); }
+.input-row.resistencia { border-left: 4px solid var(--resistencia); }
+.input-row.brazo-f { border-left: 4px solid var(--fuerza); background: #fff5f3; }
+.input-row.brazo-r { border-left: 4px solid var(--resistencia); background: #f0f6fb; }
+.input-row label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: #333;
+}
+.input-row label .desc {
+  display: block;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: #888;
+  margin-top: 2px;
+}
+.input-row input[type="number"] {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.4rem 0.6rem;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  text-align: right;
+  width: 100%;
+  background: #fff;
+  color: #222;
+}
+.input-row input:focus {
+  outline: none;
+  border-color: var(--principal, #D4700A);
+  box-shadow: 0 0 0 3px rgba(212,112,10,0.15);
+}
+.input-row input.calculado {
+  background: #ecf8ef;
+  border-color: var(--ok);
+  color: var(--ok);
+  font-weight: 700;
+}
+.input-row .unit {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: #888;
+  margin-left: 4px;
+}
+
+.formula-box {
+  background: #fff7eb;
+  border: 1px solid #f0d9b0;
+  border-radius: 10px;
+  padding: 12px 14px;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+}
+.formula-box .fm-label {
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  color: #8a6d1a;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.formula-box .fm-eq {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--principal, #D4700A); color: #fff;
+  border: none; border-radius: 8px;
+  padding: 0.7rem 1.4rem; font-family: 'Barlow', sans-serif;
+  font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.15s;
+  flex: 1;
+}
+.btn-primary:hover:not(:disabled) { background: #b85d08; }
+.btn-secondary {
+  background: #fff; color: #666; border: 1px solid #ccc; border-radius: 8px;
+  padding: 0.7rem 1.2rem; font-family: 'Barlow', sans-serif;
+  font-weight: 600; font-size: 0.95rem; cursor: pointer;
+}
+.btn-secondary:hover { background: #f5f5f5; }
+
+.resultado {
+  background: #fafafa;
+  border: 1px solid #e3e3e3;
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  margin: 0.6rem 0;
+  display: none;
+}
+.resultado.visible { display: block; }
+.resultado.equilibrio {
+  background: linear-gradient(135deg, #ecf8ef, #d8f0dc);
+  border-color: var(--ok);
+}
+.resultado.no-equilibrio {
+  background: linear-gradient(135deg, #fce4e1, #f8d2cc);
+  border-color: var(--err);
+}
+.resultado h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.15rem;
+  margin: 0 0 8px;
+  color: var(--ok);
+}
+.resultado.no-equilibrio h3 { color: var(--err); }
+.resultado p { font-size: 0.94rem; color: #444; margin: 0 0 6px; line-height: 1.5; }
+.resultado p strong { color: #222; }
+.resultado .res-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  padding: 4px 0;
+  border-bottom: 1px dashed #ccc;
+}
+.resultado .res-row:last-child { border-bottom: 0; }
+.resultado .res-row strong { color: #222; }
+
+.ventaja-mec {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-top: 0.6rem;
+  font-size: 0.92rem;
+}
+.ventaja-mec h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.9rem;
+  color: var(--principal, #D4700A);
+  margin: 0 0 6px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.ventaja-mec .vm-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--principal, #D4700A);
+}
+.ventaja-mec .vm-interpret { color: #555; margin-top: 4px; font-size: 0.88rem; }
+
+/* SVG palanca */
+.svg-fig .beam {
+  stroke: var(--beam);
+  stroke-width: 8;
+  stroke-linecap: round;
+  fill: none;
+  transition: all 0.4s ease;
+}
+.svg-fig .apoyo-tri { fill: var(--apoyo); }
+.svg-fig .fuerza-arrow {
+  stroke: var(--fuerza);
+  stroke-width: 3;
+  fill: none;
+  stroke-linecap: round;
+}
+.svg-fig .fuerza-fill { fill: var(--fuerza); }
+.svg-fig .resistencia-arrow {
+  stroke: var(--resistencia);
+  stroke-width: 3;
+  fill: none;
+  stroke-linecap: round;
+}
+.svg-fig .resistencia-fill { fill: var(--resistencia); }
+.svg-fig .brazo-line {
+  stroke: #aaa;
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+  fill: none;
+}
+.svg-fig .label-bg { fill: #fff; opacity: 0.9; }
+.svg-fig text { font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+.svg-fig text.lbl-f { fill: var(--fuerza); font-weight: 700; }
+.svg-fig text.lbl-r { fill: var(--resistencia); font-weight: 700; }
+.svg-fig text.lbl-aux { fill: #555; }
+
+@media (max-width: 720px) {
+  .calc-area { grid-template-columns: 1fr; }
+  .tipos-tabs button { font-size: 0.8rem; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U04 · Mecanismos · Calculadora de palancas</span>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Inicio</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U04</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📘</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>⚖️</span><span class="nc-lbl">Palancas</span></span>
+</nav>
+
+<div class="unidad-layout">
+
+<aside class="sb-side">
+  <h3>La ley de la palanca</h3>
+  <div style="padding: 0.6rem 1rem; font-size:0.88rem; color:#555; line-height:1.55;">
+    <p><strong>F · BF = R · BR</strong></p>
+    <p>F = fuerza aplicada<br>
+       R = resistencia (peso a vencer)<br>
+       BF = brazo de la fuerza<br>
+       BR = brazo de la resistencia</p>
+  </div>
+  <h3>Cómo usarlo</h3>
+  <p style="padding: 0.6rem 1rem; font-size:0.86rem; color:#555; line-height:1.55;">
+    Elige el tipo de palanca, rellena <strong>tres valores</strong> y pulsa Calcular. La calculadora despeja el cuarto valor y dice si la palanca está en equilibrio.
+  </p>
+</aside>
+
+<main class="ct" id="main-content">
+
+<h1 class="unidad-titulo">⚖️ Calculadora de palancas</h1>
+<p class="unidad-subt">Las tres clases de palanca con cálculo automático del equilibrio y de la ventaja mecánica.</p>
+
+<div class="tipos-tabs" role="tablist" aria-label="Tipo de palanca">
+  <button id="tab-1" class="active" onclick="setTipo(1)">
+    <span class="tab-em">⚖️</span>1ª clase
+  </button>
+  <button id="tab-2" onclick="setTipo(2)">
+    <span class="tab-em">🚛</span>2ª clase
+  </button>
+  <button id="tab-3" onclick="setTipo(3)">
+    <span class="tab-em">🎣</span>3ª clase
+  </button>
+</div>
+
+<div class="bloque">
+  <div class="tipo-info" id="tipo-info">
+    <h3 id="ti-titulo">Palanca de 1ª clase</h3>
+    <p id="ti-desc">El <strong>apoyo</strong> está entre la fuerza y la resistencia. Es la palanca "clásica".</p>
+    <p><strong>Ventaja mecánica:</strong> <span id="ti-vm">puede ser &gt; 1 o &lt; 1 según las distancias</span>.</p>
+    <div class="ejs" id="ti-ejs">
+      <span>Balancín</span><span>Tijeras</span><span>Alicates</span><span>Balanza</span><span>Sube y baja</span>
+    </div>
+  </div>
+
+  <div class="calc-area">
+    <div class="svg-wrap">
+      <svg id="svg-palanca" class="svg-fig" viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg" aria-label="Esquema de palanca con fuerza y resistencia">
+        <!-- Suelo -->
+        <line x1="20" y1="220" x2="460" y2="220" stroke="#aaa" stroke-width="2" stroke-dasharray="3 3"/>
+
+        <!-- Barra -->
+        <line id="beam" class="beam" x1="60" y1="160" x2="420" y2="160"/>
+
+        <!-- Apoyo (triángulo) -->
+        <polygon id="apoyo" class="apoyo-tri" points="240,165 220,210 260,210"/>
+
+        <!-- Fuerza (flecha hacia abajo) -->
+        <g id="fuerza-grp">
+          <line id="f-arrow-shaft" class="fuerza-arrow" x1="80" y1="100" x2="80" y2="155"/>
+          <polygon id="f-arrow-head" class="fuerza-fill" points="80,155 73,143 87,143"/>
+          <text id="f-label" class="lbl-f" x="80" y="92" text-anchor="middle">F</text>
+        </g>
+
+        <!-- Resistencia (flecha hacia abajo) -->
+        <g id="resistencia-grp">
+          <line id="r-arrow-shaft" class="resistencia-arrow" x1="400" y1="100" x2="400" y2="155"/>
+          <polygon id="r-arrow-head" class="resistencia-fill" points="400,155 393,143 407,143"/>
+          <text id="r-label" class="lbl-r" x="400" y="92" text-anchor="middle">R</text>
+        </g>
+
+        <!-- Brazo F (línea bajo la barra con doble flecha) -->
+        <g id="bf-grp">
+          <line id="bf-line" class="brazo-line" x1="80" y1="175" x2="240" y2="175"/>
+          <text id="bf-label" class="lbl-aux" x="160" y="195" text-anchor="middle">BF</text>
+        </g>
+
+        <!-- Brazo R -->
+        <g id="br-grp">
+          <line id="br-line" class="brazo-line" x1="240" y1="175" x2="400" y2="175"/>
+          <text id="br-label" class="lbl-aux" x="320" y="195" text-anchor="middle">BR</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="controles">
+
+      <div class="input-row fuerza">
+        <label>F · Fuerza<span class="desc">la que aplicas tú</span></label>
+        <div>
+          <input type="number" id="in-F" min="0" step="0.1" placeholder="—">
+          <span class="unit">N</span>
+        </div>
+      </div>
+
+      <div class="input-row brazo-f">
+        <label>BF · Brazo de la fuerza<span class="desc">distancia F-apoyo</span></label>
+        <div>
+          <input type="number" id="in-BF" min="0" step="0.1" placeholder="—">
+          <span class="unit">cm</span>
+        </div>
+      </div>
+
+      <div class="input-row resistencia">
+        <label>R · Resistencia<span class="desc">peso a levantar</span></label>
+        <div>
+          <input type="number" id="in-R" min="0" step="0.1" placeholder="—">
+          <span class="unit">N</span>
+        </div>
+      </div>
+
+      <div class="input-row brazo-r">
+        <label>BR · Brazo de la resistencia<span class="desc">distancia R-apoyo</span></label>
+        <div>
+          <input type="number" id="in-BR" min="0" step="0.1" placeholder="—">
+          <span class="unit">cm</span>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <div class="fm-label">Ley de la palanca</div>
+        <div class="fm-eq">F · BF = R · BR</div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-primary" onclick="calcular()">▶ Calcular</button>
+        <button class="btn-secondary" onclick="limpiar()">↺ Limpiar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="resultado" id="resultado">
+    <h3 id="res-titulo">—</h3>
+    <p id="res-msg">—</p>
+    <div id="res-detalle"></div>
+  </div>
+
+  <div class="ventaja-mec" id="ventaja-mec" style="display:none;">
+    <h4>Ventaja mecánica</h4>
+    <span class="vm-value" id="vm-value">—</span>
+    <div class="vm-interpret" id="vm-interpret">—</div>
+  </div>
+</div>
+
+<div class="bloque">
+  <h2>📚 Recuerda</h2>
+  <p class="descripcion">La <strong>ley de la palanca</strong> es la base de todas las máquinas simples: <strong>F · BF = R · BR</strong>. La palanca está en equilibrio cuando ambos productos son iguales. La <strong>ventaja mecánica</strong> es <strong>VM = R / F = BF / BR</strong>: si es mayor que 1, la palanca multiplica la fuerza; si es menor que 1, multiplica el recorrido.</p>
+</div>
+
+</main>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════
+//  DATOS DE LOS TRES TIPOS
+// ══════════════════════════════════════════════════════════
+const TIPOS = {
+  1: {
+    titulo: 'Palanca de 1ª clase',
+    desc: 'El <strong>apoyo</strong> está entre la fuerza y la resistencia. Es la palanca "clásica".',
+    vm: 'puede ser &gt; 1 o &lt; 1 según las distancias (BF vs BR)',
+    ejemplos: ['Balancín', 'Tijeras', 'Alicates', 'Balanza', 'Sube y baja', 'Remos'],
+    // posiciones x en SVG: F, apoyo, R
+    geo: { xF: 80, xApoyo: 240, xR: 400 }
+  },
+  2: {
+    titulo: 'Palanca de 2ª clase',
+    desc: 'La <strong>resistencia</strong> está entre el apoyo y la fuerza. Multiplica siempre la fuerza.',
+    vm: 'siempre &gt; 1 (BF &gt; BR, la fuerza necesaria es menor que la resistencia)',
+    ejemplos: ['Carretilla', 'Cascanueces', 'Destapador de botellas', 'Remo'],
+    geo: { xF: 420, xApoyo: 60, xR: 280 }
+  },
+  3: {
+    titulo: 'Palanca de 3ª clase',
+    desc: 'La <strong>fuerza</strong> está entre el apoyo y la resistencia. Multiplica el recorrido, no la fuerza.',
+    vm: 'siempre &lt; 1 (BF &lt; BR, hace falta más fuerza pero hay más rapidez y recorrido)',
+    ejemplos: ['Pinzas de cocina', 'Caña de pescar', 'Bate de béisbol', 'Brazo humano', 'Grapadora'],
+    geo: { xF: 200, xApoyo: 60, xR: 420 }
+  }
+};
+
+let tipoActual = 1;
+
+function setTipo(t) {
+  tipoActual = t;
+  [1, 2, 3].forEach(i => document.getElementById('tab-' + i).classList.toggle('active', i === t));
+  const info = TIPOS[t];
+  document.getElementById('ti-titulo').textContent = info.titulo;
+  document.getElementById('ti-desc').innerHTML = info.desc;
+  document.getElementById('ti-vm').innerHTML = info.vm;
+  document.getElementById('ti-ejs').innerHTML = info.ejemplos.map(e => `<span>${e}</span>`).join('');
+  redibujar();
+  limpiar();
+}
+
+// ══════════════════════════════════════════════════════════
+//  DIBUJO DEL SVG
+// ══════════════════════════════════════════════════════════
+function redibujar(F, R, BF, BR) {
+  const t = TIPOS[tipoActual];
+  const { xF, xApoyo, xR } = t.geo;
+
+  // Beam (la barra) — se mantiene horizontal por simplicidad pedagógica
+  // Si hay datos, podríamos inclinar la barra cuando F·BF ≠ R·BR
+  let beamX1 = Math.min(xF, xApoyo, xR) - 20;
+  let beamX2 = Math.max(xF, xApoyo, xR) + 20;
+  let beamY1 = 160, beamY2 = 160;
+
+  // Si hay desequilibrio, inclinar
+  if (F && R && BF && BR) {
+    const izquierda = F * BF;
+    const derecha = R * BR;
+    const desequilibrio = (izquierda - derecha) / Math.max(izquierda, derecha);
+    // Aplicar shear pequeño
+    const tilt = Math.max(-15, Math.min(15, desequilibrio * 15)); // ±15° max
+    // Rotar la barra alrededor del apoyo
+    const angRad = -tilt * Math.PI / 180;
+    const dx1 = beamX1 - xApoyo;
+    const dx2 = beamX2 - xApoyo;
+    beamY1 = 160 - dx1 * Math.sin(angRad);
+    beamY2 = 160 - dx2 * Math.sin(angRad);
+  }
+
+  document.getElementById('beam').setAttribute('x1', beamX1);
+  document.getElementById('beam').setAttribute('y1', beamY1);
+  document.getElementById('beam').setAttribute('x2', beamX2);
+  document.getElementById('beam').setAttribute('y2', beamY2);
+
+  // Apoyo (triángulo) - se mantiene en xApoyo
+  document.getElementById('apoyo').setAttribute('points', `${xApoyo},165 ${xApoyo-20},210 ${xApoyo+20},210`);
+
+  // Fuerza (flecha) - posición x = xF, y se ajusta a la barra inclinada
+  const fY = interpolarY(xF, beamX1, beamY1, beamX2, beamY2);
+  document.getElementById('f-arrow-shaft').setAttribute('x1', xF);
+  document.getElementById('f-arrow-shaft').setAttribute('x2', xF);
+  document.getElementById('f-arrow-shaft').setAttribute('y1', fY - 60);
+  document.getElementById('f-arrow-shaft').setAttribute('y2', fY - 5);
+  document.getElementById('f-arrow-head').setAttribute('points', `${xF},${fY-5} ${xF-7},${fY-17} ${xF+7},${fY-17}`);
+  document.getElementById('f-label').setAttribute('x', xF);
+  document.getElementById('f-label').setAttribute('y', fY - 68);
+
+  // Resistencia (flecha)
+  const rY = interpolarY(xR, beamX1, beamY1, beamX2, beamY2);
+  document.getElementById('r-arrow-shaft').setAttribute('x1', xR);
+  document.getElementById('r-arrow-shaft').setAttribute('x2', xR);
+  document.getElementById('r-arrow-shaft').setAttribute('y1', rY - 60);
+  document.getElementById('r-arrow-shaft').setAttribute('y2', rY - 5);
+  document.getElementById('r-arrow-head').setAttribute('points', `${xR},${rY-5} ${xR-7},${rY-17} ${xR+7},${rY-17}`);
+  document.getElementById('r-label').setAttribute('x', xR);
+  document.getElementById('r-label').setAttribute('y', rY - 68);
+
+  // Brazo F (línea bajo barra entre xF y xApoyo)
+  const bfX1 = Math.min(xF, xApoyo), bfX2 = Math.max(xF, xApoyo);
+  document.getElementById('bf-line').setAttribute('x1', bfX1);
+  document.getElementById('bf-line').setAttribute('x2', bfX2);
+  document.getElementById('bf-line').setAttribute('y1', 200);
+  document.getElementById('bf-line').setAttribute('y2', 200);
+  document.getElementById('bf-label').setAttribute('x', (bfX1 + bfX2) / 2);
+  document.getElementById('bf-label').setAttribute('y', 215);
+
+  // Brazo R
+  const brX1 = Math.min(xR, xApoyo), brX2 = Math.max(xR, xApoyo);
+  document.getElementById('br-line').setAttribute('x1', brX1);
+  document.getElementById('br-line').setAttribute('x2', brX2);
+  document.getElementById('br-line').setAttribute('y1', 200);
+  document.getElementById('br-line').setAttribute('y2', 200);
+  document.getElementById('br-label').setAttribute('x', (brX1 + brX2) / 2);
+  document.getElementById('br-label').setAttribute('y', 215);
+}
+
+function interpolarY(x, x1, y1, x2, y2) {
+  if (x2 === x1) return y1;
+  return y1 + (y2 - y1) * (x - x1) / (x2 - x1);
+}
+
+// ══════════════════════════════════════════════════════════
+//  CÁLCULO
+// ══════════════════════════════════════════════════════════
+function leerValor(id) {
+  const el = document.getElementById(id);
+  const v = el.value.trim();
+  if (v === '') return null;
+  const n = parseFloat(v.replace(',', '.'));
+  return isNaN(n) ? null : n;
+}
+
+function calcular() {
+  const F = leerValor('in-F');
+  const R = leerValor('in-R');
+  const BF = leerValor('in-BF');
+  const BR = leerValor('in-BR');
+
+  // Quitar marca de calculado de todos
+  ['in-F', 'in-R', 'in-BF', 'in-BR'].forEach(id => document.getElementById(id).classList.remove('calculado'));
+
+  const valores = { F, R, BF, BR };
+  const conValor = Object.keys(valores).filter(k => valores[k] !== null);
+  const sinValor = Object.keys(valores).filter(k => valores[k] === null);
+
+  if (conValor.length === 4) {
+    // 4 valores: comprobar equilibrio
+    const izquierda = F * BF;
+    const derecha = R * BR;
+    const diff = Math.abs(izquierda - derecha);
+    const tol = Math.max(izquierda, derecha) * 0.01; // 1% de tolerancia
+    const equilibrio = diff <= tol;
+    mostrarResultado(F, R, BF, BR, equilibrio, izquierda, derecha, null);
+    redibujar(F, R, BF, BR);
+  } else if (conValor.length === 3 && sinValor.length === 1) {
+    // 3 valores: despejar el cuarto
+    const incognita = sinValor[0];
+    let calc;
+    if (incognita === 'F') calc = (R * BR) / BF;
+    else if (incognita === 'R') calc = (F * BF) / BR;
+    else if (incognita === 'BF') calc = (R * BR) / F;
+    else if (incognita === 'BR') calc = (F * BF) / R;
+
+    if (!isFinite(calc) || isNaN(calc)) {
+      mostrarError('No se puede calcular: comprueba que ninguno de los valores es 0.');
+      return;
+    }
+    if (calc < 0) {
+      mostrarError('El cálculo da un resultado negativo. Revisa los valores introducidos.');
+      return;
+    }
+
+    valores[incognita] = calc;
+    const inputId = 'in-' + incognita;
+    document.getElementById(inputId).value = calc.toFixed(2);
+    document.getElementById(inputId).classList.add('calculado');
+
+    mostrarResultado(valores.F, valores.R, valores.BF, valores.BR, true, null, null, incognita);
+    redibujar(valores.F, valores.R, valores.BF, valores.BR);
+  } else if (conValor.length < 3) {
+    mostrarError(`Necesito al menos <strong>3 valores</strong> para calcular el cuarto. Ahora mismo hay ${conValor.length}.`);
+  } else {
+    mostrarError('Algo raro en la entrada. Limpia y vuelve a intentarlo.');
+  }
+}
+
+function mostrarResultado(F, R, BF, BR, equilibrio, izquierda, derecha, despejado) {
+  const res = document.getElementById('resultado');
+  const titulo = document.getElementById('res-titulo');
+  const msg = document.getElementById('res-msg');
+  const detalle = document.getElementById('res-detalle');
+
+  res.classList.add('visible');
+  res.classList.remove('equilibrio', 'no-equilibrio');
+
+  if (despejado) {
+    res.classList.add('equilibrio');
+    const nombres = { F: 'la fuerza', R: 'la resistencia', BF: 'el brazo de la fuerza', BR: 'el brazo de la resistencia' };
+    const unidades = { F: 'N', R: 'N', BF: 'cm', BR: 'cm' };
+    titulo.textContent = `✓ Hemos despejado ${nombres[despejado]}`;
+    const valor = ({F, R, BF, BR})[despejado];
+    msg.innerHTML = `Para que la palanca esté en equilibrio, ${nombres[despejado]} debe valer <strong>${valor.toFixed(2)} ${unidades[despejado]}</strong>.`;
+    detalle.innerHTML = `<div class="res-row"><span>F · BF</span><strong>${(F * BF).toFixed(2)} N·cm</strong></div>
+                        <div class="res-row"><span>R · BR</span><strong>${(R * BR).toFixed(2)} N·cm</strong></div>`;
+  } else {
+    if (equilibrio) {
+      res.classList.add('equilibrio');
+      titulo.textContent = '✓ La palanca está en equilibrio';
+      msg.innerHTML = `Los dos productos son iguales: <strong>F · BF = R · BR</strong>.`;
+    } else {
+      res.classList.add('no-equilibrio');
+      titulo.textContent = '✗ La palanca NO está en equilibrio';
+      const lado = izquierda > derecha ? 'fuerza (lado izquierdo)' : 'resistencia (lado derecho)';
+      msg.innerHTML = `Pesa más el lado de la <strong>${lado}</strong>. La barra giraría hacia ese lado.`;
+    }
+    detalle.innerHTML = `<div class="res-row"><span>F · BF</span><strong>${izquierda.toFixed(2)} N·cm</strong></div>
+                        <div class="res-row"><span>R · BR</span><strong>${derecha.toFixed(2)} N·cm</strong></div>`;
+  }
+
+  // Ventaja mecánica
+  mostrarVentajaMec(F, R, BF, BR);
+}
+
+function mostrarVentajaMec(F, R, BF, BR) {
+  const vm = document.getElementById('ventaja-mec');
+  const value = document.getElementById('vm-value');
+  const interpret = document.getElementById('vm-interpret');
+  if (BR === 0 || isNaN(BR)) { vm.style.display = 'none'; return; }
+  const VM = BF / BR;
+  vm.style.display = 'block';
+  value.textContent = 'VM = ' + VM.toFixed(2);
+  if (VM > 1.05) {
+    interpret.innerHTML = `<strong>VM &gt; 1</strong>: la palanca <strong>multiplica la fuerza</strong>. Aplicas menos fuerza que la resistencia, pero recorres más distancia.`;
+  } else if (VM < 0.95) {
+    interpret.innerHTML = `<strong>VM &lt; 1</strong>: la palanca <strong>multiplica el recorrido</strong>. Aplicas más fuerza que la resistencia, pero la mueves más rápido y más lejos.`;
+  } else {
+    interpret.innerHTML = `<strong>VM ≈ 1</strong>: la palanca <strong>está equilibrada</strong>. F y R son iguales. Sirve para cambiar la dirección del movimiento.`;
+  }
+}
+
+function mostrarError(msgHtml) {
+  const res = document.getElementById('resultado');
+  res.classList.add('visible', 'no-equilibrio');
+  res.classList.remove('equilibrio');
+  document.getElementById('res-titulo').textContent = '⚠️ No puedo calcular';
+  document.getElementById('res-msg').innerHTML = msgHtml;
+  document.getElementById('res-detalle').innerHTML = '';
+  document.getElementById('ventaja-mec').style.display = 'none';
+}
+
+function limpiar() {
+  ['in-F', 'in-R', 'in-BF', 'in-BR'].forEach(id => {
+    document.getElementById(id).value = '';
+    document.getElementById(id).classList.remove('calculado');
+  });
+  document.getElementById('resultado').classList.remove('visible');
+  document.getElementById('ventaja-mec').style.display = 'none';
+  redibujar();
+}
+
+// Inicialización
+redibujar();
+</script>
+
+<footer style="text-align:center; padding:2rem 1rem 1rem; color:#888; font-size:0.85rem;">
+  <p>⚖️ Calculadora de palancas · TyD 2º ESO · Unidad 4</p>
+  <p><a href="../index.html" style="color:#D4700A; text-decoration:none;">← Volver al hub de la unidad</a></p>
+  <p style="margin-top:8px; font-family:'JetBrains Mono', monospace; font-size:0.72rem; opacity:0.6;">v1.0</p>
+</footer>
+
+</body>
+</html>

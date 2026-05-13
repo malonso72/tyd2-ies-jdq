@@ -1,0 +1,2022 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dibujo técnico · 2º ESO · Tecnología y Digitalización · v1.0</title>
+<meta name="description" content="Libro digital de dibujo técnico para 2º ESO: vistas, perspectivas, escalas, acotación y CAD. IES Jiménez de Quesada (Santa Fe, Granada).">
+<meta name="theme-color" content="#d2552a">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/00-dibujo-tecnico/libro-digital.html">
+
+<!-- ══ Open Graph ══ -->
+<meta property="og:title" content="Libro digital · Dibujo técnico · TyD 2º ESO">
+<meta property="og:description" content="Libro digital de dibujo técnico para 2º ESO: vistas, perspectivas, escalas, acotación y CAD.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/00-dibujo-tecnico/libro-digital.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cream: #f6f1e7;
+  --cream-2: #efe7d4;
+  --ink: #1a2238;
+  --ink-soft: #3a4360;
+  --teja: #d2552a;
+  --teja-soft: #e87a4e;
+  --blue: #2c5f8d;
+  --blue-soft: #3d7fb8;
+  --yellow: #e8b647;
+  --line: #d6c9ad;
+  --ok: #4a7c59;
+  --err: #c44536;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.6;
+  font-size: 16px;
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(232,182,71,0.08) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(210,85,42,0.06) 0%, transparent 40%);
+  min-height: 100vh;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+/* ── ASIDE ── */
+aside {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 32px 24px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  border-right: 3px solid var(--teja);
+}
+aside .brand { font-family: 'Fraunces', serif; font-weight: 800; font-size: 24px; line-height: 1.1; margin-bottom: 4px; }
+aside .brand span { color: var(--teja-soft); font-style: italic; }
+aside .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: rgba(246,241,231,0.5); margin-bottom: 32px; }
+aside .parte-titulo {
+  font-family: 'Fraunces', serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--teja-soft);
+  margin-top: 24px;
+  margin-bottom: 8px;
+  padding-left: 14px;
+  font-weight: 700;
+}
+aside .parte-titulo:first-of-type { margin-top: 8px; }
+aside nav { display: flex; flex-direction: column; gap: 4px; }
+aside nav a {
+  color: rgba(246,241,231,0.75);
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+aside nav a:hover { background: rgba(246,241,231,0.05); color: var(--cream); border-left-color: var(--teja-soft); }
+aside nav a .num { font-family: 'JetBrains Mono', monospace; font-size: 11px; background: rgba(246,241,231,0.1); padding: 2px 6px; border-radius: 4px; min-width: 24px; text-align: center; }
+aside .back-link {
+  margin-top: 24px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(232,122,78,0.12);
+  color: var(--teja-soft);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(232,122,78,0.2);
+  transition: all .15s;
+}
+aside .back-link:hover { background: rgba(232,122,78,0.2); color: var(--cream); }
+aside .credit { margin-top: 24px; font-size: 11px; opacity: 0.4; line-height: 1.5; }
+
+/* ── MAIN ── */
+main { padding: 48px 56px 80px; min-width: 0; }
+header.hero { margin-bottom: 56px; padding-bottom: 32px; border-bottom: 1px dashed var(--line); }
+header.hero .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--teja); margin-bottom: 12px; }
+header.hero h1 { font-family: 'Fraunces', serif; font-size: 56px; font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 16px; }
+header.hero h1 em { font-style: italic; color: var(--teja); font-weight: 400; }
+header.hero p.lead { font-size: 18px; color: var(--ink-soft); max-width: 640px; }
+header.hero .meta { display: flex; gap: 24px; margin-top: 24px; font-size: 13px; color: var(--ink-soft); flex-wrap: wrap; }
+header.hero .meta strong { color: var(--ink); font-weight: 600; }
+
+/* ── PARTE ── */
+.parte { margin-bottom: 60px; scroll-margin-top: 24px; }
+.parte-cabecera {
+  background: linear-gradient(135deg, var(--ink) 0%, #2a3458 100%);
+  color: var(--cream);
+  padding: 36px 44px;
+  border-radius: 18px;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+  border-left: 6px solid var(--teja);
+}
+.parte-cabecera::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(232,182,71,0.08) 0%, transparent 70%);
+}
+.parte-cabecera .parte-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--teja-soft);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  position: relative;
+}
+.parte-cabecera h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 12px;
+  position: relative;
+}
+.parte-cabecera p {
+  font-size: 16px;
+  opacity: 0.85;
+  max-width: 580px;
+  position: relative;
+}
+
+/* ── SECTION ── */
+.section { margin-bottom: 56px; scroll-margin-top: 24px; }
+.section-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--teja);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.section h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  color: var(--ink);
+}
+.section h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 28px 0 12px;
+  color: var(--ink);
+}
+.section p { margin-bottom: 14px; color: var(--ink-soft); }
+.section p strong { color: var(--ink); font-weight: 600; }
+.section ul, .section ol { margin: 8px 0 14px 24px; color: var(--ink-soft); }
+.section li { margin-bottom: 6px; }
+.section li strong { color: var(--ink); font-weight: 600; }
+
+/* ── KEY CONCEPT BOX ── */
+.keybox {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--teja);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 20px 0;
+  box-shadow: 0 4px 14px rgba(26,34,56,0.05);
+}
+.keybox .ktit {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--teja);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.keybox p { margin-bottom: 8px; }
+.keybox p:last-child { margin-bottom: 0; }
+
+/* ── CALLOUT (info, ok, warn) ── */
+.callout {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin: 20px 0;
+}
+.callout .ic { font-size: 22px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+.callout p { margin: 0; color: var(--ink-soft); font-size: 15px; }
+.callout p + p { margin-top: 6px; }
+.callout-info { background: rgba(44,95,141,0.07); border: 1px solid rgba(44,95,141,0.18); }
+.callout-info p strong { color: var(--blue); }
+.callout-ok { background: rgba(74,124,89,0.07); border: 1px solid rgba(74,124,89,0.18); }
+.callout-ok p strong { color: var(--ok); }
+.callout-warn { background: rgba(232,182,71,0.10); border: 1px solid rgba(232,182,71,0.30); }
+.callout-warn p strong { color: #8a6d1a; }
+.callout-key { background: rgba(210,85,42,0.07); border: 1px solid rgba(210,85,42,0.20); }
+.callout-key p strong { color: var(--teja); }
+
+/* ── TWO COLS ── */
+.cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin: 22px 0; }
+.cols3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; margin: 22px 0; }
+.col-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  box-shadow: 0 4px 14px rgba(26,34,56,0.05);
+}
+.col-card h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  margin: 0 0 10px;
+  color: var(--teja);
+}
+.col-card h4.azul { color: var(--blue); }
+.col-card p { font-size: 14.5px; margin-bottom: 8px; }
+.col-card ul { margin: 6px 0 0 18px; font-size: 14.5px; }
+
+/* ── FIGURE ── */
+.fig {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+  margin: 24px 0;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(26,34,56,0.05);
+}
+.fig svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+.fig-cap {
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--ink-soft);
+  margin-top: 12px;
+}
+
+/* ── EJEMPLO RESUELTO ── */
+.ejemplo {
+  background: linear-gradient(135deg, #fdfaf3, #f6f1e7);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--yellow);
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin: 24px 0;
+}
+.ejemplo .et {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #8a6d1a;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.ejemplo h5 {
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  margin: 0 0 14px;
+  color: var(--ink);
+}
+.steps { display: grid; gap: 10px; counter-reset: step; }
+.step {
+  position: relative;
+  padding: 12px 14px 12px 46px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+.step::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--teja);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* ── TABLE ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  font-size: 14.5px;
+}
+th {
+  background: var(--ink);
+  color: var(--cream);
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  padding: 12px 14px;
+  text-align: left;
+  font-size: 14px;
+  letter-spacing: .3px;
+}
+td { padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink-soft); }
+tr:last-child td { border-bottom: 0; }
+tr:nth-child(even) td { background: rgba(246,241,231,0.5); }
+td.bien { color: var(--ok); font-weight: 600; }
+td.mal { color: var(--err); font-weight: 600; }
+
+/* ── NORM TABLE (3 cols) ── */
+.norm-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 14px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 10px 0;
+  align-items: center;
+}
+.norm-row .nr-text { font-size: 14.5px; color: var(--ink-soft); }
+.norm-row .nr-svg { background: rgba(74,124,89,0.06); border-radius: 8px; padding: 10px; text-align: center; }
+.norm-row .nr-svg.mal { background: rgba(196,69,54,0.06); }
+.norm-row .nr-svg svg { max-width: 100%; height: auto; }
+.norm-row .nr-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.norm-row .nr-svg .lab-ok { color: var(--ok); }
+.norm-row .nr-svg .lab-bad { color: var(--err); }
+.norm-head {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 14px;
+  padding: 0 16px;
+  margin-bottom: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+}
+
+/* ── GLOSARIO ── */
+.glos { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 24px; margin-top: 32px; }
+.glos h3 { font-family: 'Fraunces', serif; font-size: 22px; margin-bottom: 14px; color: var(--ink); }
+.glos dl { display: grid; gap: 12px; }
+.glos dt { font-family: 'Fraunces', serif; font-weight: 700; color: var(--teja); font-size: 16px; }
+.glos dd { color: var(--ink-soft); font-size: 14.5px; margin-left: 0; }
+
+/* ── FOOTER ── */
+footer.book-foot {
+  margin-top: 60px;
+  padding-top: 28px;
+  border-top: 1px dashed var(--line);
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+footer.book-foot a { color: var(--teja); text-decoration: none; }
+footer.book-foot a:hover { color: var(--teja-soft); }
+footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px; opacity: 0.6; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  aside { position: relative; height: auto; max-height: none; top: auto; }
+  main { padding: 32px 24px 60px; }
+  header.hero h1 { font-size: 36px; }
+  .parte-cabecera { padding: 28px 24px; }
+  .parte-cabecera h2 { font-size: 26px; }
+  .section h3 { font-size: 24px; }
+  .cols2, .cols3 { grid-template-columns: 1fr; }
+  .norm-row, .norm-head { grid-template-columns: 1fr; }
+}
+
+@media print {
+  body { background: #fff; }
+  aside { display: none; }
+  .layout { grid-template-columns: 1fr; }
+  main { padding: 0; }
+  .parte-cabecera { background: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .section, .ejemplo, .fig, .col-card, .keybox { break-inside: avoid; }
+}
+
+/* ── SVG STYLES ── */
+.svg-fig { font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+.svg-fig .stroke-main { stroke: #1a2238; stroke-width: 2; fill: none; stroke-linejoin: round; stroke-linecap: round; }
+.svg-fig .stroke-thin { stroke: #1a2238; stroke-width: 1; fill: none; }
+.svg-fig .stroke-aux { stroke: #d2552a; stroke-width: 1; fill: none; stroke-dasharray: 4 3; }
+.svg-fig .stroke-eje { stroke: #2c5f8d; stroke-width: 1; fill: none; stroke-dasharray: 6 2 1 2; }
+.svg-fig .fill-light { fill: #f6f1e7; }
+.svg-fig .fill-teja { fill: rgba(210,85,42,0.18); }
+.svg-fig .fill-blue { fill: rgba(44,95,141,0.15); }
+.svg-fig .fill-yellow { fill: rgba(232,182,71,0.25); }
+.svg-fig text { fill: #1a2238; }
+.svg-fig text.lbl-teja { fill: #d2552a; font-weight: 600; }
+.svg-fig text.lbl-blue { fill: #2c5f8d; font-weight: 600; }
+.svg-fig .arrow { fill: #1a2238; }
+.svg-fig .arrow-teja { fill: #d2552a; }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+<aside>
+  <div class="brand">Dibujo<br><span>técnico</span></div>
+  <div class="sub">TyD 2º ESO · U0</div>
+
+  <div class="parte-titulo">Parte 1 · Fundamentos</div>
+  <nav>
+    <a href="#s1"><span class="num">1</span>¿Qué es el dibujo técnico?</a>
+    <a href="#s2"><span class="num">2</span>Boceto, croquis y plano</a>
+  </nav>
+
+  <div class="parte-titulo">Parte 2 · Representar</div>
+  <nav>
+    <a href="#s3"><span class="num">3</span>Las tres vistas</a>
+    <a href="#s4"><span class="num">4</span>Perspectivas</a>
+  </nav>
+
+  <div class="parte-titulo">Parte 3 · Herramientas y normas</div>
+  <nav>
+    <a href="#s5"><span class="num">5</span>Instrumentos</a>
+    <a href="#s6"><span class="num">6</span>La escala</a>
+    <a href="#s7"><span class="num">7</span>La acotación</a>
+  </nav>
+
+  <div class="parte-titulo">Parte 4 · Diseño con ordenador</div>
+  <nav>
+    <a href="#s8"><span class="num">8</span>CAD 2D</a>
+    <a href="#s9"><span class="num">9</span>CAD 3D</a>
+    <a href="#cierre"><span class="num">★</span>Recuerda</a>
+  </nav>
+
+  <a class="back-link" href="index.html">← Volver al hub de la unidad</a>
+
+  <div class="credit">
+    TyD 2º ESO · Curso 2025-26<br>
+    Manuel Alonso Herrera<br>
+    IES Jiménez de Quesada
+  </div>
+</aside>
+
+<main>
+
+<header class="hero">
+  <div class="eyebrow">Unidad 0 · Libro digital · v1.2</div>
+  <h1>Expresión gráfica<br>y <em>representación</em></h1>
+  <p class="lead">Dibujar es una manera de pensar. Aprenderás a representar objetos reales sobre el papel con precisión: a verlos desde varios lados, a respetar sus proporciones y a contar sus medidas con un lenguaje común a toda la ingeniería del mundo.</p>
+  <div class="meta">
+    <span><strong>Curso:</strong> 2º ESO</span>
+    <span><strong>Duración:</strong> 8-10 sesiones</span>
+    <span><strong>Bloques:</strong> 9 secciones · 4 partes</span>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PARTE 1 · FUNDAMENTOS
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="parte1">
+  <div class="parte-cabecera">
+    <div class="parte-num">Parte 1</div>
+    <h2>Fundamentos</h2>
+    <p>Antes de coger el lápiz: qué es el dibujo técnico, en qué se diferencia del dibujo artístico y por qué un mismo plano sirve en cualquier parte del mundo.</p>
+  </div>
+
+  <!-- ─── 1. ¿Qué es el dibujo técnico? ─── -->
+  <article class="section" id="s1">
+    <div class="section-num">Sección 1</div>
+    <h3>¿Qué es el dibujo técnico?</h3>
+
+    <p>El dibujo es una técnica gráfica que sirve para <strong>expresar aquello que se percibe</strong>. Pero no todos los dibujos persiguen lo mismo: unos buscan emocionar al que mira, otros quieren <strong>transmitir información exacta</strong> sobre un objeto. Por eso distinguimos dos grandes familias.</p>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4>Dibujo técnico</h4>
+        <p>Sistema de representación gráfica cuyo objetivo es transmitir <strong>información objetiva</strong> sobre un objeto (medidas, forma, materiales…). Sigue <strong>normas internacionales</strong> para que cualquier persona, en cualquier país, pueda interpretarlo sin error.</p>
+        <p style="font-size:13px;color:var(--ink-soft);"><em>Ejemplo: el plano de una pieza de un coche.</em></p>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Dibujo artístico</h4>
+        <p>Su finalidad es <strong>expresar ideas o emociones</strong> de la persona que dibuja. No tiene normas: el dibujante es libre de elegir su estilo, sus colores y su trazo. La interpretación depende del que mira.</p>
+        <p style="font-size:13px;color:var(--ink-soft);"><em>Ejemplo: un cuadro al óleo, un cómic.</em></p>
+      </div>
+    </div>
+
+    <div class="keybox">
+      <div class="ktit">Idea clave</div>
+      <p>El dibujo técnico no busca ser bonito: busca ser <strong>preciso</strong>, <strong>claro</strong> y <strong>universal</strong>. Si dos personas miran el mismo plano, tienen que entender exactamente lo mismo.</p>
+    </div>
+
+    <h4>Los formatos normalizados de papel</h4>
+    <p>Para que los planos se entiendan en todo el mundo, también el papel está normalizado. La serie <strong>DIN-A</strong> parte de una hoja A0 de 1 m² de superficie. Cada formato más pequeño es la mitad del anterior.</p>
+
+    <div class="fig">
+      <svg class="svg-fig" viewBox="0 0 540 280" xmlns="http://www.w3.org/2000/svg" aria-label="Serie DIN A0 a A4">
+        <!-- A0 -->
+        <rect x="20" y="20" width="240" height="170" class="stroke-main fill-light"/>
+        <text x="140" y="115" text-anchor="middle" font-size="22" font-weight="700">A0</text>
+        <text x="140" y="135" text-anchor="middle" font-size="11">841 × 1189 mm</text>
+        <!-- A1 -->
+        <rect x="280" y="20" width="170" height="120" class="stroke-main fill-light"/>
+        <text x="365" y="80" text-anchor="middle" font-size="18" font-weight="700">A1</text>
+        <text x="365" y="98" text-anchor="middle" font-size="10">594 × 841 mm</text>
+        <!-- A2 -->
+        <rect x="280" y="150" width="120" height="85" class="stroke-main fill-light"/>
+        <text x="340" y="190" text-anchor="middle" font-size="15" font-weight="700">A2</text>
+        <text x="340" y="205" text-anchor="middle" font-size="9">420 × 594</text>
+        <!-- A3 -->
+        <rect x="410" y="150" width="85" height="60" class="stroke-main fill-light"/>
+        <text x="452" y="180" text-anchor="middle" font-size="13" font-weight="700">A3</text>
+        <text x="452" y="195" text-anchor="middle" font-size="8">297×420</text>
+        <!-- A4 -->
+        <rect x="410" y="220" width="60" height="42" class="stroke-main fill-teja"/>
+        <text x="440" y="240" text-anchor="middle" font-size="11" font-weight="700" class="lbl-teja">A4</text>
+        <text x="440" y="253" text-anchor="middle" font-size="7">210×297</text>
+        <!-- flechas escala -->
+        <text x="20" y="270" font-size="11" class="lbl-teja">El A4 es el formato más común: cuaderno de clase.</text>
+      </svg>
+      <div class="fig-cap">Serie DIN-A · cada formato es la mitad del anterior</div>
+    </div>
+
+    <h4>El cajetín</h4>
+    <p>Todo plano técnico lleva un <strong>cajetín</strong> en la esquina inferior derecha. Es como su DNI: indica quién lo ha dibujado, qué representa, a qué escala y cuándo. Sin cajetín, un plano queda incompleto.</p>
+
+    <div class="fig">
+      <svg class="svg-fig" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg" aria-label="Hoja A4 con cajetín">
+        <!-- hoja -->
+        <rect x="50" y="20" width="400" height="310" class="stroke-main fill-light"/>
+        <!-- margen -->
+        <rect x="68" y="35" width="364" height="280" class="stroke-thin" stroke-dasharray="3 3"/>
+        <!-- cajetín -->
+        <rect x="270" y="265" width="162" height="50" class="stroke-main" fill="#fff"/>
+        <line x1="270" y1="282" x2="432" y2="282" class="stroke-thin"/>
+        <line x1="270" y1="299" x2="432" y2="299" class="stroke-thin"/>
+        <line x1="340" y1="265" x2="340" y2="315" class="stroke-thin"/>
+        <text x="275" y="277" font-size="8">Título:</text>
+        <text x="275" y="294" font-size="8">Autor:</text>
+        <text x="275" y="311" font-size="8">Fecha:</text>
+        <text x="345" y="277" font-size="8">Escala:</text>
+        <text x="345" y="294" font-size="8">Nº plano:</text>
+        <text x="345" y="311" font-size="8">Centro:</text>
+        <!-- etiqueta -->
+        <text x="100" y="160" font-size="13" font-weight="700">Zona del dibujo</text>
+        <text x="100" y="178" font-size="11" class="lbl-teja">(aquí va la pieza)</text>
+        <!-- flecha al cajetín -->
+        <path d="M 260 290 Q 240 320 230 305" class="stroke-aux"/>
+        <text x="60" y="335" font-size="11" class="lbl-teja">↑ Cajetín: identifica el plano</text>
+      </svg>
+      <div class="fig-cap">Estructura básica de una lámina técnica</div>
+    </div>
+  </article>
+
+  <!-- ─── 2. Boceto, croquis y plano ─── -->
+  <article class="section" id="s2">
+    <div class="section-num">Sección 2</div>
+    <h3>Boceto, croquis y plano</h3>
+
+    <p>Un plano final no nace ya hecho: pasa por tres fases. Cada una añade más precisión que la anterior. Es como pasar de una idea suelta a un objeto que se puede fabricar.</p>
+
+    <div class="cols3">
+      <div class="col-card">
+        <h4>1 · Boceto</h4>
+        <p>Primera idea, hecha a mano alzada, <strong>rápida y sin instrumentos</strong>.</p>
+        <ul>
+          <li>No lleva medidas</li>
+          <li>Captura la forma general</li>
+          <li>Sirve para pensar y comparar opciones</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <h4>2 · Croquis</h4>
+        <p>Dibujo más cuidado, también a mano alzada pero <strong>con medidas</strong>.</p>
+        <ul>
+          <li>Lleva cotas reales</li>
+          <li>Indica materiales si hace falta</li>
+          <li>Aún no usa escala estricta</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <h4>3 · Plano</h4>
+        <p>Dibujo <strong>definitivo</strong>, hecho con instrumentos o con ordenador (CAD).</p>
+        <ul>
+          <li>A escala</li>
+          <li>Con todas las cotas y normas</li>
+          <li>Sirve para fabricar la pieza</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="fig">
+      <svg class="svg-fig" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg" aria-label="Boceto, croquis y plano de una silla">
+        <!-- Boceto: muy esbozado -->
+        <g transform="translate(20,30)">
+          <path d="M 30 90 L 30 30 L 110 30 L 110 90 M 30 90 L 110 90 M 30 90 L 30 130 M 110 90 L 110 130 M 30 30 L 35 5 L 110 5 L 115 30" class="stroke-main" stroke-linecap="round" stroke-width="2.5" opacity="0.7"/>
+          <text x="70" y="160" text-anchor="middle" font-size="13" font-weight="700">Boceto</text>
+          <text x="70" y="175" text-anchor="middle" font-size="10" fill="#3a4360">A mano · sin medidas</text>
+        </g>
+        <!-- flecha -->
+        <text x="175" y="100" font-size="18" class="arrow-teja">→</text>
+        <!-- Croquis: más limpio, con medidas -->
+        <g transform="translate(200,30)">
+          <path d="M 30 90 L 30 30 L 110 30 L 110 90 M 30 90 L 110 90 M 30 90 L 30 130 M 110 90 L 110 130 M 30 30 L 35 5 L 110 5 L 115 30" class="stroke-main"/>
+          <!-- cotas a mano -->
+          <line x1="30" y1="145" x2="110" y2="145" class="stroke-aux"/>
+          <text x="70" y="143" text-anchor="middle" font-size="10" class="lbl-teja">≈ 45 cm</text>
+          <line x1="135" y1="30" x2="135" y2="130" class="stroke-aux"/>
+          <text x="142" y="83" font-size="10" class="lbl-teja">≈ 80 cm</text>
+          <text x="70" y="170" text-anchor="middle" font-size="13" font-weight="700">Croquis</text>
+          <text x="70" y="185" text-anchor="middle" font-size="10" fill="#3a4360">A mano · con medidas</text>
+        </g>
+        <text x="380" y="100" font-size="18" class="arrow-teja">→</text>
+        <!-- Plano: limpio, con cotas norma -->
+        <g transform="translate(405,30)">
+          <rect x="30" y="30" width="80" height="60" class="stroke-main" fill="none"/>
+          <rect x="30" y="90" width="80" height="40" class="stroke-main" fill="none"/>
+          <line x1="30" y1="30" x2="35" y2="5" class="stroke-main"/>
+          <line x1="110" y1="30" x2="115" y2="5" class="stroke-main"/>
+          <line x1="35" y1="5" x2="115" y2="5" class="stroke-main"/>
+          <!-- cotas norma -->
+          <line x1="30" y1="145" x2="110" y2="145" class="stroke-thin"/>
+          <line x1="30" y1="140" x2="30" y2="150" class="stroke-thin"/>
+          <line x1="110" y1="140" x2="110" y2="150" class="stroke-thin"/>
+          <text x="70" y="143" text-anchor="middle" font-size="9" fill="#1a2238">450</text>
+          <line x1="135" y1="5" x2="135" y2="130" class="stroke-thin"/>
+          <line x1="130" y1="5" x2="140" y2="5" class="stroke-thin"/>
+          <line x1="130" y1="130" x2="140" y2="130" class="stroke-thin"/>
+          <text x="142" y="70" font-size="9" fill="#1a2238">800</text>
+          <text x="70" y="170" text-anchor="middle" font-size="13" font-weight="700">Plano</text>
+          <text x="70" y="185" text-anchor="middle" font-size="10" fill="#3a4360">A escala · con norma</text>
+        </g>
+      </svg>
+      <div class="fig-cap">Las tres fases de representación de una silla</div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">💡</span>
+      <p><strong>En clase</strong>, trabajaremos sobre todo el <strong>boceto</strong> y el <strong>croquis</strong>: son los que se hacen con lápiz, papel y goma. El plano final lo veremos ya en la sección de CAD.</p>
+    </div>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PARTE 2 · REPRESENTAR
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="parte2">
+  <div class="parte-cabecera">
+    <div class="parte-num">Parte 2</div>
+    <h2>Representar en el papel</h2>
+    <p>El gran problema del dibujo técnico: ¿cómo dibujamos un objeto que tiene tres dimensiones sobre una hoja, que solo tiene dos? Dos respuestas: las vistas y las perspectivas.</p>
+  </div>
+
+  <!-- ─── 3. Las tres vistas ─── -->
+  <article class="section" id="s3">
+    <div class="section-num">Sección 3</div>
+    <h3>El sistema diédrico: las tres vistas</h3>
+
+    <p>El <strong>sistema diédrico</strong> es la forma estándar de representar objetos en ingeniería. La idea es sencilla: imagínate que envuelves el objeto en una caja de cristal. Sobre cada cara de la caja proyectamos lo que veríamos mirando el objeto desde fuera.</p>
+
+    <p>De las seis caras de la caja, usamos solo las tres más importantes:</p>
+
+    <div class="fig">
+      <svg class="svg-fig" viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg" aria-label="Los tres planos del sistema diédrico">
+        <!-- Plano horizontal (planta) -->
+        <polygon points="100,260 280,260 380,200 200,200" class="stroke-main fill-blue" opacity="0.5"/>
+        <text x="240" y="240" text-anchor="middle" font-size="11" class="lbl-blue" font-weight="700">Plano horizontal (PLANTA)</text>
+
+        <!-- Plano vertical (alzado) -->
+        <polygon points="100,80 280,80 280,260 100,260" class="stroke-main fill-teja" opacity="0.55"/>
+        <text x="190" y="170" text-anchor="middle" font-size="11" class="lbl-teja" font-weight="700">Plano vertical (ALZADO)</text>
+
+        <!-- Plano de perfil -->
+        <polygon points="280,80 380,20 380,200 280,260" class="stroke-main fill-yellow" opacity="0.7"/>
+        <text x="335" y="155" text-anchor="middle" font-size="11" font-weight="700" fill="#8a6d1a">PERFIL</text>
+
+        <!-- objeto en el rincón (cubito) -->
+        <g transform="translate(160,180)">
+          <polygon points="0,30 30,30 30,0 0,0" class="stroke-main" fill="#fff"/>
+          <polygon points="0,0 30,0 45,-15 15,-15" class="stroke-main" fill="#efe7d4"/>
+          <polygon points="30,0 30,30 45,15 45,-15" class="stroke-main" fill="#d6c9ad"/>
+          <text x="22" y="50" text-anchor="middle" font-size="10" font-weight="700">objeto</text>
+        </g>
+
+        <!-- líneas de proyección -->
+        <line x1="190" y1="195" x2="190" y2="265" class="stroke-aux"/>
+        <line x1="175" y1="170" x2="105" y2="170" class="stroke-aux"/>
+        <line x1="205" y1="178" x2="280" y2="143" class="stroke-aux"/>
+
+        <!-- etiquetas en planos -->
+        <text x="125" y="100" font-size="11" font-weight="600">Lo que vemos</text>
+        <text x="125" y="115" font-size="11" font-weight="600">de FRENTE</text>
+
+        <text x="160" y="280" font-size="11" font-weight="600">Lo que vemos desde ARRIBA</text>
+
+        <text x="295" y="100" font-size="10" font-weight="600">Lo que</text>
+        <text x="295" y="113" font-size="10" font-weight="600">vemos</text>
+        <text x="295" y="126" font-size="10" font-weight="600">de LADO</text>
+
+        <!-- ojo observador -->
+        <text x="60" y="300" font-size="20">👁</text>
+        <text x="35" y="320" font-size="10" font-style="italic">Observador</text>
+
+        <!-- leyenda -->
+        <text x="430" y="120" font-size="13" font-weight="700" class="lbl-teja">Tres planos</text>
+        <text x="430" y="140" font-size="11">perpendiculares entre sí.</text>
+        <text x="430" y="158" font-size="11">El objeto se proyecta</text>
+        <text x="430" y="172" font-size="11">sobre cada uno.</text>
+      </svg>
+      <div class="fig-cap">El objeto se proyecta sobre tres planos perpendiculares</div>
+    </div>
+
+    <div class="cols3">
+      <div class="col-card">
+        <h4>Alzado</h4>
+        <p>Lo que se ve <strong>de frente</strong>. Es la vista principal. Se proyecta sobre el plano vertical.</p>
+      </div>
+      <div class="col-card">
+        <h4>Planta</h4>
+        <p>Lo que se ve <strong>desde arriba</strong>. Se proyecta sobre el plano horizontal.</p>
+      </div>
+      <div class="col-card">
+        <h4>Perfil</h4>
+        <p>Lo que se ve <strong>desde el lado</strong> (normalmente el izquierdo). Se proyecta sobre el plano de perfil.</p>
+      </div>
+    </div>
+
+    <h4>La correspondencia entre las vistas</h4>
+    <p>Cuando desplegamos los tres planos sobre la hoja, las vistas no se colocan en cualquier sitio: tienen que <strong>coincidir entre ellas</strong>. Esto es lo que llamamos correspondencia, y es la clave de todo el sistema diédrico.</p>
+
+    <div class="fig">
+      <svg class="svg-fig" viewBox="0 0 500 380" xmlns="http://www.w3.org/2000/svg" aria-label="Disposición de alzado, planta y perfil">
+        <!-- líneas de referencia -->
+        <line x1="50" y1="170" x2="450" y2="170" class="stroke-aux"/>
+        <line x1="220" y1="20" x2="220" y2="370" class="stroke-aux"/>
+
+        <!-- Alzado (arriba izquierda) -->
+        <rect x="100" y="50" width="120" height="80" class="stroke-main fill-light"/>
+        <rect x="130" y="50" width="60" height="40" class="stroke-main fill-light"/>
+        <text x="160" y="40" text-anchor="middle" font-size="13" font-weight="700" class="lbl-teja">ALZADO</text>
+
+        <!-- Perfil (arriba derecha) -->
+        <rect x="270" y="50" width="80" height="80" class="stroke-main fill-light"/>
+        <rect x="270" y="50" width="40" height="40" class="stroke-main fill-light"/>
+        <text x="310" y="40" text-anchor="middle" font-size="13" font-weight="700" class="lbl-teja">PERFIL</text>
+
+        <!-- Planta (abajo izquierda) -->
+        <rect x="100" y="200" width="120" height="80" class="stroke-main fill-light"/>
+        <rect x="130" y="200" width="60" height="40" class="stroke-main fill-light"/>
+        <text x="160" y="300" text-anchor="middle" font-size="13" font-weight="700" class="lbl-teja">PLANTA</text>
+
+        <!-- líneas de correspondencia -->
+        <line x1="100" y1="135" x2="100" y2="200" class="stroke-aux"/>
+        <line x1="220" y1="135" x2="220" y2="200" class="stroke-aux"/>
+        <line x1="220" y1="90" x2="270" y2="90" class="stroke-aux"/>
+        <line x1="220" y1="130" x2="270" y2="130" class="stroke-aux"/>
+
+        <!-- medidas -->
+        <text x="160" y="155" text-anchor="middle" font-size="10" class="lbl-teja">misma ANCHURA</text>
+        <text x="310" y="155" text-anchor="middle" font-size="10" class="lbl-teja">misma ALTURA</text>
+        <line x1="240" y1="90" x2="240" y2="130" class="stroke-thin"/>
+        <text x="248" y="113" font-size="10" class="lbl-teja">altura</text>
+
+        <!-- línea separación -->
+        <line x1="60" y1="170" x2="440" y2="170" class="stroke-main" stroke-width="2.5"/>
+        <text x="55" y="178" font-size="10" font-style="italic">línea de tierra</text>
+
+        <!-- regla mnemo -->
+        <rect x="60" y="320" width="380" height="50" rx="8" fill="rgba(232,182,71,0.18)" stroke="rgba(232,182,71,0.5)"/>
+        <text x="250" y="340" text-anchor="middle" font-size="12" font-weight="700">Las tres vistas comparten medidas:</text>
+        <text x="250" y="358" text-anchor="middle" font-size="11">Alzado y planta → misma ANCHURA · Alzado y perfil → misma ALTURA</text>
+      </svg>
+      <div class="fig-cap">Disposición estándar de las tres vistas (sistema europeo)</div>
+    </div>
+
+    <div class="callout callout-key">
+      <span class="ic">🎯</span>
+      <p><strong>Regla de oro:</strong> el <strong>alzado y la planta</strong> tienen la misma anchura · el <strong>alzado y el perfil</strong> tienen la misma altura · la <strong>planta y el perfil</strong> tienen la misma profundidad.</p>
+    </div>
+
+    <div class="ejemplo">
+      <div class="et">Ejemplo resuelto 1</div>
+      <h5>Las tres vistas de una pieza con escalón</h5>
+      <p>Vamos a sacar las tres vistas del siguiente objeto: una pieza con forma de "L" tumbada.</p>
+
+      <div class="fig" style="margin:14px 0;">
+        <svg class="svg-fig" viewBox="0 0 520 250" xmlns="http://www.w3.org/2000/svg">
+          <!-- objeto 3D isométrico -->
+          <g transform="translate(20,40)">
+            <!-- base larga -->
+            <polygon points="0,120 100,120 100,90 0,90" class="stroke-main fill-light"/>
+            <polygon points="0,90 100,90 130,70 30,70" class="stroke-main fill-light"/>
+            <polygon points="100,120 100,90 130,70 130,100" class="stroke-main" fill="#e0d8c2"/>
+            <!-- escalón -->
+            <polygon points="60,90 100,90 100,50 60,50" class="stroke-main fill-light"/>
+            <polygon points="60,50 100,50 130,30 90,30" class="stroke-main fill-light"/>
+            <polygon points="100,50 100,90 130,70 130,30" class="stroke-main" fill="#e0d8c2"/>
+            <text x="65" y="160" font-size="11" font-weight="700">Objeto 3D</text>
+            <!-- arrow -->
+            <line x1="20" y1="140" x2="-5" y2="155" class="stroke-aux"/>
+            <text x="-30" y="170" font-size="10" class="lbl-teja">mirar</text>
+          </g>
+
+          <!-- separador -->
+          <text x="180" y="125" font-size="22" class="arrow-teja">→</text>
+
+          <!-- Alzado -->
+          <g transform="translate(220,40)">
+            <rect x="0" y="40" width="80" height="40" class="stroke-main fill-light"/>
+            <rect x="40" y="0" width="40" height="40" class="stroke-main fill-light"/>
+            <text x="40" y="100" text-anchor="middle" font-size="11" font-weight="700" class="lbl-teja">ALZADO</text>
+          </g>
+          <!-- Perfil -->
+          <g transform="translate(340,40)">
+            <rect x="0" y="40" width="30" height="40" class="stroke-main fill-light"/>
+            <rect x="0" y="0" width="30" height="40" class="stroke-main fill-light"/>
+            <text x="15" y="100" text-anchor="middle" font-size="11" font-weight="700" class="lbl-teja">PERFIL</text>
+          </g>
+          <!-- Planta -->
+          <g transform="translate(220,135)">
+            <rect x="0" y="0" width="80" height="30" class="stroke-main fill-light"/>
+            <line x1="40" y1="0" x2="40" y2="30" class="stroke-aux"/>
+            <text x="40" y="55" text-anchor="middle" font-size="11" font-weight="700" class="lbl-teja">PLANTA</text>
+          </g>
+
+          <!-- líneas correspondencia -->
+          <line x1="220" y1="105" x2="220" y2="135" class="stroke-aux"/>
+          <line x1="300" y1="105" x2="300" y2="135" class="stroke-aux"/>
+          <line x1="300" y1="40" x2="340" y2="40" class="stroke-aux"/>
+          <line x1="300" y1="80" x2="340" y2="80" class="stroke-aux"/>
+        </svg>
+      </div>
+
+      <div class="steps">
+        <div class="step">Identifica la <strong>vista principal</strong> mirando el objeto: la cara que muestre más detalles será el <strong>alzado</strong>.</div>
+        <div class="step">Mira el objeto <strong>desde arriba</strong> sin perspectiva: dibuja el contorno → es la <strong>planta</strong>.</div>
+        <div class="step">Mira el objeto <strong>desde el lado izquierdo</strong>: dibuja el contorno → es el <strong>perfil</strong>.</div>
+        <div class="step">Coloca las tres vistas en posición: <strong>alzado arriba a la izquierda</strong>, planta debajo, perfil a la derecha.</div>
+        <div class="step">Comprueba la correspondencia: las medidas tienen que coincidir entre vistas vecinas.</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ─── 4. Perspectivas ─── -->
+  <article class="section" id="s4">
+    <div class="section-num">Sección 4</div>
+    <h3>Las perspectivas</h3>
+
+    <p>Las vistas son muy precisas, pero no resultan fáciles de "leer" de un solo golpe. Para enseñar cómo es un objeto de un vistazo usamos las <strong>perspectivas</strong>: representaciones que muestran el objeto en tres dimensiones sobre un papel plano.</p>
+
+    <p>En el dibujo técnico se utilizan dos tipos de perspectiva, ambas de la familia <strong>axonométrica</strong> (las líneas paralelas del objeto siguen siendo paralelas en el dibujo):</p>
+
+    <ul>
+      <li><strong>Perspectiva isométrica:</strong> los tres ejes forman 120° entre sí. Es la más usada en clase.</li>
+      <li><strong>Perspectiva caballera:</strong> mantiene la cara frontal real y proyecta la profundidad inclinada.</li>
+    </ul>
+
+    <h4>Perspectiva isométrica</h4>
+    <p>Los tres ejes (X, Y, Z) forman entre sí <strong>ángulos de 120°</strong>. Las medidas se miden directamente sobre los ejes sin reducir. Es la perspectiva más usada en clase porque es fácil de dibujar con escuadra y cartabón.</p>
+
+    <div class="cols2">
+      <div class="fig" style="margin:0;">
+        <svg class="svg-fig" viewBox="0 0 280 240" xmlns="http://www.w3.org/2000/svg" aria-label="Ejes isométricos">
+          <!-- ejes -->
+          <line x1="140" y1="120" x2="140" y2="20" class="stroke-eje" stroke-width="2"/>
+          <line x1="140" y1="120" x2="50" y2="172" class="stroke-eje" stroke-width="2"/>
+          <line x1="140" y1="120" x2="230" y2="172" class="stroke-eje" stroke-width="2"/>
+          <text x="148" y="30" font-size="13" class="lbl-blue" font-weight="700">Z</text>
+          <text x="35" y="180" font-size="13" class="lbl-blue" font-weight="700">X</text>
+          <text x="235" y="180" font-size="13" class="lbl-blue" font-weight="700">Y</text>
+          <!-- arcos de ángulo -->
+          <path d="M 140 90 A 30 30 0 0 0 114 105" class="stroke-thin"/>
+          <text x="105" y="100" font-size="11" class="lbl-teja">120°</text>
+          <path d="M 140 90 A 30 30 0 0 1 166 105" class="stroke-thin"/>
+          <text x="160" y="100" font-size="11" class="lbl-teja">120°</text>
+          <path d="M 114 135 A 30 30 0 0 0 166 135" class="stroke-thin"/>
+          <text x="130" y="155" font-size="11" class="lbl-teja">120°</text>
+        </svg>
+        <div class="fig-cap">Los tres ejes a 120°</div>
+      </div>
+
+      <div class="fig" style="margin:0;">
+        <svg class="svg-fig" viewBox="0 0 280 240" xmlns="http://www.w3.org/2000/svg" aria-label="Cubo en isométrica">
+          <!-- cubo isométrico -->
+          <polygon points="100,170 180,170 220,140 140,140" class="stroke-main fill-light"/>
+          <polygon points="100,170 100,90 140,60 140,140" class="stroke-main" fill="#efe7d4"/>
+          <polygon points="100,90 140,60 220,60 180,90" class="stroke-main" fill="#fff"/>
+          <polygon points="180,90 220,60 220,140 180,170" class="stroke-main" fill="#d6c9ad"/>
+          <polygon points="100,170 180,170 180,90 100,90" class="stroke-main" fill="none"/>
+          <polygon points="140,140 220,140 220,60 140,60" class="stroke-main" fill="none"/>
+          <text x="160" y="220" text-anchor="middle" font-size="12" font-weight="700">Cubo en isométrica</text>
+        </svg>
+        <div class="fig-cap">Las medidas se conservan en los tres ejes</div>
+      </div>
+    </div>
+
+    <h4>Perspectiva caballera</h4>
+    <p>Es la más sencilla. Los ejes <strong>X y Z se mantienen a 90°</strong> entre sí (formando una cara frontal como la realidad). El eje <strong>Y se inclina 30°, 45° o 60°</strong> y, además, las medidas en Y se <strong>reducen a la mitad</strong> (coeficiente 0,5) para evitar que la figura se vea deformada.</p>
+
+    <div class="cols2">
+      <div class="fig" style="margin:0;">
+        <svg class="svg-fig" viewBox="0 0 280 240" xmlns="http://www.w3.org/2000/svg" aria-label="Ejes caballera">
+          <line x1="80" y1="180" x2="220" y2="180" class="stroke-eje" stroke-width="2"/>
+          <line x1="80" y1="180" x2="80" y2="40" class="stroke-eje" stroke-width="2"/>
+          <line x1="80" y1="180" x2="180" y2="100" class="stroke-eje" stroke-width="2"/>
+          <text x="225" y="185" font-size="13" class="lbl-blue" font-weight="700">X</text>
+          <text x="72" y="35" font-size="13" class="lbl-blue" font-weight="700">Z</text>
+          <text x="185" y="98" font-size="13" class="lbl-blue" font-weight="700">Y</text>
+          <!-- ángulo recto X-Z -->
+          <rect x="80" y="170" width="10" height="10" class="stroke-thin" fill="none"/>
+          <!-- ángulo 45° -->
+          <path d="M 130 180 A 50 50 0 0 0 115 145" class="stroke-thin"/>
+          <text x="118" y="170" font-size="11" class="lbl-teja">45°</text>
+        </svg>
+        <div class="fig-cap">X-Z a 90°, Y a 45°</div>
+      </div>
+
+      <div class="fig" style="margin:0;">
+        <svg class="svg-fig" viewBox="0 0 280 240" xmlns="http://www.w3.org/2000/svg" aria-label="Cubo caballera">
+          <!-- cara frontal real -->
+          <rect x="60" y="80" width="100" height="100" class="stroke-main" fill="#efe7d4"/>
+          <!-- aristas Y reducidas -->
+          <line x1="60" y1="80" x2="100" y2="40" class="stroke-main"/>
+          <line x1="160" y1="80" x2="200" y2="40" class="stroke-main"/>
+          <line x1="160" y1="180" x2="200" y2="140" class="stroke-main"/>
+          <line x1="60" y1="180" x2="100" y2="140" class="stroke-aux"/>
+          <!-- cara trasera -->
+          <line x1="100" y1="40" x2="200" y2="40" class="stroke-main"/>
+          <line x1="200" y1="40" x2="200" y2="140" class="stroke-main"/>
+          <line x1="100" y1="40" x2="100" y2="140" class="stroke-aux"/>
+          <line x1="100" y1="140" x2="200" y2="140" class="stroke-aux"/>
+          <!-- etiqueta -->
+          <text x="110" y="135" font-size="9" class="lbl-teja">Y · 50%</text>
+          <text x="40" y="135" font-size="9" class="lbl-teja">Z</text>
+          <text x="105" y="200" font-size="9" class="lbl-teja">X</text>
+        </svg>
+        <div class="fig-cap">El cubo conserva su cara frontal; las aristas en Y se reducen</div>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">💡</span>
+      <p><strong>Truco:</strong> si dibujas un cubo a tamaño real en caballera, la arista que va "hacia atrás" (eje Y) se dibuja con la mitad de longitud. Así el cubo no se ve "tan estirado".</p>
+    </div>
+
+    <div class="ejemplo">
+      <div class="et">Ejemplo resuelto 2</div>
+      <h5>De las tres vistas a la perspectiva caballera</h5>
+      <p>Te dan las tres vistas de una pieza con forma de "L". El alzado mide 4 × 3 unidades con un escalón. La pieza tiene 2 unidades de profundidad. Vamos a dibujar su caballera paso a paso.</p>
+
+      <div class="fig" style="margin:14px 0;">
+        <svg class="svg-fig" viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg" aria-label="Construcción de la caballera a partir de las tres vistas">
+          <!-- ─── Las 3 vistas (izquierda) ─── -->
+          <g transform="translate(20,30)">
+            <text x="0" y="-10" font-size="11" font-weight="700" class="lbl-teja">DATO: las tres vistas</text>
+
+            <!-- cuadrícula alzado -->
+            <g opacity="0.35">
+              <path d="M 0 0 H 80 M 0 20 H 80 M 0 40 H 80 M 0 60 H 80 M 0 0 V 60 M 20 0 V 60 M 40 0 V 60 M 60 0 V 60 M 80 0 V 60" class="stroke-thin"/>
+            </g>
+            <!-- alzado: L invertida -->
+            <path d="M 0 60 L 80 60 L 80 40 L 40 40 L 40 0 L 0 0 Z" class="stroke-main fill-light"/>
+            <text x="40" y="80" text-anchor="middle" font-size="10" font-weight="700">Alzado</text>
+
+            <!-- cuadrícula perfil -->
+            <g transform="translate(100,0)" opacity="0.35">
+              <path d="M 0 0 H 40 M 0 20 H 40 M 0 40 H 40 M 0 60 H 40 M 0 0 V 60 M 20 0 V 60 M 40 0 V 60" class="stroke-thin"/>
+            </g>
+            <!-- perfil: rectángulo 2x3 -->
+            <rect x="100" y="0" width="40" height="60" class="stroke-main fill-light"/>
+            <text x="120" y="80" text-anchor="middle" font-size="10" font-weight="700">Perfil</text>
+
+            <!-- cuadrícula planta -->
+            <g transform="translate(0,100)" opacity="0.35">
+              <path d="M 0 0 H 80 M 0 20 H 80 M 0 40 H 80 M 0 0 V 40 M 20 0 V 40 M 40 0 V 40 M 60 0 V 40 M 80 0 V 40" class="stroke-thin"/>
+            </g>
+            <!-- planta: rectángulo 4x2 con arista interna del escalón -->
+            <rect x="0" y="100" width="80" height="40" class="stroke-main fill-light"/>
+            <line x1="40" y1="100" x2="40" y2="140" class="stroke-thin" stroke-dasharray="3 2"/>
+            <text x="40" y="160" text-anchor="middle" font-size="10" font-weight="700">Planta</text>
+          </g>
+
+          <!-- ─── La caballera construida (derecha) ─── -->
+          <g transform="translate(280,40)">
+            <text x="80" y="-15" text-anchor="middle" font-size="11" font-weight="700" class="lbl-teja">PROCESO: caballera (45° · coef 0.5)</text>
+
+            <!-- cuadrícula tenue -->
+            <g opacity="0.18">
+              <path d="M 0 0 H 320 M 0 20 H 320 M 0 40 H 320 M 0 60 H 320 M 0 80 H 320 M 0 100 H 320 M 0 120 H 320 M 0 140 H 320 M 0 160 H 320 M 0 180 H 320 M 0 200 H 320 M 0 220 H 320
+                       M 0 0 V 220 M 20 0 V 220 M 40 0 V 220 M 60 0 V 220 M 80 0 V 220 M 100 0 V 220 M 120 0 V 220 M 140 0 V 220 M 160 0 V 220 M 180 0 V 220 M 200 0 V 220 M 220 0 V 220 M 240 0 V 220 M 260 0 V 220 M 280 0 V 220 M 300 0 V 220 M 320 0 V 220" class="stroke-thin"/>
+            </g>
+
+            <!-- Alzado frontal (L) en su posición -->
+            <path d="M 30 200 L 110 200 L 110 180 L 70 180 L 70 140 L 30 140 Z" class="stroke-main fill-light"/>
+
+            <!-- Líneas auxiliares a 45° desde cada vértice (coef 0.5 · 2 prof reales = 1 cuadradito a 45°) -->
+            <!-- Tomamos paso de 14px (≈ 20/√2) para 1 unidad reducida -->
+            <line x1="30" y1="200" x2="58" y2="172" class="stroke-aux"/>
+            <line x1="110" y1="200" x2="138" y2="172" class="stroke-aux"/>
+            <line x1="110" y1="180" x2="138" y2="152" class="stroke-aux"/>
+            <line x1="70" y1="180" x2="98" y2="152" class="stroke-aux"/>
+            <line x1="70" y1="140" x2="98" y2="112" class="stroke-aux"/>
+            <line x1="30" y1="140" x2="58" y2="112" class="stroke-aux"/>
+
+            <!-- Cara trasera (líneas paralelas al alzado, en discontinuo) -->
+            <path d="M 58 172 L 138 172 L 138 152 L 98 152 L 98 112 L 58 112 Z" class="stroke-main" fill="none" stroke-dasharray="4 3"/>
+
+            <!-- Repaso de las aristas vistas: las del alzado y las del contorno superior visibles -->
+            <!-- ya están dibujadas como sólidas. Las traseras vistas (top + right): -->
+            <!-- nada más se ve por delante -->
+
+            <!-- Etiquetas de profundidad -->
+            <text x="160" y="180" font-size="10" class="lbl-teja">2 prof reales</text>
+            <text x="160" y="194" font-size="10" class="lbl-teja">→ 1 en caballera</text>
+
+            <!-- Eje Y caballera -->
+            <line x1="30" y1="200" x2="20" y2="210" class="stroke-eje"/>
+            <text x="10" y="222" font-size="10" class="lbl-blue">45°</text>
+          </g>
+
+          <!-- Flecha entre las dos zonas -->
+          <text x="240" y="170" font-size="26" class="arrow-teja">→</text>
+        </svg>
+        <div class="fig-cap">A partir de las tres vistas, construimos la caballera apoyándonos en la cuadrícula</div>
+      </div>
+
+      <div class="steps">
+        <div class="step"><strong>Dibuja el alzado</strong> a tamaño real sobre la cuadrícula. Es la cara que va a quedar de frente: la "L" de 4×3 unidades con el escalón.</div>
+        <div class="step"><strong>Desde cada vértice del alzado</strong>, traza una línea auxiliar (fina) <strong>a 45°</strong> hacia arriba-derecha. Estas líneas marcan la dirección del eje Y (la profundidad).</div>
+        <div class="step"><strong>Mide la profundidad reducida</strong>. La pieza tiene 2 unidades de profundidad real, pero el coeficiente de caballera es 0,5 → sobre las líneas auxiliares marcamos solo <strong>1 cuadradito a 45°</strong>.</div>
+        <div class="step"><strong>Une los puntos traseros</strong> con líneas paralelas a las del alzado. Esto forma la cara trasera (idéntica al alzado, desplazada).</div>
+        <div class="step"><strong>Repasa</strong>: aristas vistas con <strong>línea continua</strong> y aristas ocultas (las que quedan detrás de otras) con <strong>línea discontinua</strong>.</div>
+      </div>
+
+      <div class="callout callout-info" style="margin-top:14px;">
+        <span class="ic">📐</span>
+        <p><strong>Truco con la cuadrícula:</strong> si en clase trabajas sobre láminas con cuadrícula, 1 cuadradito real ≈ 1 cuadradito en horizontal/vertical, y 1 unidad de profundidad ≈ 1 cuadradito en diagonal a 45°. La cuadrícula te hace de regla y de transportador.</p>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PARTE 3 · HERRAMIENTAS Y NORMAS
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="parte3">
+  <div class="parte-cabecera">
+    <div class="parte-num">Parte 3</div>
+    <h2>Herramientas y normas</h2>
+    <p>Lo que necesitas tener encima de la mesa para que tus dibujos sean precisos, y las reglas para que las medidas las entienda cualquiera.</p>
+  </div>
+
+  <!-- ─── 5. Instrumentos ─── -->
+  <article class="section" id="s5">
+    <div class="section-num">Sección 5</div>
+    <h3>Los instrumentos de dibujo</h3>
+
+    <p>Para hacer un dibujo técnico necesitas el material adecuado. Cada herramienta tiene una función concreta: no se puede dibujar bien con el material equivocado.</p>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4>📄 El papel</h4>
+        <p>Soporte sobre el que se dibuja. En clase usamos hojas <strong>DIN A4</strong> (210 × 297 mm). El papel para dibujo técnico es más grueso que el de cuaderno y tiene la superficie ligeramente rugosa.</p>
+      </div>
+      <div class="col-card">
+        <h4>✏️ El lápiz de grafito</h4>
+        <p>El alma del dibujo. Hay dos tipos según la dureza:</p>
+        <ul>
+          <li><strong>Lápiz duro (2H, H):</strong> trazo fino y claro. Para líneas auxiliares y bocetos.</li>
+          <li><strong>Lápiz blando (HB, B, 2B):</strong> trazo grueso y oscuro. Para líneas definitivas.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cols2">
+      <div class="col-card" style="display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;">
+        <svg class="svg-fig" viewBox="0 0 80 90" width="70" xmlns="http://www.w3.org/2000/svg">
+          <line x1="20" y1="80" x2="55" y2="20" class="stroke-main" stroke-width="2"/>
+          <line x1="60" y1="80" x2="55" y2="20" class="stroke-main" stroke-width="2"/>
+          <line x1="40" y1="80" x2="40" y2="78" class="stroke-thin"/>
+          <circle cx="55" cy="20" r="3" class="arrow-teja"/>
+        </svg>
+        <div>
+          <h4>El compás</h4>
+          <p>Para dibujar <strong>arcos y circunferencias</strong>. También sirve para transportar medidas. Una punta es metálica, la otra lleva mina.</p>
+        </div>
+      </div>
+      <div class="col-card" style="display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;">
+        <svg class="svg-fig" viewBox="0 0 90 30" width="80" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="8" width="80" height="14" class="stroke-main" fill="#efe7d4"/>
+          <g font-size="6">
+            <line x1="15" y1="8" x2="15" y2="14" class="stroke-thin"/>
+            <line x1="25" y1="8" x2="25" y2="14" class="stroke-thin"/>
+            <line x1="35" y1="8" x2="35" y2="14" class="stroke-thin"/>
+            <line x1="45" y1="8" x2="45" y2="14" class="stroke-thin"/>
+            <line x1="55" y1="8" x2="55" y2="14" class="stroke-thin"/>
+            <line x1="65" y1="8" x2="65" y2="14" class="stroke-thin"/>
+            <line x1="75" y1="8" x2="75" y2="14" class="stroke-thin"/>
+          </g>
+        </svg>
+        <div>
+          <h4>La regla</h4>
+          <p>Para dibujar y <strong>medir líneas rectas</strong>. Graduada en cm y mm.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cols2">
+      <div class="col-card" style="display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;">
+        <svg class="svg-fig" viewBox="0 0 90 60" width="80" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 5 50 A 40 40 0 0 1 85 50 Z" class="stroke-main" fill="#efe7d4"/>
+          <line x1="5" y1="50" x2="85" y2="50" class="stroke-main"/>
+          <text x="45" y="34" text-anchor="middle" font-size="6">180°</text>
+        </svg>
+        <div>
+          <h4>El transportador</h4>
+          <p>Para <strong>medir y dibujar ángulos</strong>. Se coloca el centro en el vértice del ángulo y se lee la graduación (0° a 180°).</p>
+        </div>
+      </div>
+      <div class="col-card" style="display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;">
+        <svg class="svg-fig" viewBox="0 0 120 70" width="100" xmlns="http://www.w3.org/2000/svg">
+          <!-- escuadra (45-45-90) -->
+          <polygon points="5,60 55,60 5,10" class="stroke-main fill-teja" opacity="0.6"/>
+          <text x="15" y="50" font-size="6">45°</text>
+          <!-- cartabón (30-60-90) -->
+          <polygon points="60,60 115,60 115,15" class="stroke-main fill-blue" opacity="0.6"/>
+          <text x="100" y="55" font-size="6">30°</text>
+          <text x="105" y="25" font-size="6">60°</text>
+        </svg>
+        <div>
+          <h4>Escuadra y cartabón</h4>
+          <p>Dos triángulos rectángulos. La <strong>escuadra</strong> tiene 45°-45°-90°. El <strong>cartabón</strong> tiene 30°-60°-90°. Juntos permiten dibujar paralelas y perpendiculares.</p>
+        </div>
+      </div>
+    </div>
+
+    <h4>Trazado con escuadra y cartabón</h4>
+    <p>La pareja escuadra-cartabón es <strong>el instrumento más utilizado</strong> en clase. Con ellos se trazan rectas paralelas, perpendiculares y rectas a ángulos concretos sin necesidad de transportador. La idea es siempre la misma: <strong>uno hace de "guía" fija</strong> y <strong>el otro se desliza</strong> sobre él.</p>
+
+    <div class="ejemplo">
+      <div class="et">Ejemplo resuelto 3</div>
+      <h5>Trazar rectas paralelas con escuadra y cartabón</h5>
+      <p>Queremos trazar varias rectas paralelas a una línea horizontal dada.</p>
+
+      <div class="fig" style="margin:14px 0;">
+        <svg class="svg-fig" viewBox="0 0 640 240" xmlns="http://www.w3.org/2000/svg" aria-label="Trazado de paralelas con escuadra y cartabón en dos fotogramas">
+          <!-- ─── Fotograma 1: posición inicial ─── -->
+          <g transform="translate(20,20)">
+            <text x="0" y="0" font-size="11" font-weight="700" class="lbl-teja">① POSICIÓN INICIAL</text>
+
+            <!-- línea original (horizontal) -->
+            <line x1="20" y1="120" x2="240" y2="120" class="stroke-main" stroke-width="2.5"/>
+            <text x="135" y="138" text-anchor="middle" font-size="10" font-weight="600">línea original</text>
+
+            <!-- cartabón abajo, haciendo de guía (su hipotenusa apoya en la línea) -->
+            <polygon points="20,200 240,200 240,120" class="stroke-main" fill="rgba(44,95,141,0.18)"/>
+            <text x="180" y="180" font-size="10" class="lbl-blue" font-weight="700">CARTABÓN (fijo · guía)</text>
+            <text x="180" y="193" font-size="9" class="lbl-blue">no se mueve</text>
+
+            <!-- escuadra encima, un cateto apoyado en la línea original -->
+            <polygon points="60,120 60,60 120,120" class="stroke-main" fill="rgba(210,85,42,0.20)"/>
+            <text x="74" y="100" font-size="10" class="lbl-teja" font-weight="700">ESCUADRA</text>
+            <text x="74" y="113" font-size="9" class="lbl-teja">cateto sobre la línea</text>
+          </g>
+
+          <!-- flecha entre fotogramas -->
+          <text x="305" y="125" font-size="26" class="arrow-teja">→</text>
+
+          <!-- ─── Fotograma 2: deslizar y trazar ─── -->
+          <g transform="translate(340,20)">
+            <text x="0" y="0" font-size="11" font-weight="700" class="lbl-teja">② DESLIZAR Y TRAZAR</text>
+
+            <!-- cartabón fijo (igual) -->
+            <polygon points="20,200 240,200 240,120" class="stroke-main" fill="rgba(44,95,141,0.18)"/>
+            <text x="180" y="180" font-size="10" class="lbl-blue" font-weight="700">CARTABÓN</text>
+            <text x="180" y="193" font-size="9" class="lbl-blue">sigue fijo</text>
+
+            <!-- línea original más tenue -->
+            <line x1="20" y1="120" x2="240" y2="120" class="stroke-main" stroke-width="1.5" opacity="0.45"/>
+
+            <!-- escuadra desplazada hacia arriba-izquierda a lo largo de la hipotenusa -->
+            <polygon points="20,100 20,40 80,100" class="stroke-main" fill="rgba(210,85,42,0.20)"/>
+
+            <!-- flecha de deslizamiento -->
+            <line x1="55" y1="120" x2="40" y2="105" class="stroke-aux" stroke-width="1.5"/>
+            <polygon points="40,105 47,107 45,99" class="arrow-teja"/>
+            <text x="40" y="135" font-size="9" class="lbl-teja">desliza</text>
+
+            <!-- líneas paralelas trazadas -->
+            <line x1="20" y1="100" x2="80" y2="100" class="stroke-main" stroke-width="2.5"/>
+            <line x1="20" y1="80" x2="60" y2="80" class="stroke-main" stroke-width="1.5" opacity="0.7"/>
+            <line x1="20" y1="60" x2="40" y2="60" class="stroke-main" stroke-width="1.5" opacity="0.5"/>
+            <text x="90" y="103" font-size="9" class="lbl-teja" font-weight="700">¡paralela!</text>
+          </g>
+        </svg>
+        <div class="fig-cap">El cartabón hace de raíl y la escuadra dibuja una paralela en cada posición</div>
+      </div>
+
+      <div class="steps">
+        <div class="step">Coloca la <strong>escuadra</strong> con un cateto apoyado sobre la línea original.</div>
+        <div class="step">Coloca el <strong>cartabón</strong> pegado a la hipotenusa de la escuadra. Este será la guía: <strong>sujétalo firme con la mano izquierda</strong>.</div>
+        <div class="step">Sin mover el cartabón, <strong>desliza la escuadra</strong> a lo largo de la hipotenusa hasta la posición que quieras.</div>
+        <div class="step">Dibuja la nueva línea con el cateto de la escuadra: es <strong>paralela</strong> a la original.</div>
+        <div class="step">Repite cuantas veces necesites para trazar todas las paralelas que quieras.</div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <div class="et">Ejemplo resuelto 4</div>
+      <h5>Trazar rectas perpendiculares con escuadra y cartabón</h5>
+      <p>Misma idea, pero <strong>girando la escuadra 90°</strong> sobre el cartabón.</p>
+
+      <div class="fig" style="margin:14px 0;">
+        <svg class="svg-fig" viewBox="0 0 640 240" xmlns="http://www.w3.org/2000/svg" aria-label="Trazado de perpendiculares con escuadra y cartabón">
+          <!-- ─── Fotograma 1: paralela trazada ─── -->
+          <g transform="translate(20,20)">
+            <text x="0" y="0" font-size="11" font-weight="700" class="lbl-teja">① POSICIÓN PARA PARALELA</text>
+
+            <line x1="20" y1="120" x2="240" y2="120" class="stroke-main" stroke-width="2.5"/>
+            <text x="135" y="138" text-anchor="middle" font-size="10" font-weight="600">línea original</text>
+
+            <polygon points="20,200 240,200 240,120" class="stroke-main" fill="rgba(44,95,141,0.18)"/>
+            <text x="180" y="180" font-size="10" class="lbl-blue" font-weight="700">CARTABÓN</text>
+
+            <!-- escuadra con cateto horizontal (paralela) -->
+            <polygon points="60,120 60,60 120,120" class="stroke-main" fill="rgba(210,85,42,0.20)"/>
+            <text x="78" y="105" font-size="9" class="lbl-teja">cateto ↔</text>
+          </g>
+
+          <!-- flecha + 90° -->
+          <g transform="translate(290,90)">
+            <text x="10" y="20" font-size="20" class="arrow-teja">↻</text>
+            <text x="5" y="42" font-size="11" font-weight="700" class="lbl-teja">90°</text>
+          </g>
+
+          <!-- ─── Fotograma 2: escuadra girada → perpendicular ─── -->
+          <g transform="translate(340,20)">
+            <text x="0" y="0" font-size="11" font-weight="700" class="lbl-teja">② ESCUADRA GIRADA 90°</text>
+
+            <line x1="20" y1="120" x2="240" y2="120" class="stroke-main" stroke-width="2.5"/>
+
+            <polygon points="20,200 240,200 240,120" class="stroke-main" fill="rgba(44,95,141,0.18)"/>
+            <text x="180" y="180" font-size="10" class="lbl-blue" font-weight="700">CARTABÓN</text>
+            <text x="180" y="193" font-size="9" class="lbl-blue">sigue fijo</text>
+
+            <!-- escuadra girada: ahora el cateto vertical apoya en la hipotenusa del cartabón -->
+            <polygon points="100,120 160,120 100,60" class="stroke-main" fill="rgba(210,85,42,0.20)"/>
+
+            <!-- recta perpendicular trazada -->
+            <line x1="100" y1="120" x2="100" y2="40" class="stroke-main" stroke-width="2.5"/>
+            <text x="108" y="55" font-size="9" class="lbl-teja" font-weight="700">¡perpendicular!</text>
+
+            <!-- símbolo del ángulo recto -->
+            <rect x="100" y="110" width="10" height="10" class="stroke-thin" fill="none"/>
+          </g>
+        </svg>
+        <div class="fig-cap">Girando la escuadra 90° sobre el cartabón, el otro cateto dibuja la perpendicular</div>
+      </div>
+
+      <div class="steps">
+        <div class="step">Parte de la misma posición que para las paralelas (cartabón haciendo de guía).</div>
+        <div class="step"><strong>Gira la escuadra 90°</strong>: ahora el cateto que estaba horizontal queda vertical (apoyado contra el cartabón).</div>
+        <div class="step">Dibuja con el cateto libre: la nueva línea es <strong>perpendicular</strong> a la original.</div>
+        <div class="step">Igual que antes, deslizando la escuadra sobre el cartabón puedes trazar todas las perpendiculares que necesites.</div>
+      </div>
+    </div>
+
+    <h4>Ángulos que puedes dibujar combinando escuadra y cartabón</h4>
+    <p>La gracia de tener los dos triángulos es que <strong>sumando o restando sus ángulos</strong> se consiguen muchas inclinaciones distintas sin transportador:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:24%;">Cómo se obtiene</th>
+          <th style="width:18%;">Ángulo</th>
+          <th>Usa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Cateto de la escuadra</td><td><strong>90°</strong></td><td>Perpendiculares</td></tr>
+        <tr><td>Hipotenusa de la escuadra</td><td><strong>45°</strong></td><td>Diagonales, perspectiva caballera</td></tr>
+        <tr><td>Cateto corto del cartabón</td><td><strong>30°</strong></td><td>Líneas inclinadas suaves</td></tr>
+        <tr><td>Cateto largo del cartabón</td><td><strong>60°</strong></td><td>Líneas inclinadas pronunciadas, perspectiva isométrica</td></tr>
+        <tr><td>Escuadra + cartabón (45° + 30°)</td><td><strong>75°</strong></td><td>Inclinaciones intermedias</td></tr>
+        <tr><td>Cartabón − escuadra (45° − 30°)</td><td><strong>15°</strong></td><td>Inclinaciones muy suaves</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-key">
+      <span class="ic">📏</span>
+      <p><strong>En clase</strong> practicaremos estos trazados con las <strong>láminas de rayados</strong>: paralelas horizontales, paralelas verticales, paralelas inclinadas, combinaciones de paralelas y perpendiculares, y figuras rayadas en diferentes direcciones. Lleva siempre <strong>escuadra y cartabón a clase</strong> (más regla, compás, lápiz duro y goma).</p>
+    </div>
+  </article>
+
+  <!-- ─── 6. La escala ─── -->
+  <article class="section" id="s6">
+    <div class="section-num">Sección 6</div>
+    <h3>La escala</h3>
+
+    <p>Imagina que quieres dibujar un coche en una hoja A4. Por mucho que la gires, no cabe a tamaño real. Y al revés: si dibujas una hormiga a tamaño real, no se entiende nada. La solución es la <strong>escala</strong>: dibujar el objeto más grande o más pequeño que la realidad, pero <strong>guardando las proporciones</strong>.</p>
+
+    <div class="keybox">
+      <div class="ktit">Definición</div>
+      <p>La <strong>escala</strong> es la relación entre el <strong>tamaño del dibujo</strong> y el <strong>tamaño real</strong> del objeto.</p>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:18px;text-align:center;margin-top:10px;color:var(--teja);font-weight:600;">E = tamaño dibujo / tamaño real</p>
+    </div>
+
+    <h4>Tipos de escala</h4>
+
+    <div class="cols3">
+      <div class="col-card">
+        <h4 style="font-size:17px;">Escala natural</h4>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:18px;color:var(--teja);font-weight:600;">E = 1:1</p>
+        <p>El dibujo tiene el <strong>mismo tamaño</strong> que el objeto real. 1 cm en el papel = 1 cm en la realidad.</p>
+        <p style="font-size:13px;color:var(--ink-soft);"><em>Ej: una pieza de Lego.</em></p>
+      </div>
+      <div class="col-card">
+        <h4 style="font-size:17px;">Escala de reducción</h4>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:18px;color:var(--teja);font-weight:600;">E = 1:N <span style="font-size:13px;">(N&gt;1)</span></p>
+        <p>El dibujo es <strong>más pequeño</strong> que la realidad. Sirve para representar objetos grandes (casas, ciudades, coches).</p>
+        <p style="font-size:13px;color:var(--ink-soft);"><em>Ej: 1:50 → el dibujo es 50 veces menor.</em></p>
+      </div>
+      <div class="col-card">
+        <h4 style="font-size:17px;">Escala de ampliación</h4>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:18px;color:var(--teja);font-weight:600;">E = N:1 <span style="font-size:13px;">(N&gt;1)</span></p>
+        <p>El dibujo es <strong>más grande</strong> que la realidad. Sirve para representar objetos muy pequeños (insectos, chips).</p>
+        <p style="font-size:13px;color:var(--ink-soft);"><em>Ej: 5:1 → el dibujo es 5 veces mayor.</em></p>
+      </div>
+    </div>
+
+    <h4>Cómo se representa la escala</h4>
+    <p>Hay dos formas equivalentes:</p>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4>Escala numérica</h4>
+        <p>Una proporción de la forma <strong>1:N</strong> (reducción) o <strong>N:1</strong> (ampliación).</p>
+        <p style="font-family:'JetBrains Mono',monospace;background:#f6f1e7;padding:10px;border-radius:8px;text-align:center;">E = 1:50</p>
+      </div>
+      <div class="col-card">
+        <h4>Escala gráfica</h4>
+        <p>Una <strong>línea graduada</strong>: midiendo sobre ella con la regla, se obtiene directamente la medida real.</p>
+        <svg class="svg-fig" viewBox="0 0 240 50" xmlns="http://www.w3.org/2000/svg" style="margin-top:8px;">
+          <rect x="10" y="20" width="40" height="10" fill="#1a2238"/>
+          <rect x="50" y="20" width="40" height="10" fill="#fff" stroke="#1a2238"/>
+          <rect x="90" y="20" width="40" height="10" fill="#1a2238"/>
+          <rect x="130" y="20" width="40" height="10" fill="#fff" stroke="#1a2238"/>
+          <text x="10" y="15" font-size="9">0</text>
+          <text x="50" y="15" font-size="9">1</text>
+          <text x="90" y="15" font-size="9">2</text>
+          <text x="130" y="15" font-size="9">3</text>
+          <text x="170" y="15" font-size="9">4 m</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <div class="et">Ejemplo resuelto 5</div>
+      <h5>Dibujar una pieza a tres escalas distintas</h5>
+      <p>Tenemos una pieza rectangular cuyas medidas <strong>reales</strong> son <strong>40 × 30 mm</strong>. Vamos a dibujarla a tres escalas y comparar los resultados.</p>
+
+      <div class="fig" style="margin:14px 0;">
+        <svg class="svg-fig" viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg" aria-label="La misma pieza a escalas 1:1, 2:1 y 1:2">
+
+          <!-- ─── 1:1 natural ─── -->
+          <g transform="translate(40,40)">
+            <text x="60" y="-15" text-anchor="middle" font-size="13" font-weight="700" class="lbl-teja">E = 1:1</text>
+            <text x="60" y="0" text-anchor="middle" font-size="10" fill="#3a4360">tamaño real</text>
+            <rect x="0" y="20" width="120" height="90" class="stroke-main fill-light"/>
+            <!-- cota horizontal -->
+            <line x1="0" y1="125" x2="120" y2="125" class="stroke-thin"/>
+            <polygon points="0,125 6,123 6,127" class="arrow"/>
+            <polygon points="120,125 114,123 114,127" class="arrow"/>
+            <text x="60" y="138" text-anchor="middle" font-size="10" font-weight="700">40 mm</text>
+            <!-- cota vertical -->
+            <line x1="135" y1="20" x2="135" y2="110" class="stroke-thin"/>
+            <polygon points="135,20 133,26 137,26" class="arrow"/>
+            <polygon points="135,110 133,104 137,104" class="arrow"/>
+            <text x="155" y="68" font-size="10" font-weight="700">30 mm</text>
+            <!-- nota -->
+            <text x="60" y="170" text-anchor="middle" font-size="10" fill="#3a4360">papel = real</text>
+          </g>
+
+          <!-- ─── 2:1 ampliación ─── -->
+          <g transform="translate(220,40)">
+            <text x="120" y="-15" text-anchor="middle" font-size="13" font-weight="700" class="lbl-teja">E = 2:1</text>
+            <text x="120" y="0" text-anchor="middle" font-size="10" fill="#3a4360">ampliación · ×2</text>
+            <rect x="0" y="-25" width="240" height="180" class="stroke-main fill-teja" opacity="0.85"/>
+            <!-- cota horizontal -->
+            <line x1="0" y1="170" x2="240" y2="170" class="stroke-thin"/>
+            <polygon points="0,170 6,168 6,172" class="arrow"/>
+            <polygon points="240,170 234,168 234,172" class="arrow"/>
+            <text x="120" y="183" text-anchor="middle" font-size="10" font-weight="700">80 mm en papel · <tspan class="lbl-teja">(40 reales)</tspan></text>
+            <!-- nota -->
+            <text x="120" y="208" text-anchor="middle" font-size="10" fill="#3a4360">papel = real × 2</text>
+          </g>
+
+          <!-- ─── 1:2 reducción ─── -->
+          <g transform="translate(500,40)">
+            <text x="30" y="-15" text-anchor="middle" font-size="13" font-weight="700" class="lbl-teja">E = 1:2</text>
+            <text x="30" y="0" text-anchor="middle" font-size="10" fill="#3a4360">reducción · ÷2</text>
+            <rect x="0" y="45" width="60" height="45" class="stroke-main fill-blue"/>
+            <!-- cota horizontal -->
+            <line x1="0" y1="105" x2="60" y2="105" class="stroke-thin"/>
+            <polygon points="0,105 6,103 6,107" class="arrow"/>
+            <polygon points="60,105 54,103 54,107" class="arrow"/>
+            <text x="30" y="118" text-anchor="middle" font-size="9" font-weight="700">20 mm en papel</text>
+            <text x="30" y="130" text-anchor="middle" font-size="9" class="lbl-teja">(40 reales)</text>
+            <!-- nota -->
+            <text x="30" y="170" text-anchor="middle" font-size="10" fill="#3a4360">papel = real ÷ 2</text>
+          </g>
+        </svg>
+        <div class="fig-cap">La misma pieza (40 × 30 mm reales) representada a escala natural, ampliada y reducida</div>
+      </div>
+
+      <div class="steps">
+        <div class="step"><strong>Escala 1:1 (natural).</strong> El dibujo conserva las medidas reales: <strong>40 × 30 mm</strong> en el papel.</div>
+        <div class="step"><strong>Escala 2:1 (ampliación).</strong> Multiplicamos las medidas reales por 2: <strong>80 × 60 mm</strong> en el papel. La pieza se ve el doble de grande.</div>
+        <div class="step"><strong>Escala 1:2 (reducción).</strong> Dividimos las medidas reales entre 2: <strong>20 × 15 mm</strong> en el papel. La pieza se ve la mitad.</div>
+        <div class="step"><strong>Importante:</strong> aunque las medidas en el papel cambien, <strong>las cotas siempre indican la medida real</strong> (40 mm, no 80 ni 20). Eso es lo que permite a quien fabrique la pieza saber cuánto mide de verdad.</div>
+      </div>
+
+      <div class="callout callout-warn" style="margin-top:14px;">
+        <span class="ic">⚠️</span>
+        <p><strong>Confusión típica:</strong> escala 2:1 significa "<strong>2 en el dibujo por cada 1 en la realidad</strong>" → el dibujo es <strong>más grande</strong> (ampliación). Escala 1:2 significa "<strong>1 en el dibujo por cada 2 en la realidad</strong>" → el dibujo es <strong>más pequeño</strong> (reducción). El primer número siempre va con el dibujo, el segundo con la realidad.</p>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <div class="et">Ejemplo resuelto 6</div>
+      <h5>De la realidad al dibujo</h5>
+      <p>Tienes que dibujar el aula del instituto en escala <strong>1:100</strong>. Si el aula mide <strong>9 m</strong> de largo, ¿qué medida tendrá en el dibujo?</p>
+      <div class="steps">
+        <div class="step">Aplicamos la fórmula: <strong>dibujo = real × escala</strong>.</div>
+        <div class="step">Pasamos la medida real a la misma unidad: 9 m = <strong>900 cm</strong>.</div>
+        <div class="step">Calculamos: dibujo = 900 × (1/100) = <strong>9 cm</strong>.</div>
+        <div class="step">El aula medirá <strong>9 cm</strong> en el papel.</div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <div class="et">Ejemplo resuelto 7</div>
+      <h5>Del dibujo a la realidad</h5>
+      <p>En un mapa con escala <strong>1:25000</strong>, la distancia entre dos pueblos es de <strong>8 cm</strong>. ¿Cuál es la distancia real?</p>
+      <div class="steps">
+        <div class="step">Aplicamos: <strong>real = dibujo / escala</strong> → real = 8 × 25000.</div>
+        <div class="step">real = <strong>200 000 cm</strong>.</div>
+        <div class="step">Pasamos a unidades cómodas: 200 000 cm = <strong>2 000 m</strong> = <strong>2 km</strong>.</div>
+        <div class="step">Los dos pueblos están a <strong>2 km</strong> el uno del otro.</div>
+      </div>
+    </div>
+
+    <div class="callout callout-warn">
+      <span class="ic">⚠️</span>
+      <p><strong>Atención a las unidades:</strong> antes de hacer cualquier cálculo, pasa el dibujo y la realidad a la misma unidad (las dos en cm, o las dos en mm). Si mezclas, el resultado será absurdo.</p>
+    </div>
+  </article>
+
+  <!-- ─── 7. La acotación ─── -->
+  <article class="section" id="s7">
+    <div class="section-num">Sección 7</div>
+    <h3>La acotación</h3>
+
+    <p>Un dibujo a escala bonito sin medidas no sirve para fabricar nada. Por eso el dibujo técnico siempre lleva <strong>cotas</strong>: números que indican el tamaño real de cada parte del objeto.</p>
+
+    <div class="keybox">
+      <div class="ktit">Definición</div>
+      <p><strong>Acotar</strong> es poner sobre el dibujo las medidas reales del objeto, siguiendo unas normas iguales en todo el mundo.</p>
+    </div>
+
+    <h4>Los elementos de una cota</h4>
+    <p>Cada cota está formada por cuatro elementos. Mira el ejemplo:</p>
+
+    <div class="fig">
+      <svg class="svg-fig" viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg" aria-label="Elementos de una cota">
+        <!-- objeto -->
+        <rect x="180" y="100" width="200" height="80" class="stroke-main fill-light"/>
+        <!-- líneas auxiliares de cota -->
+        <line x1="180" y1="100" x2="180" y2="60" class="stroke-thin"/>
+        <line x1="380" y1="100" x2="380" y2="60" class="stroke-thin"/>
+        <!-- línea de cota -->
+        <line x1="180" y1="70" x2="380" y2="70" class="stroke-thin"/>
+        <!-- flechas -->
+        <polygon points="180,70 192,66 192,74" class="arrow"/>
+        <polygon points="380,70 368,66 368,74" class="arrow"/>
+        <!-- cifra -->
+        <text x="280" y="65" text-anchor="middle" font-size="14" font-weight="700">200</text>
+
+        <!-- segunda cota lateral -->
+        <line x1="180" y1="180" x2="140" y2="180" class="stroke-thin"/>
+        <line x1="180" y1="100" x2="140" y2="100" class="stroke-thin"/>
+        <line x1="150" y1="100" x2="150" y2="180" class="stroke-thin"/>
+        <polygon points="150,100 146,112 154,112" class="arrow"/>
+        <polygon points="150,180 146,168 154,168" class="arrow"/>
+        <text x="135" y="145" text-anchor="end" font-size="14" font-weight="700">80</text>
+
+        <!-- etiquetas explicativas -->
+        <line x1="200" y1="60" x2="200" y2="30" class="stroke-aux"/>
+        <text x="200" y="25" text-anchor="middle" font-size="11" class="lbl-teja">Línea auxiliar</text>
+        <text x="200" y="14" text-anchor="middle" font-size="9" fill="#3a4360">(perpendicular al objeto)</text>
+
+        <line x1="270" y1="70" x2="295" y2="220" class="stroke-aux"/>
+        <text x="295" y="232" text-anchor="middle" font-size="11" class="lbl-teja">Línea de cota</text>
+        <text x="295" y="246" text-anchor="middle" font-size="9" fill="#3a4360">(paralela al lado medido)</text>
+
+        <line x1="180" y1="78" x2="80" y2="220" class="stroke-aux"/>
+        <text x="80" y="232" text-anchor="middle" font-size="11" class="lbl-teja">Flecha</text>
+        <text x="80" y="246" text-anchor="middle" font-size="9" fill="#3a4360">(inicio y fin de la cota)</text>
+
+        <line x1="280" y1="58" x2="420" y2="30" class="stroke-aux"/>
+        <text x="495" y="35" text-anchor="middle" font-size="11" class="lbl-teja">Cifra de cota</text>
+        <text x="495" y="49" text-anchor="middle" font-size="9" fill="#3a4360">(medida real, en mm)</text>
+      </svg>
+      <div class="fig-cap">Las cuatro partes de una cota: línea auxiliar, línea de cota, flechas y cifra</div>
+    </div>
+
+    <h4>Tipos de acotación</h4>
+    <p>Cuando una pieza tiene varias medidas seguidas, hay tres formas de organizarlas:</p>
+
+    <div class="cols3">
+      <div class="fig" style="margin:0;">
+        <svg class="svg-fig" viewBox="0 0 220 130" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="40" width="180" height="50" class="stroke-main fill-light"/>
+          <line x1="20" y1="40" x2="20" y2="15" class="stroke-thin"/>
+          <line x1="80" y1="40" x2="80" y2="15" class="stroke-thin"/>
+          <line x1="140" y1="40" x2="140" y2="15" class="stroke-thin"/>
+          <line x1="200" y1="40" x2="200" y2="15" class="stroke-thin"/>
+          <line x1="20" y1="25" x2="80" y2="25" class="stroke-thin"/>
+          <line x1="80" y1="25" x2="140" y2="25" class="stroke-thin"/>
+          <line x1="140" y1="25" x2="200" y2="25" class="stroke-thin"/>
+          <polygon points="20,25 30,21 30,29" class="arrow"/><polygon points="80,25 70,21 70,29" class="arrow"/>
+          <polygon points="80,25 90,21 90,29" class="arrow"/><polygon points="140,25 130,21 130,29" class="arrow"/>
+          <polygon points="140,25 150,21 150,29" class="arrow"/><polygon points="200,25 190,21 190,29" class="arrow"/>
+          <text x="50" y="20" text-anchor="middle" font-size="10">30</text>
+          <text x="110" y="20" text-anchor="middle" font-size="10">30</text>
+          <text x="170" y="20" text-anchor="middle" font-size="10">30</text>
+          <text x="110" y="115" text-anchor="middle" font-size="11" font-weight="700">En serie</text>
+        </svg>
+      </div>
+      <div class="fig" style="margin:0;">
+        <svg class="svg-fig" viewBox="0 0 220 130" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="60" width="180" height="50" class="stroke-main fill-light"/>
+          <line x1="20" y1="60" x2="20" y2="5" class="stroke-thin"/>
+          <line x1="80" y1="60" x2="80" y2="20" class="stroke-thin"/>
+          <line x1="140" y1="60" x2="140" y2="35" class="stroke-thin"/>
+          <line x1="200" y1="60" x2="200" y2="50" class="stroke-thin"/>
+          <line x1="20" y1="50" x2="200" y2="50" class="stroke-thin"/>
+          <line x1="20" y1="35" x2="140" y2="35" class="stroke-thin"/>
+          <line x1="20" y1="20" x2="80" y2="20" class="stroke-thin"/>
+          <polygon points="20,50 30,46 30,54" class="arrow"/><polygon points="200,50 190,46 190,54" class="arrow"/>
+          <polygon points="20,35 30,31 30,39" class="arrow"/><polygon points="140,35 130,31 130,39" class="arrow"/>
+          <polygon points="20,20 30,16 30,24" class="arrow"/><polygon points="80,20 70,16 70,24" class="arrow"/>
+          <text x="110" y="48" text-anchor="middle" font-size="10">90</text>
+          <text x="80" y="33" text-anchor="middle" font-size="10">60</text>
+          <text x="50" y="18" text-anchor="middle" font-size="10">30</text>
+          <text x="110" y="125" text-anchor="middle" font-size="11" font-weight="700">En paralelo</text>
+        </svg>
+      </div>
+      <div class="fig" style="margin:0;">
+        <svg class="svg-fig" viewBox="0 0 220 130" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="60" width="180" height="50" class="stroke-main fill-light"/>
+          <line x1="20" y1="60" x2="20" y2="10" class="stroke-thin"/>
+          <line x1="80" y1="60" x2="80" y2="40" class="stroke-thin"/>
+          <line x1="140" y1="60" x2="140" y2="40" class="stroke-thin"/>
+          <line x1="200" y1="60" x2="200" y2="25" class="stroke-thin"/>
+          <line x1="80" y1="50" x2="140" y2="50" class="stroke-thin"/>
+          <line x1="20" y1="35" x2="200" y2="35" class="stroke-thin"/>
+          <line x1="20" y1="20" x2="80" y2="20" class="stroke-thin"/>
+          <polygon points="80,50 90,46 90,54" class="arrow"/><polygon points="140,50 130,46 130,54" class="arrow"/>
+          <polygon points="20,35 30,31 30,39" class="arrow"/><polygon points="200,35 190,31 190,39" class="arrow"/>
+          <polygon points="20,20 30,16 30,24" class="arrow"/><polygon points="80,20 70,16 70,24" class="arrow"/>
+          <text x="110" y="48" text-anchor="middle" font-size="10">60</text>
+          <text x="110" y="33" text-anchor="middle" font-size="10">180</text>
+          <text x="50" y="18" text-anchor="middle" font-size="10">30</text>
+          <text x="110" y="125" text-anchor="middle" font-size="11" font-weight="700">Mixta</text>
+        </svg>
+      </div>
+    </div>
+
+    <h4>Símbolos especiales</h4>
+    <p>Algunas cotas llevan un símbolo delante de la cifra para indicar qué se mide:</p>
+    <ul>
+      <li><strong>Ø</strong> → <strong>diámetro</strong> de una circunferencia. Ej: Ø20 significa "20 mm de diámetro".</li>
+      <li><strong>R</strong> → <strong>radio</strong> de un arco. Ej: R15 significa "15 mm de radio". Los arcos <strong>menores de 180°</strong> se acotan con el radio (R); los <strong>mayores de 180°</strong> se acotan con el diámetro (Ø).</li>
+      <li><strong>□</strong> → sección <strong>cuadrada</strong>.</li>
+    </ul>
+
+    <h4>Normas generales de acotación</h4>
+    <p>Estas son las <strong>seis reglas básicas</strong> que debes recordar siempre. Las usaremos como rúbrica para corregir cualquier acotación.</p>
+
+    <div class="keybox">
+      <ol style="margin-left:18px;">
+        <li><strong>Aparecerán las cotas necesarias</strong> para que la pieza quede definida.</li>
+        <li>Las cotas <strong>no deben repetirse</strong>; se colocarán las mínimas necesarias.</li>
+        <li>Las cotas se colocarán en la <strong>vista que mejor defina</strong> la magnitud acotada.</li>
+        <li>Todas las cotas se expresarán en la <strong>misma unidad</strong> (normalmente mm).</li>
+        <li>Las cotas se leerán <strong>desde abajo</strong> (las horizontales) y <strong>desde la derecha</strong> (las verticales).</li>
+        <li>Las <strong>cifras</strong> de cota quedarán <strong>encima</strong> de la línea de cota y en su misma dirección.</li>
+      </ol>
+    </div>
+
+    <h4>Comparativa visual: bien acotado vs mal acotado</h4>
+
+    <div class="norm-head">
+      <div>Regla</div>
+      <div>Bien acotado</div>
+      <div>Mal acotado</div>
+    </div>
+
+    <div class="norm-row">
+      <div class="nr-text">Las cotas se ponen <strong>fuera de la figura</strong>, no encima.</div>
+      <div class="nr-svg">
+        <div class="nr-label lab-ok">CORRECTO</div>
+        <svg class="svg-fig" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="35" width="80" height="35" class="stroke-main fill-light"/>
+          <line x1="20" y1="35" x2="20" y2="15" class="stroke-thin"/>
+          <line x1="100" y1="35" x2="100" y2="15" class="stroke-thin"/>
+          <line x1="20" y1="25" x2="100" y2="25" class="stroke-thin"/>
+          <polygon points="20,25 28,22 28,28" class="arrow"/>
+          <polygon points="100,25 92,22 92,28" class="arrow"/>
+          <text x="60" y="22" text-anchor="middle" font-size="10">80</text>
+        </svg>
+      </div>
+      <div class="nr-svg mal">
+        <div class="nr-label lab-bad">INCORRECTO</div>
+        <svg class="svg-fig" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="20" width="80" height="50" class="stroke-main fill-light"/>
+          <line x1="20" y1="45" x2="100" y2="45" class="stroke-thin" stroke="#c44536"/>
+          <polygon points="20,45 28,42 28,48" fill="#c44536"/>
+          <polygon points="100,45 92,42 92,48" fill="#c44536"/>
+          <text x="60" y="42" text-anchor="middle" font-size="10" fill="#c44536">80</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="norm-row">
+      <div class="nr-text">La <strong>cifra</strong> va siempre <strong>centrada y por encima</strong> de la línea de cota.</div>
+      <div class="nr-svg">
+        <div class="nr-label lab-ok">CORRECTO</div>
+        <svg class="svg-fig" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="40" width="80" height="35" class="stroke-main fill-light"/>
+          <line x1="20" y1="40" x2="20" y2="20" class="stroke-thin"/>
+          <line x1="100" y1="40" x2="100" y2="20" class="stroke-thin"/>
+          <line x1="20" y1="30" x2="100" y2="30" class="stroke-thin"/>
+          <polygon points="20,30 28,27 28,33" class="arrow"/>
+          <polygon points="100,30 92,27 92,33" class="arrow"/>
+          <text x="60" y="27" text-anchor="middle" font-size="10">80</text>
+        </svg>
+      </div>
+      <div class="nr-svg mal">
+        <div class="nr-label lab-bad">INCORRECTO</div>
+        <svg class="svg-fig" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="40" width="80" height="35" class="stroke-main fill-light"/>
+          <line x1="20" y1="40" x2="20" y2="20" class="stroke-thin"/>
+          <line x1="100" y1="40" x2="100" y2="20" class="stroke-thin"/>
+          <line x1="20" y1="30" x2="100" y2="30" class="stroke-thin"/>
+          <polygon points="20,30 28,27 28,33" class="arrow"/>
+          <polygon points="100,30 92,27 92,33" class="arrow"/>
+          <text x="20" y="38" font-size="10" fill="#c44536">80</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="norm-row">
+      <div class="nr-text">No deben <strong>faltar</strong> ni <strong>sobrar</strong> cotas. Cada medida solo una vez.</div>
+      <div class="nr-svg">
+        <div class="nr-label lab-ok">CORRECTO</div>
+        <svg class="svg-fig" viewBox="0 0 140 100" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="40" width="100" height="40" class="stroke-main fill-light"/>
+          <line x1="20" y1="40" x2="20" y2="20" class="stroke-thin"/>
+          <line x1="120" y1="40" x2="120" y2="20" class="stroke-thin"/>
+          <line x1="20" y1="30" x2="120" y2="30" class="stroke-thin"/>
+          <polygon points="20,30 28,27 28,33" class="arrow"/>
+          <polygon points="120,30 112,27 112,33" class="arrow"/>
+          <text x="70" y="27" text-anchor="middle" font-size="10">100</text>
+          <line x1="120" y1="40" x2="135" y2="40" class="stroke-thin"/>
+          <line x1="120" y1="80" x2="135" y2="80" class="stroke-thin"/>
+          <line x1="130" y1="40" x2="130" y2="80" class="stroke-thin"/>
+          <polygon points="130,40 127,48 133,48" class="arrow"/>
+          <polygon points="130,80 127,72 133,72" class="arrow"/>
+          <text x="135" y="63" font-size="10">40</text>
+        </svg>
+      </div>
+      <div class="nr-svg mal">
+        <div class="nr-label lab-bad">INCORRECTO</div>
+        <svg class="svg-fig" viewBox="0 0 140 100" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="40" width="100" height="40" class="stroke-main fill-light"/>
+          <line x1="20" y1="40" x2="20" y2="20" class="stroke-thin"/>
+          <line x1="120" y1="40" x2="120" y2="20" class="stroke-thin"/>
+          <line x1="20" y1="30" x2="120" y2="30" class="stroke-thin"/>
+          <polygon points="20,30 28,27 28,33" class="arrow"/>
+          <polygon points="120,30 112,27 112,33" class="arrow"/>
+          <text x="50" y="27" text-anchor="middle" font-size="10" fill="#c44536">50</text>
+          <text x="90" y="27" text-anchor="middle" font-size="10" fill="#c44536">50</text>
+        </svg>
+      </div>
+    </div>
+
+    <h4>Acotación de aristas y ejes</h4>
+    <p>Hay dos errores muy frecuentes que conviene aprender desde el primer día:</p>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4 style="color:var(--err);">❌ Línea de cota sobre arista</h4>
+        <p>La línea de cota <strong>nunca</strong> debe coincidir con una arista del objeto. Si lo hace, no se sabe si "esa línea" es la pieza o la cota.</p>
+        <svg class="svg-fig" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="margin-top:8px;">
+          <rect x="20" y="30" width="160" height="40" class="stroke-main fill-light"/>
+          <line x1="20" y1="70" x2="180" y2="70" stroke="#c44536" stroke-width="2"/>
+          <polygon points="20,70 28,67 28,73" fill="#c44536"/>
+          <polygon points="180,70 172,67 172,73" fill="#c44536"/>
+          <text x="100" y="84" text-anchor="middle" font-size="10" fill="#c44536">160 · ¡pisa la arista!</text>
+        </svg>
+      </div>
+      <div class="col-card">
+        <h4 style="color:var(--err);">❌ Línea de cota sobre eje de simetría</h4>
+        <p>Tampoco debe coincidir con un <strong>eje de simetría</strong> (esa línea de punto y raya que parte la pieza por la mitad). La cota se separa del eje.</p>
+        <svg class="svg-fig" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="margin-top:8px;">
+          <rect x="40" y="20" width="120" height="40" class="stroke-main fill-light"/>
+          <line x1="20" y1="40" x2="180" y2="40" class="stroke-eje"/>
+          <line x1="40" y1="40" x2="160" y2="40" stroke="#c44536" stroke-width="2"/>
+          <polygon points="40,40 48,37 48,43" fill="#c44536"/>
+          <polygon points="160,40 152,37 152,43" fill="#c44536"/>
+          <text x="100" y="78" text-anchor="middle" font-size="10" fill="#c44536">¡pisa el eje de simetría!</text>
+        </svg>
+      </div>
+    </div>
+
+    <h4>Acotación de circunferencias y arcos</h4>
+    <p>Cuando hay redondos (agujeros, ejes, arcos) la cota tiene reglas propias:</p>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4 class="azul">Diámetros (Ø)</h4>
+        <ul style="margin-top:6px;">
+          <li>Se usa el símbolo <strong>Ø</strong> antes de la cifra cuando se acota una circunferencia.</li>
+          <li>La línea de cota <strong>no coincide</strong> con los ejes de simetría: se inclina.</li>
+          <li>Si hay varias circunferencias concéntricas, no se acotan más de <strong>dos</strong> en la misma vista. El resto, en otra vista.</li>
+        </ul>
+        <svg class="svg-fig" viewBox="0 0 180 130" xmlns="http://www.w3.org/2000/svg" style="margin-top:8px;">
+          <circle cx="90" cy="65" r="50" class="stroke-main fill-light"/>
+          <circle cx="90" cy="65" r="28" class="stroke-main" fill="#fff"/>
+          <line x1="20" y1="65" x2="160" y2="65" class="stroke-eje"/>
+          <line x1="90" y1="10" x2="90" y2="120" class="stroke-eje"/>
+          <!-- cota Ø50 inclinada 30° -->
+          <line x1="56" y1="100" x2="124" y2="30" class="stroke-thin"/>
+          <polygon points="56,100 64,95 60,90" class="arrow"/>
+          <polygon points="124,30 116,35 120,40" class="arrow"/>
+          <text x="95" y="62" font-size="10" font-weight="700">Ø100</text>
+          <!-- cota interior Ø28 inclinada 60° -->
+          <line x1="75" y1="90" x2="105" y2="40" class="stroke-thin"/>
+          <polygon points="75,90 82,87 79,82" class="arrow"/>
+          <polygon points="105,40 98,43 101,48" class="arrow"/>
+          <text x="76" y="78" font-size="9" font-weight="700">Ø56</text>
+        </svg>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Radios (R)</h4>
+        <ul style="margin-top:6px;">
+          <li>Se usa el símbolo <strong>R</strong> antes de la cifra cuando se acota un arco.</li>
+          <li>La línea de cota parte <strong>desde el centro</strong> del arco hacia la circunferencia, con una sola flecha (la que toca el arco).</li>
+          <li>Arcos &lt; 180° → R. Arcos &gt; 180° → Ø.</li>
+        </ul>
+        <svg class="svg-fig" viewBox="0 0 180 130" xmlns="http://www.w3.org/2000/svg" style="margin-top:8px;">
+          <path d="M 30 100 L 30 50 A 50 50 0 0 1 130 50 L 130 100 Z" class="stroke-main fill-light"/>
+          <circle cx="80" cy="50" r="2" fill="#1a2238"/>
+          <line x1="80" y1="50" x2="115" y2="15" class="stroke-thin"/>
+          <polygon points="115,15 109,15 113,20" class="arrow"/>
+          <text x="100" y="32" font-size="10" font-weight="700">R50</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="callout callout-ok">
+      <span class="ic">✓</span>
+      <p><strong>Regla mnemotécnica:</strong> "Toda medida del objeto debe aparecer una vez, y solo una. Si la cota se puede deducir de otras, no se pone."</p>
+    </div>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PARTE 4 · DISEÑO ASISTIDO POR ORDENADOR
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="parte4">
+  <div class="parte-cabecera">
+    <div class="parte-num">Parte 4</div>
+    <h2>Diseño con ordenador</h2>
+    <p>Hoy casi nadie dibuja a mano los planos finales: lo hace el ordenador con programas de CAD. Veremos uno en 2D (LibreCAD) y otro en 3D (Tinkercad).</p>
+  </div>
+
+  <!-- ─── 8. CAD 2D ─── -->
+  <article class="section" id="s8">
+    <div class="section-num">Sección 8</div>
+    <h3>CAD 2D · diseño asistido por ordenador</h3>
+
+    <p><strong>CAD</strong> son las siglas de <em>Computer Aided Design</em>, "diseño asistido por ordenador". Es el conjunto de programas que usan ingenieros, arquitectos y diseñadores para hacer planos. Son más rápidos y precisos que el lápiz, y permiten modificar el dibujo sin tener que volver a empezar.</p>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4>Ventajas del CAD</h4>
+        <ul>
+          <li>Cambios rápidos sin borrar nada</li>
+          <li>Precisión milimétrica</li>
+          <li>Acotación automática</li>
+          <li>Capas para organizar el dibujo</li>
+          <li>Se exporta a PDF, imagen o archivo de impresión 3D</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <h4>Algunos programas</h4>
+        <ul>
+          <li><strong>LibreCAD</strong> · 2D · gratis y libre</li>
+          <li><strong>AutoCAD</strong> · 2D y 3D · profesional</li>
+          <li><strong>FreeCAD</strong> · 2D y 3D · gratis</li>
+          <li><strong>SketchUp</strong> · 3D · iniciación</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4>Conceptos básicos en LibreCAD</h4>
+    <ul>
+      <li><strong>Entidad:</strong> cada elemento del dibujo (línea, círculo, arco, polilínea). Cada uno tiene propiedades (longitud, posición, color).</li>
+      <li><strong>Capa:</strong> "transparencia" virtual donde se agrupan entidades parecidas. Permite ocultar partes o cambiar su color de golpe. Ej: una capa para el dibujo y otra para las cotas.</li>
+      <li><strong>Coordenadas:</strong> cada punto se identifica por sus valores (X, Y). El origen (0,0) está en la intersección de los ejes.</li>
+      <li><strong>Comando:</strong> orden escrita que ejecuta una acción (por ejemplo: <code>line</code> para dibujar una recta).</li>
+    </ul>
+
+    <div class="callout callout-info">
+      <span class="ic">💡</span>
+      <p>El paso del lápiz al CAD se parece al paso del papel al procesador de textos: cambia la herramienta, pero las <strong>normas siguen siendo las mismas</strong> (cotas, escalas, vistas).</p>
+    </div>
+  </article>
+
+  <!-- ─── 9. CAD 3D ─── -->
+  <article class="section" id="s9">
+    <div class="section-num">Sección 9</div>
+    <h3>CAD 3D · diseño en tres dimensiones</h3>
+
+    <p>El paso natural después del CAD 2D es el <strong>CAD 3D</strong>: programas que permiten modelar el objeto entero en el ordenador como si lo tuvieras en las manos. Una vez modelado, puedes:</p>
+
+    <ul>
+      <li><strong>Verlo desde cualquier ángulo</strong> con un giro de ratón.</li>
+      <li><strong>Sacar automáticamente sus vistas y cotas</strong> (el programa lo hace por ti).</li>
+      <li><strong>Imprimirlo en 3D</strong> con una impresora.</li>
+      <li><strong>Simularlo</strong> (cómo resiste un peso, cómo fluye el aire alrededor…).</li>
+    </ul>
+
+    <h4>Tinkercad: el CAD 3D para empezar</h4>
+    <p><strong>Tinkercad</strong> es un programa gratuito y online que se usa desde el navegador. No hace falta instalar nada. Es el ideal para empezar porque:</p>
+
+    <ul>
+      <li>Funciona <strong>arrastrando formas básicas</strong> (cubo, cilindro, esfera) sobre un plano de trabajo.</li>
+      <li>Se combinan formas <strong>sólidas y huecas</strong> para añadir o restar volumen.</li>
+      <li>El resultado se puede exportar a <strong>archivo STL</strong>, listo para imprimir en 3D.</li>
+    </ul>
+
+    <div class="cols3">
+      <div class="col-card">
+        <h4>Construcción</h4>
+        <p>Casas, puentes, mobiliario virtual antes de fabricar.</p>
+      </div>
+      <div class="col-card">
+        <h4>Industria</h4>
+        <p>Piezas de coches, aviones, electrodomésticos.</p>
+      </div>
+      <div class="col-card">
+        <h4>Diseño</h4>
+        <p>Joyería, juguetes, prótesis médicas, prototipos.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-key">
+      <span class="ic">🎯</span>
+      <p><strong>Práctica de aula:</strong> al final de la unidad modelaremos en Tinkercad un objeto sencillo (un llavero, una pieza del aula…) y sacaremos automáticamente sus tres vistas para comprobar que coinciden con las que hemos dibujado a mano.</p>
+    </div>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     CIERRE
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="cierre">
+  <div class="parte-cabecera">
+    <div class="parte-num">Cierre</div>
+    <h2>Recuerda lo que has aprendido</h2>
+    <p>Resumen y glosario para volver cuando lo necesites.</p>
+  </div>
+
+  <div class="cols2">
+    <div class="col-card">
+      <h4>Las 5 ideas clave</h4>
+      <ol>
+        <li>El dibujo técnico es un <strong>lenguaje universal</strong> sometido a normas.</li>
+        <li>Las <strong>tres vistas</strong> (alzado, planta, perfil) describen un objeto sin perspectiva.</li>
+        <li>La <strong>perspectiva</strong> permite ver el objeto en 3D sobre un papel plano.</li>
+        <li>La <strong>escala</strong> conserva las proporciones cuando cambia el tamaño del dibujo.</li>
+        <li>La <strong>acotación</strong> añade las medidas reales: sin cotas, un plano no sirve para fabricar.</li>
+      </ol>
+    </div>
+    <div class="col-card">
+      <h4>Lo que debes saber hacer</h4>
+      <ul>
+        <li>Dibujar las tres vistas de un objeto sencillo.</li>
+        <li>Pasar de una vista a una perspectiva isométrica o caballera.</li>
+        <li>Aplicar una escala a una medida real (y al revés).</li>
+        <li>Acotar una pieza siguiendo las normas básicas.</li>
+        <li>Manejar un programa de CAD 2D y modelar en Tinkercad.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="glos">
+    <h3>📖 Glosario</h3>
+    <dl>
+      <dt>Acotación</dt>
+      <dd>Acción de añadir al dibujo las medidas reales del objeto, siguiendo unas normas.</dd>
+      <dt>Alzado</dt>
+      <dd>Vista frontal de un objeto. Se proyecta sobre el plano vertical.</dd>
+      <dt>Boceto</dt>
+      <dd>Primer dibujo a mano alzada, sin medidas. Captura la idea general.</dd>
+      <dt>CAD</dt>
+      <dd>Computer Aided Design: diseño asistido por ordenador. Programas que sustituyen al lápiz para hacer planos.</dd>
+      <dt>Cajetín</dt>
+      <dd>Recuadro en la esquina inferior derecha del plano que identifica autor, escala, fecha…</dd>
+      <dt>Cota</dt>
+      <dd>Medida real de una parte del objeto, expresada con un número sobre el dibujo.</dd>
+      <dt>Croquis</dt>
+      <dd>Dibujo a mano alzada con medidas reales. Sirve para fabricar piezas sencillas.</dd>
+      <dt>Escala</dt>
+      <dd>Relación entre el tamaño del dibujo y el tamaño real del objeto. Puede ser natural (1:1), de reducción (1:N) o de ampliación (N:1).</dd>
+      <dt>Perfil</dt>
+      <dd>Vista lateral del objeto. Se proyecta sobre el plano de perfil.</dd>
+      <dt>Perspectiva</dt>
+      <dd>Representación de un objeto 3D sobre un papel 2D. En clase usamos dos tipos: isométrica (ejes a 120°) y caballera (cara frontal real, profundidad inclinada).</dd>
+      <dt>Planta</dt>
+      <dd>Vista superior del objeto, vista desde arriba. Se proyecta sobre el plano horizontal.</dd>
+      <dt>Plano</dt>
+      <dd>Dibujo final, a escala, con cotas y normas. Sirve para fabricar el objeto.</dd>
+      <dt>Sistema diédrico</dt>
+      <dd>Sistema de representación basado en las tres vistas perpendiculares: alzado, planta y perfil.</dd>
+    </dl>
+  </div>
+
+</section>
+
+<footer class="book-foot">
+  <p>IES Jiménez de Quesada · Santa Fe (Granada)<br>
+  TyD 2º ESO · Curso 2025-26 · Manuel Alonso Herrera</p>
+  <p style="margin-top:6px;"><a href="index.html">← Volver al hub</a> · <a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a></p>
+  <p class="v" style="margin-top:8px;">Libro digital v1.2</p>
+</footer>
+
+</main>
+</div>
+
+</body>
+</html>

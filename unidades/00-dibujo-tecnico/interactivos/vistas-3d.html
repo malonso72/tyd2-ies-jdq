@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Visor 3D de vistas · U00 Dibujo técnico · TyD 2º ESO</title>
+<meta name="description" content="Visor 3D interactivo de piezas para entender alzado, planta y perfil. Rota la pieza con el ratón y observa cómo cambian las vistas.">
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/00-dibujo-tecnico/interactivos/vistas-3d.html">
+
+<meta property="og:title" content="Visor 3D de vistas · U00 Dibujo técnico · TyD 2º ESO">
+<meta property="og:description" content="Visor 3D interactivo de piezas para entender alzado, planta y perfil.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/00-dibujo-tecnico/interactivos/vistas-3d.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Visor 3D de vistas · U00 Dibujo técnico · TyD 2º ESO">
+<meta name="twitter:description" content="Visor 3D interactivo de piezas.">
+<meta name="twitter:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+.v3d-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 1.4rem;
+  margin: 1rem 0;
+}
+@media (max-width: 980px) { .v3d-layout { grid-template-columns: 1fr; } }
+
+.v3d-main {
+  background: linear-gradient(135deg, #1a2238 0%, #2a3458 100%);
+  border-radius: 14px;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  min-height: 460px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+#three-canvas {
+  width: 100%;
+  height: 460px;
+  display: block;
+  cursor: grab;
+  touch-action: none;
+}
+#three-canvas:active { cursor: grabbing; }
+
+.v3d-hud {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(255,255,255,0.95);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: #1a2238;
+  pointer-events: none;
+  font-weight: 600;
+}
+.v3d-hud .currview {
+  color: var(--principal, #D4700A);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.v3d-hint {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  background: rgba(0,0,0,0.55);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.82rem;
+  text-align: center;
+  pointer-events: none;
+}
+
+.v3d-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.v3d-block {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.v3d-block h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--principal, #D4700A);
+  margin: 0 0 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pieza-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.pieza-btn {
+  background: #fafafa;
+  border: 1px solid #e3e3e3;
+  border-radius: 8px;
+  padding: 0.5rem 0.7rem;
+  cursor: pointer;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 500;
+  font-size: 0.92rem;
+  color: #444;
+  text-align: left;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.pieza-btn:hover { background: #fff5e6; border-color: var(--principal, #D4700A); }
+.pieza-btn.active { background: var(--principal, #D4700A); color: #fff; border-color: var(--principal, #D4700A); font-weight: 600; }
+.pieza-btn .pieza-emoji { font-size: 1.2rem; }
+
+.view-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+.view-btn {
+  background: #fafafa;
+  border: 1px solid #e3e3e3;
+  border-radius: 8px;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: #444;
+  transition: all 0.15s;
+  text-align: center;
+}
+.view-btn:hover { background: #fff5e6; border-color: var(--principal, #D4700A); color: var(--principal, #D4700A); }
+.view-btn.iso { grid-column: 1 / -1; }
+
+/* ─── Mini-vistas SVG ─── */
+.minivistas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin: 1.2rem 0;
+}
+.minivista {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 10px;
+  padding: 0.8rem;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+.minivista h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--principal, #D4700A);
+  margin: 0 0 0.4rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.minivista svg {
+  max-width: 100%;
+  height: 110px;
+}
+.minivista.spotlight {
+  border-color: var(--principal, #D4700A);
+  background: #fffaf3;
+  box-shadow: 0 4px 12px rgba(212,112,10,0.18);
+}
+.minivista.spotlight h4 { color: var(--principal, #D4700A); }
+
+.vista-svg .main { stroke: #1a2238; stroke-width: 2; fill: rgba(44,95,141,0.18); stroke-linejoin: round; }
+.vista-svg .hidden-edge { stroke: #1a2238; stroke-width: 1; fill: none; stroke-dasharray: 4 3; }
+.vista-svg .axis { stroke: #1a2238; stroke-width: 0.6; stroke-dasharray: 5 2 1 2; fill: none; }
+
+.tip-card {
+  background: #fffaf3;
+  border-left: 4px solid var(--principal, #D4700A);
+  border-radius: 0 10px 10px 0;
+  padding: 0.85rem 1rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+  color: #444;
+  line-height: 1.55;
+}
+.tip-card strong { color: var(--principal, #D4700A); }
+.tip-card .tip-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--principal, #D4700A);
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.error-msg {
+  background: #fdf6f5;
+  border: 1px solid #c44536;
+  color: #8c2f24;
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+@media print {
+  .v3d-main, .v3d-side { display: none; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U00 · Dibujo técnico · Visor 3D de vistas</span>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Inicio</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U00</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📘</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>📦</span><span class="nc-lbl">Visor 3D</span></span>
+</nav>
+
+<div class="unidad-layout">
+
+<aside class="sb-side">
+  <h3>Cómo usarlo</h3>
+  <p style="padding: 0.6rem 1rem; font-size:0.88rem; color:#555; line-height:1.55;">
+    <strong>1.</strong> Elige una <strong>pieza</strong>.<br>
+    <strong>2.</strong> <strong>Arrastra el ratón</strong> sobre la pieza para girarla.<br>
+    <strong>3.</strong> Usa los botones de vista para ver el <strong>alzado</strong>, la <strong>planta</strong> o el <strong>perfil</strong> puros.<br>
+    <strong>4.</strong> Compara con las mini-vistas de abajo.
+  </p>
+  <h3>Atajos de teclado</h3>
+  <p style="padding: 0.4rem 1rem; font-size:0.85rem; color:#555; line-height:1.7;">
+    <kbd style="background:#eee; padding:1px 6px; border-radius:3px; font-family:monospace; font-size:0.8rem;">A</kbd> Alzado<br>
+    <kbd style="background:#eee; padding:1px 6px; border-radius:3px; font-family:monospace; font-size:0.8rem;">P</kbd> Planta<br>
+    <kbd style="background:#eee; padding:1px 6px; border-radius:3px; font-family:monospace; font-size:0.8rem;">L</kbd> Perfil<br>
+    <kbd style="background:#eee; padding:1px 6px; border-radius:3px; font-family:monospace; font-size:0.8rem;">I</kbd> Isométrica<br>
+  </p>
+</aside>
+
+<main class="ct" id="main-content">
+
+<h1 class="unidad-titulo">📦 Visor 3D de vistas</h1>
+<p class="unidad-subt">Gira la pieza con el ratón y descubre cómo se obtienen el alzado, la planta y el perfil. Compara la rotación 3D con las vistas planas de abajo.</p>
+
+<div id="webgl-error" class="error-msg" style="display:none;">
+  ⚠️ Tu navegador no soporta WebGL o está desactivado. Para ver el visor 3D, prueba con un navegador actualizado (Chrome, Firefox, Edge, Safari).
+</div>
+
+<div class="v3d-layout">
+  <div class="v3d-main">
+    <canvas id="three-canvas" aria-label="Vista 3D interactiva. Arrastra para rotar la pieza."></canvas>
+    <div class="v3d-hud">📷 Vista: <span class="currview" id="curr-view">Isométrica</span></div>
+    <div class="v3d-hint" id="v3d-hint">🖱️ Arrastra con el ratón para rotar · Rueda para acercar</div>
+  </div>
+
+  <div class="v3d-side">
+    <div class="v3d-block">
+      <h3>Elige una pieza</h3>
+      <div class="pieza-list" id="pieza-list">
+        <button class="pieza-btn active" data-pieza="L">
+          <span class="pieza-emoji">📐</span><span>Pieza en L</span>
+        </button>
+        <button class="pieza-btn" data-pieza="escalon">
+          <span class="pieza-emoji">🪜</span><span>Escalón doble</span>
+        </button>
+        <button class="pieza-btn" data-pieza="hueco">
+          <span class="pieza-emoji">⬛</span><span>Cubo con muesca</span>
+        </button>
+        <button class="pieza-btn" data-pieza="cilindro">
+          <span class="pieza-emoji">🛢️</span><span>Cilindro sobre base</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="v3d-block">
+      <h3>Vista directa</h3>
+      <div class="view-buttons">
+        <button class="view-btn iso" onclick="goToView('iso')">📦 Isométrica</button>
+        <button class="view-btn" onclick="goToView('front')">⬜ Alzado</button>
+        <button class="view-btn" onclick="goToView('top')">⬇️ Planta</button>
+        <button class="view-btn" onclick="goToView('side')">▶️ Perfil</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2 style="font-family: 'Barlow Condensed', sans-serif; color: var(--principal, #D4700A); margin: 1.5rem 0 0.5rem; font-size: 1.4rem; border-bottom: 2px solid var(--principal, #D4700A); padding-bottom: 0.3rem;">Las tres vistas de esta pieza</h2>
+<p style="color:#555; font-size:0.92rem; font-style:italic; margin-bottom:0.6rem;">Cuando giras la pieza, observa cómo la vista 3D coincide con una de estas tres proyecciones planas. La vista activa se destaca en naranja.</p>
+
+<div class="minivistas">
+  <div class="minivista" id="mv-alzado">
+    <h4>Alzado</h4>
+    <svg id="svg-alzado" class="vista-svg" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg"></svg>
+  </div>
+  <div class="minivista" id="mv-planta">
+    <h4>Planta</h4>
+    <svg id="svg-planta" class="vista-svg" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg"></svg>
+  </div>
+  <div class="minivista" id="mv-perfil" style="grid-column: 1 / -1;">
+    <h4>Perfil (desde la izquierda)</h4>
+    <svg id="svg-perfil" class="vista-svg" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" style="max-width:160px;"></svg>
+  </div>
+</div>
+
+<div class="tip-card">
+  <div class="tip-title">💡 Cómo se relacionan</div>
+  El <strong>alzado</strong> es lo que ves mirando la pieza de frente · la <strong>planta</strong> es lo que ves desde arriba · el <strong>perfil</strong> es lo que ves desde el lado izquierdo. <strong>Alzado y planta</strong> comparten anchura, <strong>alzado y perfil</strong> comparten altura, <strong>planta y perfil</strong> comparten profundidad.
+</div>
+
+<div class="tip-card">
+  <div class="tip-title">📏 Líneas discontinuas</div>
+  Cuando veas líneas <strong>discontinuas</strong> en las mini-vistas, representan <strong>aristas ocultas</strong> (aristas reales del objeto que no se ven desde ese punto de vista porque están detrás de otra cara).
+</div>
+
+<footer class="unidad-foot">
+  IES Jiménez de Quesada · Santa Fe (Granada)<br>
+  TyD 2º ESO · Curso 2025-26 · Manuel Alonso Herrera<br>
+  <a href="../index.html">← Volver al hub</a> · <a href="../libro-digital.html">📘 Libro digital</a>
+  <br><span class="version">Visor 3D v1.0</span>
+</footer>
+
+</main>
+</div>
+
+<!-- Three.js r128 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script>
+(function() {
+  'use strict';
+
+  // ── WebGL check ────────────────────────────────────────
+  try {
+    const testCanvas = document.createElement('canvas');
+    const gl = testCanvas.getContext('webgl') || testCanvas.getContext('experimental-webgl');
+    if (!gl) throw new Error('No WebGL');
+  } catch(e) {
+    document.getElementById('webgl-error').style.display = 'block';
+    return;
+  }
+
+  // ── Catálogo de piezas ─────────────────────────────────
+  // Cada pieza es una función que devuelve un THREE.Group + sus 3 vistas SVG (paths)
+  const piezas = {
+    L: {
+      build: () => {
+        // Pieza en L: base 4×3×2 con escalón 2×2×2 en la izquierda superior
+        const g = new THREE.Group();
+        // base inferior (anchura=4, altura=1.2, profundidad=2)
+        const base = boxMesh(4, 1.2, 2);
+        base.position.set(0, -0.6, 0);
+        g.add(base);
+        // bloque escalón (2×1.8×2) colocado encima izquierda
+        const blk = boxMesh(2, 1.8, 2);
+        blk.position.set(-1, 0.9, 0);
+        g.add(blk);
+        return g;
+      },
+      vistas: {
+        // dimensiones: anchura 4u, altura 3u, profundidad 2u
+        alzado: 'M 20 80 L 100 80 L 100 50 L 60 50 L 60 20 L 20 20 Z',
+        planta: 'M 20 30 L 100 30 L 100 70 L 20 70 Z',
+        plantaHidden: 'M 60 30 L 60 70',
+        perfil: 'M 30 80 L 90 80 L 90 20 L 30 20 Z'
+      }
+    },
+    escalon: {
+      build: () => {
+        const g = new THREE.Group();
+        const b1 = boxMesh(4, 1, 2);
+        b1.position.set(0, -1, 0);
+        g.add(b1);
+        const b2 = boxMesh(2.6, 1, 2);
+        b2.position.set(-0.7, 0, 0);
+        g.add(b2);
+        const b3 = boxMesh(1.4, 1, 2);
+        b3.position.set(-1.3, 1, 0);
+        g.add(b3);
+        return g;
+      },
+      vistas: {
+        alzado: 'M 20 80 L 100 80 L 100 60 L 72 60 L 72 40 L 44 40 L 44 20 L 20 20 Z',
+        planta: 'M 20 30 L 100 30 L 100 70 L 20 70 Z',
+        plantaHidden: 'M 44 30 L 44 70 M 72 30 L 72 70',
+        perfil: 'M 30 80 L 90 80 L 90 20 L 30 20 Z'
+      }
+    },
+    hueco: {
+      build: () => {
+        const g = new THREE.Group();
+        // cubo 3×3×3 con una muesca rectangular sacada de la esquina sup-der frontal (1.2×1.2×3)
+        const front = boxMesh(1.8, 3, 3);
+        front.position.set(-0.6, 0, 0);
+        g.add(front);
+        const top = boxMesh(1.2, 1.8, 3);
+        top.position.set(0.9, -0.6, 0);
+        g.add(top);
+        return g;
+      },
+      vistas: {
+        alzado: 'M 25 80 L 95 80 L 95 38 L 67 38 L 67 20 L 25 20 Z',
+        planta: 'M 25 30 L 95 30 L 95 70 L 25 70 Z',
+        perfil: 'M 30 80 L 90 80 L 90 20 L 30 20 Z',
+        perfilHidden: 'M 30 38 L 90 38'
+      }
+    },
+    cilindro: {
+      build: () => {
+        const g = new THREE.Group();
+        // base cuadrada 3×0.6×3
+        const base = boxMesh(3, 0.6, 3);
+        base.position.set(0, -1.2, 0);
+        g.add(base);
+        // cilindro vertical encima
+        const geo = new THREE.CylinderGeometry(0.8, 0.8, 1.8, 32);
+        const mat = new THREE.MeshStandardMaterial({color: 0x7ba6d4, flatShading: false, metalness: 0.0, roughness: 0.55});
+        const cyl = new THREE.Mesh(geo, mat);
+        cyl.position.set(0, 0, 0);
+        g.add(cyl);
+        // bordes
+        const eg = new THREE.EdgesGeometry(geo);
+        const lm = new THREE.LineBasicMaterial({color: 0x1a2238, linewidth: 2});
+        const eb = new THREE.LineSegments(eg, lm);
+        cyl.add(eb);
+        return g;
+      },
+      vistas: {
+        // alzado: base + cilindro visto de lado (rectángulo)
+        alzado: 'M 20 80 L 100 80 L 100 65 L 20 65 Z M 52 65 L 52 25 L 68 25 L 68 65 Z',
+        // planta: cuadrado + círculo en medio (haremos círculo aparte)
+        planta: 'M 25 25 L 95 25 L 95 75 L 25 75 Z',
+        plantaCircle: 'cx="60" cy="50" r="12"',
+        perfil: 'M 30 80 L 90 80 L 90 65 L 30 65 Z M 52 65 L 52 25 L 68 25 L 68 65 Z'
+      }
+    }
+  };
+
+  function boxMesh(w, h, d) {
+    const geo = new THREE.BoxGeometry(w, h, d);
+    const mat = new THREE.MeshStandardMaterial({color: 0x7ba6d4, flatShading: true, metalness: 0.0, roughness: 0.6});
+    const m = new THREE.Mesh(geo, mat);
+    // edges overlay
+    const eg = new THREE.EdgesGeometry(geo);
+    const lm = new THREE.LineBasicMaterial({color: 0x1a2238, linewidth: 2});
+    const eb = new THREE.LineSegments(eg, lm);
+    m.add(eb);
+    return m;
+  }
+
+  // ── Escena ─────────────────────────────────────────────
+  const canvas = document.getElementById('three-canvas');
+  const scene = new THREE.Scene();
+  scene.background = null;
+
+  const camera = new THREE.PerspectiveCamera(40, canvas.clientWidth / canvas.clientHeight || 1.7, 0.1, 100);
+  // posición isométrica inicial
+  camera.position.set(7, 6, 9);
+  camera.lookAt(0, 0, 0);
+
+  const renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: true, alpha: true});
+  renderer.setPixelRatio(window.devicePixelRatio);
+  function resize() {
+    const w = canvas.clientWidth || canvas.parentElement.clientWidth;
+    const h = canvas.clientHeight || 460;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  // Luces
+  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+  const dir1 = new THREE.DirectionalLight(0xffffff, 0.85);
+  dir1.position.set(5, 8, 4);
+  scene.add(dir1);
+  const dir2 = new THREE.DirectionalLight(0xffffff, 0.3);
+  dir2.position.set(-4, -3, -6);
+  scene.add(dir2);
+
+  // Plano de referencia (sutil grilla)
+  const grid = new THREE.GridHelper(8, 8, 0xe89947, 0x4a5572);
+  grid.position.y = -2.6;
+  scene.add(grid);
+
+  // Ejes pequeños
+  const axes = new THREE.AxesHelper(3.2);
+  axes.position.y = -2.6;
+  scene.add(axes);
+
+  // ── Pieza actual ───────────────────────────────────────
+  let piezaActual = null;
+  let piezaKey = 'L';
+  function cargarPieza(key) {
+    if (piezaActual) {
+      scene.remove(piezaActual);
+      piezaActual.traverse(o => {
+        if (o.geometry) o.geometry.dispose();
+        if (o.material) o.material.dispose();
+      });
+    }
+    piezaKey = key;
+    piezaActual = piezas[key].build();
+    scene.add(piezaActual);
+    actualizarMinivistas();
+  }
+
+  // ── Rotación con ratón / touch ─────────────────────────
+  let isDragging = false;
+  let prevX = 0, prevY = 0;
+  let theta = Math.atan2(camera.position.x, camera.position.z); // azimut
+  let phi = Math.atan2(Math.hypot(camera.position.x, camera.position.z), camera.position.y); // polar desde Y
+  let radius = camera.position.length();
+
+  function updateCamera() {
+    // Clamp phi
+    phi = Math.max(0.05, Math.min(Math.PI - 0.05, phi));
+    camera.position.x = radius * Math.sin(phi) * Math.sin(theta);
+    camera.position.y = radius * Math.cos(phi);
+    camera.position.z = radius * Math.sin(phi) * Math.cos(theta);
+    camera.lookAt(0, 0, 0);
+    actualizarHud();
+  }
+
+  function onPointerDown(e) {
+    isDragging = true;
+    prevX = e.clientX;
+    prevY = e.clientY;
+    canvas.setPointerCapture(e.pointerId);
+  }
+  function onPointerMove(e) {
+    if (!isDragging) return;
+    const dx = e.clientX - prevX;
+    const dy = e.clientY - prevY;
+    theta -= dx * 0.008;
+    phi -= dy * 0.008;
+    prevX = e.clientX;
+    prevY = e.clientY;
+    updateCamera();
+  }
+  function onPointerUp(e) {
+    isDragging = false;
+    try { canvas.releasePointerCapture(e.pointerId); } catch(_){}
+  }
+  canvas.addEventListener('pointerdown', onPointerDown);
+  canvas.addEventListener('pointermove', onPointerMove);
+  canvas.addEventListener('pointerup', onPointerUp);
+  canvas.addEventListener('pointerleave', onPointerUp);
+
+  // Zoom con rueda
+  canvas.addEventListener('wheel', e => {
+    e.preventDefault();
+    radius *= (e.deltaY > 0) ? 1.08 : 0.92;
+    radius = Math.max(4, Math.min(25, radius));
+    updateCamera();
+  }, {passive: false});
+
+  // ── Vistas directas (animadas) ─────────────────────────
+  const VIEWS = {
+    iso:   {theta: Math.PI/4,   phi: Math.PI/3.2, name: 'Isométrica'},
+    front: {theta: 0,            phi: Math.PI/2,    name: 'Alzado (frente)'},
+    top:   {theta: 0,            phi: 0.05,         name: 'Planta (arriba)'},
+    side:  {theta: -Math.PI/2,   phi: Math.PI/2,    name: 'Perfil (izquierda)'}
+  };
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function shortAngle(from, to) {
+    let d = (to - from) % (Math.PI * 2);
+    if (d > Math.PI) d -= Math.PI * 2;
+    else if (d < -Math.PI) d += Math.PI * 2;
+    return d;
+  }
+
+  let animTarget = null;
+  let animStart = null;
+  let animFromTheta = 0, animFromPhi = 0;
+  let animDelta = 0;
+
+  window.goToView = function(key) {
+    const v = VIEWS[key];
+    if (!v) return;
+    animFromTheta = theta;
+    animFromPhi = phi;
+    animDelta = Date.now();
+    animTarget = v;
+  };
+
+  function animar() {
+    if (!animTarget) return;
+    const dt = (Date.now() - animDelta) / 600; // 0.6s
+    if (dt >= 1) {
+      theta = animTarget.theta;
+      phi = animTarget.phi;
+      animTarget = null;
+    } else {
+      const t = dt < 0.5 ? 2*dt*dt : 1 - Math.pow(-2*dt+2, 2)/2; // easeInOutQuad
+      const dth = shortAngle(animFromTheta, animTarget.theta);
+      theta = animFromTheta + dth * t;
+      phi = lerp(animFromPhi, animTarget.phi, t);
+    }
+    updateCamera();
+  }
+
+  // ── HUD: detectar qué vista predomina ──────────────────
+  const hudEl = document.getElementById('curr-view');
+  function vistaActual() {
+    // Comparar dirección de la cámara con ejes
+    const dir = new THREE.Vector3();
+    camera.getWorldDirection(dir);
+    dir.negate();
+    const ax = Math.abs(dir.x), ay = Math.abs(dir.y), az = Math.abs(dir.z);
+    const max = Math.max(ax, ay, az);
+    if (max < 0.85) return {key: 'iso', label: 'Isométrica · vista intermedia'};
+    if (max === ay) return {key: dir.y > 0 ? 'top' : 'bot', label: dir.y > 0 ? 'Planta (desde arriba)' : 'Vista inferior'};
+    if (max === az) return {key: dir.z > 0 ? 'front' : 'back', label: dir.z > 0 ? 'Alzado (de frente)' : 'Vista trasera'};
+    return {key: dir.x > 0 ? 'right' : 'side', label: dir.x > 0 ? 'Perfil derecho' : 'Perfil izquierdo'};
+  }
+  function actualizarHud() {
+    const v = vistaActual();
+    hudEl.textContent = v.label;
+    // marcar minivista correspondiente
+    document.querySelectorAll('.minivista').forEach(m => m.classList.remove('spotlight'));
+    if (v.key === 'front') document.getElementById('mv-alzado').classList.add('spotlight');
+    else if (v.key === 'top') document.getElementById('mv-planta').classList.add('spotlight');
+    else if (v.key === 'side') document.getElementById('mv-perfil').classList.add('spotlight');
+  }
+
+  // ── Mini-vistas SVG ────────────────────────────────────
+  function actualizarMinivistas() {
+    const v = piezas[piezaKey].vistas;
+    const NS = 'http://www.w3.org/2000/svg';
+
+    function renderSvg(id, mainPath, hiddenPath, extraCircle) {
+      const svg = document.getElementById(id);
+      svg.innerHTML = '';
+      // ejes de simetría (sutil)
+      const ax1 = document.createElementNS(NS, 'line');
+      ax1.setAttribute('x1', 10); ax1.setAttribute('y1', 50);
+      ax1.setAttribute('x2', 110); ax1.setAttribute('y2', 50);
+      ax1.setAttribute('class', 'axis');
+      svg.appendChild(ax1);
+
+      const p = document.createElementNS(NS, 'path');
+      p.setAttribute('d', mainPath);
+      p.setAttribute('class', 'main');
+      svg.appendChild(p);
+
+      if (hiddenPath) {
+        const h = document.createElementNS(NS, 'path');
+        h.setAttribute('d', hiddenPath);
+        h.setAttribute('class', 'hidden-edge');
+        svg.appendChild(h);
+      }
+      if (extraCircle) {
+        const c = document.createElementNS(NS, 'circle');
+        const parts = extraCircle.split(' ');
+        parts.forEach(p => {
+          const [k, val] = p.split('=');
+          c.setAttribute(k, val.replace(/"/g, ''));
+        });
+        c.setAttribute('fill', 'none');
+        c.setAttribute('stroke', '#1a2238');
+        c.setAttribute('stroke-width', 2);
+        svg.appendChild(c);
+      }
+    }
+
+    renderSvg('svg-alzado', v.alzado, v.alzadoHidden);
+    renderSvg('svg-planta', v.planta, v.plantaHidden, v.plantaCircle);
+    renderSvg('svg-perfil', v.perfil, v.perfilHidden);
+  }
+
+  // ── Selección de pieza ─────────────────────────────────
+  document.querySelectorAll('.pieza-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.pieza-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      cargarPieza(btn.dataset.pieza);
+    });
+  });
+
+  // ── Atajos teclado ─────────────────────────────────────
+  document.addEventListener('keydown', e => {
+    if (e.target.tagName === 'INPUT') return;
+    const k = e.key.toLowerCase();
+    if (k === 'a') goToView('front');
+    else if (k === 'p') goToView('top');
+    else if (k === 'l') goToView('side');
+    else if (k === 'i') goToView('iso');
+  });
+
+  // ── Loop principal ─────────────────────────────────────
+  function loop() {
+    requestAnimationFrame(loop);
+    animar();
+    renderer.render(scene, camera);
+  }
+
+  cargarPieza('L');
+  updateCamera();
+  loop();
+})();
+</script>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

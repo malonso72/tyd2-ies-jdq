@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Generador de memoria técnica · U01 · TyD 2º ESO</title>
+<meta name="description" content="Generador interactivo de memoria técnica para 2º ESO: rellena el formulario y obtén una memoria completa lista para imprimir o descargar.">
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/01-tecnologia-proceso/interactivos/memoria-tecnica.html">
+
+<meta property="og:title" content="Generador de memoria técnica · U01 · TyD 2º ESO">
+<meta property="og:description" content="Rellena el formulario y genera tu memoria técnica con las 7 partes: portada, índice, cuerpo, planos, presupuesto, bibliografía y anexos.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/01-tecnologia-proceso/interactivos/memoria-tecnica.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Generador de memoria técnica · U01 · TyD 2º ESO">
+<meta name="twitter:description" content="Rellena el formulario y genera tu memoria técnica.">
+<meta name="twitter:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+.mt-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+  margin: 1.2rem 0;
+}
+@media (max-width: 1100px) { .mt-grid { grid-template-columns: 1fr; } }
+
+.mt-panel {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 12px;
+  padding: 1.2rem 1.3rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.mt-panel h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--principal, #D4700A);
+  margin: 0 0 0.4rem;
+  border-bottom: 2px solid var(--principal, #D4700A);
+  padding-bottom: 0.4rem;
+}
+.mt-panel .panel-sub {
+  color: #555;
+  font-size: 0.88rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.mt-section {
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-left: 4px solid var(--principal, #D4700A);
+  border-radius: 8px;
+  padding: 0.9rem 1.1rem;
+  margin: 0.8rem 0;
+}
+.mt-section h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--secundario, #1B4F8A);
+  margin: 0 0 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.mt-section h3 .step-tag {
+  background: var(--principal, #D4700A);
+  color: #fff;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.mt-field {
+  margin-bottom: 0.7rem;
+}
+.mt-field label {
+  display: block;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+.mt-field input[type="text"],
+.mt-field input[type="number"],
+.mt-field textarea {
+  width: 100%;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.93rem;
+  padding: 0.5rem 0.7rem;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 7px;
+  background: #fff;
+  color: #222;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+.mt-field textarea {
+  font-family: 'Barlow', sans-serif;
+  min-height: 70px;
+  resize: vertical;
+  line-height: 1.5;
+}
+.mt-field input:focus, .mt-field textarea:focus {
+  outline: none;
+  border-color: var(--principal, #D4700A);
+  box-shadow: 0 0 0 3px rgba(212,112,10,0.1);
+}
+.mt-field .field-help {
+  font-size: 0.78rem;
+  color: #888;
+  margin-top: 0.2rem;
+  font-style: italic;
+}
+.mt-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+/* ── Lista dinámica de autores ── */
+.autor-list, .biblio-list, .anexo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+.autor-row, .biblio-row, .anexo-row {
+  display: grid;
+  grid-template-columns: 1fr 36px;
+  gap: 0.4rem;
+}
+.btn-remove {
+  background: #fff;
+  border: 1px solid #ccc;
+  color: #c44536;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.btn-remove:hover { background: #fdf6f5; border-color: #c44536; }
+.btn-add {
+  background: transparent;
+  border: 1px dashed var(--principal, #D4700A);
+  color: var(--principal, #D4700A);
+  padding: 0.4rem 0.8rem;
+  border-radius: 7px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  width: 100%;
+}
+.btn-add:hover { background: #fffaf3; }
+
+/* ── Presupuesto ── */
+.presup-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 0.5rem 0;
+}
+.presup-table th {
+  background: #f0f0f0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 0.78rem;
+  padding: 0.4rem 0.5rem;
+  text-align: left;
+  border-bottom: 2px solid var(--principal, #D4700A);
+  color: var(--principal, #D4700A);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.presup-table td { padding: 0.3rem 0.2rem; vertical-align: middle; }
+.presup-table input {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.88rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.presup-table input.col-cant, .presup-table input.col-prec {
+  text-align: right;
+  font-family: 'JetBrains Mono', monospace;
+}
+.presup-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fffaf3;
+  border: 1px solid var(--principal, #D4700A);
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  margin-top: 0.5rem;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+}
+.presup-total .total-amount {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--principal, #D4700A);
+}
+
+/* ── Acciones ── */
+.mt-actions {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+  flex-wrap: wrap;
+}
+.mt-btn {
+  border: none;
+  padding: 0.55rem 1.2rem;
+  border-radius: 8px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.mt-btn-primary { background: var(--principal, #D4700A); color: #fff; }
+.mt-btn-primary:hover { background: #b85e08; transform: translateY(-1px); }
+.mt-btn-secondary { background: #fff; border: 1px solid #ccc; color: #666; }
+.mt-btn-secondary:hover { border-color: var(--principal, #D4700A); color: var(--principal, #D4700A); }
+
+/* ── Preview ── */
+.preview-frame {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 8px;
+  padding: 1.5rem 1.8rem;
+  font-family: 'Times New Roman', serif;
+  color: #222;
+  max-height: 600px;
+  overflow-y: auto;
+  font-size: 0.93rem;
+  line-height: 1.55;
+}
+.preview-frame .preview-portada {
+  text-align: center;
+  padding: 2rem 1rem;
+  border-bottom: 3px double #1a2238;
+  margin-bottom: 1.5rem;
+}
+.preview-frame .preview-portada h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 2rem;
+  color: #1a2238;
+  margin: 0 0 0.5rem;
+  letter-spacing: 0.5px;
+}
+.preview-frame .preview-portada .subtitle {
+  font-style: italic;
+  color: #666;
+  margin-bottom: 1.2rem;
+}
+.preview-frame .preview-portada .info {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.7;
+}
+.preview-frame .preview-section {
+  margin-bottom: 1.4rem;
+  page-break-inside: avoid;
+}
+.preview-frame .preview-section h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.25rem;
+  color: var(--principal, #D4700A);
+  border-bottom: 2px solid var(--principal, #D4700A);
+  padding-bottom: 0.2rem;
+  margin: 0 0 0.5rem;
+  letter-spacing: 0.5px;
+}
+.preview-frame .preview-section h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.05rem;
+  color: #1a2238;
+  margin: 0.8rem 0 0.3rem;
+}
+.preview-frame .preview-section p {
+  white-space: pre-wrap;
+  text-align: justify;
+  font-size: 0.93rem;
+}
+.preview-frame ul, .preview-frame ol {
+  margin: 0.4rem 0 0.6rem 1.5rem;
+  font-size: 0.93rem;
+}
+.preview-frame table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.5rem 0;
+  font-size: 0.88rem;
+}
+.preview-frame th, .preview-frame td {
+  border: 1px solid #aaa;
+  padding: 0.3rem 0.5rem;
+  text-align: left;
+}
+.preview-frame th { background: #f0f0f0; font-family: 'Barlow Condensed', sans-serif; }
+.preview-frame td.num { text-align: right; font-family: 'JetBrains Mono', monospace; }
+.preview-frame tr.total td { background: #fff5e6; font-weight: 700; }
+.preview-frame .placeholder { color: #bbb; font-style: italic; }
+
+.save-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f4faf6;
+  border: 1px solid #b8dec1;
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  color: #2e7d4f;
+  margin: 0.7rem 0;
+  justify-content: space-between;
+}
+.tip-card {
+  background: #fffaf3;
+  border-left: 4px solid var(--principal, #D4700A);
+  border-radius: 0 10px 10px 0;
+  padding: 0.85rem 1.1rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+  color: #444;
+  line-height: 1.55;
+}
+
+/* ── Print area (oculto en pantalla, visible al imprimir) ── */
+.print-area {
+  display: none;
+}
+
+@media print {
+  body * { visibility: hidden; }
+  .print-area, .print-area * { visibility: visible; }
+  .print-area {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 0;
+  }
+  .print-area .pa-portada {
+    page-break-after: always;
+  }
+  .print-area .pa-section {
+    page-break-inside: avoid;
+  }
+}
+
+/* Modo "vista imprimir": el print-area se muestra fullscreen */
+.print-area.active {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  z-index: 1000;
+  overflow-y: auto;
+  padding: 3rem 4rem;
+  font-family: 'Times New Roman', serif;
+  font-size: 12pt;
+  line-height: 1.5;
+  color: #222;
+}
+.print-area.active .pa-portada {
+  text-align: center;
+  padding: 4rem 1rem;
+  border-bottom: 4px double #1a2238;
+  margin-bottom: 2rem;
+}
+.print-area.active .pa-portada h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 2.6rem;
+  color: #1a2238;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+.print-area.active .pa-portada .subt {
+  font-style: italic;
+  color: #666;
+  margin-bottom: 2rem;
+  font-size: 1.05rem;
+}
+.print-area.active .pa-portada .pa-info {
+  font-family: 'Barlow', sans-serif;
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.8;
+}
+.print-area.active h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  color: var(--principal, #D4700A);
+  border-bottom: 2px solid var(--principal, #D4700A);
+  padding-bottom: 0.3rem;
+  margin: 1.6rem 0 0.6rem;
+  font-size: 1.4rem;
+}
+.print-area.active h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  color: #1a2238;
+  font-size: 1.1rem;
+  margin: 1rem 0 0.3rem;
+}
+.print-area.active p { white-space: pre-wrap; }
+.print-area.active table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.6rem 0;
+}
+.print-area.active th, .print-area.active td {
+  border: 1px solid #999;
+  padding: 0.4rem 0.6rem;
+}
+.print-area.active th {
+  background: #f0f0f0;
+  font-family: 'Barlow Condensed', sans-serif;
+}
+.print-area.active td.num { text-align: right; font-family: 'JetBrains Mono', monospace; }
+.print-area.active tr.total td { background: #fff5e6; font-weight: 700; }
+.print-area.active ul, .print-area.active ol { margin: 0.4rem 0 0.6rem 2rem; }
+
+.btn-cerrar-print {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  background: var(--principal, #D4700A);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  z-index: 1100;
+}
+@media print {
+  .btn-cerrar-print { display: none; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U01 · Proceso tecnológico · Generador de memoria</span>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Inicio</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U01</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📘</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>📝</span><span class="nc-lbl">Generador de memoria</span></span>
+</nav>
+
+<div class="unidad-layout">
+
+<aside class="sb-side">
+  <h3>Las 7 partes</h3>
+  <ol style="padding: 0.4rem 1rem 0 2rem; font-size:0.86rem; color:#555; line-height:1.7;">
+    <li>Portada</li>
+    <li>Índice</li>
+    <li>Cuerpo (6 fases)</li>
+    <li>Planos</li>
+    <li>Presupuesto</li>
+    <li>Bibliografía</li>
+    <li>Anexos</li>
+  </ol>
+  <h3>Cómo usarlo</h3>
+  <p style="padding: 0.5rem 1rem; font-size:0.85rem; color:#555; line-height:1.55;">
+    Ve rellenando los apartados. La vista previa se actualiza automáticamente. Tu trabajo se guarda en este navegador.<br><br>
+    Cuando termines, pulsa <strong>"Generar memoria"</strong> para abrir el documento en formato imprimible y guardarlo como PDF (Ctrl+P → "Guardar como PDF").
+  </p>
+</aside>
+
+<main class="ct" id="main-content">
+
+<h1 class="unidad-titulo">📝 Generador de memoria técnica</h1>
+<p class="unidad-subt">Rellena cada apartado de tu proyecto. La vista previa de la derecha se actualiza automáticamente. Tu trabajo se guarda en este navegador y puedes volver más adelante.</p>
+
+<div class="tip-card">
+  <strong>📌 Recuerda:</strong> una buena memoria técnica debe ser <strong>clara y concisa</strong>. No hace falta llenar páginas con palabras vacías: lo importante es que describa bien tu proyecto y permita reproducirlo.
+</div>
+
+<div class="mt-grid">
+
+  <!-- ═══════════════════════════════ FORMULARIO ═══════════════════════════════ -->
+  <div class="mt-panel">
+    <h2>📋 Formulario del proyecto</h2>
+    <p class="panel-sub">Rellena cada sección con los datos de tu proyecto.</p>
+
+    <div class="save-tag" id="save-tag">
+      <span>💾 Guardado automático</span>
+      <button class="mt-btn mt-btn-secondary" style="padding: 0.3rem 0.7rem; font-size: 0.8rem;" onclick="resetForm()">↺ Empezar de cero</button>
+    </div>
+
+    <!-- 1 · Portada -->
+    <div class="mt-section">
+      <h3><span class="step-tag">1</span>Portada</h3>
+      <p class="field-help">Datos identificativos del proyecto.</p>
+      <div class="mt-field">
+        <label for="f-titulo">Título del proyecto</label>
+        <input type="text" id="f-titulo" placeholder="Ej: Diseño de un soporte para móvil">
+      </div>
+      <div class="mt-field-row">
+        <div class="mt-field">
+          <label for="f-fecha">Fecha</label>
+          <input type="text" id="f-fecha" placeholder="Mayo de 2026">
+        </div>
+        <div class="mt-field">
+          <label for="f-curso">Curso</label>
+          <input type="text" id="f-curso" placeholder="2º ESO B" value="2º ESO">
+        </div>
+      </div>
+      <div class="mt-field">
+        <label>Autores del proyecto</label>
+        <div class="autor-list" id="autor-list"></div>
+        <button class="btn-add" onclick="addAutor()">+ Añadir autor</button>
+      </div>
+    </div>
+
+    <!-- 3 · Cuerpo: las 6 fases -->
+    <div class="mt-section">
+      <h3><span class="step-tag">3</span>Cuerpo: el proceso tecnológico</h3>
+      <p class="field-help">Describe cómo has aplicado las 6 fases del proceso tecnológico a tu proyecto.</p>
+
+      <div class="mt-field">
+        <label for="f-requerimiento">Fase 1 · Requerimiento o necesidad</label>
+        <p class="field-help">¿Qué problema o necesidad querías resolver?</p>
+        <textarea id="f-requerimiento" placeholder="Ej: Cuando estudio uso el móvil para ver vídeos explicativos pero no tengo dónde apoyarlo, se cae a cada rato y mancho los apuntes."></textarea>
+      </div>
+
+      <div class="mt-field">
+        <label for="f-ideas">Fase 2 · Posibles soluciones</label>
+        <p class="field-help">¿Qué ideas se te ocurrieron? (puedes poner varias)</p>
+        <textarea id="f-ideas" placeholder="Ej: Comprar un soporte, fabricar uno de cartón, usar libros como apoyo, una caja con muescas, un brazo articulado…"></textarea>
+      </div>
+
+      <div class="mt-field">
+        <label for="f-eleccion">Fase 3 · Selección de la solución</label>
+        <p class="field-help">¿Cuál has elegido y por qué? Justifica con criterios (coste, tiempo, materiales…).</p>
+        <textarea id="f-eleccion" placeholder="Ej: He elegido fabricar un soporte de cartón pluma. Es barato, lo puedo cortar yo en clase y es ligero. Otra opción era el cartón corrugado pero pesa más."></textarea>
+      </div>
+
+      <div class="mt-field">
+        <label for="f-diseno">Fase 4 · Diseño y planificación</label>
+        <p class="field-help">Describe el plan de trabajo: pasos, tiempo y reparto de tareas. Si tienes croquis o planos, indícalos.</p>
+        <textarea id="f-diseno" placeholder="Ej: 1) Medir el móvil. 2) Diseñar el croquis. 3) Cortar las piezas. 4) Pegar con cola. 5) Probar.&#10;El plano está en el anexo 1.&#10;Reparto: Lucía mide y dibuja, Carlos corta, Sara pega."></textarea>
+      </div>
+
+      <div class="mt-field">
+        <label for="f-construccion">Fase 5 · Construcción</label>
+        <p class="field-help">¿Cómo ha ido la construcción? Indica incidencias y cambios respecto al plan.</p>
+        <textarea id="f-construccion" placeholder="Ej: Al cortar la base, una pieza se rompió y tuvimos que volver a cortarla. Cambiamos la cola por pegamento líquido porque se secaba más rápido."></textarea>
+      </div>
+
+      <div class="mt-field">
+        <label for="f-evaluacion">Fase 6 · Evaluación</label>
+        <p class="field-help">¿Funciona? ¿Cumple el objetivo inicial? ¿Qué mejorarías?</p>
+        <textarea id="f-evaluacion" placeholder="Ej: El soporte aguanta bien el móvil en dos ángulos. Algo mejorable: la base se mueve un poco con superficies muy lisas. Próxima versión: añadir gomas antideslizantes."></textarea>
+      </div>
+    </div>
+
+    <!-- 5 · Presupuesto -->
+    <div class="mt-section">
+      <h3><span class="step-tag">5</span>Presupuesto</h3>
+      <p class="field-help">Materiales, herramientas y maquinaria con su coste. El total se calcula automáticamente.</p>
+      <table class="presup-table">
+        <thead>
+          <tr>
+            <th>Concepto</th>
+            <th class="col-cant" style="width:80px;">Cant.</th>
+            <th class="col-prec" style="width:90px;">€/ud</th>
+            <th style="width:60px;text-align:right;">Total</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="presup-rows"></tbody>
+      </table>
+      <button class="btn-add" onclick="addPresupRow()">+ Añadir línea</button>
+      <div class="presup-total">
+        <span>Total estimado:</span>
+        <span class="total-amount" id="presup-total">0,00 €</span>
+      </div>
+    </div>
+
+    <!-- 6 · Bibliografía -->
+    <div class="mt-section">
+      <h3><span class="step-tag">6</span>Bibliografía</h3>
+      <p class="field-help">Fuentes consultadas (libros, webs, vídeos…).</p>
+      <div class="biblio-list" id="biblio-list"></div>
+      <button class="btn-add" onclick="addBiblio()">+ Añadir fuente</button>
+    </div>
+
+    <!-- 7 · Anexos -->
+    <div class="mt-section">
+      <h3><span class="step-tag">7</span>Anexos</h3>
+      <p class="field-help">Documentos complementarios (fotos, fichas de seguridad, gráficas…). Solo escribe los nombres; los archivos se entregarán aparte.</p>
+      <div class="anexo-list" id="anexo-list"></div>
+      <button class="btn-add" onclick="addAnexo()">+ Añadir anexo</button>
+    </div>
+
+    <div class="mt-actions">
+      <button class="mt-btn mt-btn-primary" onclick="generarMemoria()">📄 Generar memoria final</button>
+      <button class="mt-btn mt-btn-secondary" onclick="descargarHTML()">⬇ Descargar como HTML</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ PREVIEW ═══════════════════════════════ -->
+  <div class="mt-panel">
+    <h2>👁️ Vista previa</h2>
+    <p class="panel-sub">Así va quedando tu memoria. Se actualiza automáticamente al rellenar el formulario.</p>
+    <div class="preview-frame" id="preview"></div>
+  </div>
+
+</div>
+
+<footer class="unidad-foot">
+  IES Jiménez de Quesada · Santa Fe (Granada)<br>
+  TyD 2º ESO · Curso 2025-26 · Manuel Alonso Herrera<br>
+  <a href="../index.html">← Volver al hub</a> · <a href="../libro-digital.html">📘 Libro digital</a>
+  <br><span class="version">Generador de memoria v1.0</span>
+</footer>
+
+</main>
+</div>
+
+<!-- Print area: oculto hasta que se activa -->
+<div class="print-area" id="print-area"></div>
+<button class="btn-cerrar-print" id="btn-cerrar-print" onclick="cerrarPrintView()" style="display:none;">✕ Cerrar vista</button>
+
+<script>
+(function() {
+  'use strict';
+
+  const STORAGE_KEY = 'tyd2_memoria_u01';
+
+  // ─── Estado ─────────────────────────────────────────────
+  let state = {
+    titulo: '',
+    fecha: '',
+    curso: '2º ESO',
+    autores: [''],
+    requerimiento: '',
+    ideas: '',
+    eleccion: '',
+    diseno: '',
+    construccion: '',
+    evaluacion: '',
+    presup: [{concepto:'', cant:'', prec:''}],
+    biblio: [''],
+    anexos: ['']
+  };
+
+  function loadState() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        state = Object.assign(state, parsed);
+      }
+    } catch(_) {}
+  }
+
+  function saveState() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(_) {}
+  }
+
+  function escapeHtml(s) {
+    return String(s || '').replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+  }
+
+  // ─── Render formulario (lo no dinámico) ─────────────────
+  function fillFormFromState() {
+    document.getElementById('f-titulo').value = state.titulo;
+    document.getElementById('f-fecha').value = state.fecha;
+    document.getElementById('f-curso').value = state.curso;
+    document.getElementById('f-requerimiento').value = state.requerimiento;
+    document.getElementById('f-ideas').value = state.ideas;
+    document.getElementById('f-eleccion').value = state.eleccion;
+    document.getElementById('f-diseno').value = state.diseno;
+    document.getElementById('f-construccion').value = state.construccion;
+    document.getElementById('f-evaluacion').value = state.evaluacion;
+  }
+
+  // ─── Autores dinámicos ──────────────────────────────────
+  function renderAutores() {
+    const list = document.getElementById('autor-list');
+    list.innerHTML = '';
+    state.autores.forEach((a, i) => {
+      const row = document.createElement('div');
+      row.className = 'autor-row';
+      row.innerHTML = `<input type="text" placeholder="Nombre y apellidos" value="${escapeHtml(a)}" data-i="${i}" oninput="updateAutor(${i}, this.value)"><button class="btn-remove" onclick="removeAutor(${i})" aria-label="Eliminar autor">✕</button>`;
+      list.appendChild(row);
+    });
+  }
+  window.addAutor = function() { state.autores.push(''); renderAutores(); saveState(); renderPreview(); };
+  window.removeAutor = function(i) {
+    state.autores.splice(i, 1);
+    if (state.autores.length === 0) state.autores = [''];
+    renderAutores(); saveState(); renderPreview();
+  };
+  window.updateAutor = function(i, v) { state.autores[i] = v; saveState(); renderPreview(); };
+
+  // ─── Presupuesto dinámico ───────────────────────────────
+  function renderPresup() {
+    const rows = document.getElementById('presup-rows');
+    rows.innerHTML = '';
+    let total = 0;
+    state.presup.forEach((r, i) => {
+      const subtotal = (parseFloat(r.cant) || 0) * (parseFloat(r.prec) || 0);
+      total += subtotal;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><input type="text" placeholder="Material o herramienta" value="${escapeHtml(r.concepto)}" oninput="updatePresup(${i}, 'concepto', this.value)"></td>
+        <td><input type="number" class="col-cant" placeholder="0" step="any" value="${escapeHtml(r.cant)}" oninput="updatePresup(${i}, 'cant', this.value)"></td>
+        <td><input type="number" class="col-prec" placeholder="0.00" step="any" value="${escapeHtml(r.prec)}" oninput="updatePresup(${i}, 'prec', this.value)"></td>
+        <td style="text-align:right;font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#555;padding-right:0.3rem;">${subtotal.toFixed(2).replace('.', ',')} €</td>
+        <td><button class="btn-remove" onclick="removePresup(${i})" aria-label="Eliminar línea">✕</button></td>
+      `;
+      rows.appendChild(tr);
+    });
+    document.getElementById('presup-total').textContent = total.toFixed(2).replace('.', ',') + ' €';
+  }
+  window.addPresupRow = function() { state.presup.push({concepto:'', cant:'', prec:''}); renderPresup(); saveState(); renderPreview(); };
+  window.removePresup = function(i) {
+    state.presup.splice(i, 1);
+    if (state.presup.length === 0) state.presup = [{concepto:'', cant:'', prec:''}];
+    renderPresup(); saveState(); renderPreview();
+  };
+  window.updatePresup = function(i, field, val) {
+    state.presup[i][field] = val;
+    renderPresup();
+    saveState(); renderPreview();
+  };
+
+  // ─── Bibliografía y anexos dinámicos ────────────────────
+  function renderBiblio() {
+    const list = document.getElementById('biblio-list');
+    list.innerHTML = '';
+    state.biblio.forEach((b, i) => {
+      const row = document.createElement('div');
+      row.className = 'biblio-row';
+      row.innerHTML = `<input type="text" placeholder="Ej: Wikipedia · Proceso tecnológico (consultado 2026)" value="${escapeHtml(b)}" oninput="updateBiblio(${i}, this.value)"><button class="btn-remove" onclick="removeBiblio(${i})" aria-label="Eliminar fuente">✕</button>`;
+      list.appendChild(row);
+    });
+  }
+  window.addBiblio = function() { state.biblio.push(''); renderBiblio(); saveState(); renderPreview(); };
+  window.removeBiblio = function(i) {
+    state.biblio.splice(i, 1);
+    if (state.biblio.length === 0) state.biblio = [''];
+    renderBiblio(); saveState(); renderPreview();
+  };
+  window.updateBiblio = function(i, v) { state.biblio[i] = v; saveState(); renderPreview(); };
+
+  function renderAnexos() {
+    const list = document.getElementById('anexo-list');
+    list.innerHTML = '';
+    state.anexos.forEach((a, i) => {
+      const row = document.createElement('div');
+      row.className = 'anexo-row';
+      row.innerHTML = `<input type="text" placeholder="Ej: Anexo 1 — Plano del soporte" value="${escapeHtml(a)}" oninput="updateAnexo(${i}, this.value)"><button class="btn-remove" onclick="removeAnexo(${i})" aria-label="Eliminar anexo">✕</button>`;
+      list.appendChild(row);
+    });
+  }
+  window.addAnexo = function() { state.anexos.push(''); renderAnexos(); saveState(); renderPreview(); };
+  window.removeAnexo = function(i) {
+    state.anexos.splice(i, 1);
+    if (state.anexos.length === 0) state.anexos = [''];
+    renderAnexos(); saveState(); renderPreview();
+  };
+  window.updateAnexo = function(i, v) { state.anexos[i] = v; saveState(); renderPreview(); };
+
+  // ─── Bind inputs simples ────────────────────────────────
+  function bindInputs() {
+    const map = {
+      'f-titulo': 'titulo', 'f-fecha': 'fecha', 'f-curso': 'curso',
+      'f-requerimiento': 'requerimiento', 'f-ideas': 'ideas', 'f-eleccion': 'eleccion',
+      'f-diseno': 'diseno', 'f-construccion': 'construccion', 'f-evaluacion': 'evaluacion'
+    };
+    Object.entries(map).forEach(([id, key]) => {
+      const el = document.getElementById(id);
+      el.addEventListener('input', () => { state[key] = el.value; saveState(); renderPreview(); });
+    });
+  }
+
+  // ─── Render preview ─────────────────────────────────────
+  function buildBodyHTML(forPrint) {
+    const ph = forPrint ? '' : ' class="placeholder"';
+    const phMsg = (campo, ej) => forPrint ? `<em>(${campo} no rellenado)</em>` : `[${campo}: ${ej}]`;
+
+    const autoresStr = state.autores.filter(a => a.trim()).join(' · ') || (forPrint ? '<em>Sin autores</em>' : '[autores]');
+
+    const fases = [
+      { n: '1. Requerimiento o necesidad', txt: state.requerimiento, ej: 'describe el problema' },
+      { n: '2. Posibles soluciones', txt: state.ideas, ej: 'ideas generadas' },
+      { n: '3. Selección de la solución', txt: state.eleccion, ej: 'qué elegiste y por qué' },
+      { n: '4. Diseño y planificación', txt: state.diseno, ej: 'plan de trabajo' },
+      { n: '5. Construcción', txt: state.construccion, ej: 'cómo lo construiste' },
+      { n: '6. Evaluación', txt: state.evaluacion, ej: 'resultado y mejoras' }
+    ];
+
+    const cuerpoHTML = fases.map(f => `
+      <h3>${f.n}</h3>
+      ${f.txt.trim() ? `<p>${escapeHtml(f.txt)}</p>` : `<p${ph}>${phMsg(f.n, f.ej)}</p>`}
+    `).join('');
+
+    const presupFilas = state.presup.filter(r => r.concepto.trim()).map(r => {
+      const subtotal = (parseFloat(r.cant) || 0) * (parseFloat(r.prec) || 0);
+      return `<tr>
+        <td>${escapeHtml(r.concepto)}</td>
+        <td class="num">${parseFloat(r.cant) || 0}</td>
+        <td class="num">${(parseFloat(r.prec) || 0).toFixed(2).replace('.', ',')} €</td>
+        <td class="num">${subtotal.toFixed(2).replace('.', ',')} €</td>
+      </tr>`;
+    }).join('');
+    const totalPresup = state.presup.reduce((s, r) => s + (parseFloat(r.cant) || 0) * (parseFloat(r.prec) || 0), 0);
+    const presupHTML = presupFilas
+      ? `<table>
+          <thead><tr><th>Concepto</th><th>Cant.</th><th>€/ud</th><th>Total</th></tr></thead>
+          <tbody>${presupFilas}<tr class="total"><td colspan="3" style="text-align:right;">TOTAL</td><td class="num">${totalPresup.toFixed(2).replace('.', ',')} €</td></tr></tbody>
+        </table>`
+      : `<p${ph}>${phMsg('Presupuesto', 'añade líneas en el formulario')}</p>`;
+
+    const biblioItems = state.biblio.filter(b => b.trim());
+    const biblioHTML = biblioItems.length 
+      ? `<ol>${biblioItems.map(b => `<li>${escapeHtml(b)}</li>`).join('')}</ol>`
+      : `<p${ph}>${phMsg('Bibliografía', 'añade fuentes')}</p>`;
+
+    const anexoItems = state.anexos.filter(a => a.trim());
+    const anexosHTML = anexoItems.length 
+      ? `<ul>${anexoItems.map(a => `<li>${escapeHtml(a)}</li>`).join('')}</ul>`
+      : `<p${ph}>${phMsg('Anexos', 'añade anexos si los hay')}</p>`;
+
+    const indice = `
+      <ol>
+        <li>Portada</li>
+        <li>Índice</li>
+        <li>Cuerpo de la memoria
+          <ol>
+            <li>Requerimiento o necesidad</li>
+            <li>Posibles soluciones</li>
+            <li>Selección de la solución</li>
+            <li>Diseño y planificación</li>
+            <li>Construcción</li>
+            <li>Evaluación</li>
+          </ol>
+        </li>
+        <li>Planos</li>
+        <li>Presupuesto</li>
+        <li>Bibliografía</li>
+        <li>Anexos</li>
+      </ol>
+    `;
+
+    return {autoresStr, cuerpoHTML, presupHTML, biblioHTML, anexosHTML, indice};
+  }
+
+  function renderPreview() {
+    const {autoresStr, cuerpoHTML, presupHTML, biblioHTML, anexosHTML, indice} = buildBodyHTML(false);
+    const preview = document.getElementById('preview');
+    preview.innerHTML = `
+      <div class="preview-portada">
+        <h1>${state.titulo.trim() ? escapeHtml(state.titulo) : '<span class="placeholder">[Título del proyecto]</span>'}</h1>
+        <div class="subtitle">Memoria técnica</div>
+        <div class="info">
+          ${autoresStr}<br>
+          ${state.curso.trim() ? escapeHtml(state.curso) : '<span class="placeholder">[curso]</span>'}
+          · ${state.fecha.trim() ? escapeHtml(state.fecha) : '<span class="placeholder">[fecha]</span>'}<br>
+          IES Jiménez de Quesada · Santa Fe (Granada)
+        </div>
+      </div>
+
+      <div class="preview-section">
+        <h2>2 · Índice</h2>
+        ${indice}
+      </div>
+
+      <div class="preview-section">
+        <h2>3 · Cuerpo de la memoria</h2>
+        ${cuerpoHTML}
+      </div>
+
+      <div class="preview-section">
+        <h2>4 · Planos</h2>
+        <p class="placeholder">[Aquí se incluirán los planos del proyecto: vistas, perspectiva, medidas, etc. Se entregan en hojas aparte.]</p>
+      </div>
+
+      <div class="preview-section">
+        <h2>5 · Presupuesto</h2>
+        ${presupHTML}
+      </div>
+
+      <div class="preview-section">
+        <h2>6 · Bibliografía</h2>
+        ${biblioHTML}
+      </div>
+
+      <div class="preview-section">
+        <h2>7 · Anexos</h2>
+        ${anexosHTML}
+      </div>
+    `;
+  }
+
+  // ─── Modo imprimir (vista grande) ───────────────────────
+  window.generarMemoria = function() {
+    const {autoresStr, cuerpoHTML, presupHTML, biblioHTML, anexosHTML, indice} = buildBodyHTML(true);
+    const printArea = document.getElementById('print-area');
+    const titulo = state.titulo.trim() || 'Memoria técnica';
+    printArea.innerHTML = `
+      <div class="pa-portada">
+        <h1>${escapeHtml(titulo)}</h1>
+        <div class="subt">Memoria técnica</div>
+        <div class="pa-info">
+          ${autoresStr}<br>
+          ${escapeHtml(state.curso || '2º ESO')} · ${escapeHtml(state.fecha || '')}<br>
+          IES Jiménez de Quesada · Santa Fe (Granada)
+        </div>
+      </div>
+      <div class="pa-section"><h2>2 · Índice</h2>${indice}</div>
+      <div class="pa-section"><h2>3 · Cuerpo de la memoria</h2>${cuerpoHTML}</div>
+      <div class="pa-section"><h2>4 · Planos</h2><p><em>(Los planos se incluyen en hojas aparte.)</em></p></div>
+      <div class="pa-section"><h2>5 · Presupuesto</h2>${presupHTML}</div>
+      <div class="pa-section"><h2>6 · Bibliografía</h2>${biblioHTML}</div>
+      <div class="pa-section"><h2>7 · Anexos</h2>${anexosHTML}</div>
+    `;
+    printArea.classList.add('active');
+    document.getElementById('btn-cerrar-print').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    // Trigger print dialog
+    setTimeout(() => window.print(), 300);
+  };
+
+  window.cerrarPrintView = function() {
+    document.getElementById('print-area').classList.remove('active');
+    document.getElementById('btn-cerrar-print').style.display = 'none';
+    document.body.style.overflow = '';
+  };
+
+  // ─── Descargar HTML standalone ──────────────────────────
+  window.descargarHTML = function() {
+    const {autoresStr, cuerpoHTML, presupHTML, biblioHTML, anexosHTML, indice} = buildBodyHTML(true);
+    const titulo = state.titulo.trim() || 'Memoria técnica';
+    const html = `<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8">
+<title>${escapeHtml(titulo)} · Memoria técnica</title>
+<style>
+body { font-family: 'Times New Roman', serif; max-width: 800px; margin: 2cm auto; padding: 0 1cm; color: #222; line-height: 1.5; }
+.portada { text-align:center; padding: 4cm 1cm; border-bottom: 4px double #1a2238; margin-bottom: 2cm; }
+.portada h1 { font-family: Arial, sans-serif; font-size: 30pt; color: #1a2238; margin: 0 0 0.5cm; }
+.portada .subt { font-style: italic; color: #666; margin-bottom: 1cm; }
+.portada .info { font-family: Arial, sans-serif; color: #444; line-height: 1.6; }
+h2 { font-family: Arial, sans-serif; color: #D4700A; border-bottom: 2px solid #D4700A; padding-bottom: 4px; margin: 1.5cm 0 0.5cm; }
+h3 { font-family: Arial, sans-serif; color: #1a2238; margin-top: 0.8cm; }
+p { white-space: pre-wrap; }
+table { width: 100%; border-collapse: collapse; margin: 0.5cm 0; }
+th, td { border: 1px solid #999; padding: 4pt 8pt; }
+th { background: #f0f0f0; font-family: Arial, sans-serif; }
+td.num { text-align: right; font-family: monospace; }
+tr.total td { background: #fff5e6; font-weight: bold; }
+@page { margin: 2cm; }
+</style></head><body>
+<div class="portada">
+  <h1>${escapeHtml(titulo)}</h1>
+  <div class="subt">Memoria técnica</div>
+  <div class="info">${autoresStr}<br>${escapeHtml(state.curso || '2º ESO')} · ${escapeHtml(state.fecha || '')}<br>IES Jiménez de Quesada · Santa Fe (Granada)</div>
+</div>
+<h2>2 · Índice</h2>${indice}
+<h2>3 · Cuerpo de la memoria</h2>${cuerpoHTML}
+<h2>4 · Planos</h2><p><em>(Los planos se incluyen en hojas aparte.)</em></p>
+<h2>5 · Presupuesto</h2>${presupHTML}
+<h2>6 · Bibliografía</h2>${biblioHTML}
+<h2>7 · Anexos</h2>${anexosHTML}
+</body></html>`;
+
+    const blob = new Blob([html], {type: 'text/html;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = (titulo.replace(/[^a-zA-Z0-9_-]+/g, '_') || 'memoria') + '.html';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 100);
+  };
+
+  window.resetForm = function() {
+    if (!confirm('¿Borrar todos los datos del formulario? No se podrá recuperar.')) return;
+    state = {
+      titulo: '', fecha: '', curso: '2º ESO',
+      autores: [''],
+      requerimiento: '', ideas: '', eleccion: '', diseno: '', construccion: '', evaluacion: '',
+      presup: [{concepto:'', cant:'', prec:''}],
+      biblio: [''],
+      anexos: ['']
+    };
+    saveState();
+    fillFormFromState();
+    renderAutores(); renderPresup(); renderBiblio(); renderAnexos();
+    renderPreview();
+  };
+
+  // ─── Init ──────────────────────────────────────────────
+  loadState();
+  fillFormFromState();
+  renderAutores();
+  renderPresup();
+  renderBiblio();
+  renderAnexos();
+  bindInputs();
+  renderPreview();
+
+  // Detect printing back to normal state
+  window.addEventListener('afterprint', () => {
+    // Mantenemos la vista visible para que el usuario pueda revisar
+  });
+})();
+</script>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Actividades · U02 Los materiales · TyD 2º ESO</title>
+<meta name="description" content="Actividades interactivas sobre los materiales y sus propiedades para 2º ESO con autocorrección: clasificación, propiedades, papel, madera, polímeros, metales, cerámicos, textiles y reciclaje.">
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/02-materiales/actividades/">
+
+<meta property="og:title" content="Actividades · U02 Los materiales · TyD 2º ESO">
+<meta property="og:description" content="35 actividades interactivas con autocorrección sobre los materiales y sus propiedades.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/02-materiales/actividades/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Actividades · U02 Los materiales · TyD 2º ESO">
+<meta name="twitter:description" content="35 actividades interactivas con autocorrección.">
+<meta name="twitter:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+:root {
+  --act-ok: #2e7d4f;
+  --act-err: #c44536;
+  --act-warn: #e8b647;
+  --act-card-bg: #fafafa;
+  --act-border: #e3e3e3;
+}
+
+.bloque-titulo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--principal, #D4700A);
+  margin: 2.5rem 0 0.4rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 3px solid var(--principal, #D4700A);
+  letter-spacing: 0.5px;
+}
+.bloque-intro {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 1.2rem;
+  font-style: italic;
+}
+
+.activity-card {
+  background: var(--act-card-bg);
+  border: 1px solid var(--act-border);
+  border-left: 4px solid var(--principal, #D4700A);
+  border-radius: 10px;
+  padding: 1.2rem 1.4rem;
+  margin: 1rem 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+.activity-card.solved { border-left-color: var(--act-ok); background: #f4faf6; }
+.activity-card.wrong { border-left-color: var(--act-err); background: #fdf6f5; }
+
+.act-num {
+  display: inline-block;
+  background: var(--principal, #D4700A);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-right: 8px;
+  letter-spacing: 0.5px;
+}
+.activity-card.solved .act-num { background: var(--act-ok); }
+.activity-card.wrong .act-num { background: var(--act-err); }
+
+.statement { font-size: 1rem; color: #222; margin-bottom: 1rem; line-height: 1.5; }
+.statement strong { color: #111; }
+.statement em { color: var(--secundario, #1B4F8A); font-style: italic; }
+
+.data-pill {
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 2px 8px;
+  margin: 0 3px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--secundario, #1B4F8A);
+}
+
+.options { display: grid; gap: 0.5rem; margin: 0.8rem 0; }
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.6rem 0.8rem;
+  background: #fff;
+  border: 1px solid var(--act-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 0.95rem;
+}
+.option:hover { background: #fffaf3; border-color: var(--principal, #D4700A); }
+.option input { margin-top: 3px; cursor: pointer; flex-shrink: 0; }
+.option input:checked + .option-label { color: var(--secundario, #1B4F8A); font-weight: 600; }
+.options.cols2 { grid-template-columns: 1fr 1fr; }
+.options.cols3 { grid-template-columns: 1fr 1fr 1fr; }
+
+.answer-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.8rem 0;
+  flex-wrap: wrap;
+}
+.answer-box label { font-weight: 600; color: #444; font-size: 0.95rem; }
+.answer-box input[type="number"],
+.answer-box input[type="text"] {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.45rem 0.7rem;
+  border: 2px solid var(--act-border);
+  border-radius: 8px;
+  width: 110px;
+  background: #fff;
+  color: var(--secundario, #1B4F8A);
+}
+.answer-box input:focus {
+  outline: none;
+  border-color: var(--principal, #D4700A);
+  box-shadow: 0 0 0 3px rgba(212,112,10,0.15);
+}
+.answer-box .unit {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.order-list { display: grid; gap: 0.5rem; margin: 0.8rem 0; }
+.order-item {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 0.7rem;
+  align-items: center;
+  padding: 0.6rem 0.9rem;
+  background: #fff;
+  border: 1px solid var(--act-border);
+  border-radius: 8px;
+}
+.order-item input {
+  width: 50px;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.35rem;
+  border: 2px solid var(--act-border);
+  border-radius: 6px;
+  color: var(--principal, #D4700A);
+}
+.order-item input:focus { outline: none; border-color: var(--principal, #D4700A); }
+.order-item input.ok-input { background: #dff2e6; border-color: var(--act-ok); }
+.order-item input.err-input { background: #fce4e1; border-color: var(--act-err); }
+.order-item .order-text { font-size: 0.95rem; color: #333; font-weight: 500; }
+.order-item .order-text strong { color: #111; }
+
+.match-list { display: grid; gap: 0.5rem; margin: 0.8rem 0; }
+.match-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.8rem;
+  align-items: center;
+  padding: 0.6rem 0.9rem;
+  background: #fff;
+  border: 1px solid var(--act-border);
+  border-radius: 8px;
+}
+.match-item .match-text { font-size: 0.95rem; color: #333; font-weight: 500; }
+.match-item select {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.92rem;
+  padding: 0.35rem 0.5rem;
+  border: 2px solid var(--act-border);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  min-width: 160px;
+  font-weight: 500;
+}
+.match-item select.ok-input { background: #dff2e6; border-color: var(--act-ok); color: var(--act-ok); }
+.match-item select.err-input { background: #fce4e1; border-color: var(--act-err); color: var(--act-err); }
+
+.check-btn {
+  background: var(--principal, #D4700A);
+  color: #fff;
+  border: none;
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  letter-spacing: 0.3px;
+}
+.check-btn:hover { background: #b85e08; transform: translateY(-1px); }
+.check-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.feedback {
+  margin-top: 0.7rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.93rem;
+  font-weight: 600;
+  display: none;
+}
+.feedback.show { display: block; }
+.feedback.ok { background: #dff2e6; color: var(--act-ok); border-left: 4px solid var(--act-ok); }
+.feedback.err { background: #fce4e1; color: var(--act-err); border-left: 4px solid var(--act-err); }
+.feedback .icon { margin-right: 6px; font-size: 1.1rem; }
+
+details.solution {
+  margin-top: 0.9rem;
+  background: #fffaf3;
+  border: 1px dashed #d4a373;
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+}
+details.solution > summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--principal, #D4700A);
+  font-size: 0.92rem;
+  list-style: none;
+  user-select: none;
+}
+details.solution > summary::before {
+  content: "▸ ";
+  display: inline-block;
+  transition: transform 0.15s;
+}
+details.solution[open] > summary::before { content: "▾ "; }
+details.solution > summary:hover { text-decoration: underline; }
+details.solution .sol-body {
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px dashed #d4a373;
+  font-size: 0.92rem;
+  color: #444;
+  line-height: 1.55;
+}
+details.solution .steps-sol {
+  display: grid;
+  gap: 0.4rem;
+  counter-reset: stp;
+  margin-top: 0.4rem;
+}
+details.solution .step-sol {
+  position: relative;
+  padding: 0.4rem 0.5rem 0.4rem 1.9rem;
+  background: #fff;
+  border-radius: 6px;
+  border: 1px solid #f0e6d3;
+  font-size: 0.9rem;
+}
+details.solution .step-sol::before {
+  counter-increment: stp;
+  content: counter(stp);
+  position: absolute;
+  left: 0.4rem;
+  top: 0.45rem;
+  width: 18px;
+  height: 18px;
+  background: var(--principal, #D4700A);
+  color: #fff;
+  border-radius: 50%;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+
+.progreso {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  border-bottom: 2px solid var(--principal, #D4700A);
+  padding: 0.6rem 1rem;
+  margin-bottom: 1.5rem;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.92rem;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.progreso .bar-wrap { flex: 1; margin: 0 1rem; background: #eee; height: 8px; border-radius: 4px; overflow: hidden; }
+.progreso .bar { height: 100%; background: linear-gradient(90deg, var(--principal, #D4700A), #e89947); width: 0%; transition: width 0.4s ease; }
+.progreso .stat { font-weight: 600; color: var(--secundario, #1B4F8A); }
+.progreso .stat strong { color: var(--principal, #D4700A); }
+.progreso .reset-btn {
+  background: transparent;
+  border: 1px solid #ccc;
+  color: #666;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  font-family: 'Barlow', sans-serif;
+}
+.progreso .reset-btn:hover { border-color: var(--principal, #D4700A); color: var(--principal, #D4700A); }
+
+@media (max-width: 720px) {
+  .options.cols2, .options.cols3 { grid-template-columns: 1fr; }
+  .progreso { flex-wrap: wrap; gap: 0.5rem; }
+  .progreso .bar-wrap { margin: 0; order: 99; flex-basis: 100%; }
+  .order-item { grid-template-columns: 45px 1fr; }
+  .match-item { grid-template-columns: 1fr; }
+  .match-item select { min-width: 0; width: 100%; }
+}
+
+@media print {
+  .progreso, .check-btn, .reset-btn { display: none; }
+  .feedback.show { display: block !important; }
+  details.solution { background: #fff; }
+  details.solution > summary { display: none; }
+  details.solution > .sol-body { display: block !important; }
+  details.solution[open] > .sol-body,
+  details.solution > .sol-body { display: block !important; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U02 · Materiales · Actividades</span>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Inicio</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U02</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📘</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>📝</span><span class="nc-lbl">Actividades</span></span>
+</nav>
+
+<div class="unidad-layout">
+
+<aside class="sb-side">
+  <h3>Bloques</h3>
+  <a href="#bloque-a">A · Los materiales</a>
+  <a href="#bloque-b">B · Las propiedades</a>
+  <a href="#bloque-c">C · Papel y cartón</a>
+  <a href="#bloque-d">D · La madera</a>
+  <a href="#bloque-e">E · Los polímeros</a>
+  <a href="#bloque-f">F · Los metales</a>
+  <a href="#bloque-g">G · Cerámicos, textiles y reciclaje</a>
+</aside>
+
+<main class="ct" id="main-content">
+
+<h1 class="unidad-titulo">Actividades · U02 Los materiales</h1>
+<p class="unidad-subt">Ejercicios con comprobación automática y solución paso a paso. Hay <strong>35 actividades</strong> repartidas en 7 bloques. Puedes resolverlas en cualquier orden y consultar el <a href="../libro-digital.html">libro digital</a> cuando necesites repasar.</p>
+
+<div class="progreso" id="progreso">
+  <span class="stat"><strong id="prog-num">0</strong> / <span id="prog-total">35</span> resueltas</span>
+  <div class="bar-wrap"><div class="bar" id="prog-bar"></div></div>
+  <span class="stat">Aciertos: <strong id="prog-ok">0</strong></span>
+  <button class="reset-btn" onclick="resetAll()">↺ Reiniciar</button>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE A · LOS MATERIALES
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-a">
+  <h2 class="bloque-titulo">A · Los materiales</h2>
+  <p class="bloque-intro">Qué es un material, su origen (natural, artificial, sintético) y los factores que determinan su elección.</p>
+
+  <!-- A1 -->
+  <article class="activity-card" data-type="radio" data-id="A1">
+    <p class="statement"><span class="act-num">A1</span>¿Qué es un <strong>material</strong>?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="A1"><span class="option-label">Una herramienta para fabricar objetos.</span></label>
+      <label class="option"><input type="radio" name="A1" data-correct="true"><span class="option-label">La sustancia de la que está hecho un objeto.</span></label>
+      <label class="option"><input type="radio" name="A1"><span class="option-label">Cualquier elemento que sirva para construir una casa.</span></label>
+      <label class="option"><input type="radio" name="A1"><span class="option-label">Un producto industrial fabricado en serie.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Un <strong>material</strong> es la materia de la que está hecho un objeto. Si cambias el material, cambia el precio, el peso, la resistencia y el impacto ambiental del objeto. No hay que confundir el material (la sustancia) con la herramienta (lo que usas para trabajarlo).</div></details>
+  </article>
+
+  <!-- A2 -->
+  <article class="activity-card" data-type="radio" data-id="A2">
+    <p class="statement"><span class="act-num">A2</span>¿Cuál de estos materiales es <strong>natural</strong>?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="A2"><span class="option-label">Papel</span></label>
+      <label class="option"><input type="radio" name="A2" data-correct="true"><span class="option-label">Algodón</span></label>
+      <label class="option"><input type="radio" name="A2"><span class="option-label">PVC</span></label>
+      <label class="option"><input type="radio" name="A2"><span class="option-label">Acero</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El <strong>algodón</strong> se obtiene directamente de la flor del algodonero, sin transformación química: es <strong>natural</strong>. El papel y el acero son <strong>artificiales</strong> (se fabrican a partir de madera y de mineral de hierro). El PVC es <strong>sintético</strong> (se crea en laboratorio a partir del petróleo).</div></details>
+  </article>
+
+  <!-- A3 -->
+  <article class="activity-card" data-type="match" data-id="A3"
+    data-pairs='[
+      {"item":"Lana","correct":"Natural"},
+      {"item":"Vidrio","correct":"Artificial"},
+      {"item":"Nailon","correct":"Sintético"},
+      {"item":"Arcilla","correct":"Natural"},
+      {"item":"Hormigón","correct":"Artificial"}
+    ]'
+    data-options='["Natural","Artificial","Sintético"]'>
+    <p class="statement"><span class="act-num">A3</span>Clasifica cada material según su <strong>origen</strong>.</p>
+    <div class="match-list" id="A_A3"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body"><strong>Naturales</strong> (se obtienen de la naturaleza sin transformaciones químicas): lana, arcilla. <strong>Artificiales</strong> (se fabrican humanamente a partir de un natural): vidrio (de arena), hormigón (de cemento). <strong>Sintéticos</strong> (creados en laboratorio, no existen en la naturaleza): nailon. El truco está en que los sintéticos NO existen como tales en la naturaleza, mientras que los artificiales sí parten de algo natural.</div></details>
+  </article>
+
+  <!-- A4 -->
+  <article class="activity-card" data-type="radio" data-id="A4">
+    <p class="statement"><span class="act-num">A4</span>¿Qué es una <strong>materia prima</strong>?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="A4"><span class="option-label">Un objeto fabricado en serie en una fábrica.</span></label>
+      <label class="option"><input type="radio" name="A4"><span class="option-label">El material reciclado que se reutiliza varias veces.</span></label>
+      <label class="option"><input type="radio" name="A4" data-correct="true"><span class="option-label">El material tal y como aparece en la naturaleza, antes de ser transformado.</span></label>
+      <label class="option"><input type="radio" name="A4"><span class="option-label">Cualquier producto químico de origen industrial.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Una <strong>materia prima</strong> es el material en su estado natural antes de cualquier proceso industrial. Ejemplos: un tronco de pino (antes de hacer madera procesada), una mena de hierro (antes de hacer acero), una bola de algodón (antes de hacer hilo).</div></details>
+  </article>
+
+  <!-- A5 -->
+  <article class="activity-card" data-type="radio" data-id="A5">
+    <p class="statement"><span class="act-num">A5</span>Cuando un ingeniero elige un material, <strong>NO</strong> tiene en cuenta uno de estos factores. ¿Cuál?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="A5"><span class="option-label">Las propiedades técnicas que exige la aplicación.</span></label>
+      <label class="option"><input type="radio" name="A5"><span class="option-label">La disponibilidad y el coste del material.</span></label>
+      <label class="option"><input type="radio" name="A5" data-correct="true"><span class="option-label">El color favorito del cliente final.</span></label>
+      <label class="option"><input type="radio" name="A5"><span class="option-label">El impacto ambiental durante su uso y como residuo.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Los cuatro factores que sí cuentan son: <strong>propiedades técnicas</strong>, <strong>disponibilidad y coste</strong>, <strong>facilidad de fabricación</strong> e <strong>impacto ambiental</strong>. Las preferencias estéticas pueden influir en el acabado, pero no en la elección del material desde el punto de vista técnico.</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE B · LAS PROPIEDADES DE LOS MATERIALES
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-b">
+  <h2 class="bloque-titulo">B · Las propiedades de los materiales</h2>
+  <p class="bloque-intro">Las 6 familias de propiedades y cómo se aplican a la elección real de un material.</p>
+
+  <!-- B1 -->
+  <article class="activity-card" data-type="number" data-id="B1" data-answer="6" data-tol="0">
+    <p class="statement"><span class="act-num">B1</span>¿Cuántas <strong>familias de propiedades</strong> hemos visto en el libro digital?</p>
+    <div class="answer-box">
+      <label>Respuesta:</label>
+      <input type="number" inputmode="numeric" min="0" max="20" aria-label="Número de familias de propiedades">
+      <span class="unit">familias</span>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Son <strong>6 familias</strong>: mecánicas, térmicas, electromagnéticas, ópticas, fisicoquímicas y ambientales. Cada material tiene sus puntos fuertes en unas familias y sus puntos débiles en otras: por eso ningún material es "el mejor" en absoluto, solo el más adecuado para un uso concreto.</div></details>
+  </article>
+
+  <!-- B2 -->
+  <article class="activity-card" data-type="match" data-id="B2"
+    data-pairs='[
+      {"item":"Dureza","correct":"Mecánica"},
+      {"item":"Densidad","correct":"Fisicoquímica"},
+      {"item":"Conductividad eléctrica","correct":"Electromagnética"},
+      {"item":"Transparencia","correct":"Óptica"},
+      {"item":"Biodegradabilidad","correct":"Ambiental"},
+      {"item":"Dilatación","correct":"Térmica"}
+    ]'
+    data-options='["Mecánica","Térmica","Electromagnética","Óptica","Fisicoquímica","Ambiental"]'>
+    <p class="statement"><span class="act-num">B2</span>Asigna cada <strong>propiedad</strong> a su familia correspondiente.</p>
+    <div class="match-list" id="A_B2"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body"><strong>Dureza</strong> → mecánica (resistencia al rayado). <strong>Densidad</strong> → fisicoquímica. <strong>Conductividad eléctrica</strong> → electromagnética. <strong>Transparencia</strong> → óptica. <strong>Biodegradabilidad</strong> → ambiental. <strong>Dilatación</strong> → térmica (cuánto se agranda al calentarse).</div></details>
+  </article>
+
+  <!-- B3 -->
+  <article class="activity-card" data-type="radio" data-id="B3">
+    <p class="statement"><span class="act-num">B3</span>¿Cuál es la diferencia entre <strong>ductilidad</strong> y <strong>maleabilidad</strong>?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="B3"><span class="option-label">Son sinónimos: ambas significan lo mismo.</span></label>
+      <label class="option"><input type="radio" name="B3" data-correct="true"><span class="option-label">Ductilidad es estirarse en hilos; maleabilidad es extenderse en láminas.</span></label>
+      <label class="option"><input type="radio" name="B3"><span class="option-label">Ductilidad mide la elasticidad; maleabilidad, la dureza.</span></label>
+      <label class="option"><input type="radio" name="B3"><span class="option-label">Ductilidad se aplica solo a metales; maleabilidad solo a plásticos.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Las dos son tipos de <strong>plasticidad</strong> (capacidad de deformarse sin romperse): <strong>ductilidad</strong> = formar hilos (el cobre es muy dúctil). <strong>Maleabilidad</strong> = formar láminas finas (el oro es muy maleable: se hace "pan de oro" de pocos átomos de grosor). Truco: la "i" de ductil es como un alambre largo y fino.</div></details>
+  </article>
+
+  <!-- B4 -->
+  <article class="activity-card" data-type="radio" data-id="B4">
+    <p class="statement"><span class="act-num">B4</span>Queremos diseñar el <strong>mango de una sartén</strong>. ¿Cuál de estas propiedades es MÁS importante?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="B4"><span class="option-label">Alta conductividad térmica</span></label>
+      <label class="option"><input type="radio" name="B4" data-correct="true"><span class="option-label">Baja conductividad térmica</span></label>
+      <label class="option"><input type="radio" name="B4"><span class="option-label">Alta transparencia</span></label>
+      <label class="option"><input type="radio" name="B4"><span class="option-label">Alta densidad</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El mango toca la mano mientras la sartén está al fuego: necesita ser <strong>mal conductor del calor</strong> para que no queme. Por eso se usan madera, plástico termoestable o silicona, y NUNCA metal puro. Es justo lo opuesto de lo que necesita el cuerpo de la sartén (que sí debe conducir bien el calor para cocinar).</div></details>
+  </article>
+
+  <!-- B5 -->
+  <article class="activity-card" data-type="radio" data-id="B5">
+    <p class="statement"><span class="act-num">B5</span>¿Cuál es la diferencia entre <strong>tenacidad</strong> y <strong>dureza</strong>?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="B5"><span class="option-label">Son lo mismo, solo cambia el nombre.</span></label>
+      <label class="option"><input type="radio" name="B5"><span class="option-label">Tenacidad se mide en kilos; dureza en metros.</span></label>
+      <label class="option"><input type="radio" name="B5" data-correct="true"><span class="option-label">Tenacidad es resistencia a romperse de un golpe; dureza es resistencia a ser rayado.</span></label>
+      <label class="option"><input type="radio" name="B5"><span class="option-label">La tenacidad solo se aplica a los metales; la dureza, a la cerámica.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Un material puede ser <strong>muy duro</strong> (no se raya) pero a la vez <strong>poco tenaz</strong> (se rompe del golpe). Ejemplos: el vidrio y el diamante son durísimos pero frágiles. El acero, en cambio, es duro y tenaz: por eso lo usamos en herramientas que reciben golpes.</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE C · PAPEL Y CARTÓN
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-c">
+  <h2 class="bloque-titulo">C · Papel y cartón</h2>
+  <p class="bloque-intro">Origen del papel, tipos y reciclaje. Una familia ligera pero protagonista del día a día.</p>
+
+  <!-- C1 -->
+  <article class="activity-card" data-type="radio" data-id="C1">
+    <p class="statement"><span class="act-num">C1</span>¿De qué se obtiene principalmente el <strong>papel</strong>?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="C1"><span class="option-label">Del petróleo</span></label>
+      <label class="option"><input type="radio" name="C1" data-correct="true"><span class="option-label">De la celulosa de la madera</span></label>
+      <label class="option"><input type="radio" name="C1"><span class="option-label">De la arena cocida</span></label>
+      <label class="option"><input type="radio" name="C1"><span class="option-label">De minerales de hierro</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El papel se fabrica a partir de la <strong>celulosa</strong>, una sustancia que abunda en la madera (sobre todo de pino, eucalipto y abeto). La madera se tritura, se cuece, se diluye y se prensa hasta formar las hojas de papel.</div></details>
+  </article>
+
+  <!-- C2 ORDER -->
+  <article class="activity-card" data-type="order" data-id="C2"
+    data-items='[
+      {"text":"Prensado y secado de la hoja","correct":5},
+      {"text":"Tala y descortezado de los troncos","correct":1},
+      {"text":"Refinado de la pasta (diluida en agua)","correct":3},
+      {"text":"Formación de la hoja en la malla","correct":4},
+      {"text":"Cocción y blanqueo de las astillas","correct":2}
+    ]'>
+    <p class="statement"><span class="act-num">C2</span>Ordena los <strong>5 pasos</strong> de la fabricación del papel escribiendo el número que corresponde (1-5).</p>
+    <div class="order-list" id="A_C2"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El orden correcto es:
+      <div class="steps-sol">
+        <div class="step-sol"><strong>Tala y descortezado</strong> — los troncos se cortan en astillas.</div>
+        <div class="step-sol"><strong>Cocción y blanqueo</strong> — sosa caliente separa la celulosa de la lignina.</div>
+        <div class="step-sol"><strong>Refinado</strong> — la pasta se diluye con agua y se afinan las fibras.</div>
+        <div class="step-sol"><strong>Formación de la hoja</strong> — la pasta pasa por una malla.</div>
+        <div class="step-sol"><strong>Prensado y secado</strong> — se elimina el agua por compresión y calor.</div>
+      </div>
+    </div></details>
+  </article>
+
+  <!-- C3 MATCH -->
+  <article class="activity-card" data-type="match" data-id="C3"
+    data-pairs='[
+      {"item":"Papel de prensa","correct":"Periódicos"},
+      {"item":"Papel cuché","correct":"Revistas brillantes"},
+      {"item":"Papel kraft","correct":"Bolsas y sobres"},
+      {"item":"Cartón ondulado","correct":"Cajas de transporte"}
+    ]'
+    data-options='["Periódicos","Revistas brillantes","Bolsas y sobres","Cajas de transporte"]'>
+    <p class="statement"><span class="act-num">C3</span>Empareja cada <strong>tipo de papel o cartón</strong> con su uso más habitual.</p>
+    <div class="match-list" id="A_C3"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body"><strong>Papel de prensa</strong> → periódicos (fino, poroso, barato). <strong>Papel cuché</strong> → revistas (capa brillante de alta calidad). <strong>Papel kraft</strong> → bolsas y sobres (marrón, muy resistente). <strong>Cartón ondulado</strong> → cajas de transporte (gracias al rizo intermedio aguanta mucho peso).</div></details>
+  </article>
+
+  <!-- C4 -->
+  <article class="activity-card" data-type="radio" data-id="C4">
+    <p class="statement"><span class="act-num">C4</span>¿Por qué el <strong>cartón ondulado</strong> aguanta tanto peso siendo tan ligero?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="C4"><span class="option-label">Porque tiene fibras de plástico mezcladas.</span></label>
+      <label class="option"><input type="radio" name="C4" data-correct="true"><span class="option-label">Porque la capa rizada intermedia distribuye la carga como una serie de pequeñas vigas en arco.</span></label>
+      <label class="option"><input type="radio" name="C4"><span class="option-label">Porque está prensado a alta presión durante semanas.</span></label>
+      <label class="option"><input type="radio" name="C4"><span class="option-label">Porque la celulosa es muy densa por sí sola.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El <strong>rizo intermedio</strong> entre las dos láminas planas funciona como una sucesión de pequeñas vigas en forma de arco que distribuyen la carga en lugar de concentrarla. Es el mismo principio que las estructuras trianguladas (lo verás en la U3) o que los arcos de los puentes romanos: con poco material se aguanta mucho peso si la geometría es la adecuada.</div></details>
+  </article>
+
+  <!-- C5 -->
+  <article class="activity-card" data-type="radio" data-id="C5">
+    <p class="statement"><span class="act-num">C5</span>¿Cuántas veces se puede <strong>reciclar</strong> una hoja de papel, aproximadamente, antes de que sus fibras se vuelvan demasiado cortas?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="C5"><span class="option-label">1 vez (solo un reciclaje)</span></label>
+      <label class="option"><input type="radio" name="C5"><span class="option-label">Entre 2 y 3 veces</span></label>
+      <label class="option"><input type="radio" name="C5" data-correct="true"><span class="option-label">Entre 5 y 7 veces</span></label>
+      <label class="option"><input type="radio" name="C5"><span class="option-label">Infinitas veces, igual que el vidrio</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Cada vez que se recicla el papel, las fibras de celulosa se acortan un poco. Después de <strong>5 a 7 ciclos</strong> ya son tan cortas que el papel pierde consistencia y deja de poder reciclarse. Cuanto más papel reciclado se mezcle con fibra virgen, más se alarga la cadena de reciclajes.</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE D · LA MADERA
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-d">
+  <h2 class="bloque-titulo">D · La madera</h2>
+  <p class="bloque-intro">El material tecnológico más antiguo: tipos, obtención, propiedades y certificados.</p>
+
+  <!-- D1 -->
+  <article class="activity-card" data-type="radio" data-id="D1">
+    <p class="statement"><span class="act-num">D1</span>¿Qué representan los <strong>anillos de crecimiento</strong> que se ven en la sección de un tronco?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="D1"><span class="option-label">Las vetas decorativas que se forman al pulir la madera.</span></label>
+      <label class="option"><input type="radio" name="D1" data-correct="true"><span class="option-label">Un anillo por cada año de vida del árbol.</span></label>
+      <label class="option"><input type="radio" name="D1"><span class="option-label">Las marcas que deja la sierra al cortar el tronco.</span></label>
+      <label class="option"><input type="radio" name="D1"><span class="option-label">El número de ramas principales que ha tenido el árbol.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Cada año, el árbol forma una capa de madera nueva alrededor del tronco. Por eso, si cortas un tronco transversalmente, puedes <strong>contar los anillos</strong> y saber qué edad tenía el árbol. Es la misma información que da una huella dactilar para un humano, pero a escala botánica.</div></details>
+  </article>
+
+  <!-- D2 MATCH -->
+  <article class="activity-card" data-type="match" data-id="D2"
+    data-pairs='[
+      {"item":"Pino","correct":"Blanda"},
+      {"item":"Abeto","correct":"Blanda"},
+      {"item":"Roble","correct":"Dura"},
+      {"item":"Haya","correct":"Dura"},
+      {"item":"Nogal","correct":"Dura"},
+      {"item":"Chopo","correct":"Blanda"}
+    ]'
+    data-options='["Blanda","Dura"]'>
+    <p class="statement"><span class="act-num">D2</span>Clasifica cada tipo de madera como <strong>blanda</strong> o <strong>dura</strong>.</p>
+    <div class="match-list" id="A_D2"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body"><strong>Blandas</strong> (árboles de crecimiento rápido, ligeras y baratas): pino, abeto, chopo. <strong>Duras</strong> (árboles de crecimiento lento, resistentes y caras): roble, haya, nogal. Las maderas duras se reservan para muebles de calidad e instrumentos musicales; las blandas son las del taller y de la construcción ligera.</div></details>
+  </article>
+
+  <!-- D3 ORDER -->
+  <article class="activity-card" data-type="order" data-id="D3"
+    data-items='[
+      {"text":"Cepillado y comercialización","correct":5},
+      {"text":"Tala del árbol","correct":1},
+      {"text":"Aserrado en tablones","correct":3},
+      {"text":"Secado al aire o en horno","correct":4},
+      {"text":"Desramado y descortezado","correct":2}
+    ]'>
+    <p class="statement"><span class="act-num">D3</span>Ordena las <strong>5 fases</strong> de la obtención de la madera (1-5).</p>
+    <div class="order-list" id="A_D3"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El orden correcto es:
+      <div class="steps-sol">
+        <div class="step-sol"><strong>Tala</strong> — se corta el árbol cuando ha alcanzado la edad adecuada.</div>
+        <div class="step-sol"><strong>Desramado y descortezado</strong> — se quitan ramas y corteza.</div>
+        <div class="step-sol"><strong>Aserrado</strong> — el tronco se corta en tablones.</div>
+        <div class="step-sol"><strong>Secado</strong> — al aire o en hornos para eliminar la humedad.</div>
+        <div class="step-sol"><strong>Cepillado y comercialización</strong> — listo para las carpinterías.</div>
+      </div>
+    </div></details>
+  </article>
+
+  <!-- D4 -->
+  <article class="activity-card" data-type="radio" data-id="D4">
+    <p class="statement"><span class="act-num">D4</span>¿Qué garantiza un mueble que lleva el <strong>sello FSC</strong>?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="D4"><span class="option-label">Que está fabricado en Andalucía.</span></label>
+      <label class="option"><input type="radio" name="D4"><span class="option-label">Que la madera es 100% maciza, sin tableros derivados.</span></label>
+      <label class="option"><input type="radio" name="D4" data-correct="true"><span class="option-label">Que la madera procede de un bosque gestionado de forma sostenible.</span></label>
+      <label class="option"><input type="radio" name="D4"><span class="option-label">Que el mueble está garantizado durante 5 años.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Los certificados <strong>FSC</strong> (Forest Stewardship Council) y <strong>PEFC</strong> garantizan que la madera procede de un bosque donde por cada árbol cortado se planta uno nuevo, se respeta a las especies que viven en él y se trata bien a los trabajadores. Si compras un mueble con FSC, sabes que no contribuyes a la deforestación.</div></details>
+  </article>
+
+  <!-- D5 -->
+  <article class="activity-card" data-type="radio" data-id="D5">
+    <p class="statement"><span class="act-num">D5</span>¿Cuál de estas <strong>NO</strong> es una propiedad típica de la madera?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="D5"><span class="option-label">Aislante térmico y eléctrico</span></label>
+      <label class="option"><input type="radio" name="D5"><span class="option-label">Ligera para su resistencia</span></label>
+      <label class="option"><input type="radio" name="D5" data-correct="true"><span class="option-label">Buena conductora de la electricidad</span></label>
+      <label class="option"><input type="radio" name="D5"><span class="option-label">Higroscópica (absorbe humedad)</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La madera es <strong>aislante</strong> tanto del calor como de la electricidad: por eso se usan mangos de madera en herramientas eléctricas y en utensilios de cocina antiguos. También es ligera para la resistencia que ofrece y absorbe humedad del ambiente (higroscópica): por eso una puerta puede atascarse en días lluviosos.</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE E · LOS POLÍMEROS
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-e">
+  <h2 class="bloque-titulo">E · Los polímeros</h2>
+  <p class="bloque-intro">Los plásticos: tipos, conformado y los 7 códigos de reciclaje.</p>
+
+  <!-- E1 -->
+  <article class="activity-card" data-type="radio" data-id="E1">
+    <p class="statement"><span class="act-num">E1</span>¿Qué es un <strong>polímero</strong>?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="E1"><span class="option-label">Una aleación entre dos metales.</span></label>
+      <label class="option"><input type="radio" name="E1" data-correct="true"><span class="option-label">Un material formado por largas cadenas de moléculas que se repiten.</span></label>
+      <label class="option"><input type="radio" name="E1"><span class="option-label">Un tipo de cerámico fabricado con arena.</span></label>
+      <label class="option"><input type="radio" name="E1"><span class="option-label">Un material obtenido únicamente del agua del mar.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La palabra significa <em>poli-</em> (muchas) <em>-mero</em> (partes): un polímero es un material hecho de muchas piezas idénticas (los <strong>monómeros</strong>) unidas en cadena. Cuanto más larga y entrelazada sea la cadena, más rígido es el plástico.</div></details>
+  </article>
+
+  <!-- E2 MATCH -->
+  <article class="activity-card" data-type="match" data-id="E2"
+    data-pairs='[
+      {"item":"PET (botella de agua)","correct":"Termoplástico"},
+      {"item":"Baquelita (mangos de sartén)","correct":"Termoestable"},
+      {"item":"Caucho del neumático","correct":"Elastómero"},
+      {"item":"Polietileno (bolsa)","correct":"Termoplástico"},
+      {"item":"Resina epoxi (pegamento)","correct":"Termoestable"}
+    ]'
+    data-options='["Termoplástico","Termoestable","Elastómero"]'>
+    <p class="statement"><span class="act-num">E2</span>Clasifica cada material según su <strong>comportamiento frente al calor</strong>.</p>
+    <div class="match-list" id="A_E2"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body"><strong>Termoplásticos</strong> (se ablandan al calentar, se pueden fundir y reciclar): PET, polietileno. <strong>Termoestables</strong> (una vez moldeados no se pueden fundir: si se calientan, se queman): baquelita, resinas epoxi. <strong>Elastómeros</strong> (se estiran y vuelven a su forma): caucho del neumático.</div></details>
+  </article>
+
+  <!-- E3 MATCH -->
+  <article class="activity-card" data-type="match" data-id="E3"
+    data-pairs='[
+      {"item":"Código 1 (PET)","correct":"Botellas de agua y refrescos"},
+      {"item":"Código 2 (HDPE)","correct":"Garrafas de leche y detergente"},
+      {"item":"Código 4 (LDPE)","correct":"Bolsas finas y film alimentario"},
+      {"item":"Código 5 (PP)","correct":"Tarros de yogur y tuppers"}
+    ]'
+    data-options='["Botellas de agua y refrescos","Garrafas de leche y detergente","Bolsas finas y film alimentario","Tarros de yogur y tuppers"]'>
+    <p class="statement"><span class="act-num">E3</span>Empareja cada <strong>código del plástico</strong> con su uso más típico.</p>
+    <div class="match-list" id="A_E3"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body"><strong>Código 1 (PET)</strong> → botellas de agua y refrescos. <strong>Código 2 (HDPE)</strong> → garrafas de leche, detergente, champú. <strong>Código 4 (LDPE)</strong> → bolsas finas, film alimentario, bolsas de pan. <strong>Código 5 (PP)</strong> → tarros de yogur, tuppers, tapones de botella. Estos son los más comunes en el contenedor amarillo.</div></details>
+  </article>
+
+  <!-- E4 -->
+  <article class="activity-card" data-type="radio" data-id="E4">
+    <p class="statement"><span class="act-num">E4</span>Para fabricar una <strong>botella de plástico hueca</strong>, ¿qué técnica de conformado se utiliza?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="E4"><span class="option-label">Extrusión</span></label>
+      <label class="option"><input type="radio" name="E4"><span class="option-label">Inyección</span></label>
+      <label class="option"><input type="radio" name="E4" data-correct="true"><span class="option-label">Soplado</span></label>
+      <label class="option"><input type="radio" name="E4"><span class="option-label">Calandrado</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El <strong>soplado</strong> infla una burbuja de plástico dentro de un molde, igual que se hace con el vidrio. Es la técnica de las piezas huecas: botellas, bidones, garrafas. La <strong>extrusión</strong> hace piezas continuas (tubos), la <strong>inyección</strong> piezas con detalle (tapones), y el <strong>calandrado</strong> láminas finas.</div></details>
+  </article>
+
+  <!-- E5 NUMBER -->
+  <article class="activity-card" data-type="number" data-id="E5" data-answer="450" data-tol="50">
+    <p class="statement"><span class="act-num">E5</span>¿Cuántos años tarda en degradarse aproximadamente una <strong>botella de PET</strong> tirada al medio natural? (acepta un margen de ± 50 años)</p>
+    <div class="answer-box">
+      <label>Respuesta:</label>
+      <input type="number" inputmode="numeric" min="0" max="10000" aria-label="Años de degradación del PET">
+      <span class="unit">años</span>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Una botella de PET tarda aproximadamente <strong>450 años</strong> en degradarse. Es decir: una botella tirada hoy seguirá ahí cuando hayan pasado más de 15 generaciones humanas. Por eso reciclar no es opcional: es la única forma realista de gestionar los plásticos.</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE F · LOS METALES
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-f">
+  <h2 class="bloque-titulo">F · Los metales</h2>
+  <p class="bloque-intro">Férreos y no férreos, aleaciones, propiedades y procesos de conformado.</p>
+
+  <!-- F1 -->
+  <article class="activity-card" data-type="radio" data-id="F1">
+    <p class="statement"><span class="act-num">F1</span>¿Cuál es la diferencia entre un metal <strong>férreo</strong> y uno <strong>no férreo</strong>?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="F1"><span class="option-label">Los férreos son sólidos y los no férreos son líquidos.</span></label>
+      <label class="option"><input type="radio" name="F1" data-correct="true"><span class="option-label">Los férreos contienen hierro; los no férreos, no.</span></label>
+      <label class="option"><input type="radio" name="F1"><span class="option-label">Los férreos son aleaciones y los no férreos, metales puros.</span></label>
+      <label class="option"><input type="radio" name="F1"><span class="option-label">Los férreos brillan; los no férreos, no.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El nombre lo dice: <em>férreo</em> viene del latín <em>ferrum</em> (hierro). Los <strong>férreos</strong> son los que contienen hierro: hierro puro, acero, fundición. Los <strong>no férreos</strong> son los demás: aluminio, cobre, plomo, zinc, oro, plata… Los férreos suelen ser más baratos pero se oxidan; los no férreos son más ligeros y resistentes a la corrosión pero más caros.</div></details>
+  </article>
+
+  <!-- F2 MATCH -->
+  <article class="activity-card" data-type="match" data-id="F2"
+    data-pairs='[
+      {"item":"Acero","correct":"Hierro + carbono"},
+      {"item":"Latón","correct":"Cobre + zinc"},
+      {"item":"Bronce","correct":"Cobre + estaño"},
+      {"item":"Duraluminio","correct":"Aluminio + cobre + magnesio"}
+    ]'
+    data-options='["Hierro + carbono","Cobre + zinc","Cobre + estaño","Aluminio + cobre + magnesio"]'>
+    <p class="statement"><span class="act-num">F2</span>Empareja cada <strong>aleación</strong> con su composición.</p>
+    <div class="match-list" id="A_F2"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body"><strong>Acero</strong> = hierro + carbono (es la aleación más usada del mundo). <strong>Latón</strong> = cobre + zinc (de color dorado, lo verás en cerraduras y grifería). <strong>Bronce</strong> = cobre + estaño (de las primeras aleaciones de la humanidad, dio nombre a la Edad del Bronce). <strong>Duraluminio</strong> = aluminio + cobre + magnesio (ligero y resistente: aviación, ciclismo).</div></details>
+  </article>
+
+  <!-- F3 -->
+  <article class="activity-card" data-type="radio" data-id="F3">
+    <p class="statement"><span class="act-num">F3</span>¿Cuál es el <strong>mejor conductor eléctrico</strong> de uso común?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="F3"><span class="option-label">Hierro</span></label>
+      <label class="option"><input type="radio" name="F3"><span class="option-label">Aluminio</span></label>
+      <label class="option"><input type="radio" name="F3" data-correct="true"><span class="option-label">Cobre</span></label>
+      <label class="option"><input type="radio" name="F3"><span class="option-label">Plomo</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El <strong>cobre</strong> es el mejor conductor eléctrico habitual (la plata conduce un poco mejor pero es demasiado cara). Es muy <strong>dúctil</strong>: se estira en hilos finísimos sin romperse, perfecto para fabricar cables. El aluminio también conduce bien y se usa en líneas de alta tensión por ser más ligero.</div></details>
+  </article>
+
+  <!-- F4 ORDER -->
+  <article class="activity-card" data-type="order" data-id="F4"
+    data-items='[
+      {"text":"Conformado del lingote en piezas","correct":4},
+      {"text":"Extracción del mineral en la mina","correct":1},
+      {"text":"Fundición en alto horno","correct":3},
+      {"text":"Trituración y concentración","correct":2}
+    ]'>
+    <p class="statement"><span class="act-num">F4</span>Ordena las <strong>4 fases</strong> de la obtención de un metal (1-4).</p>
+    <div class="order-list" id="A_F4"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El orden correcto es:
+      <div class="steps-sol">
+        <div class="step-sol"><strong>Extracción</strong> — los minerales se sacan de minas a cielo abierto o subterráneas.</div>
+        <div class="step-sol"><strong>Trituración y concentración</strong> — se separa el metal de la ganga (roca de desecho).</div>
+        <div class="step-sol"><strong>Fundición</strong> — en alto horno a 1500 °C el metal puro se separa por densidad.</div>
+        <div class="step-sol"><strong>Conformado</strong> — el metal líquido se vierte en moldes y se forma en lingotes y piezas.</div>
+      </div>
+    </div></details>
+  </article>
+
+  <!-- F5 -->
+  <article class="activity-card" data-type="radio" data-id="F5">
+    <p class="statement"><span class="act-num">F5</span>¿Por qué el <strong>acero inoxidable</strong> no se oxida como el hierro normal?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="F5"><span class="option-label">Porque se cuece a temperaturas muy altas durante meses.</span></label>
+      <label class="option"><input type="radio" name="F5" data-correct="true"><span class="option-label">Porque lleva cromo y níquel, que forman una capa protectora frente a la oxidación.</span></label>
+      <label class="option"><input type="radio" name="F5"><span class="option-label">Porque se pinta por dentro con una pintura especial.</span></label>
+      <label class="option"><input type="radio" name="F5"><span class="option-label">Porque no contiene hierro: es solo cromo y níquel.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El acero inoxidable sí contiene hierro (es una aleación de hierro). Lo que tiene de especial es que también lleva <strong>cromo</strong> (al menos 10,5 %) y <strong>níquel</strong>: estos forman una capa invisible de óxido de cromo en la superficie que protege al hierro de seguir oxidándose. Por eso lo usamos en cubiertos, fregaderos e instrumental médico.</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE G · CERÁMICOS, TEXTILES Y RECICLAJE
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-g">
+  <h2 class="bloque-titulo">G · Cerámicos, textiles y reciclaje</h2>
+  <p class="bloque-intro">Cierre de la unidad: cerámica, fibras textiles y lo más práctico de todo, separar residuos correctamente.</p>
+
+  <!-- G1 -->
+  <article class="activity-card" data-type="radio" data-id="G1">
+    <p class="statement"><span class="act-num">G1</span>¿Cuáles son los <strong>tres ingredientes principales</strong> con los que se fabrica el vidrio común?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="G1"><span class="option-label">Arcilla, agua y cemento</span></label>
+      <label class="option"><input type="radio" name="G1" data-correct="true"><span class="option-label">Arena (sílice), sosa y cal</span></label>
+      <label class="option"><input type="radio" name="G1"><span class="option-label">Resinas plásticas transparentes</span></label>
+      <label class="option"><input type="radio" name="G1"><span class="option-label">Cuarzo, hierro y plomo</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El vidrio común se fabrica fundiendo <strong>arena (sílice) + sosa + cal</strong> a unos 1500 °C. Al enfriarse rápido, las moléculas no llegan a cristalizar: queda como un "líquido endurecido" desordenado, y por eso es transparente.</div></details>
+  </article>
+
+  <!-- G2 -->
+  <article class="activity-card" data-type="radio" data-id="G2">
+    <p class="statement"><span class="act-num">G2</span>¿Por qué el <strong>hormigón armado</strong> lleva varillas de acero por dentro?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="G2"><span class="option-label">Para detectar el hormigón con detectores de metales.</span></label>
+      <label class="option"><input type="radio" name="G2"><span class="option-label">Para que el hormigón aguante mejor el calor.</span></label>
+      <label class="option"><input type="radio" name="G2" data-correct="true"><span class="option-label">Porque el hormigón aguanta bien la compresión pero mal la tracción, y el acero compensa.</span></label>
+      <label class="option"><input type="radio" name="G2"><span class="option-label">Porque las varillas de acero son más baratas que el cemento.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El <strong>hormigón</strong> aguanta mucho peso encima (<strong>compresión</strong>) pero se agrieta si se tira de él (<strong>tracción</strong>). El acero hace lo contrario: aguanta tirones muy grandes. Al combinarlos obtenemos un material que resiste por igual peso y tirones: por eso vigas, pilares y forjados de edificios y puentes son de hormigón armado.</div></details>
+  </article>
+
+  <!-- G3 MATCH -->
+  <article class="activity-card" data-type="match" data-id="G3"
+    data-pairs='[
+      {"item":"Algodón","correct":"Natural vegetal"},
+      {"item":"Lana","correct":"Natural animal"},
+      {"item":"Rayón","correct":"Química artificial"},
+      {"item":"Nailon","correct":"Química sintética"},
+      {"item":"Lino","correct":"Natural vegetal"},
+      {"item":"Poliéster","correct":"Química sintética"}
+    ]'
+    data-options='["Natural vegetal","Natural animal","Química artificial","Química sintética"]'>
+    <p class="statement"><span class="act-num">G3</span>Clasifica cada <strong>fibra textil</strong> según su origen.</p>
+    <div class="match-list" id="A_G3"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body"><strong>Naturales vegetales</strong> (de plantas): algodón, lino. <strong>Naturales animales</strong> (de animales): lana, seda. <strong>Químicas artificiales</strong> (a partir de algo natural transformado): rayón, viscosa, acetato (los tres parten de la celulosa). <strong>Químicas sintéticas</strong> (a partir del petróleo): nailon, poliéster, licra, acrílico.</div></details>
+  </article>
+
+  <!-- G4 MATCH -->
+  <article class="activity-card" data-type="match" data-id="G4"
+    data-pairs='[
+      {"item":"Botella de vino vacía","correct":"Verde"},
+      {"item":"Caja de zapatos","correct":"Azul"},
+      {"item":"Lata de refresco","correct":"Amarillo"},
+      {"item":"Cáscara de fruta","correct":"Marrón"},
+      {"item":"Pila usada","correct":"Punto limpio"},
+      {"item":"Pañal sucio","correct":"Gris"}
+    ]'
+    data-options='["Azul","Amarillo","Verde","Marrón","Gris","Punto limpio"]'>
+    <p class="statement"><span class="act-num">G4</span>Envía cada <strong>residuo</strong> al <strong>contenedor</strong> correcto (Andalucía).</p>
+    <div class="match-list" id="A_G4"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body"><strong>Botella de vino</strong> → verde (vidrio). <strong>Caja de zapatos</strong> → azul (cartón limpio). <strong>Lata de refresco</strong> → amarillo (envases metálicos). <strong>Cáscara de fruta</strong> → marrón (orgánico). <strong>Pila usada</strong> → punto limpio (metales pesados, NUNCA al resto). <strong>Pañal sucio</strong> → gris (resto, no se recicla por contener restos biológicos).</div></details>
+  </article>
+
+  <!-- G5 ORDER -->
+  <article class="activity-card" data-type="order" data-id="G5"
+    data-items='[
+      {"text":"Reutilizar","correct":2},
+      {"text":"Reciclar","correct":3},
+      {"text":"Reducir","correct":1}
+    ]'>
+    <p class="statement"><span class="act-num">G5</span>Ordena las <strong>3 R</strong> de la más importante (1) a la menos prioritaria (3).</p>
+    <div class="order-list" id="A_G5"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El orden correcto es:
+      <div class="steps-sol">
+        <div class="step-sol"><strong>Reducir</strong> — consumir MENOS material desde el principio. Es lo más eficaz.</div>
+        <div class="step-sol"><strong>Reutilizar</strong> — volver a usar el mismo objeto antes de tirarlo.</div>
+        <div class="step-sol"><strong>Reciclar</strong> — convertir el residuo en materia prima nueva. Es la última opción, no la primera.</div>
+      </div>
+      Muchas veces nos quedamos solo con "reciclar" porque es el más cómodo, pero <strong>el reciclaje también gasta energía</strong>. Lo verdaderamente sostenible es no generar el residuo: por eso "reducir" va primero.</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PIE
+     ════════════════════════════════════════════════════════════════ -->
+<footer style="text-align:center; padding:2rem 1rem 1rem; color:#888; font-size:0.85rem; border-top: 1px dashed #ddd; margin-top: 3rem;">
+  <p>📝 Actividades · TyD 2º ESO · Unidad 2 · Los materiales</p>
+  <p><a href="../index.html" style="color:#D4700A; text-decoration:none;">← Volver al hub de la unidad</a> · <a href="../libro-digital.html" style="color:#D4700A; text-decoration:none;">📘 Libro digital</a></p>
+  <p style="margin-top:8px; font-family:'JetBrains Mono', monospace; font-size:0.72rem; opacity:0.6;">v1.0</p>
+</footer>
+
+</main>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     SCRIPT · autocorrección + progreso
+     ════════════════════════════════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  const totalEl = document.getElementById('prog-total');
+  const numEl = document.getElementById('prog-num');
+  const okEl = document.getElementById('prog-ok');
+  const barEl = document.getElementById('prog-bar');
+  const cards = document.querySelectorAll('.activity-card');
+  totalEl.textContent = cards.length;
+
+  cards.forEach(card => {
+    const type = card.dataset.type;
+
+    if (type === 'order') {
+      const items = JSON.parse(card.dataset.items);
+      const container = card.querySelector('.order-list');
+      items.forEach((it) => {
+        const div = document.createElement('div');
+        div.className = 'order-item';
+        div.innerHTML = `<input type="number" min="1" max="${items.length}" data-correct="${it.correct}" aria-label="Orden de ${it.text}"><span class="order-text">${it.text}</span>`;
+        container.appendChild(div);
+      });
+    }
+
+    else if (type === 'match') {
+      const pairs = JSON.parse(card.dataset.pairs);
+      const options = JSON.parse(card.dataset.options);
+      const container = card.querySelector('.match-list');
+      pairs.forEach((p) => {
+        const div = document.createElement('div');
+        div.className = 'match-item';
+        let opts = '<option value="">— elige —</option>';
+        options.forEach(o => opts += `<option value="${o}">${o}</option>`);
+        div.innerHTML = `<span class="match-text">${p.item}</span><select data-correct="${p.correct}" aria-label="Categoría de ${p.item}">${opts}</select>`;
+        container.appendChild(div);
+      });
+    }
+  });
+
+  function updateProgress() {
+    const resueltas = document.querySelectorAll('.activity-card.solved, .activity-card.wrong').length;
+    const aciertos = document.querySelectorAll('.activity-card.solved').length;
+    numEl.textContent = resueltas;
+    okEl.textContent = aciertos;
+    const pct = cards.length ? (resueltas / cards.length) * 100 : 0;
+    barEl.style.width = pct + '%';
+  }
+
+  function normalize(str) {
+    return String(str).trim().replace(',', '.').toLowerCase();
+  }
+
+  window.check = function(btn) {
+    const card = btn.closest('.activity-card');
+    const type = card.dataset.type;
+    const feedback = card.querySelector('.feedback');
+    let correct = false;
+    let msg = '';
+
+    if (type === 'radio') {
+      const checked = card.querySelector('input[type=radio]:checked');
+      if (!checked) {
+        feedback.className = 'feedback err show';
+        feedback.innerHTML = '<span class="icon">⚠️</span>Selecciona una opción antes de comprobar.';
+        return;
+      }
+      correct = checked.dataset.correct === 'true';
+      msg = correct
+        ? '<span class="icon">✓</span>¡Correcto! Bien razonado.'
+        : '<span class="icon">✗</span>No es la opción correcta. Mira la solución para entender por qué.';
+    }
+    else if (type === 'number') {
+      const input = card.querySelector('input[type=number]');
+      const raw = normalize(input.value);
+      if (raw === '') {
+        feedback.className = 'feedback err show';
+        feedback.innerHTML = '<span class="icon">⚠️</span>Escribe una respuesta antes de comprobar.';
+        return;
+      }
+      const num = parseFloat(raw);
+      if (isNaN(num)) {
+        feedback.className = 'feedback err show';
+        feedback.innerHTML = '<span class="icon">⚠️</span>La respuesta debe ser un número.';
+        return;
+      }
+      const expected = parseFloat(card.dataset.answer);
+      const tol = parseFloat(card.dataset.tol || '0');
+      correct = Math.abs(num - expected) <= tol + 1e-9;
+      msg = correct
+        ? '<span class="icon">✓</span>¡Correcto! Resultado: ' + expected + '.'
+        : '<span class="icon">✗</span>No es el resultado esperado. Revisa el cálculo o consulta la solución.';
+    }
+    else if (type === 'order') {
+      const inputs = card.querySelectorAll('.order-item input');
+      let allFilled = true;
+      let allCorrect = true;
+      inputs.forEach(inp => {
+        inp.classList.remove('ok-input', 'err-input');
+        const val = parseInt(inp.value);
+        const exp = parseInt(inp.dataset.correct);
+        if (isNaN(val)) { allFilled = false; return; }
+        if (val === exp) { inp.classList.add('ok-input'); }
+        else { inp.classList.add('err-input'); allCorrect = false; }
+      });
+      if (!allFilled) {
+        feedback.className = 'feedback err show';
+        feedback.innerHTML = '<span class="icon">⚠️</span>Asigna un número a cada elemento antes de comprobar.';
+        return;
+      }
+      correct = allCorrect;
+      msg = correct
+        ? '<span class="icon">✓</span>¡Todas las posiciones correctas!'
+        : '<span class="icon">✗</span>Algunas posiciones son incorrectas. Repasa la solución.';
+    }
+    else if (type === 'match') {
+      const selects = card.querySelectorAll('.match-item select');
+      let allFilled = true;
+      let allCorrect = true;
+      selects.forEach(sel => {
+        sel.classList.remove('ok-input', 'err-input');
+        if (sel.value === '') { allFilled = false; return; }
+        if (sel.value === sel.dataset.correct) { sel.classList.add('ok-input'); }
+        else { sel.classList.add('err-input'); allCorrect = false; }
+      });
+      if (!allFilled) {
+        feedback.className = 'feedback err show';
+        feedback.innerHTML = '<span class="icon">⚠️</span>Elige una opción en cada elemento antes de comprobar.';
+        return;
+      }
+      correct = allCorrect;
+      msg = correct
+        ? '<span class="icon">✓</span>¡Todas las parejas correctas!'
+        : '<span class="icon">✗</span>Algunas parejas son incorrectas. Revisa la solución.';
+    }
+
+    card.classList.remove('solved', 'wrong');
+    card.classList.add(correct ? 'solved' : 'wrong');
+    feedback.className = 'feedback ' + (correct ? 'ok' : 'err') + ' show';
+    feedback.innerHTML = msg;
+    updateProgress();
+  };
+
+  window.resetAll = function() {
+    if (!confirm('¿Reiniciar todas las actividades? Se perderán las respuestas marcadas.')) return;
+    cards.forEach(card => {
+      card.classList.remove('solved', 'wrong');
+      const fb = card.querySelector('.feedback');
+      if (fb) { fb.className = 'feedback'; fb.innerHTML = ''; }
+      card.querySelectorAll('input[type=radio], input[type=checkbox]').forEach(inp => inp.checked = false);
+      card.querySelectorAll('input[type=number], input[type=text]').forEach(inp => {
+        inp.value = '';
+        inp.classList.remove('ok-input', 'err-input');
+      });
+      card.querySelectorAll('select').forEach(sel => {
+        sel.value = '';
+        sel.classList.remove('ok-input', 'err-input');
+      });
+      card.querySelectorAll('details.solution').forEach(d => d.open = false);
+    });
+    updateProgress();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  };
+
+  updateProgress();
+})();
+</script>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

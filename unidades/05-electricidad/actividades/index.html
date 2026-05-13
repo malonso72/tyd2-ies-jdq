@@ -1,9 +1,669 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Actividades resueltas · En desarrollo</title>
-<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/hub.css">
-</head><body>
-<div class="hub-main" id="main-content">
-<section class="unidad-titulo-hero"><div class="num">Contenido en desarrollo</div><h1>📝 Actividades resueltas</h1><div class="duracion">Este recurso está previsto dentro de la arquitectura de la unidad.</div></section>
-<div class="bg"><a class="bc" href="../index.html"><span class="bi">⬅️</span><span class="bk">Volver a la unidad</span><span class="bn">Este apartado se completará progresivamente</span></a></div>
-</div></body></html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Actividades resueltas · Electricidad · TyD 2º ESO</title>
+<meta name="description" content="Actividades resueltas guiadas: Ley de Ohm, resistencias en serie y paralelo, potencia, energía y cálculos del CGMP de una vivienda.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/hub.css">
+<style>
+.activity-list{display:grid;gap:24px;margin:24px 0 42px}
+.activity-card{background:#fff;border:1px solid rgba(25,31,43,.12);border-radius:22px;padding:24px;box-shadow:0 12px 30px rgba(25,31,43,.07)}
+.activity-head{display:flex;gap:16px;align-items:flex-start;margin-bottom:16px}
+.activity-num{font-family:"JetBrains Mono",monospace;font-weight:700;color:#fff;background:#D4700A;border-radius:999px;padding:7px 12px;font-size:.85rem;white-space:nowrap}
+.activity-card h2{font-family:"Barlow Condensed",sans-serif;font-size:clamp(1.55rem,3vw,2.1rem);line-height:1.05;margin:0 0 6px}
+.statement{background:#f7f2e8;border-left:5px solid #D4700A;border-radius:12px;padding:16px 18px;margin:16px 0}
+.data-row{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.data-pill{font-family:"JetBrains Mono",monospace;background:#1a2238;color:#fffaf0;border-radius:999px;padding:6px 12px;font-size:.9rem}
+.answer-box{display:grid;grid-template-columns:minmax(160px,1fr) auto auto;gap:10px;align-items:center;margin:18px 0 8px}
+.answer-box input{width:100%;border:2px solid rgba(26,34,56,.18);border-radius:12px;padding:12px 14px;font-family:"JetBrains Mono",monospace;font-size:1rem}
+.unit-label{font-family:"JetBrains Mono",monospace;font-weight:700;color:#1a2238}
+.check-btn{border:0;border-radius:12px;padding:12px 16px;background:#1a2238;color:white;font-weight:700;cursor:pointer}
+.check-btn:hover{filter:brightness(1.12)}
+.feedback{min-height:28px;margin-top:8px;font-weight:700}
+.feedback.ok{color:#2e7d32} .feedback.bad{color:#b3261e}
+details.solution{margin-top:16px;background:#f9fbff;border:1px solid rgba(44,95,141,.18);border-radius:16px;overflow:hidden}
+details.solution summary{cursor:pointer;padding:14px 18px;font-weight:700;color:#1a2238;background:#eaf3fb}
+.solution-body{padding:18px}
+.solution-body h4{font-family:"Barlow Condensed",sans-serif;font-size:1.2rem;color:#D4700A;margin:14px 0 8px;letter-spacing:.02em}
+.solution-body h4:first-child{margin-top:0}
+.steps{counter-reset:step;display:grid;gap:12px}
+.step{position:relative;padding:14px 16px 14px 48px;background:white;border-radius:12px;border:1px solid rgba(26,34,56,.10)}
+.step::before{counter-increment:step;content:counter(step);position:absolute;left:14px;top:14px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#D4700A;color:white;font-family:"JetBrains Mono",monospace;font-size:.8rem;font-weight:700}
+.note{color:#4a5568;font-size:.95rem;margin-top:8px}
+.bloque-titulo{font-family:"Barlow Condensed",sans-serif;font-size:1.6rem;font-weight:700;color:#D4700A;margin:28px 0 4px;text-transform:uppercase;letter-spacing:.04em}
+.bloque-sub{font-size:.95rem;color:#4a5568;margin-bottom:8px}
+.schema{display:flex;justify-content:center;background:#fdfaf3;border:1px dashed #d4a070;border-radius:14px;padding:16px;margin:14px 0}
+.schema svg{max-width:100%;height:auto}
+.subactivity{margin:18px 0 0;padding:14px 16px;background:#f7f2e8;border-radius:12px;border-left:4px solid #D4700A}
+.subactivity h3{font-family:"Barlow Condensed",sans-serif;font-size:1.15rem;color:#1a2238;margin:0 0 8px;text-transform:none;letter-spacing:0}
+.subactivity .answer-box{margin-top:10px}
+.aplicacion{margin-top:14px;padding:14px 16px;background:#eaf3fb;border-radius:12px;border-left:4px solid #1B4F8A}
+.aplicacion h3{font-family:"Barlow Condensed",sans-serif;font-size:1.1rem;color:#1B4F8A;margin:0 0 6px;text-transform:none}
+.aplicacion p{margin:0;font-size:.95rem;color:#4a5568}
+@media(max-width:700px){.answer-box{grid-template-columns:1fr}.check-btn{width:100%}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+<header class="curso-hd"><span class="curso-sb">TyD 2º ESO · U5 Electricidad</span></header>
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Inicio</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>⚡</span><span class="nc-lbl">Electricidad</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>📝</span><span class="nc-lbl">Actividades</span></span>
+</nav>
+<div id="main-content">
+<section class="unidad-titulo-hero">
+  <div class="num">U5 · Actividades resueltas</div>
+  <h1>📝 Ley de Ohm, potencia y cálculos del cuadro</h1>
+  <div class="duracion">19 ejercicios guiados con esquemas, comprobación automática y solución paso a paso</div>
+</section>
+<div class="hub-main">
+  <div class="section-title">🎯 Cómo trabajar esta página</div>
+  <div class="aprender-grid">
+    <div class="aprender-card saber"><h3>1 · Intenta resolver</h3><ul><li>Observa el esquema o los datos.</li><li>Escribe la fórmula.</li><li>Sustituye datos y calcula.</li></ul></div>
+    <div class="aprender-card hacer"><h3>2 · Comprueba</h3><ul><li>Introduce solo el número.</li><li>Usa punto o coma decimal.</li><li>Respeta la unidad indicada.</li></ul></div>
+    <div class="aprender-card evaluar"><h3>3 · Revisa</h3><ul><li>Si fallas, despliega la solución.</li><li>Repite el cálculo sin mirar.</li><li>Corrige el procedimiento.</li></ul></div>
+  </div>
+  <div class="activity-list">
+
+    <!-- ============== BLOQUE 1 ============== -->
+    <div class="bloque-titulo">Bloque 1 · Ley de Ohm en un circuito simple</div>
+    <div class="bloque-sub">Un circuito con <b>pila, interruptor y una resistencia</b>. Practica las tres formas de la Ley de Ohm: <b>V = I · R</b>.</div>
+
+    <article class="activity-card">
+      <div class="activity-head"><span class="activity-num">Ej. 1</span><div><h2>Calcular la intensidad</h2><p class="note">Conoces V y R: despeja I.</p></div></div>
+      <div class="schema" id="sch1"></div>
+      <div class="statement">Una pila de <b>12 V</b> alimenta una resistencia de <b>4 Ω</b>. ¿Qué intensidad circula por el circuito?</div>
+      <div class="data-row"><span class="data-pill">V = 12 V</span><span class="data-pill">R = 4 Ω</span><span class="data-pill">I = ?</span></div>
+      <div class="answer-box"><input id="ans1" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">A</span><button class="check-btn" onclick="checkAnswer('ans1', 3, 0.05)">Comprobar</button></div>
+      <div id="fb-ans1" class="feedback"></div>
+      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
+        <div class="step">Ley de Ohm: V = I · R.</div>
+        <div class="step">Despejamos la intensidad: I = V / R.</div>
+        <div class="step">Sustituimos: I = 12 / 4 = 3 A.</div>
+        <div class="step">Resultado: <b>I = 3 A</b>.</div>
+      </div></div></details>
+    </article>
+
+    <article class="activity-card">
+      <div class="activity-head"><span class="activity-num">Ej. 2</span><div><h2>Calcular la resistencia</h2><p class="note">Conoces V y I: despeja R.</p></div></div>
+      <div class="schema" id="sch2"></div>
+      <div class="statement">En un circuito de <b>10 V</b> circula una intensidad de <b>2 A</b>. ¿Cuál es el valor de la resistencia?</div>
+      <div class="data-row"><span class="data-pill">V = 10 V</span><span class="data-pill">I = 2 A</span><span class="data-pill">R = ?</span></div>
+      <div class="answer-box"><input id="ans2" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">Ω</span><button class="check-btn" onclick="checkAnswer('ans2', 5, 0.05)">Comprobar</button></div>
+      <div id="fb-ans2" class="feedback"></div>
+      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
+        <div class="step">Ley de Ohm: V = I · R.</div>
+        <div class="step">Despejamos la resistencia: R = V / I.</div>
+        <div class="step">Sustituimos: R = 10 / 2 = 5 Ω.</div>
+        <div class="step">Resultado: <b>R = 5 Ω</b>.</div>
+      </div></div></details>
+    </article>
+
+    <article class="activity-card">
+      <div class="activity-head"><span class="activity-num">Ej. 3</span><div><h2>Calcular la tensión</h2><p class="note">Conoces R e I: aplica V = I · R.</p></div></div>
+      <div class="schema" id="sch3"></div>
+      <div class="statement">Una resistencia de <b>6 Ω</b> tiene una intensidad de <b>4 A</b>. ¿Qué tensión proporciona la pila?</div>
+      <div class="data-row"><span class="data-pill">R = 6 Ω</span><span class="data-pill">I = 4 A</span><span class="data-pill">V = ?</span></div>
+      <div class="answer-box"><input id="ans3" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">V</span><button class="check-btn" onclick="checkAnswer('ans3', 24, 0.1)">Comprobar</button></div>
+      <div id="fb-ans3" class="feedback"></div>
+      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
+        <div class="step">Ley de Ohm: V = I · R.</div>
+        <div class="step">Sustituimos directamente: V = 4 · 6.</div>
+        <div class="step">V = 24 V.</div>
+        <div class="step">Resultado: <b>V = 24 V</b>.</div>
+      </div></div></details>
+    </article>
+
+    <!-- ============== BLOQUE 2 ============== -->
+    <div class="bloque-titulo">Bloque 2 · Resistencias en serie</div>
+    <div class="bloque-sub">En serie, la resistencia equivalente es la <b>suma</b> de todas las resistencias: <b>R<sub>eq</sub> = R₁ + R₂ + ...</b></div>
+
+    <article class="activity-card">
+      <div class="activity-head"><span class="activity-num">Ej. 4</span><div><h2>Dos resistencias en serie</h2><p class="note">Calcula primero la R<sub>eq</sub> y después la intensidad.</p></div></div>
+      <div class="schema" id="sch4"></div>
+      <div class="statement">Dos resistencias de <b>R₁ = 2 Ω</b> y <b>R₂ = 4 Ω</b> están conectadas en serie a una pila de <b>12 V</b>.</div>
+      <div class="data-row"><span class="data-pill">R₁ = 2 Ω</span><span class="data-pill">R₂ = 4 Ω</span><span class="data-pill">V = 12 V</span></div>
+
+      <div class="subactivity">
+        <h3>a) Calcula la resistencia equivalente del circuito.</h3>
+        <div class="answer-box"><input id="ans4a" type="text" inputmode="decimal" placeholder="Resistencia equivalente"><span class="unit-label">Ω</span><button class="check-btn" onclick="checkAnswer('ans4a', 6, 0.05)">Comprobar</button></div>
+        <div id="fb-ans4a" class="feedback"></div>
+      </div>
+      <div class="subactivity">
+        <h3>b) Calcula la intensidad que circula por el circuito.</h3>
+        <div class="answer-box"><input id="ans4b" type="text" inputmode="decimal" placeholder="Intensidad"><span class="unit-label">A</span><button class="check-btn" onclick="checkAnswer('ans4b', 2, 0.05)">Comprobar</button></div>
+        <div id="fb-ans4b" class="feedback"></div>
+      </div>
+
+      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body">
+        <h4>a) Resistencia equivalente</h4>
+        <div class="steps">
+          <div class="step">Fórmula en serie: R<sub>eq</sub> = R₁ + R₂.</div>
+          <div class="step">Sustituimos: R<sub>eq</sub> = 2 + 4.</div>
+          <div class="step">R<sub>eq</sub> = 6 Ω.</div>
+        </div>
+        <h4>b) Intensidad</h4>
+        <div class="steps">
+          <div class="step">Ley de Ohm aplicada al circuito completo: I = V / R<sub>eq</sub>.</div>
+          <div class="step">Sustituimos: I = 12 / 6 = 2 A.</div>
+          <div class="step">Resultado: <b>I = 2 A</b>. En serie, esta intensidad es la misma a través de las dos resistencias.</div>
+        </div>
+      </div></details>
+    </article>
+
+    <article class="activity-card">
+      <div class="activity-head"><span class="activity-num">Ej. 5</span><div><h2>Tres resistencias en serie</h2><p class="note">Mismo procedimiento que el anterior, pero con tres resistencias.</p></div></div>
+      <div class="schema" id="sch5"></div>
+      <div class="statement">Tres resistencias de <b>R₁ = 2 Ω</b>, <b>R₂ = 4 Ω</b> y <b>R₃ = 6 Ω</b> están conectadas en serie a una pila de <b>24 V</b>.</div>
+      <div class="data-row"><span class="data-pill">R₁ = 2 Ω</span><span class="data-pill">R₂ = 4 Ω</span><span class="data-pill">R₃ = 6 Ω</span><span class="data-pill">V = 24 V</span></div>
+
+      <div class="subactivity">
+        <h3>a) Calcula la resistencia equivalente del circuito.</h3>
+        <div class="answer-box"><input id="ans5a" type="text" inputmode="decimal" placeholder="Resistencia equivalente"><span class="unit-label">Ω</span><button class="check-btn" onclick="checkAnswer('ans5a', 12, 0.1)">Comprobar</button></div>
+        <div id="fb-ans5a" class="feedback"></div>
+      </div>
+      <div class="subactivity">
+        <h3>b) Calcula la intensidad que circula por el circuito.</h3>
+        <div class="answer-box"><input id="ans5b" type="text" inputmode="decimal" placeholder="Intensidad"><span class="unit-label">A</span><button class="check-btn" onclick="checkAnswer('ans5b', 2, 0.05)">Comprobar</button></div>
+        <div id="fb-ans5b" class="feedback"></div>
+      </div>
+
+      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body">
+        <h4>a) Resistencia equivalente</h4>
+        <div class="steps">
+          <div class="step">Fórmula en serie: R<sub>eq</sub> = R₁ + R₂ + R₃.</div>
+          <div class="step">Sustituimos: R<sub>eq</sub> = 2 + 4 + 6.</div>
+          <div class="step">R<sub>eq</sub> = 12 Ω.</div>
+        </div>
+        <h4>b) Intensidad</h4>
+        <div class="steps">
+          <div class="step">Ley de Ohm: I = V / R<sub>eq</sub>.</div>
+          <div class="step">Sustituimos: I = 24 / 12 = 2 A.</div>
+          <div class="step">Resultado: <b>I = 2 A</b>.</div>
+        </div>
+      </div></details>
+    </article>
+
+    <!-- ============== BLOQUE 3 ============== -->
+    <div class="bloque-titulo">Bloque 3 · Resistencias en paralelo</div>
+    <div class="bloque-sub">En paralelo usamos la fórmula del <b>producto sobre la suma</b>:<br><b>R<sub>eq</sub> = (R₁ · R₂) / (R₁ + R₂)</b>. Para tres resistencias, aplicamos la misma fórmula <b>dos veces</b>.</div>
+
+    <article class="activity-card">
+      <div class="activity-head"><span class="activity-num">Ej. 6</span><div><h2>Dos resistencias en paralelo</h2><p class="note">Aplica la fórmula del producto sobre la suma.</p></div></div>
+      <div class="schema" id="sch6"></div>
+      <div class="statement">Dos resistencias de <b>R₁ = 6 Ω</b> y <b>R₂ = 3 Ω</b> están conectadas en paralelo a una pila de <b>12 V</b>.</div>
+      <div class="data-row"><span class="data-pill">R₁ = 6 Ω</span><span class="data-pill">R₂ = 3 Ω</span><span class="data-pill">V = 12 V</span></div>
+
+      <div class="subactivity">
+        <h3>a) Calcula la resistencia equivalente.</h3>
+        <div class="answer-box"><input id="ans6a" type="text" inputmode="decimal" placeholder="Resistencia equivalente"><span class="unit-label">Ω</span><button class="check-btn" onclick="checkAnswer('ans6a', 2, 0.05)">Comprobar</button></div>
+        <div id="fb-ans6a" class="feedback"></div>
+      </div>
+      <div class="subactivity">
+        <h3>b) Calcula la intensidad total que entrega la pila.</h3>
+        <div class="answer-box"><input id="ans6b" type="text" inputmode="decimal" placeholder="Intensidad total"><span class="unit-label">A</span><button class="check-btn" onclick="checkAnswer('ans6b', 6, 0.05)">Comprobar</button></div>
+        <div id="fb-ans6b" class="feedback"></div>
+      </div>
+
+      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body">
+        <h4>a) Resistencia equivalente</h4>
+        <div class="steps">
+          <div class="step">Fórmula del producto sobre la suma: R<sub>eq</sub> = (R₁ · R₂) / (R₁ + R₂).</div>
+          <div class="step">Sustituimos arriba: R₁ · R₂ = 6 · 3 = 18.</div>
+          <div class="step">Sustituimos abajo: R₁ + R₂ = 6 + 3 = 9.</div>
+          <div class="step">Dividimos: R<sub>eq</sub> = 18 / 9 = 2 Ω. ⚠️ Observa que <b>la R<sub>eq</sub> es menor</b> que cualquiera de las dos resistencias originales (siempre ocurre en paralelo).</div>
+        </div>
+        <h4>b) Intensidad total</h4>
+        <div class="steps">
+          <div class="step">Ley de Ohm aplicada al conjunto: I = V / R<sub>eq</sub>.</div>
+          <div class="step">Sustituimos: I = 12 / 2 = 6 A.</div>
+          <div class="step">Resultado: <b>I = 6 A</b>. Esta es la intensidad <b>total</b> que sale de la pila; luego se reparte entre las dos ramas.</div>
+        </div>
+      </div></details>
+    </article>
+
+    <article class="activity-card">
+      <div class="activity-head"><span class="activity-num">Ej. 7</span><div><h2>Tres resistencias en paralelo</h2><p class="note">Aplicamos la fórmula del producto sobre la suma <b>dos veces</b>: primero asociamos R₁ con R₂, y luego ese resultado con R₃.</p></div></div>
+      <div class="schema" id="sch7"></div>
+      <div class="statement">Tres resistencias de <b>R₁ = 6 Ω</b>, <b>R₂ = 3 Ω</b> y <b>R₃ = 2 Ω</b> están conectadas en paralelo a una pila de <b>12 V</b>.</div>
+      <div class="data-row"><span class="data-pill">R₁ = 6 Ω</span><span class="data-pill">R₂ = 3 Ω</span><span class="data-pill">R₃ = 2 Ω</span><span class="data-pill">V = 12 V</span></div>
+
+      <div class="subactivity">
+        <h3>a) Calcula la resistencia equivalente aplicando dos veces la fórmula del producto sobre la suma.</h3>
+        <div class="answer-box"><input id="ans7a" type="text" inputmode="decimal" placeholder="Resistencia equivalente"><span class="unit-label">Ω</span><button class="check-btn" onclick="checkAnswer('ans7a', 1, 0.05)">Comprobar</button></div>
+        <div id="fb-ans7a" class="feedback"></div>
+      </div>
+      <div class="subactivity">
+        <h3>b) Calcula la intensidad total que entrega la pila.</h3>
+        <div class="answer-box"><input id="ans7b" type="text" inputmode="decimal" placeholder="Intensidad total"><span class="unit-label">A</span><button class="check-btn" onclick="checkAnswer('ans7b', 12, 0.1)">Comprobar</button></div>
+        <div id="fb-ans7b" class="feedback"></div>
+      </div>
+
+      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body">
+        <h4>a) Resistencia equivalente — método de asociar de dos en dos</h4>
+        <div class="steps">
+          <div class="step"><b>Paso 1.</b> Asociamos primero R₁ y R₂ con la fórmula del producto sobre la suma:<br>R₁₂ = (R₁ · R₂) / (R₁ + R₂) = (6 · 3) / (6 + 3) = 18 / 9 = <b>2 Ω</b>.</div>
+          <div class="step"><b>Paso 2.</b> Ahora asociamos ese resultado (R₁₂ = 2 Ω) con R₃ = 2 Ω, aplicando la misma fórmula:<br>R<sub>eq</sub> = (R₁₂ · R₃) / (R₁₂ + R₃) = (2 · 2) / (2 + 2) = 4 / 4 = <b>1 Ω</b>.</div>
+          <div class="step">Resultado: <b>R<sub>eq</sub> = 1 Ω</b>.</div>
+        </div>
+        <h4>b) Intensidad total</h4>
+        <div class="steps">
+          <div class="step">Ley de Ohm: I = V / R<sub>eq</sub>.</div>
+          <div class="step">Sustituimos: I = 12 / 1 = 12 A.</div>
+          <div class="step">Resultado: <b>I = 12 A</b>. Cuantas más resistencias añades en paralelo, <b>más intensidad</b> pide el circuito (la R<sub>eq</sub> baja). Por eso si conectas muchos aparatos a la vez en casa salta el PIA.</div>
+        </div>
+        <div class="aplicacion">
+          <h3>🔎 Aplicación: comprobación con la fórmula general</h3>
+          <p>La fórmula general para cualquier número de resistencias en paralelo es <b>1/R<sub>eq</sub> = 1/R₁ + 1/R₂ + 1/R₃</b>. Vamos a comprobar que sale lo mismo:</p>
+          <p style="margin-top:8px">1/R<sub>eq</sub> = 1/6 + 1/3 + 1/2 = 1/6 + 2/6 + 3/6 = 6/6 = 1. Por tanto <b>R<sub>eq</sub> = 1 Ω</b> ✓. Cuando dominas las fracciones, esta fórmula general es más rápida; mientras tanto, asociar de dos en dos funciona igual de bien.</p>
+        </div>
+      </div></details>
+    </article>
+
+    <!-- ============== BLOQUE 4 — BONUS ============== -->
+    <div class="bloque-titulo">Bloque 4 · Potencia, energía y coste</div>
+    <div class="bloque-sub">Aplica las fórmulas <b>P = V · I</b>, <b>E = P · t</b> y el cálculo del coste eléctrico.</div>
+
+    <article class="activity-card">
+      <div class="activity-head"><span class="activity-num">Ej. 8</span><div><h2>Calcular la potencia eléctrica</h2><p class="note">Aplica P = V · I.</p></div></div>
+      <div class="statement">Una bombilla está conectada a <b>230 V</b> y por ella circula una intensidad de <b>0,3 A</b>. ¿Cuál es la potencia que consume?</div>
+      <div class="data-row"><span class="data-pill">V = 230 V</span><span class="data-pill">I = 0,3 A</span><span class="data-pill">P = ?</span></div>
+      <div class="answer-box"><input id="ans8" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">W</span><button class="check-btn" onclick="checkAnswer('ans8', 69, 0.5)">Comprobar</button></div>
+      <div id="fb-ans8" class="feedback"></div>
+      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
+        <div class="step">Fórmula: P = V · I.</div>
+        <div class="step">Sustituimos: P = 230 · 0,3.</div>
+        <div class="step">P = 69 W.</div>
+        <div class="step">Resultado: <b>P = 69 W</b>.</div>
+      </div></div></details>
+    </article>
+
+    <article class="activity-card">
+      <div class="activity-head"><span class="activity-num">Ej. 9</span><div><h2>Potencia con resistencia e intensidad</h2><p class="note">Usa P = I² · R.</p></div></div>
+      <div class="statement">Por una resistencia de <b>10 Ω</b> circula una intensidad de <b>2 A</b>. ¿Qué potencia disipa?</div>
+      <div class="data-row"><span class="data-pill">R = 10 Ω</span><span class="data-pill">I = 2 A</span><span class="data-pill">P = ?</span></div>
+      <div class="answer-box"><input id="ans9" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">W</span><button class="check-btn" onclick="checkAnswer('ans9', 40, 0.5)">Comprobar</button></div>
+      <div id="fb-ans9" class="feedback"></div>
+      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
+        <div class="step">Fórmula alternativa: P = I² · R.</div>
+        <div class="step">Sustituimos: P = 2² · 10 = 4 · 10.</div>
+        <div class="step">P = 40 W.</div>
+        <div class="step">Resultado: <b>P = 40 W</b>.</div>
+      </div></div></details>
+    </article>
+
+    <article class="activity-card">
+      <div class="activity-head"><span class="activity-num">Ej. 10</span><div><h2>Energía consumida</h2><p class="note">Usa E = P · t (kWh).</p></div></div>
+      <div class="statement">Un horno de <b>2 000 W</b> funciona durante <b>1,5 horas</b>. ¿Cuánta energía consume? Da el resultado en <b>kWh</b>.</div>
+      <div class="data-row"><span class="data-pill">P = 2000 W = 2 kW</span><span class="data-pill">t = 1,5 h</span><span class="data-pill">E = ?</span></div>
+      <div class="answer-box"><input id="ans10" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">kWh</span><button class="check-btn" onclick="checkAnswer('ans10', 3, 0.05)">Comprobar</button></div>
+      <div id="fb-ans10" class="feedback"></div>
+      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
+        <div class="step">Pasamos la potencia a kW: 2 000 W = 2 kW.</div>
+        <div class="step">Fórmula: E = P · t.</div>
+        <div class="step">Sustituimos: E = 2 · 1,5 = 3 kWh.</div>
+        <div class="step">Resultado: <b>E = 3 kWh</b>.</div>
+      </div></div></details>
+    </article>
+
+    <article class="activity-card">
+      <div class="activity-head"><span class="activity-num">Ej. 11</span><div><h2>Coste de la energía consumida</h2><p class="note">Multiplica energía por precio.</p></div></div>
+      <div class="statement">El horno del ejercicio anterior consume <b>3 kWh</b>. Si la electricidad cuesta <b>0,20 €/kWh</b>, ¿cuánto cuesta su uso?</div>
+      <div class="data-row"><span class="data-pill">E = 3 kWh</span><span class="data-pill">Precio = 0,20 €/kWh</span><span class="data-pill">Coste = ?</span></div>
+      <div class="answer-box"><input id="ans11" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">€</span><button class="check-btn" onclick="checkAnswer('ans11', 0.6, 0.02)">Comprobar</button></div>
+      <div id="fb-ans11" class="feedback"></div>
+      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
+        <div class="step">Fórmula: Coste = E · precio.</div>
+        <div class="step">Sustituimos: Coste = 3 · 0,20.</div>
+        <div class="step">Coste = 0,60 €.</div>
+        <div class="step">Resultado: <b>Coste = 0,60 €</b>.</div>
+      </div></div></details>
+    </article>
+
+    <!-- ============== BLOQUE 5 — CGMP ============== -->
+    <div class="bloque-titulo">Bloque 5 · Cálculos del cuadro CGMP</div>
+    <div class="bloque-sub">Aplica las fórmulas a situaciones reales de tu vivienda. Recuerda: <b>V = 230 V</b> (red doméstica española).</div>
+
+    <article class="activity-card">
+      <div class="activity-head"><span class="activity-num">Ej. 12</span><div><h2>Intensidad que pide la vitrocerámica</h2><p class="note">Aplica la fórmula despejando I.</p></div></div>
+      <div class="statement">La vitrocerámica de tu casa consume <b>3 500 W</b> y está conectada a la red de <b>230 V</b>. Calcula la intensidad de corriente que circula por el circuito C3.</div>
+      <div class="data-row"><span class="data-pill">P = 3500 W</span><span class="data-pill">V = 230 V</span><span class="data-pill">I = ?</span></div>
+      <div class="answer-box"><input id="ans12" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">A</span><button class="check-btn" onclick="checkAnswer('ans12', 15.22, 0.1)">Comprobar</button></div>
+      <div id="fb-ans12" class="feedback"></div>
+      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
+        <div class="step">Partimos de la fórmula de la potencia: P = V · I.</div>
+        <div class="step">Despejamos la intensidad: I = P / V.</div>
+        <div class="step">Sustituimos: I = 3500 / 230 ≈ 15,22 A.</div>
+        <div class="step">Resultado: I ≈ 15,22 A. El circuito C3 lleva un PIA de 25 A, así que <b>no salta</b>: la vitro pide 15,22 A y el PIA aguanta hasta 25 A.</div>
+      </div></div></details>
+    </article>
+
+    <article class="activity-card">
+      <div class="activity-head"><span class="activity-num">Ej. 13</span><div><h2>Plancha en el circuito de enchufes</h2><p class="note">Comprueba si el PIA de C2 aguanta.</p></div></div>
+      <div class="statement">Enchufas una <b>plancha de 2 000 W</b> en un enchufe del circuito C2, protegido por un PIA de <b>16 A</b>. Calcula la intensidad que circula. (V = 230 V)</div>
+      <div class="data-row"><span class="data-pill">P = 2000 W</span><span class="data-pill">V = 230 V</span><span class="data-pill">PIA = 16 A</span><span class="data-pill">I = ?</span></div>
+      <div class="answer-box"><input id="ans13" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">A</span><button class="check-btn" onclick="checkAnswer('ans13', 8.70, 0.1)">Comprobar</button></div>
+      <div id="fb-ans13" class="feedback"></div>
+      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
+        <div class="step">Fórmula: I = P / V.</div>
+        <div class="step">Sustituimos: I = 2000 / 230 ≈ 8,70 A.</div>
+        <div class="step">Comparamos con el PIA: 8,70 A &lt; 16 A.</div>
+        <div class="step">Resultado: I ≈ 8,70 A. La plancha sola <b>no hace saltar</b> el PIA C2, pero si añades el secador (otros 8 A) sí saltaría.</div>
+      </div></div></details>
+    </article>
+
+    <article class="activity-card">
+      <div class="activity-head"><span class="activity-num">Ej. 14</span><div><h2>Potencia máxima de un PIA de 16 A</h2><p class="note">Calcula el "techo" de cada circuito.</p></div></div>
+      <div class="statement">Un circuito está protegido por un PIA de <b>16 A</b>. ¿Cuál es la potencia máxima que puede consumir ese circuito sin que el PIA salte? (V = 230 V)</div>
+      <div class="data-row"><span class="data-pill">I = 16 A</span><span class="data-pill">V = 230 V</span><span class="data-pill">P máx = ?</span></div>
+      <div class="answer-box"><input id="ans14" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">W</span><button class="check-btn" onclick="checkAnswer('ans14', 3680, 10)">Comprobar</button></div>
+      <div id="fb-ans14" class="feedback"></div>
+      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
+        <div class="step">Aplicamos la fórmula de la potencia: P = V · I.</div>
+        <div class="step">Sustituimos con el valor máximo: P = 230 · 16 = 3 680 W.</div>
+        <div class="step">Resultado: P máx ≈ 3 680 W. Si conectas aparatos que sumen más que eso en C2, el PIA saltará por sobrecarga.</div>
+      </div></div></details>
+    </article>
+
+    <article class="activity-card">
+      <div class="activity-head"><span class="activity-num">Ej. 15</span><div><h2>Suma de potencias</h2><p class="note">Cuánto consumes en este momento.</p></div></div>
+      <div class="statement">En tu casa están encendidos a la vez: <b>frigorífico (250 W)</b>, <b>televisor (150 W)</b>, <b>lavadora (2 200 W)</b> y <b>microondas (900 W)</b>. ¿Cuánta potencia total estás consumiendo?</div>
+      <div class="data-row"><span class="data-pill">Frigo 250 W</span><span class="data-pill">TV 150 W</span><span class="data-pill">Lavadora 2200 W</span><span class="data-pill">Micro 900 W</span></div>
+      <div class="answer-box"><input id="ans15" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">W</span><button class="check-btn" onclick="checkAnswer('ans15', 3500, 5)">Comprobar</button></div>
+      <div id="fb-ans15" class="feedback"></div>
+      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
+        <div class="step">La potencia total es la suma de las potencias de cada aparato.</div>
+        <div class="step">P total = 250 + 150 + 2 200 + 900.</div>
+        <div class="step">P total = 3 500 W = 3,5 kW.</div>
+        <div class="step">Resultado: 3 500 W. Si tu casa tiene contratados 4,6 kW, estás dentro del límite.</div>
+      </div></div></details>
+    </article>
+
+    <article class="activity-card">
+      <div class="activity-head"><span class="activity-num">Ej. 16</span><div><h2>¿Salta el ICP?</h2><p class="note">Compara consumo total con la potencia contratada.</p></div></div>
+      <div class="statement">Tu vivienda tiene contratados <b>4 600 W</b>. Si pones a calentar la <b>vitrocerámica (3 500 W)</b> y el <b>horno (2 500 W)</b> a la vez, ¿qué potencia total estás pidiendo? (Después decide si salta el ICP o no.)</div>
+      <div class="data-row"><span class="data-pill">Contratada 4600 W</span><span class="data-pill">Vitro 3500 W</span><span class="data-pill">Horno 2500 W</span><span class="data-pill">P total = ?</span></div>
+      <div class="answer-box"><input id="ans16" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">W</span><button class="check-btn" onclick="checkAnswer('ans16', 6000, 5)">Comprobar</button></div>
+      <div id="fb-ans16" class="feedback"></div>
+      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
+        <div class="step">Sumamos la potencia de los dos aparatos: 3 500 + 2 500 = 6 000 W.</div>
+        <div class="step">Comparamos con la contratada: 6 000 W &gt; 4 600 W.</div>
+        <div class="step">Como pides más potencia de la contratada, <b>salta el ICP</b> y se va la luz de toda la casa.</div>
+        <div class="step">Resultado: 6 000 W. Para usar ambos a la vez tendrías que subir la contratación o no encenderlos simultáneamente.</div>
+      </div></div></details>
+    </article>
+
+    <article class="activity-card">
+      <div class="activity-head"><span class="activity-num">Ej. 17</span><div><h2>¿Cuántos vatios me quedan libres?</h2><p class="note">Margen disponible antes de saltar el ICP.</p></div></div>
+      <div class="statement">Tu casa tiene contratados <b>4 600 W</b>. Llevas conectados aparatos que suman <b>3 000 W</b>. ¿Cuántos vatios más puedes conectar antes de superar la potencia contratada?</div>
+      <div class="data-row"><span class="data-pill">Contratada 4600 W</span><span class="data-pill">Ya conectado 3000 W</span><span class="data-pill">Margen = ?</span></div>
+      <div class="answer-box"><input id="ans17" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">W</span><button class="check-btn" onclick="checkAnswer('ans17', 1600, 5)">Comprobar</button></div>
+      <div id="fb-ans17" class="feedback"></div>
+      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
+        <div class="step">El margen libre es la diferencia entre la potencia contratada y la que ya consumes.</div>
+        <div class="step">Margen = 4 600 − 3 000 = 1 600 W.</div>
+        <div class="step">Resultado: 1 600 W. Podrías encender, por ejemplo, un microondas (900 W) y un secador (600 W) sin que salte el ICP. Pero si añades una plancha (2 000 W), ¡cataplás!</div>
+      </div></div></details>
+    </article>
+
+    <article class="activity-card">
+      <div class="activity-head"><span class="activity-num">Ej. 18</span><div><h2>Energía mensual del termo</h2><p class="note">Energía = potencia × tiempo.</p></div></div>
+      <div class="statement">Un <b>termo eléctrico de 1 500 W</b> está funcionando una media de <b>3 horas al día</b>. ¿Cuánta energía consume en <b>30 días</b>? Da el resultado en <b>kWh</b>.</div>
+      <div class="data-row"><span class="data-pill">P = 1500 W = 1,5 kW</span><span class="data-pill">t = 3 h/día</span><span class="data-pill">días = 30</span><span class="data-pill">E = ?</span></div>
+      <div class="answer-box"><input id="ans18" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">kWh</span><button class="check-btn" onclick="checkAnswer('ans18', 135, 1)">Comprobar</button></div>
+      <div id="fb-ans18" class="feedback"></div>
+      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
+        <div class="step">Para usar kWh, pasamos la potencia a kilovatios: 1 500 W = 1,5 kW.</div>
+        <div class="step">Calculamos las horas totales al mes: 3 h/día · 30 días = 90 h.</div>
+        <div class="step">Energía: E = P · t = 1,5 kW · 90 h = 135 kWh.</div>
+        <div class="step">Resultado: 135 kWh al mes solo por el termo. ¡Es uno de los aparatos que más consume!</div>
+      </div></div></details>
+    </article>
+
+    <article class="activity-card">
+      <div class="activity-head"><span class="activity-num">Ej. 19</span><div><h2>Coste mensual del termo</h2><p class="note">El último paso: lo que ve tu familia en la factura.</p></div></div>
+      <div class="statement">El termo del ejercicio anterior consume <b>135 kWh al mes</b>. Si la electricidad cuesta <b>0,15 €/kWh</b>, ¿cuánto dinero se gasta al mes solo por el termo?</div>
+      <div class="data-row"><span class="data-pill">E = 135 kWh</span><span class="data-pill">Precio = 0,15 €/kWh</span><span class="data-pill">Coste = ?</span></div>
+      <div class="answer-box"><input id="ans19" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">€</span><button class="check-btn" onclick="checkAnswer('ans19', 20.25, 0.1)">Comprobar</button></div>
+      <div id="fb-ans19" class="feedback"></div>
+      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
+        <div class="step">El coste se calcula multiplicando la energía por el precio del kWh.</div>
+        <div class="step">Coste = 135 kWh · 0,15 €/kWh.</div>
+        <div class="step">Coste = 20,25 €.</div>
+        <div class="step">Resultado: 20,25 € al mes solo por el termo. Por eso es importante <b>aislar bien el termo</b> y programarlo para que no caliente todo el día.</div>
+      </div></div></details>
+    </article>
+
+  </div>
+  <div class="bg">
+    <a href="../index.html" class="bc"><span class="bi">⬅️</span><span class="bk">Volver a Electricidad</span><span class="bn">Libro digital, interactivos y proyecto</span></a>
+    <a href="../interactivos/cgmp.html" class="bc"><span class="bi">⚡</span><span class="bk">Cuadro de la vivienda</span><span class="bn">Simulación interactiva del CGMP</span></a>
+    <a href="https://educacionadistancia.juntadeandalucia.es/centros/granada/login/index.php" class="bc tipo-tool" target="_blank"><span class="bi">📤</span><span class="bk">Entrega Moodle</span><span class="bn">Subir evidencias o consultar la tarea</span></a>
+  </div>
+</div>
+</div>
+
+<script>
+/* ============================================================
+   ESQUEMAS SVG · símbolos eléctricos didácticos
+   Flecha I siempre presente · sentido convencional (+→−)
+============================================================ */
+
+const wireStyle = 'stroke="#1a2238" stroke-width="2.5" fill="none" stroke-linecap="round"';
+const battStyle = 'stroke="#1a2238" stroke-width="3" stroke-linecap="round"';
+const labelStyle = 'font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="#1a2238"';
+const labelSmall = 'font-family="JetBrains Mono, monospace" font-size="11" fill="#4a5568"';
+
+// Pila vertical (en cable izquierdo): + arriba (línea larga), − abajo (línea corta)
+function pila(cx, cy, V){
+  return `
+    <line x1="${cx-18}" y1="${cy-5}" x2="${cx+18}" y2="${cy-5}" ${battStyle}/>
+    <line x1="${cx-10}" y1="${cy+5}" x2="${cx+10}" y2="${cy+5}" ${battStyle}/>
+    <text x="${cx-26}" y="${cy-2}" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="14" font-weight="700" fill="#b3261e">+</text>
+    <text x="${cx-26}" y="${cy+13}" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="14" font-weight="700" fill="#1a2238">−</text>
+    <text x="${cx+24}" y="${cy+4}" ${labelStyle}>${V}</text>
+  `;
+}
+
+// Resistencia horizontal entre (x1, y) y (x2, y)
+function resistenciaH(x1, x2, y, etiqueta){
+  const w = x2 - x1, cx = (x1+x2)/2;
+  return `
+    <rect x="${x1}" y="${y-10}" width="${w}" height="20" fill="#fff" stroke="#1a2238" stroke-width="2"/>
+    <text x="${cx}" y="${y-15}" text-anchor="middle" ${labelStyle}>${etiqueta}</text>
+  `;
+}
+
+// Interruptor horizontal en (cx, cy) — cerrado, palanca inclinada
+function interruptor(cx, cy){
+  return `
+    <circle cx="${cx-15}" cy="${cy}" r="3" fill="#1a2238"/>
+    <circle cx="${cx+15}" cy="${cy}" r="3" fill="#1a2238"/>
+    <line x1="${cx-13}" y1="${cy}" x2="${cx+13}" y2="${cy-7}" stroke="#1a2238" stroke-width="2" stroke-linecap="round"/>
+    <text x="${cx}" y="${cy+18}" text-anchor="middle" ${labelSmall}>interruptor</text>
+  `;
+}
+
+// Flecha de intensidad horizontal · sentido convencional (izq→dch en cable superior)
+function flechaI(x1, x2, y, label){
+  const cx = (x1+x2)/2;
+  return `
+    <line x1="${x1}" y1="${y}" x2="${x2-5}" y2="${y}" stroke="#D4700A" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="${x2-5},${y-4} ${x2},${y} ${x2-5},${y+4}" fill="#D4700A"/>
+    <text x="${cx}" y="${y-6}" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" font-weight="700" fill="#D4700A">${label}</text>
+  `;
+}
+
+// Construye el label de la flecha: "I = ?" o "I = <valor>"
+function labelI(I){ return I === '?' ? 'I = ?' : 'I = ' + I; }
+
+/* 1) SIMPLE — pila, interruptor, 1 resistencia */
+function svgSimple(R, V, I){
+  return `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" style="max-width:340px">
+    <g ${wireStyle}>
+      <path d="M 40 40 L 110 40"/>
+      <path d="M 210 40 L 280 40"/>
+      <path d="M 280 40 L 280 160"/>
+      <path d="M 280 160 L 180 160"/>
+      <path d="M 150 160 L 40 160"/>
+      <path d="M 40 160 L 40 110"/>
+      <path d="M 40 90 L 40 40"/>
+    </g>
+    ${pila(40, 100, V)}
+    ${resistenciaH(110, 210, 40, R)}
+    ${interruptor(165, 160)}
+    ${flechaI(50, 105, 22, labelI(I))}
+  </svg>`;
+}
+
+/* 2) SERIE 2R */
+function svgSerie2(R1, R2, V, I){
+  return `<svg viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg" style="max-width:400px">
+    <g ${wireStyle}>
+      <path d="M 40 40 L 100 40"/>
+      <path d="M 180 40 L 220 40"/>
+      <path d="M 300 40 L 340 40"/>
+      <path d="M 340 40 L 340 160"/>
+      <path d="M 340 160 L 220 160"/>
+      <path d="M 190 160 L 40 160"/>
+      <path d="M 40 160 L 40 110"/>
+      <path d="M 40 90 L 40 40"/>
+    </g>
+    ${pila(40, 100, V)}
+    ${resistenciaH(100, 180, 40, R1)}
+    ${resistenciaH(220, 300, 40, R2)}
+    ${interruptor(205, 160)}
+    ${flechaI(50, 95, 22, labelI(I))}
+  </svg>`;
+}
+
+/* 3) SERIE 3R */
+function svgSerie3(R1, R2, R3, V, I){
+  return `<svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg" style="max-width:460px">
+    <g ${wireStyle}>
+      <path d="M 40 40 L 90 40"/>
+      <path d="M 160 40 L 200 40"/>
+      <path d="M 270 40 L 310 40"/>
+      <path d="M 380 40 L 420 40"/>
+      <path d="M 420 40 L 420 160"/>
+      <path d="M 420 160 L 260 160"/>
+      <path d="M 230 160 L 40 160"/>
+      <path d="M 40 160 L 40 110"/>
+      <path d="M 40 90 L 40 40"/>
+    </g>
+    ${pila(40, 100, V)}
+    ${resistenciaH(90, 160, 40, R1)}
+    ${resistenciaH(200, 270, 40, R2)}
+    ${resistenciaH(310, 380, 40, R3)}
+    ${interruptor(245, 160)}
+    ${flechaI(50, 85, 22, labelI(I))}
+  </svg>`;
+}
+
+/* 4) PARALELO 2R — flecha en cable de entrada al nodo A */
+function svgParalelo2(R1, R2, V, I){
+  return `<svg viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg" style="max-width:400px">
+    <g ${wireStyle}>
+      <path d="M 140 80 L 140 50 L 160 50"/>
+      <path d="M 240 50 L 280 50 L 280 80"/>
+      <path d="M 140 80 L 140 130 L 160 130"/>
+      <path d="M 240 130 L 280 130 L 280 80"/>
+      <path d="M 40 80 L 140 80"/>
+      <path d="M 280 80 L 340 80"/>
+      <path d="M 340 80 L 340 200"/>
+      <path d="M 340 200 L 210 200"/>
+      <path d="M 180 200 L 40 200"/>
+      <path d="M 40 200 L 40 150"/>
+      <path d="M 40 130 L 40 80"/>
+    </g>
+    <circle cx="140" cy="80" r="3.5" fill="#1a2238"/>
+    <circle cx="280" cy="80" r="3.5" fill="#1a2238"/>
+    ${pila(40, 140, V)}
+    ${resistenciaH(160, 240, 50, R1)}
+    ${resistenciaH(160, 240, 130, R2)}
+    ${interruptor(195, 200)}
+    ${flechaI(55, 135, 70, labelI(I) + ' (total)')}
+  </svg>`;
+}
+
+/* 5) PARALELO 3R */
+function svgParalelo3(R1, R2, R3, V, I){
+  return `<svg viewBox="0 0 380 280" xmlns="http://www.w3.org/2000/svg" style="max-width:400px">
+    <g ${wireStyle}>
+      <path d="M 140 110 L 140 50 L 160 50"/>
+      <path d="M 240 50 L 280 50 L 280 110"/>
+      <path d="M 140 110 L 160 110"/>
+      <path d="M 240 110 L 280 110"/>
+      <path d="M 140 110 L 140 170 L 160 170"/>
+      <path d="M 240 170 L 280 170 L 280 110"/>
+      <path d="M 40 110 L 140 110"/>
+      <path d="M 280 110 L 340 110"/>
+      <path d="M 340 110 L 340 240"/>
+      <path d="M 340 240 L 210 240"/>
+      <path d="M 180 240 L 40 240"/>
+      <path d="M 40 240 L 40 180"/>
+      <path d="M 40 160 L 40 110"/>
+    </g>
+    <circle cx="140" cy="110" r="3.5" fill="#1a2238"/>
+    <circle cx="280" cy="110" r="3.5" fill="#1a2238"/>
+    ${pila(40, 170, V)}
+    ${resistenciaH(160, 240, 50, R1)}
+    ${resistenciaH(160, 240, 110, R2)}
+    ${resistenciaH(160, 240, 170, R3)}
+    ${interruptor(195, 240)}
+    ${flechaI(55, 135, 100, labelI(I) + ' (total)')}
+  </svg>`;
+}
+
+/* INYECCIÓN DE ESQUEMAS · I siempre como dato o como interrogación */
+document.addEventListener('DOMContentLoaded', () => {
+  // Bloque 1 - Ohm simple
+  document.getElementById('sch1').innerHTML  = svgSimple('R = 4 Ω', 'V = 12 V', '?');
+  document.getElementById('sch2').innerHTML  = svgSimple('R = ?',   'V = 10 V', '2 A');
+  document.getElementById('sch3').innerHTML  = svgSimple('R = 6 Ω', 'V = ?',    '4 A');
+  // Bloque 2 - Serie (I = ? hasta el apartado b)
+  document.getElementById('sch4').innerHTML  = svgSerie2('R₁ = 2 Ω', 'R₂ = 4 Ω', 'V = 12 V', '?');
+  document.getElementById('sch5').innerHTML  = svgSerie3('R₁ = 2 Ω', 'R₂ = 4 Ω', 'R₃ = 6 Ω', 'V = 24 V', '?');
+  // Bloque 3 - Paralelo (I total = ? hasta el apartado b)
+  document.getElementById('sch6').innerHTML  = svgParalelo2('R₁ = 6 Ω', 'R₂ = 3 Ω', 'V = 12 V', '?');
+  document.getElementById('sch7').innerHTML  = svgParalelo3('R₁ = 6 Ω', 'R₂ = 3 Ω', 'R₃ = 2 Ω', 'V = 12 V', '?');
+});
+
+/* AUTOCORRECCIÓN */
+function normalizeNumber(value) {
+  if (!value) return NaN;
+  let clean = value.toString().trim().replace(",", ".").replace(/[^\d.\-]/g, "");
+  return parseFloat(clean);
+}
+function formatNumber(value) { return String(value).replace(".", ","); }
+function checkAnswer(inputId, expected, tolerance) {
+  const input = document.getElementById(inputId);
+  const feedback = document.getElementById("fb-" + inputId);
+  const value = normalizeNumber(input.value);
+  feedback.classList.remove("ok", "bad");
+  if (Number.isNaN(value)) {
+    feedback.textContent = "Introduce un número válido.";
+    feedback.classList.add("bad");
+    return;
+  }
+  if (Math.abs(value - expected) <= tolerance) {
+    feedback.textContent = "✓ Correcto.";
+    feedback.classList.add("ok");
+  } else {
+    feedback.textContent = "✗ Revisa el cálculo. Pista: el resultado esperado está cerca de " + formatNumber(expected) + ".";
+    feedback.classList.add("bad");
+  }
+}
+</script>
+</body>
+</html>

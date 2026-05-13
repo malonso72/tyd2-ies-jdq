@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Actividades · U03 Las estructuras · TyD 2º ESO</title>
+<meta name="description" content="Actividades interactivas sobre las estructuras para 2º ESO con autocorrección: condiciones, esfuerzos, elementos, triangulación, tipologías y patrimonio andaluz.">
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/03-estructuras/actividades/">
+
+<meta property="og:title" content="Actividades · U03 Las estructuras · TyD 2º ESO">
+<meta property="og:description" content="35 actividades interactivas con autocorrección sobre las estructuras.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/03-estructuras/actividades/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Actividades · U03 Las estructuras · TyD 2º ESO">
+<meta name="twitter:description" content="35 actividades interactivas con autocorrección.">
+<meta name="twitter:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+:root {
+  --act-ok: #2e7d4f;
+  --act-err: #c44536;
+  --act-warn: #e8b647;
+  --act-card-bg: #fafafa;
+  --act-border: #e3e3e3;
+}
+
+.bloque-titulo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--principal, #D4700A);
+  margin: 2.5rem 0 0.4rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 3px solid var(--principal, #D4700A);
+  letter-spacing: 0.5px;
+}
+.bloque-intro { color: #555; font-size: 0.95rem; margin-bottom: 1.2rem; font-style: italic; }
+
+.activity-card {
+  background: var(--act-card-bg);
+  border: 1px solid var(--act-border);
+  border-left: 4px solid var(--principal, #D4700A);
+  border-radius: 10px;
+  padding: 1.2rem 1.4rem;
+  margin: 1rem 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+.activity-card.solved { border-left-color: var(--act-ok); background: #f4faf6; }
+.activity-card.wrong { border-left-color: var(--act-err); background: #fdf6f5; }
+
+.act-num {
+  display: inline-block;
+  background: var(--principal, #D4700A);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-right: 8px;
+  letter-spacing: 0.5px;
+}
+.activity-card.solved .act-num { background: var(--act-ok); }
+.activity-card.wrong .act-num { background: var(--act-err); }
+
+.statement { font-size: 1rem; color: #222; margin-bottom: 1rem; line-height: 1.5; }
+.statement strong { color: #111; }
+.statement em { color: var(--secundario, #1B4F8A); font-style: italic; }
+
+.options { display: grid; gap: 0.5rem; margin: 0.8rem 0; }
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.6rem 0.8rem;
+  background: #fff;
+  border: 1px solid var(--act-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 0.95rem;
+}
+.option:hover { background: #fffaf3; border-color: var(--principal, #D4700A); }
+.option input { margin-top: 3px; cursor: pointer; flex-shrink: 0; }
+.option input:checked + .option-label { color: var(--secundario, #1B4F8A); font-weight: 600; }
+.options.cols2 { grid-template-columns: 1fr 1fr; }
+.options.cols3 { grid-template-columns: 1fr 1fr 1fr; }
+
+.answer-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.8rem 0;
+  flex-wrap: wrap;
+}
+.answer-box label { font-weight: 600; color: #444; font-size: 0.95rem; }
+.answer-box input[type="number"] {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.45rem 0.7rem;
+  border: 2px solid var(--act-border);
+  border-radius: 8px;
+  width: 110px;
+  background: #fff;
+  color: var(--secundario, #1B4F8A);
+}
+.answer-box input:focus {
+  outline: none;
+  border-color: var(--principal, #D4700A);
+  box-shadow: 0 0 0 3px rgba(212,112,10,0.15);
+}
+.answer-box .unit {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.order-list { display: grid; gap: 0.5rem; margin: 0.8rem 0; }
+.order-item {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 0.7rem;
+  align-items: center;
+  padding: 0.6rem 0.9rem;
+  background: #fff;
+  border: 1px solid var(--act-border);
+  border-radius: 8px;
+}
+.order-item input {
+  width: 50px;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.35rem;
+  border: 2px solid var(--act-border);
+  border-radius: 6px;
+  color: var(--principal, #D4700A);
+}
+.order-item input:focus { outline: none; border-color: var(--principal, #D4700A); }
+.order-item input.ok-input { background: #dff2e6; border-color: var(--act-ok); }
+.order-item input.err-input { background: #fce4e1; border-color: var(--act-err); }
+.order-item .order-text { font-size: 0.95rem; color: #333; font-weight: 500; }
+.order-item .order-text strong { color: #111; }
+
+.match-list { display: grid; gap: 0.5rem; margin: 0.8rem 0; }
+.match-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.8rem;
+  align-items: center;
+  padding: 0.6rem 0.9rem;
+  background: #fff;
+  border: 1px solid var(--act-border);
+  border-radius: 8px;
+}
+.match-item .match-text { font-size: 0.95rem; color: #333; font-weight: 500; }
+.match-item select {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.92rem;
+  padding: 0.35rem 0.5rem;
+  border: 2px solid var(--act-border);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  min-width: 160px;
+  font-weight: 500;
+}
+.match-item select.ok-input { background: #dff2e6; border-color: var(--act-ok); color: var(--act-ok); }
+.match-item select.err-input { background: #fce4e1; border-color: var(--act-err); color: var(--act-err); }
+
+.check-btn {
+  background: var(--principal, #D4700A);
+  color: #fff;
+  border: none;
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  letter-spacing: 0.3px;
+}
+.check-btn:hover { background: #b85e08; transform: translateY(-1px); }
+.check-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.feedback {
+  margin-top: 0.7rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.93rem;
+  font-weight: 600;
+  display: none;
+}
+.feedback.show { display: block; }
+.feedback.ok { background: #dff2e6; color: var(--act-ok); border-left: 4px solid var(--act-ok); }
+.feedback.err { background: #fce4e1; color: var(--act-err); border-left: 4px solid var(--act-err); }
+.feedback .icon { margin-right: 6px; font-size: 1.1rem; }
+
+details.solution {
+  margin-top: 0.9rem;
+  background: #fffaf3;
+  border: 1px dashed #d4a373;
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+}
+details.solution > summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--principal, #D4700A);
+  font-size: 0.92rem;
+  list-style: none;
+  user-select: none;
+}
+details.solution > summary::before { content: "▸ "; display: inline-block; transition: transform 0.15s; }
+details.solution[open] > summary::before { content: "▾ "; }
+details.solution > summary:hover { text-decoration: underline; }
+details.solution .sol-body {
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px dashed #d4a373;
+  font-size: 0.92rem;
+  color: #444;
+  line-height: 1.55;
+}
+details.solution .steps-sol { display: grid; gap: 0.4rem; counter-reset: stp; margin-top: 0.4rem; }
+details.solution .step-sol {
+  position: relative;
+  padding: 0.4rem 0.5rem 0.4rem 1.9rem;
+  background: #fff;
+  border-radius: 6px;
+  border: 1px solid #f0e6d3;
+  font-size: 0.9rem;
+}
+details.solution .step-sol::before {
+  counter-increment: stp;
+  content: counter(stp);
+  position: absolute;
+  left: 0.4rem;
+  top: 0.45rem;
+  width: 18px;
+  height: 18px;
+  background: var(--principal, #D4700A);
+  color: #fff;
+  border-radius: 50%;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+
+.progreso {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  border-bottom: 2px solid var(--principal, #D4700A);
+  padding: 0.6rem 1rem;
+  margin-bottom: 1.5rem;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.92rem;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.progreso .bar-wrap { flex: 1; margin: 0 1rem; background: #eee; height: 8px; border-radius: 4px; overflow: hidden; }
+.progreso .bar { height: 100%; background: linear-gradient(90deg, var(--principal, #D4700A), #e89947); width: 0%; transition: width 0.4s ease; }
+.progreso .stat { font-weight: 600; color: var(--secundario, #1B4F8A); }
+.progreso .stat strong { color: var(--principal, #D4700A); }
+.progreso .reset-btn {
+  background: transparent;
+  border: 1px solid #ccc;
+  color: #666;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  font-family: 'Barlow', sans-serif;
+}
+.progreso .reset-btn:hover { border-color: var(--principal, #D4700A); color: var(--principal, #D4700A); }
+
+@media (max-width: 720px) {
+  .options.cols2, .options.cols3 { grid-template-columns: 1fr; }
+  .progreso { flex-wrap: wrap; gap: 0.5rem; }
+  .progreso .bar-wrap { margin: 0; order: 99; flex-basis: 100%; }
+  .order-item { grid-template-columns: 45px 1fr; }
+  .match-item { grid-template-columns: 1fr; }
+  .match-item select { min-width: 0; width: 100%; }
+}
+
+@media print {
+  .progreso, .check-btn, .reset-btn { display: none; }
+  .feedback.show { display: block !important; }
+  details.solution { background: #fff; }
+  details.solution > summary { display: none; }
+  details.solution > .sol-body { display: block !important; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U03 · Estructuras · Actividades</span>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Inicio</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U03</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📘</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>📝</span><span class="nc-lbl">Actividades</span></span>
+</nav>
+
+<div class="unidad-layout">
+
+<aside class="sb-side">
+  <h3>Bloques</h3>
+  <a href="#bloque-a">A · Las estructuras</a>
+  <a href="#bloque-b">B · Los 5 esfuerzos</a>
+  <a href="#bloque-c">C · Elementos estructurales</a>
+  <a href="#bloque-d">D · Triangulación y CdG</a>
+  <a href="#bloque-e">E · Tipologías clásicas</a>
+  <a href="#bloque-f">F · Tipologías modernas</a>
+  <a href="#bloque-g">G · Patrimonio andaluz</a>
+</aside>
+
+<main class="ct" id="main-content">
+
+<h1 class="unidad-titulo">Actividades · U03 Las estructuras</h1>
+<p class="unidad-subt">Ejercicios con comprobación automática y solución paso a paso. Hay <strong>35 actividades</strong> repartidas en 7 bloques. Puedes resolverlas en cualquier orden y consultar el <a href="../libro-digital.html">libro digital</a> cuando necesites repasar.</p>
+
+<div class="progreso" id="progreso">
+  <span class="stat"><strong id="prog-num">0</strong> / <span id="prog-total">35</span> resueltas</span>
+  <div class="bar-wrap"><div class="bar" id="prog-bar"></div></div>
+  <span class="stat">Aciertos: <strong id="prog-ok">0</strong></span>
+  <button class="reset-btn" onclick="resetAll()">↺ Reiniciar</button>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE A · LAS ESTRUCTURAS
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-a">
+  <h2 class="bloque-titulo">A · Las estructuras y sus condiciones</h2>
+  <p class="bloque-intro">Qué es una estructura, qué funciones cumple y qué tres condiciones debe satisfacer para no colapsar.</p>
+
+  <article class="activity-card" data-type="radio" data-id="A1">
+    <p class="statement"><span class="act-num">A1</span>¿Cuál es la <strong>definición correcta</strong> de estructura?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="A1"><span class="option-label">Cualquier objeto fabricado con metal.</span></label>
+      <label class="option"><input type="radio" name="A1" data-correct="true"><span class="option-label">Conjunto de elementos conectados cuya función es soportar cargas sin deformarse en exceso ni romperse.</span></label>
+      <label class="option"><input type="radio" name="A1"><span class="option-label">El esqueleto interno de un edificio antes de poner las paredes.</span></label>
+      <label class="option"><input type="radio" name="A1"><span class="option-label">Un objeto que tenga forma de triángulo o rectángulo.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Una <strong>estructura</strong> es cualquier conjunto de elementos conectados que aguanta cargas. No tiene que ser de metal (la madera, la piedra y los huesos también son estructuras), ni el esqueleto interno de algo (un huevo es estructura masiva), ni tener una forma concreta.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="A2">
+    <p class="statement"><span class="act-num">A2</span>¿Cuál de las siguientes <strong>NO</strong> es una función básica de una estructura?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="A2"><span class="option-label">Soportar cargas</span></label>
+      <label class="option"><input type="radio" name="A2"><span class="option-label">Resistir fuerzas externas (viento, agua)</span></label>
+      <label class="option"><input type="radio" name="A2"><span class="option-label">Mantener una forma sin deformarse demasiado</span></label>
+      <label class="option"><input type="radio" name="A2" data-correct="true"><span class="option-label">Resultar atractiva a la vista</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La estética puede importar en arquitectura, pero <strong>no es una función estructural</strong>. Las cuatro funciones reales de una estructura son: soportar cargas, resistir fuerzas externas, mantener una forma y proteger lo que hay dentro. Una catedral puede ser fea y aguantar mil años igual.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="match" data-id="A3"
+    data-pairs='[
+      {"item":"Rigidez","correct":"No deformarse demasiado bajo carga"},
+      {"item":"Estabilidad","correct":"No caerse ni volcar"},
+      {"item":"Resistencia","correct":"No romperse bajo carga"}
+    ]'
+    data-options='["No deformarse demasiado bajo carga","No caerse ni volcar","No romperse bajo carga"]'>
+    <p class="statement"><span class="act-num">A3</span>Empareja cada <strong>condición</strong> con lo que controla.</p>
+    <div class="match-list" id="A_A3"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body"><strong>Rigidez</strong> → no deformarse (controla el "hundirse"). <strong>Estabilidad</strong> → no volcar (controla el "caerse"). <strong>Resistencia</strong> → no romperse (controla el "partirse"). Una estructura puede fallar por cualquiera de las tres y, si falla una, falla la estructura.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="A4">
+    <p class="statement"><span class="act-num">A4</span>¿Cuál de estos es un ejemplo de <strong>estructura natural</strong>?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="A4"><span class="option-label">Un puente metálico de ferrocarril</span></label>
+      <label class="option"><input type="radio" name="A4" data-correct="true"><span class="option-label">El esqueleto de los vertebrados</span></label>
+      <label class="option"><input type="radio" name="A4"><span class="option-label">Una grúa torre de obra</span></label>
+      <label class="option"><input type="radio" name="A4"><span class="option-label">Un castillo medieval</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El <strong>esqueleto</strong> es una estructura natural fascinante: huesos rígidos conectados por articulaciones que permiten movimiento y aguantan enormes cargas en relación a su peso. Otros ejemplos naturales: telas de araña, panales de abejas, troncos de árbol. Las demás opciones son estructuras artificiales (las hizo el ser humano).</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="A5">
+    <p class="statement"><span class="act-num">A5</span>Apoyas un libro en una mesa de cartón y la mesa se <strong>hunde por el medio</strong> aunque no se rompa ni se caiga. ¿Qué condición ha fallado?</p>
+    <div class="options cols3">
+      <label class="option"><input type="radio" name="A5" data-correct="true"><span class="option-label">Rigidez</span></label>
+      <label class="option"><input type="radio" name="A5"><span class="option-label">Estabilidad</span></label>
+      <label class="option"><input type="radio" name="A5"><span class="option-label">Resistencia</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Si la mesa <strong>se hunde</strong> pero no se cae ni se rompe, ha fallado la <strong>rigidez</strong>: la mesa no aguanta su forma bajo carga. Si se cayese, sería estabilidad. Si se rompiera, sería resistencia. Las tres condiciones son independientes.</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE B · LOS 5 ESFUERZOS
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-b">
+  <h2 class="bloque-titulo">B · Los 5 esfuerzos</h2>
+  <p class="bloque-intro">Las cinco formas en que puede sufrir un elemento estructural y cómo identificarlas en piezas reales.</p>
+
+  <article class="activity-card" data-type="number" data-id="B1" data-answer="5" data-tol="0">
+    <p class="statement"><span class="act-num">B1</span>¿Cuántos <strong>esfuerzos básicos</strong> hay?</p>
+    <div class="answer-box">
+      <label>Respuesta:</label>
+      <input type="number" inputmode="numeric" min="0" max="20" aria-label="Número de esfuerzos básicos">
+      <span class="unit">esfuerzos</span>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Los <strong>5 esfuerzos básicos</strong> son: <strong>tracción</strong> (estira), <strong>compresión</strong> (aprieta), <strong>flexión</strong> (curva), <strong>torsión</strong> (retuerce) y <strong>cortadura</strong> (cizalla). Cualquier elemento estructural puede analizarse identificando cuál o cuáles de estos cinco sufre.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="match" data-id="B2"
+    data-pairs='[
+      {"item":"Cable de un ascensor","correct":"Tracción"},
+      {"item":"Pilar de un edificio","correct":"Compresión"},
+      {"item":"Viga del techo","correct":"Flexión"},
+      {"item":"Eje de un motor","correct":"Torsión"},
+      {"item":"Pasador de un eslabón de cadena","correct":"Cortadura"}
+    ]'
+    data-options='["Tracción","Compresión","Flexión","Torsión","Cortadura"]'>
+    <p class="statement"><span class="act-num">B2</span>Empareja cada <strong>elemento</strong> con el esfuerzo que sufre principalmente.</p>
+    <div class="match-list" id="A_B2"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body"><strong>Cable</strong> → tracción (lo estiran). <strong>Pilar</strong> → compresión (lo aplasta el peso). <strong>Viga</strong> → flexión (la curvan la carga y los apoyos). <strong>Eje</strong> → torsión (lo retuerce el motor). <strong>Pasador</strong> → cortadura (los eslabones tiran en direcciones opuestas a muy poca distancia).</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="B3">
+    <p class="statement"><span class="act-num">B3</span>La <strong>tracción</strong> es el esfuerzo en el que…</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="B3" data-correct="true"><span class="option-label">Dos fuerzas opuestas tiran del elemento alargándolo.</span></label>
+      <label class="option"><input type="radio" name="B3"><span class="option-label">Dos fuerzas opuestas empujan al elemento acortándolo.</span></label>
+      <label class="option"><input type="radio" name="B3"><span class="option-label">Una fuerza perpendicular curva al elemento.</span></label>
+      <label class="option"><input type="radio" name="B3"><span class="option-label">Dos pares de fuerzas retuercen al elemento.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La <strong>tracción</strong> <em>tira</em> del elemento. Lo opuesto es la compresión (que aprieta). Cuerdas, cables y tirantes trabajan a tracción. Los metales como el acero son excelentes para tracción; los cerámicos y la piedra, terribles (por eso el hormigón armado lleva acero por dentro: el acero asume la tracción que el hormigón no aguanta).</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="B4">
+    <p class="statement"><span class="act-num">B4</span>Una viga apoyada en dos extremos con carga en el centro sufre <strong>flexión</strong>. La flexión combina internamente dos esfuerzos simples. ¿Cuáles?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="B4"><span class="option-label">Tracción y cortadura</span></label>
+      <label class="option"><input type="radio" name="B4" data-correct="true"><span class="option-label">Compresión arriba (cara superior) y tracción abajo (cara inferior)</span></label>
+      <label class="option"><input type="radio" name="B4"><span class="option-label">Torsión y compresión</span></label>
+      <label class="option"><input type="radio" name="B4"><span class="option-label">Cortadura arriba y abajo</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Cuando una viga se curva hacia abajo, las fibras de la <strong>cara superior se comprimen</strong> (se acortan) y las de la <strong>cara inferior se estiran</strong> (tracción). Por eso las vigas de hormigón armado llevan las varillas de acero en la parte inferior: el acero compensa la tracción que el hormigón no resiste.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="B5">
+    <p class="statement"><span class="act-num">B5</span>Un <strong>pájaro grande</strong> se posa en el extremo de una rama larga de árbol. ¿Qué esfuerzo sufre la rama?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="B5"><span class="option-label">Tracción</span></label>
+      <label class="option"><input type="radio" name="B5"><span class="option-label">Compresión</span></label>
+      <label class="option"><input type="radio" name="B5" data-correct="true"><span class="option-label">Flexión</span></label>
+      <label class="option"><input type="radio" name="B5"><span class="option-label">Cortadura</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La rama es una <strong>viga en voladizo</strong> (empotrada en el tronco, libre por el otro extremo). El peso del pájaro la curva: <strong>flexión</strong>. Si el pájaro es muy grande, la flexión llega al límite y la rama puede partirse. Es la misma situación que un trampolín de piscina con un saltador.</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE C · ELEMENTOS ESTRUCTURALES
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-c">
+  <h2 class="bloque-titulo">C · Elementos estructurales</h2>
+  <p class="bloque-intro">Las piezas básicas con que se construyen las estructuras: pilar, viga, tirante, dintel, arco, cimentación.</p>
+
+  <article class="activity-card" data-type="radio" data-id="C1">
+    <p class="statement"><span class="act-num">C1</span>Un <strong>pilar</strong> es…</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="C1" data-correct="true"><span class="option-label">Un elemento vertical que soporta cargas y las transmite al suelo, trabajando a compresión.</span></label>
+      <label class="option"><input type="radio" name="C1"><span class="option-label">Un elemento horizontal que cubre el espacio entre dos apoyos.</span></label>
+      <label class="option"><input type="radio" name="C1"><span class="option-label">Un cable que mantiene en tracción a otros elementos.</span></label>
+      <label class="option"><input type="radio" name="C1"><span class="option-label">Una pieza inclinada que rigidiza una estructura.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Un <strong>pilar</strong> es vertical y trabaja a compresión: aguanta peso encima y lo lleva al suelo. La opción b describe una viga, la c un tirante o cable, la d una diagonal o riostra.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="C2">
+    <p class="statement"><span class="act-num">C2</span>Un <strong>tirante</strong> y un <strong>cable</strong> trabajan ambos a tracción. ¿Cuál es la diferencia?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="C2"><span class="option-label">El cable es siempre de metal; el tirante, de tela.</span></label>
+      <label class="option"><input type="radio" name="C2" data-correct="true"><span class="option-label">El tirante es rígido (no se dobla); el cable es flexible (se pliega).</span></label>
+      <label class="option"><input type="radio" name="C2"><span class="option-label">El tirante es vertical y el cable es horizontal.</span></label>
+      <label class="option"><input type="radio" name="C2"><span class="option-label">Son sinónimos exactos: significan lo mismo.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Los dos trabajan a tracción, pero la diferencia es la <strong>rigidez</strong>: un cable es flexible (lo plegas en la mano), un tirante es rígido (no lo doblas con la mano). Los puentes colgantes usan cables; las bóvedas romanas y muchos edificios actuales usan tirantes metálicos.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="match" data-id="C3"
+    data-pairs='[
+      {"item":"Pilar","correct":"Compresión"},
+      {"item":"Viga","correct":"Flexión"},
+      {"item":"Tirante","correct":"Tracción"},
+      {"item":"Arco","correct":"Compresión"},
+      {"item":"Dintel","correct":"Flexión"}
+    ]'
+    data-options='["Tracción","Compresión","Flexión"]'>
+    <p class="statement"><span class="act-num">C3</span>Asigna cada <strong>elemento estructural</strong> al esfuerzo que sufre principalmente.</p>
+    <div class="match-list" id="A_C3"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body"><strong>Pilar</strong> → compresión (vertical, peso encima). <strong>Viga</strong> → flexión (horizontal, carga sobre ella). <strong>Tirante</strong> → tracción (mantiene unidos dos puntos que tienden a separarse). <strong>Arco</strong> → compresión (la carga se transmite por dovelas hacia los lados). <strong>Dintel</strong> → flexión (es una viga horizontal sobre una abertura).</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="C4">
+    <p class="statement"><span class="act-num">C4</span>La principal diferencia entre una <strong>viga</strong> y un <strong>dintel</strong> es:</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="C4"><span class="option-label">La viga es de metal; el dintel siempre de piedra.</span></label>
+      <label class="option"><input type="radio" name="C4" data-correct="true"><span class="option-label">El dintel es la viga concreta que va sobre una abertura (puerta o ventana).</span></label>
+      <label class="option"><input type="radio" name="C4"><span class="option-label">La viga trabaja a compresión; el dintel a tracción.</span></label>
+      <label class="option"><input type="radio" name="C4"><span class="option-label">El dintel es vertical y la viga es horizontal.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El <strong>dintel</strong> es un tipo concreto de viga: la que se coloca sobre una <strong>puerta o ventana</strong> para cubrir el hueco. Ambos trabajan a flexión y son horizontales. El dintel suele ser de piedra o de madera en construcción tradicional, y de hormigón armado en la moderna.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="C5">
+    <p class="statement"><span class="act-num">C5</span>¿Por qué el <strong>arco</strong> es mejor que el dintel para cubrir vanos grandes en piedra o ladrillo?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="C5"><span class="option-label">Porque pesa menos.</span></label>
+      <label class="option"><input type="radio" name="C5"><span class="option-label">Porque se construye más rápido.</span></label>
+      <label class="option"><input type="radio" name="C5" data-correct="true"><span class="option-label">Porque el arco trabaja a compresión, que la piedra aguanta bien; el dintel a flexión, que la piedra aguanta mal.</span></label>
+      <label class="option"><input type="radio" name="C5"><span class="option-label">Porque es más decorativo.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Es uno de los grandes inventos de la historia. El <strong>dintel de piedra</strong> trabaja a flexión: su parte inferior se traccion y la piedra se rompe (no aguanta tracción). El <strong>arco</strong>, en cambio, transmite el peso por compresión a través de las dovelas hacia los lados: la piedra aguanta perfectamente este esfuerzo. Por eso los acueductos romanos, la Mezquita de Córdoba o las catedrales góticas pudieron cubrir luces enormes con piedra.</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE D · TRIANGULACIÓN Y CdG
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-d">
+  <h2 class="bloque-titulo">D · Triangulación y centro de gravedad</h2>
+  <p class="bloque-intro">Las dos herramientas más potentes para conseguir rigidez (triangulación) y estabilidad (centro de gravedad).</p>
+
+  <article class="activity-card" data-type="radio" data-id="D1">
+    <p class="statement"><span class="act-num">D1</span>¿Por qué el <strong>triángulo</strong> es la única figura geométrica indeformable?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="D1"><span class="option-label">Porque sus ángulos suman 180°.</span></label>
+      <label class="option"><input type="radio" name="D1" data-correct="true"><span class="option-label">Porque al fijar las longitudes de sus tres lados, su forma queda completamente determinada.</span></label>
+      <label class="option"><input type="radio" name="D1"><span class="option-label">Porque tiene tres lados iguales.</span></label>
+      <label class="option"><input type="radio" name="D1"><span class="option-label">Porque las tres barras son siempre de acero.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Geométricamente, <strong>tres longitudes fijas determinan un único triángulo</strong>. En cambio, cuatro lados (cuadrilátero) admiten infinitas formas: cuadrado, rombo, paralelogramo. Por eso un cuadrado articulado se deforma fácilmente, pero un triángulo articulado no.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="D2">
+    <p class="statement"><span class="act-num">D2</span>Tienes un cuadrado articulado que se deforma al menor empujón. ¿Cómo lo rigidizas con <strong>un solo elemento adicional</strong>?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="D2"><span class="option-label">Añadiendo una barra horizontal en el centro.</span></label>
+      <label class="option"><input type="radio" name="D2"><span class="option-label">Añadiendo una segunda barra vertical.</span></label>
+      <label class="option"><input type="radio" name="D2" data-correct="true"><span class="option-label">Añadiendo una diagonal que una dos esquinas opuestas.</span></label>
+      <label class="option"><input type="radio" name="D2"><span class="option-label">No se puede rigidizar con un solo elemento.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Una <strong>diagonal</strong> descompone el cuadrado en <strong>dos triángulos</strong>, y como los triángulos son indeformables, la estructura entera queda rígida. Este es el truco que usan la Torre Eiffel, las cerchas de las naves industriales y los andamios de obra.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="order" data-id="D3"
+    data-items='[
+      {"text":"Pirámide de Keops (base ancha, vértice estrecho)","correct":4},
+      {"text":"Lápiz de pie sobre la mesa","correct":1},
+      {"text":"Mesa con 4 patas y un libro encima","correct":3},
+      {"text":"Botella alta vacía sobre el suelo de un barco","correct":2}
+    ]'>
+    <p class="statement"><span class="act-num">D3</span>Ordena estas <strong>4 situaciones</strong> de menor a mayor estabilidad (1 = la menos estable, 4 = la más estable).</p>
+    <div class="order-list" id="A_D3"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El orden correcto (de menos a más estable):
+      <div class="steps-sol">
+        <div class="step-sol"><strong>Lápiz de pie</strong> — base mínima (la punta), centro de gravedad muy alto. Inestable extremo.</div>
+        <div class="step-sol"><strong>Botella alta vacía en un barco</strong> — base estrecha, centro relativamente alto, y además el barco se mueve. Muy inestable.</div>
+        <div class="step-sol"><strong>Mesa con libro</strong> — base amplia, centro bajo (peso bien repartido). Estable.</div>
+        <div class="step-sol"><strong>Pirámide de Keops</strong> — base ancho-ancha, vértice estrecho. Estabilidad máxima.</div>
+      </div>
+      Regla general: cuanto más <strong>ancha la base</strong> y más <strong>bajo el centro de gravedad</strong>, mayor estabilidad.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="D4">
+    <p class="statement"><span class="act-num">D4</span>¿En qué <strong>condición</strong> influye principalmente la posición del centro de gravedad?</p>
+    <div class="options cols3">
+      <label class="option"><input type="radio" name="D4"><span class="option-label">Rigidez</span></label>
+      <label class="option"><input type="radio" name="D4" data-correct="true"><span class="option-label">Estabilidad</span></label>
+      <label class="option"><input type="radio" name="D4"><span class="option-label">Resistencia</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El centro de gravedad determina si una estructura <strong>vuelca o no</strong> (estabilidad). La estructura es estable si la vertical desde el CdG cae dentro de su base de apoyo. La rigidez la controla la geometría (triángulos); la resistencia, el material.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="D5">
+    <p class="statement"><span class="act-num">D5</span>¿Por qué la <strong>Torre inclinada de Pisa</strong> no se ha caído todavía aunque está inclinada?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="D5"><span class="option-label">Porque está hecha de hormigón armado moderno.</span></label>
+      <label class="option"><input type="radio" name="D5"><span class="option-label">Porque está apoyada en muchos pilares.</span></label>
+      <label class="option"><input type="radio" name="D5" data-correct="true"><span class="option-label">Porque, a pesar de la inclinación, la vertical desde su centro de gravedad sigue cayendo dentro de su base.</span></label>
+      <label class="option"><input type="radio" name="D5"><span class="option-label">Porque la mantienen levantada con cables desde el suelo.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La torre lleva inclinada más de 800 años. Mientras la vertical desde el centro de gravedad <strong>caiga dentro de su base circular</strong>, la torre se mantiene en pie. Si la inclinación aumentase, en algún momento esa vertical saldría de la base y la torre caería. Por eso en los últimos años se han hecho obras para frenar la inclinación.</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE E · TIPOLOGÍAS CLÁSICAS
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-e">
+  <h2 class="bloque-titulo">E · Tipologías clásicas (masivas, abovedadas, entramadas)</h2>
+  <p class="bloque-intro">Las tres tipologías más antiguas: cómo funcionan y dónde encontrarlas.</p>
+
+  <article class="activity-card" data-type="match" data-id="E1"
+    data-pairs='[
+      {"item":"Pirámide de Egipto","correct":"Masiva"},
+      {"item":"Acueducto romano","correct":"Abovedada"},
+      {"item":"Castillo medieval","correct":"Masiva"},
+      {"item":"Catedral gótica","correct":"Abovedada"},
+      {"item":"Edificio de pisos moderno","correct":"Entramada"}
+    ]'
+    data-options='["Masiva","Abovedada","Entramada"]'>
+    <p class="statement"><span class="act-num">E1</span>Clasifica cada <strong>construcción</strong> según su tipología.</p>
+    <div class="match-list" id="A_E1"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body"><strong>Masivas</strong> (mucho material, todo a compresión): pirámides, castillos, murallas, presas. <strong>Abovedadas</strong> (arcos y bóvedas que reparten cargas a los lados): acueductos romanos, catedrales, mezquitas, panteones. <strong>Entramadas</strong> (esqueleto de pilares y vigas): edificios modernos, viviendas, centros comerciales.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="E2">
+    <p class="statement"><span class="act-num">E2</span>Las <strong>pirámides de Egipto</strong> son ejemplo de estructura…</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="E2" data-correct="true"><span class="option-label">Masiva</span></label>
+      <label class="option"><input type="radio" name="E2"><span class="option-label">Abovedada</span></label>
+      <label class="option"><input type="radio" name="E2"><span class="option-label">Entramada</span></label>
+      <label class="option"><input type="radio" name="E2"><span class="option-label">Triangulada</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Las pirámides son <strong>masivas</strong>: enormes bloques de piedra apilados sin trucos geométricos sofisticados. Aguantan miles de años porque tienen tanto material que ningún punto recibe esfuerzo excesivo. Casi no tienen espacio interior aprovechable.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="E3">
+    <p class="statement"><span class="act-num">E3</span>¿Qué <strong>característica define</strong> una estructura entramada?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="E3"><span class="option-label">Tiene un cable principal del que cuelga el resto.</span></label>
+      <label class="option"><input type="radio" name="E3"><span class="option-label">Está formada por arcos y bóvedas que reparten el peso.</span></label>
+      <label class="option"><input type="radio" name="E3" data-correct="true"><span class="option-label">Está formada por un esqueleto de pilares verticales y vigas horizontales.</span></label>
+      <label class="option"><input type="radio" name="E3"><span class="option-label">Se mantiene rígida por la presión de aire interior.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Una estructura <strong>entramada</strong> es un esqueleto rectangular de <strong>pilares verticales y vigas horizontales</strong>. Es la base de la arquitectura moderna. Las paredes son solo cerramiento: no soportan peso. Por eso pueden tener ventanales enormes o se pueden tirar para hacer una reforma.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="E4">
+    <p class="statement"><span class="act-num">E4</span>¿Cuál es la <strong>principal ventaja</strong> de las estructuras abovedadas frente a las masivas?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="E4"><span class="option-label">Aguantan más peso encima.</span></label>
+      <label class="option"><input type="radio" name="E4" data-correct="true"><span class="option-label">Cubren grandes espacios con menos material y dejan amplias zonas vacías.</span></label>
+      <label class="option"><input type="radio" name="E4"><span class="option-label">Son más rápidas de construir.</span></label>
+      <label class="option"><input type="radio" name="E4"><span class="option-label">Se construyen sin cimentación.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Las estructuras <strong>abovedadas</strong> son una evolución de las masivas: gracias al arco, cubren grandes vanos con poco material. Una pirámide enorme tiene apenas espacio interior; en cambio, la cúpula del Panteón cubre un espacio diáfano de 43 m de diámetro.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="E5">
+    <p class="statement"><span class="act-num">E5</span>En un edificio entramado moderno, <strong>las paredes exteriores</strong>…</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="E5"><span class="option-label">Soportan todo el peso del edificio.</span></label>
+      <label class="option"><input type="radio" name="E5" data-correct="true"><span class="option-label">Son solo cerramiento: no soportan carga estructural.</span></label>
+      <label class="option"><input type="radio" name="E5"><span class="option-label">Soportan el peso de los suelos pero no del tejado.</span></label>
+      <label class="option"><input type="radio" name="E5"><span class="option-label">Trabajan a tracción.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">En un edificio entramado, todo el peso lo soportan los <strong>pilares interiores</strong>. Las paredes exteriores son <strong>cerramientos</strong>: solo aíslan del exterior (frío, lluvia, ruido). Por eso pueden quitarse en una reforma, hacerse de cualquier material o sustituirse por ventanales completos como en los rascacielos.</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE F · TIPOLOGÍAS MODERNAS
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-f">
+  <h2 class="bloque-titulo">F · Tipologías modernas (trianguladas, colgantes, neumáticas)</h2>
+  <p class="bloque-intro">Tres tipologías que aprovechan trucos geométricos o materiales nuevos para hacer más con menos.</p>
+
+  <article class="activity-card" data-type="order" data-id="F1"
+    data-items='[
+      {"text":"Estructuras neumáticas (siglo XX)","correct":6},
+      {"text":"Estructuras abovedadas (Roma, siglo I a.C.)","correct":2},
+      {"text":"Estructuras masivas (pirámides, milenios a.C.)","correct":1},
+      {"text":"Estructuras entramadas (Revolución industrial)","correct":3},
+      {"text":"Estructuras colgantes (siglo XIX)","correct":5},
+      {"text":"Estructuras trianguladas (Torre Eiffel, 1889)","correct":4}
+    ]'>
+    <p class="statement"><span class="act-num">F1</span>Ordena las <strong>6 tipologías</strong> según su aparición histórica, de la más antigua (1) a la más reciente (6).</p>
+    <div class="order-list" id="A_F1"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Orden histórico:
+      <div class="steps-sol">
+        <div class="step-sol"><strong>Masivas</strong> — desde el Neolítico (pirámides, dólmenes).</div>
+        <div class="step-sol"><strong>Abovedadas</strong> — Roma, siglo I a.C. (arco, bóveda, cúpula).</div>
+        <div class="step-sol"><strong>Entramadas</strong> — Revolución industrial (hierro y luego hormigón armado).</div>
+        <div class="step-sol"><strong>Trianguladas</strong> — siglo XIX, Torre Eiffel (1889).</div>
+        <div class="step-sol"><strong>Colgantes</strong> — siglo XIX-XX (Brooklyn Bridge 1883, Golden Gate 1937).</div>
+        <div class="step-sol"><strong>Neumáticas</strong> — siglo XX, popularización industrial.</div>
+      </div>
+      Es una progresión lógica: cuanto más complejo el material y la geometría, más reciente la tipología.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="F2">
+    <p class="statement"><span class="act-num">F2</span>En un puente colgante, los <strong>cables principales</strong> trabajan a…</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="F2" data-correct="true"><span class="option-label">Tracción pura</span></label>
+      <label class="option"><input type="radio" name="F2"><span class="option-label">Compresión pura</span></label>
+      <label class="option"><input type="radio" name="F2"><span class="option-label">Flexión</span></label>
+      <label class="option"><input type="radio" name="F2"><span class="option-label">Torsión</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Los cables de un puente colgante (Golden Gate, Centenario, Akashi) cuelgan del peso del tablero y se anclan en torres laterales y en el suelo. <strong>Toda su longitud está sometida a tracción pura</strong>. Por eso se fabrican de acero, el material rey para tracción.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="F3">
+    <p class="statement"><span class="act-num">F3</span>¿De qué tipología es la <strong>Torre Eiffel</strong>?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="F3"><span class="option-label">Masiva</span></label>
+      <label class="option"><input type="radio" name="F3"><span class="option-label">Entramada</span></label>
+      <label class="option"><input type="radio" name="F3" data-correct="true"><span class="option-label">Triangulada</span></label>
+      <label class="option"><input type="radio" name="F3"><span class="option-label">Colgante</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La Torre Eiffel (1889) es el ejemplo paradigmático de <strong>estructura triangulada</strong>: 300 m de altura formados por miles de barras de hierro unidas en triángulos. Si fuese masiva, pesaría mil veces más. Si fuese entramada (solo pilares y vigas), no aguantaría su propio peso ni el viento.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="match" data-id="F4"
+    data-pairs='[
+      {"item":"Puente Golden Gate","correct":"Colgante"},
+      {"item":"Nave industrial con cercha en el tejado","correct":"Triangulada"},
+      {"item":"Castillo hinchable de feria","correct":"Neumática"},
+      {"item":"Andamio de obra","correct":"Triangulada"},
+      {"item":"Telecabina aérea","correct":"Colgante"},
+      {"item":"Salvavidas","correct":"Neumática"}
+    ]'
+    data-options='["Triangulada","Colgante","Neumática"]'>
+    <p class="statement"><span class="act-num">F4</span>Clasifica cada ejemplo según su <strong>tipología moderna</strong>.</p>
+    <div class="match-list" id="A_F4"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body"><strong>Trianguladas</strong>: nave industrial con cercha (el tejado), andamio (las cruces de San Andrés). <strong>Colgantes</strong>: Golden Gate (cables principales y verticales), telecabina (cable principal). <strong>Neumáticas</strong>: castillo hinchable, salvavidas (la forma se mantiene con aire a presión).</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="F5">
+    <p class="statement"><span class="act-num">F5</span>¿Qué pasa con un <strong>neumático</strong> si se le quita el aire?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="F5"><span class="option-label">Sigue cumpliendo su función igualmente.</span></label>
+      <label class="option"><input type="radio" name="F5" data-correct="true"><span class="option-label">Deja de ser una estructura: se aplasta y no aguanta peso.</span></label>
+      <label class="option"><input type="radio" name="F5"><span class="option-label">Se vuelve más rígido por la compresión del caucho.</span></label>
+      <label class="option"><input type="radio" name="F5"><span class="option-label">Aguanta más peso porque no se deforma.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Un neumático <strong>sin aire es solo goma blanda</strong>: se aplasta inmediatamente bajo el peso del coche. Esto demuestra que la verdadera estructura no es la carcasa de caucho: es el <strong>aire a presión que hay dentro</strong>. Es estructura neumática pura, como un castillo hinchable o una pelota de fútbol.</div></details>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BLOQUE G · PATRIMONIO ANDALUZ E INTEGRACIÓN
+     ════════════════════════════════════════════════════════════════ -->
+<section id="bloque-g">
+  <h2 class="bloque-titulo">G · Patrimonio andaluz e integración</h2>
+  <p class="bloque-intro">Aplicar todo lo aprendido a estructuras de Andalucía y a casos de decisión estructural.</p>
+
+  <article class="activity-card" data-type="radio" data-id="G1">
+    <p class="statement"><span class="act-num">G1</span>La <strong>Mezquita-Catedral de Córdoba</strong> es un ejemplo destacado de estructura…</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="G1"><span class="option-label">Masiva</span></label>
+      <label class="option"><input type="radio" name="G1" data-correct="true"><span class="option-label">Abovedada</span></label>
+      <label class="option"><input type="radio" name="G1"><span class="option-label">Entramada</span></label>
+      <label class="option"><input type="radio" name="G1"><span class="option-label">Colgante</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La Mezquita-Catedral es <strong>abovedada</strong>: combina arcos de herradura y de medio punto en una doble arcada que descansa sobre columnas. Los maestros andalusíes superpusieron dos arcadas para conseguir más altura sin necesidad de columnas más largas. Toda la estructura trabaja a compresión.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="G2">
+    <p class="statement"><span class="act-num">G2</span>Las <strong>murallas exteriores de la Alhambra</strong> son un ejemplo de estructura…</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="G2" data-correct="true"><span class="option-label">Masiva</span></label>
+      <label class="option"><input type="radio" name="G2"><span class="option-label">Abovedada</span></label>
+      <label class="option"><input type="radio" name="G2"><span class="option-label">Triangulada</span></label>
+      <label class="option"><input type="radio" name="G2"><span class="option-label">Neumática</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Las murallas exteriores de la Alhambra son <strong>masivas</strong>: muros gruesos de tapial (tierra apisonada). Toda su solidez viene de la cantidad de material. En cambio, los <strong>palacios interiores</strong> sí son abovedados, con arcos, bóvedas de mocárabes y cúpulas. La Alhambra combina ambas tipologías.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="G3">
+    <p class="statement"><span class="act-num">G3</span>El <strong>Puente del Centenario de Sevilla</strong>, con sus dos torres altas y tirantes que sostienen el tablero, pertenece a la familia…</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="G3"><span class="option-label">Triangulada</span></label>
+      <label class="option"><input type="radio" name="G3"><span class="option-label">Abovedada</span></label>
+      <label class="option"><input type="radio" name="G3" data-correct="true"><span class="option-label">Colgante (atirantada)</span></label>
+      <label class="option"><input type="radio" name="G3"><span class="option-label">Masiva</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El Puente del Centenario, inaugurado en 1992 para la Expo, es un <strong>puente atirantado</strong> (variante moderna de los colgantes): el tablero cuelga de tirantes que parten directamente de dos torres laterales. Los tirantes trabajan a tracción y las torres a compresión. Es una de las obras de ingeniería civil más bellas de Sevilla.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="match" data-id="G4"
+    data-pairs='[
+      {"item":"Cúpula del Panteón de Roma","correct":"Abovedada"},
+      {"item":"Acueducto romano de los Milagros","correct":"Abovedada"},
+      {"item":"Torre Sevilla (rascacielos 180 m)","correct":"Entramada"},
+      {"item":"Castillo de la Calahorra (Granada)","correct":"Masiva"},
+      {"item":"Cubierta hinchable de un pabellón temporal","correct":"Neumática"}
+    ]'
+    data-options='["Masiva","Abovedada","Entramada","Triangulada","Colgante","Neumática"]'>
+    <p class="statement"><span class="act-num">G4</span>Clasifica cada elemento del <strong>patrimonio histórico y moderno</strong> según su tipología.</p>
+    <div class="match-list" id="A_G4"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body"><strong>Cúpula del Panteón</strong> → abovedada (cúpula semiesférica de hormigón sin armar). <strong>Acueducto romano</strong> → abovedada (arcos en serie). <strong>Torre Sevilla</strong> → entramada (hormigón armado + acero con núcleo central rigidizador). <strong>Castillo de la Calahorra</strong> → masiva (muros gruesos de piedra). <strong>Cubierta hinchable</strong> → neumática (presión interior).</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="G5">
+    <p class="statement"><span class="act-num">G5</span>Quieres diseñar un puente entre <strong>dos torres altas separadas 1 km</strong> sin apoyos intermedios. ¿Qué tipología elegirías?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="G5"><span class="option-label">Abovedada (arcos de piedra)</span></label>
+      <label class="option"><input type="radio" name="G5"><span class="option-label">Entramada (pilares cada 5 m)</span></label>
+      <label class="option"><input type="radio" name="G5" data-correct="true"><span class="option-label">Colgante (cables principales entre las torres)</span></label>
+      <label class="option"><input type="radio" name="G5"><span class="option-label">Neumática (cojín de aire bajo el tablero)</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Las estructuras <strong>colgantes</strong> son las únicas capaces de cubrir distancias de 1 km o más sin apoyos intermedios. Un arco de piedra de 1 km es inviable (el peso lo aplastaría). Una estructura entramada exigiría pilares intermedios. La neumática es para pelotas y carpas, no para puentes. Los puentes colgantes y atirantados son la respuesta moderna a los vanos enormes: el Akashi Kaikyō (Japón) supera los 2 km de vano libre.</div></details>
+  </article>
+</section>
+
+<footer style="text-align:center; padding:2rem 1rem 1rem; color:#888; font-size:0.85rem; border-top: 1px dashed #ddd; margin-top: 3rem;">
+  <p>📝 Actividades · TyD 2º ESO · Unidad 3 · Las estructuras</p>
+  <p><a href="../index.html" style="color:#D4700A; text-decoration:none;">← Volver al hub de la unidad</a> · <a href="../libro-digital.html" style="color:#D4700A; text-decoration:none;">📘 Libro digital</a></p>
+  <p style="margin-top:8px; font-family:'JetBrains Mono', monospace; font-size:0.72rem; opacity:0.6;">v1.0</p>
+</footer>
+
+</main>
+</div>
+
+<script>
+(function() {
+  'use strict';
+  const totalEl = document.getElementById('prog-total');
+  const numEl = document.getElementById('prog-num');
+  const okEl = document.getElementById('prog-ok');
+  const barEl = document.getElementById('prog-bar');
+  const cards = document.querySelectorAll('.activity-card');
+  totalEl.textContent = cards.length;
+
+  cards.forEach(card => {
+    const type = card.dataset.type;
+    if (type === 'order') {
+      const items = JSON.parse(card.dataset.items);
+      const container = card.querySelector('.order-list');
+      items.forEach((it) => {
+        const div = document.createElement('div');
+        div.className = 'order-item';
+        div.innerHTML = `<input type="number" min="1" max="${items.length}" data-correct="${it.correct}" aria-label="Orden de ${it.text}"><span class="order-text">${it.text}</span>`;
+        container.appendChild(div);
+      });
+    } else if (type === 'match') {
+      const pairs = JSON.parse(card.dataset.pairs);
+      const options = JSON.parse(card.dataset.options);
+      const container = card.querySelector('.match-list');
+      pairs.forEach((p) => {
+        const div = document.createElement('div');
+        div.className = 'match-item';
+        let opts = '<option value="">— elige —</option>';
+        options.forEach(o => opts += `<option value="${o}">${o}</option>`);
+        div.innerHTML = `<span class="match-text">${p.item}</span><select data-correct="${p.correct}" aria-label="Categoría de ${p.item}">${opts}</select>`;
+        container.appendChild(div);
+      });
+    }
+  });
+
+  function updateProgress() {
+    const resueltas = document.querySelectorAll('.activity-card.solved, .activity-card.wrong').length;
+    const aciertos = document.querySelectorAll('.activity-card.solved').length;
+    numEl.textContent = resueltas;
+    okEl.textContent = aciertos;
+    const pct = cards.length ? (resueltas / cards.length) * 100 : 0;
+    barEl.style.width = pct + '%';
+  }
+
+  function normalize(str) { return String(str).trim().replace(',', '.').toLowerCase(); }
+
+  window.check = function(btn) {
+    const card = btn.closest('.activity-card');
+    const type = card.dataset.type;
+    const feedback = card.querySelector('.feedback');
+    let correct = false;
+    let msg = '';
+
+    if (type === 'radio') {
+      const checked = card.querySelector('input[type=radio]:checked');
+      if (!checked) {
+        feedback.className = 'feedback err show';
+        feedback.innerHTML = '<span class="icon">⚠️</span>Selecciona una opción antes de comprobar.';
+        return;
+      }
+      correct = checked.dataset.correct === 'true';
+      msg = correct ? '<span class="icon">✓</span>¡Correcto! Bien razonado.' : '<span class="icon">✗</span>No es la opción correcta. Mira la solución para entender por qué.';
+    } else if (type === 'number') {
+      const input = card.querySelector('input[type=number]');
+      const raw = normalize(input.value);
+      if (raw === '') { feedback.className = 'feedback err show'; feedback.innerHTML = '<span class="icon">⚠️</span>Escribe una respuesta antes de comprobar.'; return; }
+      const num = parseFloat(raw);
+      if (isNaN(num)) { feedback.className = 'feedback err show'; feedback.innerHTML = '<span class="icon">⚠️</span>La respuesta debe ser un número.'; return; }
+      const expected = parseFloat(card.dataset.answer);
+      const tol = parseFloat(card.dataset.tol || '0');
+      correct = Math.abs(num - expected) <= tol + 1e-9;
+      msg = correct ? '<span class="icon">✓</span>¡Correcto! Resultado: ' + expected + '.' : '<span class="icon">✗</span>No es el resultado esperado. Revisa el cálculo o consulta la solución.';
+    } else if (type === 'order') {
+      const inputs = card.querySelectorAll('.order-item input');
+      let allFilled = true, allCorrect = true;
+      inputs.forEach(inp => {
+        inp.classList.remove('ok-input', 'err-input');
+        const val = parseInt(inp.value);
+        const exp = parseInt(inp.dataset.correct);
+        if (isNaN(val)) { allFilled = false; return; }
+        if (val === exp) inp.classList.add('ok-input');
+        else { inp.classList.add('err-input'); allCorrect = false; }
+      });
+      if (!allFilled) { feedback.className = 'feedback err show'; feedback.innerHTML = '<span class="icon">⚠️</span>Asigna un número a cada elemento antes de comprobar.'; return; }
+      correct = allCorrect;
+      msg = correct ? '<span class="icon">✓</span>¡Todas las posiciones correctas!' : '<span class="icon">✗</span>Algunas posiciones son incorrectas. Repasa la solución.';
+    } else if (type === 'match') {
+      const selects = card.querySelectorAll('.match-item select');
+      let allFilled = true, allCorrect = true;
+      selects.forEach(sel => {
+        sel.classList.remove('ok-input', 'err-input');
+        if (sel.value === '') { allFilled = false; return; }
+        if (sel.value === sel.dataset.correct) sel.classList.add('ok-input');
+        else { sel.classList.add('err-input'); allCorrect = false; }
+      });
+      if (!allFilled) { feedback.className = 'feedback err show'; feedback.innerHTML = '<span class="icon">⚠️</span>Elige una opción en cada elemento antes de comprobar.'; return; }
+      correct = allCorrect;
+      msg = correct ? '<span class="icon">✓</span>¡Todas las parejas correctas!' : '<span class="icon">✗</span>Algunas parejas son incorrectas. Revisa la solución.';
+    }
+
+    card.classList.remove('solved', 'wrong');
+    card.classList.add(correct ? 'solved' : 'wrong');
+    feedback.className = 'feedback ' + (correct ? 'ok' : 'err') + ' show';
+    feedback.innerHTML = msg;
+    updateProgress();
+  };
+
+  window.resetAll = function() {
+    if (!confirm('¿Reiniciar todas las actividades? Se perderán las respuestas marcadas.')) return;
+    cards.forEach(card => {
+      card.classList.remove('solved', 'wrong');
+      const fb = card.querySelector('.feedback');
+      if (fb) { fb.className = 'feedback'; fb.innerHTML = ''; }
+      card.querySelectorAll('input[type=radio], input[type=checkbox]').forEach(inp => inp.checked = false);
+      card.querySelectorAll('input[type=number], input[type=text]').forEach(inp => { inp.value = ''; inp.classList.remove('ok-input', 'err-input'); });
+      card.querySelectorAll('select').forEach(sel => { sel.value = ''; sel.classList.remove('ok-input', 'err-input'); });
+      card.querySelectorAll('details.solution').forEach(d => d.open = false);
+    });
+    updateProgress();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  };
+
+  updateProgress();
+})();
+</script>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

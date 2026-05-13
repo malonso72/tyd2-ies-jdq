@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Símbolos de reciclaje · U02 · TyD 2º ESO</title>
+<meta name="description" content="Interactivo de reciclaje: los 7 códigos del plástico, símbolos clave y separación de residuos en los contenedores de Andalucía. TyD 2º ESO.">
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/02-materiales/interactivos/reciclaje.html">
+
+<meta property="og:title" content="Símbolos de reciclaje · U02 · TyD 2º ESO">
+<meta property="og:description" content="7 códigos del plástico + 6 símbolos clave + separación a 5 contenedores de Andalucía.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/02-materiales/interactivos/reciclaje.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Símbolos de reciclaje · U02 · TyD 2º ESO">
+<meta name="twitter:description" content="7 códigos del plástico + 6 símbolos clave + separación a contenedores.">
+<meta name="twitter:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+:root {
+  --ok: #2e7d4f;
+  --err: #c44536;
+  --warn: #e8b647;
+  --c-azul: #2c5f8d;
+  --c-amarillo: #e8b647;
+  --c-verde: #4a7c59;
+  --c-marron: #7a4f2a;
+  --c-gris: #6a6a6a;
+  --c-pl: #c44a8a;
+}
+
+.modo-toggle {
+  display: flex;
+  gap: 0.4rem;
+  background: #f0f0f0;
+  padding: 4px;
+  border-radius: 10px;
+  margin: 1rem 0 1.4rem;
+}
+.modo-toggle button {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 0.6rem 0.8rem;
+  border-radius: 7px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.15s;
+}
+.modo-toggle button.active {
+  background: var(--principal, #D4700A);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(212,112,10,0.3);
+}
+
+.bloque {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 14px;
+  padding: 1.4rem 1.6rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+.bloque h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--principal, #D4700A);
+  margin: 0 0 0.5rem;
+  border-bottom: 2px solid var(--principal, #D4700A);
+  padding-bottom: 0.4rem;
+}
+.bloque p.descripcion { color: #555; margin-bottom: 1rem; font-size: 0.95rem; }
+.bloque h3.sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.05rem;
+  color: #333;
+  margin: 1.4rem 0 0.6rem;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  font-size: 0.86rem;
+}
+
+/* ════ SÍMBOLOS · GALERÍA ════ */
+.simb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  margin: 0.6rem 0 1rem;
+}
+.simb-card {
+  background: #fafafa;
+  border: 2px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 14px 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s;
+}
+.simb-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--principal, #D4700A);
+  box-shadow: 0 4px 14px rgba(212,112,10,0.15);
+}
+.simb-card.active {
+  border-color: var(--principal, #D4700A);
+  background: #fff7eb;
+}
+
+/* Triángulo Möbius con número (los 7 códigos plástico) */
+.sym-mobius {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 8px;
+  position: relative;
+}
+.sym-mobius svg { width: 100%; height: 100%; }
+.sym-mobius .num-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -42%);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: #333;
+}
+.sym-mobius .code-text {
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.65rem;
+  color: #333;
+  letter-spacing: 0.5px;
+  background: #fff;
+  padding: 0 4px;
+}
+.simb-card .sym-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #222;
+  margin-bottom: 2px;
+}
+.simb-card .sym-desc {
+  font-size: 0.74rem;
+  color: #666;
+  line-height: 1.3;
+}
+
+/* Otros símbolos (no códigos plástico) */
+.sym-otro {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.4rem;
+}
+
+/* ════ FICHA ════ */
+.ficha-simb {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-left: 5px solid var(--principal, #D4700A);
+  border-radius: 12px;
+  padding: 1.4rem 1.6rem;
+  margin: 1rem 0;
+  display: none;
+}
+.ficha-simb.visible { display: block; }
+.ficha-simb-hd {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.ficha-simb-hd .sym-mobius, .ficha-simb-hd .sym-otro { width: 80px; height: 80px; margin: 0; }
+.ficha-simb-hd .info h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin: 0 0 4px;
+  color: #222;
+}
+.ficha-simb-hd .info .cont-pill {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.5px;
+  padding: 4px 12px;
+  border-radius: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #fff;
+}
+.ficha-simb-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 8px;
+}
+.ficha-simb-item {
+  background: #fafafa;
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+}
+.ficha-simb-item h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem;
+  color: var(--principal, #D4700A);
+  margin: 0 0 4px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.ficha-simb-item p { font-size: 0.92rem; color: #444; margin: 0; line-height: 1.45; }
+.ficha-simb-item.full { grid-column: 1 / -1; }
+.ficha-cierre { text-align: right; margin-top: 12px; }
+.ficha-cierre button {
+  background: transparent; border: 1px solid #ccc; border-radius: 6px;
+  padding: 0.3rem 0.8rem; font-family: 'Barlow', sans-serif;
+  font-size: 0.85rem; cursor: pointer; color: #666;
+}
+.ficha-cierre button:hover { background: #f0f0f0; }
+
+/* ════ MODO SEPARAR ════ */
+.sep-hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 1rem;
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+}
+.sep-hud .hud-item {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.78rem;
+  color: #888;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+.sep-hud .hud-item strong {
+  font-size: 1.4rem;
+  color: var(--principal, #D4700A);
+  font-weight: 700;
+}
+.sep-hud .hud-item.aciertos strong { color: var(--ok); }
+.sep-hud .hud-item.fallos strong { color: var(--err); }
+.sep-hud .hud-progress {
+  flex: 1;
+  height: 8px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.sep-hud .hud-progress .bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--principal, #D4700A), #f0a040);
+  transition: width 0.3s;
+  width: 0%;
+}
+
+.sep-obj {
+  background: #fff;
+  border: 2px solid var(--principal, #D4700A);
+  border-radius: 14px;
+  padding: 1.8rem 1.6rem;
+  text-align: center;
+  margin: 1.2rem 0;
+}
+.sep-obj .obj-em-big {
+  font-size: 4.4rem;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.sep-obj .obj-pregunta {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.05rem;
+  color: #888;
+  margin-bottom: 4px;
+  letter-spacing: 0.4px;
+}
+.sep-obj .obj-nombre-big {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #222;
+  margin-bottom: 6px;
+}
+.sep-obj .obj-detail {
+  font-size: 0.88rem;
+  color: #999;
+  font-style: italic;
+}
+
+/* Contenedores como botones */
+.cont-botonera {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
+  margin: 1.2rem 0;
+}
+.cont-bt {
+  background: #fff;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 0.9rem 0.4rem;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: #333;
+}
+.cont-bt .cont-vis {
+  width: 36px;
+  height: 44px;
+  border-radius: 6px 6px 3px 3px;
+  position: relative;
+}
+.cont-bt .cont-vis::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -3px;
+  right: -3px;
+  height: 6px;
+  background: inherit;
+  border-radius: 5px 5px 0 0;
+  filter: brightness(0.85);
+}
+.cont-bt[data-c="azul"]    .cont-vis { background: var(--c-azul); }
+.cont-bt[data-c="amarillo"] .cont-vis { background: var(--c-amarillo); }
+.cont-bt[data-c="verde"]   .cont-vis { background: var(--c-verde); }
+.cont-bt[data-c="marron"]  .cont-vis { background: var(--c-marron); }
+.cont-bt[data-c="gris"]    .cont-vis { background: var(--c-gris); }
+.cont-bt[data-c="plimpio"] .cont-vis { background: var(--c-pl); border-radius: 50%; }
+.cont-bt[data-c="plimpio"] .cont-vis::after { display: none; }
+.cont-bt:hover:not(:disabled) {
+  border-color: var(--principal, #D4700A);
+  background: #fff7eb;
+}
+.cont-bt:disabled { cursor: not-allowed; opacity: 0.6; }
+.cont-bt.correcto {
+  background: #dff2e6;
+  border-color: var(--ok);
+  color: var(--ok);
+}
+.cont-bt.incorrecto {
+  background: #fce4e1;
+  border-color: var(--err);
+  color: var(--err);
+}
+
+.sep-feedback {
+  background: #fafafa;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 1rem 0;
+  display: none;
+  border-left: 4px solid #ccc;
+}
+.sep-feedback.visible { display: block; }
+.sep-feedback.ok { background: #ecf8ef; border-color: var(--ok); }
+.sep-feedback.err { background: #fdedea; border-color: var(--err); }
+.sep-feedback h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem;
+  margin: 0 0 6px;
+  color: #333;
+  letter-spacing: 0.3px;
+}
+.sep-feedback.ok h4 { color: var(--ok); }
+.sep-feedback.err h4 { color: var(--err); }
+.sep-feedback p { font-size: 0.92rem; color: #555; margin: 0; line-height: 1.5; }
+
+.sep-controles {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+}
+.btn-primary {
+  background: var(--principal, #D4700A); color: #fff;
+  border: none; border-radius: 8px;
+  padding: 0.7rem 1.4rem; font-family: 'Barlow', sans-serif;
+  font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.15s;
+}
+.btn-primary:hover { background: #b85d08; }
+.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-secondary {
+  background: #fff; color: #666; border: 1px solid #ccc; border-radius: 8px;
+  padding: 0.7rem 1.2rem; font-family: 'Barlow', sans-serif;
+  font-weight: 600; font-size: 0.95rem; cursor: pointer;
+}
+.btn-secondary:hover { background: #f5f5f5; }
+
+.resultado {
+  background: linear-gradient(135deg, #fff7eb, #ffeed4);
+  border: 2px solid var(--principal, #D4700A);
+  border-radius: 14px;
+  padding: 1.8rem;
+  margin: 1.4rem 0;
+  text-align: center;
+  display: none;
+}
+.resultado.visible { display: block; }
+.resultado .res-emoji { font-size: 4rem; line-height: 1; margin-bottom: 10px; }
+.resultado h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.8rem;
+  color: var(--principal, #D4700A);
+  margin: 0 0 6px;
+}
+.resultado .res-score {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #222;
+  margin: 0.4rem 0;
+}
+.resultado .res-msg { color: #555; font-size: 1rem; margin-bottom: 1rem; }
+.resultado .res-detalle { font-size: 0.85rem; color: #888; margin-top: 0.6rem; }
+
+@media (max-width: 700px) {
+  .ficha-simb-body { grid-template-columns: 1fr; }
+  .sep-obj .obj-em-big { font-size: 3.4rem; }
+  .sep-obj .obj-nombre-big { font-size: 1.3rem; }
+  .cont-bt .cont-vis { width: 28px; height: 34px; }
+  .simb-grid { grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U02 · Materiales · Reciclaje</span>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Inicio</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U02</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📘</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>♻️</span><span class="nc-lbl">Reciclaje</span></span>
+</nav>
+
+<div class="unidad-layout">
+
+<aside class="sb-side">
+  <h3>Cómo usarlo</h3>
+  <p style="padding: 0.6rem 1rem; font-size:0.88rem; color:#555; line-height:1.55;">
+    <strong>Modo 1 (Aprender):</strong> haz clic en cualquier símbolo para ver de qué es y a qué contenedor va.<br><br>
+    <strong>Modo 2 (Separar):</strong> ronda de 12 residuos al azar. Elige el contenedor correcto.
+  </p>
+  <h3>Los 5 contenedores</h3>
+  <ul style="font-size:0.84rem; color:#555; padding:0 1rem 0 0.6rem; line-height:1.7; list-style:none;">
+    <li><span style="display:inline-block;width:12px;height:12px;background:var(--c-azul);border-radius:3px;vertical-align:middle;"></span> Azul: papel y cartón</li>
+    <li><span style="display:inline-block;width:12px;height:12px;background:var(--c-amarillo);border-radius:3px;vertical-align:middle;"></span> Amarillo: envases ligeros</li>
+    <li><span style="display:inline-block;width:12px;height:12px;background:var(--c-verde);border-radius:3px;vertical-align:middle;"></span> Verde: vidrio</li>
+    <li><span style="display:inline-block;width:12px;height:12px;background:var(--c-marron);border-radius:3px;vertical-align:middle;"></span> Marrón: orgánico</li>
+    <li><span style="display:inline-block;width:12px;height:12px;background:var(--c-gris);border-radius:3px;vertical-align:middle;"></span> Gris: resto</li>
+    <li><span style="display:inline-block;width:12px;height:12px;background:var(--c-pl);border-radius:50%;vertical-align:middle;"></span> Punto limpio: especiales</li>
+  </ul>
+</aside>
+
+<main class="ct" id="main-content">
+
+<h1 class="unidad-titulo">♻️ Símbolos de reciclaje</h1>
+<p class="unidad-subt">Aprende los símbolos y aprende a separar correctamente en los contenedores de Andalucía.</p>
+
+<div class="modo-toggle" role="tablist" aria-label="Modo de práctica">
+  <button id="modo-aprender" class="active" onclick="setModo('aprender')">📖 Aprender (símbolos)</button>
+  <button id="modo-separar" onclick="setModo('separar')">🗑️ Separar (ronda 12)</button>
+</div>
+
+<!-- ════ MODO 1 · APRENDER ════ -->
+<section id="vista-aprender">
+  <div class="bloque">
+    <h2>Los 7 códigos del plástico</h2>
+    <p class="descripcion">Cada plástico lleva un número del 1 al 7 dentro de un triángulo de flechas. Te dice de qué polímero está hecho el envase. <strong>Casi todos van al contenedor amarillo</strong>.</p>
+
+    <div class="simb-grid" id="grid-plasticos"></div>
+
+    <h3 class="sub">Otros símbolos importantes</h3>
+    <div class="simb-grid" id="grid-otros"></div>
+  </div>
+
+  <div class="ficha-simb" id="ficha">
+    <div class="ficha-simb-hd">
+      <div id="f-icon"></div>
+      <div class="info">
+        <h3 id="f-nombre">Nombre</h3>
+        <span class="cont-pill" id="f-cont">CONTENEDOR</span>
+      </div>
+    </div>
+    <div class="ficha-simb-body">
+      <div class="ficha-simb-item">
+        <h4>De qué se trata</h4>
+        <p id="f-que">—</p>
+      </div>
+      <div class="ficha-simb-item">
+        <h4>Dónde se tira</h4>
+        <p id="f-donde">—</p>
+      </div>
+      <div class="ficha-simb-item full">
+        <h4>Ejemplos cotidianos</h4>
+        <p id="f-ejemplos">—</p>
+      </div>
+    </div>
+    <div class="ficha-cierre"><button onclick="cerrarFicha()">✕ Cerrar ficha</button></div>
+  </div>
+</section>
+
+<!-- ════ MODO 2 · SEPARAR ════ -->
+<section id="vista-separar" style="display:none;">
+  <div class="sep-hud">
+    <div class="hud-item">
+      <span>Ronda</span>
+      <strong id="sep-num">1<span style="font-size:0.9rem; color:#aaa; font-weight:400;">/12</span></strong>
+    </div>
+    <div class="hud-progress"><div class="bar" id="sep-bar"></div></div>
+    <div class="hud-item aciertos">
+      <span>Aciertos</span><strong id="sep-ok">0</strong>
+    </div>
+    <div class="hud-item fallos">
+      <span>Fallos</span><strong id="sep-err">0</strong>
+    </div>
+  </div>
+
+  <div class="sep-obj" id="sep-obj">
+    <div class="obj-em-big" id="sep-em">📦</div>
+    <div class="obj-pregunta">¿A qué contenedor va este residuo?</div>
+    <div class="obj-nombre-big" id="sep-name">—</div>
+    <div class="obj-detail" id="sep-detail">—</div>
+  </div>
+
+  <div class="cont-botonera" id="sep-bots">
+    <button class="cont-bt" data-c="azul"><span class="cont-vis"></span>Azul<br><small style="font-weight:400; color:#888;">Papel</small></button>
+    <button class="cont-bt" data-c="amarillo"><span class="cont-vis"></span>Amarillo<br><small style="font-weight:400; color:#888;">Envases</small></button>
+    <button class="cont-bt" data-c="verde"><span class="cont-vis"></span>Verde<br><small style="font-weight:400; color:#888;">Vidrio</small></button>
+    <button class="cont-bt" data-c="marron"><span class="cont-vis"></span>Marrón<br><small style="font-weight:400; color:#888;">Orgánico</small></button>
+    <button class="cont-bt" data-c="gris"><span class="cont-vis"></span>Gris<br><small style="font-weight:400; color:#888;">Resto</small></button>
+    <button class="cont-bt" data-c="plimpio"><span class="cont-vis"></span>Punto limpio<br><small style="font-weight:400; color:#888;">Especiales</small></button>
+  </div>
+
+  <div class="sep-feedback" id="sep-feedback">
+    <h4 id="sep-fb-titulo">¡Correcto!</h4>
+    <p id="sep-fb-texto">—</p>
+  </div>
+
+  <div class="sep-controles">
+    <button class="btn-primary" id="sep-next" onclick="siguienteResiduo()" disabled>Siguiente →</button>
+    <button class="btn-secondary" onclick="reiniciarRonda()">↺ Reiniciar ronda</button>
+  </div>
+
+  <div class="resultado" id="sep-resultado">
+    <div class="res-emoji" id="sep-res-emoji">🎉</div>
+    <h3 id="sep-res-titulo">¡Ronda terminada!</h3>
+    <div class="res-score" id="sep-res-score">0/12</div>
+    <p class="res-msg" id="sep-res-msg">—</p>
+    <button class="btn-primary" onclick="reiniciarRonda()">↺ Nueva ronda</button>
+    <p class="res-detalle">Cada ronda se sortean 12 residuos diferentes entre los 25 disponibles.</p>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════
+//  SVG del anillo de Möbius para los códigos plástico
+// ══════════════════════════════════════════════════════════
+const MOBIUS_SVG = `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <g fill="none" stroke="#333" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 32 6 L 50 38" />
+    <path d="M 50 38 L 14 38" />
+    <path d="M 14 38 L 32 6" />
+    <polygon points="48,38 54,38 50,46" fill="#333" stroke="none"/>
+    <polygon points="14,40 14,34 8,38" fill="#333" stroke="none"/>
+    <polygon points="34,5 28,5 31,11" fill="#333" stroke="none"/>
+  </g>
+</svg>`;
+
+// ══════════════════════════════════════════════════════════
+//  CATÁLOGO DE SÍMBOLOS
+// ══════════════════════════════════════════════════════════
+const SIMBOLOS_PLASTICO = [
+  { id:'pet',   code:'PET',   num:1, nombre:'PET',  desc:'Polietileno tereftalato',
+    cont:'amarillo', donde:'Contenedor amarillo (envases). Es el plástico más reciclado de España.',
+    que:'Polímero rígido y transparente. Es el plástico de las botellas de bebida.',
+    ejemplos:'Botellas de agua y refrescos, envases de aceite, bandejas de fruta del súper.' },
+  { id:'hdpe',  code:'HDPE',  num:2, nombre:'HDPE', desc:'Polietileno alta densidad',
+    cont:'amarillo', donde:'Contenedor amarillo (envases). Reciclaje muy eficiente.',
+    que:'Polímero rígido y opaco. Soporta golpes y productos químicos.',
+    ejemplos:'Garrafas de leche y detergente, tapones de botella, bolsas resistentes, cubos.' },
+  { id:'pvc',   code:'PVC',   num:3, nombre:'PVC',  desc:'Cloruro de polivinilo',
+    cont:'plimpio', donde:'Punto limpio. NO va al amarillo: contiene cloro, contamina el reciclaje del resto.',
+    que:'Polímero versátil pero problemático ambientalmente. Difícil de reciclar.',
+    ejemplos:'Tuberías, marcos de ventana, recubrimientos de cable, film transparente fino.' },
+  { id:'ldpe',  code:'LDPE',  num:4, nombre:'LDPE', desc:'Polietileno baja densidad',
+    cont:'amarillo', donde:'Contenedor amarillo (envases). Bolsas y films.',
+    que:'Polímero flexible y blando, ligero. Es el plástico de las bolsas finas.',
+    ejemplos:'Bolsas de supermercado, film alimentario, envoltorios, bolsas de pan.' },
+  { id:'pp',    code:'PP',    num:5, nombre:'PP',   desc:'Polipropileno',
+    cont:'amarillo', donde:'Contenedor amarillo (envases). Reciclable, muy usado.',
+    que:'Polímero versátil, resistente al calor (admite microondas). Apto para alimentos.',
+    ejemplos:'Tarros de yogur, tuppers, tapones, envases de medicinas, cubos.' },
+  { id:'ps',    code:'PS',    num:6, nombre:'PS',   desc:'Poliestireno',
+    cont:'amarillo', donde:'Contenedor amarillo (envases). El corcho blanco también, aunque ocupa mucho.',
+    que:'Polímero rígido (vasos transparentes) o expandido (corcho blanco).',
+    ejemplos:'Vasos desechables, cubertería de plástico duro, corcho blanco de embalaje.' },
+  { id:'otros', code:'OTROS', num:7, nombre:'Otros',desc:'Mezclas y nuevos plásticos',
+    cont:'gris', donde:'Habitualmente al contenedor gris (resto): casi nunca se pueden reciclar.',
+    que:'Mezcla de polímeros o materiales nuevos (bioplásticos, biodegradables, multicapa).',
+    ejemplos:'CDs, DVDs, biberones policarbonato, electrónica plástica, bioplásticos PLA.' }
+];
+
+const SIMBOLOS_OTROS = [
+  { id:'papel-cart', em:'📄', nombre:'Papel y cartón',  cont:'azul',
+    que:'Papel u origen celulósico apto para reciclaje.',
+    donde:'Contenedor azul. Plegado para que ocupe poco.',
+    ejemplos:'Cajas de cartón, periódicos, revistas, folios, libros viejos.' },
+  { id:'vidrio',     em:'🪟', nombre:'Vidrio',          cont:'verde',
+    que:'Vidrio de envase apto para reciclar (botellas, tarros).',
+    donde:'Contenedor verde. Sin tapón ni anilla metálica (esos al amarillo).',
+    ejemplos:'Botellas de vino y refresco, tarros de mermelada, frascos de perfume.' },
+  { id:'aluminio',   em:'🥫', nombre:'Aluminio (ALU)',   cont:'amarillo',
+    que:'Metal de envase, fácil de reciclar y de gran valor.',
+    donde:'Contenedor amarillo. El aluminio se recicla un número infinito de veces.',
+    ejemplos:'Latas de refresco, bandejas de comida para llevar, envoltorios de chocolate.' },
+  { id:'brick',      em:'🧃', nombre:'Brick',            cont:'amarillo',
+    que:'Envase multicapa: papel + plástico + lámina de aluminio.',
+    donde:'Contenedor amarillo. Se separa en la planta de reciclaje en sus tres componentes.',
+    ejemplos:'Bricks de leche, zumo, caldo, batidos, salsa de tomate.' },
+  { id:'mobius',     em:'♻️', nombre:'Símbolo de reciclaje (Möbius)', cont:'amarillo',
+    que:'Símbolo internacional de "material reciclable". Si lleva número dentro, indica de qué plástico es.',
+    donde:'A su contenedor correspondiente según el material.',
+    ejemplos:'Aparece en casi todos los envases reciclables del mundo.' },
+  { id:'tidyman',    em:'🚮', nombre:'Tidyman (depositar en papelera)', cont:'gris',
+    que:'Símbolo que pide que NO tires el envase al suelo: hay que depositarlo en un contenedor o papelera.',
+    donde:'A la papelera más cercana o al contenedor que corresponda. NO es un símbolo de reciclaje.',
+    ejemplos:'Aparece en casi todos los envases junto al símbolo Möbius.' }
+];
+
+const SIMBOLOS = [...SIMBOLOS_PLASTICO, ...SIMBOLOS_OTROS];
+
+const CONT_NAMES = {
+  azul: 'Azul (papel y cartón)',
+  amarillo: 'Amarillo (envases)',
+  verde: 'Verde (vidrio)',
+  marron: 'Marrón (orgánico)',
+  gris: 'Gris (resto)',
+  plimpio: 'Punto limpio (especiales)'
+};
+
+// ══════════════════════════════════════════════════════════
+//  CATÁLOGO DE 25 RESIDUOS PARA LA RONDA
+// ══════════════════════════════════════════════════════════
+const RESIDUOS = [
+  // ── Azul (5) ──
+  { em:'📰', nombre:'Periódico viejo',         det:'Papel de prensa, sin plásticos ni grasa.', cont:'azul', why:'Es papel limpio: contenedor azul. Si quedaran restos de comida o grasa, iría al resto.' },
+  { em:'📦', nombre:'Caja de cartón',          det:'De zapatos o de paquetería, limpia.',     cont:'azul', why:'Cartón limpio plegado: contenedor azul. Hay que plegarla para que ocupe lo mínimo.' },
+  { em:'📚', nombre:'Cuaderno con anillas',    det:'Cuaderno viejo. ¿Y las anillas metálicas?', cont:'azul', why:'Va al azul: las hojas son papel. Lo ideal es quitar las anillas metálicas antes (al amarillo) si es posible.' },
+  { em:'🥚', nombre:'Hueva de huevos',         det:'De cartón prensado, sin restos de huevo.', cont:'azul', why:'Cartón moldeado: contenedor azul (también vale el marrón si tu municipio lo permite por ser biodegradable).' },
+  { em:'✉️', nombre:'Sobre con ventana',       det:'Sobre con ventana de plástico para la dirección.', cont:'azul', why:'Aunque tenga una ventanilla pequeña de plástico, el grueso es papel. Al azul.' },
+
+  // ── Amarillo (6) ──
+  { em:'🧴', nombre:'Botella de agua vacía',   det:'PET (código 1).',                          cont:'amarillo', why:'PET = contenedor amarillo. Aplástala antes de tirarla para que ocupe menos.' },
+  { em:'🥤', nombre:'Lata de refresco',        det:'Aluminio.',                                cont:'amarillo', why:'Las latas de aluminio van al amarillo. El aluminio se recicla un número infinito de veces.' },
+  { em:'🧃', nombre:'Brick de zumo',           det:'Multicapa: cartón + plástico + aluminio.', cont:'amarillo', why:'Los bricks van al amarillo, no al azul (porque no son solo cartón). La planta los separa en sus tres capas.' },
+  { em:'🥫', nombre:'Lata de atún',            det:'Acero recubierto de estaño.',              cont:'amarillo', why:'Latas de conserva (de acero o aluminio): contenedor amarillo. Convéndria enjuagarlas para evitar olores.' },
+  { em:'🛒', nombre:'Bolsa de supermercado',   det:'Polietileno (LDPE).',                      cont:'amarillo', why:'Las bolsas de plástico van al amarillo, pero la mejor opción es reutilizarlas.' },
+  { em:'🍨', nombre:'Tarro de yogur vacío',    det:'Polipropileno (PP, código 5).',           cont:'amarillo', why:'Envase de PP: al amarillo. Si quedan restos de yogur, una pasada de agua antes está bien.' },
+
+  // ── Verde (3) ──
+  { em:'🍷', nombre:'Botella de vino',         det:'Vidrio. Sin tapón ni cápsula.',           cont:'verde', why:'El vidrio va al verde. El tapón (corcho o plástico) y la cápsula metálica VAN APARTE: al amarillo o al resto.' },
+  { em:'🍯', nombre:'Tarro de mermelada',      det:'Vidrio con tapa metálica.',                cont:'verde', why:'El tarro de vidrio al verde; la tapa metálica al amarillo. Lávalo si quedan restos.' },
+  { em:'🫒', nombre:'Botella de aceitunas',     det:'Vidrio.',                                  cont:'verde', why:'Vidrio = contenedor verde. Vaciar el líquido primero.' },
+
+  // ── Marrón (3) ──
+  { em:'🍌', nombre:'Cáscara de plátano',      det:'Restos orgánicos.',                        cont:'marron', why:'Restos de comida = contenedor marrón (biorresiduos). Si tu municipio aún no tiene marrón, va al resto.' },
+  { em:'☕', nombre:'Posos de café',           det:'Restos orgánicos del café molido.',        cont:'marron', why:'Los posos de café son biodegradables: contenedor marrón. También sirven para abonar plantas.' },
+  { em:'🥬', nombre:'Restos de lechuga',       det:'Verdura mustia que se va a tirar.',        cont:'marron', why:'Restos vegetales = contenedor marrón. Si las cocinaste, igual: orgánico.' },
+
+  // ── Gris (4) ──
+  { em:'🧷', nombre:'Pañal usado',             det:'Higiene personal con restos orgánicos.',  cont:'gris', why:'Aunque tenga celulosa, los pañales NO se reciclan (restos biológicos). Al gris (resto).' },
+  { em:'🍽️', nombre:'Plato de cerámica roto', det:'Cerámica fracturada.',                    cont:'gris', why:'La cerámica NO es vidrio: NO va al verde (su composición rompe el proceso). Al gris.' },
+  { em:'🚬', nombre:'Colillas',                det:'Filtros usados.',                          cont:'gris', why:'Las colillas son altamente contaminantes y NO se reciclan. Al gris, NUNCA al suelo (¡una colilla contamina 500 litros de agua!).' },
+  { em:'🪞', nombre:'Espejo roto',             det:'Cristal de espejo con película reflectante.', cont:'gris', why:'Aunque parezca vidrio, los espejos NO van al verde (la capa reflectante rompe el reciclaje). Al gris envuelto en papel para no cortarse.' },
+
+  // ── Punto limpio (4) ──
+  { em:'🔋', nombre:'Pila usada',              det:'Pila alcalina o de botón.',                cont:'plimpio', why:'Las pilas tienen metales pesados muy contaminantes. NUNCA al resto. Hay buzones en supermercados, ferreterías y en el centro educativo.' },
+  { em:'📱', nombre:'Móvil viejo',             det:'Aparato electrónico que ya no funciona.',  cont:'plimpio', why:'Los aparatos electrónicos contienen metales valiosos y tóxicos: van al punto limpio o al programa de recogida de la tienda.' },
+  { em:'🛢️', nombre:'Botella de aceite usado', det:'Aceite de cocina usado.',                  cont:'plimpio', why:'NUNCA al fregadero: 1 L de aceite contamina 1000 L de agua. Recógelo en una botella y llévalo al punto limpio.' },
+  { em:'👕', nombre:'Camiseta vieja',          det:'Ropa que ya no usas.',                    cont:'plimpio', why:'Los textiles van a contenedores específicos (Cáritas, Humana, ropa) en la calle o al punto limpio. NO al resto si está usable.' }
+];
+
+// ══════════════════════════════════════════════════════════
+//  MODO TOGGLE
+// ══════════════════════════════════════════════════════════
+function setModo(modo) {
+  document.getElementById('vista-aprender').style.display = (modo === 'aprender') ? '' : 'none';
+  document.getElementById('vista-separar').style.display = (modo === 'separar') ? '' : 'none';
+  document.getElementById('modo-aprender').classList.toggle('active', modo === 'aprender');
+  document.getElementById('modo-separar').classList.toggle('active', modo === 'separar');
+  if (modo === 'separar' && rondaActiva === null) iniciarRonda();
+}
+
+// ══════════════════════════════════════════════════════════
+//  RENDER GALERÍAS
+// ══════════════════════════════════════════════════════════
+function renderGalerias() {
+  const gridP = document.getElementById('grid-plasticos');
+  gridP.innerHTML = SIMBOLOS_PLASTICO.map(s => `
+    <div class="simb-card" data-id="${s.id}" onclick="abrirFicha('${s.id}')">
+      <div class="sym-mobius">${MOBIUS_SVG}<span class="num-inner">${s.num}</span><span class="code-text">${s.code}</span></div>
+      <div class="sym-name">${s.nombre}</div>
+      <div class="sym-desc">${s.desc}</div>
+    </div>
+  `).join('');
+  const gridO = document.getElementById('grid-otros');
+  gridO.innerHTML = SIMBOLOS_OTROS.map(s => `
+    <div class="simb-card" data-id="${s.id}" onclick="abrirFicha('${s.id}')">
+      <div class="sym-otro">${s.em}</div>
+      <div class="sym-name">${s.nombre.split(' (')[0]}</div>
+      <div class="sym-desc">${s.nombre.includes('(') ? s.nombre.match(/\((.*?)\)/)[1] : '—'}</div>
+    </div>
+  `).join('');
+}
+
+function abrirFicha(id) {
+  const s = SIMBOLOS.find(x => x.id === id);
+  if (!s) return;
+  let iconHtml;
+  if (s.code) {
+    iconHtml = `<div class="sym-mobius">${MOBIUS_SVG}<span class="num-inner">${s.num}</span><span class="code-text">${s.code}</span></div>`;
+  } else {
+    iconHtml = `<div class="sym-otro">${s.em}</div>`;
+  }
+  document.getElementById('f-icon').innerHTML = iconHtml;
+  document.getElementById('f-nombre').textContent = s.nombre;
+  const pill = document.getElementById('f-cont');
+  pill.textContent = CONT_NAMES[s.cont];
+  pill.style.background = `var(--c-${s.cont})`;
+  document.getElementById('f-que').textContent = s.que;
+  document.getElementById('f-donde').textContent = s.donde;
+  document.getElementById('f-ejemplos').textContent = s.ejemplos;
+  document.getElementById('ficha').classList.add('visible');
+  document.querySelectorAll('.simb-card').forEach(c => c.classList.toggle('active', c.dataset.id === id));
+  document.getElementById('ficha').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function cerrarFicha() {
+  document.getElementById('ficha').classList.remove('visible');
+  document.querySelectorAll('.simb-card').forEach(c => c.classList.remove('active'));
+}
+
+// ══════════════════════════════════════════════════════════
+//  MODO SEPARAR · ronda de 12 residuos
+// ══════════════════════════════════════════════════════════
+let rondaActiva = null;
+let rondaList = [];
+let rondaIdx = 0;
+let aciertos = 0;
+let fallos = 0;
+
+function iniciarRonda() {
+  // 12 al azar, mezclando contenedores. Asegurar 1 por contenedor.
+  const porCont = {};
+  ['azul','amarillo','verde','marron','gris','plimpio'].forEach(c => porCont[c] = RESIDUOS.filter(r => r.cont === c).slice());
+  const seleccion = [];
+  // 1 obligatorio por contenedor (6)
+  Object.keys(porCont).forEach(c => {
+    const arr = porCont[c];
+    if (arr.length > 0) {
+      const i = Math.floor(Math.random() * arr.length);
+      seleccion.push(arr.splice(i, 1)[0]);
+    }
+  });
+  // Completar hasta 12
+  const restantes = Object.values(porCont).flat();
+  while (seleccion.length < 12 && restantes.length > 0) {
+    const i = Math.floor(Math.random() * restantes.length);
+    seleccion.push(restantes.splice(i, 1)[0]);
+  }
+  // Mezcla final
+  for (let i = seleccion.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [seleccion[i], seleccion[j]] = [seleccion[j], seleccion[i]];
+  }
+  rondaList = seleccion;
+  rondaIdx = 0; aciertos = 0; fallos = 0;
+  rondaActiva = true;
+  document.getElementById('sep-resultado').classList.remove('visible');
+  document.getElementById('sep-obj').style.display = '';
+  document.getElementById('sep-bots').style.display = '';
+  document.getElementById('sep-feedback').classList.remove('visible');
+  document.getElementById('sep-next').disabled = true;
+  pintarResiduo();
+  actualizarHud();
+}
+
+function pintarResiduo() {
+  const r = rondaList[rondaIdx];
+  document.getElementById('sep-em').textContent = r.em;
+  document.getElementById('sep-name').textContent = r.nombre;
+  document.getElementById('sep-detail').textContent = r.det;
+  document.querySelectorAll('.cont-bt').forEach(b => {
+    b.classList.remove('correcto','incorrecto');
+    b.disabled = false;
+  });
+  document.getElementById('sep-feedback').classList.remove('visible');
+  document.getElementById('sep-next').disabled = true;
+}
+
+function actualizarHud() {
+  document.getElementById('sep-num').innerHTML = (rondaIdx + 1) + '<span style="font-size:0.9rem; color:#aaa; font-weight:400;">/12</span>';
+  document.getElementById('sep-ok').textContent = aciertos;
+  document.getElementById('sep-err').textContent = fallos;
+  document.getElementById('sep-bar').style.width = (rondaIdx / 12 * 100) + '%';
+}
+
+document.querySelectorAll('.cont-bt').forEach(b => {
+  b.onclick = () => {
+    if (b.disabled) return;
+    const c = b.dataset.c;
+    const r = rondaList[rondaIdx];
+    const correcto = (c === r.cont);
+    document.querySelectorAll('.cont-bt').forEach(x => x.disabled = true);
+    document.querySelector(`.cont-bt[data-c="${r.cont}"]`).classList.add('correcto');
+    if (!correcto) b.classList.add('incorrecto');
+    const fb = document.getElementById('sep-feedback');
+    fb.classList.add('visible');
+    fb.classList.toggle('ok', correcto);
+    fb.classList.toggle('err', !correcto);
+    if (correcto) {
+      aciertos++;
+      document.getElementById('sep-fb-titulo').textContent = '✅ ¡Correcto!';
+      document.getElementById('sep-fb-texto').innerHTML = `<strong>${r.nombre}</strong> → ${CONT_NAMES[r.cont]}. ${r.why}`;
+    } else {
+      fallos++;
+      document.getElementById('sep-fb-titulo').textContent = '❌ No es correcto';
+      document.getElementById('sep-fb-texto').innerHTML = `<strong>${r.nombre}</strong> va al <strong>${CONT_NAMES[r.cont]}</strong>. ${r.why}`;
+    }
+    document.getElementById('sep-next').disabled = false;
+  };
+});
+
+function siguienteResiduo() {
+  rondaIdx++;
+  if (rondaIdx >= rondaList.length) { mostrarResultado(); return; }
+  pintarResiduo();
+  actualizarHud();
+}
+
+function mostrarResultado() {
+  document.getElementById('sep-obj').style.display = 'none';
+  document.getElementById('sep-bots').style.display = 'none';
+  document.getElementById('sep-feedback').classList.remove('visible');
+  document.getElementById('sep-next').disabled = true;
+  const res = document.getElementById('sep-resultado');
+  res.classList.add('visible');
+  document.getElementById('sep-bar').style.width = '100%';
+  const score = aciertos;
+  document.getElementById('sep-res-score').textContent = score + '/12';
+  let emoji, titulo, msg;
+  if (score === 12) { emoji='🏆'; titulo='¡Perfecto!'; msg='Sabes separar residuos sin titubear. Ya puedes ayudar en casa con la limpieza.'; }
+  else if (score >= 10) { emoji='♻️'; titulo='¡Muy bien!'; msg='Casi perfecto. Repasa los que has fallado y entenderás el patrón.'; }
+  else if (score >= 7) { emoji='👍'; titulo='Aprobado'; msg='Vas por buen camino. Algunos casos (cerámica, pañales) son trampas frecuentes.'; }
+  else if (score >= 5) { emoji='🤔'; titulo='Hay que repasar'; msg='Conviene volver al modo Aprender y leer cada símbolo. También la sección 9 del libro digital.'; }
+  else { emoji='📚'; titulo='Vuelve al libro'; msg='Sección 9 del libro digital. Mira los símbolos uno por uno antes de volver al modo Separar.'; }
+  document.getElementById('sep-res-emoji').textContent = emoji;
+  document.getElementById('sep-res-titulo').textContent = titulo;
+  document.getElementById('sep-res-msg').textContent = msg;
+}
+
+function reiniciarRonda() { iniciarRonda(); }
+
+// ══════════════════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════════════════
+renderGalerias();
+</script>
+
+<footer style="text-align:center; padding:2rem 1rem 1rem; color:#888; font-size:0.85rem;">
+  <p>♻️ Símbolos de reciclaje · TyD 2º ESO · Unidad 2</p>
+  <p><a href="../index.html" style="color:#D4700A; text-decoration:none;">← Volver al hub de la unidad</a></p>
+  <p style="margin-top:8px; font-family:'JetBrains Mono', monospace; font-size:0.72rem; opacity:0.6;">v1.0</p>
+</footer>
+
+</body>
+</html>

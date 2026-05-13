@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La tecnología y el proceso tecnológico · 2º ESO · Tecnología y Digitalización · v1.0</title>
+<meta name="description" content="Libro digital de la unidad 1 para 2º ESO: la tecnología, su historia, las 6 fases del proceso tecnológico, proyecto, memoria, fabricación y medio ambiente. IES Jiménez de Quesada (Santa Fe, Granada).">
+<meta name="theme-color" content="#d2552a">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/01-tecnologia-proceso/libro-digital.html">
+
+<!-- ══ Open Graph ══ -->
+<meta property="og:title" content="Libro digital · La tecnología y el proceso tecnológico · TyD 2º ESO">
+<meta property="og:description" content="Libro digital de la unidad 1: tecnología, historia, 6 fases del proceso tecnológico, proyecto, memoria, fabricación y medio ambiente.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/01-tecnologia-proceso/libro-digital.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cream: #f6f1e7;
+  --cream-2: #efe7d4;
+  --ink: #1a2238;
+  --ink-soft: #3a4360;
+  --teja: #d2552a;
+  --teja-soft: #e87a4e;
+  --blue: #2c5f8d;
+  --blue-soft: #3d7fb8;
+  --yellow: #e8b647;
+  --line: #d6c9ad;
+  --ok: #4a7c59;
+  --err: #c44536;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.6;
+  font-size: 16px;
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(232,182,71,0.08) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(210,85,42,0.06) 0%, transparent 40%);
+  min-height: 100vh;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+/* ── ASIDE ── */
+aside {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 32px 24px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  border-right: 3px solid var(--teja);
+}
+aside .brand { font-family: 'Fraunces', serif; font-weight: 800; font-size: 24px; line-height: 1.1; margin-bottom: 4px; }
+aside .brand span { color: var(--teja-soft); font-style: italic; }
+aside .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: rgba(246,241,231,0.5); margin-bottom: 32px; }
+aside .parte-titulo {
+  font-family: 'Fraunces', serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--teja-soft);
+  margin-top: 24px;
+  margin-bottom: 8px;
+  padding-left: 14px;
+  font-weight: 700;
+}
+aside .parte-titulo:first-of-type { margin-top: 8px; }
+aside nav { display: flex; flex-direction: column; gap: 4px; }
+aside nav a {
+  color: rgba(246,241,231,0.75);
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+aside nav a:hover { background: rgba(246,241,231,0.05); color: var(--cream); border-left-color: var(--teja-soft); }
+aside nav a .num { font-family: 'JetBrains Mono', monospace; font-size: 11px; background: rgba(246,241,231,0.1); padding: 2px 6px; border-radius: 4px; min-width: 24px; text-align: center; }
+aside .back-link {
+  margin-top: 24px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(232,122,78,0.12);
+  color: var(--teja-soft);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(232,122,78,0.2);
+  transition: all .15s;
+}
+aside .back-link:hover { background: rgba(232,122,78,0.2); color: var(--cream); }
+aside .credit { margin-top: 24px; font-size: 11px; opacity: 0.4; line-height: 1.5; }
+
+/* ── MAIN ── */
+main { padding: 48px 56px 80px; min-width: 0; }
+header.hero { margin-bottom: 56px; padding-bottom: 32px; border-bottom: 1px dashed var(--line); }
+header.hero .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--teja); margin-bottom: 12px; }
+header.hero h1 { font-family: 'Fraunces', serif; font-size: 56px; font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 16px; }
+header.hero h1 em { font-style: italic; color: var(--teja); font-weight: 400; }
+header.hero p.lead { font-size: 18px; color: var(--ink-soft); max-width: 640px; }
+header.hero .meta { display: flex; gap: 24px; margin-top: 24px; font-size: 13px; color: var(--ink-soft); flex-wrap: wrap; }
+header.hero .meta strong { color: var(--ink); font-weight: 600; }
+
+/* ── PARTE ── */
+.parte { margin-bottom: 60px; scroll-margin-top: 24px; }
+.parte-cabecera {
+  background: linear-gradient(135deg, var(--ink) 0%, #2a3458 100%);
+  color: var(--cream);
+  padding: 36px 44px;
+  border-radius: 18px;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+  border-left: 6px solid var(--teja);
+}
+.parte-cabecera::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(232,182,71,0.08) 0%, transparent 70%);
+}
+.parte-cabecera .parte-num { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 3px; color: var(--teja-soft); text-transform: uppercase; margin-bottom: 8px; position: relative; }
+.parte-cabecera h2 { font-family: 'Fraunces', serif; font-size: 38px; font-weight: 800; line-height: 1.1; margin-bottom: 12px; position: relative; }
+.parte-cabecera p { font-size: 16px; opacity: 0.85; max-width: 580px; position: relative; }
+
+/* ── SECTION ── */
+.section { margin-bottom: 56px; scroll-margin-top: 24px; }
+.section-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--teja); text-transform: uppercase; margin-bottom: 8px; }
+.section h3 { font-family: 'Fraunces', serif; font-size: 30px; font-weight: 700; line-height: 1.15; margin-bottom: 16px; color: var(--ink); }
+.section h4 { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 600; margin: 28px 0 12px; color: var(--ink); }
+.section p { margin-bottom: 14px; color: var(--ink-soft); }
+.section p strong { color: var(--ink); font-weight: 600; }
+.section ul, .section ol { margin: 8px 0 14px 24px; color: var(--ink-soft); }
+.section li { margin-bottom: 6px; }
+.section li strong { color: var(--ink); font-weight: 600; }
+
+/* ── KEYBOX ── */
+.keybox {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--teja);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 20px 0;
+  box-shadow: 0 4px 14px rgba(26,34,56,0.05);
+}
+.keybox .ktit { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--teja); text-transform: uppercase; margin-bottom: 8px; }
+.keybox p { margin-bottom: 8px; }
+.keybox p:last-child { margin-bottom: 0; }
+
+/* ── CALLOUT ── */
+.callout { display: flex; gap: 14px; align-items: flex-start; padding: 16px 20px; border-radius: 12px; margin: 20px 0; }
+.callout .ic { font-size: 22px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+.callout p { margin: 0; color: var(--ink-soft); font-size: 15px; }
+.callout p + p { margin-top: 6px; }
+.callout-info { background: rgba(44,95,141,0.07); border: 1px solid rgba(44,95,141,0.18); }
+.callout-info p strong { color: var(--blue); }
+.callout-ok { background: rgba(74,124,89,0.07); border: 1px solid rgba(74,124,89,0.18); }
+.callout-ok p strong { color: var(--ok); }
+.callout-warn { background: rgba(232,182,71,0.10); border: 1px solid rgba(232,182,71,0.30); }
+.callout-warn p strong { color: #8a6d1a; }
+.callout-key { background: rgba(210,85,42,0.07); border: 1px solid rgba(210,85,42,0.20); }
+.callout-key p strong { color: var(--teja); }
+
+/* ── COLS ── */
+.cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin: 22px 0; }
+.cols3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; margin: 22px 0; }
+.col-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  box-shadow: 0 4px 14px rgba(26,34,56,0.05);
+}
+.col-card h4 { font-family: 'Fraunces', serif; font-size: 19px; margin: 0 0 10px; color: var(--teja); }
+.col-card h4.azul { color: var(--blue); }
+.col-card h4.green { color: var(--ok); }
+.col-card p { font-size: 14.5px; margin-bottom: 8px; }
+.col-card ul { margin: 6px 0 0 18px; font-size: 14.5px; }
+
+/* ── FIGURE ── */
+.fig {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+  margin: 24px 0;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(26,34,56,0.05);
+}
+.fig svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+.fig-cap { font-family: 'Fraunces', serif; font-size: 13px; font-style: italic; color: var(--ink-soft); margin-top: 12px; }
+
+/* ── EJEMPLO ── */
+.ejemplo {
+  background: linear-gradient(135deg, #fdfaf3, #f6f1e7);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--yellow);
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin: 24px 0;
+}
+.ejemplo .et { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: #8a6d1a; text-transform: uppercase; margin-bottom: 6px; }
+.ejemplo h5 { font-family: 'Fraunces', serif; font-size: 19px; margin: 0 0 14px; color: var(--ink); }
+.steps { display: grid; gap: 10px; counter-reset: step; }
+.step {
+  position: relative;
+  padding: 12px 14px 12px 46px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+.step::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--teja);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* ── TABLE ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  font-size: 14.5px;
+}
+th { background: var(--ink); color: var(--cream); font-family: 'Fraunces', serif; font-weight: 600; padding: 12px 14px; text-align: left; font-size: 14px; letter-spacing: .3px; }
+td { padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink-soft); }
+tr:last-child td { border-bottom: 0; }
+tr:nth-child(even) td { background: rgba(246,241,231,0.5); }
+
+/* ── GLOSARIO ── */
+.glos { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 24px; margin-top: 32px; }
+.glos h3 { font-family: 'Fraunces', serif; font-size: 22px; margin-bottom: 14px; color: var(--ink); }
+.glos dl { display: grid; gap: 12px; }
+.glos dt { font-family: 'Fraunces', serif; font-weight: 700; color: var(--teja); font-size: 16px; }
+.glos dd { color: var(--ink-soft); font-size: 14.5px; margin-left: 0; }
+
+/* ── FOOTER ── */
+footer.book-foot { margin-top: 60px; padding-top: 28px; border-top: 1px dashed var(--line); text-align: center; font-size: 13px; color: var(--ink-soft); }
+footer.book-foot a { color: var(--teja); text-decoration: none; }
+footer.book-foot a:hover { color: var(--teja-soft); }
+footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px; opacity: 0.6; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  aside { position: relative; height: auto; max-height: none; top: auto; }
+  main { padding: 32px 24px 60px; }
+  header.hero h1 { font-size: 36px; }
+  .parte-cabecera { padding: 28px 24px; }
+  .parte-cabecera h2 { font-size: 26px; }
+  .section h3 { font-size: 24px; }
+  .cols2, .cols3 { grid-template-columns: 1fr; }
+}
+
+@media print {
+  body { background: #fff; }
+  aside { display: none; }
+  .layout { grid-template-columns: 1fr; }
+  main { padding: 0; }
+  .parte-cabecera { background: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .section, .ejemplo, .fig, .col-card, .keybox { break-inside: avoid; }
+}
+
+/* ── SVG STYLES ── */
+.svg-fig { font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+.svg-fig .stroke-main { stroke: #1a2238; stroke-width: 2; fill: none; stroke-linejoin: round; stroke-linecap: round; }
+.svg-fig .stroke-thin { stroke: #1a2238; stroke-width: 1; fill: none; }
+.svg-fig .stroke-aux { stroke: #d2552a; stroke-width: 1; fill: none; stroke-dasharray: 4 3; }
+.svg-fig .fill-light { fill: #f6f1e7; }
+.svg-fig .fill-teja { fill: rgba(210,85,42,0.18); }
+.svg-fig .fill-blue { fill: rgba(44,95,141,0.15); }
+.svg-fig .fill-yellow { fill: rgba(232,182,71,0.25); }
+.svg-fig .fill-green { fill: rgba(74,124,89,0.18); }
+.svg-fig text { fill: #1a2238; }
+.svg-fig text.lbl-teja { fill: #d2552a; font-weight: 600; }
+.svg-fig text.lbl-blue { fill: #2c5f8d; font-weight: 600; }
+.svg-fig .arrow { fill: #1a2238; }
+.svg-fig .arrow-teja { fill: #d2552a; }
+
+/* Las 6 fases — proceso tecnológico (círculo) */
+.fase-circle { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 20px 0; }
+.fase-item {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 14px;
+  align-items: start;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--teja);
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: 0 2px 8px rgba(26,34,56,0.04);
+}
+.fase-num {
+  font-family: 'Fraunces', serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--teja);
+  line-height: 1;
+  text-align: center;
+}
+.fase-content h5 {
+  font-family: 'Fraunces', serif;
+  font-size: 17px;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+.fase-content p { font-size: 14.5px; margin: 0; }
+
+/* Línea del tiempo */
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin: 24px 0;
+  position: relative;
+}
+.timeline-item {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--teja);
+  border-radius: 10px;
+  padding: 14px 12px;
+  position: relative;
+  font-size: 13.5px;
+}
+.timeline-item h5 {
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  color: var(--teja);
+  margin: 0 0 4px;
+}
+.timeline-item .periodo {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-soft);
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+.timeline-item ul { margin: 4px 0 0 14px; padding: 0; }
+.timeline-item li { margin-bottom: 2px; }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+<aside>
+  <div class="brand">Proceso<br><span>tecnológico</span></div>
+  <div class="sub">TyD 2º ESO · U1</div>
+
+  <div class="parte-titulo">Parte 1 · Fundamentos</div>
+  <nav>
+    <a href="#s1"><span class="num">1</span>La tecnología</a>
+    <a href="#s2"><span class="num">2</span>Historia de la tecnología</a>
+  </nav>
+
+  <div class="parte-titulo">Parte 2 · Trabajar en tecnología</div>
+  <nav>
+    <a href="#s3"><span class="num">3</span>El proceso tecnológico</a>
+    <a href="#s4"><span class="num">4</span>El proyecto tecnológico</a>
+  </nav>
+
+  <div class="parte-titulo">Parte 3 · Documentar y fabricar</div>
+  <nav>
+    <a href="#s5"><span class="num">5</span>Memoria técnica</a>
+    <a href="#s6"><span class="num">6</span>Fabricación de productos</a>
+  </nav>
+
+  <div class="parte-titulo">Parte 4 · Impacto</div>
+  <nav>
+    <a href="#s7"><span class="num">7</span>Tecnología y medio ambiente</a>
+    <a href="#cierre"><span class="num">★</span>Recuerda</a>
+  </nav>
+
+  <a class="back-link" href="index.html">← Volver al hub de la unidad</a>
+
+  <div class="credit">
+    TyD 2º ESO · Curso 2025-26<br>
+    Manuel Alonso Herrera<br>
+    IES Jiménez de Quesada
+  </div>
+</aside>
+
+<main>
+
+<header class="hero">
+  <div class="eyebrow">Unidad 1 · Libro digital · v1.0</div>
+  <h1>La tecnología y el<br><em>proceso tecnológico</em></h1>
+  <p class="lead">Resolver un problema no es lo mismo que improvisar. Detrás de cada objeto que usas hay un método: <strong>el proceso tecnológico</strong>. En esta unidad aprenderás a aplicarlo paso a paso, a documentar tu trabajo en una memoria técnica y a entender por qué la tecnología que diseñamos tiene consecuencias en el planeta.</p>
+  <div class="meta">
+    <span><strong>Curso:</strong> 2º ESO</span>
+    <span><strong>Duración:</strong> 6-8 sesiones</span>
+    <span><strong>Bloques:</strong> 7 secciones · 4 partes</span>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PARTE 1 · FUNDAMENTOS
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="parte1">
+  <div class="parte-cabecera">
+    <div class="parte-num">Parte 1</div>
+    <h2>Fundamentos</h2>
+    <p>Qué es la tecnología, de dónde viene la palabra y cómo ha evolucionado a lo largo de la historia humana.</p>
+  </div>
+
+  <!-- ─── 1. La tecnología ─── -->
+  <article class="section" id="s1">
+    <div class="section-num">Sección 1</div>
+    <h3>¿Qué es la tecnología?</h3>
+
+    <p>La palabra <strong>tecnología</strong> viene del griego: <em>techne</em> (técnica, arte u oficio) y <em>logos</em> (estudio o tratado). Es decir, "el estudio de las técnicas". Pero la tecnología no se queda solo en las técnicas: combina <strong>conocimientos</strong> y <strong>habilidades</strong> para conseguir un objetivo muy concreto.</p>
+
+    <div class="keybox">
+      <div class="ktit">Definición</div>
+      <p>La <strong>tecnología</strong> es el conjunto de <strong>conocimientos y procedimientos</strong> que aplicamos para fabricar objetos o sistemas con los que <strong>satisfacer nuestras necesidades</strong>.</p>
+    </div>
+
+    <p>Estamos tan acostumbrados a la tecnología que ni la notamos. Pensa un momento: el bolígrafo con el que escribes, la silla en la que estás sentado, el móvil que llevas en el bolsillo, el grifo de tu cocina, la zapatilla deportiva… todo es tecnología.</p>
+
+    <div class="fig">
+      <svg class="svg-fig" viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg" aria-label="La tecnología en la etimología y en la vida cotidiana">
+        <!-- Etimología -->
+        <g transform="translate(20,20)">
+          <text x="170" y="20" text-anchor="middle" font-size="13" font-weight="700" class="lbl-teja">DE DÓNDE VIENE LA PALABRA</text>
+          <rect x="20" y="40" width="120" height="60" rx="10" class="stroke-main fill-teja"/>
+          <text x="80" y="65" text-anchor="middle" font-size="14" font-weight="700">techne</text>
+          <text x="80" y="82" text-anchor="middle" font-size="10">técnica, arte, oficio</text>
+
+          <text x="170" y="75" text-anchor="middle" font-size="22" font-weight="700">+</text>
+
+          <rect x="200" y="40" width="120" height="60" rx="10" class="stroke-main fill-blue"/>
+          <text x="260" y="65" text-anchor="middle" font-size="14" font-weight="700">logos</text>
+          <text x="260" y="82" text-anchor="middle" font-size="10">estudio, tratado</text>
+
+          <text x="345" y="75" text-anchor="middle" font-size="22" font-weight="700">=</text>
+
+          <rect x="370" y="40" width="140" height="60" rx="10" class="stroke-main fill-yellow"/>
+          <text x="440" y="65" text-anchor="middle" font-size="14" font-weight="700">TECNOLOGÍA</text>
+          <text x="440" y="82" text-anchor="middle" font-size="10">estudio de las técnicas</text>
+        </g>
+
+        <!-- Componentes -->
+        <g transform="translate(30,140)">
+          <text x="265" y="0" text-anchor="middle" font-size="13" font-weight="700" class="lbl-teja">LA TECNOLOGÍA COMBINA</text>
+          <rect x="0" y="20" width="170" height="60" rx="10" class="stroke-thin fill-light"/>
+          <text x="85" y="42" text-anchor="middle" font-size="13" font-weight="700">CONOCIMIENTOS</text>
+          <text x="85" y="60" text-anchor="middle" font-size="10">saber cómo funciona algo</text>
+          <text x="85" y="73" text-anchor="middle" font-size="10">(ciencia, matemáticas…)</text>
+
+          <text x="195" y="60" text-anchor="middle" font-size="20" font-weight="700">+</text>
+
+          <rect x="220" y="20" width="170" height="60" rx="10" class="stroke-thin fill-light"/>
+          <text x="305" y="42" text-anchor="middle" font-size="13" font-weight="700">PROCEDIMIENTOS</text>
+          <text x="305" y="60" text-anchor="middle" font-size="10">saber hacerlo</text>
+          <text x="305" y="73" text-anchor="middle" font-size="10">(técnicas, herramientas)</text>
+
+          <text x="410" y="60" text-anchor="middle" font-size="20" font-weight="700">→</text>
+
+          <rect x="435" y="20" width="130" height="60" rx="10" class="stroke-main fill-teja"/>
+          <text x="500" y="42" text-anchor="middle" font-size="12" font-weight="700">SATISFACER</text>
+          <text x="500" y="58" text-anchor="middle" font-size="12" font-weight="700">NECESIDADES</text>
+        </g>
+      </svg>
+      <div class="fig-cap">Etimología y componentes esenciales de la tecnología</div>
+    </div>
+
+    <h4>Tecnología en el mundo animal</h4>
+    <p>Los seres humanos no somos los únicos que nos servimos de la tecnología. En el mundo animal hay muchos ejemplos de uso de "instrumentos" para resolver problemas:</p>
+
+    <div class="cols3">
+      <div class="col-card">
+        <h4 class="azul">Escarabajos peloteros</h4>
+        <p>Forman bolas de excremento del tamaño justo y las usan como reserva de alimento y refugio.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Simios</h4>
+        <p>Algunos primates emplean piedras como martillo para romper nueces o palitos para extraer termitas.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Delfines</h4>
+        <p>Usan esponjas marinas para protegerse el hocico mientras rebuscan comida en el fondo arenoso.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">💡</span>
+      <p><strong>Diferencia clave:</strong> los animales usan instrumentos casi siempre <em>tal cual los encuentran</em> en la naturaleza. Los seres humanos, en cambio, <strong>diseñamos, modificamos y fabricamos</strong> nuestros instrumentos: ahí está la gran diferencia.</p>
+    </div>
+  </article>
+
+  <!-- ─── 2. Historia de la tecnología ─── -->
+  <article class="section" id="s2">
+    <div class="section-num">Sección 2</div>
+    <h3>La historia de la tecnología</h3>
+
+    <p>Lo que diferencia a la especie humana del resto de animales es la <strong>inteligencia</strong>: gracias a ella, hemos ido construyendo a lo largo de los siglos una tecnología cada vez más sofisticada. Cada gran avance histórico ha estado acompañado de un avance tecnológico clave.</p>
+
+    <h4>La línea del tiempo de los grandes hitos</h4>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <h5>Prehistoria</h5>
+        <div class="periodo">hasta 3000 a.C.</div>
+        <ul>
+          <li>Fuego</li>
+          <li>Lascas de piedra</li>
+          <li>Rueda</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <h5>Edad Antigua</h5>
+        <div class="periodo">3000 a.C. – 476 d.C.</div>
+        <ul>
+          <li>Escritura</li>
+          <li>Arado</li>
+          <li>Bronce y hierro</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <h5>Edad Media</h5>
+        <div class="periodo">476 – 1492</div>
+        <ul>
+          <li>Brújula</li>
+          <li>Imprenta</li>
+          <li>Molinos</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <h5>Edad Moderna</h5>
+        <div class="periodo">1492 – 1789</div>
+        <ul>
+          <li>Telescopio</li>
+          <li>Microscopio</li>
+          <li>Termómetro</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <h5>Revolución Industrial</h5>
+        <div class="periodo">1760 – 1840</div>
+        <ul>
+          <li>Máquina de vapor</li>
+          <li>Tren</li>
+          <li>Fábricas</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <h5>Siglos XIX–XX</h5>
+        <div class="periodo">1800 – 2000</div>
+        <ul>
+          <li>Electricidad</li>
+          <li>Coche</li>
+          <li>Ordenador</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <h5>Actualidad</h5>
+        <div class="periodo">desde 2000</div>
+        <ul>
+          <li>Internet móvil</li>
+          <li>Inteligencia artificial</li>
+          <li>Impresión 3D</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout callout-key">
+      <span class="ic">🔥</span>
+      <p><strong>El fuego, primer invento tecnológico:</strong> el dominio del fuego marcó un antes y un después en la historia humana. Permitió cocinar alimentos, iluminar, calentarse, fabricar herramientas e incluso defenderse de los depredadores.</p>
+    </div>
+
+    <h4>Las necesidades humanas</h4>
+    <p>La tecnología existe para <strong>satisfacer necesidades</strong>. Pero no todas las necesidades son iguales: las distinguimos en dos grandes grupos.</p>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4>Necesidades primarias o básicas</h4>
+        <p>Son <strong>universales y fundamentales</strong> para la supervivencia del individuo. Sin cubrirlas, una persona no puede vivir.</p>
+        <ul>
+          <li>Alimentarse</li>
+          <li>Beber agua</li>
+          <li>Vestirse</li>
+          <li>Tener refugio y descanso</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Necesidades secundarias</h4>
+        <p>Su satisfacción <strong>incrementa el bienestar</strong>, pero un individuo puede vivir sin tenerlas cubiertas.</p>
+        <ul>
+          <li>Ocio y entretenimiento</li>
+          <li>Cultura y arte</li>
+          <li>Turismo</li>
+          <li>Comunicaciones</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <div class="et">Ejemplo resuelto 1</div>
+      <h5>¿La tecnología siempre nos beneficia?</h5>
+      <p>Un cuchillo sirve para pelar patatas y para cortar la madera que necesitamos en clase, pero también puede usarse como un arma. ¿Es entonces el cuchillo una tecnología "mala"?</p>
+      <p>La tecnología en sí <strong>no es ni buena ni mala</strong>: lo que cambia es el <strong>uso</strong> que cada persona le da. A esta reflexión sobre las consecuencias de la tecnología y la responsabilidad de quien la usa la llamamos <strong>tecnoética</strong>.</p>
+      <div class="steps">
+        <div class="step">El objetivo de la tecnoética es <strong>pensar y reflexionar</strong> antes de aplicar una tecnología.</div>
+        <div class="step">Nos ayuda a conocer las <strong>consecuencias</strong> que un invento o un uso pueden tener en la sociedad.</div>
+        <div class="step">La pregunta clave no es "<em>¿puedo hacerlo?</em>" sino "<em>¿debo hacerlo?</em>".</div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PARTE 2 · TRABAJAR EN TECNOLOGÍA
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="parte2">
+  <div class="parte-cabecera">
+    <div class="parte-num">Parte 2</div>
+    <h2>Trabajar en tecnología</h2>
+    <p>El método universal para resolver problemas tecnológicos: las 6 fases del proceso tecnológico y cómo se convierten en un proyecto real con condicionantes y dimensiones.</p>
+  </div>
+
+  <!-- ─── 3. El proceso tecnológico ─── -->
+  <article class="section" id="s3">
+    <div class="section-num">Sección 3</div>
+    <h3>El proceso tecnológico · las 6 fases</h3>
+
+    <p>El <strong>proceso tecnológico</strong> es el corazón de esta unidad. Es el <strong>método ordenado y lógico</strong> que se sigue para resolver problemas o crear objetos que satisfagan una necesidad. No te lo inventas tú: lo siguen ingenieros, diseñadores, arquitectos… y desde hoy también vosotros en clase.</p>
+
+    <div class="keybox">
+      <div class="ktit">Idea central</div>
+      <p>El proceso tecnológico se compone de <strong>6 fases</strong> que se siguen <strong>en orden</strong>. Saltarse una fase suele significar acabar con un producto que no funciona, no cumple lo que se buscaba o no satisface al usuario.</p>
+    </div>
+
+    <h4>Las 6 fases en orden</h4>
+
+    <div class="fase-circle">
+      <div class="fase-item">
+        <div class="fase-num">1</div>
+        <div class="fase-content">
+          <h5>Requerimiento o necesidad</h5>
+          <p>Hay que <strong>empezar identificando la necesidad</strong> que se debe satisfacer o el problema que se tiene que resolver. Sin pregunta clara no hay respuesta útil.</p>
+        </div>
+      </div>
+      <div class="fase-item">
+        <div class="fase-num">2</div>
+        <div class="fase-content">
+          <h5>Pensar en posibles soluciones</h5>
+          <p>Reflexionamos sobre las soluciones posibles y elegimos la más viable. Aquí entran dos sub-fases: <strong>búsqueda de información</strong> y <strong>generación de ideas</strong> (cuantas más, mejor).</p>
+        </div>
+      </div>
+      <div class="fase-item">
+        <div class="fase-num">3</div>
+        <div class="fase-content">
+          <h5>Selección de la solución</h5>
+          <p>Se escoge la solución que mejor resuelve el problema entre las propuestas. Aquí pesan factores como el coste, la dificultad, los materiales disponibles…</p>
+        </div>
+      </div>
+      <div class="fase-item">
+        <div class="fase-num">4</div>
+        <div class="fase-content">
+          <h5>Diseño y planificación</h5>
+          <p>Se decide <strong>cómo</strong> se va a construir la solución: bocetos, croquis, planos, herramientas, materiales, fases, plazos y reparto de tareas. Este paso es el <strong>plan de trabajo</strong>.</p>
+        </div>
+      </div>
+      <div class="fase-item">
+        <div class="fase-num">5</div>
+        <div class="fase-content">
+          <h5>Construcción</h5>
+          <p>Se elabora el objeto que resuelve la necesidad <strong>siguiendo el plan</strong>. Aparecen imprevistos, se resuelven y se documentan.</p>
+        </div>
+      </div>
+      <div class="fase-item">
+        <div class="fase-num">6</div>
+        <div class="fase-content">
+          <h5>Evaluación</h5>
+          <p>Se estudia el grado de satisfacción de la necesidad inicial y se plantean <strong>posibles mejoras</strong>. ¿Funciona? ¿Es seguro? ¿Resuelve el problema? ¿Qué cambiaríamos?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-warn">
+      <span class="ic">⚠️</span>
+      <p><strong>Errores típicos:</strong> empezar a construir antes de diseñar (fase 5 sin fase 4), no documentar lo que se hace (no podrás evaluarlo en la fase 6), o quedarse con la primera idea que se le ocurre al grupo (fase 2 a medio hacer).</p>
+    </div>
+
+    <div class="ejemplo">
+      <div class="et">Ejemplo resuelto 2</div>
+      <h5>Aplicación del proceso tecnológico: se nos ha pinchado la rueda de la bici</h5>
+      <p>Vamos a aplicar las 6 fases a un caso muy concreto y cotidiano:</p>
+
+      <table>
+        <thead>
+          <tr><th>Fase</th><th>Qué hacemos en este caso</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1 · Requerimiento</strong></td>
+            <td>Estamos jugando con la bici y se pincha. Queremos resolver el problema y seguir.</td>
+          </tr>
+          <tr>
+            <td><strong>2 · Posibles soluciones</strong></td>
+            <td>¿Llamamos a un adulto? ¿Vamos a un taller? ¿La reparamos nosotros? ¿Cogemos otra bici? ¿La dejamos para luego?</td>
+          </tr>
+          <tr>
+            <td><strong>3 · Selección</strong></td>
+            <td>Decidimos repararla nosotros: tenemos el kit de parches en casa, sabemos cómo se hace y es rápido.</td>
+          </tr>
+          <tr>
+            <td><strong>4 · Diseño y planificación</strong></td>
+            <td>Pensamos los pasos: desmontar la rueda, sacar la cámara, localizar el pinchazo, lijar, pegar el parche, montar de nuevo.</td>
+          </tr>
+          <tr>
+            <td><strong>5 · Construcción</strong></td>
+            <td>Realizamos cada paso del plan. Si surge un imprevisto (la cámara está muy dañada), lo anotamos y adaptamos.</td>
+          </tr>
+          <tr>
+            <td><strong>6 · Evaluación</strong></td>
+            <td>Damos una vuelta con la bici. ¿Aguanta el aire? ¿Hay alguna fuga? Si todo va bien, problema resuelto.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Conexión con el método científico</h4>
+    <p>El proceso tecnológico se parece mucho al <strong>método científico</strong> que aprendéis en ciencias. La diferencia es la pregunta de partida:</p>
+
+    <table>
+      <thead>
+        <tr><th>Método científico (Ciencias)</th><th>Proceso tecnológico (Tecnología)</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Pregunta: ¿<strong>cómo funciona</strong> la naturaleza?</td>
+          <td>Pregunta: ¿<strong>cómo resuelvo</strong> un problema?</td>
+        </tr>
+        <tr>
+          <td>Planteamiento del problema</td>
+          <td>Requerimiento o necesidad</td>
+        </tr>
+        <tr>
+          <td>Formulación de hipótesis</td>
+          <td>Posibles soluciones</td>
+        </tr>
+        <tr>
+          <td>Experimento</td>
+          <td>Construcción</td>
+        </tr>
+        <tr>
+          <td>Conclusiones</td>
+          <td>Evaluación</td>
+        </tr>
+      </tbody>
+    </table>
+  </article>
+
+  <!-- ─── 4. El proyecto tecnológico ─── -->
+  <article class="section" id="s4">
+    <div class="section-num">Sección 4</div>
+    <h3>El proyecto tecnológico</h3>
+
+    <p>Cuando aplicamos el proceso tecnológico a un objetivo concreto, lo llamamos <strong>proyecto tecnológico</strong>. Un proyecto siempre tiene una meta clara: <strong>diseñar y construir</strong> un objeto (físico o digital) que resuelva un problema o satisfaga una necesidad.</p>
+
+    <h4>Condicionantes del proyecto</h4>
+    <p>En cualquier proyecto, por pequeño que sea, hay <strong>condicionantes</strong> que determinan qué se puede hacer y qué no. Olvidarlos al principio suele significar tener que rehacerlo todo a mitad de camino. Los principales son:</p>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4>💰 Presupuesto económico</h4>
+        <p>El presupuesto debe ajustarse a los requisitos definidos. Si no hay dinero suficiente, hay que replantear el proyecto desde el principio.</p>
+      </div>
+      <div class="col-card">
+        <h4>⏰ Plazos de entrega</h4>
+        <p>Hay que cumplir los términos pactados. Un retraso puede arruinar un proyecto o suponer costes adicionales.</p>
+      </div>
+      <div class="col-card">
+        <h4>🔧 Condiciones técnicas</h4>
+        <p>Limitaciones técnicas: la maquinaria disponible, los materiales accesibles, las técnicas que conocemos…</p>
+      </div>
+      <div class="col-card">
+        <h4>👥 Aspectos personales</h4>
+        <p>La cooperación entre el equipo es clave. Un conflicto, una baja por enfermedad o un cambio en la plantilla afecta a todo el proyecto.</p>
+      </div>
+    </div>
+
+    <p>Además, todo proyecto debe considerar las <strong>repercusiones sociales</strong>: que el objeto sea accesible para todos (no genere desigualdades), que la complejidad sea proporcionada, y que cumpla la <strong>normativa y legislación</strong> vigentes.</p>
+
+    <h4>Las 3 dimensiones del proyecto tecnológico</h4>
+    <p>Cuando se diseña algo, hay que pensar en tres dimensiones que afectan al usuario final:</p>
+
+    <div class="fig">
+      <svg class="svg-fig" viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" aria-label="Las tres dimensiones del proyecto tecnológico">
+        <!-- Material -->
+        <g>
+          <circle cx="120" cy="100" r="60" class="stroke-main fill-teja"/>
+          <text x="120" y="95" text-anchor="middle" font-size="18" font-weight="700" class="lbl-teja">Material</text>
+          <text x="120" y="115" text-anchor="middle" font-size="11">¿De qué se hace?</text>
+          <text x="120" y="190" text-anchor="middle" font-size="11" font-weight="600">resistencia · coste · ecología</text>
+        </g>
+        <!-- Forma -->
+        <g>
+          <circle cx="300" cy="100" r="60" class="stroke-main fill-blue"/>
+          <text x="300" y="95" text-anchor="middle" font-size="18" font-weight="700" class="lbl-blue">Forma</text>
+          <text x="300" y="115" text-anchor="middle" font-size="11">¿Qué aspecto tiene?</text>
+          <text x="300" y="190" text-anchor="middle" font-size="11" font-weight="600">estética · ergonomía · medidas</text>
+        </g>
+        <!-- Función -->
+        <g>
+          <circle cx="480" cy="100" r="60" class="stroke-main fill-yellow"/>
+          <text x="480" y="95" text-anchor="middle" font-size="18" font-weight="700" fill="#8a6d1a">Función</text>
+          <text x="480" y="115" text-anchor="middle" font-size="11">¿Para qué sirve?</text>
+          <text x="480" y="190" text-anchor="middle" font-size="11" font-weight="600">utilidad · eficacia · durabilidad</text>
+        </g>
+      </svg>
+      <div class="fig-cap">Material, forma y función · las tres preguntas que todo proyecto debe responder</div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">🔍</span>
+      <p><strong>Ergonomía:</strong> es la disciplina que estudia cómo adaptar los objetos al cuerpo y a las capacidades humanas. Una silla mal diseñada (mala ergonomía) puede ser preciosa, pero te destrozará la espalda en una tarde de estudio.</p>
+    </div>
+
+    <h4>El taller de tecnología</h4>
+    <p>En el taller del instituto vais a usar herramientas concretas para construir vuestros proyectos. Es <strong>imprescindible</strong> conocer cada herramienta y manejarla con las normas de seguridad adecuadas: gafas de protección, calzado cerrado, pelo recogido y nada de prisa.</p>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PARTE 3 · DOCUMENTAR Y FABRICAR
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="parte3">
+  <div class="parte-cabecera">
+    <div class="parte-num">Parte 3</div>
+    <h2>Documentar y fabricar</h2>
+    <p>Cómo se escribe la memoria técnica de un proyecto y cuáles son las dos grandes formas de fabricar lo que se ha diseñado: a mano (artesanía) y en serie (industria).</p>
+  </div>
+
+  <!-- ─── 5. La memoria técnica ─── -->
+  <article class="section" id="s5">
+    <div class="section-num">Sección 5</div>
+    <h3>La memoria técnica y el plan de trabajo</h3>
+
+    <p>Un proyecto sin documentación es como un examen sin nombre: aunque esté perfecto, no sirve. Para que un proyecto tecnológico se pueda repetir, evaluar y mejorar, hay que escribirlo. Ese documento es la <strong>memoria técnica</strong>.</p>
+
+    <div class="keybox">
+      <div class="ktit">Definición</div>
+      <p>La <strong>memoria técnica</strong> es el conjunto de documentos que <strong>describen un proyecto tecnológico</strong>: el problema, las ideas, la solución elegida, los planos, el presupuesto y la evaluación. Debe ser <strong>clara y concisa</strong>.</p>
+    </div>
+
+    <h4>Partes de la memoria técnica</h4>
+
+    <div class="fig" style="text-align:left;padding:24px 30px;">
+      <ol style="counter-reset: idx; list-style:none; padding:0; margin:0;">
+        <li style="counter-increment: idx; padding: 10px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 50px 1fr; gap: 12px; align-items: start;">
+          <span style="background:var(--teja);color:#fff;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;">1</span>
+          <div><strong style="font-family:'Fraunces',serif;font-size:17px;color:var(--ink);">Portada</strong><br>
+          <span style="font-size:14px;color:var(--ink-soft);">Título del proyecto, fecha y nombre de los autores.</span></div>
+        </li>
+        <li style="counter-increment: idx; padding: 10px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 50px 1fr; gap: 12px; align-items: start;">
+          <span style="background:var(--teja);color:#fff;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;">2</span>
+          <div><strong style="font-family:'Fraunces',serif;font-size:17px;color:var(--ink);">Índice</strong><br>
+          <span style="font-size:14px;color:var(--ink-soft);">Lista de apartados con la página donde empieza cada uno.</span></div>
+        </li>
+        <li style="counter-increment: idx; padding: 10px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 50px 1fr; gap: 12px; align-items: start;">
+          <span style="background:var(--teja);color:#fff;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;">3</span>
+          <div><strong style="font-family:'Fraunces',serif;font-size:17px;color:var(--ink);">Cuerpo de la memoria</strong><br>
+          <span style="font-size:14px;color:var(--ink-soft);">Las fases del proceso tecnológico explicadas con el plan de trabajo y las conclusiones: requerimiento, investigación y generación de ideas, elección de la solución, diseño y planificación, construcción, evaluación.</span></div>
+        </li>
+        <li style="counter-increment: idx; padding: 10px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 50px 1fr; gap: 12px; align-items: start;">
+          <span style="background:var(--teja);color:#fff;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;">4</span>
+          <div><strong style="font-family:'Fraunces',serif;font-size:17px;color:var(--ink);">Planos</strong><br>
+          <span style="font-size:14px;color:var(--ink-soft);">Dibujos técnicos del producto: vistas, perspectivas, medidas. <em>(Aquí se ve la utilidad de la U0 — dibujo técnico.)</em></span></div>
+        </li>
+        <li style="counter-increment: idx; padding: 10px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 50px 1fr; gap: 12px; align-items: start;">
+          <span style="background:var(--teja);color:#fff;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;">5</span>
+          <div><strong style="font-family:'Fraunces',serif;font-size:17px;color:var(--ink);">Presupuesto</strong><br>
+          <span style="font-size:14px;color:var(--ink-soft);">Coste detallado de materiales, herramientas y maquinaria. Es el coste total del proyecto.</span></div>
+        </li>
+        <li style="counter-increment: idx; padding: 10px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 50px 1fr; gap: 12px; align-items: start;">
+          <span style="background:var(--teja);color:#fff;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;">6</span>
+          <div><strong style="font-family:'Fraunces',serif;font-size:17px;color:var(--ink);">Bibliografía</strong><br>
+          <span style="font-size:14px;color:var(--ink-soft);">Lista de fuentes consultadas: libros, webs, vídeos, manuales. Cuanto más rigurosa, más fiable es la memoria.</span></div>
+        </li>
+        <li style="counter-increment: idx; padding: 10px 0; display: grid; grid-template-columns: 50px 1fr; gap: 12px; align-items: start;">
+          <span style="background:var(--teja);color:#fff;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;">7</span>
+          <div><strong style="font-family:'Fraunces',serif;font-size:17px;color:var(--ink);">Anexos</strong><br>
+          <span style="font-size:14px;color:var(--ink-soft);">Documentos adicionales que complementan la memoria: fotos del proceso, fichas de seguridad de materiales, gráficas, etc.</span></div>
+        </li>
+      </ol>
+    </div>
+
+    <h4>El plan de trabajo</h4>
+    <p>El <strong>plan de trabajo</strong> es la herramienta donde se reflejan todas las acciones que se van a realizar en la fase de construcción. Sirve dos veces:</p>
+
+    <ul>
+      <li>👉 <strong>Antes</strong> de empezar a construir: como <strong>planificación</strong>.</li>
+      <li>👉 <strong>Después</strong> de la construcción: como <strong>diario y evaluación</strong> de lo realmente sucedido.</li>
+    </ul>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4 class="azul">Antes de empezar la construcción</h4>
+        <ul>
+          <li>Tareas a realizar</li>
+          <li>Herramientas y materiales que se necesitan</li>
+          <li>Previsión de los pasos a seguir</li>
+          <li>Tiempo estimado para cada paso</li>
+          <li>Distribución de tareas entre las personas del equipo</li>
+          <li>Presupuesto del proyecto</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <h4 class="green">Durante la construcción</h4>
+        <ul>
+          <li>Incidencias y problemas encontrados</li>
+          <li>Soluciones que se han adoptado</li>
+          <li>Cambios con respecto al plan inicial</li>
+          <li>Tiempo real empleado en cada tarea</li>
+          <li>Observaciones de cara a la fabricación del producto final</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout callout-key">
+      <span class="ic">📋</span>
+      <p><strong>Truco para el aula:</strong> un buen plan de trabajo nunca queda como se diseñó al principio. Si tu plan inicial y el real coinciden al 100%, probablemente no has documentado los imprevistos. La diferencia entre los dos es información valiosa para futuros proyectos.</p>
+    </div>
+  </article>
+
+  <!-- ─── 6. La fabricación de productos ─── -->
+  <article class="section" id="s6">
+    <div class="section-num">Sección 6</div>
+    <h3>La fabricación de productos</h3>
+
+    <p>Un <strong>producto</strong> es el resultado de un proceso de fabricación o producción que se basa en un conjunto de técnicas y conocimientos. A nuestro alrededor todo son productos tecnológicos: unos muy complejos (un ordenador, un satélite) y otros muy simples (un lápiz, una grapa). Pero <strong>todos</strong> resuelven un problema o satisfacen una necesidad.</p>
+
+    <p>La fabricación se puede hacer de dos formas muy distintas: <strong>a mano</strong> (artesanía) o <strong>en serie con máquinas</strong> (industria).</p>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4>🧶 La artesanía</h4>
+        <p>Es el proceso de <strong>diseño y elaboración manual</strong> de objetos, con la ayuda de herramientas o máquinas simples. Lo lleva a cabo <strong>una persona o un grupo reducido</strong> de personas.</p>
+        <ul>
+          <li>Se realiza en <strong>talleres</strong>.</li>
+          <li>Cada pieza es <strong>única</strong> o casi.</li>
+          <li>Suele combinar tradición con tecnología puntual moderna (p. ej. impresión 3D).</li>
+          <li>Ejemplos: orfebrería, carpintería, alfarería, sastrería.</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">🏭 La industria</h4>
+        <p>Es el conjunto de actividades dedicadas a producir una <strong>gran cantidad</strong> de objetos usando herramientas y <strong>máquinas más complejas</strong>. Requiere <strong>personal especializado</strong>.</p>
+        <ul>
+          <li>Se realiza en <strong>fábricas</strong> o naves industriales.</li>
+          <li>Se llama <strong>producción en serie</strong> (o en cadena).</li>
+          <li>Las piezas son <strong>iguales entre sí</strong> y mucho más baratas.</li>
+          <li>Ejemplos: industria alimentaria, automoción, electrónica, metalurgia.</li>
+        </ul>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Característica</th><th>Artesanía</th><th>Industria</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Cantidad producida</strong></td><td>Pocas piezas</td><td>Gran cantidad</td></tr>
+        <tr><td><strong>Lugar</strong></td><td>Taller</td><td>Fábrica</td></tr>
+        <tr><td><strong>Personal</strong></td><td>Reducido</td><td>Numeroso y especializado</td></tr>
+        <tr><td><strong>Maquinaria</strong></td><td>Sencilla, herramientas manuales</td><td>Compleja, automática</td></tr>
+        <tr><td><strong>Precio por unidad</strong></td><td>Más caro</td><td>Más barato</td></tr>
+        <tr><td><strong>Diferencias entre piezas</strong></td><td>Cada una es única</td><td>Idénticas entre sí</td></tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <div class="et">Ejemplo resuelto 3</div>
+      <h5>Identifica el tipo de fabricación</h5>
+      <p>Decide si cada producto se ha fabricado de forma <strong>artesanal</strong> o <strong>industrial</strong>:</p>
+      <div class="steps">
+        <div class="step"><strong>Una jarra de barro hecha en un taller alfarero</strong> → artesanal (manual, pieza única).</div>
+        <div class="step"><strong>Una botella de refresco de 33 cl</strong> → industrial (millones de botellas idénticas, en serie).</div>
+        <div class="step"><strong>Un mueble a medida construido por un carpintero</strong> → artesanal (un único cliente, una sola pieza).</div>
+        <div class="step"><strong>Un coche del concesionario</strong> → industrial (líneas de producción, miles de unidades).</div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PARTE 4 · IMPACTO
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="parte4">
+  <div class="parte-cabecera">
+    <div class="parte-num">Parte 4</div>
+    <h2>Tecnología y planeta</h2>
+    <p>La tecnología cubre necesidades, pero también deja huella en el planeta. Aprendemos qué impacto generamos y cómo reducirlo con las 3 R.</p>
+  </div>
+
+  <!-- ─── 7. Desarrollo tecnológico y medio ambiente ─── -->
+  <article class="section" id="s7">
+    <div class="section-num">Sección 7</div>
+    <h3>El desarrollo tecnológico y el medio ambiente</h3>
+
+    <p>La tecnología avanza muy rápido y nos hace la vida más fácil, pero también <strong>tiene un precio</strong>: el <strong>impacto ambiental</strong>. Cada producto que fabricamos consume recursos, genera residuos y emite gases. Es nuestra responsabilidad conocer ese impacto y reducirlo.</p>
+
+    <h4>Cuatro grandes problemas ambientales</h4>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4>⛏️ Sobreexplotación de recursos</h4>
+        <p>La fabricación de objetos tecnológicos consume <strong>materiales como el cobre, el aluminio o el cinc</strong>. La mayoría son <strong>no renovables</strong>: cuando se agoten, se acaban.</p>
+      </div>
+      <div class="col-card">
+        <h4>💨 Producción de gases contaminantes</h4>
+        <p>Las centrales eléctricas (carbón, petróleo, gas), los vehículos de combustión y muchos procesos industriales generan <strong>gases de efecto invernadero</strong> que causan el cambio climático.</p>
+      </div>
+      <div class="col-card">
+        <h4>🗑️ Excesiva generación de residuos</h4>
+        <p>La <strong>mentalidad consumista</strong> de buena parte de la población produce un volumen desmesurado de residuos. Los productos tecnológicos pasan demasiado rápido al cubo de la basura.</p>
+      </div>
+      <div class="col-card">
+        <h4>💻 Contaminación tecnológica</h4>
+        <p>Los <strong>centros de datos</strong> que almacenan internet (fotos, vídeos, mensajes, IA) consumen enormes cantidades de energía y agua. Una búsqueda en internet no es "gratis" para el planeta.</p>
+      </div>
+    </div>
+
+    <h4>Las 3 R: reducir, reutilizar, reciclar</h4>
+    <p>La principal forma de <strong>conservar el medio ambiente</strong> es la regla de las <strong>3 R</strong>. El orden de las erres es importante: primero reducir, luego reutilizar y, solo cuando no quede más remedio, reciclar.</p>
+
+    <div class="fig">
+      <svg class="svg-fig" viewBox="0 0 660 200" xmlns="http://www.w3.org/2000/svg" aria-label="Las 3 R">
+        <!-- Reducir -->
+        <g>
+          <circle cx="110" cy="100" r="70" class="stroke-main fill-green"/>
+          <text x="110" y="90" text-anchor="middle" font-size="32" font-weight="800" fill="#4a7c59">R</text>
+          <text x="110" y="115" text-anchor="middle" font-size="14" font-weight="700" fill="#4a7c59">REDUCIR</text>
+          <text x="110" y="190" text-anchor="middle" font-size="11" font-weight="600">comprar menos · consumir menos</text>
+        </g>
+        <text x="220" y="105" text-anchor="middle" font-size="22" class="arrow-teja">→</text>
+        <!-- Reutilizar -->
+        <g>
+          <circle cx="330" cy="100" r="70" class="stroke-main fill-yellow"/>
+          <text x="330" y="90" text-anchor="middle" font-size="32" font-weight="800" fill="#8a6d1a">R</text>
+          <text x="330" y="115" text-anchor="middle" font-size="14" font-weight="700" fill="#8a6d1a">REUTILIZAR</text>
+          <text x="330" y="190" text-anchor="middle" font-size="11" font-weight="600">darle otra vida útil al producto</text>
+        </g>
+        <text x="440" y="105" text-anchor="middle" font-size="22" class="arrow-teja">→</text>
+        <!-- Reciclar -->
+        <g>
+          <circle cx="550" cy="100" r="70" class="stroke-main fill-blue"/>
+          <text x="550" y="90" text-anchor="middle" font-size="32" font-weight="800" class="lbl-blue">R</text>
+          <text x="550" y="115" text-anchor="middle" font-size="14" font-weight="700" class="lbl-blue">RECICLAR</text>
+          <text x="550" y="190" text-anchor="middle" font-size="11" font-weight="600">transformar el material en otro nuevo</text>
+        </g>
+      </svg>
+      <div class="fig-cap">Las 3 R en orden de prioridad: lo mejor es no consumir si no hace falta</div>
+    </div>
+
+    <div class="cols3">
+      <div class="col-card">
+        <h4 class="green">Reducir</h4>
+        <p>Consumir <strong>solo lo necesario</strong>. Antes de comprar, preguntarse si realmente hace falta. Reducir el consumo es la "R" más eficaz: lo que no compras no contamina.</p>
+      </div>
+      <div class="col-card">
+        <h4 style="color:#8a6d1a;">Reutilizar</h4>
+        <p>Volver a usar un objeto sin transformarlo. Ejemplo: una botella de vidrio como florero, ropa de segunda mano, un móvil viejo para otra persona…</p>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Reciclar</h4>
+        <p>Llevar el material al proceso industrial adecuado para fabricar otro producto nuevo. Ejemplo: el papel de los cuadernos viejos vuelve a ser papel.</p>
+      </div>
+    </div>
+
+    <h4>La obsolescencia programada</h4>
+    <p>Es un fenómeno preocupante de la industria moderna: muchos productos están diseñados para <strong>durar un tiempo limitado</strong>, de manera que el usuario se vea obligado a comprar uno nuevo en pocos años. A esto se le llama <strong>obsolescencia programada</strong>.</p>
+
+    <div class="callout callout-warn">
+      <span class="ic">⏱️</span>
+      <p><strong>¿Por qué existe?</strong> Porque a las empresas les interesa vender más. Pero supone un problema enorme para el medio ambiente: residuos prematuros, consumo de recursos innecesario y una economía basada en producir más en vez de hacerlo mejor.</p>
+    </div>
+
+    <h4>El efecto invernadero</h4>
+    <p>El <strong>efecto invernadero</strong> es un fenómeno natural debido a los gases atmosféricos (vapor de agua, dióxido de carbono) que <strong>retienen parte del calor</strong> del Sol en la Tierra. Sin él, la temperatura media de la Tierra sería bajísima.</p>
+
+    <p>El problema es que la actividad humana ha <strong>multiplicado la emisión</strong> de estos gases (centrales eléctricas, coches, ganadería intensiva), reforzando el efecto invernadero hasta provocar el <strong>cambio climático</strong>. La tecnología nos puede ayudar a salir de esto si la usamos bien: energías renovables, transporte eficiente, eficiencia energética…</p>
+
+    <div class="callout callout-ok">
+      <span class="ic">🌱</span>
+      <p><strong>Lo que tú puedes hacer:</strong> apagar la luz cuando sales de una habitación, usar la bici para ir al instituto, no cambiar el móvil cada año, separar la basura, comer menos carne, evitar el plástico de un solo uso. Cosas pequeñas multiplicadas por millones cambian las cosas.</p>
+    </div>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     CIERRE
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="cierre">
+  <div class="parte-cabecera">
+    <div class="parte-num">Cierre</div>
+    <h2>Recuerda lo que has aprendido</h2>
+    <p>Resumen y glosario para volver cuando lo necesites.</p>
+  </div>
+
+  <div class="cols2">
+    <div class="col-card">
+      <h4>Las 5 ideas clave</h4>
+      <ol>
+        <li>La <strong>tecnología</strong> combina conocimientos y procedimientos para satisfacer necesidades humanas.</li>
+        <li>El <strong>proceso tecnológico</strong> tiene 6 fases en orden: requerimiento, soluciones, selección, diseño, construcción y evaluación.</li>
+        <li>Un proyecto se condiciona por presupuesto, plazos, técnica y personas; y se piensa en tres dimensiones: <strong>material, forma y función</strong>.</li>
+        <li>La <strong>memoria técnica</strong> documenta todo el proyecto y permite repetirlo, evaluarlo y mejorarlo.</li>
+        <li>La tecnología tiene un <strong>impacto ambiental</strong> que se mitiga con las 3 R: reducir, reutilizar y reciclar.</li>
+      </ol>
+    </div>
+    <div class="col-card">
+      <h4>Lo que debes saber hacer</h4>
+      <ul>
+        <li>Aplicar las 6 fases del proceso tecnológico a un problema concreto.</li>
+        <li>Redactar una memoria técnica completa con sus 7 apartados.</li>
+        <li>Elaborar un plan de trabajo antes y durante la construcción.</li>
+        <li>Diferenciar artesanía e industria, y producción en serie.</li>
+        <li>Identificar el impacto ambiental de un producto y aplicar las 3 R.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="glos">
+    <h3>📖 Glosario</h3>
+    <dl>
+      <dt>3 R</dt>
+      <dd>Reducir, reutilizar y reciclar. Estrategia básica para reducir el impacto ambiental, en ese orden.</dd>
+      <dt>Artesanía</dt>
+      <dd>Fabricación manual de objetos por una persona o grupo reducido, con herramientas simples y en talleres.</dd>
+      <dt>Cambio climático</dt>
+      <dd>Alteración del clima del planeta provocada por el refuerzo del efecto invernadero, debido a la actividad humana.</dd>
+      <dt>Ergonomía</dt>
+      <dd>Disciplina que estudia cómo adaptar los objetos al cuerpo humano para que sean cómodos y seguros.</dd>
+      <dt>Fases del proceso tecnológico</dt>
+      <dd>Requerimiento · soluciones · selección · diseño y planificación · construcción · evaluación.</dd>
+      <dt>Industria</dt>
+      <dd>Producción de gran cantidad de objetos en fábricas con máquinas complejas y personal especializado.</dd>
+      <dt>Memoria técnica</dt>
+      <dd>Conjunto de documentos que describen un proyecto tecnológico de principio a fin.</dd>
+      <dt>Necesidades primarias</dt>
+      <dd>Las imprescindibles para sobrevivir: alimentación, agua, vestido, refugio.</dd>
+      <dt>Necesidades secundarias</dt>
+      <dd>Las que aumentan el bienestar pero no son imprescindibles: ocio, arte, turismo, comunicación.</dd>
+      <dt>Obsolescencia programada</dt>
+      <dd>Diseño deliberado para que un producto deje de funcionar o quede obsoleto en un tiempo determinado.</dd>
+      <dt>Plan de trabajo</dt>
+      <dd>Herramienta donde se reflejan todas las acciones de la fase de construcción de un proyecto.</dd>
+      <dt>Producción en serie</dt>
+      <dd>Sistema industrial de fabricación de muchas piezas idénticas mediante una cadena de montaje.</dd>
+      <dt>Producto tecnológico</dt>
+      <dd>Resultado de un proceso de fabricación que combina técnicas y conocimientos para satisfacer una necesidad.</dd>
+      <dt>Proceso tecnológico</dt>
+      <dd>Método ordenado y lógico para resolver problemas y crear objetos. Tiene 6 fases.</dd>
+      <dt>Proyecto tecnológico</dt>
+      <dd>Aplicación concreta del proceso tecnológico para diseñar y construir un objeto específico.</dd>
+      <dt>Tecnoética</dt>
+      <dd>Reflexión sobre las consecuencias éticas y sociales de la tecnología.</dd>
+      <dt>Tecnología</dt>
+      <dd>Conjunto de conocimientos y procedimientos para fabricar objetos o sistemas que satisfagan necesidades humanas.</dd>
+    </dl>
+  </div>
+
+</section>
+
+<footer class="book-foot">
+  <p>IES Jiménez de Quesada · Santa Fe (Granada)<br>
+  TyD 2º ESO · Curso 2025-26 · Manuel Alonso Herrera</p>
+  <p style="margin-top:6px;"><a href="index.html">← Volver al hub</a> · <a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a></p>
+  <p class="v" style="margin-top:8px;">Libro digital v1.0</p>
+</footer>
+
+</main>
+</div>
+
+</body>
+</html>

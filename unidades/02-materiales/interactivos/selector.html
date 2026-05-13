@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Selector de material · U02 · TyD 2º ESO</title>
+<meta name="description" content="Interactivo del selector de material: 10 casos reales y elige el material adecuado justificando con propiedades. TyD 2º ESO.">
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/02-materiales/interactivos/selector.html">
+
+<meta property="og:title" content="Selector de material · U02 · TyD 2º ESO">
+<meta property="og:description" content="10 casos reales para elegir el material adecuado y justificarlo con propiedades.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/02-materiales/interactivos/selector.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Selector de material · U02 · TyD 2º ESO">
+<meta name="twitter:description" content="10 casos reales para elegir el material adecuado.">
+<meta name="twitter:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+:root {
+  --ok: #2e7d4f;
+  --err: #c44536;
+  --warn: #e8b647;
+  --omit: #d4a017;
+}
+
+/* ════ LISTA DE CASOS ════ */
+.bloque {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 14px;
+  padding: 1.4rem 1.6rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+.bloque h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--principal, #D4700A);
+  margin: 0 0 0.5rem;
+  border-bottom: 2px solid var(--principal, #D4700A);
+  padding-bottom: 0.4rem;
+}
+.bloque p.descripcion {
+  color: #555;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.casos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 1rem 0;
+}
+.caso-card {
+  background: #fafafa;
+  border: 2px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 16px 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+.caso-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--principal, #D4700A);
+  box-shadow: 0 4px 14px rgba(212,112,10,0.15);
+}
+.caso-card.resuelto {
+  border-color: var(--ok);
+  background: #ecf8ef;
+}
+.caso-card.resuelto::after {
+  content: '✓';
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  color: var(--ok);
+  font-weight: 700;
+}
+.caso-card .em {
+  font-size: 2rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.caso-card .info { flex: 1; }
+.caso-card .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: #888;
+  letter-spacing: 0.6px;
+  margin-bottom: 2px;
+}
+.caso-card .nombre {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #222;
+  line-height: 1.2;
+}
+
+/* ════ VISTA DETALLE DEL CASO ════ */
+#vista-caso { display: none; }
+#vista-caso.visible { display: block; }
+
+.caso-detalle-hd {
+  background: linear-gradient(135deg, #fff7eb 0%, #ffeed4 100%);
+  border: 2px solid var(--principal, #D4700A);
+  border-radius: 14px;
+  padding: 1.4rem 1.6rem;
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.caso-detalle-hd .em {
+  font-size: 3rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.caso-detalle-hd .ct {
+  flex: 1;
+}
+.caso-detalle-hd .num-tag {
+  display: inline-block;
+  background: var(--principal, #D4700A);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.6px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  margin-bottom: 6px;
+}
+.caso-detalle-hd h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  margin: 0 0 6px;
+  color: #222;
+  border: none;
+  padding: 0;
+}
+.caso-detalle-hd p {
+  color: #555;
+  font-size: 0.95rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.propiedades-bloque {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-left: 4px solid #5e88b2;
+  border-radius: 12px;
+  padding: 1.1rem 1.3rem;
+  margin: 1rem 0;
+}
+.propiedades-bloque h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.05rem;
+  color: #2c5f8d;
+  margin: 0 0 8px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+.propiedades-bloque ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.propiedades-bloque li {
+  position: relative;
+  padding: 5px 0 5px 24px;
+  color: #444;
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+.propiedades-bloque li::before {
+  content: '◆';
+  position: absolute;
+  left: 6px;
+  color: #5e88b2;
+  font-size: 0.7rem;
+  top: 8px;
+}
+.propiedades-bloque .tipo-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.5px;
+  padding: 1px 7px;
+  border-radius: 4px;
+  margin-left: 6px;
+  text-transform: uppercase;
+  background: #e8edf3;
+  color: #2c5f8d;
+  font-weight: 600;
+}
+
+/* ════ CANDIDATOS ════ */
+.candidatos-bloque {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 12px;
+  padding: 1.2rem 1.4rem;
+  margin: 1rem 0;
+}
+.candidatos-bloque h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--principal, #D4700A);
+  margin: 0 0 8px;
+  letter-spacing: 0.3px;
+}
+.candidatos-bloque .hint {
+  font-size: 0.85rem;
+  color: #888;
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+.candidatos-list {
+  display: grid;
+  gap: 10px;
+}
+.cand-card {
+  display: grid;
+  grid-template-columns: 40px 36px 1fr;
+  gap: 12px;
+  align-items: center;
+  background: #fafafa;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.cand-card:hover { border-color: #aaa; background: #f5f5f5; }
+.cand-card.checked {
+  border-color: var(--principal, #D4700A);
+  background: #fff7eb;
+}
+.cand-card .chk {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #aaa;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  flex-shrink: 0;
+}
+.cand-card.checked .chk {
+  background: var(--principal, #D4700A);
+  border-color: var(--principal, #D4700A);
+  color: #fff;
+}
+.cand-card.checked .chk::after { content: '✓'; font-weight: 700; }
+.cand-card .em {
+  font-size: 1.6rem;
+  line-height: 1;
+  text-align: center;
+}
+.cand-card .info { flex: 1; }
+.cand-card .mat-nombre {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: #222;
+}
+.cand-card.disabled {
+  cursor: default;
+  opacity: 0.95;
+}
+
+/* Estados post-comprobación */
+.cand-card.viable-ok {
+  background: #dff2e6;
+  border-color: var(--ok);
+}
+.cand-card.viable-ok .chk { background: var(--ok); border-color: var(--ok); color: #fff; }
+.cand-card.viable-ok .chk::after { content: '✓'; }
+.cand-card.viable-fallo {
+  background: #fff7e0;
+  border-color: var(--omit);
+  border-style: dashed;
+}
+.cand-card.viable-fallo .chk { background: #fff; border-color: var(--omit); color: var(--omit); }
+.cand-card.viable-fallo .chk::after { content: '!'; font-weight: 700; font-style: italic; }
+.cand-card.noviable-ok {
+  background: #f5f5f5;
+  border-color: #aaa;
+  opacity: 0.7;
+}
+.cand-card.noviable-ok .chk { background: #fff; border-color: #aaa; }
+.cand-card.noviable-fallo {
+  background: #fce4e1;
+  border-color: var(--err);
+}
+.cand-card.noviable-fallo .chk { background: var(--err); border-color: var(--err); color: #fff; }
+.cand-card.noviable-fallo .chk::after { content: '✕'; font-weight: 700; }
+
+.cand-justif {
+  display: none;
+  grid-column: 1 / -1;
+  margin-top: 8px;
+  padding: 10px 12px;
+  background: #fff;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  color: #555;
+  line-height: 1.5;
+  border-left: 3px solid #ccc;
+}
+.cand-card.resuelto .cand-justif { display: block; }
+.cand-card.viable-ok .cand-justif { border-left-color: var(--ok); }
+.cand-card.viable-fallo .cand-justif { border-left-color: var(--omit); }
+.cand-card.noviable-ok .cand-justif { border-left-color: #aaa; }
+.cand-card.noviable-fallo .cand-justif { border-left-color: var(--err); }
+.cand-justif strong {
+  color: #333;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+/* ════ CONTROLES ════ */
+.controles {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 1rem 0 0.5rem;
+}
+.btn-primary {
+  background: var(--principal, #D4700A);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.4rem;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-primary:hover { background: #b85d08; }
+.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-secondary {
+  background: #fff;
+  color: #666;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0.7rem 1.2rem;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.btn-secondary:hover { background: #f5f5f5; }
+
+/* ════ SCORE ════ */
+.score-box {
+  background: linear-gradient(135deg, #fff7eb, #ffeed4);
+  border: 2px solid var(--principal, #D4700A);
+  border-radius: 12px;
+  padding: 1rem 1.4rem;
+  margin: 1rem 0;
+  display: none;
+}
+.score-box.visible { display: block; }
+.score-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.score-row .total {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--principal, #D4700A);
+}
+.score-row .total small {
+  font-size: 0.7rem;
+  color: #888;
+  font-weight: 500;
+  margin-left: 6px;
+}
+.score-leyenda {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: #555;
+}
+.score-leyenda span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.score-leyenda .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+@media (max-width: 700px) {
+  .caso-detalle-hd { flex-direction: column; }
+  .caso-detalle-hd .em { font-size: 2.4rem; }
+  .cand-card { grid-template-columns: 28px 30px 1fr; gap: 8px; padding: 10px; }
+  .cand-card .em { font-size: 1.3rem; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U02 · Materiales · Selector</span>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Inicio</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U02</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📘</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🎯</span><span class="nc-lbl">Selector</span></span>
+</nav>
+
+<div class="unidad-layout">
+
+<aside class="sb-side">
+  <h3>Cómo funciona</h3>
+  <p style="padding: 0.6rem 1rem; font-size:0.88rem; color:#555; line-height:1.55;">
+    Para cada caso, lee las <strong>propiedades exigidas</strong> y marca los materiales que cumplen.<br><br>
+    Pulsa <em>Comprobar</em> para ver el resultado y la justificación de cada candidato.
+  </p>
+  <h3>Leyenda del feedback</h3>
+  <ul style="font-size:0.82rem; color:#555; padding:0 1rem 0 0.6rem; line-height:1.6; list-style:none;">
+    <li><span style="color:var(--ok);">✓</span> Viable, lo marcaste: <strong>+1</strong></li>
+    <li><span style="color:#d4a017;">!</span> Viable, no lo viste: 0</li>
+    <li><span style="color:#888;">○</span> No viable, descartado: <strong>+1</strong></li>
+    <li><span style="color:var(--err);">✕</span> No viable, mal marcado: 0</li>
+  </ul>
+</aside>
+
+<main class="ct" id="main-content">
+
+<h1 class="unidad-titulo">🎯 Selector de material</h1>
+<p class="unidad-subt">Diez casos reales: elige los materiales viables justificando con sus propiedades.</p>
+
+<!-- ════ VISTA LISTA ════ -->
+<section id="vista-lista">
+  <div class="bloque">
+    <h2>Elige un caso para resolver</h2>
+    <p class="descripcion">Cada caso te presenta una situación real con unas propiedades exigidas. Tu tarea es elegir los materiales que cumplen esas propiedades entre seis candidatos.</p>
+    <div class="casos-grid" id="casos-grid"></div>
+  </div>
+</section>
+
+<!-- ════ VISTA DETALLE ════ -->
+<section id="vista-caso">
+  <div class="caso-detalle-hd">
+    <div class="em" id="cd-em">🍳</div>
+    <div class="ct">
+      <span class="num-tag" id="cd-num">Caso 1 / 10</span>
+      <h2 id="cd-titulo">Título del caso</h2>
+      <p id="cd-desc">Descripción del caso</p>
+    </div>
+  </div>
+
+  <div class="propiedades-bloque">
+    <h3>Propiedades exigidas</h3>
+    <ul id="cd-props"></ul>
+  </div>
+
+  <div class="candidatos-bloque">
+    <h3>Materiales candidatos</h3>
+    <p class="hint">Marca <strong>todos</strong> los que sean viables. No siempre hay un único material correcto.</p>
+    <div class="candidatos-list" id="cd-candidatos"></div>
+  </div>
+
+  <div class="controles">
+    <button class="btn-primary" id="btn-check" onclick="comprobar()" disabled>✅ Comprobar selección</button>
+    <button class="btn-secondary" onclick="volverLista()">← Volver a la lista</button>
+  </div>
+
+  <div class="score-box" id="score-box">
+    <div class="score-row">
+      <div>
+        <div class="total" id="score-total">0/6 <small>aciertos</small></div>
+        <div id="score-msg" style="color:#555; font-size:0.92rem; margin-top: 4px;"></div>
+      </div>
+      <button class="btn-secondary" onclick="volverLista()">Otro caso →</button>
+    </div>
+    <div class="score-leyenda">
+      <span><span class="dot" style="background:#2e7d4f"></span>Viable bien marcado</span>
+      <span><span class="dot" style="background:#d4a017"></span>Viable que omitiste</span>
+      <span><span class="dot" style="background:#aaa"></span>No viable descartado</span>
+      <span><span class="dot" style="background:#c44536"></span>No viable mal marcado</span>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════
+//  CATÁLOGO DE 10 CASOS
+// ══════════════════════════════════════════════════════════
+const CASOS = [
+  {
+    id: 'mango-sarten',
+    em: '🍳',
+    titulo: 'Mango de una sartén',
+    descripcion: 'El mango se sujeta con la mano mientras la sartén está al fuego. Imagina que diseñas uno desde cero.',
+    propiedades: [
+      { txt: 'Mala conductora del calor (que no queme la mano)', tipo: 'TÉRMICA' },
+      { txt: 'Tenaz: resistente a golpes y caídas', tipo: 'MECÁNICA' },
+      { txt: 'Resistente al agua y al lavavajillas', tipo: 'FISICOQUÍMICA' }
+    ],
+    candidatos: [
+      { mat: 'Madera dura (haya, roble)', em: '🪵', viable: true, justif: 'Excelente aislante térmico, agradable al tacto, tenaz. Hay que tratarla contra la humedad pero es una opción tradicional muy buena.' },
+      { mat: 'Plástico termoestable (baquelita)', em: '🟫', viable: true, justif: 'No conduce el calor y, al ser termoestable, no se ablanda con el calor del fogón. Es la solución más usada en sartenes industriales.' },
+      { mat: 'Silicona (elastómero)', em: '🎨', viable: true, justif: 'Aguanta hasta 250 °C, agradable al tacto, lavable en lavavajillas. Una opción premium cada vez más extendida.' },
+      { mat: 'Aluminio', em: '⚙️', viable: false, justif: 'Conduce muy bien el calor. Te quemarías la mano en cuanto la sartén estuviera caliente.' },
+      { mat: 'Acero inoxidable', em: '🔩', viable: false, justif: 'Buena resistencia mecánica y al agua, pero MUY conductor del calor. Solo se usa si se combina con otro material aislante.' },
+      { mat: 'Vidrio', em: '🪟', viable: false, justif: 'Aceptable como aislante térmico, pero demasiado frágil: se rompería con un solo golpe contra la encimera.' }
+    ]
+  },
+  {
+    id: 'cable-electrico',
+    em: '🔌',
+    titulo: 'Cable eléctrico de un electrodoméstico',
+    descripcion: 'Diseñas el material del NÚCLEO conductor (parte interna por la que pasa la corriente).',
+    propiedades: [
+      { txt: 'Excelente conductividad eléctrica', tipo: 'ELÉCTRICA' },
+      { txt: 'Dúctil: se debe poder estirar en hilos finos', tipo: 'MECÁNICA' },
+      { txt: 'Económicamente accesible para producción masiva', tipo: 'ECONÓMICA' }
+    ],
+    candidatos: [
+      { mat: 'Cobre', em: '🟫', viable: true, justif: 'Excelente conductor eléctrico, muy dúctil (se hila perfectamente en cables finos) y precio razonable. Es el estándar de la industria.' },
+      { mat: 'Aluminio', em: '⚙️', viable: true, justif: 'Buen conductor, mucho más ligero que el cobre y más barato. Se usa en líneas de alta tensión y cableado de edificios grandes.' },
+      { mat: 'Plata', em: '🥈', viable: false, justif: 'Sería el mejor conductor de los tres, pero su precio la descarta para uso doméstico. Solo se usa en electrónica de precisión.' },
+      { mat: 'Acero al carbono', em: '🔩', viable: false, justif: 'Mucha menos conductividad que el cobre. Solo se usa por su resistencia mecánica, no eléctrica (cables tensores).' },
+      { mat: 'PVC', em: '🧴', viable: false, justif: 'El PVC es AISLANTE, no conductor. Es el material que envuelve el cable POR FUERA, no el del núcleo.' },
+      { mat: 'Madera', em: '🪵', viable: false, justif: 'La madera es aislante. Imposible que pase corriente eléctrica de forma útil.' }
+    ]
+  },
+  {
+    id: 'botella-reutil',
+    em: '💧',
+    titulo: 'Botella de agua reutilizable',
+    descripcion: 'Diseñas una botella que llevarás al instituto cada día durante todo el curso.',
+    propiedades: [
+      { txt: 'Tenaz: aguanta golpes y caídas sin romperse', tipo: 'MECÁNICA' },
+      { txt: 'No tóxica: en contacto directo con agua de beber', tipo: 'AMBIENTAL' },
+      { txt: 'Ligera para llevar en la mochila', tipo: 'FÍSICA' }
+    ],
+    candidatos: [
+      { mat: 'Acero inoxidable', em: '🥤', viable: true, justif: 'Tenaz, no se rompe, no se oxida, inerte con los alimentos. Pesa algo más que el plástico pero es la opción más duradera.' },
+      { mat: 'Aluminio', em: '⚙️', viable: true, justif: 'Muy ligero y resistente. Necesita una capa interior protectora para que el agua no toque directamente el metal.' },
+      { mat: 'Polipropileno (PP)', em: '🧴', viable: true, justif: 'Ligero, tenaz, no tóxico (admite contacto alimentario). Habitual en botellas deportivas reutilizables.' },
+      { mat: 'Vidrio común', em: '🪟', viable: false, justif: 'Pesado y MUY frágil. Una caída en el patio y se rompe en pedazos peligrosos. Lo descartamos para uso en mochila.' },
+      { mat: 'Cobre', em: '🟫', viable: false, justif: 'En contacto con agua durante horas puede liberar iones de cobre que dan sabor metálico y pueden ser tóxicos en exceso.' },
+      { mat: 'Madera', em: '🪵', viable: false, justif: 'No es impermeable de forma duradera: a las pocas semanas absorbería humedad y se estropearía.' }
+    ]
+  },
+  {
+    id: 'ventana-salon',
+    em: '🪟',
+    titulo: 'Cristal de una ventana del salón',
+    descripcion: 'Diseñas el material principal del cristal de una ventana de tu casa.',
+    propiedades: [
+      { txt: 'Transparente: deja pasar la luz visible', tipo: 'ÓPTICA' },
+      { txt: 'Buen aislante térmico (no se enfría/calienta la casa)', tipo: 'TÉRMICA' },
+      { txt: 'Resistente al rayado y a los productos de limpieza', tipo: 'MECÁNICA' }
+    ],
+    candidatos: [
+      { mat: 'Vidrio plano (flotado)', em: '🪟', viable: true, justif: 'Es la respuesta: perfectamente transparente, aislante térmico aceptable y resistente al rayado. Las ventanas de tu casa son de esto.' },
+      { mat: 'Policarbonato', em: '🧴', viable: true, justif: 'Plástico transparente muy tenaz, usado en techados industriales y mamparas. Más caro que el vidrio y se raya más fácil, pero no se rompe.' },
+      { mat: 'PMMA (metacrilato)', em: '✨', viable: false, justif: 'Transparente y aceptable, pero se raya fácilmente con la limpieza diaria y amarillea con los años de sol. Solo se usa en aplicaciones temporales.' },
+      { mat: 'Madera', em: '🪵', viable: false, justif: 'La madera no es transparente. Es el material del MARCO de la ventana, no del cristal.' },
+      { mat: 'Aluminio', em: '⚙️', viable: false, justif: 'Tampoco es transparente. Igual que la madera, es material de MARCO, no de vidrio.' },
+      { mat: 'Cartón', em: '📦', viable: false, justif: 'Ni transparente ni impermeable. Si pones cartón en una ventana no es una ventana, es una pared mala.' }
+    ]
+  },
+  {
+    id: 'suela-zapatilla',
+    em: '👟',
+    titulo: 'Suela de una zapatilla deportiva',
+    descripcion: 'Diseñas la suela (la parte de abajo que toca el suelo) de una zapatilla para correr o jugar al baloncesto.',
+    propiedades: [
+      { txt: 'Elástica: amortigua impactos al correr y saltar', tipo: 'MECÁNICA' },
+      { txt: 'Alto coeficiente de fricción (agarre)', tipo: 'MECÁNICA' },
+      { txt: 'Ligera y resistente al desgaste', tipo: 'MECÁNICA' }
+    ],
+    candidatos: [
+      { mat: 'Caucho sintético', em: '🛞', viable: true, justif: 'Elástico, antideslizante, ligero y muy resistente al desgaste por rozamiento. Es el material clásico de las suelas.' },
+      { mat: 'EVA (etileno-vinilo)', em: '🟦', viable: true, justif: 'Espuma muy ligera con buena amortiguación. Habitual en la mediasuela. Si se usa sola en la suela, se desgasta rápido.' },
+      { mat: 'Cuero', em: '🟫', viable: false, justif: 'En su día se usó en zapatillas, pero es resbaladizo en mojado y se desgasta muy rápido en superficies abrasivas. Hoy queda relegado a zapatos de vestir.' },
+      { mat: 'Madera', em: '🪵', viable: false, justif: 'Rígida y resbaladiza. Solo te imaginas corriendo con zuecos: dolor de espalda al instante.' },
+      { mat: 'Acero', em: '🔩', viable: false, justif: 'Demasiado rígido, pesado y resbaladizo en seco. Solo se usa en clavos para atletismo de pista.' },
+      { mat: 'Vidrio', em: '🪟', viable: false, justif: 'Frágil y cortante: imposible. Se rompería al primer paso.' }
+    ]
+  },
+  {
+    id: 'freno-deport',
+    em: '🏎️',
+    titulo: 'Discos de freno de un coche deportivo',
+    descripcion: 'Diseñas los discos de freno de un coche que corre en circuito a más de 250 km/h.',
+    propiedades: [
+      { txt: 'Soporta temperaturas extremas (más de 800 °C)', tipo: 'TÉRMICA' },
+      { txt: 'Muy duros: no se desgastan con el frenado fuerte', tipo: 'MECÁNICA' },
+      { txt: 'Ligeros: cada kilo en frenos cuesta rendimiento', tipo: 'MECÁNICA' }
+    ],
+    candidatos: [
+      { mat: 'Cerámica técnica (carbono-cerámica)', em: '🏺', viable: true, justif: 'La cerámica técnica aguanta temperaturas extremas sin deformarse y es más ligera que el acero. Se usa en coches deportivos de alta gama.' },
+      { mat: 'Acero al carbono', em: '🔩', viable: true, justif: 'El estándar de los frenos de coche normales. Tenaz, duro y barato. En coches deportivos se usa cuando los discos cerámicos son demasiado caros.' },
+      { mat: 'Aluminio', em: '⚙️', viable: false, justif: 'Ligero, sí, pero su punto de fusión (660 °C) es demasiado bajo. Se deformaría al primer frenazo fuerte.' },
+      { mat: 'Plástico termoestable', em: '🟫', viable: false, justif: 'No aguanta temperaturas tan altas. Se quemaría literalmente.' },
+      { mat: 'Madera', em: '🪵', viable: false, justif: 'Combustible. Frenar sería prender fuego al coche. No, gracias.' },
+      { mat: 'Vidrio', em: '🪟', viable: false, justif: 'Frágil. Se haría añicos a la primera vibración.' }
+    ]
+  },
+  {
+    id: 'cubo-exterior',
+    em: '🗑️',
+    titulo: 'Cubo de basura para la calle',
+    descripcion: 'Diseñas un cubo que estará al sol y la lluvia todo el año en la acera.',
+    propiedades: [
+      { txt: 'Resistente a la intemperie (sol, lluvia)', tipo: 'AMBIENTAL' },
+      { txt: 'Tenaz: aguanta golpes del camión de la basura', tipo: 'MECÁNICA' },
+      { txt: 'Económicamente viable para producción masiva', tipo: 'ECONÓMICA' }
+    ],
+    candidatos: [
+      { mat: 'HDPE (polímero 2)', em: '🧴', viable: true, justif: 'Polietileno de alta densidad: tenaz, resistente al sol, impermeable, barato. Es el material estándar de los cubos urbanos.' },
+      { mat: 'Polipropileno (PP)', em: '🛢️', viable: true, justif: 'Similar al HDPE pero algo más rígido. También muy usado en cubos y contenedores grandes.' },
+      { mat: 'Acero galvanizado', em: '🔩', viable: true, justif: 'El zinc del galvanizado lo protege de la oxidación. Lo verás en cubos antiguos. Cae en desuso porque pesa más y es más caro.' },
+      { mat: 'Cartón', em: '📦', viable: false, justif: 'A la primera lluvia se desharía. Inservible en exterior.' },
+      { mat: 'Madera sin tratar', em: '🪵', viable: false, justif: 'Sin tratamiento contra humedad, se pudriría en pocos meses. Aun tratada, no resiste tan bien como el plástico.' },
+      { mat: 'Vidrio', em: '🪟', viable: false, justif: 'Frágil ante el golpe del camión de basura. Se haría añicos al primer vaciado.' }
+    ]
+  },
+  {
+    id: 'mesa-taller',
+    em: '🔨',
+    titulo: 'Mesa del taller de tecnología',
+    descripcion: 'Diseñas la mesa de trabajo del taller donde se cortará, atornillará y serrará material durante años.',
+    propiedades: [
+      { txt: 'Aguanta peso de máquinas y herramientas', tipo: 'MECÁNICA' },
+      { txt: 'Resistente a golpes y rayados', tipo: 'MECÁNICA' },
+      { txt: 'Estable: no se deforma con el tiempo', tipo: 'MECÁNICA' }
+    ],
+    candidatos: [
+      { mat: 'Madera maciza (haya)', em: '🪵', viable: true, justif: 'Resistente, agradable de trabajar, fácil de reparar (se lija si se raya). Es la opción clásica del taller de carpintería.' },
+      { mat: 'Tablero MDF de alta densidad', em: '🟫', viable: true, justif: 'Económico, plano, estable. Si se daña la superficie se sustituye fácilmente. Frecuente en talleres escolares.' },
+      { mat: 'Acero', em: '🔩', viable: true, justif: 'Mesas metálicas industriales aguantan el peso de máquinas pesadas y golpes muy duros. Más caras pero indestructibles.' },
+      { mat: 'Vidrio', em: '🪟', viable: false, justif: 'Frágil y peligroso si se rompe en un taller con herramientas. Descartado.' },
+      { mat: 'Cartón', em: '📦', viable: false, justif: 'Cede al primer peso. Inservible.' },
+      { mat: 'Plástico termoplástico fino', em: '🧴', viable: false, justif: 'Se deforma con el calor de soldaduras y los pesos. Solo en mesas auxiliares, nunca como mesa principal.' }
+    ]
+  },
+  {
+    id: 'llanta-coche',
+    em: '🚗',
+    titulo: 'Llanta de un coche utilitario',
+    descripcion: 'Diseñas la llanta (la parte metálica sobre la que va el neumático).',
+    propiedades: [
+      { txt: 'Rígida: no se deforma con el peso del coche', tipo: 'MECÁNICA' },
+      { txt: 'Ligera: cada kilo cuenta para el consumo', tipo: 'MECÁNICA' },
+      { txt: 'Tenaz: aguanta golpes con bordillos sin romperse', tipo: 'MECÁNICA' }
+    ],
+    candidatos: [
+      { mat: 'Aleación de aluminio (duraluminio)', em: '⚙️', viable: true, justif: 'Rígida, ligera y bonita. Las llantas "de aluminio" de los coches modernos son en realidad de duraluminio (Al + Cu + Mg).' },
+      { mat: 'Acero', em: '🔩', viable: true, justif: 'Más pesado que el aluminio pero tenaz y barato. Las llantas de los coches utilitarios básicos son de acero (las que llevan tapacubos).' },
+      { mat: 'Magnesio', em: '⚪', viable: false, justif: 'Aún más ligero que el aluminio, pero arde con facilidad y es caro. Solo se usa en competición.' },
+      { mat: 'Madera', em: '🪵', viable: false, justif: 'Hasta los años 1920 se usaron. Hoy día no aguantarían la velocidad ni las fuerzas dinámicas modernas.' },
+      { mat: 'Plástico', em: '🧴', viable: false, justif: 'No tiene la rigidez suficiente para aguantar el peso del coche girando a alta velocidad. Solo se usa en tapacubos decorativos.' },
+      { mat: 'Cerámica', em: '🏺', viable: false, justif: 'Demasiado frágil ante los impactos con bordillos y baches. Aunque sea ligera, una grieta en cerámica progresa rápido.' }
+    ]
+  },
+  {
+    id: 'camiseta',
+    em: '👕',
+    titulo: 'Camiseta deportiva técnica',
+    descripcion: 'Diseñas una camiseta para hacer ejercicio: piensas en qué fibra textil usar.',
+    propiedades: [
+      { txt: 'Transpirable: deja salir el sudor', tipo: 'FÍSICA' },
+      { txt: 'Ligera y elástica para moverte', tipo: 'MECÁNICA' },
+      { txt: 'Suave al tacto: no irrita la piel', tipo: 'FISICOQUÍMICA' }
+    ],
+    candidatos: [
+      { mat: 'Poliéster técnico', em: '👕', viable: true, justif: 'Las fibras técnicas modernas son ligeras, transpirables y se secan rápido. Es el estándar en ropa deportiva.' },
+      { mat: 'Algodón', em: '🌾', viable: true, justif: 'Suave, transpirable, natural. Su pega: tarda mucho en secar y al absorber sudor pesa. Está bien para entrenamientos suaves.' },
+      { mat: 'Algodón + elastano', em: '🧵', viable: true, justif: 'Combinación habitual: el algodón da transpirabilidad; el elastano (licra), la elasticidad necesaria para moverte cómodamente.' },
+      { mat: 'Lana virgen', em: '🐑', viable: false, justif: 'Es buena aislante pero pica, calienta demasiado y absorbe agua: lo contrario de lo que necesitas haciendo deporte.' },
+      { mat: 'Cuero', em: '🟫', viable: false, justif: 'No transpira, pesa, no es elástico. Imagina correr con una chaqueta de cuero: sudarías a chorros.' },
+      { mat: 'Lino', em: '🌿', viable: false, justif: 'Fresco pero muy rígido y se arruga con cualquier movimiento. Solo se usa en ropa de vestir, no de deporte.' }
+    ]
+  }
+];
+
+// ══════════════════════════════════════════════════════════
+//  ESTADO Y RENDER
+// ══════════════════════════════════════════════════════════
+let casoActual = null;
+let seleccion = new Set();
+const resueltos = new Set();
+
+function renderLista() {
+  const grid = document.getElementById('casos-grid');
+  grid.innerHTML = CASOS.map((c, i) => `
+    <div class="caso-card ${resueltos.has(c.id) ? 'resuelto' : ''}" onclick="abrirCaso(${i})">
+      <div class="em">${c.em}</div>
+      <div class="info">
+        <div class="num">Caso ${i + 1}</div>
+        <div class="nombre">${c.titulo}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function abrirCaso(idx) {
+  casoActual = idx;
+  seleccion = new Set();
+  const c = CASOS[idx];
+  document.getElementById('cd-em').textContent = c.em;
+  document.getElementById('cd-num').textContent = `Caso ${idx + 1} / ${CASOS.length}`;
+  document.getElementById('cd-titulo').textContent = c.titulo;
+  document.getElementById('cd-desc').textContent = c.descripcion;
+
+  document.getElementById('cd-props').innerHTML = c.propiedades.map(p =>
+    `<li>${p.txt}<span class="tipo-tag">${p.tipo}</span></li>`
+  ).join('');
+
+  document.getElementById('cd-candidatos').innerHTML = c.candidatos.map((cand, i) => `
+    <div class="cand-card" data-idx="${i}" onclick="toggleCand(${i})">
+      <span class="chk"></span>
+      <span class="em">${cand.em}</span>
+      <div class="info">
+        <div class="mat-nombre">${cand.mat}</div>
+      </div>
+      <div class="cand-justif"><strong>Por qué:</strong> ${cand.justif}</div>
+    </div>
+  `).join('');
+
+  document.getElementById('vista-lista').style.display = 'none';
+  document.getElementById('vista-caso').classList.add('visible');
+  document.getElementById('score-box').classList.remove('visible');
+  document.getElementById('btn-check').disabled = true;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function volverLista() {
+  document.getElementById('vista-lista').style.display = '';
+  document.getElementById('vista-caso').classList.remove('visible');
+  casoActual = null;
+  renderLista();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleCand(idx) {
+  if (casoActual === null) return;
+  const card = document.querySelector(`.cand-card[data-idx="${idx}"]`);
+  if (card.classList.contains('resuelto')) return;
+  if (seleccion.has(idx)) {
+    seleccion.delete(idx);
+    card.classList.remove('checked');
+  } else {
+    seleccion.add(idx);
+    card.classList.add('checked');
+  }
+  document.getElementById('btn-check').disabled = false;
+}
+
+function comprobar() {
+  if (casoActual === null) return;
+  const c = CASOS[casoActual];
+  let aciertos = 0;
+  c.candidatos.forEach((cand, i) => {
+    const card = document.querySelector(`.cand-card[data-idx="${i}"]`);
+    card.classList.add('resuelto', 'disabled');
+    card.classList.remove('checked');
+    const marcado = seleccion.has(i);
+    if (cand.viable && marcado) {
+      card.classList.add('viable-ok');
+      aciertos++;
+    } else if (cand.viable && !marcado) {
+      card.classList.add('viable-fallo');
+    } else if (!cand.viable && !marcado) {
+      card.classList.add('noviable-ok');
+      aciertos++;
+    } else if (!cand.viable && marcado) {
+      card.classList.add('noviable-fallo');
+    }
+    card.removeAttribute('onclick');
+  });
+  document.getElementById('btn-check').disabled = true;
+  const total = c.candidatos.length;
+  document.getElementById('score-total').innerHTML = `${aciertos}/${total} <small>aciertos sobre ${total} candidatos</small>`;
+  let msg;
+  if (aciertos === total) msg = '¡Perfecto! Has clasificado correctamente todos los candidatos.';
+  else if (aciertos >= total - 1) msg = 'Casi perfecto. Revisa la justificación del que has fallado.';
+  else if (aciertos >= total - 2) msg = 'Buen trabajo, pero revisa las propiedades del caso y vuelve a intentarlo en otro.';
+  else msg = 'Conviene volver a leer la sección 2 (propiedades) del libro digital antes de seguir.';
+  document.getElementById('score-msg').textContent = msg;
+  document.getElementById('score-box').classList.add('visible');
+  if (aciertos === total) resueltos.add(c.id);
+  document.getElementById('score-box').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// ══════════════════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════════════════
+renderLista();
+</script>
+
+<footer style="text-align:center; padding:2rem 1rem 1rem; color:#888; font-size:0.85rem;">
+  <p>🎯 Selector de material · TyD 2º ESO · Unidad 2</p>
+  <p><a href="../index.html" style="color:#D4700A; text-decoration:none;">← Volver al hub de la unidad</a></p>
+  <p style="margin-top:8px; font-family:'JetBrains Mono', monospace; font-size:0.72rem; opacity:0.6;">v1.0</p>
+</footer>
+
+</body>
+</html>

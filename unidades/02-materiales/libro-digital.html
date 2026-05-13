@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Los materiales y sus propiedades · 2º ESO · Tecnología y Digitalización · v1.0</title>
+<meta name="description" content="Libro digital de la unidad 2 para 2º ESO: qué es un material, las 6 familias de propiedades y las 8 familias de materiales (papel, madera, polímeros, metales, cerámicos y textiles), con la conexión andaluza en investigación de nuevos materiales. IES Jiménez de Quesada (Santa Fe, Granada).">
+<meta name="theme-color" content="#d2552a">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/02-materiales/libro-digital.html">
+
+<!-- ══ Open Graph ══ -->
+<meta property="og:title" content="Libro digital · Los materiales y sus propiedades · TyD 2º ESO">
+<meta property="og:description" content="Libro digital de la unidad 2: clasificación, propiedades, papel y cartón, madera, polímeros, metales, cerámicos, textiles y reciclaje. Con la conexión andaluza en nuevos materiales.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/02-materiales/libro-digital.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cream: #f6f1e7;
+  --cream-2: #efe7d4;
+  --ink: #1a2238;
+  --ink-soft: #3a4360;
+  --teja: #d2552a;
+  --teja-soft: #e87a4e;
+  --blue: #2c5f8d;
+  --blue-soft: #3d7fb8;
+  --yellow: #e8b647;
+  --line: #d6c9ad;
+  --ok: #4a7c59;
+  --err: #c44536;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.6;
+  font-size: 16px;
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(232,182,71,0.08) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(210,85,42,0.06) 0%, transparent 40%);
+  min-height: 100vh;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+/* ── ASIDE ── */
+aside {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 32px 24px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  border-right: 3px solid var(--teja);
+}
+aside .brand { font-family: 'Fraunces', serif; font-weight: 800; font-size: 24px; line-height: 1.1; margin-bottom: 4px; }
+aside .brand span { color: var(--teja-soft); font-style: italic; }
+aside .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: rgba(246,241,231,0.5); margin-bottom: 32px; }
+aside .parte-titulo {
+  font-family: 'Fraunces', serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--teja-soft);
+  margin-top: 24px;
+  margin-bottom: 8px;
+  padding-left: 14px;
+  font-weight: 700;
+}
+aside .parte-titulo:first-of-type { margin-top: 8px; }
+aside nav { display: flex; flex-direction: column; gap: 4px; }
+aside nav a {
+  color: rgba(246,241,231,0.75);
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+aside nav a:hover { background: rgba(246,241,231,0.05); color: var(--cream); border-left-color: var(--teja-soft); }
+aside nav a .num { font-family: 'JetBrains Mono', monospace; font-size: 11px; background: rgba(246,241,231,0.1); padding: 2px 6px; border-radius: 4px; min-width: 24px; text-align: center; }
+aside .back-link {
+  margin-top: 24px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(232,122,78,0.12);
+  color: var(--teja-soft);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(232,122,78,0.2);
+  transition: all .15s;
+}
+aside .back-link:hover { background: rgba(232,122,78,0.2); color: var(--cream); }
+aside .credit { margin-top: 24px; font-size: 11px; opacity: 0.4; line-height: 1.5; }
+
+/* ── MAIN ── */
+main { padding: 48px 56px 80px; min-width: 0; }
+header.hero { margin-bottom: 56px; padding-bottom: 32px; border-bottom: 1px dashed var(--line); }
+header.hero .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--teja); margin-bottom: 12px; }
+header.hero h1 { font-family: 'Fraunces', serif; font-size: 56px; font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 16px; }
+header.hero h1 em { font-style: italic; color: var(--teja); font-weight: 400; }
+header.hero p.lead { font-size: 18px; color: var(--ink-soft); max-width: 640px; }
+header.hero .meta { display: flex; gap: 24px; margin-top: 24px; font-size: 13px; color: var(--ink-soft); flex-wrap: wrap; }
+header.hero .meta strong { color: var(--ink); font-weight: 600; }
+
+/* ── PARTE ── */
+.parte { margin-bottom: 60px; scroll-margin-top: 24px; }
+.parte-cabecera {
+  background: linear-gradient(135deg, var(--ink) 0%, #2a3458 100%);
+  color: var(--cream);
+  padding: 36px 44px;
+  border-radius: 18px;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+  border-left: 6px solid var(--teja);
+}
+.parte-cabecera::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(232,182,71,0.08) 0%, transparent 70%);
+}
+.parte-cabecera .parte-num { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 3px; color: var(--teja-soft); text-transform: uppercase; margin-bottom: 8px; position: relative; }
+.parte-cabecera h2 { font-family: 'Fraunces', serif; font-size: 38px; font-weight: 800; line-height: 1.1; margin-bottom: 12px; position: relative; }
+.parte-cabecera p { font-size: 16px; opacity: 0.85; max-width: 580px; position: relative; }
+
+/* ── SECTION ── */
+.section { margin-bottom: 56px; scroll-margin-top: 24px; }
+.section-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--teja); text-transform: uppercase; margin-bottom: 8px; }
+.section h3 { font-family: 'Fraunces', serif; font-size: 30px; font-weight: 700; line-height: 1.15; margin-bottom: 16px; color: var(--ink); }
+.section h4 { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 600; margin: 28px 0 12px; color: var(--ink); }
+.section p { margin-bottom: 14px; color: var(--ink-soft); }
+.section p strong { color: var(--ink); font-weight: 600; }
+.section ul, .section ol { margin: 8px 0 14px 24px; color: var(--ink-soft); }
+.section li { margin-bottom: 6px; }
+.section li strong { color: var(--ink); font-weight: 600; }
+
+/* ── KEYBOX ── */
+.keybox {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--teja);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 20px 0;
+  box-shadow: 0 4px 14px rgba(26,34,56,0.05);
+}
+.keybox .ktit { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--teja); text-transform: uppercase; margin-bottom: 8px; }
+.keybox p { margin-bottom: 8px; }
+.keybox p:last-child { margin-bottom: 0; }
+
+/* ── CALLOUT ── */
+.callout { display: flex; gap: 14px; align-items: flex-start; padding: 16px 20px; border-radius: 12px; margin: 20px 0; }
+.callout .ic { font-size: 22px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+.callout p { margin: 0; color: var(--ink-soft); font-size: 15px; }
+.callout p + p { margin-top: 6px; }
+.callout-info { background: rgba(44,95,141,0.07); border: 1px solid rgba(44,95,141,0.18); }
+.callout-info p strong { color: var(--blue); }
+.callout-ok { background: rgba(74,124,89,0.07); border: 1px solid rgba(74,124,89,0.18); }
+.callout-ok p strong { color: var(--ok); }
+.callout-warn { background: rgba(232,182,71,0.10); border: 1px solid rgba(232,182,71,0.30); }
+.callout-warn p strong { color: #8a6d1a; }
+.callout-key { background: rgba(210,85,42,0.07); border: 1px solid rgba(210,85,42,0.20); }
+.callout-key p strong { color: var(--teja); }
+
+/* ── COLS ── */
+.cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin: 22px 0; }
+.cols3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; margin: 22px 0; }
+.cols4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 22px 0; }
+.col-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  box-shadow: 0 4px 14px rgba(26,34,56,0.05);
+}
+.col-card h4 { font-family: 'Fraunces', serif; font-size: 19px; margin: 0 0 10px; color: var(--teja); }
+.col-card h4.azul { color: var(--blue); }
+.col-card h4.green { color: var(--ok); }
+.col-card h4.yellow { color: #8a6d1a; }
+.col-card p { font-size: 14.5px; margin-bottom: 8px; }
+.col-card ul { margin: 6px 0 0 18px; font-size: 14.5px; }
+.col-card .tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(210,85,42,0.12);
+  color: var(--teja);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.col-card .tag.azul { background: rgba(44,95,141,0.12); color: var(--blue); }
+.col-card .tag.green { background: rgba(74,124,89,0.12); color: var(--ok); }
+.col-card .tag.yellow { background: rgba(232,182,71,0.20); color: #8a6d1a; }
+
+/* ── FIGURE ── */
+.fig {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+  margin: 24px 0;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(26,34,56,0.05);
+}
+.fig svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+.fig-cap { font-family: 'Fraunces', serif; font-size: 13px; font-style: italic; color: var(--ink-soft); margin-top: 12px; }
+
+/* ── EJEMPLO ── */
+.ejemplo {
+  background: linear-gradient(135deg, #fdfaf3, #f6f1e7);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--yellow);
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin: 24px 0;
+}
+.ejemplo .et { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: #8a6d1a; text-transform: uppercase; margin-bottom: 6px; }
+.ejemplo h5 { font-family: 'Fraunces', serif; font-size: 19px; margin: 0 0 14px; color: var(--ink); }
+.steps { display: grid; gap: 10px; counter-reset: step; }
+.step {
+  position: relative;
+  padding: 12px 14px 12px 46px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+.step::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--teja);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* ── TABLE ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  font-size: 14.5px;
+}
+th { background: var(--ink); color: var(--cream); font-family: 'Fraunces', serif; font-weight: 600; padding: 12px 14px; text-align: left; font-size: 14px; letter-spacing: .3px; }
+td { padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink-soft); }
+tr:last-child td { border-bottom: 0; }
+tr:nth-child(even) td { background: rgba(246,241,231,0.5); }
+td strong { color: var(--ink); }
+
+/* ── GLOSARIO ── */
+.glos { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 24px; margin-top: 32px; }
+.glos h3 { font-family: 'Fraunces', serif; font-size: 22px; margin-bottom: 14px; color: var(--ink); }
+.glos dl { display: grid; gap: 12px; }
+.glos dt { font-family: 'Fraunces', serif; font-weight: 700; color: var(--teja); font-size: 16px; }
+.glos dd { color: var(--ink-soft); font-size: 14.5px; margin-left: 0; }
+
+/* ── FOOTER ── */
+footer.book-foot { margin-top: 60px; padding-top: 28px; border-top: 1px dashed var(--line); text-align: center; font-size: 13px; color: var(--ink-soft); }
+footer.book-foot a { color: var(--teja); text-decoration: none; }
+footer.book-foot a:hover { color: var(--teja-soft); }
+footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px; opacity: 0.6; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  aside { position: relative; height: auto; max-height: none; top: auto; }
+  main { padding: 32px 24px 60px; }
+  header.hero h1 { font-size: 36px; }
+  .parte-cabecera { padding: 28px 24px; }
+  .parte-cabecera h2 { font-size: 26px; }
+  .section h3 { font-size: 24px; }
+  .cols2, .cols3, .cols4 { grid-template-columns: 1fr; }
+}
+
+@media print {
+  body { background: #fff; }
+  aside { display: none; }
+  .layout { grid-template-columns: 1fr; }
+  main { padding: 0; }
+  .parte-cabecera { background: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .section, .ejemplo, .fig, .col-card, .keybox { break-inside: avoid; }
+}
+
+/* ── SVG STYLES ── */
+.svg-fig { font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+.svg-fig .stroke-main { stroke: #1a2238; stroke-width: 2; fill: none; stroke-linejoin: round; stroke-linecap: round; }
+.svg-fig .stroke-thin { stroke: #1a2238; stroke-width: 1; fill: none; }
+.svg-fig .stroke-aux { stroke: #d2552a; stroke-width: 1; fill: none; stroke-dasharray: 4 3; }
+.svg-fig .fill-light { fill: #f6f1e7; }
+.svg-fig .fill-teja { fill: rgba(210,85,42,0.18); }
+.svg-fig .fill-blue { fill: rgba(44,95,141,0.15); }
+.svg-fig .fill-yellow { fill: rgba(232,182,71,0.25); }
+.svg-fig .fill-green { fill: rgba(74,124,89,0.18); }
+.svg-fig text { fill: #1a2238; }
+.svg-fig text.lbl-teja { fill: #d2552a; font-weight: 600; }
+.svg-fig text.lbl-blue { fill: #2c5f8d; font-weight: 600; }
+.svg-fig .arrow { fill: #1a2238; }
+.svg-fig .arrow-teja { fill: #d2552a; }
+
+/* ── Familias de materiales (badges) ── */
+.familias-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 22px 0; }
+.familia-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--teja);
+  border-radius: 10px;
+  padding: 14px 12px;
+  text-align: center;
+}
+.familia-card .em { font-size: 28px; line-height: 1; margin-bottom: 8px; }
+.familia-card h5 { font-family: 'Fraunces', serif; font-size: 15px; color: var(--ink); margin: 0 0 4px; }
+.familia-card p { font-size: 12.5px; margin: 0; line-height: 1.4; }
+
+/* ── Códigos del plástico (números 1-7) ── */
+.codigos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 12px;
+  margin: 22px 0;
+}
+.codigo-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 10px;
+  text-align: center;
+}
+.codigo-num {
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+  line-height: 40px;
+  border-radius: 50%;
+  background: var(--cream-2);
+  border: 2px solid var(--teja);
+  color: var(--teja);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.codigo-card h5 {
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  margin: 0 0 4px;
+  color: var(--ink);
+  letter-spacing: 0.3px;
+}
+.codigo-card p { font-size: 11.5px; margin: 0; line-height: 1.3; }
+
+/* ── Contenedores de reciclaje ── */
+.cont-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px;
+  margin: 22px 0;
+}
+.cont-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px 12px;
+  text-align: center;
+}
+.cont-icon {
+  width: 56px;
+  height: 70px;
+  margin: 0 auto 10px;
+  border-radius: 8px 8px 4px 4px;
+  position: relative;
+}
+.cont-icon::after {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: -4px;
+  right: -4px;
+  height: 8px;
+  background: inherit;
+  border-radius: 6px 6px 0 0;
+  filter: brightness(0.85);
+}
+.cont-azul .cont-icon { background: #2c5f8d; }
+.cont-amarillo .cont-icon { background: #e8b647; }
+.cont-verde .cont-icon { background: #4a7c59; }
+.cont-marron .cont-icon { background: #7a4f2a; }
+.cont-gris .cont-icon { background: #888; }
+.cont-card h5 { font-family: 'Fraunces', serif; font-size: 15px; margin: 0 0 4px; color: var(--ink); }
+.cont-card p { font-size: 12.5px; margin: 0; line-height: 1.4; }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+<aside>
+  <div class="brand">Los materiales<br><span>y sus propiedades</span></div>
+  <div class="sub">TyD 2º ESO · U2</div>
+
+  <div class="parte-titulo">Parte 1 · Fundamentos</div>
+  <nav>
+    <a href="#s1"><span class="num">1</span>Los materiales</a>
+    <a href="#s2"><span class="num">2</span>Las propiedades</a>
+  </nav>
+
+  <div class="parte-titulo">Parte 2 · Las familias</div>
+  <nav>
+    <a href="#s3"><span class="num">3</span>Papel y cartón</a>
+    <a href="#s4"><span class="num">4</span>La madera</a>
+    <a href="#s5"><span class="num">5</span>Los polímeros</a>
+    <a href="#s6"><span class="num">6</span>Los metales</a>
+    <a href="#s7"><span class="num">7</span>Los cerámicos</a>
+    <a href="#s8"><span class="num">8</span>Las fibras textiles</a>
+  </nav>
+
+  <div class="parte-titulo">Parte 3 · Materiales y planeta</div>
+  <nav>
+    <a href="#s9"><span class="num">9</span>Reciclaje y Andalucía</a>
+    <a href="#cierre"><span class="num">★</span>Recuerda</a>
+  </nav>
+
+  <a class="back-link" href="index.html">← Volver al hub de la unidad</a>
+
+  <div class="credit">
+    TyD 2º ESO · Curso 2025-26<br>
+    Manuel Alonso Herrera<br>
+    IES Jiménez de Quesada
+  </div>
+</aside>
+
+<main>
+
+<header class="hero">
+  <div class="eyebrow">Unidad 2 · Libro digital · v1.0</div>
+  <h1>Los materiales<br><em>y sus propiedades</em></h1>
+  <p class="lead">Todo lo que tocas está hecho de algún <strong>material</strong>: la mesa, el bolígrafo, la botella, la zapatilla, la pantalla del móvil. Pero no todos sirven para lo mismo. En esta unidad aprenderás a reconocer las <strong>ocho familias</strong> de materiales que dominan nuestro día a día, a entender qué <strong>propiedades</strong> los hacen únicos y, sobre todo, a elegir el material adecuado para cada cosa que diseñes.</p>
+  <div class="meta">
+    <span><strong>Curso:</strong> 2º ESO</span>
+    <span><strong>Duración:</strong> 8-10 sesiones</span>
+    <span><strong>Bloques:</strong> 9 secciones · 3 partes</span>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PARTE 1 · EL MUNDO DE LOS MATERIALES
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="parte1">
+  <div class="parte-cabecera">
+    <div class="parte-num">Parte 1</div>
+    <h2>El mundo de los materiales</h2>
+    <p>Antes de entrar en cada familia, necesitamos dos ideas claras: qué es un material y por qué unos sirven para unas cosas y otros no. Las <strong>propiedades</strong> son la respuesta.</p>
+  </div>
+
+  <!-- ─── 1. Los materiales ─── -->
+  <article class="section" id="s1">
+    <div class="section-num">Sección 1</div>
+    <h3>Los materiales</h3>
+
+    <p>Un <strong>material</strong> es la <strong>sustancia de la que está hecho un objeto</strong>. Una silla puede ser de madera, de plástico, de metal o incluso de cartón prensado: cambia el material y cambia su precio, su peso, su resistencia y su impacto ambiental. Por eso, elegir bien el material es una de las decisiones técnicas más importantes que tomarás cuando diseñes algo en el taller.</p>
+
+    <div class="keybox">
+      <div class="ktit">Definición</div>
+      <p>Un <strong>material</strong> es la materia con la que se fabrica un objeto. Las <strong>materias primas</strong> son los materiales tal y como aparecen en la naturaleza (un tronco de pino, una mena de hierro, una bola de algodón) antes de ser transformados.</p>
+    </div>
+
+    <h4>Naturales, artificiales y sintéticos</h4>
+
+    <p>Según de dónde venga, un material entra en uno de estos tres grandes grupos. Esta distinción es importante porque marca su impacto ambiental y su precio.</p>
+
+    <div class="fig">
+      <svg class="svg-fig" viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" aria-label="Materiales naturales, artificiales y sintéticos">
+        <!-- Natural -->
+        <g transform="translate(20,20)">
+          <rect x="0" y="0" width="180" height="170" rx="14" class="stroke-main fill-green"/>
+          <text x="90" y="28" text-anchor="middle" font-size="14" font-weight="700">NATURALES</text>
+          <text x="90" y="48" text-anchor="middle" font-size="11">Se obtienen directamente</text>
+          <text x="90" y="62" text-anchor="middle" font-size="11">de la naturaleza</text>
+          <line x1="20" y1="80" x2="160" y2="80" class="stroke-thin"/>
+          <text x="90" y="100" text-anchor="middle" font-size="12" font-weight="600">Ejemplos</text>
+          <text x="90" y="118" text-anchor="middle" font-size="11">madera · algodón</text>
+          <text x="90" y="134" text-anchor="middle" font-size="11">lana · piedra · arena</text>
+          <text x="90" y="150" text-anchor="middle" font-size="11">arcilla · seda · corcho</text>
+        </g>
+        <!-- Artificial -->
+        <g transform="translate(230,20)">
+          <rect x="0" y="0" width="180" height="170" rx="14" class="stroke-main fill-yellow"/>
+          <text x="90" y="28" text-anchor="middle" font-size="14" font-weight="700">ARTIFICIALES</text>
+          <text x="90" y="48" text-anchor="middle" font-size="11">Hechos por humanos</text>
+          <text x="90" y="62" text-anchor="middle" font-size="11">a partir de algo natural</text>
+          <line x1="20" y1="80" x2="160" y2="80" class="stroke-thin"/>
+          <text x="90" y="100" text-anchor="middle" font-size="12" font-weight="600">Ejemplos</text>
+          <text x="90" y="118" text-anchor="middle" font-size="11">papel · vidrio</text>
+          <text x="90" y="134" text-anchor="middle" font-size="11">ladrillo · acero</text>
+          <text x="90" y="150" text-anchor="middle" font-size="11">hormigón · rayón</text>
+        </g>
+        <!-- Sintético -->
+        <g transform="translate(440,20)">
+          <rect x="0" y="0" width="180" height="170" rx="14" class="stroke-main fill-teja"/>
+          <text x="90" y="28" text-anchor="middle" font-size="14" font-weight="700">SINTÉTICOS</text>
+          <text x="90" y="48" text-anchor="middle" font-size="11">Creados en laboratorio,</text>
+          <text x="90" y="62" text-anchor="middle" font-size="11">no existen en la naturaleza</text>
+          <line x1="20" y1="80" x2="160" y2="80" class="stroke-thin"/>
+          <text x="90" y="100" text-anchor="middle" font-size="12" font-weight="600">Ejemplos</text>
+          <text x="90" y="118" text-anchor="middle" font-size="11">plásticos (PET, PVC)</text>
+          <text x="90" y="134" text-anchor="middle" font-size="11">nailon · poliéster</text>
+          <text x="90" y="150" text-anchor="middle" font-size="11">licra · grafeno</text>
+        </g>
+      </svg>
+      <div class="fig-cap">Los materiales según su origen: naturales (sin transformar), artificiales (transformados a partir de algo natural) y sintéticos (totalmente nuevos)</div>
+    </div>
+
+    <h4>Las ocho familias de materiales</h4>
+
+    <p>Sea cual sea su origen, casi todos los materiales que se usan en tecnología se agrupan en ocho grandes <strong>familias</strong>. Esta unidad las recorre una por una.</p>
+
+    <div class="familias-grid">
+      <div class="familia-card"><div class="em">📄</div><h5>Papel y cartón</h5><p>Periódicos, libros, embalajes</p></div>
+      <div class="familia-card"><div class="em">🪵</div><h5>Madera</h5><p>Mesas, lápices, casas</p></div>
+      <div class="familia-card"><div class="em">🧴</div><h5>Polímeros</h5><p>Botellas, juguetes, tuberías</p></div>
+      <div class="familia-card"><div class="em">⚙️</div><h5>Metales</h5><p>Herramientas, vehículos</p></div>
+      <div class="familia-card"><div class="em">🏺</div><h5>Cerámicos</h5><p>Vasos, ladrillos, ventanas</p></div>
+      <div class="familia-card"><div class="em">👕</div><h5>Textiles</h5><p>Ropa, mochilas, cuerdas</p></div>
+    </div>
+
+    <h4>¿Cómo se elige un material?</h4>
+
+    <p>Nunca se elige un material por capricho. Cuando un ingeniero o un diseñador escoge un material, mira al menos <strong>cuatro factores</strong>:</p>
+
+    <div class="cols2">
+      <div class="col-card">
+        <span class="tag">Factor 1</span>
+        <h4>Las propiedades</h4>
+        <p>¿Aguanta el peso? ¿Conduce la electricidad? ¿Es transparente? ¿Aguanta el calor? Cada aplicación exige propiedades concretas.</p>
+      </div>
+      <div class="col-card">
+        <span class="tag azul">Factor 2</span>
+        <h4 class="azul">La disponibilidad y el coste</h4>
+        <p>¿Es fácil conseguirlo? ¿A qué precio? Un material excelente pero carísimo o muy escaso no es buena opción para un producto cotidiano.</p>
+      </div>
+      <div class="col-card">
+        <span class="tag green">Factor 3</span>
+        <h4 class="green">La fabricación</h4>
+        <p>¿Cómo se trabaja? Una pieza puede ser fácil de cortar pero difícil de pegar; fácil de moldear pero difícil de mecanizar.</p>
+      </div>
+      <div class="col-card">
+        <span class="tag yellow">Factor 4</span>
+        <h4 class="yellow">El impacto ambiental</h4>
+        <p>¿Se recicla? ¿Cuánto contamina su producción? ¿De dónde se extrae? Cada vez es un factor más decisivo.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-key">
+      <span class="ic">🎯</span>
+      <p><strong>Idea de fondo:</strong> el material adecuado no es "el mejor" sin más. Es <em>el más equilibrado</em> entre lo que pide la aplicación, lo que cuesta, lo que se puede fabricar y lo que afecta al planeta.</p>
+    </div>
+  </article>
+
+  <!-- ─── 2. Las propiedades ─── -->
+  <article class="section" id="s2">
+    <div class="section-num">Sección 2</div>
+    <h3>Las propiedades de los materiales</h3>
+
+    <p>Las <strong>propiedades</strong> son las características que tiene un material y que determinan <strong>para qué sirve</strong>. Si necesitas algo que conduzca la electricidad, escoges un metal; si necesitas algo transparente, un vidrio o un plástico; si necesitas algo que se estire sin romperse, un elastómero. Cada decisión técnica empieza por preguntar: <em>¿qué propiedades necesito?</em></p>
+
+    <div class="keybox">
+      <div class="ktit">Las 6 familias de propiedades</div>
+      <p>Agrupamos las propiedades en <strong>seis grandes familias</strong>: mecánicas, térmicas, eléctricas, ópticas, fisicoquímicas y ambientales. Un material puede ser bueno en unas y malo en otras: el oro conduce muy bien la electricidad pero es muy blando; el vidrio es transparente pero muy frágil.</p>
+    </div>
+
+    <h4>Propiedades mecánicas</h4>
+    <p>Describen cómo reacciona un material cuando le aplicamos <strong>fuerzas</strong>: tirar, comprimir, golpear, doblar, rayar.</p>
+
+    <div class="cols3">
+      <div class="col-card">
+        <h4>Dureza</h4>
+        <p>Resistencia a ser <strong>rayado</strong>. El diamante es lo más duro; la cera, lo más blando.</p>
+      </div>
+      <div class="col-card">
+        <h4>Tenacidad</h4>
+        <p>Resistencia a <strong>romperse</strong> de un golpe. Lo opuesto a la fragilidad. El acero es tenaz; el vidrio, frágil.</p>
+      </div>
+      <div class="col-card">
+        <h4>Elasticidad</h4>
+        <p>Capacidad de <strong>recuperar la forma</strong> tras deformarse. Una goma es elástica; el barro, no.</p>
+      </div>
+      <div class="col-card">
+        <h4>Plasticidad</h4>
+        <p>Capacidad de <strong>quedarse deformado</strong> sin romperse. La plastilina o la arcilla mojada son plásticas.</p>
+      </div>
+      <div class="col-card">
+        <h4>Ductilidad</h4>
+        <p>Plasticidad para formar <strong>hilos</strong>. El cobre se estira en cables muy finos: es muy dúctil.</p>
+      </div>
+      <div class="col-card">
+        <h4>Maleabilidad</h4>
+        <p>Plasticidad para formar <strong>láminas</strong>. El oro se lamina hasta lámina finísima (pan de oro).</p>
+      </div>
+    </div>
+
+    <h4>Propiedades térmicas</h4>
+    <p>Describen cómo se comporta un material frente al <strong>calor</strong>.</p>
+
+    <table>
+      <tr><th>Propiedad</th><th>Qué mide</th><th>Ejemplo cotidiano</th></tr>
+      <tr><td><strong>Conductividad térmica</strong></td><td>Si transmite o no el calor</td><td>El mango de una sartén de madera (aislante) frente al cuerpo metálico (conductor)</td></tr>
+      <tr><td><strong>Cambio de fase</strong></td><td>Temperaturas a las que funde, hierve o se quema</td><td>Un cable de plomo funde a 327 °C; la cera, a 60 °C</td></tr>
+      <tr><td><strong>Dilatación</strong></td><td>Cuánto se agranda al calentarse</td><td>Los rieles del tren llevan juntas para dejar dilatar el acero en verano</td></tr>
+    </table>
+
+    <h4>Propiedades electromagnéticas</h4>
+    <p>Describen cómo responde un material a la <strong>electricidad</strong> y al <strong>magnetismo</strong>.</p>
+
+    <div class="cols3">
+      <div class="col-card">
+        <h4 class="azul">Conductividad eléctrica</h4>
+        <p>Capacidad de dejar pasar la corriente. La plata y el cobre son los mejores conductores.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Aislamiento</h4>
+        <p>Opuesto a la conductividad. El plástico, el vidrio y la cerámica no dejan pasar la corriente.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Magnetismo</h4>
+        <p>Capacidad de ser atraído por un imán. Los materiales <strong>ferromagnéticos</strong> (hierro, níquel, cobalto) sí lo son.</p>
+      </div>
+    </div>
+
+    <h4>Propiedades ópticas</h4>
+    <p>Describen cómo se comporta el material frente a la <strong>luz</strong>: si la deja pasar, la refleja o la absorbe.</p>
+
+    <div class="cols3">
+      <div class="col-card">
+        <h4 class="yellow">Transparencia, translucidez y opacidad</h4>
+        <p>Un vidrio liso es <strong>transparente</strong> (se ve a través); un cristal esmerilado es <strong>translúcido</strong> (deja pasar luz pero no se ven formas); una pared es <strong>opaca</strong>.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="yellow">Color</h4>
+        <p>El color que vemos es el que el material <strong>refleja</strong>. Los objetos negros absorben casi toda la luz; los blancos reflejan casi toda.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="yellow">Brillo</h4>
+        <p>Cantidad de luz que un material refleja. Los metales pulidos tienen brillo característico; los materiales rugosos lo apagan.</p>
+      </div>
+    </div>
+
+    <h4>Propiedades fisicoquímicas</h4>
+    <p>Describen cómo reacciona el material con su <strong>entorno</strong> (agua, aire, oxígeno).</p>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4>Densidad</h4>
+        <p>Cuánto pesa un material en proporción a su volumen. El plomo es muy denso (pesado para su tamaño); el corcho, muy poco denso (ligero).</p>
+      </div>
+      <div class="col-card">
+        <h4>Resistencia a la oxidación</h4>
+        <p>Capacidad de no reaccionar con el oxígeno del aire. El oro casi no se oxida; el hierro se oxida rápido y forma la <strong>herrumbre</strong>.</p>
+      </div>
+    </div>
+
+    <h4>Propiedades ambientales</h4>
+    <p>Describen el <strong>impacto del material en el planeta</strong>, tanto durante su uso como cuando se convierte en residuo.</p>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4 class="green">Toxicidad</h4>
+        <p>Si el material puede causar daño a personas, animales o ecosistemas. El plomo y el mercurio son tóxicos: por eso ya casi no se usan en pinturas o termómetros.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="green">Biodegradabilidad</h4>
+        <p>Si el material puede descomponerse de forma natural. La madera y el papel sí; un envase de plástico tarda más de 400 años en desaparecer.</p>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <div class="et">Ejemplo resuelto 1</div>
+      <h5>Elegir el material de un mango de sartén</h5>
+      <p>Queremos diseñar el mango de una sartén. ¿Qué propiedades necesitamos?</p>
+      <div class="steps">
+        <div class="step">El mango toca la mano: <strong>baja conductividad térmica</strong> (no se debe calentar).</div>
+        <div class="step">Sufre golpes contra la encimera: <strong>buena tenacidad</strong> (que no se rompa de un golpe).</div>
+        <div class="step">Se moja al lavar: <strong>buena resistencia a la oxidación y al agua</strong>.</div>
+        <div class="step">Debe durar años: poca degradación con el uso.</div>
+        <div class="step">Conclusión: madera dura, plástico termoestable o silicona; <strong>no metal</strong> (¡quemaría!).</div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PARTE 2 · LAS OCHO FAMILIAS
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="parte2">
+  <div class="parte-cabecera">
+    <div class="parte-num">Parte 2</div>
+    <h2>Las familias de materiales</h2>
+    <p>Las recorremos una por una. Para cada familia: de dónde sale, cómo se procesa, qué tipos hay, qué propiedades la caracterizan y para qué la usamos en el día a día.</p>
+  </div>
+
+  <!-- ─── 3. Papel y cartón ─── -->
+  <article class="section" id="s3">
+    <div class="section-num">Sección 3</div>
+    <h3>El papel y el cartón</h3>
+
+    <p>El <strong>papel</strong> es el primer material industrial que tocó la humanidad de forma masiva. Lo inventaron los chinos hace más de 2000 años, y desde la invención de la imprenta en el siglo XV permitió que la cultura, las leyes y la ciencia llegaran a todo el mundo. Hoy seguimos rodeados de él: libros, libretas, embalajes, pañuelos, billetes…</p>
+
+    <div class="keybox">
+      <div class="ktit">De dónde sale el papel</div>
+      <p>El papel se fabrica a partir de la <strong>celulosa</strong>, que se obtiene de la <strong>madera</strong> (sobre todo de pino, eucalipto y abeto). La madera se tritura y se trata químicamente hasta convertirse en una <strong>pasta de papel</strong>, que luego se prensa, se seca y se corta en hojas.</p>
+    </div>
+
+    <h4>Cómo se fabrica el papel</h4>
+
+    <div class="ejemplo">
+      <div class="et">Proceso de fabricación</div>
+      <h5>De la madera al papel: 5 pasos</h5>
+      <div class="steps">
+        <div class="step"><strong>Tala y descortezado:</strong> los troncos se cortan en astillas pequeñas.</div>
+        <div class="step"><strong>Cocción y blanqueo:</strong> las astillas se cuecen con sosa para separar la celulosa de la lignina. Se obtiene una <strong>pasta marrón</strong> que luego se blanquea.</div>
+        <div class="step"><strong>Refinado:</strong> la pasta se diluye con mucha agua y se afinan las fibras.</div>
+        <div class="step"><strong>Formación de la hoja:</strong> la pasta diluida pasa por una malla que la deja extendida en una capa fina.</div>
+        <div class="step"><strong>Prensado y secado:</strong> se elimina el agua por compresión y por calor; se enrolla el papel en bobinas y se corta a medida.</div>
+      </div>
+    </div>
+
+    <h4>Tipos de papel</h4>
+
+    <table>
+      <tr><th>Tipo</th><th>Características</th><th>Usos</th></tr>
+      <tr><td><strong>Papel de prensa</strong></td><td>Fino, poroso, barato</td><td>Periódicos, panfletos</td></tr>
+      <tr><td><strong>Papel offset</strong></td><td>Liso, gramaje medio</td><td>Libros, libretas, fotocopias</td></tr>
+      <tr><td><strong>Papel cuché</strong></td><td>Capa brillante, alta calidad</td><td>Revistas, catálogos, folletos</td></tr>
+      <tr><td><strong>Papel fotográfico</strong></td><td>Muy liso, capa especial</td><td>Fotografía de calidad</td></tr>
+      <tr><td><strong>Papel kraft</strong></td><td>Marrón, muy resistente</td><td>Bolsas, sobres, envoltorios</td></tr>
+      <tr><td><strong>Papel parafinado</strong></td><td>Impermeable al agua y la grasa</td><td>Envoltorios de alimentos</td></tr>
+      <tr><td><strong>Papel reciclado</strong></td><td>Fibras recuperadas, gris claro</td><td>Cuadernos, embalaje ecológico</td></tr>
+    </table>
+
+    <h4>El cartón</h4>
+
+    <p>El <strong>cartón</strong> es papel más grueso (más de 220 g/m²). Aguanta más golpes y se usa sobre todo para embalaje y construcción.</p>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4>Cartulina</h4>
+        <p>Cartón fino y liso. Se usa en tarjetas, manualidades, portadas de cuadernos, archivadores.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Cartón ondulado</h4>
+        <p>Dos láminas planas con una <strong>capa rizada</strong> en medio. La capa ondulada hace que el cartón sea ligero pero <strong>muy resistente a la compresión</strong>: por eso se usa en cajas de transporte.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">📦</span>
+      <p><strong>Por qué el cartón ondulado aguanta tanto:</strong> el rizo intermedio funciona como una serie de pequeñas vigas en forma de arco. Distribuye la carga en lugar de concentrarla. Es el mismo principio que las estructuras trianguladas que verás en la unidad 3.</p>
+    </div>
+
+    <h4>Reciclaje del papel</h4>
+    <p>El papel es uno de los materiales <strong>más reciclables</strong> del mundo: una hoja se puede reciclar entre 5 y 7 veces antes de que sus fibras se vuelvan demasiado cortas. Por eso es importante separarlo en el <strong>contenedor azul</strong>. No se reciclan los papeles plastificados, con grasa o con tinta especial (tickets de cajero).</p>
+
+    <div class="callout callout-ok">
+      <span class="ic">♻️</span>
+      <p><strong>Una tonelada de papel reciclado</strong> ahorra 17 árboles, 26.000 litros de agua y la energía necesaria para tener un piso entero alumbrado durante seis meses.</p>
+    </div>
+  </article>
+
+  <!-- ─── 4. La madera ─── -->
+  <article class="section" id="s4">
+    <div class="section-num">Sección 4</div>
+    <h3>La madera</h3>
+
+    <p>La <strong>madera</strong> es el material tecnológico más antiguo: la usamos desde la prehistoria para hacer lanzas, viviendas, ruedas, herramientas, muebles y barcos. Es un material <strong>natural, renovable y biodegradable</strong>, y eso la convierte en una elección cada vez más interesante en un planeta que pide materiales sostenibles.</p>
+
+    <h4>De dónde sale: el árbol y el tronco</h4>
+
+    <p>La madera se obtiene del <strong>tronco</strong> de los árboles. Si cortas un tronco transversalmente, ves los <strong>anillos de crecimiento</strong>: uno por cada año de vida del árbol. Por eso se puede saber la edad de un árbol contando sus anillos.</p>
+
+    <div class="fig">
+      <svg class="svg-fig" viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg" aria-label="Sección transversal de un tronco con sus anillos">
+        <!-- Tronco circular -->
+        <g transform="translate(120,140)">
+          <circle r="120" class="stroke-main fill-light"/>
+          <circle r="100" class="stroke-thin"/>
+          <circle r="80" class="stroke-thin"/>
+          <circle r="60" class="stroke-thin"/>
+          <circle r="40" class="stroke-thin"/>
+          <circle r="20" class="stroke-thin"/>
+          <circle r="6" fill="#d2552a"/>
+
+          <!-- Etiquetas -->
+          <line x1="0" y1="-120" x2="0" y2="-180" stroke="#d2552a" stroke-width="1.5"/>
+          <line x1="0" y1="-100" x2="-150" y2="-100" stroke="#d2552a" stroke-width="1.5"/>
+          <line x1="0" y1="-60" x2="180" y2="-60" stroke="#d2552a" stroke-width="1.5"/>
+          <line x1="0" y1="0" x2="180" y2="0" stroke="#d2552a" stroke-width="1.5"/>
+          <line x1="0" y1="60" x2="180" y2="60" stroke="#d2552a" stroke-width="1.5"/>
+        </g>
+        <text x="120" y="-50" text-anchor="middle" font-size="12" font-weight="600" class="lbl-teja" transform="translate(0,5)"></text>
+        <text x="120" y="0" text-anchor="middle" font-size="12" font-weight="600" class="lbl-teja">CORTEZA</text>
+        <text x="-30" y="40" font-size="11" class="lbl-teja">Albura (madera joven)</text>
+        <text x="305" y="80" font-size="11" class="lbl-teja">Duramen (madera vieja)</text>
+        <text x="305" y="140" font-size="11" class="lbl-teja">Anillos de crecimiento</text>
+        <text x="305" y="200" font-size="11" class="lbl-teja">Médula (centro)</text>
+      </svg>
+      <div class="fig-cap">Sección transversal de un tronco: cada anillo representa un año de vida del árbol</div>
+    </div>
+
+    <h4>Obtención de la madera</h4>
+
+    <div class="ejemplo">
+      <div class="et">Proceso</div>
+      <h5>Del árbol al tablero</h5>
+      <div class="steps">
+        <div class="step"><strong>Tala:</strong> se corta el árbol cuando ha alcanzado la edad adecuada.</div>
+        <div class="step"><strong>Desramado y descortezado:</strong> se quitan ramas y corteza, dejando solo el tronco.</div>
+        <div class="step"><strong>Aserrado:</strong> el tronco se corta en tablones de distintos grosores.</div>
+        <div class="step"><strong>Secado:</strong> los tablones se secan al aire o en hornos para eliminar la humedad.</div>
+        <div class="step"><strong>Cepillado y comercialización:</strong> los tablones se alisan y se llevan a las carpinterías.</div>
+      </div>
+    </div>
+
+    <h4>Tipos de madera</h4>
+
+    <div class="cols2">
+      <div class="col-card">
+        <span class="tag">Maderas naturales</span>
+        <h4>Blandas y duras</h4>
+        <p>Las <strong>blandas</strong> proceden de árboles de crecimiento rápido (pino, abeto, chopo): son ligeras, baratas y fáciles de trabajar.</p>
+        <p>Las <strong>duras</strong> vienen de árboles de crecimiento lento (roble, haya, nogal, cerezo): son más resistentes y caras. Se usan en muebles de calidad e instrumentos musicales.</p>
+      </div>
+      <div class="col-card">
+        <span class="tag azul">Maderas artificiales</span>
+        <h4 class="azul">Tableros derivados</h4>
+        <p>Se fabrican uniendo trozos pequeños de madera con cola. Aprovechan los restos y son más estables que la madera natural:</p>
+        <ul>
+          <li><strong>Aglomerado:</strong> virutas prensadas con cola. Económico.</li>
+          <li><strong>Contrachapado:</strong> láminas cruzadas (mucha resistencia).</li>
+          <li><strong>MDF:</strong> fibras prensadas, superficie muy lisa.</li>
+          <li><strong>OSB:</strong> virutas grandes orientadas, robusto y estético.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4>Propiedades de la madera</h4>
+
+    <ul>
+      <li><strong>Buena resistencia mecánica</strong> en relación a su peso (es ligera).</li>
+      <li><strong>Mala conductora del calor y la electricidad</strong> (excelente aislante).</li>
+      <li><strong>Combustible:</strong> arde con facilidad, lo cual es una desventaja en construcción si no se trata.</li>
+      <li><strong>Higroscópica:</strong> absorbe y libera humedad del ambiente, lo que la hace dilatarse o contraerse.</li>
+      <li><strong>Biodegradable y renovable</strong> si se gestiona el bosque correctamente.</li>
+    </ul>
+
+    <div class="callout callout-ok">
+      <span class="ic">🌲</span>
+      <p><strong>Sellos FSC y PEFC:</strong> son certificados internacionales que garantizan que la madera procede de un <strong>bosque gestionado de forma sostenible</strong>: por cada árbol cortado se planta uno nuevo, se respeta a las especies que viven allí y se trata bien a los trabajadores. Si compras un mueble con sello FSC o PEFC, sabes que no estás contribuyendo a la deforestación.</p>
+    </div>
+  </article>
+
+  <!-- ─── 5. Los polímeros ─── -->
+  <article class="section" id="s5">
+    <div class="section-num">Sección 5</div>
+    <h3>Los polímeros</h3>
+
+    <p>Los <strong>polímeros</strong>, más conocidos como <strong>plásticos</strong>, son los materiales más usados del siglo XXI. Están en envases, ropa, juguetes, móviles, coches, electrodomésticos, tuberías, ventanas. Son ligeros, baratos y se pueden moldear en casi cualquier forma. Pero generan un grave problema: tardan cientos de años en degradarse.</p>
+
+    <div class="keybox">
+      <div class="ktit">Definición</div>
+      <p>Un <strong>polímero</strong> es un material formado por largas <strong>cadenas de moléculas</strong> (la palabra significa "muchas partes": <em>poli-</em> = muchas, <em>mero</em> = parte). Cada eslabón de la cadena se llama <strong>monómero</strong>. Cuanto más larga y entrelazada sea la cadena, más rígido y resistente es el plástico.</p>
+    </div>
+
+    <h4>Clasificación según su origen</h4>
+
+    <div class="cols3">
+      <div class="col-card">
+        <h4 class="green">Naturales</h4>
+        <p>Existen en la naturaleza. El <strong>caucho</strong> (látex del árbol del caucho), el <strong>ámbar</strong>, la <strong>celulosa</strong>, la <strong>seda</strong>.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Artificiales</h4>
+        <p>Se obtienen modificando polímeros naturales. El <strong>celuloide</strong> (primer plástico de la historia) o el <strong>rayón</strong> (a partir de celulosa).</p>
+      </div>
+      <div class="col-card">
+        <h4>Sintéticos</h4>
+        <p>Creados en laboratorio a partir del <strong>petróleo</strong>. Son la mayoría: PET, PVC, polietileno, poliestireno, nailon…</p>
+      </div>
+    </div>
+
+    <h4>Clasificación según su comportamiento al calor</h4>
+
+    <table>
+      <tr><th>Tipo</th><th>Comportamiento</th><th>Ejemplos</th></tr>
+      <tr><td><strong>Termoplásticos</strong></td><td>Se ablandan al calentar y se endurecen al enfriar. Se pueden <strong>fundir y reciclar</strong> muchas veces.</td><td>PET (botellas), PVC (tuberías), PE (bolsas), PP (envases)</td></tr>
+      <tr><td><strong>Termoestables</strong></td><td>Una vez moldeados, <strong>no se pueden volver a fundir</strong>. Si se calientan, se queman. Muy resistentes.</td><td>Baquelita (mangos), resinas epoxi, melamina (tableros)</td></tr>
+      <tr><td><strong>Elastómeros</strong></td><td>Se <strong>estiran y vuelven a su forma</strong> original como una goma.</td><td>Caucho natural y sintético, neumáticos, gomas elásticas, silicona</td></tr>
+    </table>
+
+    <h4>Cómo se conforman los plásticos</h4>
+
+    <p>Los plásticos se fabrican en grandes cantidades mediante cuatro técnicas industriales:</p>
+
+    <div class="cols4">
+      <div class="col-card">
+        <h4>Extrusión</h4>
+        <p>El plástico fundido pasa por un molde con una <strong>boquilla continua</strong>. Salen tuberías, perfiles, hilos.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Inyección</h4>
+        <p>Se inyecta plástico fundido en un <strong>molde cerrado</strong>. Salen piezas con detalle: juguetes, carcasas, tapones.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="green">Soplado</h4>
+        <p>Se infla una <strong>burbuja</strong> de plástico dentro de un molde. Salen botellas y bidones huecos.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="yellow">Calandrado</h4>
+        <p>El plástico pasa entre <strong>rodillos</strong> para formar láminas finas. Salen films, manteles, tarjetas.</p>
+      </div>
+    </div>
+
+    <h4>Los 7 códigos del reciclaje de plásticos</h4>
+
+    <p>Para reciclar bien hay que <strong>saber qué plástico es cada cosa</strong>. La industria marca cada envase con un número del 1 al 7 dentro de un triángulo. Apréndete al menos los tres primeros: son los que más vas a encontrar.</p>
+
+    <div class="codigos-grid">
+      <div class="codigo-card">
+        <div class="codigo-num">1</div>
+        <h5>PET</h5>
+        <p>Botellas de agua y refrescos. Reciclable.</p>
+      </div>
+      <div class="codigo-card">
+        <div class="codigo-num">2</div>
+        <h5>HDPE</h5>
+        <p>Garrafas de leche, detergentes. Reciclable.</p>
+      </div>
+      <div class="codigo-card">
+        <div class="codigo-num">3</div>
+        <h5>PVC</h5>
+        <p>Tuberías, ventanas. Difícil de reciclar.</p>
+      </div>
+      <div class="codigo-card">
+        <div class="codigo-num">4</div>
+        <h5>LDPE</h5>
+        <p>Bolsas, film alimentario.</p>
+      </div>
+      <div class="codigo-card">
+        <div class="codigo-num">5</div>
+        <h5>PP</h5>
+        <p>Envases de yogur, tuppers, tapones.</p>
+      </div>
+      <div class="codigo-card">
+        <div class="codigo-num">6</div>
+        <h5>PS</h5>
+        <p>Vasos desechables, corcho blanco.</p>
+      </div>
+      <div class="codigo-card">
+        <div class="codigo-num">7</div>
+        <h5>Otros</h5>
+        <p>Mezcla de polímeros. Casi nunca reciclable.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-warn">
+      <span class="ic">⏳</span>
+      <p><strong>¿Cuánto tarda en degradarse un plástico?</strong> Una botella de PET: 450 años. Una bolsa de polietileno: 150 años. Una pajita: 200 años. Un encendedor: 100 años. Por eso reciclar no es opcional: es la única forma de cerrar el ciclo.</p>
+    </div>
+  </article>
+
+  <!-- ─── 6. Los metales ─── -->
+  <article class="section" id="s6">
+    <div class="section-num">Sección 6</div>
+    <h3>Los metales</h3>
+
+    <p>Los <strong>metales</strong> son los materiales que han marcado las grandes épocas históricas: edad del bronce, edad del hierro, revolución industrial. Hoy siguen siendo imprescindibles: la estructura de los edificios, el cuerpo de los coches, los cables eléctricos, las herramientas, las latas y la mayoría de los componentes electrónicos están hechos de metal.</p>
+
+    <div class="keybox">
+      <div class="ktit">Definición</div>
+      <p>Los <strong>metales</strong> son materiales que se obtienen de los <strong>minerales</strong> y que se caracterizan por ser <strong>buenos conductores</strong> de la electricidad y el calor, tener <strong>brillo metálico</strong> y poderse moldear (ductilidad y maleabilidad).</p>
+    </div>
+
+    <h4>De dónde vienen: el ciclo del metal</h4>
+
+    <div class="ejemplo">
+      <div class="et">Obtención</div>
+      <h5>Del mineral al lingote</h5>
+      <div class="steps">
+        <div class="step"><strong>Extracción:</strong> los <strong>minerales</strong> (rocas que contienen el metal mezclado con otras sustancias) se extraen de minas a cielo abierto o subterráneas.</div>
+        <div class="step"><strong>Trituración y concentración:</strong> el mineral se tritura y se separa lo que tiene metal de lo que no (la <strong>ganga</strong>).</div>
+        <div class="step"><strong>Fundición:</strong> el mineral concentrado se calienta a temperaturas altísimas (1500 °C en el caso del hierro) en un <strong>alto horno</strong>. El metal puro se separa por su densidad.</div>
+        <div class="step"><strong>Conformado:</strong> el metal líquido se vierte en moldes y se enfría en forma de <strong>lingotes</strong>, listos para fabricar piezas.</div>
+      </div>
+    </div>
+
+    <h4>Férreos y no férreos</h4>
+
+    <div class="cols2">
+      <div class="col-card">
+        <span class="tag">Metales férreos</span>
+        <h4>Contienen hierro</h4>
+        <p>El <strong>hierro</strong> puro es blando y se oxida muy rápido. Por eso casi siempre se usa mezclado con carbono y otros elementos.</p>
+        <ul>
+          <li><strong>Acero:</strong> hierro + carbono (0,02 a 2 %). Resistente y dúctil. La aleación más usada del mundo.</li>
+          <li><strong>Acero inoxidable:</strong> acero + cromo y níquel. No se oxida.</li>
+          <li><strong>Fundición:</strong> hierro + mucho carbono (2 a 7 %). Muy duro pero frágil.</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <span class="tag azul">Metales no férreos</span>
+        <h4 class="azul">No contienen hierro</h4>
+        <p>Suelen ser más ligeros y resistentes a la corrosión, pero más caros.</p>
+        <ul>
+          <li><strong>Aluminio:</strong> muy ligero. Latas, ventanas, aviones.</li>
+          <li><strong>Cobre:</strong> el mejor conductor eléctrico habitual. Cables, tuberías.</li>
+          <li><strong>Plomo:</strong> muy denso y blando. Tóxico: ya no se usa en pinturas.</li>
+          <li><strong>Estaño, zinc, plata, oro:</strong> en electrónica, recubrimientos y joyería.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4>Aleaciones más comunes</h4>
+
+    <p>Una <strong>aleación</strong> es la mezcla de dos o más metales (o metal + no metal) para mejorar sus propiedades.</p>
+
+    <table>
+      <tr><th>Aleación</th><th>Composición</th><th>Características</th><th>Usos</th></tr>
+      <tr><td><strong>Acero</strong></td><td>Hierro + carbono</td><td>Resistente, dúctil</td><td>Edificios, coches, herramientas</td></tr>
+      <tr><td><strong>Acero inoxidable</strong></td><td>Acero + cromo + níquel</td><td>No se oxida</td><td>Cubiertos, fregaderos, instrumental médico</td></tr>
+      <tr><td><strong>Bronce</strong></td><td>Cobre + estaño</td><td>Duro, resistente a la corrosión</td><td>Campanas, esculturas, monedas</td></tr>
+      <tr><td><strong>Latón</strong></td><td>Cobre + zinc</td><td>Brillo dorado, fácil de mecanizar</td><td>Cerraduras, grifería, instrumentos musicales</td></tr>
+      <tr><td><strong>Duraluminio</strong></td><td>Aluminio + cobre + magnesio</td><td>Ligero y muy resistente</td><td>Aviación, ciclismo</td></tr>
+    </table>
+
+    <h4>Propiedades de los metales</h4>
+
+    <ul>
+      <li><strong>Buenos conductores</strong> eléctricos y térmicos (especialmente cobre y plata).</li>
+      <li><strong>Dúctiles y maleables:</strong> se pueden hacer hilos y láminas.</li>
+      <li><strong>Brillantes</strong> cuando se pulen.</li>
+      <li><strong>Densos y pesados</strong> (excepto el aluminio y el magnesio, que son ligeros).</li>
+      <li>Algunos (hierro, níquel, cobalto) son <strong>magnéticos</strong>.</li>
+      <li>La mayoría se <strong>oxidan</strong> al estar en contacto con el aire húmedo: el hierro forma herrumbre; el aluminio, una capa protectora; el cobre, una pátina verdosa.</li>
+    </ul>
+
+    <h4>Cómo se da forma al metal</h4>
+
+    <div class="cols4">
+      <div class="col-card">
+        <h4>Laminado</h4>
+        <p>El metal pasa entre rodillos y queda en chapas o láminas.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Forja</h4>
+        <p>Se calienta y se martillea hasta darle forma. Técnica milenaria.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="green">Fundición</h4>
+        <p>Se vierte líquido en un molde. Salen piezas grandes y complejas.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="yellow">Soldadura</h4>
+        <p>Se unen dos piezas fundiendo metal en la junta. Une la estructura final.</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ─── 7. Los materiales cerámicos ─── -->
+  <article class="section" id="s7">
+    <div class="section-num">Sección 7</div>
+    <h3>Los materiales cerámicos</h3>
+
+    <p>Los <strong>cerámicos</strong> son materiales fabricados a partir de <strong>arcilla, arena u otros minerales no metálicos</strong> que se moldean y luego se cuecen a temperaturas muy altas. Son tan antiguos como el papel: ya se hacían vasijas hace 30.000 años. Hoy los cerámicos están en los azulejos del baño, los ladrillos de las paredes, los vasos de cristal, las pantallas del móvil y los frenos de los coches deportivos.</p>
+
+    <div class="keybox">
+      <div class="ktit">Definición</div>
+      <p>Los <strong>cerámicos</strong> son materiales <strong>inorgánicos</strong> y <strong>no metálicos</strong> que se obtienen por <strong>cocción a alta temperatura</strong>. Son típicamente <strong>duros, frágiles, resistentes al calor y aislantes</strong>.</p>
+    </div>
+
+    <h4>Cerámicas de arcilla</h4>
+
+    <p>La <strong>arcilla</strong> es un tipo de tierra muy fina que, mezclada con agua, se vuelve moldeable. Al cocerla, endurece y queda permanentemente con la forma que le hemos dado. Según la calidad y la temperatura de cocción, salen distintos productos:</p>
+
+    <div class="cols3">
+      <div class="col-card">
+        <h4>Ladrillos y tejas</h4>
+        <p>Arcilla cocida a baja temperatura. <strong>Porosos</strong> (absorben agua) pero baratos. Toda la construcción tradicional los usa.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Loza y gres</h4>
+        <p>Arcilla más fina cocida a temperatura media-alta. <strong>Impermeable</strong>. Vajilla, azulejos, sanitarios.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="green">Porcelana</h4>
+        <p>Arcilla muy pura (caolín) cocida a temperatura altísima. Translúcida, brillante, resistente. Vajilla fina, aislantes eléctricos, prótesis dentales.</p>
+      </div>
+    </div>
+
+    <h4>Cementos y hormigón</h4>
+
+    <p>El <strong>cemento</strong> es un polvo gris que, al mezclarse con agua, reacciona químicamente y endurece como una piedra. Es el material de construcción más usado del planeta.</p>
+
+    <div class="keybox">
+      <div class="ktit">El hormigón</div>
+      <p>El <strong>hormigón</strong> es la mezcla de <strong>cemento + arena + grava + agua</strong>. Al endurecer, queda como una roca artificial: aguanta muchísima compresión (peso encima) pero poca tracción (tirones). Por eso, en estructuras grandes (edificios, puentes), se mete por dentro una armadura de varillas de acero: es el <strong>hormigón armado</strong>.</p>
+    </div>
+
+    <h4>El vidrio</h4>
+
+    <p>El <strong>vidrio</strong> es un cerámico especial. Se fabrica fundiendo <strong>arena (sílice) + sosa + cal</strong> a 1500 °C. Al enfriarse rápido, no cristaliza: queda como un líquido endurecido. Por eso es transparente.</p>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4>Conformado del vidrio</h4>
+        <ul>
+          <li><strong>Soplado:</strong> se sopla en una bola y se moldea. Botellas, copas artesanas.</li>
+          <li><strong>Moldeado:</strong> se prensa en un molde. Tarros, vasos.</li>
+          <li><strong>Laminado o flotado:</strong> se vierte sobre un baño de estaño líquido para obtener láminas perfectamente lisas. Vidrio de ventanas y de móviles.</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Vidrios especiales</h4>
+        <ul>
+          <li><strong>Vidrio templado:</strong> tratado térmicamente. Resistente: si se rompe, lo hace en trozos pequeños no cortantes.</li>
+          <li><strong>Vidrio laminado:</strong> dos capas con una lámina plástica en medio. No se desprende al romperse (parabrisas).</li>
+          <li><strong>Fibra de vidrio:</strong> hilos finísimos para aislamiento térmico o como refuerzo en plásticos (cascos, embarcaciones).</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4>Cerámicas técnicas</h4>
+
+    <p>Son cerámicas modernas diseñadas para soportar condiciones extremas. Se usan en:</p>
+    <ul>
+      <li><strong>Frenos de cerámica</strong> en coches deportivos: aguantan altísimas temperaturas sin deformarse.</li>
+      <li><strong>Aislantes</strong> en hornos industriales y motores aeronáuticos.</li>
+      <li><strong>Implantes médicos:</strong> prótesis de cadera y dentales (no se corroen, son biocompatibles).</li>
+      <li><strong>Microchips:</strong> el sustrato cerámico de los circuitos integrados.</li>
+    </ul>
+
+    <div class="callout callout-info">
+      <span class="ic">🏛️</span>
+      <p><strong>Cerámica andaluza:</strong> Andalucía tiene una de las tradiciones cerámicas más ricas de Europa. La <strong>cerámica de Fajalauza</strong> en Granada (con su característico azul cobalto sobre fondo blanco) y la <strong>azulejería de Triana</strong> en Sevilla se siguen fabricando con técnicas heredadas de los alfares andalusíes. En la Alhambra puedes ver azulejos de hace más de 600 años en perfecto estado.</p>
+    </div>
+  </article>
+
+  <!-- ─── 8. Las fibras textiles ─── -->
+  <article class="section" id="s8">
+    <div class="section-num">Sección 8</div>
+    <h3>Las fibras textiles</h3>
+
+    <p>Las <strong>fibras textiles</strong> son hilos largos, finos y flexibles que se trenzan, tejen o entrelazan para formar telas. La industria textil fue una de las protagonistas de la Revolución Industrial y, en pleno siglo XXI, sigue produciendo cantidades enormes: cada persona usa, de media, más de 25 prendas nuevas al año.</p>
+
+    <div class="keybox">
+      <div class="ktit">Definición</div>
+      <p>Una <strong>fibra textil</strong> es un filamento delgado y largo en relación a su grosor, capaz de hilarse y tejerse para producir tejidos. Las fibras pueden ser <strong>naturales</strong> (de plantas, animales o minerales) o <strong>químicas</strong> (artificiales o sintéticas).</p>
+    </div>
+
+    <h4>Fibras naturales</h4>
+
+    <div class="cols3">
+      <div class="col-card">
+        <span class="tag green">De origen vegetal</span>
+        <h4 class="green">Algodón y lino</h4>
+        <p>El <strong>algodón</strong> viene de la flor del algodonero. Transpirable, suave, absorbente: ideal para ropa interior y camisetas. El <strong>lino</strong> es más rígido y fresco; clásico de verano.</p>
+      </div>
+      <div class="col-card">
+        <span class="tag">De origen animal</span>
+        <h4>Lana y seda</h4>
+        <p>La <strong>lana</strong> viene del pelo de la oveja: aísla bien del frío. La <strong>seda</strong> es la hebra que produce el gusano de seda: muy fina, brillante, ligera; carísima.</p>
+      </div>
+      <div class="col-card">
+        <span class="tag yellow">De origen mineral</span>
+        <h4 class="yellow">Amianto y fibra de vidrio</h4>
+        <p>El <strong>amianto</strong> está prohibido (es cancerígeno). La <strong>fibra de vidrio</strong> se usa como aislante térmico en edificios y como refuerzo en materiales compuestos.</p>
+      </div>
+    </div>
+
+    <h4>Fibras químicas</h4>
+
+    <div class="cols2">
+      <div class="col-card">
+        <span class="tag azul">Artificiales</span>
+        <h4 class="azul">Hechas a partir de celulosa</h4>
+        <p>Parten de un material natural (madera) y lo transforman químicamente. Las más conocidas son el <strong>rayón</strong>, la <strong>viscosa</strong> y el <strong>acetato</strong>. Suaves, parecidas a la seda pero más baratas.</p>
+      </div>
+      <div class="col-card">
+        <span class="tag">Sintéticas</span>
+        <h4>Hechas a partir del petróleo</h4>
+        <p>Son las más usadas hoy: <strong>poliéster</strong> (camisetas técnicas), <strong>nailon</strong> (medias, cuerdas), <strong>licra/elastano</strong> (ropa elástica), <strong>acrílico</strong> (jerséis baratos). Resistentes, baratas, fáciles de teñir. Pero generan microplásticos al lavarse.</p>
+      </div>
+    </div>
+
+    <h4>Propiedades destacadas</h4>
+
+    <table>
+      <tr><th>Propiedad</th><th>Fibras buenas en eso</th></tr>
+      <tr><td><strong>Transpirabilidad</strong> (deja pasar aire y sudor)</td><td>Algodón, lino, lana, poliéster técnico</td></tr>
+      <tr><td><strong>Aislamiento térmico</strong></td><td>Lana, plumón, acrílico</td></tr>
+      <tr><td><strong>Resistencia mecánica</strong></td><td>Nailon, poliéster, aramidas (kevlar)</td></tr>
+      <tr><td><strong>Elasticidad</strong></td><td>Licra, elastano</td></tr>
+      <tr><td><strong>Resistencia al fuego</strong></td><td>Aramidas, lana (se quema con dificultad)</td></tr>
+    </table>
+
+    <div class="callout callout-warn">
+      <span class="ic">🌊</span>
+      <p><strong>Microplásticos en la lavadora:</strong> cada vez que lavas una camiseta de poliéster, se desprenden miles de fibras minúsculas que pasan al agua de las depuradoras y de ahí al mar. Una sola colada puede liberar 700.000 microfibras. Por eso muchas marcas están volviendo al algodón y a las fibras recicladas.</p>
+    </div>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PARTE 3 · MATERIALES Y PLANETA
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="parte3">
+  <div class="parte-cabecera">
+    <div class="parte-num">Parte 3</div>
+    <h2>Materiales y planeta</h2>
+    <p>Cada material que usamos tiene un coste para el planeta: extraerlo, fabricarlo y desecharlo consume recursos y genera residuos. La buena noticia es que casi todo se puede reciclar y, cada vez más, se inventan materiales nuevos pensados para no contaminar.</p>
+  </div>
+
+  <!-- ─── 9. Reciclaje y nuevos materiales ─── -->
+  <article class="section" id="s9">
+    <div class="section-num">Sección 9</div>
+    <h3>Reciclaje y nuevos materiales</h3>
+
+    <p>Cada año la humanidad produce miles de millones de toneladas de residuos. Una parte importante son materiales que <strong>podríamos volver a usar</strong> si los separásemos bien. Reciclar es la herramienta más potente que tenemos para reducir la presión sobre el planeta.</p>
+
+    <h4>La regla de las 3 R aplicada a los materiales</h4>
+
+    <div class="cols3">
+      <div class="col-card">
+        <span class="tag green">Lo más importante</span>
+        <h4 class="green">Reducir</h4>
+        <p>Consumir <strong>menos material</strong> desde el principio. Comprar a granel, evitar envases innecesarios, alargar la vida útil de los objetos.</p>
+      </div>
+      <div class="col-card">
+        <span class="tag yellow">Antes de tirar</span>
+        <h4 class="yellow">Reutilizar</h4>
+        <p>Volver a usar el mismo objeto para lo mismo o para otra cosa: rellenar una botella, donar la ropa, reparar el móvil.</p>
+      </div>
+      <div class="col-card">
+        <span class="tag azul">Cuando ya no sirve</span>
+        <h4 class="azul">Reciclar</h4>
+        <p>Convertir el material en <strong>materia prima</strong> para fabricar algo nuevo. Es la última opción, no la primera.</p>
+      </div>
+    </div>
+
+    <h4>Los contenedores en Andalucía</h4>
+
+    <p>En toda Andalucía la separación domiciliaria de residuos sigue este sistema de colores. Cada contenedor recoge un tipo de material para que pueda ser reciclado correctamente.</p>
+
+    <div class="cont-grid">
+      <div class="cont-card cont-azul">
+        <div class="cont-icon"></div>
+        <h5>Azul</h5>
+        <p>Papel y cartón limpios. Sin grasa ni plásticos.</p>
+      </div>
+      <div class="cont-card cont-amarillo">
+        <div class="cont-icon"></div>
+        <h5>Amarillo</h5>
+        <p>Envases ligeros: plástico, latas y bricks.</p>
+      </div>
+      <div class="cont-card cont-verde">
+        <div class="cont-icon"></div>
+        <h5>Verde</h5>
+        <p>Vidrio: botellas y tarros. Sin tapones.</p>
+      </div>
+      <div class="cont-card cont-marron">
+        <div class="cont-icon"></div>
+        <h5>Marrón</h5>
+        <p>Orgánico: restos de comida, jardín. Compostable.</p>
+      </div>
+      <div class="cont-card cont-gris">
+        <div class="cont-icon"></div>
+        <h5>Gris</h5>
+        <p>Resto: lo que no encaja en los otros (pañales, cerámica rota…).</p>
+      </div>
+    </div>
+
+    <div class="callout callout-warn">
+      <span class="ic">⚠️</span>
+      <p><strong>Dos errores que invalidan el reciclaje:</strong> echar una pizza sucia de grasa al contenedor azul (contamina el papel) o echar un cristal de vaso roto al verde (el vidrio del vaso no es el mismo que el de la botella). Para esos casos hay <strong>puntos limpios</strong> municipales donde tirar electrodomésticos, vidrio plano, aceite, pinturas, pilas, móviles…</p>
+    </div>
+
+    <h4>Más allá de las 3 R: nuevos materiales</h4>
+
+    <p>La ciencia de materiales no para. Cada año aparecen materiales nuevos pensados para resolver los problemas ambientales de los antiguos. Tres líneas de investigación que ya verás en tu vida adulta:</p>
+
+    <div class="cols3">
+      <div class="col-card">
+        <h4>Bioplásticos</h4>
+        <p>Plásticos hechos a partir de almidón de maíz, caña de azúcar o residuos agrícolas en lugar de petróleo. Algunos son <strong>biodegradables</strong>.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Materiales reciclados</h4>
+        <p>Plásticos recuperados del mar para hacer zapatillas. Cemento con escorias de acería. Tableros con cáscara de almendra. La economía circular en acción.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="green">Grafeno y nanomateriales</h4>
+        <p>El <strong>grafeno</strong> es una lámina de carbono de un solo átomo de grosor. Más resistente que el acero, más conductor que el cobre. Aplicaciones futuras en electrónica, baterías y medicina.</p>
+      </div>
+    </div>
+
+    <h4>Andalucía a la vanguardia</h4>
+
+    <div class="callout callout-info">
+      <span class="ic">🔬</span>
+      <p><strong>Andalucía y los nuevos materiales:</strong> grupos de investigación de las universidades andaluzas (Granada, Sevilla, Málaga, Córdoba) y del <strong>CSIC</strong> trabajan en grafeno, biomateriales, hormigones sostenibles, células solares de nueva generación y nanomateriales para la medicina. La <strong>ciencia e ingeniería de los materiales</strong> es una de las carreras con más futuro: lo que se diseñe en estos laboratorios marcará cómo serán los objetos cotidianos de tus hijos.</p>
+    </div>
+
+    <div class="ejemplo">
+      <div class="et">Para debatir en clase</div>
+      <h5>¿Volver a la madera o seguir con el plástico?</h5>
+      <p>Imagina que tu instituto tiene que cambiar todas las sillas. Hay tres opciones:</p>
+      <div class="steps">
+        <div class="step"><strong>Sillas de plástico nuevas:</strong> baratas, ligeras, fáciles de limpiar. Pero hechas de petróleo y difíciles de reciclar.</div>
+        <div class="step"><strong>Sillas de madera certificada FSC:</strong> más caras, más pesadas. Pero biodegradables y de bosque gestionado.</div>
+        <div class="step"><strong>Sillas de plástico reciclado:</strong> aprovechan residuos. Coste intermedio. Calidad algo menor.</div>
+        <div class="step">¿Cuál elegirías? La decisión real no tiene una respuesta única: depende del presupuesto, del uso esperado y de los valores del centro.</div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     CIERRE · RECUERDA
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="cierre">
+  <div class="parte-cabecera" style="background: linear-gradient(135deg, var(--teja) 0%, #b8431c 100%); border-left-color: var(--yellow);">
+    <div class="parte-num">Cierre</div>
+    <h2>Recuerda lo que has aprendido</h2>
+    <p>Las ideas clave de la unidad y un glosario de los términos importantes que vas a necesitar para las actividades y el examen.</p>
+  </div>
+
+  <article class="section">
+    <div class="cols2">
+      <div class="col-card">
+        <h4>Las 5 ideas clave</h4>
+        <ol>
+          <li>Un material puede ser <strong>natural</strong>, <strong>artificial</strong> o <strong>sintético</strong>.</li>
+          <li>Hay <strong>6 familias de propiedades</strong> y <strong>8 familias de materiales</strong>.</li>
+          <li>Elegir un material es equilibrar <strong>propiedades, coste, fabricación e impacto</strong>.</li>
+          <li>Casi todo se puede <strong>reciclar</strong> si se separa bien en el contenedor adecuado.</li>
+          <li>Las <strong>3 R</strong> tienen orden: primero reducir, luego reutilizar y por último reciclar.</li>
+        </ol>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Lo que debes saber hacer</h4>
+        <ul>
+          <li>Reconocer la <strong>familia</strong> a la que pertenece un material a primera vista.</li>
+          <li>Elegir un material <strong>justificando técnicamente</strong> qué propiedades necesitas.</li>
+          <li>Identificar los <strong>símbolos de reciclaje</strong> y saber a qué contenedor va cada residuo.</li>
+          <li>Distinguir entre <strong>termoplásticos, termoestables y elastómeros</strong>.</li>
+          <li>Reconocer las aleaciones más comunes: acero, latón, bronce, duraluminio.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="glos">
+      <h3>📖 Glosario</h3>
+      <dl>
+        <dt>Aleación</dt>
+        <dd>Mezcla de dos o más metales (o de metal con un no metal) para mejorar sus propiedades. El acero es una aleación de hierro y carbono.</dd>
+
+        <dt>Biodegradable</dt>
+        <dd>Material que se descompone de forma natural en sustancias inocuas. La madera y el papel lo son; el plástico, no.</dd>
+
+        <dt>Cerámico</dt>
+        <dd>Material inorgánico no metálico, fabricado por cocción a alta temperatura. Duro, frágil y aislante.</dd>
+
+        <dt>Ductilidad</dt>
+        <dd>Capacidad de un material de estirarse en hilos sin romperse. El cobre es muy dúctil.</dd>
+
+        <dt>Dureza</dt>
+        <dd>Resistencia de un material a ser rayado. El diamante es lo más duro conocido.</dd>
+
+        <dt>Elasticidad</dt>
+        <dd>Capacidad de un material de deformarse y recuperar la forma original al cesar la fuerza.</dd>
+
+        <dt>Elastómero</dt>
+        <dd>Polímero muy elástico, como el caucho. Se estira y vuelve a su forma.</dd>
+
+        <dt>FSC y PEFC</dt>
+        <dd>Sellos internacionales que garantizan que la madera procede de bosques gestionados de forma sostenible.</dd>
+
+        <dt>Grafeno</dt>
+        <dd>Nanomaterial formado por una capa de átomos de carbono. Más resistente que el acero y muy conductor.</dd>
+
+        <dt>Maleabilidad</dt>
+        <dd>Capacidad de un material de extenderse en láminas finas sin romperse. El oro es muy maleable.</dd>
+
+        <dt>Material artificial</dt>
+        <dd>Material fabricado por el ser humano a partir de uno natural (papel desde madera, acero desde mineral).</dd>
+
+        <dt>Material natural</dt>
+        <dd>Material que se obtiene directamente de la naturaleza sin transformaciones químicas.</dd>
+
+        <dt>Material sintético</dt>
+        <dd>Material creado en laboratorio que no existe como tal en la naturaleza (plásticos, nailon, grafeno).</dd>
+
+        <dt>Mineral</dt>
+        <dd>Roca o sustancia natural de la que se extraen los metales.</dd>
+
+        <dt>Polímero</dt>
+        <dd>Material formado por cadenas largas de moléculas repetidas. Los plásticos son polímeros.</dd>
+
+        <dt>Reciclar</dt>
+        <dd>Convertir un residuo en materia prima para fabricar un nuevo producto.</dd>
+
+        <dt>Tenacidad</dt>
+        <dd>Resistencia de un material a romperse por un golpe. Lo opuesto a fragilidad.</dd>
+
+        <dt>Termoestable</dt>
+        <dd>Plástico que, una vez moldeado, no se puede volver a fundir. Si se calienta, se quema.</dd>
+
+        <dt>Termoplástico</dt>
+        <dd>Plástico que se ablanda con el calor y se endurece al enfriar. Se puede reciclar muchas veces.</dd>
+      </dl>
+    </div>
+  </article>
+</section>
+
+<footer class="book-foot">
+  <p>📘 Libro digital · TyD 2º ESO · Unidad 2 · Los materiales y sus propiedades</p>
+  <p><a href="index.html">← Volver al hub de la unidad</a> · <a href="actividades/index.html">📝 Actividades resueltas</a></p>
+  <p style="margin-top: 16px;">IES Jiménez de Quesada · Santa Fe (Granada) · Curso 2025-26 · Manuel Alonso Herrera</p>
+  <p class="v">v1.0</p>
+</footer>
+
+</main>
+</div>
+
+</body>
+</html>

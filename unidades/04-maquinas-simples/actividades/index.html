@@ -1,9 +1,694 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Actividades · En desarrollo</title>
-<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/hub.css">
-</head><body>
-<div class="hub-main" id="main-content">
-<section class="unidad-titulo-hero"><div class="num">Contenido en desarrollo</div><h1>📝 Actividades</h1><div class="duracion">Este recurso está previsto dentro de la arquitectura de la unidad.</div></section>
-<div class="bg"><a class="bc" href="../index.html"><span class="bi">⬅️</span><span class="bk">Volver a la unidad</span><span class="bn">Este apartado se completará progresivamente</span></a></div>
-</div></body></html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Actividades · U04 Mecanismos · TyD 2º ESO</title>
+<meta name="description" content="35 actividades interactivas sobre mecanismos para 2º ESO con autocorrección: palancas, poleas, plano inclinado, transmisión por correa y engranajes.">
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/04-maquinas-simples/actividades/">
+<meta property="og:title" content="Actividades · U04 Mecanismos · TyD 2º ESO">
+<meta property="og:description" content="35 actividades interactivas con autocorrección sobre mecanismos.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/04-maquinas-simples/actividades/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Actividades · U04 Mecanismos · TyD 2º ESO">
+<meta name="twitter:description" content="35 actividades interactivas con autocorrección.">
+<meta name="twitter:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+:root { --act-ok: #2e7d4f; --act-err: #c44536; --act-warn: #e8b647; --act-card-bg: #fafafa; --act-border: #e3e3e3; }
+.bloque-titulo { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.6rem; color: var(--principal, #D4700A); margin: 2.5rem 0 0.4rem; padding-bottom: 0.4rem; border-bottom: 3px solid var(--principal, #D4700A); letter-spacing: 0.5px; }
+.bloque-intro { color: #555; font-size: 0.95rem; margin-bottom: 1.2rem; font-style: italic; }
+.activity-card { background: var(--act-card-bg); border: 1px solid var(--act-border); border-left: 4px solid var(--principal, #D4700A); border-radius: 10px; padding: 1.2rem 1.4rem; margin: 1rem 0; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.activity-card.solved { border-left-color: var(--act-ok); background: #f4faf6; }
+.activity-card.wrong { border-left-color: var(--act-err); background: #fdf6f5; }
+.act-num { display: inline-block; background: var(--principal, #D4700A); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-right: 8px; letter-spacing: 0.5px; }
+.activity-card.solved .act-num { background: var(--act-ok); }
+.activity-card.wrong .act-num { background: var(--act-err); }
+.statement { font-size: 1rem; color: #222; margin-bottom: 1rem; line-height: 1.5; }
+.statement strong { color: #111; } .statement em { color: var(--secundario, #1B4F8A); font-style: italic; }
+.options { display: grid; gap: 0.5rem; margin: 0.8rem 0; }
+.option { display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.6rem 0.8rem; background: #fff; border: 1px solid var(--act-border); border-radius: 8px; cursor: pointer; transition: all 0.15s ease; font-size: 0.95rem; }
+.option:hover { background: #fffaf3; border-color: var(--principal, #D4700A); }
+.option input { margin-top: 3px; cursor: pointer; flex-shrink: 0; }
+.option input:checked + .option-label { color: var(--secundario, #1B4F8A); font-weight: 600; }
+.options.cols2 { grid-template-columns: 1fr 1fr; } .options.cols3 { grid-template-columns: 1fr 1fr 1fr; }
+.answer-box { display: flex; align-items: center; gap: 0.5rem; margin: 0.8rem 0; flex-wrap: wrap; }
+.answer-box label { font-weight: 600; color: #444; font-size: 0.95rem; }
+.answer-box input[type="number"] { font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 600; padding: 0.45rem 0.7rem; border: 2px solid var(--act-border); border-radius: 8px; width: 110px; background: #fff; color: var(--secundario, #1B4F8A); }
+.answer-box input:focus { outline: none; border-color: var(--principal, #D4700A); box-shadow: 0 0 0 3px rgba(212,112,10,0.15); }
+.answer-box .unit { font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; color: #666; font-weight: 500; }
+.order-list { display: grid; gap: 0.5rem; margin: 0.8rem 0; }
+.order-item { display: grid; grid-template-columns: 60px 1fr; gap: 0.7rem; align-items: center; padding: 0.6rem 0.9rem; background: #fff; border: 1px solid var(--act-border); border-radius: 8px; }
+.order-item input { width: 50px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; padding: 0.35rem; border: 2px solid var(--act-border); border-radius: 6px; color: var(--principal, #D4700A); }
+.order-item input:focus { outline: none; border-color: var(--principal, #D4700A); }
+.order-item input.ok-input { background: #dff2e6; border-color: var(--act-ok); }
+.order-item input.err-input { background: #fce4e1; border-color: var(--act-err); }
+.order-item .order-text { font-size: 0.95rem; color: #333; font-weight: 500; }
+.match-list { display: grid; gap: 0.5rem; margin: 0.8rem 0; }
+.match-item { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem; align-items: center; padding: 0.6rem 0.9rem; background: #fff; border: 1px solid var(--act-border); border-radius: 8px; }
+.match-item .match-text { font-size: 0.95rem; color: #333; font-weight: 500; }
+.match-item select { font-family: 'Barlow', sans-serif; font-size: 0.92rem; padding: 0.35rem 0.5rem; border: 2px solid var(--act-border); border-radius: 6px; background: #fff; cursor: pointer; min-width: 160px; font-weight: 500; }
+.match-item select.ok-input { background: #dff2e6; border-color: var(--act-ok); color: var(--act-ok); }
+.match-item select.err-input { background: #fce4e1; border-color: var(--act-err); color: var(--act-err); }
+.check-btn { background: var(--principal, #D4700A); color: #fff; border: none; padding: 0.55rem 1.1rem; border-radius: 8px; font-family: 'Barlow', sans-serif; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.15s ease; }
+.check-btn:hover { background: #b85e08; transform: translateY(-1px); }
+.feedback { margin-top: 0.7rem; padding: 0.6rem 0.9rem; border-radius: 6px; font-size: 0.93rem; font-weight: 600; display: none; }
+.feedback.show { display: block; }
+.feedback.ok { background: #dff2e6; color: var(--act-ok); border-left: 4px solid var(--act-ok); }
+.feedback.err { background: #fce4e1; color: var(--act-err); border-left: 4px solid var(--act-err); }
+.feedback .icon { margin-right: 6px; font-size: 1.1rem; }
+details.solution { margin-top: 0.9rem; background: #fffaf3; border: 1px dashed #d4a373; border-radius: 8px; padding: 0.6rem 0.9rem; }
+details.solution > summary { cursor: pointer; font-weight: 600; color: var(--principal, #D4700A); font-size: 0.92rem; list-style: none; user-select: none; }
+details.solution > summary::before { content: "▸ "; display: inline-block; }
+details.solution[open] > summary::before { content: "▾ "; }
+details.solution .sol-body { margin-top: 0.6rem; padding-top: 0.6rem; border-top: 1px dashed #d4a373; font-size: 0.92rem; color: #444; line-height: 1.55; }
+details.solution .steps-sol { display: grid; gap: 0.4rem; counter-reset: stp; margin-top: 0.4rem; }
+details.solution .step-sol { position: relative; padding: 0.4rem 0.5rem 0.4rem 1.9rem; background: #fff; border-radius: 6px; border: 1px solid #f0e6d3; font-size: 0.9rem; }
+details.solution .step-sol::before { counter-increment: stp; content: counter(stp); position: absolute; left: 0.4rem; top: 0.45rem; width: 18px; height: 18px; background: var(--principal, #D4700A); color: #fff; border-radius: 50%; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700; display: grid; place-items: center; }
+.progreso { position: sticky; top: 0; background: #fff; border-bottom: 2px solid var(--principal, #D4700A); padding: 0.6rem 1rem; margin-bottom: 1.5rem; z-index: 50; display: flex; justify-content: space-between; align-items: center; font-family: 'Barlow', sans-serif; font-size: 0.92rem; border-radius: 0 0 10px 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.progreso .bar-wrap { flex: 1; margin: 0 1rem; background: #eee; height: 8px; border-radius: 4px; overflow: hidden; }
+.progreso .bar { height: 100%; background: linear-gradient(90deg, var(--principal, #D4700A), #e89947); width: 0%; transition: width 0.4s ease; }
+.progreso .stat { font-weight: 600; color: var(--secundario, #1B4F8A); }
+.progreso .stat strong { color: var(--principal, #D4700A); }
+.progreso .reset-btn { background: transparent; border: 1px solid #ccc; color: #666; padding: 0.3rem 0.7rem; border-radius: 6px; font-size: 0.82rem; cursor: pointer; font-family: 'Barlow', sans-serif; }
+.progreso .reset-btn:hover { border-color: var(--principal, #D4700A); color: var(--principal, #D4700A); }
+@media (max-width: 720px) { .options.cols2, .options.cols3 { grid-template-columns: 1fr; } .progreso { flex-wrap: wrap; gap: 0.5rem; } .progreso .bar-wrap { margin: 0; order: 99; flex-basis: 100%; } .order-item { grid-template-columns: 45px 1fr; } .match-item { grid-template-columns: 1fr; } .match-item select { min-width: 0; width: 100%; } }
+@media print { .progreso, .check-btn, .reset-btn { display: none; } .feedback.show { display: block !important; } details.solution { background: #fff; } details.solution > summary { display: none; } details.solution > .sol-body { display: block !important; } }
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+<header class="curso-hd"><span class="curso-sb">U04 · Mecanismos · Actividades</span></header>
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Inicio</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U04</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📘</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>📝</span><span class="nc-lbl">Actividades</span></span>
+</nav>
+<div class="unidad-layout">
+<aside class="sb-side">
+  <h3>Bloques</h3>
+  <a href="#bloque-a">A · Conceptos básicos</a>
+  <a href="#bloque-b">B · Palancas</a>
+  <a href="#bloque-c">C · Poleas y polipastos</a>
+  <a href="#bloque-d">D · Plano inclinado, torno, tornillo</a>
+  <a href="#bloque-e">E · Fricción y correa</a>
+  <a href="#bloque-f">F · Engranajes y cadena</a>
+  <a href="#bloque-g">G · Trenes compuestos</a>
+</aside>
+<main class="ct" id="main-content">
+<h1 class="unidad-titulo">Actividades · U04 Mecanismos</h1>
+<p class="unidad-subt">Ejercicios con comprobación automática y solución paso a paso. <strong>35 actividades</strong> en 7 bloques. Consulta el <a href="../libro-digital.html">libro digital</a> cuando lo necesites.</p>
+<div class="progreso" id="progreso">
+  <span class="stat"><strong id="prog-num">0</strong> / <span id="prog-total">35</span> resueltas</span>
+  <div class="bar-wrap"><div class="bar" id="prog-bar"></div></div>
+  <span class="stat">Aciertos: <strong id="prog-ok">0</strong></span>
+  <button class="reset-btn" onclick="resetAll()">↺ Reiniciar</button>
+</div>
+
+<!-- ════ BLOQUE A ════ -->
+<section id="bloque-a">
+  <h2 class="bloque-titulo">A · Conceptos básicos</h2>
+  <p class="bloque-intro">Qué es una máquina y las magnitudes físicas que necesitamos.</p>
+
+  <article class="activity-card" data-type="radio" data-id="A1">
+    <p class="statement"><span class="act-num">A1</span>Una <strong>máquina</strong> es…</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="A1"><span class="option-label">Un objeto fabricado con metal y movido por electricidad.</span></label>
+      <label class="option"><input type="radio" name="A1" data-correct="true"><span class="option-label">Un dispositivo que transforma o transmite energía para facilitar un trabajo.</span></label>
+      <label class="option"><input type="radio" name="A1"><span class="option-label">Solo lo que tiene un motor.</span></label>
+      <label class="option"><input type="radio" name="A1"><span class="option-label">Cualquier sistema con engranajes en su interior.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Una <strong>máquina</strong> transforma o transmite energía. No necesita motor (las máquinas simples como palanca o polea son máquinas), ni ser metálica, ni llevar engranajes.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="match" data-id="A2"
+    data-pairs='[{"item":"Trabajo (W)","correct":"Julio (J)"},{"item":"Potencia (P)","correct":"Vatio (W)"},{"item":"Fuerza (F)","correct":"Newton (N)"},{"item":"Energía (E)","correct":"Julio (J)"}]'
+    data-options='["Newton (N)","Julio (J)","Vatio (W)"]'>
+    <p class="statement"><span class="act-num">A2</span>Asigna a cada <strong>magnitud</strong> su unidad en el SI.</p>
+    <div class="match-list" id="A_A2"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body"><strong>Trabajo</strong> y <strong>energía</strong> → Julio (J). <strong>Potencia</strong> → Vatio (W). <strong>Fuerza</strong> → Newton (N). 1 W = 1 J/s y 1 J = 1 N · 1 m.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="number" data-id="A3" data-answer="200" data-tol="0">
+    <p class="statement"><span class="act-num">A3</span>Una persona levanta una caja de <strong>40 N</strong> hasta una estantería a <strong>5 m</strong>. ¿Cuánto trabajo realiza? <em>(W = F · d)</em></p>
+    <div class="answer-box"><label>Trabajo:</label><input type="number" inputmode="numeric" min="0" step="0.01"><span class="unit">J</span></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">W = F · d = 40 N × 5 m = <strong>200 J</strong>. La energía invertida igual a 200 J: ese principio (la energía no se crea ni destruye) es la base de toda la unidad.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="number" data-id="A4" data-answer="50" data-tol="0">
+    <p class="statement"><span class="act-num">A4</span>Una grúa realiza un trabajo de <strong>500 J</strong> en <strong>10 segundos</strong>. ¿Cuál es su <strong>potencia</strong>? <em>(P = W / t)</em></p>
+    <div class="answer-box"><label>Potencia:</label><input type="number" inputmode="numeric" min="0" step="0.1"><span class="unit">W</span></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">P = W / t = 500 / 10 = <strong>50 W</strong>. La potencia mide la rapidez con la que se hace el trabajo.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="A5">
+    <p class="statement"><span class="act-num">A5</span>Una máquina recibe <strong>1000 J</strong> y entrega <strong>800 J</strong> útiles. ¿Cuál es su <strong>rendimiento</strong>?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="A5"><span class="option-label">125 %</span></label>
+      <label class="option"><input type="radio" name="A5"><span class="option-label">200 %</span></label>
+      <label class="option"><input type="radio" name="A5" data-correct="true"><span class="option-label">80 %</span></label>
+      <label class="option"><input type="radio" name="A5"><span class="option-label">20 %</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">η = (E útil / E aportada) × 100 = (800/1000) × 100 = <strong>80 %</strong>. Los 200 J restantes se pierden en calor por rozamiento. Ninguna máquina real alcanza el 100 %.</div></details>
+  </article>
+</section>
+
+<!-- ════ BLOQUE B ════ -->
+<section id="bloque-b">
+  <h2 class="bloque-titulo">B · Palancas</h2>
+  <p class="bloque-intro">La máquina simple más antigua. Tres clases, una sola ley.</p>
+
+  <article class="activity-card" data-type="radio" data-id="B1">
+    <p class="statement"><span class="act-num">B1</span>La <strong>ley de la palanca</strong> establece que…</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="B1"><span class="option-label">F + BF = R + BR</span></label>
+      <label class="option"><input type="radio" name="B1" data-correct="true"><span class="option-label">F · BF = R · BR</span></label>
+      <label class="option"><input type="radio" name="B1"><span class="option-label">F / BF = R / BR</span></label>
+      <label class="option"><input type="radio" name="B1"><span class="option-label">F · R = BF · BR</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La ley es <strong>F · BF = R · BR</strong>. Es la "ley de los momentos": cada momento es F × distancia al apoyo.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="match" data-id="B2"
+    data-pairs='[{"item":"Tijeras","correct":"1ª clase"},{"item":"Balancín","correct":"1ª clase"},{"item":"Carretilla","correct":"2ª clase"},{"item":"Cascanueces","correct":"2ª clase"},{"item":"Caña de pescar","correct":"3ª clase"},{"item":"Pinzas de cocina","correct":"3ª clase"}]'
+    data-options='["1ª clase","2ª clase","3ª clase"]'>
+    <p class="statement"><span class="act-num">B2</span>Asigna cada objeto a la <strong>clase de palanca</strong>.</p>
+    <div class="match-list" id="A_B2"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body"><strong>1ª clase</strong> (apoyo entre F y R): tijeras, balancín. <strong>2ª clase</strong> (R entre apoyo y F): carretilla, cascanueces. <strong>3ª clase</strong> (F entre apoyo y R): caña de pescar, pinzas. Truco: <em>ARF</em> según qué hay en medio.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="number" data-id="B3" data-answer="50" data-tol="0">
+    <p class="statement"><span class="act-num">B3</span>Palanca de 1ª clase: <strong>R = 100 N</strong>, <strong>BR = 20 cm</strong>, <strong>BF = 40 cm</strong>. ¿Qué fuerza F hay que aplicar para el equilibrio?</p>
+    <div class="answer-box"><label>F:</label><input type="number" inputmode="numeric" min="0" step="0.1"><span class="unit">N</span></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">F · 40 = 100 · 20 → F = 2000/40 = <strong>50 N</strong>. Aplicando 50 N levantas 100 N: la palanca multiplica la fuerza.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="B4">
+    <p class="statement"><span class="act-num">B4</span>Las palancas de <strong>2ª clase</strong> tienen siempre…</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="B4"><span class="option-label">Multiplican el recorrido pero no la fuerza.</span></label>
+      <label class="option"><input type="radio" name="B4" data-correct="true"><span class="option-label">Multiplican la fuerza (BF &gt; BR siempre): VM mayor que 1.</span></label>
+      <label class="option"><input type="radio" name="B4"><span class="option-label">No tienen apoyo, solo fuerza y resistencia.</span></label>
+      <label class="option"><input type="radio" name="B4"><span class="option-label">Se usan solo para cortar.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">En 2ª clase, la resistencia está entre el apoyo y la fuerza, así que BF &gt; BR siempre. VM = BF/BR &gt; 1: <strong>siempre multiplica la fuerza</strong>. Ejemplo: carretilla.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="B5">
+    <p class="statement"><span class="act-num">B5</span>Palanca de 3ª clase: F = 60 N, BF = 10 cm, BR = 50 cm. ¿Cuánta resistencia puede vencer?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="B5"><span class="option-label">300 N</span></label>
+      <label class="option"><input type="radio" name="B5"><span class="option-label">120 N</span></label>
+      <label class="option"><input type="radio" name="B5" data-correct="true"><span class="option-label">12 N</span></label>
+      <label class="option"><input type="radio" name="B5"><span class="option-label">50 N</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">60 · 10 = R · 50 → R = 600/50 = <strong>12 N</strong>. La 3ª clase necesita más fuerza para vencer menos resistencia, pero multiplica el recorrido y la velocidad. Por eso está construido así tu brazo.</div></details>
+  </article>
+</section>
+
+<!-- ════ BLOQUE C ════ -->
+<section id="bloque-c">
+  <h2 class="bloque-titulo">C · Poleas y polipastos</h2>
+  <p class="bloque-intro">Dividir el esfuerzo en varios tramos de cuerda.</p>
+
+  <article class="activity-card" data-type="radio" data-id="C1">
+    <p class="statement"><span class="act-num">C1</span>Una <strong>polea fija</strong>…</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="C1"><span class="option-label">Divide a la mitad la fuerza necesaria.</span></label>
+      <label class="option"><input type="radio" name="C1" data-correct="true"><span class="option-label">No ahorra fuerza, solo cambia la dirección del esfuerzo.</span></label>
+      <label class="option"><input type="radio" name="C1"><span class="option-label">Multiplica la fuerza por el número de poleas.</span></label>
+      <label class="option"><input type="radio" name="C1"><span class="option-label">Aumenta el recorrido al doble.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La polea fija no ahorra fuerza (F = R). Solo cambia la dirección: tiras hacia abajo y la carga sube. Lo usan persianas, cortinas y pozos antiguos.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="number" data-id="C2" data-answer="125" data-tol="0">
+    <p class="statement"><span class="act-num">C2</span>Con una <strong>polea móvil</strong> quieres levantar una caja de <strong>250 N</strong>. ¿Qué fuerza F necesitas?</p>
+    <div class="answer-box"><label>F:</label><input type="number" inputmode="numeric" min="0" step="0.1"><span class="unit">N</span></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">En polea móvil, la carga cuelga de 2 tramos: F = R/2 = 250/2 = <strong>125 N</strong>. La pega: tiras de 2 m de cuerda para subir la carga 1 m.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="number" data-id="C3" data-answer="100" data-tol="0">
+    <p class="statement"><span class="act-num">C3</span><strong>Polipasto compuesto</strong> con <strong>n = 4 tramos</strong> sostiene una carga de <strong>400 N</strong>. ¿Cuál es la fuerza?</p>
+    <div class="answer-box"><label>F:</label><input type="number" inputmode="numeric" min="0" step="0.1"><span class="unit">N</span></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">F = R / n = 400 / 4 = <strong>100 N</strong>. Tiras de 4 m por cada 1 m que sube la carga.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="C4">
+    <p class="statement"><span class="act-num">C4</span>Si <strong>F = R/3</strong>, ¿cuántos metros de cuerda tienes que tirar para que la carga suba <strong>1 m</strong>?</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="C4"><span class="option-label">1 m</span></label>
+      <label class="option"><input type="radio" name="C4"><span class="option-label">2 m</span></label>
+      <label class="option"><input type="radio" name="C4" data-correct="true"><span class="option-label">3 m</span></label>
+      <label class="option"><input type="radio" name="C4"><span class="option-label">1/3 m</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Si la fuerza se divide entre 3, hay 3 tramos. Cuando la carga sube 1 m, cada tramo se acorta 1 m, así que tiras de 3 m. La energía se conserva: F × 3 m = R/3 × 3 m = R · 1 m.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="C5">
+    <p class="statement"><span class="act-num">C5</span>La principal razón por la que se usan <strong>polipastos</strong> en obras es:</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="C5"><span class="option-label">Ahorran cuerda respecto a la polea fija.</span></label>
+      <label class="option"><input type="radio" name="C5" data-correct="true"><span class="option-label">Permiten levantar cargas pesadas con poca fuerza humana.</span></label>
+      <label class="option"><input type="radio" name="C5"><span class="option-label">Suben la carga más rápido.</span></label>
+      <label class="option"><input type="radio" name="C5"><span class="option-label">Evitan el rozamiento de la cuerda.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Los polipastos <strong>multiplican la fuerza humana</strong>. Lo "pagan" en recorrido y tiempo, pero a cambio se evita maquinaria pesada.</div></details>
+  </article>
+</section>
+
+<!-- ════ BLOQUE D ════ -->
+<section id="bloque-d">
+  <h2 class="bloque-titulo">D · Plano inclinado, torno y tornillo</h2>
+  <p class="bloque-intro">La rampa, la rueda con manivela y el invento que mueve el mundo.</p>
+
+  <article class="activity-card" data-type="radio" data-id="D1">
+    <p class="statement"><span class="act-num">D1</span>Un <strong>plano inclinado</strong> facilita un trabajo porque:</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="D1"><span class="option-label">Hace que la carga pese menos.</span></label>
+      <label class="option"><input type="radio" name="D1" data-correct="true"><span class="option-label">Permite vencer un peso aplicando menos fuerza a lo largo de una distancia mayor.</span></label>
+      <label class="option"><input type="radio" name="D1"><span class="option-label">Anula el rozamiento.</span></label>
+      <label class="option"><input type="radio" name="D1"><span class="option-label">Reduce la gravedad.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La rampa no reduce el peso, reparte el esfuerzo sobre una distancia mayor (longitud de la rampa). Los egipcios subieron millones de toneladas a las pirámides usando rampas.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="number" data-id="D2" data-answer="200" data-tol="0">
+    <p class="statement"><span class="act-num">D2</span>Subir una carga de <strong>500 N</strong> a <strong>2 m</strong> de altura usando una rampa de <strong>5 m</strong> (sin rozamiento). ¿Qué fuerza F hay que aplicar? <em>(F · L = R · h)</em></p>
+    <div class="answer-box"><label>F:</label><input type="number" inputmode="numeric" min="0" step="0.1"><span class="unit">N</span></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">F · 5 = 500 · 2 → F = 1000/5 = <strong>200 N</strong>. Energía conservada: 200 N × 5 m = 500 N × 2 m = 1000 J.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="D3">
+    <p class="statement"><span class="act-num">D3</span>Un <strong>torno</strong> es esencialmente:</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="D3"><span class="option-label">Un tipo especial de polea móvil.</span></label>
+      <label class="option"><input type="radio" name="D3" data-correct="true"><span class="option-label">Una palanca circular: la manivela actúa como brazo de la fuerza y el radio del tambor como brazo de la resistencia.</span></label>
+      <label class="option"><input type="radio" name="D3"><span class="option-label">Un plano inclinado enrollado sobre un eje.</span></label>
+      <label class="option"><input type="radio" name="D3"><span class="option-label">Un sistema de engranajes invertidos.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El torno es una palanca circular: VM = manivela / radio del tambor. Por eso los pozos antiguos tenían manivelas largas: para sacar agua sin esfuerzo.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="D4">
+    <p class="statement"><span class="act-num">D4</span>Un <strong>tornillo</strong> se puede ver como…</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="D4" data-correct="true"><span class="option-label">Un plano inclinado enrollado sobre un cilindro.</span></label>
+      <label class="option"><input type="radio" name="D4"><span class="option-label">Una palanca de 3ª clase plegada.</span></label>
+      <label class="option"><input type="radio" name="D4"><span class="option-label">Una polea fija sin cuerda.</span></label>
+      <label class="option"><input type="radio" name="D4"><span class="option-label">Un engranaje sin dientes.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El tornillo es un plano inclinado enrollado sobre un cilindro. Si desenrollas la rosca, ves una rampa larga poco inclinada. Por eso permite gran fuerza axial con poco giro.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="D5">
+    <p class="statement"><span class="act-num">D5</span>¿Cuál requiere <strong>menos fuerza</strong> para subir el mismo peso a la misma altura?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="D5"><span class="option-label">Levantarlo a pulso.</span></label>
+      <label class="option"><input type="radio" name="D5"><span class="option-label">Subirlo por una rampa de la misma longitud que la altura.</span></label>
+      <label class="option"><input type="radio" name="D5" data-correct="true"><span class="option-label">Subirlo por una rampa larga y poco inclinada.</span></label>
+      <label class="option"><input type="radio" name="D5"><span class="option-label">Empujarlo lateralmente por el suelo.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Cuanto más larga y menos inclinada la rampa, menor la fuerza necesaria (pero mayor el recorrido). Una rampa "de la misma longitud que la altura" sería vertical, no rampa.</div></details>
+  </article>
+</section>
+
+<!-- ════ BLOQUE E ════ -->
+<section id="bloque-e">
+  <h2 class="bloque-titulo">E · Fricción y correa</h2>
+  <p class="bloque-intro">Cómo se transmite movimiento entre ruedas que giran.</p>
+
+  <article class="activity-card" data-type="radio" data-id="E1">
+    <p class="statement"><span class="act-num">E1</span>En la <strong>transmisión por ruedas de fricción</strong>, las dos ruedas giran:</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="E1"><span class="option-label">En el mismo sentido</span></label>
+      <label class="option"><input type="radio" name="E1" data-correct="true"><span class="option-label">En sentidos opuestos</span></label>
+      <label class="option"><input type="radio" name="E1"><span class="option-label">Solo gira la motriz</span></label>
+      <label class="option"><input type="radio" name="E1"><span class="option-label">Depende de los diámetros</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Las ruedas en contacto directo giran en <strong>sentidos opuestos</strong>. Mismo principio que los engranajes.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="number" data-id="E2" data-answer="200" data-tol="0">
+    <p class="statement"><span class="act-num">E2</span><strong>D₁ = 100 mm, n₁ = 400 rpm</strong>, mueve por contacto a la conducida de <strong>D₂ = 200 mm</strong>. ¿A qué rpm gira?</p>
+    <div class="answer-box"><label>n₂:</label><input type="number" inputmode="numeric" min="0" step="0.1"><span class="unit">rpm</span></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">n₁·D₁ = n₂·D₂ → 400·100 = n₂·200 → n₂ = <strong>200 rpm</strong>. Sistema reductor.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="E3">
+    <p class="statement"><span class="act-num">E3</span>En la <strong>transmisión por correa recta</strong>, las poleas giran:</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="E3" data-correct="true"><span class="option-label">En el mismo sentido</span></label>
+      <label class="option"><input type="radio" name="E3"><span class="option-label">En sentidos opuestos</span></label>
+      <label class="option"><input type="radio" name="E3"><span class="option-label">Una para y la otra acelera</span></label>
+      <label class="option"><input type="radio" name="E3"><span class="option-label">Depende del material de la correa</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Correa recta → mismo sentido. Para invertirlo, se cruza la correa en "8".</div></details>
+  </article>
+
+  <article class="activity-card" data-type="number" data-id="E4" data-answer="600" data-tol="0">
+    <p class="statement"><span class="act-num">E4</span>Polea motriz <strong>D₁ = 60 mm, n₁ = 1200 rpm</strong>, mueve por correa a una conducida <strong>D₂ = 120 mm</strong>. ¿A qué rpm gira?</p>
+    <div class="answer-box"><label>n₂:</label><input type="number" inputmode="numeric" min="0" step="0.1"><span class="unit">rpm</span></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">1200·60 = n₂·120 → n₂ = <strong>600 rpm</strong>. Reductor. Es la base de batidoras y lavadoras: un motor rápido conectado a una polea grande para reducir velocidad y aumentar par.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="E5">
+    <p class="statement"><span class="act-num">E5</span>Si <strong>i = n₂/n₁ = 0,5</strong>, el sistema es:</p>
+    <div class="options cols3">
+      <label class="option"><input type="radio" name="E5"><span class="option-label">Multiplicador (acelera)</span></label>
+      <label class="option"><input type="radio" name="E5" data-correct="true"><span class="option-label">Reductor (desacelera)</span></label>
+      <label class="option"><input type="radio" name="E5"><span class="option-label">Directo</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">i = 0,5 → n₂ = mitad de n₁. <strong>Reductor</strong> (i &lt; 1). Gana par a costa de velocidad. Si i &gt; 1 sería multiplicador.</div></details>
+  </article>
+</section>
+
+<!-- ════ BLOQUE F ════ -->
+<section id="bloque-f">
+  <h2 class="bloque-titulo">F · Engranajes y cadena</h2>
+  <p class="bloque-intro">La transmisión más precisa: dientes que engranan sin deslizar.</p>
+
+  <article class="activity-card" data-type="radio" data-id="F1">
+    <p class="statement"><span class="act-num">F1</span>En la transmisión por <strong>engranajes</strong>, la fórmula que relaciona velocidades y dientes es:</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="F1" data-correct="true"><span class="option-label">n₁ · Z₁ = n₂ · Z₂</span></label>
+      <label class="option"><input type="radio" name="F1"><span class="option-label">n₁ + Z₁ = n₂ + Z₂</span></label>
+      <label class="option"><input type="radio" name="F1"><span class="option-label">n₁ / Z₁ = n₂ / Z₂</span></label>
+      <label class="option"><input type="radio" name="F1"><span class="option-label">n₁ · n₂ = Z₁ · Z₂</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Es <strong>n₁ · Z₁ = n₂ · Z₂</strong>. Equivalente a n₁·D₁ = n₂·D₂ porque los engranajes deben tener el mismo módulo m = D/Z para engranar.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="number" data-id="F2" data-answer="100" data-tol="0">
+    <p class="statement"><span class="act-num">F2</span>Piñón con <strong>Z₁ = 20</strong> dientes gira a <strong>n₁ = 500 rpm</strong> y engrana con rueda dentada de <strong>Z₂ = 100</strong>. ¿A qué rpm gira la conducida?</p>
+    <div class="answer-box"><label>n₂:</label><input type="number" inputmode="numeric" min="0" step="0.1"><span class="unit">rpm</span></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">500·20 = n₂·100 → n₂ = <strong>100 rpm</strong>. Reductor 5:1: pierde velocidad pero gana par. Es lo que usan los coches en marchas cortas.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="F3">
+    <p class="statement"><span class="act-num">F3</span>La principal <strong>ventaja</strong> de los engranajes frente a la correa es:</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="F3"><span class="option-label">Son más baratos.</span></label>
+      <label class="option"><input type="radio" name="F3" data-correct="true"><span class="option-label">No deslizan: la relación de transmisión es exacta y constante.</span></label>
+      <label class="option"><input type="radio" name="F3"><span class="option-label">Funcionan a distancias mayores entre ejes.</span></label>
+      <label class="option"><input type="radio" name="F3"><span class="option-label">Hacen menos ruido.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Los engranajes <strong>no deslizan</strong>: los dientes encajan. Las correas pueden patinar o estirarse. Las pegas de los engranajes: más ruido, más caros y solo distancias cortas.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="F4">
+    <p class="statement"><span class="act-num">F4</span>Una <strong>cadena</strong> entre dos ruedas dentadas hace que giren:</p>
+    <div class="options cols2">
+      <label class="option"><input type="radio" name="F4" data-correct="true"><span class="option-label">En el mismo sentido</span></label>
+      <label class="option"><input type="radio" name="F4"><span class="option-label">En sentidos opuestos</span></label>
+      <label class="option"><input type="radio" name="F4"><span class="option-label">Depende del piñón</span></label>
+      <label class="option"><input type="radio" name="F4"><span class="option-label">Una para mientras la otra gira</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La cadena, igual que la correa recta, → <strong>mismo sentido</strong>. Como en la bici: plato y piñón giran igual. Pero NO desliza: combina ventajas de la correa (distancia) con las del engranaje (precisión).</div></details>
+  </article>
+
+  <article class="activity-card" data-type="match" data-id="F5"
+    data-pairs='[{"item":"Ruedas de fricción","correct":"Opuesto"},{"item":"Engranajes","correct":"Opuesto"},{"item":"Correa recta","correct":"Mismo"},{"item":"Cadena","correct":"Mismo"},{"item":"Correa cruzada","correct":"Opuesto"}]'
+    data-options='["Mismo","Opuesto"]'>
+    <p class="statement"><span class="act-num">F5</span>Asigna a cada sistema el <strong>sentido de giro</strong> de la conducida respecto a la motriz.</p>
+    <div class="match-list" id="A_F5"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body"><strong>Mismo</strong>: correa recta y cadena. <strong>Opuesto</strong>: ruedas de fricción, engranajes y correa cruzada.</div></details>
+  </article>
+</section>
+
+<!-- ════ BLOQUE G ════ -->
+<section id="bloque-g">
+  <h2 class="bloque-titulo">G · Trenes compuestos e integración</h2>
+  <p class="bloque-intro">Aplicaciones reales: bicicletas, cajas de cambios y maquinaria con varias etapas.</p>
+
+  <article class="activity-card" data-type="number" data-id="G1" data-answer="125" data-tol="0">
+    <p class="statement"><span class="act-num">G1</span>En una <strong>bicicleta</strong>, plato de <strong>Z₁ = 50</strong> y piñón trasero de <strong>Z₂ = 20</strong>. Pedaleas a <strong>50 rpm</strong>. ¿A qué rpm gira la rueda trasera?</p>
+    <div class="answer-box"><label>n₂:</label><input type="number" inputmode="numeric" min="0" step="0.1"><span class="unit">rpm</span></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">50·50 = n₂·20 → n₂ = <strong>125 rpm</strong>. Sistema multiplicador 2,5:1. Vas rápido pero necesitas fuerza en los pedales.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="G2">
+    <p class="statement"><span class="act-num">G2</span>Para <strong>subir una cuesta empinada</strong> con menos esfuerzo, ¿qué combinación conviene?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="G2"><span class="option-label">Plato grande y piñón pequeño.</span></label>
+      <label class="option"><input type="radio" name="G2" data-correct="true"><span class="option-label">Plato pequeño y piñón grande.</span></label>
+      <label class="option"><input type="radio" name="G2"><span class="option-label">Plato pequeño y piñón pequeño.</span></label>
+      <label class="option"><input type="radio" name="G2"><span class="option-label">Plato grande y piñón grande.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Subir cuestas necesita <strong>par</strong>, aunque vayas más despacio. <strong>Plato pequeño + piñón grande</strong> = reductor: la rueda gira lentamente pero con mucha fuerza.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="number" data-id="G3" data-answer="60" data-tol="0">
+    <p class="statement"><span class="act-num">G3</span><strong>Tren compuesto:</strong> rueda 1 (Z₁=20) a 300 rpm engrana con la rueda 2 (Z₂=60). La rueda 3 (Z₃=30) está en el mismo eje que la 2 y engrana con la 4 (Z₄=50). ¿A qué rpm gira la rueda 4?</p>
+    <div class="answer-box"><label>n₄:</label><input type="number" inputmode="numeric" min="0" step="0.1"><span class="unit">rpm</span></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">
+      <div class="steps-sol">
+        <div class="step-sol"><strong>1ª etapa (1→2):</strong> 300·20 = n₂·60 → n₂ = 100 rpm.</div>
+        <div class="step-sol"><strong>Eje común:</strong> n₃ = n₂ = 100 rpm.</div>
+        <div class="step-sol"><strong>2ª etapa (3→4):</strong> 100·30 = n₄·50 → <strong>n₄ = 60 rpm</strong>.</div>
+      </div>
+      Encadenar reducciones es lo que hace una caja de cambios.</div></details>
+  </article>
+
+  <article class="activity-card" data-type="radio" data-id="G4">
+    <p class="statement"><span class="act-num">G4</span>En un <strong>tren compuesto</strong>, la relación de transmisión total se calcula:</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="G4"><span class="option-label">Sumando las relaciones de cada etapa.</span></label>
+      <label class="option"><input type="radio" name="G4" data-correct="true"><span class="option-label">Multiplicando las relaciones de cada etapa.</span></label>
+      <label class="option"><input type="radio" name="G4"><span class="option-label">Dividiendo las relaciones entre sí.</span></label>
+      <label class="option"><input type="radio" name="G4"><span class="option-label">Tomando solo la última etapa.</span></label>
+    </div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Las relaciones <strong>se multiplican</strong>: i_total = i₁ · i₂ · i₃ … En el ejemplo G3, i₁ = 1/3 (300→100) e i₂ = 0,6 (100→60), por lo que i_total = 1/3 · 0,6 = 0,2 (300·0,2 = 60 rpm ✓).</div></details>
+  </article>
+
+  <article class="activity-card" data-type="order" data-id="G5"
+    data-items='[{"text":"Identifica entrada (motriz) y salida (conducida final) del sistema","correct":1},{"text":"Identifica los engranajes implicados en cada etapa","correct":2},{"text":"Aplica la fórmula n·Z = cte en cada etapa por separado","correct":3},{"text":"Comprueba que el resultado es coherente (reductor/multiplicador)","correct":4}]'>
+    <p class="statement"><span class="act-num">G5</span>Ordena los <strong>pasos correctos</strong> para resolver un problema de tren compuesto (1 = primero, 4 = último).</p>
+    <div class="order-list" id="A_G5"></div>
+    <button class="check-btn" onclick="check(this)">Comprobar</button>
+    <div class="feedback"></div>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">
+      <div class="steps-sol">
+        <div class="step-sol"><strong>Identificar entrada y salida:</strong> qué es motriz y qué es conducida final.</div>
+        <div class="step-sol"><strong>Identificar las etapas:</strong> qué engranajes hay en cada paso.</div>
+        <div class="step-sol"><strong>Aplicar la fórmula etapa a etapa:</strong> n·Z = constante en cada par.</div>
+        <div class="step-sol"><strong>Comprobar coherencia:</strong> ¿es reductor o multiplicador? ¿Tiene sentido?</div>
+      </div>
+      Si el resultado no encaja, revisa qué engranaje es motriz y cuál conducido en cada etapa.</div></details>
+  </article>
+</section>
+
+<footer style="text-align:center; padding:2rem 1rem 1rem; color:#888; font-size:0.85rem; border-top: 1px dashed #ddd; margin-top: 3rem;">
+  <p>📝 Actividades · TyD 2º ESO · Unidad 4 · Mecanismos</p>
+  <p><a href="../index.html" style="color:#D4700A; text-decoration:none;">← Volver al hub de la unidad</a> · <a href="../libro-digital.html" style="color:#D4700A; text-decoration:none;">📘 Libro digital</a></p>
+  <p style="margin-top:8px; font-family:'JetBrains Mono', monospace; font-size:0.72rem; opacity:0.6;">v1.0</p>
+</footer>
+
+</main>
+</div>
+
+<script>
+(function() {
+  'use strict';
+  const totalEl = document.getElementById('prog-total');
+  const numEl = document.getElementById('prog-num');
+  const okEl = document.getElementById('prog-ok');
+  const barEl = document.getElementById('prog-bar');
+  const cards = document.querySelectorAll('.activity-card');
+  totalEl.textContent = cards.length;
+
+  cards.forEach(card => {
+    const type = card.dataset.type;
+    if (type === 'order') {
+      const items = JSON.parse(card.dataset.items);
+      const container = card.querySelector('.order-list');
+      items.forEach((it) => {
+        const div = document.createElement('div');
+        div.className = 'order-item';
+        div.innerHTML = `<input type="number" min="1" max="${items.length}" data-correct="${it.correct}" aria-label="Orden de ${it.text}"><span class="order-text">${it.text}</span>`;
+        container.appendChild(div);
+      });
+    } else if (type === 'match') {
+      const pairs = JSON.parse(card.dataset.pairs);
+      const options = JSON.parse(card.dataset.options);
+      const container = card.querySelector('.match-list');
+      pairs.forEach((p) => {
+        const div = document.createElement('div');
+        div.className = 'match-item';
+        let opts = '<option value="">— elige —</option>';
+        options.forEach(o => opts += `<option value="${o}">${o}</option>`);
+        div.innerHTML = `<span class="match-text">${p.item}</span><select data-correct="${p.correct}" aria-label="Categoría de ${p.item}">${opts}</select>`;
+        container.appendChild(div);
+      });
+    }
+  });
+
+  function updateProgress() {
+    const resueltas = document.querySelectorAll('.activity-card.solved, .activity-card.wrong').length;
+    const aciertos = document.querySelectorAll('.activity-card.solved').length;
+    numEl.textContent = resueltas;
+    okEl.textContent = aciertos;
+    const pct = cards.length ? (resueltas / cards.length) * 100 : 0;
+    barEl.style.width = pct + '%';
+  }
+
+  function normalize(str) { return String(str).trim().replace(',', '.').toLowerCase(); }
+
+  window.check = function(btn) {
+    const card = btn.closest('.activity-card');
+    const type = card.dataset.type;
+    const feedback = card.querySelector('.feedback');
+    let correct = false; let msg = '';
+
+    if (type === 'radio') {
+      const checked = card.querySelector('input[type=radio]:checked');
+      if (!checked) { feedback.className = 'feedback err show'; feedback.innerHTML = '<span class="icon">⚠️</span>Selecciona una opción antes de comprobar.'; return; }
+      correct = checked.dataset.correct === 'true';
+      msg = correct ? '<span class="icon">✓</span>¡Correcto! Bien razonado.' : '<span class="icon">✗</span>No es la opción correcta. Mira la solución para entender por qué.';
+    } else if (type === 'number') {
+      const input = card.querySelector('input[type=number]');
+      const raw = normalize(input.value);
+      if (raw === '') { feedback.className = 'feedback err show'; feedback.innerHTML = '<span class="icon">⚠️</span>Escribe una respuesta antes de comprobar.'; return; }
+      const num = parseFloat(raw);
+      if (isNaN(num)) { feedback.className = 'feedback err show'; feedback.innerHTML = '<span class="icon">⚠️</span>La respuesta debe ser un número.'; return; }
+      const expected = parseFloat(card.dataset.answer);
+      const tol = parseFloat(card.dataset.tol || '0');
+      correct = Math.abs(num - expected) <= tol + 1e-9;
+      msg = correct ? '<span class="icon">✓</span>¡Correcto! Resultado: ' + expected + '.' : '<span class="icon">✗</span>No es el resultado esperado. Revisa el cálculo o consulta la solución.';
+    } else if (type === 'order') {
+      const inputs = card.querySelectorAll('.order-item input');
+      let allFilled = true, allCorrect = true;
+      inputs.forEach(inp => {
+        inp.classList.remove('ok-input', 'err-input');
+        const val = parseInt(inp.value); const exp = parseInt(inp.dataset.correct);
+        if (isNaN(val)) { allFilled = false; return; }
+        if (val === exp) inp.classList.add('ok-input'); else { inp.classList.add('err-input'); allCorrect = false; }
+      });
+      if (!allFilled) { feedback.className = 'feedback err show'; feedback.innerHTML = '<span class="icon">⚠️</span>Asigna un número a cada elemento antes de comprobar.'; return; }
+      correct = allCorrect;
+      msg = correct ? '<span class="icon">✓</span>¡Todas las posiciones correctas!' : '<span class="icon">✗</span>Algunas posiciones son incorrectas. Repasa la solución.';
+    } else if (type === 'match') {
+      const selects = card.querySelectorAll('.match-item select');
+      let allFilled = true, allCorrect = true;
+      selects.forEach(sel => {
+        sel.classList.remove('ok-input', 'err-input');
+        if (sel.value === '') { allFilled = false; return; }
+        if (sel.value === sel.dataset.correct) sel.classList.add('ok-input'); else { sel.classList.add('err-input'); allCorrect = false; }
+      });
+      if (!allFilled) { feedback.className = 'feedback err show'; feedback.innerHTML = '<span class="icon">⚠️</span>Elige una opción en cada elemento antes de comprobar.'; return; }
+      correct = allCorrect;
+      msg = correct ? '<span class="icon">✓</span>¡Todas las parejas correctas!' : '<span class="icon">✗</span>Algunas parejas son incorrectas. Revisa la solución.';
+    }
+
+    card.classList.remove('solved', 'wrong');
+    card.classList.add(correct ? 'solved' : 'wrong');
+    feedback.className = 'feedback ' + (correct ? 'ok' : 'err') + ' show';
+    feedback.innerHTML = msg;
+    updateProgress();
+  };
+
+  window.resetAll = function() {
+    if (!confirm('¿Reiniciar todas las actividades? Se perderán las respuestas marcadas.')) return;
+    cards.forEach(card => {
+      card.classList.remove('solved', 'wrong');
+      const fb = card.querySelector('.feedback');
+      if (fb) { fb.className = 'feedback'; fb.innerHTML = ''; }
+      card.querySelectorAll('input[type=radio], input[type=checkbox]').forEach(inp => inp.checked = false);
+      card.querySelectorAll('input[type=number], input[type=text]').forEach(inp => { inp.value = ''; inp.classList.remove('ok-input', 'err-input'); });
+      card.querySelectorAll('select').forEach(sel => { sel.value = ''; sel.classList.remove('ok-input', 'err-input'); });
+      card.querySelectorAll('details.solution').forEach(d => d.open = false);
+    });
+    updateProgress();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  };
+
+  updateProgress();
+})();
+</script>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

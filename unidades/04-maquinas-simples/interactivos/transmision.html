@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Transmisión circular · U04 · TyD 2º ESO</title>
+<meta name="description" content="Interactivo de transmisión circular: ruedas de fricción, poleas con correa y engranajes. Calcula la relación de transmisión y las RPM. TyD 2º ESO.">
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/04-maquinas-simples/interactivos/transmision.html">
+
+<meta property="og:title" content="Transmisión circular · U04 · TyD 2º ESO">
+<meta property="og:description" content="3 sistemas de transmisión circular con cálculo automático.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/04-maquinas-simples/interactivos/transmision.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Transmisión circular · U04 · TyD 2º ESO">
+<meta name="twitter:description" content="3 sistemas de transmisión con cálculo automático.">
+<meta name="twitter:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+:root {
+  --ok: #2e7d4f;
+  --err: #c44536;
+  --warn: #e8b647;
+  --motriz: #c44a3a;
+  --conducida: #2c5f8d;
+}
+
+.tipos-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem;
+  background: #f0f0f0;
+  padding: 4px;
+  border-radius: 10px;
+  margin: 1rem 0 1.4rem;
+}
+.tipos-tabs button {
+  background: transparent;
+  border: none;
+  padding: 0.7rem 0.5rem;
+  border-radius: 7px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.15s;
+}
+.tipos-tabs button.active {
+  background: var(--principal, #D4700A);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(212,112,10,0.3);
+}
+.tipos-tabs button .tab-em { display: block; font-size: 1.2rem; margin-bottom: 4px; }
+
+.bloque {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 14px;
+  padding: 1.4rem 1.6rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+.bloque h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--principal, #D4700A);
+  margin: 0 0 0.5rem;
+  border-bottom: 2px solid var(--principal, #D4700A);
+  padding-bottom: 0.4rem;
+}
+
+.sistema-info {
+  background: #fafafa;
+  border-left: 4px solid var(--principal, #D4700A);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 1rem 0;
+}
+.sistema-info h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.15rem;
+  color: #222;
+  margin: 0 0 6px;
+}
+.sistema-info p { font-size: 0.93rem; color: #555; margin: 0 0 6px; line-height: 1.5; }
+.sistema-info .formula-inline {
+  display: inline-block;
+  background: var(--principal, #D4700A);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 14px;
+  margin-top: 6px;
+  font-size: 0.92rem;
+}
+
+.calc-area {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 1.4rem;
+  margin: 1rem 0;
+  align-items: start;
+}
+
+.svg-wrap {
+  background: linear-gradient(to bottom, #fafafa 0%, #f0f0f0 100%);
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+}
+.svg-wrap svg { width: 100%; max-width: 500px; height: auto; }
+
+.controles { display: flex; flex-direction: column; gap: 12px; }
+
+.rueda-card {
+  background: #fafafa;
+  border: 1px solid #e3e3e3;
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+.rueda-card.motriz { border-left: 4px solid var(--motriz); }
+.rueda-card.conducida { border-left: 4px solid var(--conducida); }
+.rueda-card .rueda-titulo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 0 0 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.rueda-card.motriz .rueda-titulo { color: var(--motriz); }
+.rueda-card.conducida .rueda-titulo { color: var(--conducida); }
+.rueda-card .rueda-titulo .badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  background: #fff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.3px;
+}
+.rueda-card.motriz .badge { color: var(--motriz); border: 1px solid var(--motriz); }
+.rueda-card.conducida .badge { color: var(--conducida); border: 1px solid var(--conducida); }
+
+.input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 4px;
+}
+.input-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.input-item label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 0.78rem;
+  color: #666;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+.input-item input[type="number"] {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.4rem 0.5rem;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  text-align: right;
+  background: #fff;
+  color: #222;
+  width: 100%;
+}
+.input-item input:focus {
+  outline: none;
+  border-color: var(--principal, #D4700A);
+  box-shadow: 0 0 0 3px rgba(212,112,10,0.15);
+}
+.input-item input.calculado {
+  background: #ecf8ef;
+  border-color: var(--ok);
+  color: var(--ok);
+}
+.input-item input.locked {
+  background: #f0f0f0;
+  color: #999;
+  cursor: not-allowed;
+}
+.input-item .hint { font-size: 0.7rem; color: #999; font-style: italic; }
+
+.resultado-box {
+  background: linear-gradient(135deg, #fff7eb, #ffeed4);
+  border: 2px solid var(--principal, #D4700A);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.resultado-box .res-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #8a6d1a;
+}
+.resultado-box .res-eq {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--principal, #D4700A);
+  margin: 4px 0;
+}
+.resultado-box .res-interp { font-size: 0.88rem; color: #555; line-height: 1.5; margin-top: 6px; }
+.resultado-box .res-interp strong { color: #222; }
+
+.btn-row { display: flex; gap: 10px; }
+.btn-primary {
+  background: var(--principal, #D4700A); color: #fff;
+  border: none; border-radius: 8px;
+  padding: 0.6rem 1.2rem; font-family: 'Barlow', sans-serif;
+  font-weight: 600; font-size: 0.9rem; cursor: pointer;
+  flex: 1;
+}
+.btn-primary:hover:not(:disabled) { background: #b85d08; }
+.btn-secondary {
+  background: #fff; color: #666; border: 1px solid #ccc; border-radius: 8px;
+  padding: 0.6rem 1.2rem; font-family: 'Barlow', sans-serif;
+  font-weight: 600; font-size: 0.9rem; cursor: pointer;
+}
+.btn-secondary:hover { background: #f5f5f5; }
+
+/* SVG transmisión */
+.svg-fig .rueda-motriz { fill: #f0d5cf; stroke: var(--motriz); stroke-width: 2.5; }
+.svg-fig .rueda-conducida { fill: #d5e0ec; stroke: var(--conducida); stroke-width: 2.5; }
+.svg-fig .eje { fill: #555; stroke: #222; stroke-width: 1; }
+.svg-fig .diente-motriz { fill: var(--motriz); stroke: #8a3326; stroke-width: 1; }
+.svg-fig .diente-conducida { fill: var(--conducida); stroke: #1a3d59; stroke-width: 1; }
+.svg-fig .correa {
+  stroke: #444;
+  stroke-width: 6;
+  fill: none;
+  stroke-linecap: round;
+}
+.svg-fig .correa-inner {
+  stroke: #888;
+  stroke-width: 4;
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 6 3;
+}
+.svg-fig text { font-family: 'JetBrains Mono', monospace; font-size: 11px; fill: #444; }
+.svg-fig text.label-motriz { fill: var(--motriz); font-weight: 700; }
+.svg-fig text.label-conducida { fill: var(--conducida); font-weight: 700; }
+.svg-fig .marker-pos { stroke-width: 2; fill: #fff; stroke: #222; }
+
+.rotate-group {
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.relacion-pill {
+  background: var(--principal, #D4700A);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 14px;
+  font-size: 0.85rem;
+  display: inline-block;
+  margin-top: 6px;
+}
+
+@media (max-width: 720px) {
+  .calc-area { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U04 · Mecanismos · Transmisión circular</span>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Inicio</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U04</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📘</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>⚙️</span><span class="nc-lbl">Transmisión</span></span>
+</nav>
+
+<div class="unidad-layout">
+
+<aside class="sb-side">
+  <h3>La fórmula clave</h3>
+  <div style="padding: 0.6rem 1rem; font-size:0.88rem; color:#555; line-height:1.55;">
+    <p><strong>n₁ · D₁ = n₂ · D₂</strong></p>
+    <p>(o <strong>n₁ · Z₁ = n₂ · Z₂</strong> para engranajes)</p>
+    <p>n = velocidad de giro (RPM)<br>
+       D = diámetro (mm)<br>
+       Z = número de dientes</p>
+  </div>
+  <h3>Relación de transmisión</h3>
+  <p style="padding: 0.6rem 1rem; font-size:0.86rem; color:#555; line-height:1.55;">
+    <strong>i = n₂ / n₁</strong><br><br>
+    Si <strong>i &gt; 1</strong> → la conducida va más rápido (sistema multiplicador).<br>
+    Si <strong>i &lt; 1</strong> → la conducida va más lenta (sistema reductor).<br>
+    Si <strong>i = 1</strong> → misma velocidad.
+  </p>
+</aside>
+
+<main class="ct" id="main-content">
+
+<h1 class="unidad-titulo">⚙️ Transmisión circular</h1>
+<p class="unidad-subt">Tres sistemas para transmitir movimiento de giro: ruedas de fricción, poleas con correa y engranajes.</p>
+
+<div class="tipos-tabs" role="tablist" aria-label="Tipo de sistema">
+  <button id="tab-friccion" class="active" onclick="setSistema('friccion')">
+    <span class="tab-em">🔘</span>Ruedas fricción
+  </button>
+  <button id="tab-correa" onclick="setSistema('correa')">
+    <span class="tab-em">🪢</span>Poleas + correa
+  </button>
+  <button id="tab-engranajes" onclick="setSistema('engranajes')">
+    <span class="tab-em">⚙️</span>Engranajes
+  </button>
+</div>
+
+<div class="bloque">
+  <div class="sistema-info" id="sistema-info">
+    <h3 id="si-titulo">Ruedas de fricción</h3>
+    <p id="si-desc">Dos ruedas en <strong>contacto directo</strong>: una empuja a la otra por rozamiento. Se usan en distancias cortas.</p>
+    <p><strong>Sentido:</strong> <span id="si-sentido">opuesto</span> (las dos ruedas giran en direcciones contrarias).</p>
+    <div class="formula-inline" id="si-formula">Fórmula: n₁ · D₁ = n₂ · D₂</div>
+  </div>
+
+  <div class="calc-area">
+    <div class="svg-wrap">
+      <svg id="svg-trans" class="svg-fig" viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg" aria-label="Esquema de transmisión circular"></svg>
+    </div>
+
+    <div class="controles">
+
+      <div class="rueda-card motriz">
+        <div class="rueda-titulo">
+          <span>Rueda 1 · MOTRIZ</span>
+          <span class="badge" id="badge-1">entrada</span>
+        </div>
+        <div class="input-grid">
+          <div class="input-item">
+            <label id="lbl-1a">Diámetro D₁</label>
+            <input type="number" id="in-1a" min="1" step="1" value="50">
+            <span class="hint" id="hint-1a">mm</span>
+          </div>
+          <div class="input-item">
+            <label>RPM n₁</label>
+            <input type="number" id="in-1b" min="1" step="1" value="100">
+            <span class="hint">rev/min</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rueda-card conducida">
+        <div class="rueda-titulo">
+          <span>Rueda 2 · CONDUCIDA</span>
+          <span class="badge" id="badge-2">salida</span>
+        </div>
+        <div class="input-grid">
+          <div class="input-item">
+            <label id="lbl-2a">Diámetro D₂</label>
+            <input type="number" id="in-2a" min="1" step="1" value="100">
+            <span class="hint" id="hint-2a">mm</span>
+          </div>
+          <div class="input-item">
+            <label>RPM n₂ <span style="color:var(--ok);">(calculada)</span></label>
+            <input type="number" id="out-2b" readonly class="locked">
+            <span class="hint">rev/min</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="resultado-box">
+        <div class="res-label">Relación de transmisión</div>
+        <div class="res-eq" id="res-eq">i = —</div>
+        <div class="res-interp" id="res-interp">Introduce los datos para ver el resultado.</div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-primary" onclick="calcular()">▶ Calcular</button>
+        <button class="btn-secondary" onclick="toggleAnimacion()" id="btn-animar">▶ Animar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bloque">
+  <h2>📚 Recuerda</h2>
+  <p style="color:#555; line-height: 1.6;">La <strong>velocidad lineal</strong> de las ruedas en contacto (o de la correa) es la misma en ambas: <strong>v₁ = v₂</strong>. De ahí sale la fórmula <strong>n₁ · D₁ = n₂ · D₂</strong>. En los engranajes se usan los <strong>dientes Z</strong> en vez del diámetro porque deben ser del mismo módulo para engranar. Las ruedas de fricción y los engranajes giran en sentidos <strong>opuestos</strong>; las poleas con correa, en el mismo sentido (si la correa va recta).</p>
+</div>
+
+</main>
+</div>
+
+<script>
+const SISTEMAS = {
+  friccion: {
+    titulo: 'Ruedas de fricción',
+    desc: 'Dos ruedas en <strong>contacto directo</strong>: una empuja a la otra por rozamiento. Se usan en distancias cortas.',
+    sentido: 'opuesto (las dos ruedas giran en direcciones contrarias)',
+    formula: 'Fórmula: n₁ · D₁ = n₂ · D₂',
+    param: 'D', unidad: 'mm',
+    sentidoNum: -1
+  },
+  correa: {
+    titulo: 'Poleas con correa',
+    desc: 'Dos poleas unidas por una <strong>correa flexible</strong>. Permiten transmitir movimiento entre ejes alejados.',
+    sentido: 'mismo sentido (si la correa va recta, sin cruzar)',
+    formula: 'Fórmula: n₁ · D₁ = n₂ · D₂',
+    param: 'D', unidad: 'mm',
+    sentidoNum: 1
+  },
+  engranajes: {
+    titulo: 'Engranajes',
+    desc: 'Ruedas dentadas que <strong>engranan</strong> directamente. Son la transmisión más precisa: no deslizan ni se aflojan.',
+    sentido: 'opuesto (engranajes adyacentes giran en sentidos contrarios)',
+    formula: 'Fórmula: n₁ · Z₁ = n₂ · Z₂',
+    param: 'Z', unidad: 'dientes',
+    sentidoNum: -1
+  }
+};
+
+let sistemaActual = 'friccion';
+let animando = false;
+let animFrame = null;
+let angle1 = 0, angle2 = 0;
+
+function setSistema(s) {
+  sistemaActual = s;
+  ['friccion', 'correa', 'engranajes'].forEach(k =>
+    document.getElementById('tab-' + k).classList.toggle('active', k === s));
+  const info = SISTEMAS[s];
+  document.getElementById('si-titulo').textContent = info.titulo;
+  document.getElementById('si-desc').innerHTML = info.desc;
+  document.getElementById('si-sentido').textContent = info.sentido;
+  document.getElementById('si-formula').textContent = info.formula;
+  document.getElementById('lbl-1a').textContent = (info.param === 'D' ? 'Diámetro D₁' : 'Dientes Z₁');
+  document.getElementById('lbl-2a').textContent = (info.param === 'D' ? 'Diámetro D₂' : 'Dientes Z₂');
+  document.getElementById('hint-1a').textContent = info.unidad;
+  document.getElementById('hint-2a').textContent = info.unidad;
+  // Valores por defecto sensatos según sistema
+  if (s === 'engranajes') {
+    document.getElementById('in-1a').value = 12;
+    document.getElementById('in-2a').value = 24;
+  } else {
+    document.getElementById('in-1a').value = 50;
+    document.getElementById('in-2a').value = 100;
+  }
+  document.getElementById('in-1b').value = 100;
+  dibujar();
+  calcular();
+}
+
+function leerValor(id) {
+  const v = parseFloat(document.getElementById(id).value);
+  return (isNaN(v) || v <= 0) ? null : v;
+}
+
+function calcular() {
+  const p1 = leerValor('in-1a');
+  const n1 = leerValor('in-1b');
+  const p2 = leerValor('in-2a');
+  if (p1 === null || n1 === null || p2 === null) {
+    document.getElementById('out-2b').value = '';
+    document.getElementById('res-eq').textContent = 'i = —';
+    document.getElementById('res-interp').textContent = 'Introduce valores positivos.';
+    return;
+  }
+  const n2 = (n1 * p1) / p2;
+  const i = n2 / n1;
+  document.getElementById('out-2b').value = (n2 % 1 === 0) ? n2.toString() : n2.toFixed(2);
+  document.getElementById('res-eq').textContent = 'i = n₂ / n₁ = ' + (i % 1 === 0 ? i.toString() : i.toFixed(3));
+
+  const interp = document.getElementById('res-interp');
+  if (Math.abs(i - 1) < 0.001) {
+    interp.innerHTML = '<strong>Sistema directo:</strong> la rueda 2 gira a la misma velocidad que la 1. No multiplica ni reduce.';
+  } else if (i > 1) {
+    interp.innerHTML = `<strong>Sistema multiplicador:</strong> la rueda 2 gira <strong>${i.toFixed(2)} veces más rápido</strong> que la 1, pero con menos par (menos fuerza de giro).`;
+  } else {
+    interp.innerHTML = `<strong>Sistema reductor:</strong> la rueda 2 gira <strong>${(1/i).toFixed(2)} veces más lenta</strong> que la 1, pero con más par (más fuerza de giro). Es lo que usan los coches en marchas cortas.`;
+  }
+  dibujar();
+}
+
+function dibujar() {
+  const svg = document.getElementById('svg-trans');
+  const info = SISTEMAS[sistemaActual];
+  const p1 = leerValor('in-1a') || 50;
+  const p2 = leerValor('in-2a') || 100;
+  // Escalado visual: mantener razón pero limitar tamaño máximo y mínimo
+  const escala = 60 / Math.max(p1, p2);
+  let r1 = p1 * escala;
+  let r2 = p2 * escala;
+  // Asegurar mínimo visible
+  r1 = Math.max(r1, 18);
+  r2 = Math.max(r2, 18);
+
+  const cx1 = 130, cy = 160;
+  const cx2 = cx1 + r1 + r2 + (sistemaActual === 'correa' ? 100 : 0);
+
+  let svgContent = '';
+
+  if (sistemaActual === 'friccion') {
+    svgContent += `
+      <g class="rotate-group" transform="rotate(${angle1} ${cx1} ${cy})">
+        <circle cx="${cx1}" cy="${cy}" r="${r1}" class="rueda-motriz"/>
+        <line x1="${cx1}" y1="${cy - r1 + 4}" x2="${cx1}" y2="${cy - r1/3}" stroke="#8a3326" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="${cx1}" cy="${cy}" r="4" class="eje"/>
+      </g>
+      <g class="rotate-group" transform="rotate(${angle2} ${cx2} ${cy})">
+        <circle cx="${cx2}" cy="${cy}" r="${r2}" class="rueda-conducida"/>
+        <line x1="${cx2}" y1="${cy - r2 + 4}" x2="${cx2}" y2="${cy - r2/3}" stroke="#1a3d59" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="${cx2}" cy="${cy}" r="4" class="eje"/>
+      </g>
+      <text x="${cx1}" y="${cy + r1 + 25}" text-anchor="middle" class="label-motriz">Motriz</text>
+      <text x="${cx2}" y="${cy + r2 + 25}" text-anchor="middle" class="label-conducida">Conducida</text>
+      <text x="${cx1}" y="${cy + r1 + 40}" text-anchor="middle" class="label-motriz">D₁ = ${p1} mm</text>
+      <text x="${cx2}" y="${cy + r2 + 40}" text-anchor="middle" class="label-conducida">D₂ = ${p2} mm</text>
+    `;
+  } else if (sistemaActual === 'correa') {
+    const dist = cx2 - cx1;
+    // Correa tangente externa: aproximación con líneas rectas horizontales
+    const tangY1 = cy - r1;
+    const tangY2 = cy - r2;
+    // Para simplificar: si los radios son distintos, las tangentes están ligeramente inclinadas.
+    // Aquí usamos un arco superior y otro inferior con curvas suaves.
+    svgContent += `
+      <path d="M ${cx1} ${cy - r1} A ${r1} ${r1} 0 1 0 ${cx1} ${cy + r1}
+               L ${cx2} ${cy + r2} A ${r2} ${r2} 0 1 0 ${cx2} ${cy - r2} Z"
+            fill="#ccc" stroke="none" opacity="0.3"/>
+      <line x1="${cx1}" y1="${cy - r1}" x2="${cx2}" y2="${cy - r2}" class="correa"/>
+      <line x1="${cx1}" y1="${cy + r1}" x2="${cx2}" y2="${cy + r2}" class="correa"/>
+      <g class="rotate-group" transform="rotate(${angle1} ${cx1} ${cy})">
+        <circle cx="${cx1}" cy="${cy}" r="${r1}" class="rueda-motriz"/>
+        <line x1="${cx1}" y1="${cy - r1 + 4}" x2="${cx1}" y2="${cy - r1/3}" stroke="#8a3326" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="${cx1}" cy="${cy}" r="4" class="eje"/>
+      </g>
+      <g class="rotate-group" transform="rotate(${angle2} ${cx2} ${cy})">
+        <circle cx="${cx2}" cy="${cy}" r="${r2}" class="rueda-conducida"/>
+        <line x1="${cx2}" y1="${cy - r2 + 4}" x2="${cx2}" y2="${cy - r2/3}" stroke="#1a3d59" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="${cx2}" cy="${cy}" r="4" class="eje"/>
+      </g>
+      <text x="${cx1}" y="${cy + r1 + 25}" text-anchor="middle" class="label-motriz">Polea 1</text>
+      <text x="${cx2}" y="${cy + r2 + 25}" text-anchor="middle" class="label-conducida">Polea 2</text>
+      <text x="${cx1}" y="${cy + r1 + 40}" text-anchor="middle" class="label-motriz">D₁ = ${p1} mm</text>
+      <text x="${cx2}" y="${cy + r2 + 40}" text-anchor="middle" class="label-conducida">D₂ = ${p2} mm</text>
+    `;
+  } else if (sistemaActual === 'engranajes') {
+    // Engranajes: representamos dientes como pequeñas líneas en el contorno
+    const z1 = Math.round(p1);
+    const z2 = Math.round(p2);
+    // Para que engranen visualmente, los dientes deben tener el mismo "módulo".
+    // m = D/Z. Si forzamos m=1 visualmente, r1 = z1/2, r2 = z2/2.
+    // Pero queremos mantener escala razonable.
+    // Visualización: dibujamos cada diente como una pequeña línea radial saliente.
+    let dientes1 = '';
+    const r1_outer = r1 + 6;
+    for (let i = 0; i < z1; i++) {
+      const ang = (2 * Math.PI * i) / z1;
+      const x1 = cx1 + r1 * Math.cos(ang), y1 = cy + r1 * Math.sin(ang);
+      const x2 = cx1 + r1_outer * Math.cos(ang), y2 = cy + r1_outer * Math.sin(ang);
+      dientes1 += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#8a3326" stroke-width="2" stroke-linecap="round"/>`;
+    }
+    let dientes2 = '';
+    const r2_outer = r2 + 6;
+    for (let i = 0; i < z2; i++) {
+      const ang = (2 * Math.PI * i) / z2;
+      const x1 = cx2 + r2 * Math.cos(ang), y1 = cy + r2 * Math.sin(ang);
+      const x2 = cx2 + r2_outer * Math.cos(ang), y2 = cy + r2_outer * Math.sin(ang);
+      dientes2 += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#1a3d59" stroke-width="2" stroke-linecap="round"/>`;
+    }
+
+    svgContent += `
+      <g class="rotate-group" transform="rotate(${angle1} ${cx1} ${cy})">
+        <circle cx="${cx1}" cy="${cy}" r="${r1}" class="rueda-motriz"/>
+        ${dientes1}
+        <line x1="${cx1}" y1="${cy - r1 + 4}" x2="${cx1}" y2="${cy - r1/3}" stroke="#8a3326" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="${cx1}" cy="${cy}" r="4" class="eje"/>
+      </g>
+      <g class="rotate-group" transform="rotate(${angle2} ${cx2} ${cy})">
+        <circle cx="${cx2}" cy="${cy}" r="${r2}" class="rueda-conducida"/>
+        ${dientes2}
+        <line x1="${cx2}" y1="${cy - r2 + 4}" x2="${cx2}" y2="${cy - r2/3}" stroke="#1a3d59" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="${cx2}" cy="${cy}" r="4" class="eje"/>
+      </g>
+      <text x="${cx1}" y="${cy + r1 + 30}" text-anchor="middle" class="label-motriz">Piñón</text>
+      <text x="${cx2}" y="${cy + r2 + 30}" text-anchor="middle" class="label-conducida">Rueda</text>
+      <text x="${cx1}" y="${cy + r1 + 45}" text-anchor="middle" class="label-motriz">Z₁ = ${z1} dientes</text>
+      <text x="${cx2}" y="${cy + r2 + 45}" text-anchor="middle" class="label-conducida">Z₂ = ${z2} dientes</text>
+    `;
+  }
+
+  svg.innerHTML = svgContent;
+}
+
+function toggleAnimacion() {
+  animando = !animando;
+  document.getElementById('btn-animar').textContent = animando ? '⏸ Pausar' : '▶ Animar';
+  if (animando) animar(); else cancelAnimationFrame(animFrame);
+}
+
+function animar() {
+  if (!animando) return;
+  const info = SISTEMAS[sistemaActual];
+  const p1 = leerValor('in-1a') || 50;
+  const p2 = leerValor('in-2a') || 100;
+  // Velocidad angular: la rueda 2 gira a velocidad proporcional a la relación
+  const v1 = 2; // grados por frame
+  const v2 = v1 * (p1 / p2) * info.sentidoNum;
+  angle1 = (angle1 + v1) % 360;
+  angle2 = (angle2 + v2 + 360) % 360;
+  dibujar();
+  animFrame = requestAnimationFrame(animar);
+}
+
+document.getElementById('in-1a').addEventListener('input', calcular);
+document.getElementById('in-1b').addEventListener('input', calcular);
+document.getElementById('in-2a').addEventListener('input', calcular);
+
+// Inicialización
+setSistema('friccion');
+</script>
+
+<footer style="text-align:center; padding:2rem 1rem 1rem; color:#888; font-size:0.85rem;">
+  <p>⚙️ Transmisión circular · TyD 2º ESO · Unidad 4</p>
+  <p><a href="../index.html" style="color:#D4700A; text-decoration:none;">← Volver al hub de la unidad</a></p>
+  <p style="margin-top:8px; font-family:'JetBrains Mono', monospace; font-size:0.72rem; opacity:0.6;">v1.0</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Clasificador de materiales · U02 · TyD 2º ESO</title>
+<meta name="description" content="Interactivo del clasificador de materiales: 30 objetos cotidianos en 6 familias. Explora primero, clasifica después. TyD 2º ESO.">
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/02-materiales/interactivos/clasificador.html">
+
+<meta property="og:title" content="Clasificador de materiales · U02 · TyD 2º ESO">
+<meta property="og:description" content="30 objetos cotidianos en 6 familias. Explora primero, clasifica después.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/02-materiales/interactivos/clasificador.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Clasificador de materiales · U02 · TyD 2º ESO">
+<meta name="twitter:description" content="30 objetos cotidianos en 6 familias.">
+<meta name="twitter:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+:root {
+  --ok: #2e7d4f;
+  --err: #c44536;
+  --warn: #e8b647;
+  --fam-papel: #6b8caf;
+  --fam-madera: #a36d3e;
+  --fam-polimero: #c44a8a;
+  --fam-metal: #5c6c7c;
+  --fam-ceramico: #c87f2c;
+  --fam-textil: #4d8474;
+}
+
+/* ════ MODO TOGGLE ════ */
+.modo-toggle {
+  display: flex;
+  gap: 0.4rem;
+  background: #f0f0f0;
+  padding: 4px;
+  border-radius: 10px;
+  margin: 1rem 0 1.4rem;
+}
+.modo-toggle button {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 0.6rem 0.8rem;
+  border-radius: 7px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.15s;
+}
+.modo-toggle button.active {
+  background: var(--principal, #D4700A);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(212,112,10,0.3);
+}
+
+/* ════ TARJETAS BASE ════ */
+.bloque {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 14px;
+  padding: 1.4rem 1.6rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+.bloque h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--principal, #D4700A);
+  margin: 0 0 0.5rem;
+  border-bottom: 2px solid var(--principal, #D4700A);
+  padding-bottom: 0.4rem;
+}
+.bloque p.descripcion {
+  color: #555;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+/* ════ FILTROS FAMILIA ════ */
+.fam-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 1rem 0;
+}
+.fam-filtros button {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  border: 2px solid #ddd;
+  background: #fff;
+  color: #555;
+  padding: 0.4rem 0.9rem;
+  border-radius: 18px;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.fam-filtros button:hover { border-color: #aaa; }
+.fam-filtros button.active {
+  background: var(--principal, #D4700A);
+  border-color: var(--principal, #D4700A);
+  color: #fff;
+}
+.fam-filtros .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* ════ GALERÍA DE OBJETOS ════ */
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  margin: 1rem 0;
+}
+.obj-card {
+  background: #fafafa;
+  border: 2px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 14px 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s;
+  position: relative;
+}
+.obj-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--principal, #D4700A);
+  box-shadow: 0 4px 14px rgba(212,112,10,0.15);
+}
+.obj-card.active {
+  border-color: var(--principal, #D4700A);
+  background: #fff7eb;
+}
+.obj-card .obj-emoji {
+  font-size: 2.2rem;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.obj-card .obj-nombre {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 500;
+  font-size: 0.82rem;
+  color: #333;
+  line-height: 1.2;
+}
+.obj-card .fam-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-top: 6px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #fff;
+}
+.fam-tag.papel { background: var(--fam-papel); }
+.fam-tag.madera { background: var(--fam-madera); }
+.fam-tag.polimero { background: var(--fam-polimero); }
+.fam-tag.metal { background: var(--fam-metal); }
+.fam-tag.ceramico { background: var(--fam-ceramico); }
+.fam-tag.textil { background: var(--fam-textil); }
+
+/* ════ FICHA DE EXPLORACIÓN ════ */
+.ficha {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-left: 5px solid var(--principal, #D4700A);
+  border-radius: 12px;
+  padding: 1.4rem 1.6rem;
+  margin: 1rem 0;
+  display: none;
+}
+.ficha.visible { display: block; }
+.ficha-hd {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+.ficha-hd .em {
+  font-size: 2.6rem;
+  line-height: 1;
+}
+.ficha-hd h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin: 0;
+  color: #222;
+}
+.ficha-hd .fam-pill {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #fff;
+  margin-top: 4px;
+}
+.fam-pill.papel { background: var(--fam-papel); }
+.fam-pill.madera { background: var(--fam-madera); }
+.fam-pill.polimero { background: var(--fam-polimero); }
+.fam-pill.metal { background: var(--fam-metal); }
+.fam-pill.ceramico { background: var(--fam-ceramico); }
+.fam-pill.textil { background: var(--fam-textil); }
+
+.ficha-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.ficha-item {
+  background: #fafafa;
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+}
+.ficha-item h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem;
+  color: var(--principal, #D4700A);
+  margin: 0 0 4px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.ficha-item p {
+  font-size: 0.92rem;
+  color: #444;
+  margin: 0;
+  line-height: 1.45;
+}
+.ficha-item.full { grid-column: 1 / -1; }
+.ficha-cierre {
+  text-align: right;
+  margin-top: 12px;
+}
+.ficha-cierre button {
+  background: transparent;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.3rem 0.8rem;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: #666;
+}
+.ficha-cierre button:hover { background: #f0f0f0; }
+
+/* ════ MODO CLASIFICAR ════ */
+.cl-hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 1rem;
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+}
+.cl-hud .hud-item {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.78rem;
+  color: #888;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+.cl-hud .hud-item strong {
+  font-size: 1.4rem;
+  color: var(--principal, #D4700A);
+  font-weight: 700;
+}
+.cl-hud .hud-item.aciertos strong { color: var(--ok); }
+.cl-hud .hud-item.fallos strong { color: var(--err); }
+.cl-hud .hud-progress {
+  flex: 1;
+  height: 8px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.cl-hud .hud-progress .bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--principal, #D4700A), #f0a040);
+  transition: width 0.3s;
+  width: 0%;
+}
+
+.cl-obj {
+  background: #fff;
+  border: 2px solid var(--principal, #D4700A);
+  border-radius: 14px;
+  padding: 2rem 1.6rem;
+  text-align: center;
+  margin: 1.4rem 0;
+  position: relative;
+}
+.cl-obj .obj-em-big {
+  font-size: 5rem;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.cl-obj .obj-pregunta {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.1rem;
+  color: #888;
+  margin-bottom: 4px;
+  letter-spacing: 0.4px;
+}
+.cl-obj .obj-nombre-big {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  color: #222;
+  margin-bottom: 6px;
+}
+.cl-obj .obj-hint {
+  font-size: 0.88rem;
+  color: #999;
+  font-style: italic;
+}
+
+.cl-botonera {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin: 1.2rem 0;
+}
+.cl-bt {
+  background: #fff;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 1rem 0.6rem;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.96rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: #333;
+}
+.cl-bt .bt-em { font-size: 1.6rem; line-height: 1; }
+.cl-bt:hover {
+  border-color: var(--principal, #D4700A);
+  background: #fff7eb;
+}
+.cl-bt:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.cl-bt.correcto {
+  background: #dff2e6;
+  border-color: var(--ok);
+  color: var(--ok);
+}
+.cl-bt.incorrecto {
+  background: #fce4e1;
+  border-color: var(--err);
+  color: var(--err);
+}
+
+.cl-feedback {
+  background: #fafafa;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 1rem 0;
+  display: none;
+  border-left: 4px solid #ccc;
+}
+.cl-feedback.visible { display: block; }
+.cl-feedback.ok {
+  background: #ecf8ef;
+  border-color: var(--ok);
+}
+.cl-feedback.err {
+  background: #fdedea;
+  border-color: var(--err);
+}
+.cl-feedback h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem;
+  margin: 0 0 6px;
+  color: #333;
+  letter-spacing: 0.3px;
+}
+.cl-feedback.ok h4 { color: var(--ok); }
+.cl-feedback.err h4 { color: var(--err); }
+.cl-feedback p {
+  font-size: 0.92rem;
+  color: #555;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.cl-controles {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+}
+.btn-primary {
+  background: var(--principal, #D4700A);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.4rem;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-primary:hover { background: #b85d08; }
+.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-secondary {
+  background: #fff;
+  color: #666;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0.7rem 1.2rem;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.btn-secondary:hover { background: #f5f5f5; }
+
+/* ════ RESULTADO FINAL ════ */
+.resultado {
+  background: linear-gradient(135deg, #fff7eb, #ffeed4);
+  border: 2px solid var(--principal, #D4700A);
+  border-radius: 14px;
+  padding: 1.8rem;
+  margin: 1.4rem 0;
+  text-align: center;
+  display: none;
+}
+.resultado.visible { display: block; }
+.resultado .res-emoji {
+  font-size: 4rem;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.resultado h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.8rem;
+  color: var(--principal, #D4700A);
+  margin: 0 0 6px;
+}
+.resultado .res-score {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #222;
+  margin: 0.4rem 0;
+}
+.resultado .res-msg {
+  color: #555;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+.resultado .res-detalle {
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 0.6rem;
+}
+
+@media (max-width: 700px) {
+  .ficha-body { grid-template-columns: 1fr; }
+  .cl-obj .obj-nombre-big { font-size: 1.5rem; }
+  .cl-obj .obj-em-big { font-size: 4rem; }
+  .galeria { grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); }
+  .obj-card .obj-emoji { font-size: 1.8rem; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U02 · Materiales · Clasificador</span>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Inicio</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U02</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📘</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🗂️</span><span class="nc-lbl">Clasificador</span></span>
+</nav>
+
+<div class="unidad-layout">
+
+<aside class="sb-side">
+  <h3>Cómo usarlo</h3>
+  <p style="padding: 0.6rem 1rem; font-size:0.88rem; color:#555; line-height:1.55;">
+    <strong>Modo 1 (Explorar):</strong> haz clic en cualquier objeto para ver de qué material está hecho y por qué.<br><br>
+    <strong>Modo 2 (Clasificar):</strong> ronda de 10 objetos al azar. Elige la familia correcta y recibe feedback al instante.
+  </p>
+  <h3>Las 6 familias</h3>
+  <ul style="font-size:0.86rem; color:#555; padding:0 1rem 0 1.4rem; line-height:1.8; list-style:none;">
+    <li>📄 Papel y cartón</li>
+    <li>🪵 Madera</li>
+    <li>🧴 Polímeros</li>
+    <li>⚙️ Metales</li>
+    <li>🏺 Cerámicos</li>
+    <li>👕 Fibras textiles</li>
+  </ul>
+</aside>
+
+<main class="ct" id="main-content">
+
+<h1 class="unidad-titulo">🗂️ Clasificador de materiales</h1>
+<p class="unidad-subt">30 objetos cotidianos y 6 familias. Primero explora, luego clasifica.</p>
+
+<div class="modo-toggle" role="tablist" aria-label="Modo de práctica">
+  <button id="modo-explorar" class="active" onclick="setModo('explorar')">🔍 Explorar (galería)</button>
+  <button id="modo-clasificar" onclick="setModo('clasificar')">🎯 Clasificar (ronda 10)</button>
+</div>
+
+<!-- ════ MODO 1 · EXPLORAR ════ -->
+<section id="vista-explorar">
+  <div class="bloque">
+    <h2>Explora los 30 objetos</h2>
+    <p class="descripcion">Filtra por familia para verlos por grupos, o haz clic directamente en cualquier objeto para abrir su ficha.</p>
+
+    <div class="fam-filtros" id="fam-filtros">
+      <button class="active" data-filter="all">Todas (30)</button>
+      <button data-filter="papel"><span class="dot" style="background:var(--fam-papel)"></span>Papel y cartón</button>
+      <button data-filter="madera"><span class="dot" style="background:var(--fam-madera)"></span>Madera</button>
+      <button data-filter="polimero"><span class="dot" style="background:var(--fam-polimero)"></span>Polímeros</button>
+      <button data-filter="metal"><span class="dot" style="background:var(--fam-metal)"></span>Metales</button>
+      <button data-filter="ceramico"><span class="dot" style="background:var(--fam-ceramico)"></span>Cerámicos</button>
+      <button data-filter="textil"><span class="dot" style="background:var(--fam-textil)"></span>Textiles</button>
+    </div>
+
+    <div class="galeria" id="galeria"></div>
+  </div>
+
+  <div class="ficha" id="ficha">
+    <div class="ficha-hd">
+      <span class="em" id="f-emoji">📦</span>
+      <div>
+        <h3 id="f-nombre">Nombre del objeto</h3>
+        <span class="fam-pill" id="f-pill">Familia</span>
+      </div>
+    </div>
+    <div class="ficha-body">
+      <div class="ficha-item">
+        <h4>Material principal</h4>
+        <p id="f-material">—</p>
+      </div>
+      <div class="ficha-item">
+        <h4>Familia</h4>
+        <p id="f-familia">—</p>
+      </div>
+      <div class="ficha-item full">
+        <h4>Por qué este material</h4>
+        <p id="f-justificacion">—</p>
+      </div>
+    </div>
+    <div class="ficha-cierre">
+      <button onclick="cerrarFicha()">✕ Cerrar ficha</button>
+    </div>
+  </div>
+</section>
+
+<!-- ════ MODO 2 · CLASIFICAR ════ -->
+<section id="vista-clasificar" style="display:none;">
+  <div class="cl-hud">
+    <div class="hud-item">
+      <span>Ronda</span>
+      <strong id="cl-num">1<span style="font-size:0.9rem; color:#aaa; font-weight:400;">/10</span></strong>
+    </div>
+    <div class="hud-progress"><div class="bar" id="cl-bar"></div></div>
+    <div class="hud-item aciertos">
+      <span>Aciertos</span>
+      <strong id="cl-ok">0</strong>
+    </div>
+    <div class="hud-item fallos">
+      <span>Fallos</span>
+      <strong id="cl-err">0</strong>
+    </div>
+  </div>
+
+  <div class="cl-obj" id="cl-obj">
+    <div class="obj-em-big" id="cl-em">📦</div>
+    <div class="obj-pregunta">¿A qué familia pertenece?</div>
+    <div class="obj-nombre-big" id="cl-name">—</div>
+    <div class="obj-hint">Piensa en el material dominante, no en la función.</div>
+  </div>
+
+  <div class="cl-botonera" id="cl-bots">
+    <button class="cl-bt" data-fam="papel"><span class="bt-em">📄</span>Papel y cartón</button>
+    <button class="cl-bt" data-fam="madera"><span class="bt-em">🪵</span>Madera</button>
+    <button class="cl-bt" data-fam="polimero"><span class="bt-em">🧴</span>Polímeros</button>
+    <button class="cl-bt" data-fam="metal"><span class="bt-em">⚙️</span>Metales</button>
+    <button class="cl-bt" data-fam="ceramico"><span class="bt-em">🏺</span>Cerámicos</button>
+    <button class="cl-bt" data-fam="textil"><span class="bt-em">👕</span>Textiles</button>
+  </div>
+
+  <div class="cl-feedback" id="cl-feedback">
+    <h4 id="cl-fb-titulo">¡Correcto!</h4>
+    <p id="cl-fb-texto">Mensaje de feedback</p>
+  </div>
+
+  <div class="cl-controles">
+    <button class="btn-primary" id="cl-next" onclick="siguienteObjeto()" disabled>Siguiente →</button>
+    <button class="btn-secondary" onclick="reiniciarRonda()">↺ Reiniciar ronda</button>
+  </div>
+
+  <div class="resultado" id="cl-resultado">
+    <div class="res-emoji" id="res-emoji">🎉</div>
+    <h3 id="res-titulo">¡Ronda terminada!</h3>
+    <div class="res-score" id="res-score">0/10</div>
+    <p class="res-msg" id="res-msg">—</p>
+    <button class="btn-primary" onclick="reiniciarRonda()">↺ Nueva ronda</button>
+    <p class="res-detalle">Cada ronda se sortean 10 objetos diferentes entre los 30 disponibles.</p>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════
+//  CATÁLOGO DE 30 OBJETOS · 5 por familia
+// ══════════════════════════════════════════════════════════
+const OBJETOS = [
+  // ── Papel y cartón (5) ──
+  { id:'libreta',   em:'📓', nombre:'Libreta de clase',    fam:'papel',    mat:'papel offset',           why:'El papel es ligero, fácil de escribir encima y barato. Su porosidad permite que la tinta se absorba bien.' },
+  { id:'caja',      em:'📦', nombre:'Caja de cartón',      fam:'papel',    mat:'cartón ondulado',         why:'El rizo intermedio del cartón ondulado distribuye la carga: aguanta mucho peso siendo ligero y barato.' },
+  { id:'periodico', em:'📰', nombre:'Periódico',           fam:'papel',    mat:'papel de prensa',         why:'Papel fino y poroso, fabricado en grandes bobinas. Pensado para un solo uso: bajo coste prima sobre durabilidad.' },
+  { id:'panuelo',   em:'🧻', nombre:'Pañuelo de papel',    fam:'papel',    mat:'papel tisú',              why:'Papel suave de baja gramaje, absorbente. Pensado para ser desechado: por eso es tan ligero.' },
+  { id:'huevera',   em:'🥚', nombre:'Huevera',             fam:'papel',    mat:'cartón prensado',         why:'Cartón moldeado de fibras recicladas: amortigua los golpes y es 100% biodegradable. Ideal para huevos frágiles.' },
+
+  // ── Madera (5) ──
+  { id:'lapiz',     em:'✏️', nombre:'Lápiz',               fam:'madera',   mat:'madera de cedro',         why:'La madera de cedro es blanda, lo que permite afilarla fácilmente sin romper la mina interior.' },
+  { id:'mesa',      em:'🪑', nombre:'Mesa de escritorio',  fam:'madera',   mat:'tablero MDF chapado',     why:'Los tableros MDF son estables (no se deforman con la humedad), planos y económicos. La chapa decorativa los hace bonitos.' },
+  { id:'escoba',    em:'🧹', nombre:'Palo de escoba',      fam:'madera',   mat:'madera de pino',          why:'Madera blanda de crecimiento rápido: ligera, barata y resistente a las fuerzas de empuje al barrer.' },
+  { id:'tabla',     em:'🍞', nombre:'Tabla de cortar',     fam:'madera',   mat:'madera dura (haya)',      why:'Madera dura: resiste los cortes del cuchillo sin marcarse demasiado, y es naturalmente antibacteriana.' },
+  { id:'palillo',   em:'🦷', nombre:'Palillo de dientes',  fam:'madera',   mat:'madera de abedul',        why:'Madera de abedul: muy ligera, fácil de cortar en piezas finas y biodegradable. Un solo uso, sin residuo plástico.' },
+
+  // ── Polímeros (5) ──
+  { id:'botella',   em:'🧴', nombre:'Botella de agua',     fam:'polimero', mat:'PET (polímero 1)',        why:'El PET es transparente, ligero, irrompible y barato. Su gran inconveniente: tarda más de 400 años en degradarse.' },
+  { id:'cubo',      em:'🪣', nombre:'Cubo de fregona',     fam:'polimero', mat:'polipropileno (PP)',      why:'El PP es resistente al agua y a los detergentes, es flexible pero rígido, y aguanta golpes sin romperse.' },
+  { id:'regla',     em:'📏', nombre:'Regla escolar',       fam:'polimero', mat:'poliestireno (PS)',       why:'El PS rígido permite obtener una pieza fina, transparente y económica. Su desventaja: se rompe con facilidad si se dobla.' },
+  { id:'mando',     em:'📺', nombre:'Mando a distancia',   fam:'polimero', mat:'ABS (termoplástico)',     why:'El ABS es resistente a los golpes, aislante eléctrico (protege el circuito) y se moldea con detalle por inyección.' },
+  { id:'neumatico', em:'🛞', nombre:'Neumático de coche', fam:'polimero', mat:'caucho (elastómero)',     why:'El caucho vulcanizado es elástico (amortigua el camino) y agarra al asfalto por fricción. Sintético y reforzado con metal.' },
+
+  // ── Metales (5) ──
+  { id:'lata',      em:'🥤', nombre:'Lata de refresco',    fam:'metal',    mat:'aluminio',                why:'El aluminio es ligero, no se oxida (forma una capa protectora) y se recicla un número infinito de veces sin perder propiedades.' },
+  { id:'llave',     em:'🔑', nombre:'Llave',               fam:'metal',    mat:'latón (Cu+Zn)',           why:'El latón es duro y resistente al desgaste por fricción. Se mecaniza con precisión: las muescas de la llave deben ser exactas.' },
+  { id:'tijeras',   em:'✂️', nombre:'Tijeras',             fam:'metal',    mat:'acero inoxidable',        why:'El acero inoxidable es duro (filo afilado que dura), tenaz (no se rompe de un golpe) y no se oxida al lavarse.' },
+  { id:'tornillo',  em:'🔩', nombre:'Tornillo',            fam:'metal',    mat:'acero al carbono',        why:'El acero al carbono soporta enormes tensiones de tracción al apretarse. Suele galvanizarse para protegerlo de la oxidación.' },
+  { id:'cable',     em:'🔌', nombre:'Cable eléctrico',     fam:'metal',    mat:'cobre',                   why:'El cobre es el mejor conductor eléctrico de uso común. Muy dúctil: se estira en hilos finísimos sin romperse.' },
+
+  // ── Cerámicos (5) ──
+  { id:'taza',      em:'☕', nombre:'Taza de café',        fam:'ceramico', mat:'porcelana',               why:'La porcelana aguanta líquidos calientes sin agrietarse, no reacciona con la comida y es fácil de limpiar.' },
+  { id:'baldosa',   em:'🟫', nombre:'Baldosa de baño',     fam:'ceramico', mat:'gres porcelánico',        why:'El gres es impermeable, duro (no se raya con facilidad) y resistente a los productos de limpieza. Ideal para suelos.' },
+  { id:'ventana',   em:'🪟', nombre:'Cristal de ventana',  fam:'ceramico', mat:'vidrio plano (flotado)',  why:'El vidrio flotado es perfectamente liso y transparente. Aísla térmicamente y deja pasar la luz, pero es muy frágil al impacto.' },
+  { id:'ladrillo',  em:'🧱', nombre:'Ladrillo',            fam:'ceramico', mat:'arcilla cocida',          why:'El ladrillo aguanta enorme compresión (peso encima), aísla del calor y dura siglos. Es la base de la construcción tradicional.' },
+  { id:'vidrio',    em:'🍾', nombre:'Botella de vidrio',   fam:'ceramico', mat:'vidrio sódico-cálcico',   why:'El vidrio es inerte (no reacciona con líquidos) y reciclable infinitas veces. Por eso se usa en bebidas y conservas.' },
+
+  // ── Fibras textiles (5) ──
+  { id:'camiseta',  em:'👕', nombre:'Camiseta',            fam:'textil',   mat:'algodón',                 why:'El algodón es transpirable, absorbe el sudor y es suave al tacto. Fibra natural por excelencia para ropa interior y deporte.' },
+  { id:'mochila',   em:'🎒', nombre:'Mochila escolar',     fam:'textil',   mat:'poliéster + nailon',      why:'El poliéster y el nailon son fibras sintéticas muy resistentes a la abrasión, ligeras y repelen un poco el agua.' },
+  { id:'calcetin',  em:'🧦', nombre:'Calcetín',            fam:'textil',   mat:'algodón + elastano',      why:'El algodón da transpirabilidad; el elastano (licra), elasticidad para que se ajuste y mantenga la forma.' },
+  { id:'cordon',    em:'👟', nombre:'Cordón de zapatilla', fam:'textil',   mat:'poliéster trenzado',      why:'El poliéster trenzado es resistente, no se deshilacha y aguanta la fricción del nudo y la suciedad.' },
+  { id:'toalla',    em:'🛁', nombre:'Toalla',              fam:'textil',   mat:'algodón rizado',          why:'El algodón rizado tiene una superficie con muchas hebras pequeñas: aumenta la superficie de contacto para absorber el agua rápido.' }
+];
+
+const FAM_INFO = {
+  papel:    { nombre: 'Papel y cartón',    em: '📄', tag: 'papel' },
+  madera:   { nombre: 'Madera',            em: '🪵', tag: 'madera' },
+  polimero: { nombre: 'Polímeros',         em: '🧴', tag: 'polimero' },
+  metal:    { nombre: 'Metales',           em: '⚙️', tag: 'metal' },
+  ceramico: { nombre: 'Cerámicos',         em: '🏺', tag: 'ceramico' },
+  textil:   { nombre: 'Fibras textiles',   em: '👕', tag: 'textil' }
+};
+
+// ══════════════════════════════════════════════════════════
+//  MODO TOGGLE
+// ══════════════════════════════════════════════════════════
+function setModo(modo) {
+  document.getElementById('vista-explorar').style.display = (modo === 'explorar') ? '' : 'none';
+  document.getElementById('vista-clasificar').style.display = (modo === 'clasificar') ? '' : 'none';
+  document.getElementById('modo-explorar').classList.toggle('active', modo === 'explorar');
+  document.getElementById('modo-clasificar').classList.toggle('active', modo === 'clasificar');
+  if (modo === 'clasificar' && rondaActiva === null) {
+    iniciarRonda();
+  }
+}
+
+// ══════════════════════════════════════════════════════════
+//  MODO EXPLORAR · galería y ficha
+// ══════════════════════════════════════════════════════════
+let filtroActual = 'all';
+
+function renderGaleria() {
+  const gal = document.getElementById('galeria');
+  const lista = (filtroActual === 'all') ? OBJETOS : OBJETOS.filter(o => o.fam === filtroActual);
+  gal.innerHTML = lista.map(o => `
+    <div class="obj-card" data-id="${o.id}" onclick="abrirFicha('${o.id}')">
+      <div class="obj-emoji">${o.em}</div>
+      <div class="obj-nombre">${o.nombre}</div>
+      <span class="fam-tag ${o.fam}">${FAM_INFO[o.fam].nombre.split(' ')[0]}</span>
+    </div>
+  `).join('');
+}
+
+function abrirFicha(id) {
+  const o = OBJETOS.find(x => x.id === id);
+  if (!o) return;
+  document.getElementById('f-emoji').textContent = o.em;
+  document.getElementById('f-nombre').textContent = o.nombre;
+  const pill = document.getElementById('f-pill');
+  pill.textContent = FAM_INFO[o.fam].nombre;
+  pill.className = 'fam-pill ' + o.fam;
+  document.getElementById('f-material').textContent = o.mat;
+  document.getElementById('f-familia').textContent = FAM_INFO[o.fam].nombre;
+  document.getElementById('f-justificacion').textContent = o.why;
+  document.getElementById('ficha').classList.add('visible');
+  document.querySelectorAll('.obj-card').forEach(c => c.classList.toggle('active', c.dataset.id === id));
+  document.getElementById('ficha').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function cerrarFicha() {
+  document.getElementById('ficha').classList.remove('visible');
+  document.querySelectorAll('.obj-card').forEach(c => c.classList.remove('active'));
+}
+
+document.querySelectorAll('#fam-filtros button').forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll('#fam-filtros button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    filtroActual = b.dataset.filter;
+    renderGaleria();
+    cerrarFicha();
+  };
+});
+
+// ══════════════════════════════════════════════════════════
+//  MODO CLASIFICAR · ronda de 10 objetos
+// ══════════════════════════════════════════════════════════
+let rondaActiva = null;
+let rondaObjs = [];
+let rondaIdx = 0;
+let aciertos = 0;
+let fallos = 0;
+
+function iniciarRonda() {
+  // 10 objetos al azar, distribuidos por familia para que sea variado
+  const porFam = {};
+  Object.keys(FAM_INFO).forEach(f => porFam[f] = OBJETOS.filter(o => o.fam === f).slice());
+  const seleccion = [];
+  // 1 obligatorio de cada familia (6), 4 al azar adicionales
+  Object.keys(FAM_INFO).forEach(f => {
+    const arr = porFam[f];
+    const i = Math.floor(Math.random() * arr.length);
+    seleccion.push(arr.splice(i, 1)[0]);
+  });
+  const restantes = Object.values(porFam).flat();
+  while (seleccion.length < 10 && restantes.length > 0) {
+    const i = Math.floor(Math.random() * restantes.length);
+    seleccion.push(restantes.splice(i, 1)[0]);
+  }
+  // mezcla final
+  for (let i = seleccion.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [seleccion[i], seleccion[j]] = [seleccion[j], seleccion[i]];
+  }
+  rondaObjs = seleccion;
+  rondaIdx = 0;
+  aciertos = 0;
+  fallos = 0;
+  rondaActiva = true;
+  document.getElementById('cl-resultado').classList.remove('visible');
+  document.getElementById('cl-obj').style.display = '';
+  document.getElementById('cl-bots').style.display = '';
+  document.getElementById('cl-feedback').classList.remove('visible');
+  document.getElementById('cl-next').disabled = true;
+  pintarObjeto();
+  actualizarHud();
+}
+
+function pintarObjeto() {
+  const o = rondaObjs[rondaIdx];
+  document.getElementById('cl-em').textContent = o.em;
+  document.getElementById('cl-name').textContent = o.nombre;
+  document.querySelectorAll('.cl-bt').forEach(b => {
+    b.classList.remove('correcto', 'incorrecto');
+    b.disabled = false;
+  });
+  document.getElementById('cl-feedback').classList.remove('visible');
+  document.getElementById('cl-next').disabled = true;
+}
+
+function actualizarHud() {
+  document.getElementById('cl-num').innerHTML = (rondaIdx + 1) + '<span style="font-size:0.9rem; color:#aaa; font-weight:400;">/10</span>';
+  document.getElementById('cl-ok').textContent = aciertos;
+  document.getElementById('cl-err').textContent = fallos;
+  document.getElementById('cl-bar').style.width = ((rondaIdx) / 10 * 100) + '%';
+}
+
+document.querySelectorAll('.cl-bt').forEach(b => {
+  b.onclick = () => {
+    if (b.disabled) return;
+    const fam = b.dataset.fam;
+    const o = rondaObjs[rondaIdx];
+    const correcto = (fam === o.fam);
+    // bloquear todos
+    document.querySelectorAll('.cl-bt').forEach(x => x.disabled = true);
+    // marcar el correcto y el pulsado
+    document.querySelector(`.cl-bt[data-fam="${o.fam}"]`).classList.add('correcto');
+    if (!correcto) b.classList.add('incorrecto');
+    // feedback
+    const fb = document.getElementById('cl-feedback');
+    fb.classList.add('visible');
+    fb.classList.toggle('ok', correcto);
+    fb.classList.toggle('err', !correcto);
+    if (correcto) {
+      aciertos++;
+      document.getElementById('cl-fb-titulo').textContent = '✅ ¡Correcto!';
+      document.getElementById('cl-fb-texto').innerHTML = `<strong>${o.nombre}</strong> es de la familia <strong>${FAM_INFO[o.fam].nombre}</strong>. Material: <em>${o.mat}</em>. ${o.why}`;
+    } else {
+      fallos++;
+      document.getElementById('cl-fb-titulo').textContent = '❌ No es correcto';
+      document.getElementById('cl-fb-texto').innerHTML = `<strong>${o.nombre}</strong> pertenece en realidad a <strong>${FAM_INFO[o.fam].nombre}</strong>. Material: <em>${o.mat}</em>. ${o.why}`;
+    }
+    document.getElementById('cl-next').disabled = false;
+  };
+});
+
+function siguienteObjeto() {
+  rondaIdx++;
+  if (rondaIdx >= rondaObjs.length) {
+    mostrarResultado();
+    return;
+  }
+  pintarObjeto();
+  actualizarHud();
+}
+
+function mostrarResultado() {
+  document.getElementById('cl-obj').style.display = 'none';
+  document.getElementById('cl-bots').style.display = 'none';
+  document.getElementById('cl-feedback').classList.remove('visible');
+  document.getElementById('cl-next').disabled = true;
+  const res = document.getElementById('cl-resultado');
+  res.classList.add('visible');
+  document.getElementById('cl-bar').style.width = '100%';
+  const score = aciertos;
+  document.getElementById('res-score').textContent = score + '/10';
+  let emoji, titulo, msg;
+  if (score === 10) { emoji = '🏆'; titulo = '¡Perfecto!'; msg = 'Has clasificado los 10 objetos sin un solo fallo. Dominas las familias de materiales.'; }
+  else if (score >= 8) { emoji = '🎉'; titulo = '¡Muy bien!'; msg = 'Casi perfecto. Repasa los que has fallado y verás que están claros.'; }
+  else if (score >= 6) { emoji = '👍'; titulo = '¡Aprobado!'; msg = 'Vas por buen camino. Lee de nuevo el libro y vuelve a intentarlo.'; }
+  else if (score >= 4) { emoji = '🤔'; titulo = 'Hay que repasar'; msg = 'Aún confundes algunas familias. Repasa la sección 1 del libro digital y vuelve.'; }
+  else { emoji = '📚'; titulo = 'Vuelve al libro'; msg = 'Lee con atención las secciones 1 y 2 del libro digital antes de volver a intentarlo.'; }
+  document.getElementById('res-emoji').textContent = emoji;
+  document.getElementById('res-titulo').textContent = titulo;
+  document.getElementById('res-msg').textContent = msg;
+}
+
+function reiniciarRonda() {
+  iniciarRonda();
+}
+
+// ══════════════════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════════════════
+renderGaleria();
+</script>
+
+<footer style="text-align:center; padding:2rem 1rem 1rem; color:#888; font-size:0.85rem;">
+  <p>🗂️ Clasificador de materiales · TyD 2º ESO · Unidad 2</p>
+  <p><a href="../index.html" style="color:#D4700A; text-decoration:none;">← Volver al hub de la unidad</a></p>
+  <p style="margin-top:8px; font-family:'JetBrains Mono', monospace; font-size:0.72rem; opacity:0.6;">v1.0</p>
+</footer>
+
+</body>
+</html>

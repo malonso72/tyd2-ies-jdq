@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cuadro General de Mando y Protección · 2º ESO TyD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f1418;
+    --panel:#1a2127;
+    --panel-2:#222a31;
+    --cuadro-body:#e8e6df;
+    --cuadro-edge:#c9c5b8;
+    --cuadro-rail:#7a7468;
+    --ink:#0c1116;
+    --ink-soft:#3b4651;
+    --paper:#f5f2ea;
+    --line:#cfcabd;
+    --accent:#d9531e;       /* naranja industrial */
+    --accent-2:#e8b923;     /* amarillo señal */
+    --ok:#27a96b;
+    --warn:#e8b923;
+    --bad:#d23a2e;
+    --wire-live:#d23a2e;    /* fase: rojo/marrón */
+    --wire-neutral:#1f4ea3; /* neutro: azul */
+    --wire-earth:#27a96b;   /* tierra: verde/amarillo */
+    --shadow:0 18px 40px -14px rgba(80,60,30,.20), 0 6px 16px -8px rgba(80,60,30,.14);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:#2a2218;font-family:"Fraunces", Georgia, serif;font-feature-settings:"ss01","ss02"}
+  html,body{height:100%;overflow:hidden}
+  body{
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(217,83,30,.08), transparent 60%),
+      radial-gradient(900px 500px at 10% 110%, rgba(31,78,163,.06), transparent 60%),
+      linear-gradient(180deg,#f3ecdb,#fbf6e8 60%, #f3ecdb);
+  }
+  .grain{
+    position:fixed;inset:0;pointer-events:none;opacity:.04;mix-blend-mode:overlay;z-index:1;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.8'/></svg>");
+  }
+  .wrap{
+    max-width:1860px;margin:0 auto;padding:14px 20px;position:relative;z-index:2;
+    height:100vh;display:flex;flex-direction:column;gap:12px;
+  }
+  header{
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;
+    padding-bottom:8px;border-bottom:1px solid #d8d0b8;flex-shrink:0;
+  }
+  .titleblock{text-align:center}
+  .titleblock h1{
+    margin:0;font-family:"Fraunces",serif;font-weight:800;font-size:clamp(24px,2.6vw,34px);
+    letter-spacing:-0.02em;line-height:1;color:#2a1f10;
+  }
+  .titleblock h1 em{font-style:italic;color:#c8911a}
+  .header-actions{display:flex;align-items:center;gap:10px;justify-self:end}
+  #status-pill{justify-self:start}
+  .link-internos{
+    display:inline-flex;align-items:center;gap:6px;text-decoration:none;
+    background:#fff5dc;color:#7a4a05;border:1.5px solid #e8b923;
+    padding:9px 16px;border-radius:999px;font-family:"JetBrains Mono",monospace;
+    font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    transition:all .2s;box-shadow:0 2px 8px -2px rgba(217,135,5,.25);
+  }
+  .link-internos:hover{
+    background:#ffe28a;border-color:#d4a009;color:#5a3505;
+    transform:translateY(-1px);box-shadow:0 4px 12px -3px rgba(217,135,5,.35);
+  }
+  .status{
+    font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    padding:7px 12px;border:1px solid #d8d0b8;border-radius:999px;background:#fff;color:#3b3522;
+    display:inline-flex;align-items:center;gap:8px;font-weight:600;
+  }
+
+  .grid{ display:block; flex:1; min-height:0; }
+
+  /* CUADRO */
+  .stage{
+    background:linear-gradient(180deg,#ffffff,#fdf9ec);
+    border:1px solid #d8d0b8;border-radius:14px;padding:12px 16px 8px;
+    box-shadow:0 18px 40px -14px rgba(80,60,30,.20), 0 6px 16px -8px rgba(80,60,30,.14);
+    position:relative;overflow:hidden;
+    height:100%;display:flex;flex-direction:column;
+  }
+  .stage::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      linear-gradient(180deg, transparent 0%, transparent 80%, rgba(80,60,30,.06) 100%),
+      repeating-linear-gradient(90deg, rgba(80,60,30,.012) 0 1px, transparent 1px 80px);
+  }
+  .led{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);animation:pulse 1.6s infinite}
+  .led.bad{background:var(--bad);box-shadow:0 0 10px var(--bad)}
+  .led.warn{background:var(--warn);box-shadow:0 0 10px var(--warn)}
+  @keyframes pulse{50%{opacity:.55}}
+
+  .stage-svg-wrap{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;position:relative}
+  svg.cuadro{width:100%;height:100%;max-height:100%;display:block;cursor:default}
+  svg.cuadro .clickable{cursor:pointer;transition:filter .2s ease, transform .2s ease;transform-origin:center;transform-box:fill-box}
+  svg.cuadro .clickable:hover{filter:brightness(1.06)}
+  svg.cuadro .clickable.selected{filter:drop-shadow(0 0 6px var(--accent-2))}
+
+  /* PANEL FLOTANTE (se superpone al cuadro) */
+  .panel{
+    background:linear-gradient(180deg, var(--paper), #efeadd);
+    color:var(--ink);border-radius:14px;padding:0;
+    box-shadow:0 30px 80px -10px rgba(0,0,0,.7), 0 12px 30px -10px rgba(0,0,0,.6), 0 0 0 1px rgba(232,185,35,.15);
+    border:1px solid #d8d2c2;overflow:hidden;
+    position:absolute;top:18px;right:18px;width:380px;max-width:calc(100% - 36px);max-height:calc(100% - 36px);overflow-y:auto;
+    z-index:5;
+    transform:translateY(8px) scale(.98);opacity:0;pointer-events:none;
+    transition:opacity .25s ease, transform .3s cubic-bezier(.2,1.2,.3,1);
+  }
+  .panel.show{
+    opacity:1;transform:translateY(0) scale(1);pointer-events:auto;
+  }
+  .panel-head{
+    background:var(--ink);color:var(--paper);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;
+    border-bottom:3px solid var(--accent-2);position:sticky;top:0;z-index:2;
+  }
+  .panel-head .crumb{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.22em;color:#7a6f54;text-transform:uppercase}
+  .panel-head .code{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--accent-2);letter-spacing:.18em}
+  .panel-head .close{
+    appearance:none;background:transparent;border:1px solid #3a4148;color:#7a6f54;
+    width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:14px;line-height:1;
+    display:inline-flex;align-items:center;justify-content:center;
+    transition:all .2s;font-family:inherit;
+  }
+  .panel-head .close:hover{background:var(--accent);color:#1a0d05;border-color:var(--accent)}
+  .panel-body{padding:18px 20px}
+  .panel-body h2{margin:0 0 4px;font-family:"Fraunces",serif;font-weight:800;font-size:26px;line-height:1.05;letter-spacing:-0.02em}
+  .panel-body h3{margin:0 0 12px;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft)}
+  .panel-body p{margin:8px 0;line-height:1.5;font-size:14.5px;color:#1c2530}
+  .panel-body .kv{
+    display:grid;grid-template-columns:auto 1fr;gap:4px 14px;
+    font-family:"JetBrains Mono",monospace;font-size:11.5px;margin:12px 0;
+    padding:10px 12px;background:#fff;border:1px dashed #c9c2ad;border-radius:8px;
+  }
+  .panel-body .kv b{color:var(--ink-soft);font-weight:500;letter-spacing:.08em;text-transform:uppercase;font-size:10px}
+  .panel-body .note{
+    margin-top:12px;padding:10px 12px;background:#fff7df;border-left:3px solid var(--accent-2);
+    font-size:13.5px;color:#3b3522;border-radius:0 6px 6px 0;line-height:1.45;
+  }
+  .panel-body .note.bad{background:#fde7e4;border-color:var(--bad);color:#5a1a14}
+  .panel-body .note.ok{background:#e3f4ea;border-color:var(--ok);color:#0f3a23}
+
+  /* Hint inicial sobre el cuadro */
+  .hint{
+    position:absolute;left:50%;bottom:18px;transform:translateX(-50%);
+    background:rgba(232,185,35,.95);color:#1a0d05;padding:8px 16px;border-radius:999px;
+    font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;
+    box-shadow:0 8px 20px -6px rgba(217,135,5,.4);
+    animation:hintBounce 2.4s ease-in-out infinite;z-index:3;pointer-events:none;
+  }
+  @keyframes hintBounce{
+    0%,100%{transform:translateX(-50%) translateY(0)}
+    50%{transform:translateX(-50%) translateY(-4px)}
+  }
+  .hint.hidden{display:none}
+
+  /* LEYENDA */
+  .legend{
+    display:flex;gap:18px;flex-wrap:wrap;margin-top:8px;
+    font-family:"JetBrains Mono",monospace;font-size:10px;color:#7a6f54;flex-shrink:0;
+  }
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{width:14px;height:3px;display:inline-block;border-radius:2px}
+  .legend i.f{background:var(--wire-live)}
+  .legend i.n{background:var(--wire-neutral)}
+  .legend i.t{background:var(--wire-earth)}
+
+  /* FILA INFERIOR: mesa + controles lado a lado */
+  .bottom-row{
+    display:grid;grid-template-columns: 1fr 320px;gap:14px;
+    flex-shrink:0;height:240px;
+  }
+  @media (max-width: 1100px){.bottom-row{grid-template-columns:1fr;height:auto}}
+
+  /* CONTROLES */
+  .controls{
+    background:linear-gradient(180deg,#fffaef,#fbf3df);
+    border:1px solid #d8d0b8;border-radius:12px;padding:14px;
+    box-shadow:0 8px 20px -10px rgba(80,60,30,.15);
+    display:flex;flex-direction:column;
+  }
+  .controls h4{
+    margin:0 0 10px;font-family:"JetBrains Mono",monospace;font-size:10px;
+    letter-spacing:.18em;text-transform:uppercase;color:#7a6f54;flex-shrink:0;font-weight:700;
+  }
+  .btns{display:grid;grid-template-columns:1fr 1fr;gap:6px;flex:1;align-content:start}
+  button.sim{
+    appearance:none;border:1.5px solid #d8d0b8;background:#ffffff;color:#2a2218;
+    font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.04em;
+    padding:8px 10px;border-radius:8px;cursor:pointer;text-align:left;
+    display:flex;flex-direction:column;gap:2px;transition:all .18s;
+  }
+  button.sim:hover{border-color:#e8b923;background:#fff5dc;transform:translateY(-1px);box-shadow:0 4px 10px -4px rgba(217,135,5,.3)}
+  button.sim:active{transform:translateY(0)}
+  button.sim .num{color:#c8911a;font-weight:700;font-size:9px;letter-spacing:.18em}
+  button.sim .lbl{font-size:11px;line-height:1.2;font-weight:600}
+  button.sim.danger:hover{border-color:#d23a2e;background:#ffe8e4;box-shadow:0 4px 10px -4px rgba(210,58,46,.3)}
+  button.sim.danger:hover .num{color:#a82a20}
+  button.sim.reset{
+    background:linear-gradient(180deg,#f06b32,#d9531e);border-color:#b8431a;color:#fff;
+    grid-column:1 / -1;text-align:center;align-items:center;flex-direction:row;justify-content:center;gap:8px;
+    font-weight:700;box-shadow:0 4px 10px -3px rgba(217,83,30,.4);
+  }
+  button.sim.reset .num{color:#fff7e0}
+  button.sim.reset:hover{background:linear-gradient(180deg,#f78845,#e8602a);border-color:#a83612;transform:translateY(-1px);box-shadow:0 6px 14px -4px rgba(217,83,30,.5)}
+
+  /* ===========================================================
+     MESA DE ENSAYO DE POTENCIA (compacta)
+  =========================================================== */
+  .bench{
+    background:linear-gradient(180deg,#fffaef,#fbf3df);
+    border:1px solid #d8d0b8;border-radius:12px;padding:12px 14px;
+    box-shadow:0 8px 20px -10px rgba(80,60,30,.15);
+    position:relative;overflow:hidden;
+    display:flex;flex-direction:column;
+  }
+  .bench-head{
+    display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+    margin-bottom:8px;padding-bottom:8px;border-bottom:1px dashed #d8d0b8;flex-shrink:0;
+  }
+  .bench-head h3{
+    margin:0;font-family:"Fraunces",serif;font-size:17px;font-weight:800;letter-spacing:-0.01em;color:#1a1410;
+  }
+  .bench-head h3 em{font-style:italic;color:var(--accent-2)}
+  .bench-head .lead{
+    font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.14em;color:#7a6f54;text-transform:uppercase;
+    margin-top:2px;
+  }
+  .contratada{
+    display:flex;align-items:center;gap:8px;
+    font-family:"JetBrains Mono",monospace;font-size:10px;color:#7a6f54;letter-spacing:.12em;text-transform:uppercase;
+  }
+  .contratada select{
+    appearance:none;background:#fdf9ec;color:var(--accent-2);
+    border:1px solid #cdc5ad;border-radius:6px;padding:5px 24px 5px 10px;
+    font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.06em;font-weight:700;
+    cursor:pointer;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0 L5 6 L10 0 Z' fill='%23e8b923'/></svg>");
+    background-repeat:no-repeat;background-position:right 8px center;
+  }
+  .contratada select:focus{outline:none;border-color:var(--accent-2)}
+
+  .bench-grid{
+    display:grid;grid-template-columns: 165px 1fr;gap:14px;align-items:stretch;
+    flex:1;min-height:0;
+  }
+
+  /* Velocímetro compacto */
+  .meter{
+    background:linear-gradient(180deg,#fdf9ec,#f5efde);
+    border:1px solid #d8d0b8;border-radius:10px;padding:8px 10px;
+    display:flex;flex-direction:column;align-items:center;gap:2px;
+    position:relative;
+  }
+  .meter svg{width:100%;height:auto;max-width:150px;display:block}
+  .meter-readout{
+    text-align:center;font-family:"JetBrains Mono",monospace;
+  }
+  .meter-readout .big{
+    font-family:"Fraunces",serif;font-weight:800;font-size:22px;color:#1a1410;letter-spacing:-0.02em;line-height:1;
+    transition:color .2s;
+  }
+  .meter-readout .big.warn{color:var(--warn)}
+  .meter-readout .big.bad{color:var(--bad)}
+  .meter-readout .unit{color:#7a6f54;font-size:8px;letter-spacing:.16em;margin-top:2px;text-transform:uppercase}
+  .meter-readout .ratio{
+    margin-top:4px;padding:3px 8px;background:#fdf9ec;border:1px solid #d8d0b8;border-radius:999px;
+    font-size:9px;color:#7a6f54;letter-spacing:.1em;
+  }
+  .meter-readout .ratio b{color:#1a1410;font-weight:700}
+
+  /* Lista de aparatos compacta */
+  .aparatos{
+    display:grid;grid-template-columns:repeat(6, 1fr);gap:5px;
+    align-content:flex-start;overflow-y:auto;
+  }
+  @media (max-width: 1400px){.aparatos{grid-template-columns:repeat(4, 1fr)}}
+  .ap{
+    appearance:none;border:1.5px solid #d8d0b8;background:#ffffff;color:#3b3522;
+    border-radius:8px;padding:6px 4px 4px;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;gap:1px;
+    transition:all .18s ease;
+    font-family:"JetBrains Mono",monospace;text-align:center;position:relative;overflow:hidden;
+  }
+  .ap:hover{border-color:#e8b923;transform:translateY(-1px);background:#fffceb;box-shadow:0 4px 10px -4px rgba(217,135,5,.25)}
+  .ap .ic{font-size:18px;line-height:1;filter:grayscale(.5) brightness(.85)}
+  .ap .nm{font-size:9px;color:#3b3522;letter-spacing:.02em;line-height:1.1;min-height:20px;display:flex;align-items:center}
+  .ap .w{font-size:8.5px;color:#998b6e;letter-spacing:.06em}
+  .ap.on{
+    background:linear-gradient(180deg,#fff8e0,#f4dd9a);
+    border-color:var(--accent-2);color:#1a0d05;
+    box-shadow:0 0 0 1px rgba(232,185,35,.4), 0 6px 12px -6px rgba(217,135,5,.4);
+  }
+  .ap.on .ic{filter:none;animation:apOn .4s ease}
+  .ap.on .nm{color:#1a0d05;font-weight:700}
+  .ap.on .w{color:#5a3a05;font-weight:700}
+  .ap.on::after{
+    content:"";position:absolute;top:4px;right:4px;width:5px;height:5px;border-radius:50%;
+    background:var(--ok);box-shadow:0 0 5px var(--ok);animation:pulse 1.4s infinite;
+  }
+  @keyframes apOn{
+    0%{transform:scale(.7) rotate(-6deg)}
+    60%{transform:scale(1.15) rotate(3deg)}
+    100%{transform:scale(1) rotate(0)}
+  }
+  .ap.off-by-icp{opacity:.35;filter:grayscale(.8);pointer-events:none}
+
+  /* CATAPLÁS overlay */
+  .cataplas{
+    position:absolute;inset:0;display:none;align-items:center;justify-content:center;
+    background:radial-gradient(circle at center, rgba(210,58,46,.55), rgba(40,20,10,.92) 70%);
+    z-index:10;pointer-events:none;
+  }
+  .cataplas.show{display:flex;animation:cataplasIn .5s ease}
+  .cataplas .boom{
+    font-family:"Fraunces",serif;font-weight:800;font-style:italic;
+    font-size:clamp(60px,11vw,140px);color:#fff;letter-spacing:-0.04em;
+    text-shadow:0 0 30px rgba(255,180,50,.8), 0 0 60px rgba(210,58,46,.8);
+    transform:rotate(-6deg);
+    animation:boomShake .5s ease;
+  }
+  .cataplas .sub{
+    position:absolute;bottom:30px;font-family:"JetBrains Mono",monospace;font-size:12px;
+    color:#fff;letter-spacing:.3em;text-transform:uppercase;opacity:.85;
+  }
+  @keyframes cataplasIn{from{opacity:0}to{opacity:1}}
+  @keyframes boomShake{
+    0%{transform:rotate(-6deg) scale(.3)}
+    50%{transform:rotate(-3deg) scale(1.15)}
+    70%{transform:rotate(-8deg) scale(.95)}
+    100%{transform:rotate(-6deg) scale(1)}
+  }
+  .flash{animation:flashBg .35s ease}
+  @keyframes flashBg{
+    0%,100%{background:linear-gradient(180deg,#ffffff,#fdf9ec)}
+    50%{background:linear-gradient(180deg,#ffdcd5,#ffbeb6)}
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="wrap">
+
+  <header>
+    <span class="status" id="status-pill">
+      <span class="led" id="status-led"></span>
+      <span id="status-text">Funcionamiento normal</span>
+    </span>
+    <div class="titleblock">
+      <h1>Cuadro General de <em>Mando y Protección</em></h1>
+    </div>
+    <div class="header-actions">
+      <a class="link-internos" href="../index.html" title="Volver a la Unidad 5 de Electricidad" style="background:#fef4e9;border-color:#d4700a;color:#7a4a05">
+        ← Unidad 5
+      </a>
+      <a class="link-internos" href="cgmp-mecanismos.html" target="_blank" title="Cómo funciona por dentro un magnetotérmico y un diferencial">
+        🔬 Por dentro
+      </a>
+      <a class="link-internos" href="cgmp-test.html" target="_blank" title="Test de repaso interactivo" style="background:#e3f4ea;border-color:#27a96b;color:#0f3a23">
+        📝 Test
+      </a>
+    </div>
+  </header>
+
+  <div class="grid">
+    <!-- CUADRO -->
+    <section class="stage">
+      <div class="stage-svg-wrap">
+      <svg class="cuadro" viewBox="0 0 1300 560" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" aria-label="Cuadro general de mando y protección">
+        <!-- Carcasa del cuadro -->
+        <defs>
+          <linearGradient id="gradBody" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f4f1e7"/>
+            <stop offset="1" stop-color="#dcd8c9"/>
+          </linearGradient>
+          <linearGradient id="gradRail" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#9a9484"/>
+            <stop offset="1" stop-color="#6e6857"/>
+          </linearGradient>
+          <linearGradient id="gradInt" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fafaf6"/>
+            <stop offset="1" stop-color="#d6d2c4"/>
+          </linearGradient>
+          <linearGradient id="gradPalanca" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#2a2a2a"/>
+            <stop offset="1" stop-color="#111"/>
+          </linearGradient>
+          <pattern id="rejilla" width="14" height="14" patternUnits="userSpaceOnUse">
+            <path d="M0 14 L14 0" stroke="#b5b0a0" stroke-width=".7"/>
+          </pattern>
+          <!-- símbolo flujo corriente (electrón) -->
+          <radialGradient id="spark">
+            <stop offset="0" stop-color="#ffe27a" stop-opacity="1"/>
+            <stop offset="1" stop-color="#ffe27a" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+
+        <!-- Sombra del cuadro -->
+        <rect x="42" y="42" width="1228" height="476" rx="14" fill="#000" opacity=".35"/>
+        <!-- Carcasa exterior -->
+        <rect x="36" y="36" width="1228" height="476" rx="12" fill="url(#gradBody)" stroke="#a8a392" stroke-width="2"/>
+        <!-- Marco interior -->
+        <rect x="56" y="56" width="1188" height="436" rx="6" fill="#ebe7d8" stroke="#bdb7a4"/>
+        <!-- Carril DIN (donde se montan los automáticos) -->
+        <rect x="76" y="180" width="1148" height="22" fill="url(#gradRail)" stroke="#4a4538"/>
+        <rect x="76" y="180" width="1148" height="6" fill="#000" opacity=".25"/>
+        <!-- Cubierta inferior con rejilla decorativa -->
+        <rect x="76" y="410" width="1148" height="72" fill="url(#rejilla)" opacity=".5"/>
+        <rect x="76" y="410" width="1148" height="72" fill="none" stroke="#bdb7a4"/>
+
+        <!-- Etiqueta superior -->
+        <text x="660" y="86" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="3" fill="#5a5443">CUADRO GENERAL DE MANDO Y PROTECCIÓN</text>
+        <line x1="120" y1="98" x2="1180" y2="98" stroke="#bdb7a4"/>
+
+        <!-- Línea de acometida (entrada desde contador) -->
+        <text x="76" y="130" font-family="JetBrains Mono, monospace" font-size="9" fill="#5a5443" letter-spacing="2">DESDE CONTADOR</text>
+        <!-- Cable fase entrada -->
+        <path id="wire-in-live" d="M 60 150 L 140 150 L 140 200" stroke="var(--wire-live)" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <!-- Cable neutro entrada -->
+        <path id="wire-in-neutral" d="M 60 165 L 120 165 L 120 200" stroke="var(--wire-neutral)" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+        <!-- ============== INTERRUPTORES ============== -->
+        <!-- (cada grupo .clickable es un elemento del cuadro) -->
+
+        <!-- ICP -->
+        <g class="clickable" id="el-icp" data-id="icp" transform="translate(140,205)">
+          <rect x="0" y="0" width="60" height="180" rx="3" fill="url(#gradInt)" stroke="#9c9684"/>
+          <rect x="6" y="6" width="48" height="32" rx="2" fill="#1a1a1a"/>
+          <text x="30" y="28" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#e8b923">ICP</text>
+          <!-- Ranura para la palanca -->
+          <rect x="22" y="48" width="16" height="74" rx="2" fill="#c4bfb0" stroke="#8c8676" stroke-width=".8"/>
+          <!-- Etiquetas I/O -->
+          <text x="14" y="60" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="#3b3522">I</text>
+          <text x="14" y="118" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="#3b3522">O</text>
+          <!-- Palanca - estado ON (arriba) por defecto -->
+          <g class="palanca" data-id="icp">
+            <rect x="23" y="50" width="14" height="28" rx="2" fill="url(#gradPalanca)"/>
+            <rect x="23" y="50" width="14" height="4" fill="#e8b923"/>
+          </g>
+          <text x="30" y="140" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#3b3522">40 A</text>
+          <text x="30" y="156" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#5a5443">CONTROL</text>
+          <text x="30" y="167" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#5a5443">POTENCIA</text>
+        </g>
+
+        <!-- IGA -->
+        <g class="clickable" id="el-iga" data-id="iga" transform="translate(240,205)">
+          <rect x="0" y="0" width="60" height="180" rx="3" fill="url(#gradInt)" stroke="#9c9684"/>
+          <rect x="6" y="6" width="48" height="32" rx="2" fill="#1a1a1a"/>
+          <text x="30" y="28" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#fff">IGA</text>
+          <rect x="22" y="48" width="16" height="74" rx="2" fill="#c4bfb0" stroke="#8c8676" stroke-width=".8"/>
+          <text x="14" y="60" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="#3b3522">I</text>
+          <text x="14" y="118" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="#3b3522">O</text>
+          <g class="palanca" data-id="iga">
+            <rect x="23" y="50" width="14" height="28" rx="2" fill="url(#gradPalanca)"/>
+            <rect x="23" y="50" width="14" height="4" fill="#fff"/>
+          </g>
+          <text x="30" y="140" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#3b3522">40 A</text>
+          <text x="30" y="156" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#5a5443">INTERR.</text>
+          <text x="30" y="167" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#5a5443">GENERAL</text>
+        </g>
+
+        <!-- ID -->
+        <g class="clickable" id="el-id" data-id="id" transform="translate(340,205)">
+          <rect x="0" y="0" width="78" height="180" rx="3" fill="url(#gradInt)" stroke="#9c9684"/>
+          <rect x="6" y="6" width="66" height="32" rx="2" fill="#1a1a1a"/>
+          <text x="39" y="28" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#27a96b">ID 30mA</text>
+          <rect x="31" y="48" width="16" height="74" rx="2" fill="#c4bfb0" stroke="#8c8676" stroke-width=".8"/>
+          <text x="23" y="60" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="#3b3522">I</text>
+          <text x="23" y="118" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="#3b3522">O</text>
+          <g class="palanca" data-id="id">
+            <rect x="32" y="50" width="14" height="28" rx="2" fill="url(#gradPalanca)"/>
+            <rect x="32" y="50" width="14" height="4" fill="#27a96b"/>
+          </g>
+          <!-- Botón TEST -->
+          <rect x="52" y="55" width="20" height="18" rx="2" fill="#d23a2e"/>
+          <text x="62" y="68" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="#fff">TEST</text>
+          <text x="39" y="140" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#3b3522">40 A · 30 mA</text>
+          <text x="39" y="156" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#5a5443">DIFERENCIAL</text>
+        </g>
+
+        <!-- Separador entre protección general y circuitos -->
+        <line x1="480" y1="120" x2="480" y2="470" stroke="#bdb7a4" stroke-dasharray="3 4"/>
+        <text x="484" y="116" font-family="JetBrains Mono, monospace" font-size="9" fill="#5a5443" letter-spacing="2">CIRCUITOS INTERIORES</text>
+
+        <!-- PIA C1 - Iluminación -->
+        <g class="clickable pia" id="el-c1" data-id="c1" transform="translate(530,205)">
+          <rect x="0" y="0" width="50" height="180" rx="3" fill="url(#gradInt)" stroke="#9c9684"/>
+          <rect x="5" y="6" width="40" height="28" rx="2" fill="#1a1a1a"/>
+          <text x="25" y="26" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#e8b923">C1</text>
+          <rect x="17" y="44" width="16" height="66" rx="2" fill="#c4bfb0" stroke="#8c8676" stroke-width=".8"/>
+          <text x="9" y="55" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="#3b3522">I</text>
+          <text x="9" y="106" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="#3b3522">O</text>
+          <g class="palanca" data-id="c1">
+            <rect x="18" y="46" width="14" height="24" rx="2" fill="url(#gradPalanca)"/>
+            <rect x="18" y="46" width="14" height="4" fill="#e8b923"/>
+          </g>
+          <text x="25" y="124" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#3b3522">10 A</text>
+          <!-- Icono bombilla -->
+          <g transform="translate(13,132)">
+            <path d="M12 0 Q5 0 5 7 Q5 12 9 15 L9 19 L15 19 L15 15 Q19 12 19 7 Q19 0 12 0 Z" fill="#e8b923" stroke="#3b3522" stroke-width=".8"/>
+            <rect x="9" y="20" width="6" height="3" fill="#3b3522"/>
+          </g>
+          <text x="25" y="172" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#5a5443">ILUMINACIÓN</text>
+        </g>
+
+        <!-- PIA C2 - TUG -->
+        <g class="clickable pia" id="el-c2" data-id="c2" transform="translate(670,205)">
+          <rect x="0" y="0" width="50" height="180" rx="3" fill="url(#gradInt)" stroke="#9c9684"/>
+          <rect x="5" y="6" width="40" height="28" rx="2" fill="#1a1a1a"/>
+          <text x="25" y="26" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#e8b923">C2</text>
+          <rect x="17" y="44" width="16" height="66" rx="2" fill="#c4bfb0" stroke="#8c8676" stroke-width=".8"/>
+          <text x="9" y="55" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="#3b3522">I</text>
+          <text x="9" y="106" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="#3b3522">O</text>
+          <g class="palanca" data-id="c2">
+            <rect x="18" y="46" width="14" height="24" rx="2" fill="url(#gradPalanca)"/>
+            <rect x="18" y="46" width="14" height="4" fill="#e8b923"/>
+          </g>
+          <text x="25" y="124" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#3b3522">16 A</text>
+          <!-- Icono enchufe -->
+          <g transform="translate(13,132)">
+            <circle cx="12" cy="10" r="9" fill="none" stroke="#3b3522" stroke-width="1.2"/>
+            <circle cx="9" cy="8" r="1.5" fill="#3b3522"/>
+            <circle cx="15" cy="8" r="1.5" fill="#3b3522"/>
+          </g>
+          <text x="25" y="172" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#5a5443">ENCHUFES</text>
+        </g>
+
+        <!-- PIA C3 - Cocina -->
+        <g class="clickable pia" id="el-c3" data-id="c3" transform="translate(810,205)">
+          <rect x="0" y="0" width="50" height="180" rx="3" fill="url(#gradInt)" stroke="#9c9684"/>
+          <rect x="5" y="6" width="40" height="28" rx="2" fill="#1a1a1a"/>
+          <text x="25" y="26" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#e8b923">C3</text>
+          <rect x="17" y="44" width="16" height="66" rx="2" fill="#c4bfb0" stroke="#8c8676" stroke-width=".8"/>
+          <text x="9" y="55" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="#3b3522">I</text>
+          <text x="9" y="106" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="#3b3522">O</text>
+          <g class="palanca" data-id="c3">
+            <rect x="18" y="46" width="14" height="24" rx="2" fill="url(#gradPalanca)"/>
+            <rect x="18" y="46" width="14" height="4" fill="#e8b923"/>
+          </g>
+          <text x="25" y="124" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#3b3522">25 A</text>
+          <!-- Icono cocina/fogón -->
+          <g transform="translate(13,132)">
+            <rect x="3" y="5" width="18" height="14" rx="1.5" fill="none" stroke="#3b3522" stroke-width="1.2"/>
+            <circle cx="8" cy="11" r="2" fill="#d23a2e"/>
+            <circle cx="16" cy="11" r="2" fill="#d23a2e"/>
+          </g>
+          <text x="25" y="172" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#5a5443">COCINA</text>
+        </g>
+
+        <!-- PIA C4 - Lavadora/lavavajillas/termo -->
+        <g class="clickable pia" id="el-c4" data-id="c4" transform="translate(950,205)">
+          <rect x="0" y="0" width="50" height="180" rx="3" fill="url(#gradInt)" stroke="#9c9684"/>
+          <rect x="5" y="6" width="40" height="28" rx="2" fill="#1a1a1a"/>
+          <text x="25" y="26" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#e8b923">C4</text>
+          <rect x="17" y="44" width="16" height="66" rx="2" fill="#c4bfb0" stroke="#8c8676" stroke-width=".8"/>
+          <text x="9" y="55" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="#3b3522">I</text>
+          <text x="9" y="106" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="#3b3522">O</text>
+          <g class="palanca" data-id="c4">
+            <rect x="18" y="46" width="14" height="24" rx="2" fill="url(#gradPalanca)"/>
+            <rect x="18" y="46" width="14" height="4" fill="#e8b923"/>
+          </g>
+          <text x="25" y="124" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#3b3522">20 A</text>
+          <!-- Icono lavadora -->
+          <g transform="translate(13,132)">
+            <rect x="3" y="3" width="18" height="18" rx="1.5" fill="none" stroke="#3b3522" stroke-width="1.2"/>
+            <circle cx="12" cy="13" r="5" fill="none" stroke="#3b3522" stroke-width="1"/>
+            <circle cx="12" cy="13" r="2" fill="#3b3522"/>
+          </g>
+          <text x="25" y="172" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#5a5443">LAVADORA</text>
+        </g>
+
+        <!-- PIA C5 - Baño/cocina aux -->
+        <g class="clickable pia" id="el-c5" data-id="c5" transform="translate(1090,205)">
+          <rect x="0" y="0" width="50" height="180" rx="3" fill="url(#gradInt)" stroke="#9c9684"/>
+          <rect x="5" y="6" width="40" height="28" rx="2" fill="#1a1a1a"/>
+          <text x="25" y="26" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#e8b923">C5</text>
+          <rect x="17" y="44" width="16" height="66" rx="2" fill="#c4bfb0" stroke="#8c8676" stroke-width=".8"/>
+          <text x="9" y="55" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="#3b3522">I</text>
+          <text x="9" y="106" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700" fill="#3b3522">O</text>
+          <g class="palanca" data-id="c5">
+            <rect x="18" y="46" width="14" height="24" rx="2" fill="url(#gradPalanca)"/>
+            <rect x="18" y="46" width="14" height="4" fill="#e8b923"/>
+          </g>
+          <text x="25" y="124" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#3b3522">16 A</text>
+          <!-- Icono gota baño -->
+          <g transform="translate(13,132)">
+            <path d="M12 3 Q5 12 5 16 Q5 21 12 21 Q19 21 19 16 Q19 12 12 3 Z" fill="none" stroke="#1f4ea3" stroke-width="1.2"/>
+          </g>
+          <text x="25" y="172" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#5a5443">BAÑO/AUX</text>
+        </g>
+
+        <!-- ============== BARRAS DE CONEXIÓN (CABLEADO) ============== -->
+        <!-- Barra fase (sale del ID hacia los PIAs) -->
+        <path id="bus-live" d="M 418 230 L 1170 230" stroke="var(--wire-live)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.85"/>
+        <!-- Barra neutro -->
+        <path id="bus-neutral" d="M 418 245 L 1170 245" stroke="var(--wire-neutral)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.85"/>
+
+        <!-- Bajadas a cada PIA -->
+        <g stroke-linecap="round" stroke-width="3" fill="none" opacity=".85">
+          <path d="M 835 230 L 835 215" stroke="var(--wire-live)"/>
+          <path d="M 1115 230 L 1115 215" stroke="var(--wire-live)"/>
+          <path d="M 835 230 L 835 215" stroke="var(--wire-live)"/>
+          <path d="M 975 230 L 975 215" stroke="var(--wire-live)"/>
+          <path d="M 1115 230 L 1115 215" stroke="var(--wire-live)"/>
+        </g>
+
+        <!-- Salidas a circuitos (parte inferior) -->
+        <g stroke-linecap="round" stroke-width="3" fill="none">
+          <path d="M 555 385 L 555 460" stroke="var(--wire-live)" class="wire-out" data-c="c1"/>
+          <path d="M 695 385 L 695 460" stroke="var(--wire-live)" class="wire-out" data-c="c2"/>
+          <path d="M 835 385 L 835 460" stroke="var(--wire-live)" class="wire-out" data-c="c3"/>
+          <path d="M 975 385 L 975 460" stroke="var(--wire-live)" class="wire-out" data-c="c4"/>
+          <path d="M 1115 385 L 1115 460" stroke="var(--wire-live)" class="wire-out" data-c="c5"/>
+        </g>
+
+        <!-- Etiquetas de circuitos en salida -->
+        <g font-family="JetBrains Mono, monospace" font-size="8" fill="#5a5443" text-anchor="middle">
+          <text x="555" y="478">→ LUCES</text>
+          <text x="695" y="478">→ TUG</text>
+          <text x="835" y="478">→ COCINA</text>
+          <text x="975" y="478">→ LAV/TERMO</text>
+          <text x="1115" y="478">→ BAÑO</text>
+        </g>
+
+        <!-- Conexión entrada ICP-IGA-ID -->
+        <g stroke-linecap="round" stroke-width="3" fill="none" opacity=".85">
+          <path d="M 200 230 L 240 230" stroke="var(--wire-live)"/>
+          <path d="M 200 245 L 240 245" stroke="var(--wire-neutral)"/>
+          <path d="M 300 230 L 340 230" stroke="var(--wire-live)"/>
+          <path d="M 300 245 L 340 245" stroke="var(--wire-neutral)"/>
+        </g>
+
+        <!-- Toma de tierra -->
+        <g>
+          <path d="M 60 180 L 80 180 L 80 500" stroke="var(--wire-earth)" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <text x="60" y="172" font-family="JetBrains Mono, monospace" font-size="9" fill="#3b6b48" letter-spacing="1">TIERRA</text>
+          <!-- símbolo tierra -->
+          <g transform="translate(72,505)" stroke="#27a96b" stroke-width="2" fill="none">
+            <line x1="0" y1="0" x2="16" y2="0"/>
+            <line x1="3" y1="4" x2="13" y2="4"/>
+            <line x1="6" y1="8" x2="10" y2="8"/>
+          </g>
+        </g>
+
+        <!-- Etiqueta inferior -->
+        <text x="660" y="500" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#5a5443" letter-spacing="3">HACIA CIRCUITOS DE LA VIVIENDA</text>
+
+        <!-- ANIMACIÓN DE CORRIENTE (electrones) -->
+        <g id="electrons">
+          <!-- entrada -->
+          <circle r="3" fill="url(#spark)" opacity=".95">
+            <animateMotion dur="2.6s" repeatCount="indefinite" path="M 60 150 L 140 150 L 140 230 L 1170 230"/>
+          </circle>
+          <circle r="3" fill="url(#spark)" opacity=".95">
+            <animateMotion dur="2.6s" begin="0.6s" repeatCount="indefinite" path="M 60 150 L 140 150 L 140 230 L 1170 230"/>
+          </circle>
+          <circle r="3" fill="url(#spark)" opacity=".95">
+            <animateMotion dur="2.6s" begin="1.2s" repeatCount="indefinite" path="M 60 150 L 140 150 L 140 230 L 1170 230"/>
+          </circle>
+          <circle r="3" fill="url(#spark)" opacity=".95">
+            <animateMotion dur="2.6s" begin="1.8s" repeatCount="indefinite" path="M 60 150 L 140 150 L 140 230 L 1170 230"/>
+          </circle>
+        </g>
+
+      </svg>
+      </div>
+
+      <div class="legend">
+        <span><i class="f"></i> Fase (corriente que entra)</span>
+        <span><i class="n"></i> Neutro (corriente que vuelve)</span>
+        <span><i class="t"></i> Tierra (protección de personas)</span>
+      </div>
+
+      <!-- Hint flotante inicial -->
+      <div class="hint" id="hint">👆 Haz clic en cualquier interruptor</div>
+
+      <!-- PANEL DIDÁCTICO FLOTANTE -->
+      <aside class="panel" id="panel">
+        <div class="panel-head">
+          <span class="crumb" id="panel-crumb">Información</span>
+          <span class="code" id="panel-code">— · —</span>
+          <button class="close" id="panel-close" title="Cerrar" aria-label="Cerrar">✕</button>
+        </div>
+        <div class="panel-body" id="panel-body">
+          <h2>¿Qué es el CGMP?</h2>
+        </div>
+      </aside>
+    </section>
+
+  </div>
+
+  <!-- FILA INFERIOR: mesa de ensayo + controles -->
+  <div class="bottom-row">
+
+    <!-- =============================================
+         MESA DE ENSAYO DE POTENCIA
+    ============================================= -->
+    <section class="bench" id="bench">
+      <div class="bench-head">
+        <div>
+          <h3>Mesa de ensayo: <em>¿cuánto aguanta tu casa?</em></h3>
+          <div class="lead">Conecta aparatos y observa qué pasa al superar la potencia contratada</div>
+        </div>
+        <label class="contratada">
+          Potencia contratada:
+          <select id="sel-contratada">
+            <option value="2300">2,30 kW</option>
+            <option value="3450">3,45 kW</option>
+            <option value="4600" selected>4,60 kW</option>
+            <option value="5750">5,75 kW</option>
+            <option value="6900">6,90 kW</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="bench-grid">
+        <!-- VELOCÍMETRO -->
+        <div class="meter">
+          <svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="gradVerde" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#27a96b"/>
+                <stop offset="1" stop-color="#4dc986"/>
+              </linearGradient>
+              <linearGradient id="gradAmar" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#e8b923"/>
+                <stop offset="1" stop-color="#f0cf5b"/>
+              </linearGradient>
+              <linearGradient id="gradRojo" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#d23a2e"/>
+                <stop offset="1" stop-color="#f06224"/>
+              </linearGradient>
+            </defs>
+            <path d="M 30 120 A 80 80 0 0 1 91 44.8" stroke="url(#gradVerde)" stroke-width="14" fill="none" stroke-linecap="round" opacity=".85"/>
+            <path d="M 92 44.6 A 80 80 0 0 1 159 56.2" stroke="url(#gradAmar)" stroke-width="14" fill="none" stroke-linecap="round" opacity=".85"/>
+            <path d="M 160 56.4 A 80 80 0 0 1 190 120" stroke="url(#gradRojo)" stroke-width="14" fill="none" stroke-linecap="round" opacity=".95"/>
+            <g font-family="JetBrains Mono, monospace" font-size="7" fill="#7c7565" text-anchor="middle">
+              <text x="30" y="135">0</text>
+              <text x="60" y="55">25%</text>
+              <text x="110" y="32">50%</text>
+              <text x="160" y="55">75%</text>
+              <text x="190" y="135">100%</text>
+            </g>
+            <g id="aguja" transform="rotate(-90 110 120)">
+              <line x1="110" y1="120" x2="110" y2="50" stroke="#e8b923" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="110" cy="120" r="8" fill="#1a1a1a" stroke="#e8b923" stroke-width="2"/>
+              <circle cx="110" cy="120" r="3" fill="#e8b923"/>
+            </g>
+            <text x="110" y="105" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" letter-spacing="2" fill="#5a5443">POTENCIA</text>
+          </svg>
+          <div class="meter-readout">
+            <div class="big" id="meter-w">0</div>
+            <div class="unit">vatios consumidos</div>
+            <div class="ratio">de <b id="meter-max">4600</b> W · <b id="meter-pct">0%</b></div>
+          </div>
+
+          <!-- Overlay CATAPLÁS! -->
+          <div class="cataplas" id="cataplas">
+            <div class="boom">¡CATAPLÁS!</div>
+            <div class="sub">ICP saltado · Sin luz</div>
+          </div>
+        </div>
+
+        <!-- APARATOS -->
+        <div class="aparatos" id="aparatos"></div>
+      </div>
+    </section>
+
+    <!-- CONTROLES -->
+    <div class="controls">
+      <h4>Simulación de averías</h4>
+      <div class="btns">
+        <button class="sim reset" data-sim="reset">
+          <span class="num">↺</span>
+          <span class="lbl">REARMAR TODO</span>
+        </button>
+        <button class="sim danger" data-sim="sobrecarga">
+          <span class="num">01 / SOBRECARGA</span>
+          <span class="lbl">Muchos aparatos en C2</span>
+        </button>
+        <button class="sim danger" data-sim="cortocircuito">
+          <span class="num">02 / CORTOCIRCUITO</span>
+          <span class="lbl">Fase y neutro se tocan en C3</span>
+        </button>
+        <button class="sim danger" data-sim="derivacion">
+          <span class="num">03 / DERIVACIÓN</span>
+          <span class="lbl">Persona toca cable pelado</span>
+        </button>
+        <button class="sim danger" data-sim="general">
+          <span class="num">04 / AV. GENERAL</span>
+          <span class="lbl">Sobrecarga total</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ===========================================================
+   Datos didácticos de cada elemento
+=========================================================== */
+const INFO = {
+  icp: {
+    crumb: "Elemento 01", code: "ICP",
+    title: "ICP — Interruptor de Control de Potencia",
+    sub: "Lo instala la compañía eléctrica",
+    body: `<p>El <b>ICP</b> vigila que <b>no consumamos más potencia de la contratada</b>. Si contratas 4,6 kW y enciendes a la vez horno, vitro, lavadora y secador, el ICP salta y corta toda la casa.</p>
+           <p>Hoy en día suele estar integrado dentro del <b>contador digital</b> que hay en el portal, no en el cuadro de tu vivienda.</p>`,
+    kv: { "Función":"Limitar la potencia contratada", "Intensidad":"40 A (variable)", "Lo pone":"La compañía eléctrica" },
+    note: "🔑 Es el único interruptor del cuadro que <b>no es del usuario</b>: pertenece a la compañía."
+  },
+  iga: {
+    crumb: "Elemento 02", code: "IGA",
+    title: "IGA — Interruptor General Automático",
+    sub: "El interruptor del usuario",
+    body: `<p>Es el <b>primer interruptor que sí es tuyo</b>. Permite cortar la luz de <b>toda la vivienda</b> con la mano (por ejemplo, para hacer una reparación).</p>
+           <p>También protege contra <b>sobrecargas y cortocircuitos generales</b>: si por algún motivo fallan los pequeños automáticos de cada circuito, el IGA actúa como última barrera.</p>`,
+    kv: { "Función":"Mando general + protección térmica/magnética", "Intensidad":"40 A", "Polos":"2 (fase + neutro)" },
+    note: "💡 Si quieres dejar tu casa sin luz para irte de vacaciones largas, <b>este es el interruptor que bajas</b>."
+  },
+  id: {
+    crumb: "Elemento 03", code: "ID",
+    title: "ID — Interruptor Diferencial",
+    sub: "El que salva vidas",
+    body: `<p>El diferencial <b>protege a las personas</b>. Compara la corriente que entra por la fase con la que vuelve por el neutro: si no son iguales, significa que algo de corriente se está "escapando" (por ejemplo, a través del cuerpo de una persona).</p>
+           <p>En cuanto detecta una diferencia de solo <b>30 miliamperios</b> (¡tres centésimas de amperio!), corta la corriente en <b>menos de 30 milisegundos</b>.</p>`,
+    kv: { "Función":"Proteger a las personas de descargas", "Sensibilidad":"30 mA", "Tiempo de corte":"< 30 ms", "Comprobación":"Botón TEST (mensual)" },
+    note: "⚡ Conviene pulsar el <b>botón TEST rojo una vez al mes</b> para comprobar que funciona bien."
+  },
+  c1: {
+    crumb: "Circuito 01", code: "C1",
+    title: "C1 — Iluminación",
+    sub: "Punto de luz por toda la casa",
+    body: `<p>Alimenta <b>todos los puntos de luz</b> de la vivienda: bombillas, plafones, lámparas de techo, apliques... Como las bombillas consumen poca corriente, basta un automático de <b>10 A</b>.</p>
+           <p>Es un <b>PIA</b> (Pequeño Interruptor Automático): protege únicamente a este circuito frente a sobrecargas y cortocircuitos.</p>`,
+    kv: { "Tipo":"PIA (magnetotérmico)", "Intensidad":"10 A", "Sección del cable":"1,5 mm²", "Usuarios":"Bombillas y lámparas" }
+  },
+  c2: {
+    crumb: "Circuito 02", code: "C2",
+    title: "C2 — Tomas de uso general (TUG)",
+    sub: "Los enchufes del salón, dormitorios…",
+    body: `<p>Es el circuito de los <b>enchufes normales</b>: televisión, ordenador, cargadores, lámparas de mesa, plancha, aspiradora...</p>
+           <p>Como soporta muchos aparatos a la vez, el automático es de <b>16 A</b> y los cables más gruesos que en iluminación.</p>`,
+    kv: { "Tipo":"PIA (magnetotérmico)", "Intensidad":"16 A", "Sección del cable":"2,5 mm²", "Usuarios":"Enchufes generales" }
+  },
+  c3: {
+    crumb: "Circuito 03", code: "C3",
+    title: "C3 — Cocina y horno",
+    sub: "Los aparatos que más consumen",
+    body: `<p>La <b>vitrocerámica o placa de inducción</b> y el <b>horno eléctrico</b> son los electrodomésticos que más consumen de la casa. Necesitan su propio circuito robusto, con un automático de <b>25 A</b>.</p>`,
+    kv: { "Tipo":"PIA (magnetotérmico)", "Intensidad":"25 A", "Sección del cable":"6 mm²", "Usuarios":"Vitro + horno" }
+  },
+  c4: {
+    crumb: "Circuito 04", code: "C4",
+    title: "C4 — Lavadora, lavavajillas y termo",
+    sub: "Electrodomésticos con resistencias",
+    body: `<p>Alimenta los aparatos que calientan agua: <b>lavadora, lavavajillas y termo eléctrico</b>. Tiene su propio automático de <b>20 A</b> porque son aparatos que consumen mucho durante bastante rato.</p>`,
+    kv: { "Tipo":"PIA (magnetotérmico)", "Intensidad":"20 A", "Sección del cable":"4 mm²", "Usuarios":"Lavadora, lavavajillas, termo" }
+  },
+  c5: {
+    crumb: "Circuito 05", code: "C5",
+    title: "C5 — Baño y auxiliares de cocina",
+    sub: "Enchufes especiales",
+    body: `<p>Alimenta los <b>enchufes del cuarto de baño</b> (secador, máquina de afeitar) y los <b>enchufes auxiliares de la cocina</b> (microondas, batidora, cafetera...). Lleva automático de <b>16 A</b>.</p>
+           <p>Por seguridad, en zonas con agua los enchufes deben estar a cierta distancia de las bañeras y lavabos.</p>`,
+    kv: { "Tipo":"PIA (magnetotérmico)", "Intensidad":"16 A", "Sección del cable":"2,5 mm²", "Usuarios":"Enchufes baño y cocina" }
+  }
+};
+
+/* ===========================================================
+   Estado del cuadro
+=========================================================== */
+const STATE = {
+  // qué elemento ha "saltado" (null = todo OK)
+  tripped: null,         // 'iga' | 'id' | 'c1'..'c5' | null
+  selected: null
+};
+
+/* ===========================================================
+   Render panel
+=========================================================== */
+const $panel = {
+  crumb: document.getElementById('panel-crumb'),
+  code:  document.getElementById('panel-code'),
+  body:  document.getElementById('panel-body')
+};
+
+function showInfo(id){
+  const d = INFO[id];
+  if(!d) return;
+  $panel.crumb.textContent = d.crumb;
+  $panel.code.textContent = d.code;
+  let kvHTML = '';
+  if(d.kv){
+    kvHTML = '<div class="kv">' + Object.entries(d.kv).map(([k,v])=>`<b>${k}</b><span>${v}</span>`).join('') + '</div>';
+  }
+  $panel.body.innerHTML = `
+    <h2>${d.title}</h2>
+    <h3>${d.sub || ''}</h3>
+    ${d.body}
+    ${kvHTML}
+    ${d.note ? `<div class="note">${d.note}</div>` : ''}
+  `;
+  // Marcar selección visual
+  document.querySelectorAll('.clickable').forEach(el => el.classList.remove('selected'));
+  const sel = document.getElementById('el-' + id);
+  if(sel) sel.classList.add('selected');
+  STATE.selected = id;
+  abrirPanel();
+}
+
+// Mostrar / ocultar panel flotante
+const $panelEl = document.getElementById('panel');
+const $panelClose = document.getElementById('panel-close');
+const $hint = document.getElementById('hint');
+function abrirPanel(){
+  $panelEl.classList.add('show');
+  $hint && $hint.classList.add('hidden');
+}
+function cerrarPanel(){
+  $panelEl.classList.remove('show');
+  document.querySelectorAll('.clickable').forEach(el => el.classList.remove('selected'));
+  STATE.selected = null;
+}
+$panelClose.addEventListener('click', cerrarPanel);
+// Cerrar también con Esc
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') cerrarPanel(); });
+
+/* Click en cada elemento del cuadro */
+document.querySelectorAll('.clickable').forEach(el => {
+  el.addEventListener('click', () => showInfo(el.dataset.id));
+});
+
+/* ===========================================================
+   Animación palancas — bajan al saltar
+   ON  → posición original (junto a la I, arriba)
+   OFF → trasladada hacia abajo (junto al 0)
+=========================================================== */
+function setPalanca(id, on){
+  const grupo = document.querySelector(`g.palanca[data-id="${id}"]`);
+  if(!grupo) return;
+  if(on){
+    grupo.style.transition = 'transform 0.4s cubic-bezier(.5,1.4,.4,1)';
+    grupo.removeAttribute('transform');
+  } else {
+    // Pequeño rebote al caer: primero baja un poco más y luego se asienta
+    grupo.style.transition = 'transform 0.18s cubic-bezier(.6,.05,.8,.6)';
+    // PIAs (c1..c5): cuerpo más corto, baja 38 px (de y=46 a y=84). 
+    // ICP/IGA/ID: baja 44 px (de y=50 a y=94)
+    const isPia = ['c1','c2','c3','c4','c5'].includes(id);
+    const dy = isPia ? 38 : 44;
+    grupo.setAttribute('transform', `translate(0, ${dy})`);
+  }
+}
+
+/* ===========================================================
+   Estado visual general
+=========================================================== */
+const $statusLed = document.getElementById('status-led');
+const $statusText = document.getElementById('status-text');
+const $wireIn = document.getElementById('wire-in-live');
+const $busLive = document.getElementById('bus-live');
+const $busNeutral = document.getElementById('bus-neutral');
+const $electrons = document.getElementById('electrons');
+
+function setStatus(state, text){
+  $statusLed.className = 'led ' + (state==='ok' ? '' : state);
+  $statusText.textContent = text;
+}
+
+function setCorrienteFluyendo(flujo){
+  // si flujo = false, ocultamos electrones
+  $electrons.style.opacity = flujo ? '1' : '0';
+}
+
+/* ===========================================================
+   Simulaciones
+=========================================================== */
+function rearmarTodo(){
+  ['icp','iga','id','c1','c2','c3','c4','c5'].forEach(id => setPalanca(id, true));
+  STATE.tripped = null;
+  setStatus('ok','Funcionamiento normal');
+  setCorrienteFluyendo(true);
+  // limpiar avisos de cables
+  document.querySelectorAll('.wire-out').forEach(w => {
+    w.style.opacity = '1';
+    w.style.filter = '';
+  });
+}
+
+function simular(tipo){
+  rearmarTodo(); // estado limpio
+  setTimeout(()=>{
+    if(tipo === 'sobrecarga'){
+      // Salta C2 por efecto térmico
+      setPalanca('c2', false);
+      STATE.tripped = 'c2';
+      setStatus('warn', 'Sobrecarga: ha saltado C2');
+      // cable de salida de C2 sin corriente
+      document.querySelector('.wire-out[data-c="c2"]').style.opacity = '0.25';
+      $panel.crumb.textContent = "AVERÍA 01";
+      $panel.code.textContent = "SOBRECARGA";
+      $panel.body.innerHTML = `
+        <h2>Sobrecarga en C2</h2>
+        <h3>Acción del efecto térmico</h3>
+        <p>Has enchufado a la vez <b>plancha, secador, aspiradora y un calefactor</b> en los enchufes del circuito C2. La corriente supera los 16 A.</p>
+        <p>Dentro del PIA hay una <b>lámina bimetálica</b>: al pasar mucha corriente se calienta, se curva y dispara el mecanismo. Esto se llama <b>efecto térmico</b> y tarda <b>unos segundos</b> en actuar.</p>
+        <div class="note">✅ Resultado: el <b>PIA del circuito C2</b> baja la palanca y corta SOLO los enchufes generales. Los demás circuitos siguen funcionando.</div>
+        <p style="margin-top:14px"><b>Solución en casa:</b> desenchufa aparatos y vuelve a subir la palanca del C2.</p>
+      `;
+      // marcar visualmente
+      document.querySelectorAll('.clickable').forEach(el => el.classList.remove('selected'));
+      document.getElementById('el-c2').classList.add('selected');
+    }
+    else if(tipo === 'cortocircuito'){
+      setPalanca('c3', false);
+      STATE.tripped = 'c3';
+      setStatus('bad', 'Cortocircuito: ha saltado C3');
+      document.querySelector('.wire-out[data-c="c3"]').style.opacity = '0.25';
+      $panel.crumb.textContent = "AVERÍA 02";
+      $panel.code.textContent = "CORTOCIRCUITO";
+      $panel.body.innerHTML = `
+        <h2>Cortocircuito en C3</h2>
+        <h3>Acción del efecto magnético</h3>
+        <p>Por un cable pelado, la <b>fase ha tocado al neutro</b> directamente. Sin resistencia que limite la corriente, esta se dispara a <b>cientos de amperios</b> en una fracción de segundo.</p>
+        <p>Dentro del PIA hay una <b>bobina (electroimán)</b> que, al pasar una corriente tan enorme, genera un campo magnético que dispara la palanca de forma <b>instantánea</b>.</p>
+        <div class="note bad">⚠️ Sin protección, esa corriente fundiría los cables y podría provocar un <b>incendio</b>. El PIA actúa en <b>milisegundos</b>.</div>
+        <p style="margin-top:14px"><b>Solución en casa:</b> nunca rearmar sin antes <b>localizar y reparar el cortocircuito</b>.</p>
+      `;
+      document.querySelectorAll('.clickable').forEach(el => el.classList.remove('selected'));
+      document.getElementById('el-c3').classList.add('selected');
+    }
+    else if(tipo === 'derivacion'){
+      setPalanca('id', false);
+      // si salta el ID, también se quedan sin corriente todos los circuitos
+      ['c1','c2','c3','c4','c5'].forEach(c => {
+        document.querySelector(`.wire-out[data-c="${c}"]`).style.opacity = '0.25';
+      });
+      $busLive.style.opacity = '0.25';
+      $busNeutral.style.opacity = '0.25';
+      setCorrienteFluyendo(false);
+      STATE.tripped = 'id';
+      setStatus('bad', 'Derivación: ha saltado el ID');
+      $panel.crumb.textContent = "AVERÍA 03";
+      $panel.code.textContent = "DERIVACIÓN A TIERRA";
+      $panel.body.innerHTML = `
+        <h2>Derivación a tierra</h2>
+        <h3>Actúa el diferencial — protege a las personas</h3>
+        <p>Una persona toca, sin querer, una parte metálica con corriente (por ejemplo, una lavadora con la carcasa "derivada"). Una pequeña corriente pasa <b>a través de su cuerpo hacia la tierra</b>.</p>
+        <p>El <b>diferencial</b> detecta que <b>entra más corriente por la fase de la que vuelve por el neutro</b> (la diferencia se está yendo por la persona). En cuanto la diferencia supera <b>30 mA</b>, dispara en menos de <b>30 milisegundos</b>.</p>
+        <div class="note ok">💚 Resultado: <b>la persona se salva</b>. Sin diferencial podría sufrir una electrocución mortal.</div>
+        <p style="margin-top:14px"><b>Importante:</b> cuando salta el ID, se va la luz de <b>toda la vivienda</b>, no solo de un circuito.</p>
+      `;
+      document.querySelectorAll('.clickable').forEach(el => el.classList.remove('selected'));
+      document.getElementById('el-id').classList.add('selected');
+    }
+    else if(tipo === 'general'){
+      setPalanca('iga', false);
+      ['c1','c2','c3','c4','c5'].forEach(c => {
+        document.querySelector(`.wire-out[data-c="${c}"]`).style.opacity = '0.25';
+      });
+      $busLive.style.opacity = '0.25';
+      $busNeutral.style.opacity = '0.25';
+      setCorrienteFluyendo(false);
+      STATE.tripped = 'iga';
+      setStatus('bad', 'Avería general: ha saltado el IGA');
+      $panel.crumb.textContent = "AVERÍA 04";
+      $panel.code.textContent = "AVERÍA GENERAL";
+      $panel.body.innerHTML = `
+        <h2>Avería general</h2>
+        <h3>Última barrera: el IGA</h3>
+        <p>Imagina que un PIA está estropeado y no salta cuando debería. La corriente excesiva sigue subiendo y subiendo... hasta que llega al <b>IGA</b>.</p>
+        <p>El <b>Interruptor General Automático</b> actúa como <b>protección de respaldo</b>: si nada más lo ha hecho, él corta la corriente de <b>toda la vivienda</b>.</p>
+        <div class="note">🛡️ El IGA es la <b>última línea de defensa</b> antes de que el problema afecte a la instalación común del edificio.</div>
+        <p style="margin-top:14px"><b>Solución en casa:</b> cuando salta el IGA, hay que revisar TODA la instalación para encontrar el problema.</p>
+      `;
+      document.querySelectorAll('.clickable').forEach(el => el.classList.remove('selected'));
+      document.getElementById('el-iga').classList.add('selected');
+    }
+    abrirPanel();
+  }, 60);
+}
+
+/* Botones */
+document.querySelectorAll('button.sim').forEach(b => {
+  b.addEventListener('click', () => {
+    const t = b.dataset.sim;
+    if(t === 'reset'){
+      rearmarTodo();
+      $panel.crumb.textContent = "Estado restablecido";
+      $panel.code.textContent = "RESET";
+      $panel.body.innerHTML = `
+        <h2>Sistema rearmado</h2>
+        <h3>Todos los interruptores ON</h3>
+        <p>Todos los automáticos están de nuevo subidos. La corriente vuelve a fluir por toda la instalación.</p>
+        <div class="note ok">🟢 ¡Listo! Pulsa otro botón para probar una avería distinta.</div>
+      `;
+      abrirPanel();
+    } else {
+      simular(t);
+    }
+  });
+});
+
+/* Click en botón TEST del ID (extra didáctico) */
+document.querySelector('#el-id rect[fill="#d23a2e"]')?.addEventListener('click', (e) => {
+  e.stopPropagation();
+  simular('derivacion');
+  // sobrescribimos el panel con texto de TEST
+  setTimeout(()=>{
+    $panel.crumb.textContent = "PRUEBA MANUAL";
+    $panel.code.textContent = "BOTÓN TEST";
+    $panel.body.innerHTML = `
+      <h2>Botón TEST del diferencial</h2>
+      <h3>Comprobación de seguridad</h3>
+      <p>Al pulsar este botón, simulas una pequeña derivación dentro del propio aparato para comprobar que el diferencial <b>salta correctamente</b>.</p>
+      <div class="note ok">✅ Debe hacerse <b>una vez al mes</b>. Si al pulsar TEST no salta el ID, hay que llamar a un electricista.</div>
+    `;
+    abrirPanel();
+  }, 80);
+});
+
+// Estado inicial
+setCorrienteFluyendo(true);
+
+/* ===========================================================
+   MESA DE ENSAYO DE POTENCIA
+=========================================================== */
+const APARATOS = [
+  { id:'led',       nombre:'Bombillas LED', w:60,    icon:'💡' },
+  { id:'tv',        nombre:'Televisor',      w:150,   icon:'📺' },
+  { id:'pc',        nombre:'Ordenador',      w:300,   icon:'💻' },
+  { id:'frigo',     nombre:'Frigorífico',    w:250,   icon:'🧊' },
+  { id:'micro',     nombre:'Microondas',     w:900,   icon:'🍽️' },
+  { id:'plancha',   nombre:'Plancha',        w:1500,  icon:'👔' },
+  { id:'aspirador', nombre:'Aspirador',      w:1400,  icon:'🌪️' },
+  { id:'secador',   nombre:'Secador pelo',   w:2000,  icon:'💨' },
+  { id:'lavadora',  nombre:'Lavadora',       w:2200,  icon:'🌀' },
+  { id:'termo',     nombre:'Termo agua',     w:1500,  icon:'🚿' },
+  { id:'horno',     nombre:'Horno',          w:2500,  icon:'🔥' },
+  { id:'vitro',     nombre:'Vitrocerámica',  w:3500,  icon:'🍳' },
+];
+
+const BENCH = {
+  contratada: 4600,
+  conectados: new Set(),
+  blocked: false   // true cuando el ICP ha saltado por sobrecarga
+};
+
+const $aparatos  = document.getElementById('aparatos');
+const $selKW     = document.getElementById('sel-contratada');
+const $meterW    = document.getElementById('meter-w');
+const $meterMax  = document.getElementById('meter-max');
+const $meterPct  = document.getElementById('meter-pct');
+const $aguja     = document.getElementById('aguja');
+const $cataplas  = document.getElementById('cataplas');
+const $bench     = document.getElementById('bench');
+
+// Pintar tarjetas de aparatos
+function pintarAparatos(){
+  $aparatos.innerHTML = APARATOS.map(a => `
+    <button class="ap" data-id="${a.id}" type="button">
+      <span class="ic">${a.icon}</span>
+      <span class="nm">${a.nombre}</span>
+      <span class="w">${a.w} W</span>
+    </button>
+  `).join('');
+  $aparatos.querySelectorAll('.ap').forEach(btn => {
+    btn.addEventListener('click', () => toggleAparato(btn.dataset.id));
+  });
+}
+pintarAparatos();
+
+function potenciaActual(){
+  let suma = 0;
+  BENCH.conectados.forEach(id => {
+    const a = APARATOS.find(x=>x.id===id);
+    if(a) suma += a.w;
+  });
+  return suma;
+}
+
+function actualizarMedidor(){
+  const w = potenciaActual();
+  const max = BENCH.contratada;
+  const pct = Math.min(100, (w / max) * 100);
+
+  $meterW.textContent = w.toLocaleString('es-ES');
+  $meterMax.textContent = max.toLocaleString('es-ES');
+  $meterPct.textContent = Math.round((w/max)*100) + '%';
+
+  // Color del número
+  $meterW.classList.remove('warn','bad');
+  if(pct >= 95) $meterW.classList.add('bad');
+  else if(pct >= 70) $meterW.classList.add('warn');
+
+  // Aguja: -90deg (0%) → +90deg (100%)
+  const ang = -90 + (pct * 1.8);
+  $aguja.setAttribute('transform', `rotate(${ang} 110 120)`);
+}
+
+function toggleAparato(id){
+  if(BENCH.blocked) return; // ICP fuera: no se puede conectar nada
+  const btn = $aparatos.querySelector(`[data-id="${id}"]`);
+  if(BENCH.conectados.has(id)){
+    BENCH.conectados.delete(id);
+    btn.classList.remove('on');
+  } else {
+    BENCH.conectados.add(id);
+    btn.classList.add('on');
+  }
+  actualizarMedidor();
+
+  // ¿Hemos pasado la potencia contratada?
+  if(potenciaActual() > BENCH.contratada){
+    setTimeout(dispararICP, 350); // pequeño retardo dramático
+  }
+}
+
+function dispararICP(){
+  BENCH.blocked = true;
+
+  // 1) Animación CATAPLÁS!
+  $cataplas.classList.add('show');
+  $bench.classList.add('flash');
+  setTimeout(()=>$bench.classList.remove('flash'), 400);
+
+  // 2) Apagar visualmente todos los aparatos conectados
+  $aparatos.querySelectorAll('.ap.on').forEach(b => b.classList.add('off-by-icp'));
+
+  // 3) Bajar palanca ICP en el cuadro principal
+  setPalanca('icp', false);
+  // y dejar sin corriente todo el cuadro
+  ['c1','c2','c3','c4','c5'].forEach(c => {
+    const w = document.querySelector(`.wire-out[data-c="${c}"]`);
+    if(w) w.style.opacity = '0.25';
+  });
+  $busLive.style.opacity = '0.25';
+  $busNeutral.style.opacity = '0.25';
+  setCorrienteFluyendo(false);
+  STATE.tripped = 'icp';
+  setStatus('bad', 'ICP fuera · Potencia superada');
+
+  // 4) Actualizar panel didáctico
+  $panel.crumb.textContent = "AVERÍA 05";
+  $panel.code.textContent  = "EXCESO DE POTENCIA";
+  const w = potenciaActual();
+  $panel.body.innerHTML = `
+    <h2>¡CATAPLÁS! Salta el ICP</h2>
+    <h3>Has superado la potencia contratada</h3>
+    <p>Tienes contratados <b>${BENCH.contratada.toLocaleString('es-ES')} W</b> con la compañía, pero acabas de conectar aparatos que suman <b>${w.toLocaleString('es-ES')} W</b>. Eso es <b>${Math.round((w/BENCH.contratada)*100)}%</b> de tu contrato.</p>
+    <p>El <b>ICP</b> (Interruptor de Control de Potencia) detecta que estás pidiendo más electricidad de la que tu contrato permite y, para evitar que la compañía cobre indebidamente o sobrecargar la línea, <b>corta toda la vivienda</b>.</p>
+    <div class="note bad">⚠️ Cuando salta el ICP, se va la luz de <b>TODA la casa</b>, no solo de un circuito. Distinguirlo es fácil: el resto del cuadro está bien, solo está bajado el ICP.</div>
+    <p style="margin-top:14px"><b>¿Cómo se soluciona?</b><br>
+    1️⃣ Apagar varios aparatos hasta bajar del límite.<br>
+    2️⃣ Subir la palanca del ICP.<br>
+    3️⃣ Si pasa muy a menudo → llamar a la compañía y <b>contratar más potencia</b>.</p>
+  `;
+  document.querySelectorAll('.clickable').forEach(el => el.classList.remove('selected'));
+  document.getElementById('el-icp').classList.add('selected');
+  abrirPanel();
+}
+
+function rearmarICP_y_aparatos(){
+  // Si el ICP estaba bloqueado, lo liberamos
+  if(BENCH.blocked){
+    // si la potencia conectada sigue por encima → vuelve a saltar
+    if(potenciaActual() > BENCH.contratada){
+      // mensaje rápido pero dejamos los aparatos como están
+      setStatus('bad', 'Sigue habiendo demasiados aparatos conectados');
+      return false;
+    }
+    BENCH.blocked = false;
+    $cataplas.classList.remove('show');
+    $aparatos.querySelectorAll('.ap.off-by-icp').forEach(b => b.classList.remove('off-by-icp'));
+  }
+  return true;
+}
+
+// Cambio de potencia contratada
+$selKW.addEventListener('change', () => {
+  BENCH.contratada = parseInt($selKW.value,10);
+  actualizarMedidor();
+  // Si bajar la potencia hace que ya estemos por encima → cataplás
+  if(!BENCH.blocked && potenciaActual() > BENCH.contratada){
+    setTimeout(dispararICP, 200);
+  }
+});
+
+// Enganchar el botón RESET para que también rearme la mesa
+const _origResetBtn = document.querySelector('button.sim.reset');
+_origResetBtn.addEventListener('click', () => {
+  // desconectar todos los aparatos
+  BENCH.conectados.clear();
+  BENCH.blocked = false;
+  $cataplas.classList.remove('show');
+  $aparatos.querySelectorAll('.ap').forEach(b => {
+    b.classList.remove('on');
+    b.classList.remove('off-by-icp');
+  });
+  actualizarMedidor();
+});
+
+// Inicializar medidor
+actualizarMedidor();
+</script>
+</body>
+</html>

@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Simulador del proceso tecnológico · U01 · TyD 2º ESO</title>
+<meta name="description" content="Simulador interactivo del proceso tecnológico: ordena las 6 fases y aplícalas a un caso real paso a paso. TyD 2º ESO.">
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/01-tecnologia-proceso/interactivos/proceso-tecnologico.html">
+
+<meta property="og:title" content="Simulador del proceso tecnológico · U01 · TyD 2º ESO">
+<meta property="og:description" content="Ordena las 6 fases y aplícalas a un caso real. TyD 2º ESO.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/01-tecnologia-proceso/interactivos/proceso-tecnologico.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Simulador del proceso tecnológico · U01 · TyD 2º ESO">
+<meta name="twitter:description" content="Ordena las 6 fases y aplícalas a un caso real.">
+<meta name="twitter:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+:root {
+  --ok: #2e7d4f;
+  --err: #c44536;
+  --warn: #e8b647;
+}
+
+.modo-toggle {
+  display: flex;
+  gap: 0.4rem;
+  background: #f0f0f0;
+  padding: 4px;
+  border-radius: 10px;
+  margin: 1rem 0 1.4rem;
+}
+.modo-toggle button {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 0.6rem 0.8rem;
+  border-radius: 7px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.15s;
+}
+.modo-toggle button.active {
+  background: var(--principal, #D4700A);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(212,112,10,0.3);
+}
+
+/* ════ MODO 1 · Ordenar las 6 fases ════ */
+.order-area {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 14px;
+  padding: 1.6rem 1.8rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+.order-area h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--principal, #D4700A);
+  margin: 0 0 0.5rem;
+  border-bottom: 2px solid var(--principal, #D4700A);
+  padding-bottom: 0.4rem;
+}
+.order-area .descripcion {
+  color: #555;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.order-slots {
+  display: grid;
+  gap: 0.6rem;
+  margin: 1rem 0;
+}
+.order-slot {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: 0.6rem;
+  align-items: center;
+}
+.order-slot .pos-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--principal, #D4700A);
+  text-align: center;
+  background: #fffaf3;
+  border: 2px solid var(--principal, #D4700A);
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+.dropzone {
+  min-height: 56px;
+  background: #fafafa;
+  border: 2px dashed #c5b89f;
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  font-size: 0.95rem;
+  color: #aaa;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+}
+.dropzone.has-card { background: #fff; border-style: solid; border-color: #ccc; color: #222; font-style: normal; }
+.dropzone.drag-over { background: #fff5e6; border-color: var(--principal, #D4700A); }
+.dropzone.solved-ok { background: #dff2e6; border-color: var(--ok); }
+.dropzone.solved-err { background: #fce4e1; border-color: var(--err); }
+
+.fase-card-draggable {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-left: 4px solid var(--principal, #D4700A);
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+  cursor: grab;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #222;
+  user-select: none;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.fase-card-draggable:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.fase-card-draggable:active { cursor: grabbing; }
+.fase-card-draggable.dragging { opacity: 0.4; }
+.fase-card-draggable .grip {
+  font-size: 1.1rem;
+  color: #999;
+  cursor: grab;
+}
+
+/* Pool de tarjetas disponibles */
+.cards-pool {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: #fffaf3;
+  border: 1px dashed #d4a373;
+  border-radius: 10px;
+  min-height: 80px;
+  margin: 1rem 0;
+}
+.cards-pool .pool-msg {
+  font-size: 0.88rem;
+  color: #8a6d1a;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+.cards-pool .fase-card-draggable {
+  flex: 0 1 auto;
+  min-width: 200px;
+}
+
+.score-box {
+  background: #f0f0f0;
+  border-radius: 10px;
+  padding: 0.8rem 1.2rem;
+  margin: 1rem 0;
+  display: none;
+  border-left: 4px solid var(--principal, #D4700A);
+}
+.score-box.show { display: block; }
+.score-box.perfect { border-left-color: var(--ok); background: #f4faf6; }
+.score-box.partial { border-left-color: var(--warn); background: #fffbf0; }
+.score-titulo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+  color: var(--principal, #D4700A);
+}
+.score-box.perfect .score-titulo { color: var(--ok); }
+.score-box.partial .score-titulo { color: #8a6d1a; }
+.score-detail { font-size: 0.92rem; color: #444; }
+
+.controles {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  margin: 1.2rem 0;
+  flex-wrap: wrap;
+}
+.btn-primary, .btn-secondary {
+  border: none;
+  padding: 0.55rem 1.2rem;
+  border-radius: 8px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-primary { background: var(--principal, #D4700A); color: #fff; }
+.btn-primary:hover:not(:disabled) { background: #b85e08; transform: translateY(-1px); }
+.btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+.btn-secondary { background: #fff; color: #444; border: 1px solid #ccc; }
+.btn-secondary:hover { border-color: var(--principal, #D4700A); color: var(--principal, #D4700A); }
+
+/* ════ MODO 2 · Aplicar a caso real ════ */
+.caso-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.7rem;
+  margin: 1rem 0 1.4rem;
+}
+.caso-btn {
+  background: #fff;
+  border: 2px solid #e3e3e3;
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s;
+}
+.caso-btn:hover { border-color: var(--principal, #D4700A); background: #fffaf3; }
+.caso-btn.active { background: #fffaf3; border-color: var(--principal, #D4700A); box-shadow: 0 4px 12px rgba(212,112,10,0.15); }
+.caso-btn .ico { font-size: 1.6rem; display: block; margin-bottom: 4px; }
+.caso-btn .ttl {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--principal, #D4700A);
+}
+.caso-btn .dsc { font-size: 0.85rem; color: #666; margin-top: 4px; line-height: 1.3; }
+
+.caso-current {
+  background: linear-gradient(135deg, #fdfaf3, #f6f1e7);
+  border: 1px solid #d4a373;
+  border-radius: 12px;
+  padding: 1.2rem 1.5rem;
+  margin: 1rem 0;
+}
+.caso-current .ico-big { font-size: 2.2rem; display: inline-block; margin-right: 0.6rem; vertical-align: middle; }
+.caso-current .ttl {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--principal, #D4700A);
+  display: inline-block;
+  vertical-align: middle;
+}
+.caso-current .ctx { color: #555; font-size: 0.95rem; margin-top: 0.5rem; line-height: 1.55; }
+
+.fase-current {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 12px;
+  padding: 1.4rem 1.6rem;
+  margin: 1rem 0;
+}
+.fase-progress {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+.fase-progress .pill {
+  flex: 1;
+  height: 8px;
+  background: #eee;
+  border-radius: 4px;
+}
+.fase-progress .pill.done { background: var(--ok); }
+.fase-progress .pill.current { background: var(--principal, #D4700A); }
+.fase-progress .pill.err { background: var(--err); }
+.fase-progress .num-display {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: #555;
+  margin-left: 0.8rem;
+  white-space: nowrap;
+}
+.fase-banner {
+  background: var(--principal, #D4700A);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.5px;
+}
+.fase-banner .num { background: rgba(255,255,255,0.25); padding: 2px 8px; border-radius: 4px; margin-right: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; }
+
+.fase-pregunta {
+  font-size: 1.05rem;
+  color: #222;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+.fase-opciones {
+  display: grid;
+  gap: 0.5rem;
+}
+.fase-op {
+  background: #fafafa;
+  border: 2px solid #e3e3e3;
+  border-radius: 10px;
+  padding: 0.7rem 0.95rem;
+  cursor: pointer;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.95rem;
+  color: #444;
+  transition: all 0.15s;
+  text-align: left;
+}
+.fase-op:hover:not(:disabled) { background: #fffaf3; border-color: var(--principal, #D4700A); }
+.fase-op.correct { background: #dff2e6; border-color: var(--ok); color: var(--ok); font-weight: 600; }
+.fase-op.wrong { background: #fce4e1; border-color: var(--err); color: var(--err); }
+.fase-op:disabled { cursor: not-allowed; opacity: 0.85; }
+
+.fase-feedback {
+  margin-top: 1rem;
+  padding: 0.8rem 1.1rem;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  display: none;
+}
+.fase-feedback.show { display: block; }
+.fase-feedback.ok { background: #dff2e6; color: var(--ok); border-left: 4px solid var(--ok); }
+.fase-feedback.err { background: #fce4e1; color: var(--err); border-left: 4px solid var(--err); }
+
+.resumen-final {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 14px;
+  padding: 1.5rem 1.8rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+.resumen-final h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--principal, #D4700A);
+  margin-bottom: 0.6rem;
+  text-align: center;
+}
+.resumen-final .resumen-score {
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0.5rem 0;
+}
+.resumen-final .resumen-score .total { color: #999; font-size: 1.2rem; }
+.resumen-final .resumen-msg { text-align: center; color: #555; font-style: italic; margin-bottom: 1rem; }
+.resumen-pasos { display: grid; gap: 0.5rem; margin-top: 1rem; }
+.resumen-paso {
+  background: #fafafa;
+  border-left: 4px solid var(--ok);
+  border-radius: 6px;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.92rem;
+}
+.resumen-paso.err { border-left-color: var(--err); }
+.resumen-paso strong { color: #111; }
+
+@media (max-width: 720px) {
+  .modo-toggle { flex-direction: column; }
+  .cards-pool .fase-card-draggable { min-width: 0; flex: 1 1 100%; }
+  .order-slot { grid-template-columns: 40px 1fr; }
+  .order-slot .pos-num { font-size: 1.1rem; padding: 0.35rem; }
+}
+
+@media print {
+  .modo-toggle, .controles { display: none; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U01 · Proceso tecnológico · Simulador</span>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Inicio</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U01</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📘</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🔄</span><span class="nc-lbl">Simulador del proceso</span></span>
+</nav>
+
+<div class="unidad-layout">
+
+<aside class="sb-side">
+  <h3>Cómo usarlo</h3>
+  <p style="padding: 0.6rem 1rem; font-size:0.88rem; color:#555; line-height:1.55;">
+    <strong>Modo 1 (Ordenar):</strong> arrastra las 6 fases del proceso a su posición correcta (1-6).<br><br>
+    <strong>Modo 2 (Aplicar):</strong> elige un caso real y resuélvelo aplicando las 6 fases una a una.
+  </p>
+  <h3>Las 6 fases</h3>
+  <ol style="font-size:0.86rem; color:#555; padding:0 1rem 0 2rem; line-height:1.6;">
+    <li>Requerimiento</li>
+    <li>Posibles soluciones</li>
+    <li>Selección</li>
+    <li>Diseño y planificación</li>
+    <li>Construcción</li>
+    <li>Evaluación</li>
+  </ol>
+</aside>
+
+<main class="ct" id="main-content">
+
+<h1 class="unidad-titulo">🔄 Simulador del proceso tecnológico</h1>
+<p class="unidad-subt">Domina las 6 fases del proceso. Primero ordénalas y después aplícalas a un problema real.</p>
+
+<div class="modo-toggle" role="tablist" aria-label="Modo de práctica">
+  <button id="modo-orden" class="active" onclick="setModo('orden')">📊 Ordenar las 6 fases</button>
+  <button id="modo-aplicar" onclick="setModo('aplicar')">🛠️ Aplicar a un caso real</button>
+</div>
+
+<!-- ════ MODO 1 ════ -->
+<section id="vista-orden">
+  <div class="order-area">
+    <h2>Ordena las 6 fases del proceso tecnológico</h2>
+    <p class="descripcion">Arrastra cada tarjeta del "pool" inferior hasta la posición correcta en las casillas numeradas (1 = primera fase, 6 = última). Cuando las hayas colocado todas, pulsa <em>Comprobar</em>.</p>
+
+    <div class="order-slots" id="order-slots"></div>
+
+    <div class="cards-pool" id="cards-pool">
+      <div class="pool-msg">⬇ Tarjetas disponibles (arrastra a las casillas de arriba)</div>
+    </div>
+
+    <div class="controles">
+      <button class="btn-primary" id="btn-check-orden" onclick="comprobarOrden()" disabled>✅ Comprobar</button>
+      <button class="btn-secondary" onclick="resetOrden()">↺ Reintentar</button>
+    </div>
+
+    <div class="score-box" id="score-orden"></div>
+  </div>
+</section>
+
+<!-- ════ MODO 2 ════ -->
+<section id="vista-aplicar" style="display:none;">
+  <div class="order-area">
+    <h2>Aplica las 6 fases a un caso real</h2>
+    <p class="descripcion">Elige uno de los siguientes problemas y resuélvelo aplicando el proceso tecnológico fase por fase. En cada fase tendrás que decidir qué hacer entre varias opciones.</p>
+
+    <div class="caso-selector" id="caso-selector"></div>
+
+    <div id="caso-area"></div>
+  </div>
+</section>
+
+<footer class="unidad-foot">
+  IES Jiménez de Quesada · Santa Fe (Granada)<br>
+  TyD 2º ESO · Curso 2025-26 · Manuel Alonso Herrera<br>
+  <a href="../index.html">← Volver al hub</a> · <a href="../libro-digital.html">📘 Libro digital</a>
+  <br><span class="version">Simulador del proceso v1.0</span>
+</footer>
+
+</main>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // ════════════════════════════════════════════════════════════════
+  // Datos
+  // ════════════════════════════════════════════════════════════════
+  const FASES = [
+    {id: 'f1', nombre: 'Requerimiento o necesidad', pos: 1},
+    {id: 'f2', nombre: 'Pensar en posibles soluciones', pos: 2},
+    {id: 'f3', nombre: 'Selección de la solución', pos: 3},
+    {id: 'f4', nombre: 'Diseño y planificación', pos: 4},
+    {id: 'f5', nombre: 'Construcción', pos: 5},
+    {id: 'f6', nombre: 'Evaluación', pos: 6}
+  ];
+
+  // ─── Casos para modo Aplicar ───
+  const CASOS = [
+    {
+      id: 'bici',
+      ico: '🚲',
+      titulo: 'Se ha pinchado la rueda de la bici',
+      contexto: 'Estás dando una vuelta en bici cuando, de pronto, oyes un "pssss" y la rueda trasera empieza a deshincharse. Quieres seguir paseando hoy.',
+      preguntas: [
+        {
+          fase: 1, nombre: 'Requerimiento',
+          q: '¿Qué necesidad concreta tienes que resolver?',
+          opciones: [
+            {t: 'Quiero poder seguir usando la bici hoy.', ok: true},
+            {t: 'Quiero comprarme una bici nueva más ligera.', ok: false},
+            {t: 'Quiero llamar a mi madre.', ok: false}
+          ],
+          expl: 'La necesidad concreta es <strong>poder usar la bici ahora</strong>. Definir bien la necesidad es lo más importante: si la defines mal (comprar una nueva bici), las soluciones serán erróneas.'
+        },
+        {
+          fase: 2, nombre: 'Posibles soluciones',
+          q: '¿Qué soluciones te plantearías?',
+          opciones: [
+            {t: 'Solo se me ocurre una: llevarla al taller.', ok: false},
+            {t: 'Repararla yo · llamar a alguien · llevarla al taller · cambiar la rueda entera.', ok: true},
+            {t: 'Tirarla a la basura.', ok: false}
+          ],
+          expl: 'En esta fase hay que <strong>plantear varias soluciones</strong>, cuantas más mejor. Quedarse con una sola idea es uno de los errores típicos del proceso tecnológico.'
+        },
+        {
+          fase: 3, nombre: 'Selección',
+          q: 'Tienes parches en casa, sabes hacerlo y es rápido. ¿Qué eliges?',
+          opciones: [
+            {t: 'Llevarla al taller (pero está cerrado un domingo).', ok: false},
+            {t: 'Repararla yo en casa con el kit de parches.', ok: true},
+            {t: 'Llamar a mi padre aunque está trabajando.', ok: false}
+          ],
+          expl: 'Selecciones la opción más viable según los condicionantes: tienes los materiales, sabes la técnica y es rápida. Es la solución óptima en este contexto.'
+        },
+        {
+          fase: 4, nombre: 'Diseño y planificación',
+          q: '¿Cómo planificas la reparación?',
+          opciones: [
+            {t: 'Empiezo a desmontar y ya veré qué hago.', ok: false},
+            {t: 'Planteo los pasos: desmontar rueda → sacar cámara → localizar pinchazo → lijar → pegar parche → montar.', ok: true},
+            {t: 'Busco un vídeo tutorial muy largo y miro todos los modelos de bici.', ok: false}
+          ],
+          expl: 'Planificar los <strong>pasos en orden</strong> y la lista de herramientas es clave para no parar a mitad de camino por falta de algo.'
+        },
+        {
+          fase: 5, nombre: 'Construcción',
+          q: 'Estás reparando y descubres que la cámara está muy dañada. ¿Qué haces?',
+          opciones: [
+            {t: 'Lo anoto en el plan, busco una cámara nueva y sigo.', ok: true},
+            {t: 'Abandono el plan y empiezo de cero.', ok: false},
+            {t: 'Pego el parche igualmente, da igual que esté roto.', ok: false}
+          ],
+          expl: 'En la fase de construcción aparecen <strong>imprevistos</strong>. Hay que anotarlos en el plan de trabajo (para luego evaluar) y adaptar la solución.'
+        },
+        {
+          fase: 6, nombre: 'Evaluación',
+          q: '¿Cómo compruebas si has resuelto el problema?',
+          opciones: [
+            {t: 'No hace falta comprobar nada, doy por hecho que está bien.', ok: false},
+            {t: 'Doy una vuelta con la bici y verifico que la rueda aguanta el aire.', ok: true},
+            {t: 'Le pregunto a mi hermano si cree que está bien.', ok: false}
+          ],
+          expl: 'La evaluación consiste en <strong>verificar que el problema está resuelto</strong>. Probar la rueda es la mejor evaluación posible. También podrías anotar mejoras: comprar más parches, llevar bomba…'
+        }
+      ]
+    },
+    {
+      id: 'lampara',
+      ico: '💡',
+      titulo: 'La lámpara de mi habitación no funciona',
+      contexto: 'Al volver del instituto entras a tu habitación, le das al interruptor y la lámpara del techo no se enciende. Necesitas luz para estudiar esta tarde.',
+      preguntas: [
+        {
+          fase: 1, nombre: 'Requerimiento',
+          q: '¿Cuál es el problema o necesidad real?',
+          opciones: [
+            {t: 'Necesito iluminación para estudiar esta tarde.', ok: true},
+            {t: 'Quiero cambiar el diseño de mi habitación.', ok: false},
+            {t: 'Quiero comprarme un flexo nuevo en el centro comercial.', ok: false}
+          ],
+          expl: 'La necesidad real y prioritaria es <strong>tener luz para estudiar</strong>. Si la enuncias mal, te lías a buscar una lámpara nueva sin ni siquiera comprobar si la bombilla está fundida.'
+        },
+        {
+          fase: 2, nombre: 'Posibles soluciones',
+          q: '¿Qué soluciones se te ocurren?',
+          opciones: [
+            {t: 'Comprar una lámpara nueva inmediatamente.', ok: false},
+            {t: 'Cambiar la bombilla · revisar el interruptor · usar un flexo · pedir ayuda a un adulto.', ok: true},
+            {t: 'Estudiar a oscuras.', ok: false}
+          ],
+          expl: 'Hay que <strong>generar varias ideas</strong>. La opción más rápida y barata suele ser la mejor: empezar por cambiar la bombilla (lo más probable que falle).'
+        },
+        {
+          fase: 3, nombre: 'Selección',
+          q: '¿Cuál escoges como primera opción?',
+          opciones: [
+            {t: 'Cambiar la bombilla (probablemente está fundida y tengo de repuesto).', ok: true},
+            {t: 'Cambiar toda la instalación eléctrica.', ok: false},
+            {t: 'Llamar a un electricista profesional.', ok: false}
+          ],
+          expl: 'Lo razonable es empezar por la solución <strong>más sencilla y económica</strong>: cambiar la bombilla. Si no funciona, ya pasaremos a soluciones más complejas.'
+        },
+        {
+          fase: 4, nombre: 'Diseño y planificación',
+          q: '¿Cómo planificas el cambio de bombilla?',
+          opciones: [
+            {t: 'Apago el interruptor, espero a que se enfríe, traigo una escalera, cojo la bombilla nueva, sustituyo y verifico.', ok: true},
+            {t: 'Subo a la silla más alta que tengo y cambio rápido.', ok: false},
+            {t: 'Toco directamente la bombilla caliente para destornillarla.', ok: false}
+          ],
+          expl: 'El plan correcto considera la <strong>seguridad</strong>: apagar el interruptor antes de manipular, dejar enfriar la bombilla, usar una escalera estable. Saltarse pasos en electricidad es peligroso.'
+        },
+        {
+          fase: 5, nombre: 'Construcción',
+          q: 'Cambias la bombilla pero sigue sin encenderse. ¿Qué haces?',
+          opciones: [
+            {t: 'Sigo intentando con la misma bombilla.', ok: false},
+            {t: 'Anoto el imprevisto y paso a la siguiente solución: revisar el interruptor o pedir ayuda.', ok: true},
+            {t: 'Renuncio al estudio de hoy.', ok: false}
+          ],
+          expl: 'En la fase de construcción surgen imprevistos. Lo correcto es <strong>anotarlo</strong> y aplicar la siguiente solución planeada: si la bombilla no era el problema, hay que revisar otra parte de la instalación.'
+        },
+        {
+          fase: 6, nombre: 'Evaluación',
+          q: 'Has cambiado la bombilla y ahora funciona. ¿Cómo evalúas el proceso?',
+          opciones: [
+            {t: 'Solo importa que se encienda, no hay nada más que pensar.', ok: false},
+            {t: 'Compruebo que da luz suficiente para estudiar y anoto: comprar bombilla de repuesto para evitar el problema en el futuro.', ok: true},
+            {t: 'Reemplazo todas las bombillas de la casa por si acaso.', ok: false}
+          ],
+          expl: 'Evaluar incluye <strong>verificar que la solución cumple</strong> el requerimiento (luz suficiente) y proponer <strong>mejoras futuras</strong>: tener siempre una bombilla de repuesto a mano.'
+        }
+      ]
+    },
+    {
+      id: 'mochila',
+      ico: '🎒',
+      titulo: 'Mi mochila pesa demasiado',
+      contexto: 'Llevas varios días llegando al instituto con dolor de espalda. Tu mochila pesa mucho porque cargas libros, cuadernos y la bolsa de educación física.',
+      preguntas: [
+        {
+          fase: 1, nombre: 'Requerimiento',
+          q: '¿Cuál es el verdadero problema?',
+          opciones: [
+            {t: 'Necesito reducir el peso que cargo a diario para evitar el dolor de espalda.', ok: true},
+            {t: 'Necesito una mochila más bonita.', ok: false},
+            {t: 'Necesito ir andando menos al instituto.', ok: false}
+          ],
+          expl: 'El problema real es el <strong>peso</strong> que cargas (no la mochila en sí). Bien definida la necesidad, las soluciones se enfocan correctamente.'
+        },
+        {
+          fase: 2, nombre: 'Posibles soluciones',
+          q: '¿Qué soluciones puedes explorar?',
+          opciones: [
+            {t: 'Mochila con ruedas · llevar solo lo necesario · libros digitales · taquilla en el centro · repartir el peso.', ok: true},
+            {t: 'Hacer pesas para fortalecer la espalda.', ok: false},
+            {t: 'Ignorar el dolor y seguir igual.', ok: false}
+          ],
+          expl: 'Cuanto más amplio el abanico de soluciones, mejor. Algunas son <strong>tecnológicas</strong> (mochila con ruedas, digitalizar), otras <strong>organizativas</strong> (llevar solo lo que toca cada día).'
+        },
+        {
+          fase: 3, nombre: 'Selección',
+          q: 'Tu profesor permite usar tablet en clase. ¿Qué eliges?',
+          opciones: [
+            {t: 'Llevar tablet para los libros + revisar a diario qué cuadernos toca llevar.', ok: true},
+            {t: 'Comprar la mochila más cara del mercado.', ok: false},
+            {t: 'Dejar todos los libros en casa.', ok: false}
+          ],
+          expl: 'La solución elegida combina <strong>tecnología</strong> (tablet) y <strong>organización</strong> (planificar lo de cada día). Cumple los condicionantes: posible, asumible económicamente, efectiva.'
+        },
+        {
+          fase: 4, nombre: 'Diseño y planificación',
+          q: '¿Qué hace falta planificar?',
+          opciones: [
+            {t: 'Hablar con padres sobre tablet · digitalizar los libros · pegar el horario en la mochila · revisar mochila cada noche.', ok: true},
+            {t: 'Nada, simplemente empiezo a usar la tablet mañana.', ok: false},
+            {t: 'Comprar una báscula para pesar la mochila diariamente.', ok: false}
+          ],
+          expl: 'La planificación incluye recursos (tablet, horario), tareas (digitalizar, revisar mochila) y un cronograma (cada noche revisar). Todo bien <strong>preparado de antemano</strong>.'
+        },
+        {
+          fase: 5, nombre: 'Construcción',
+          q: 'Llevas dos semanas con el nuevo sistema pero olvidaste el cuaderno de mates. ¿Qué haces?',
+          opciones: [
+            {t: 'Anoto el problema, mejoro la lista de revisión y avanzo.', ok: true},
+            {t: 'Vuelvo al sistema antiguo de llevarlo todo.', ok: false},
+            {t: 'Pongo todos los cuadernos de nuevo en la mochila por si acaso.', ok: false}
+          ],
+          expl: 'En la fase de construcción de un sistema (sí, también es un proceso tecnológico aunque no haya un objeto físico) los <strong>fallos son normales</strong>. Se anotan y se mejora el sistema.'
+        },
+        {
+          fase: 6, nombre: 'Evaluación',
+          q: 'Después de un mes, ¿cómo evalúas la solución?',
+          opciones: [
+            {t: 'Si no me duele la espalda, ha funcionado, fin.', ok: false},
+            {t: 'Compruebo: ¿menos dolor? ¿más organización? ¿más eficiente? Si funciona, lo mantengo y propongo mejoras.', ok: true},
+            {t: 'Cambio de instituto.', ok: false}
+          ],
+          expl: 'Evaluar es <strong>comparar el resultado con el objetivo inicial</strong> (reducir peso y dolor) y proponer mejoras (¿mejor mochila? ¿usar taquilla?). El proceso tecnológico es <strong>cíclico</strong>: la evaluación puede generar nuevos requerimientos.'
+        }
+      ]
+    }
+  ];
+
+  // ════════════════════════════════════════════════════════════════
+  // Estado
+  // ════════════════════════════════════════════════════════════════
+  let modo = 'orden';
+
+  // Modo orden
+  let pool = [];           // tarjetas en el pool
+  let slots = [null, null, null, null, null, null];   // 6 slots (índice 0=pos1, etc)
+
+  // Modo aplicar
+  let casoIdx = -1;
+  let faseIdx = 0;
+  let respuestas = [];   // {fase, ok, opcionTexto}
+
+  // ════════════════════════════════════════════════════════════════
+  // MODO 1: Ordenar las 6 fases
+  // ════════════════════════════════════════════════════════════════
+  const slotsContainer = document.getElementById('order-slots');
+  const poolContainer = document.getElementById('cards-pool');
+  const btnCheck = document.getElementById('btn-check-orden');
+  const scoreOrden = document.getElementById('score-orden');
+
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function renderOrden() {
+    // slots
+    slotsContainer.innerHTML = '';
+    for (let i = 0; i < 6; i++) {
+      const row = document.createElement('div');
+      row.className = 'order-slot';
+      row.innerHTML = `<div class="pos-num">${i + 1}</div><div class="dropzone${slots[i] ? ' has-card' : ''}" data-slot="${i}"></div>`;
+      slotsContainer.appendChild(row);
+    }
+    // populate slots
+    slots.forEach((fase, i) => {
+      if (fase) {
+        const dz = slotsContainer.querySelector(`[data-slot="${i}"]`);
+        dz.appendChild(makeCard(fase, 'slot'));
+      }
+    });
+
+    // pool
+    poolContainer.innerHTML = '<div class="pool-msg">⬇ Tarjetas disponibles (arrastra a las casillas de arriba)</div>';
+    pool.forEach(f => poolContainer.appendChild(makeCard(f, 'pool')));
+
+    setupDragAndDrop();
+    btnCheck.disabled = slots.some(s => s === null);
+  }
+
+  function makeCard(fase, where) {
+    const c = document.createElement('div');
+    c.className = 'fase-card-draggable';
+    c.draggable = true;
+    c.dataset.faseId = fase.id;
+    c.dataset.from = where;
+    c.innerHTML = `<span class="grip">⋮⋮</span>${fase.nombre}`;
+    return c;
+  }
+
+  let draggedEl = null;
+  function setupDragAndDrop() {
+    document.querySelectorAll('.fase-card-draggable').forEach(card => {
+      card.addEventListener('dragstart', e => {
+        draggedEl = card;
+        card.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+        try { e.dataTransfer.setData('text/plain', card.dataset.faseId); } catch(_){}
+      });
+      card.addEventListener('dragend', () => {
+        if (draggedEl) draggedEl.classList.remove('dragging');
+        draggedEl = null;
+      });
+      // Touch support
+      let touchOrig = null;
+      card.addEventListener('touchstart', e => {
+        touchOrig = card;
+        card.classList.add('dragging');
+      }, {passive: true});
+      card.addEventListener('touchmove', e => {
+        if (!touchOrig) return;
+        const t = e.touches[0];
+        const el = document.elementFromPoint(t.clientX, t.clientY);
+        document.querySelectorAll('.dropzone.drag-over').forEach(d => d.classList.remove('drag-over'));
+        if (el && el.classList.contains('dropzone')) el.classList.add('drag-over');
+        const pool = document.getElementById('cards-pool');
+        if (el === pool || (el && pool.contains(el))) pool.classList.add('drag-over');
+        e.preventDefault();
+      }, {passive: false});
+      card.addEventListener('touchend', e => {
+        if (!touchOrig) return;
+        card.classList.remove('dragging');
+        const t = e.changedTouches[0];
+        const el = document.elementFromPoint(t.clientX, t.clientY);
+        document.querySelectorAll('.dropzone.drag-over').forEach(d => d.classList.remove('drag-over'));
+        document.getElementById('cards-pool').classList.remove('drag-over');
+        if (el && el.classList.contains('dropzone')) {
+          dropOnSlot(card, parseInt(el.dataset.slot));
+        } else if (el && (el.id === 'cards-pool' || document.getElementById('cards-pool').contains(el))) {
+          dropOnPool(card);
+        }
+        touchOrig = null;
+      });
+    });
+
+    document.querySelectorAll('.dropzone').forEach(dz => {
+      dz.addEventListener('dragover', e => {
+        e.preventDefault();
+        dz.classList.add('drag-over');
+      });
+      dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
+      dz.addEventListener('drop', e => {
+        e.preventDefault();
+        dz.classList.remove('drag-over');
+        if (!draggedEl) return;
+        dropOnSlot(draggedEl, parseInt(dz.dataset.slot));
+      });
+    });
+
+    poolContainer.addEventListener('dragover', e => {
+      e.preventDefault();
+      poolContainer.classList.add('drag-over');
+    });
+    poolContainer.addEventListener('dragleave', () => poolContainer.classList.remove('drag-over'));
+    poolContainer.addEventListener('drop', e => {
+      e.preventDefault();
+      poolContainer.classList.remove('drag-over');
+      if (!draggedEl) return;
+      dropOnPool(draggedEl);
+    });
+  }
+
+  function dropOnSlot(card, slotIdx) {
+    const faseId = card.dataset.faseId;
+    const fase = FASES.find(f => f.id === faseId);
+    if (!fase) return;
+    // Remove from current position
+    removeFromCurrent(card);
+    // If slot has card, swap to pool
+    if (slots[slotIdx]) {
+      pool.push(slots[slotIdx]);
+    }
+    slots[slotIdx] = fase;
+    renderOrden();
+  }
+
+  function dropOnPool(card) {
+    const faseId = card.dataset.faseId;
+    const fase = FASES.find(f => f.id === faseId);
+    if (!fase) return;
+    if (card.dataset.from === 'pool') return; // ya está
+    removeFromCurrent(card);
+    pool.push(fase);
+    renderOrden();
+  }
+
+  function removeFromCurrent(card) {
+    const faseId = card.dataset.faseId;
+    pool = pool.filter(f => f.id !== faseId);
+    for (let i = 0; i < slots.length; i++) {
+      if (slots[i] && slots[i].id === faseId) { slots[i] = null; }
+    }
+  }
+
+  window.comprobarOrden = function() {
+    if (slots.some(s => s === null)) return;
+    let aciertos = 0;
+    slotsContainer.querySelectorAll('.dropzone').forEach((dz, i) => {
+      dz.classList.remove('solved-ok', 'solved-err');
+      if (slots[i].pos === i + 1) {
+        dz.classList.add('solved-ok');
+        aciertos++;
+      } else {
+        dz.classList.add('solved-err');
+      }
+    });
+    // bloquear cards
+    document.querySelectorAll('.fase-card-draggable').forEach(c => { c.draggable = false; c.style.cursor = 'default'; });
+
+    scoreOrden.classList.remove('perfect', 'partial');
+    scoreOrden.classList.add('show');
+    if (aciertos === 6) {
+      scoreOrden.classList.add('perfect');
+      scoreOrden.innerHTML = '<div class="score-titulo">🎉 ¡Perfecto! Las 6 fases en el orden correcto.</div><div class="score-detail">El proceso tecnológico siempre se aplica en este orden. Saltarse alguna fase suele significar acabar con un producto que no funciona.</div>';
+    } else {
+      scoreOrden.classList.add('partial');
+      scoreOrden.innerHTML = `<div class="score-titulo">⚠️ ${aciertos} de 6 correctas</div><div class="score-detail">Revisa las casillas en rojo. Pulsa <em>Reintentar</em> para volver a intentarlo.</div>`;
+    }
+  };
+
+  window.resetOrden = function() {
+    pool = shuffle(FASES);
+    slots = [null, null, null, null, null, null];
+    scoreOrden.classList.remove('show');
+    renderOrden();
+  };
+
+  // INIT modo 1
+  resetOrden();
+
+  // ════════════════════════════════════════════════════════════════
+  // MODO 2: Aplicar a un caso real
+  // ════════════════════════════════════════════════════════════════
+  const casoSelector = document.getElementById('caso-selector');
+  const casoArea = document.getElementById('caso-area');
+
+  function renderCasoSelector() {
+    casoSelector.innerHTML = CASOS.map((c, i) => 
+      `<div class="caso-btn${i === casoIdx ? ' active' : ''}" onclick="elegirCaso(${i})">
+        <span class="ico">${c.ico}</span>
+        <span class="ttl">${c.titulo}</span>
+        <div class="dsc">${c.contexto.substring(0, 110)}…</div>
+      </div>`
+    ).join('');
+  }
+
+  window.elegirCaso = function(i) {
+    casoIdx = i;
+    faseIdx = 0;
+    respuestas = [];
+    renderCasoSelector();
+    renderCaso();
+  };
+
+  function renderCaso() {
+    if (casoIdx < 0) { casoArea.innerHTML = ''; return; }
+    const c = CASOS[casoIdx];
+
+    if (faseIdx >= c.preguntas.length) {
+      renderResumenFinal();
+      return;
+    }
+    const q = c.preguntas[faseIdx];
+
+    // barra de progreso de fases
+    let progress = '<div class="fase-progress">';
+    for (let i = 0; i < c.preguntas.length; i++) {
+      let cls = '';
+      if (i < faseIdx) cls = respuestas[i] && respuestas[i].ok ? 'done' : 'err';
+      else if (i === faseIdx) cls = 'current';
+      progress += `<div class="pill ${cls}"></div>`;
+    }
+    progress += `<span class="num-display">Fase ${faseIdx + 1} / ${c.preguntas.length}</span></div>`;
+
+    const opcionesShuffled = shuffle(q.opciones);
+    const opcionesHTML = opcionesShuffled.map(op => 
+      `<button class="fase-op" data-ok="${op.ok}" data-text="${op.t.replace(/"/g, '&quot;')}" onclick="responderFase(this)">${op.t}</button>`
+    ).join('');
+
+    casoArea.innerHTML = `
+      <div class="caso-current">
+        <span class="ico-big">${c.ico}</span>
+        <span class="ttl">${c.titulo}</span>
+        <div class="ctx">${c.contexto}</div>
+      </div>
+      <div class="fase-current">
+        ${progress}
+        <div class="fase-banner"><span class="num">Fase ${q.fase}</span>${q.nombre}</div>
+        <div class="fase-pregunta">${q.q}</div>
+        <div class="fase-opciones">${opcionesHTML}</div>
+        <div class="fase-feedback" id="fase-feedback"></div>
+        <div class="controles" id="fase-controles"></div>
+      </div>
+    `;
+  }
+
+  window.responderFase = function(btn) {
+    const c = CASOS[casoIdx];
+    const q = c.preguntas[faseIdx];
+    const ok = btn.dataset.ok === 'true';
+    const opcionTexto = btn.dataset.text;
+
+    // marcar visualmente
+    document.querySelectorAll('.fase-op').forEach(b => {
+      b.disabled = true;
+      if (b.dataset.ok === 'true') b.classList.add('correct');
+      else if (b === btn) b.classList.add('wrong');
+    });
+
+    // feedback
+    const fb = document.getElementById('fase-feedback');
+    fb.className = 'fase-feedback ' + (ok ? 'ok' : 'err') + ' show';
+    fb.innerHTML = (ok ? '✓ ' : '✗ ') + q.expl;
+
+    respuestas.push({fase: q.fase, ok, opcionTexto});
+
+    // botón siguiente
+    const ctrls = document.getElementById('fase-controles');
+    ctrls.innerHTML = `<button class="btn-primary" onclick="siguienteFase()">${faseIdx + 1 < c.preguntas.length ? 'Siguiente fase →' : 'Ver resumen final'}</button>`;
+  };
+
+  window.siguienteFase = function() {
+    faseIdx++;
+    renderCaso();
+  };
+
+  function renderResumenFinal() {
+    const c = CASOS[casoIdx];
+    const aciertos = respuestas.filter(r => r.ok).length;
+    const pct = (aciertos / respuestas.length) * 100;
+    let msg = '';
+    if (pct === 100) msg = '🏆 ¡Perfecto! Has aplicado las 6 fases sin errores.';
+    else if (pct >= 80) msg = '🌟 Muy bien. Solo te has equivocado en algún detalle.';
+    else if (pct >= 50) msg = '👍 Tienes la idea general, pero algunas fases necesitan repaso.';
+    else msg = '🤔 Vuelve a leer las 6 fases del libro digital y vuelve a intentarlo.';
+
+    const pasosHTML = respuestas.map(r => 
+      `<div class="resumen-paso${r.ok ? '' : ' err'}">
+        <strong>Fase ${r.fase}:</strong> ${r.opcionTexto}
+      </div>`
+    ).join('');
+
+    casoArea.innerHTML = `
+      <div class="resumen-final">
+        <h3>Resumen — ${c.ico} ${c.titulo}</h3>
+        <div class="resumen-score">${aciertos}<span class="total"> / ${respuestas.length}</span></div>
+        <p class="resumen-msg">${msg}</p>
+        <div class="resumen-pasos">${pasosHTML}</div>
+        <div class="controles">
+          <button class="btn-primary" onclick="elegirCaso(${casoIdx})">↺ Repetir caso</button>
+          <button class="btn-secondary" onclick="elegirOtroCaso()">⬅ Elegir otro caso</button>
+        </div>
+      </div>
+    `;
+  }
+
+  window.elegirOtroCaso = function() {
+    casoIdx = -1;
+    renderCasoSelector();
+    casoArea.innerHTML = '';
+  };
+
+  // INIT modo 2
+  renderCasoSelector();
+
+  // ════════════════════════════════════════════════════════════════
+  // Modo toggle
+  // ════════════════════════════════════════════════════════════════
+  window.setModo = function(m) {
+    modo = m;
+    document.getElementById('modo-orden').classList.toggle('active', m === 'orden');
+    document.getElementById('modo-aplicar').classList.toggle('active', m === 'aplicar');
+    document.getElementById('vista-orden').style.display = m === 'orden' ? '' : 'none';
+    document.getElementById('vista-aplicar').style.display = m === 'aplicar' ? '' : 'none';
+  };
+
+})();
+</script>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

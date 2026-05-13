@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Las estructuras · 2º ESO · Tecnología y Digitalización · v1.0</title>
+<meta name="description" content="Libro digital de la unidad 3 para 2º ESO: las 3 condiciones, los 5 esfuerzos, los elementos estructurales, la triangulación, las 6 tipologías y el patrimonio estructural andaluz. IES Jiménez de Quesada (Santa Fe, Granada).">
+<meta name="theme-color" content="#d2552a">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/03-estructuras/libro-digital.html">
+
+<!-- ══ Open Graph ══ -->
+<meta property="og:title" content="Libro digital · Las estructuras · TyD 2º ESO">
+<meta property="og:description" content="Libro digital de la unidad 3: condiciones, esfuerzos, elementos, triangulación, tipologías y patrimonio andaluz.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/03-estructuras/libro-digital.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cream: #f6f1e7;
+  --cream-2: #efe7d4;
+  --ink: #1a2238;
+  --ink-soft: #3a4360;
+  --teja: #d2552a;
+  --teja-soft: #e87a4e;
+  --blue: #2c5f8d;
+  --blue-soft: #3d7fb8;
+  --yellow: #e8b647;
+  --line: #d6c9ad;
+  --ok: #4a7c59;
+  --err: #c44536;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.6;
+  font-size: 16px;
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(232,182,71,0.08) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(210,85,42,0.06) 0%, transparent 40%);
+  min-height: 100vh;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+aside {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 32px 24px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  border-right: 3px solid var(--teja);
+}
+aside .brand { font-family: 'Fraunces', serif; font-weight: 800; font-size: 24px; line-height: 1.1; margin-bottom: 4px; }
+aside .brand span { color: var(--teja-soft); font-style: italic; }
+aside .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: rgba(246,241,231,0.5); margin-bottom: 32px; }
+aside .parte-titulo {
+  font-family: 'Fraunces', serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--teja-soft);
+  margin-top: 24px;
+  margin-bottom: 8px;
+  padding-left: 14px;
+  font-weight: 700;
+}
+aside .parte-titulo:first-of-type { margin-top: 8px; }
+aside nav { display: flex; flex-direction: column; gap: 4px; }
+aside nav a {
+  color: rgba(246,241,231,0.75);
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+aside nav a:hover { background: rgba(246,241,231,0.05); color: var(--cream); border-left-color: var(--teja-soft); }
+aside nav a .num { font-family: 'JetBrains Mono', monospace; font-size: 11px; background: rgba(246,241,231,0.1); padding: 2px 6px; border-radius: 4px; min-width: 24px; text-align: center; }
+aside .back-link {
+  margin-top: 24px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(232,122,78,0.12);
+  color: var(--teja-soft);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(232,122,78,0.2);
+  transition: all .15s;
+}
+aside .back-link:hover { background: rgba(232,122,78,0.2); color: var(--cream); }
+aside .credit { margin-top: 24px; font-size: 11px; opacity: 0.4; line-height: 1.5; }
+
+main { padding: 48px 56px 80px; min-width: 0; }
+header.hero { margin-bottom: 56px; padding-bottom: 32px; border-bottom: 1px dashed var(--line); }
+header.hero .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--teja); margin-bottom: 12px; }
+header.hero h1 { font-family: 'Fraunces', serif; font-size: 56px; font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 16px; }
+header.hero h1 em { font-style: italic; color: var(--teja); font-weight: 400; }
+header.hero p.lead { font-size: 18px; color: var(--ink-soft); max-width: 640px; }
+header.hero .meta { display: flex; gap: 24px; margin-top: 24px; font-size: 13px; color: var(--ink-soft); flex-wrap: wrap; }
+header.hero .meta strong { color: var(--ink); font-weight: 600; }
+
+.parte { margin-bottom: 60px; scroll-margin-top: 24px; }
+.parte-cabecera {
+  background: linear-gradient(135deg, var(--ink) 0%, #2a3458 100%);
+  color: var(--cream);
+  padding: 36px 44px;
+  border-radius: 18px;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+  border-left: 6px solid var(--teja);
+}
+.parte-cabecera::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(232,182,71,0.08) 0%, transparent 70%);
+}
+.parte-cabecera .parte-num { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 3px; color: var(--teja-soft); text-transform: uppercase; margin-bottom: 8px; position: relative; }
+.parte-cabecera h2 { font-family: 'Fraunces', serif; font-size: 38px; font-weight: 800; line-height: 1.1; margin-bottom: 12px; position: relative; }
+.parte-cabecera p { font-size: 16px; opacity: 0.85; max-width: 580px; position: relative; }
+
+.section { margin-bottom: 56px; scroll-margin-top: 24px; }
+.section-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--teja); text-transform: uppercase; margin-bottom: 8px; }
+.section h3 { font-family: 'Fraunces', serif; font-size: 30px; font-weight: 700; line-height: 1.15; margin-bottom: 16px; color: var(--ink); }
+.section h4 { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 600; margin: 28px 0 12px; color: var(--ink); }
+.section p { margin-bottom: 14px; color: var(--ink-soft); }
+.section p strong { color: var(--ink); font-weight: 600; }
+.section ul, .section ol { margin: 8px 0 14px 24px; color: var(--ink-soft); }
+.section li { margin-bottom: 6px; }
+.section li strong { color: var(--ink); font-weight: 600; }
+
+.keybox {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--teja);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 20px 0;
+  box-shadow: 0 4px 14px rgba(26,34,56,0.05);
+}
+.keybox .ktit { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--teja); text-transform: uppercase; margin-bottom: 8px; }
+.keybox p { margin-bottom: 8px; }
+.keybox p:last-child { margin-bottom: 0; }
+
+.callout { display: flex; gap: 14px; align-items: flex-start; padding: 16px 20px; border-radius: 12px; margin: 20px 0; }
+.callout .ic { font-size: 22px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+.callout p { margin: 0; color: var(--ink-soft); font-size: 15px; }
+.callout p + p { margin-top: 6px; }
+.callout-info { background: rgba(44,95,141,0.07); border: 1px solid rgba(44,95,141,0.18); }
+.callout-info p strong { color: var(--blue); }
+.callout-ok { background: rgba(74,124,89,0.07); border: 1px solid rgba(74,124,89,0.18); }
+.callout-ok p strong { color: var(--ok); }
+.callout-warn { background: rgba(232,182,71,0.10); border: 1px solid rgba(232,182,71,0.30); }
+.callout-warn p strong { color: #8a6d1a; }
+.callout-key { background: rgba(210,85,42,0.07); border: 1px solid rgba(210,85,42,0.20); }
+.callout-key p strong { color: var(--teja); }
+
+.cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin: 22px 0; }
+.cols3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; margin: 22px 0; }
+.cols4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 22px 0; }
+.col-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  box-shadow: 0 4px 14px rgba(26,34,56,0.05);
+}
+.col-card h4 { font-family: 'Fraunces', serif; font-size: 19px; margin: 0 0 10px; color: var(--teja); }
+.col-card h4.azul { color: var(--blue); }
+.col-card h4.green { color: var(--ok); }
+.col-card h4.yellow { color: #8a6d1a; }
+.col-card p { font-size: 14.5px; margin-bottom: 8px; }
+.col-card ul { margin: 6px 0 0 18px; font-size: 14.5px; }
+.col-card .tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(210,85,42,0.12);
+  color: var(--teja);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.col-card .tag.azul { background: rgba(44,95,141,0.12); color: var(--blue); }
+.col-card .tag.green { background: rgba(74,124,89,0.12); color: var(--ok); }
+.col-card .tag.yellow { background: rgba(232,182,71,0.20); color: #8a6d1a; }
+
+.fig {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+  margin: 24px 0;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(26,34,56,0.05);
+}
+.fig svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+.fig-cap { font-family: 'Fraunces', serif; font-size: 13px; font-style: italic; color: var(--ink-soft); margin-top: 12px; }
+
+.ejemplo {
+  background: linear-gradient(135deg, #fdfaf3, #f6f1e7);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--yellow);
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin: 24px 0;
+}
+.ejemplo .et { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: #8a6d1a; text-transform: uppercase; margin-bottom: 6px; }
+.ejemplo h5 { font-family: 'Fraunces', serif; font-size: 19px; margin: 0 0 14px; color: var(--ink); }
+.steps { display: grid; gap: 10px; counter-reset: step; }
+.step {
+  position: relative;
+  padding: 12px 14px 12px 46px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+.step::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--teja);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  font-size: 14.5px;
+}
+th { background: var(--ink); color: var(--cream); font-family: 'Fraunces', serif; font-weight: 600; padding: 12px 14px; text-align: left; font-size: 14px; letter-spacing: .3px; }
+td { padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink-soft); }
+tr:last-child td { border-bottom: 0; }
+tr:nth-child(even) td { background: rgba(246,241,231,0.5); }
+td strong { color: var(--ink); }
+
+.glos { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 24px; margin-top: 32px; }
+.glos h3 { font-family: 'Fraunces', serif; font-size: 22px; margin-bottom: 14px; color: var(--ink); }
+.glos dl { display: grid; gap: 12px; }
+.glos dt { font-family: 'Fraunces', serif; font-weight: 700; color: var(--teja); font-size: 16px; }
+.glos dd { color: var(--ink-soft); font-size: 14.5px; margin-left: 0; }
+
+footer.book-foot { margin-top: 60px; padding-top: 28px; border-top: 1px dashed var(--line); text-align: center; font-size: 13px; color: var(--ink-soft); }
+footer.book-foot a { color: var(--teja); text-decoration: none; }
+footer.book-foot a:hover { color: var(--teja-soft); }
+footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px; opacity: 0.6; }
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  aside { position: relative; height: auto; max-height: none; top: auto; }
+  main { padding: 32px 24px 60px; }
+  header.hero h1 { font-size: 36px; }
+  .parte-cabecera { padding: 28px 24px; }
+  .parte-cabecera h2 { font-size: 26px; }
+  .section h3 { font-size: 24px; }
+  .cols2, .cols3, .cols4 { grid-template-columns: 1fr; }
+}
+
+@media print {
+  body { background: #fff; }
+  aside { display: none; }
+  .layout { grid-template-columns: 1fr; }
+  main { padding: 0; }
+  .parte-cabecera { background: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .section, .ejemplo, .fig, .col-card, .keybox { break-inside: avoid; }
+}
+
+.svg-fig { font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+.svg-fig .stroke-main { stroke: #1a2238; stroke-width: 2; fill: none; stroke-linejoin: round; stroke-linecap: round; }
+.svg-fig .stroke-thin { stroke: #1a2238; stroke-width: 1; fill: none; }
+.svg-fig .stroke-aux { stroke: #d2552a; stroke-width: 1; fill: none; stroke-dasharray: 4 3; }
+.svg-fig .stroke-force { stroke: #d2552a; stroke-width: 2.5; fill: none; stroke-linecap: round; }
+.svg-fig .fill-light { fill: #f6f1e7; }
+.svg-fig .fill-teja { fill: rgba(210,85,42,0.18); }
+.svg-fig .fill-blue { fill: rgba(44,95,141,0.15); }
+.svg-fig .fill-yellow { fill: rgba(232,182,71,0.25); }
+.svg-fig .fill-green { fill: rgba(74,124,89,0.18); }
+.svg-fig text { fill: #1a2238; }
+.svg-fig text.lbl-teja { fill: #d2552a; font-weight: 600; }
+.svg-fig text.lbl-blue { fill: #2c5f8d; font-weight: 600; }
+.svg-fig .arrow-teja { fill: #d2552a; }
+.svg-fig .arrow { fill: #1a2238; }
+
+/* Tipologías */
+.tipos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0; }
+.tipo-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--teja);
+  border-radius: 12px;
+  padding: 16px 14px;
+}
+.tipo-card .em { font-size: 32px; line-height: 1; margin-bottom: 8px; }
+.tipo-card h5 { font-family: 'Fraunces', serif; font-size: 16px; color: var(--ink); margin: 0 0 6px; }
+.tipo-card p { font-size: 13px; margin: 0 0 4px; line-height: 1.4; }
+.tipo-card .ej { font-size: 12px; color: var(--teja); font-style: italic; }
+
+/* Esfuerzos visual */
+.esf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 22px 0; }
+.esf-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--teja);
+  border-radius: 10px;
+  padding: 14px 12px;
+}
+.esf-card h5 { font-family: 'Fraunces', serif; font-size: 15px; color: var(--teja); margin: 0 0 4px; }
+.esf-card p { font-size: 13px; margin: 0 0 4px; line-height: 1.45; }
+.esf-card .ejemplo-mini { font-size: 12px; color: var(--ink-soft); font-style: italic; margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+<aside>
+  <div class="brand">Las estructuras<br><span>en pie</span></div>
+  <div class="sub">TyD 2º ESO · U3</div>
+
+  <div class="parte-titulo">Parte 1 · Fundamentos</div>
+  <nav>
+    <a href="#s1"><span class="num">1</span>Qué es una estructura</a>
+    <a href="#s2"><span class="num">2</span>Las 3 condiciones</a>
+  </nav>
+
+  <div class="parte-titulo">Parte 2 · Esfuerzos</div>
+  <nav>
+    <a href="#s3"><span class="num">3</span>Los 5 esfuerzos</a>
+    <a href="#s4"><span class="num">4</span>Elementos estructurales</a>
+    <a href="#s5"><span class="num">5</span>Triangulación y CdG</a>
+  </nav>
+
+  <div class="parte-titulo">Parte 3 · Tipologías</div>
+  <nav>
+    <a href="#s6"><span class="num">6</span>Masivas y abovedadas</a>
+    <a href="#s7"><span class="num">7</span>Entramadas y trianguladas</a>
+    <a href="#s8"><span class="num">8</span>Colgantes y neumáticas</a>
+  </nav>
+
+  <div class="parte-titulo">Parte 4 · Patrimonio</div>
+  <nav>
+    <a href="#s9"><span class="num">9</span>Andalucía en pie</a>
+    <a href="#cierre"><span class="num">★</span>Recuerda</a>
+  </nav>
+
+  <a class="back-link" href="index.html">← Volver al hub de la unidad</a>
+
+  <div class="credit">
+    TyD 2º ESO · Curso 2025-26<br>
+    Manuel Alonso Herrera<br>
+    IES Jiménez de Quesada
+  </div>
+</aside>
+
+<main>
+
+<header class="hero">
+  <div class="eyebrow">Unidad 3 · Libro digital · v1.0</div>
+  <h1>Las estructuras<br><em>en pie</em></h1>
+  <p class="lead">Todo lo que <strong>se sostiene</strong> es una estructura: tu cuerpo, una silla, un puente, la Alhambra. Aprenderás a reconocer las fuerzas que actúan sobre ellas (los <strong>esfuerzos</strong>), qué partes las componen, cómo se refuerzan con un truco antiguo llamado <strong>triangulación</strong>, y a clasificar cualquier construcción del mundo en una de las seis grandes familias.</p>
+  <div class="meta">
+    <span><strong>Curso:</strong> 2º ESO</span>
+    <span><strong>Duración:</strong> 8-10 sesiones</span>
+    <span><strong>Bloques:</strong> 9 secciones · 4 partes</span>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PARTE 1 · FUNDAMENTOS
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="parte1">
+  <div class="parte-cabecera">
+    <div class="parte-num">Parte 1</div>
+    <h2>Fundamentos</h2>
+    <p>Qué hace falta para que una estructura merezca llamarse así, y qué condiciones debe cumplir para no colapsar al primer empujón.</p>
+  </div>
+
+  <!-- ─── 1. Qué es una estructura ─── -->
+  <article class="section" id="s1">
+    <div class="section-num">Sección 1</div>
+    <h3>¿Qué es una estructura?</h3>
+
+    <p>Mira a tu alrededor. La silla en la que estás sentado, la mesa del aula, las paredes de la habitación, los huesos de tu cuerpo, una bicicleta, el puente que cruzas todos los días… todo eso son <strong>estructuras</strong>. Cualquier cosa que <strong>aguante su propio peso y otras fuerzas sin venirse abajo</strong> entra en la definición.</p>
+
+    <div class="keybox">
+      <div class="ktit">Definición</div>
+      <p>Una <strong>estructura</strong> es un conjunto de elementos conectados entre sí cuya función es <strong>soportar cargas</strong> (su propio peso, el peso de otras cosas, el viento, el agua, la nieve, los terremotos…) <strong>sin deformarse en exceso ni romperse</strong>.</p>
+    </div>
+
+    <h4>Función de las estructuras</h4>
+    <p>Una estructura no es un capricho del ingeniero: existe porque hay <strong>fuerzas que actúan sobre ella</strong> y, sin un esqueleto que las soporte, el conjunto se vendría abajo. Las cuatro funciones básicas de cualquier estructura son:</p>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4>Soportar cargas</h4>
+        <p>Mantener encima objetos, personas, vehículos, agua… El peso es la carga más típica, pero no la única.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Resistir fuerzas externas</h4>
+        <p>Aguantar viento, agua, temblores, golpes, sin venirse abajo.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="green">Mantener una forma</h4>
+        <p>No deformarse demasiado durante el uso. Una mesa que se hunde 5 cm al apoyar un libro no sirve.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="yellow">Proteger lo que hay dentro</h4>
+        <p>Una caja protege lo que contiene; un casco protege la cabeza; un edificio protege a sus habitantes del exterior.</p>
+      </div>
+    </div>
+
+    <h4>Estructuras naturales y artificiales</h4>
+    <p>El ser humano no inventó las estructuras: la naturaleza llevaba millones de años perfeccionándolas antes de que apareciéramos. De hecho, muchos de nuestros mejores diseños son <strong>copias de estructuras naturales</strong>.</p>
+
+    <div class="cols2">
+      <div class="col-card">
+        <span class="tag green">Naturales</span>
+        <h4 class="green">Las inventó la evolución</h4>
+        <ul>
+          <li><strong>El esqueleto</strong> de los vertebrados: huesos rígidos articulados.</li>
+          <li><strong>La tela de araña</strong>: una de las estructuras más resistentes en relación a su peso.</li>
+          <li><strong>El panal de abejas</strong>: hexágonos que aprovechan el espacio al máximo.</li>
+          <li><strong>El tronco del árbol</strong>: una columna que aguanta peso y viento durante siglos.</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <span class="tag azul">Artificiales</span>
+        <h4 class="azul">Las inventamos nosotros</h4>
+        <ul>
+          <li><strong>Edificios y casas:</strong> desde una choza de paja hasta un rascacielos.</li>
+          <li><strong>Puentes:</strong> el primer salto técnico de la humanidad sobre el agua.</li>
+          <li><strong>Vehículos:</strong> la carrocería de un coche es una estructura.</li>
+          <li><strong>Objetos cotidianos:</strong> sillas, mesas, estanterías, lámparas.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">🐝</span>
+      <p><strong>Biomimética:</strong> el campo de la ingeniería que copia soluciones de la naturaleza. La forma de los aviones modernos imita las alas de los pájaros; los velcros imitan los pelos de las plantas con púas; los rascacielos llevan amortiguadores que imitan los troncos flexibles.</p>
+    </div>
+  </article>
+
+  <!-- ─── 2. Las 3 condiciones ─── -->
+  <article class="section" id="s2">
+    <div class="section-num">Sección 2</div>
+    <h3>Las 3 condiciones de una estructura</h3>
+
+    <p>No basta con apilar materiales para que algo se sostenga. Una estructura, para funcionar, debe cumplir <strong>tres condiciones simultáneamente</strong>. Si falla una sola, falla la estructura.</p>
+
+    <div class="cols3">
+      <div class="col-card">
+        <span class="tag">Condición 1</span>
+        <h4>Rigidez</h4>
+        <p>La estructura <strong>no se deforma</strong> demasiado con las cargas. Una mesa rígida apenas se hunde al apoyar un peso; una mesa con poca rigidez sí.</p>
+        <p style="font-size: 13px; color: var(--ink); margin-top: 6px;"><em>¿Se queda en su sitio cuando le pongo peso?</em></p>
+      </div>
+      <div class="col-card">
+        <span class="tag azul">Condición 2</span>
+        <h4 class="azul">Estabilidad</h4>
+        <p>La estructura <strong>no se cae ni vuelca</strong> con su propio peso o con las cargas habituales. Es lo opuesto a una torre tambaleante.</p>
+        <p style="font-size: 13px; color: var(--ink); margin-top: 6px;"><em>¿Se mantiene en pie sin caerse?</em></p>
+      </div>
+      <div class="col-card">
+        <span class="tag green">Condición 3</span>
+        <h4 class="green">Resistencia</h4>
+        <p>La estructura <strong>no se rompe</strong> con las fuerzas que recibe. Aunque se deforme un poco, no llega al colapso.</p>
+        <p style="font-size: 13px; color: var(--ink); margin-top: 6px;"><em>¿Aguanta sin partirse?</em></p>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <div class="et">Ejemplo</div>
+      <h5>Una mesa de cartón</h5>
+      <p>Imagínate una mesa fabricada con cartón corrugado. ¿Cumple las tres condiciones?</p>
+      <div class="steps">
+        <div class="step"><strong>Estabilidad:</strong> SÍ, si tiene cuatro patas bien colocadas, no se vuelca al menos en un primer momento.</div>
+        <div class="step"><strong>Resistencia:</strong> SÍ, aguanta el peso de tu libro (es ligero).</div>
+        <div class="step"><strong>Rigidez:</strong> NO. Al apoyar el codo encima, la mesa se hunde por el centro. <strong>Falla una condición</strong>, así que falla como mesa para escribir.</div>
+        <div class="step">¿Cuál sería la solución? Reforzar con triángulos en la cara inferior. Ya verás por qué en la sección 5.</div>
+      </div>
+    </div>
+
+    <h4>Por qué importa cada una</h4>
+
+    <table>
+      <tr><th>Condición</th><th>Qué controla</th><th>Si falla…</th></tr>
+      <tr><td><strong>Rigidez</strong></td><td>La deformación bajo carga</td><td>La estructura "se vence" o "tiembla", aunque no se rompa</td></tr>
+      <tr><td><strong>Estabilidad</strong></td><td>El equilibrio del conjunto</td><td>La estructura <strong>vuelca</strong> sin necesidad de romperse</td></tr>
+      <tr><td><strong>Resistencia</strong></td><td>La rotura del material</td><td>La estructura se <strong>parte, fisura o colapsa</strong></td></tr>
+    </table>
+
+    <div class="callout callout-key">
+      <span class="ic">🧠</span>
+      <p><strong>Trampa típica:</strong> mucha gente confunde "estable" con "rígido". Una torre puede ser estable pero poco rígida (oscila con el viento). Y una pieza puede ser muy rígida pero inestable (un lápiz de pie sobre la mesa: rígido pero se cae al menor empujón).</p>
+    </div>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PARTE 2 · ESFUERZOS Y ELEMENTOS
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="parte2">
+  <div class="parte-cabecera">
+    <div class="parte-num">Parte 2</div>
+    <h2>Los esfuerzos y los elementos</h2>
+    <p>Las cinco formas en que una estructura puede sufrir, los elementos que la componen y el truco geométrico más poderoso de la historia: la triangulación.</p>
+  </div>
+
+  <!-- ─── 3. Los 5 esfuerzos ─── -->
+  <article class="section" id="s3">
+    <div class="section-num">Sección 3</div>
+    <h3>Los 5 esfuerzos</h3>
+
+    <p>Cuando una fuerza actúa sobre un elemento de una estructura, este sufre lo que llamamos un <strong>esfuerzo</strong>. La idea clave de esta unidad es que <strong>hay solamente cinco tipos de esfuerzo</strong>, y que cualquier elemento estructural se puede analizar identificando qué esfuerzos sufre.</p>
+
+    <div class="keybox">
+      <div class="ktit">Idea central</div>
+      <p>Un <strong>esfuerzo</strong> es la respuesta interna que ofrece un elemento estructural cuando sufre una fuerza externa. Los <strong>5 esfuerzos básicos</strong> son: <strong>tracción</strong>, <strong>compresión</strong>, <strong>flexión</strong>, <strong>torsión</strong> y <strong>cortadura</strong>.</p>
+    </div>
+
+    <div class="fig">
+      <svg class="svg-fig" viewBox="0 0 720 420" xmlns="http://www.w3.org/2000/svg" aria-label="Los 5 esfuerzos básicos: tracción, compresión, flexión, torsión y cortadura">
+        <!-- Tracción -->
+        <g transform="translate(20,20)">
+          <text x="100" y="14" text-anchor="middle" font-size="13" font-weight="700" class="lbl-teja">TRACCIÓN</text>
+          <rect x="50" y="40" width="100" height="20" class="stroke-main fill-light"/>
+          <line x1="15" y1="50" x2="50" y2="50" class="stroke-force"/>
+          <polygon points="15,50 25,45 25,55" class="arrow-teja"/>
+          <line x1="150" y1="50" x2="185" y2="50" class="stroke-force"/>
+          <polygon points="185,50 175,45 175,55" class="arrow-teja"/>
+          <text x="100" y="80" text-anchor="middle" font-size="11">Fuerzas que ESTIRAN la pieza</text>
+          <text x="100" y="95" text-anchor="middle" font-size="11" font-style="italic">Cable de un puente colgante</text>
+        </g>
+        <!-- Compresión -->
+        <g transform="translate(240,20)">
+          <text x="100" y="14" text-anchor="middle" font-size="13" font-weight="700" class="lbl-teja">COMPRESIÓN</text>
+          <rect x="50" y="40" width="100" height="20" class="stroke-main fill-light"/>
+          <line x1="15" y1="50" x2="50" y2="50" class="stroke-force"/>
+          <polygon points="50,50 40,45 40,55" class="arrow-teja"/>
+          <line x1="150" y1="50" x2="185" y2="50" class="stroke-force"/>
+          <polygon points="150,50 160,45 160,55" class="arrow-teja"/>
+          <text x="100" y="80" text-anchor="middle" font-size="11">Fuerzas que APRIETAN la pieza</text>
+          <text x="100" y="95" text-anchor="middle" font-size="11" font-style="italic">Pilar bajo el peso de un edificio</text>
+        </g>
+        <!-- Flexión -->
+        <g transform="translate(460,20)">
+          <text x="100" y="14" text-anchor="middle" font-size="13" font-weight="700" class="lbl-teja">FLEXIÓN</text>
+          <path d="M 30 50 Q 100 75 170 50" class="stroke-main" stroke-width="3"/>
+          <rect x="20" y="48" width="20" height="6" class="stroke-thin fill-light"/>
+          <rect x="160" y="48" width="20" height="6" class="stroke-thin fill-light"/>
+          <line x1="100" y1="20" x2="100" y2="60" class="stroke-force"/>
+          <polygon points="100,60 95,50 105,50" class="arrow-teja"/>
+          <text x="100" y="90" text-anchor="middle" font-size="11">Fuerzas que CURVAN la pieza</text>
+          <text x="100" y="105" text-anchor="middle" font-size="11" font-style="italic">Viga de un techo, tablero de un puente</text>
+        </g>
+        <!-- Torsión -->
+        <g transform="translate(20,200)">
+          <text x="100" y="14" text-anchor="middle" font-size="13" font-weight="700" class="lbl-teja">TORSIÓN</text>
+          <rect x="50" y="40" width="100" height="20" class="stroke-main fill-light"/>
+          <!-- Flechas en arco indicando rotación -->
+          <path d="M 30 50 A 15 15 0 1 1 30 51" class="stroke-force" stroke-width="2.5" fill="none"/>
+          <polygon points="30,38 23,42 28,32" class="arrow-teja"/>
+          <path d="M 170 50 A 15 15 0 1 0 170 49" class="stroke-force" stroke-width="2.5" fill="none"/>
+          <polygon points="170,62 177,58 172,68" class="arrow-teja"/>
+          <text x="100" y="80" text-anchor="middle" font-size="11">Fuerzas que RETUERCEN la pieza</text>
+          <text x="100" y="95" text-anchor="middle" font-size="11" font-style="italic">Llave de tornillo, eje de motor</text>
+        </g>
+        <!-- Cortadura -->
+        <g transform="translate(240,200)">
+          <text x="100" y="14" text-anchor="middle" font-size="13" font-weight="700" class="lbl-teja">CORTADURA</text>
+          <rect x="40" y="50" width="50" height="20" class="stroke-main fill-light"/>
+          <rect x="90" y="50" width="60" height="20" class="stroke-main fill-light"/>
+          <line x1="50" y1="35" x2="50" y2="50" class="stroke-force"/>
+          <polygon points="50,50 45,42 55,42" class="arrow-teja"/>
+          <line x1="130" y1="85" x2="130" y2="70" class="stroke-force"/>
+          <polygon points="130,70 125,78 135,78" class="arrow-teja"/>
+          <text x="100" y="100" text-anchor="middle" font-size="11">Fuerzas que CIZALLAN la pieza</text>
+          <text x="100" y="115" text-anchor="middle" font-size="11" font-style="italic">Tijeras cortando, tornillo cizallado</text>
+        </g>
+        <!-- Resumen central -->
+        <g transform="translate(460,200)">
+          <rect x="10" y="20" width="200" height="120" rx="12" class="stroke-main fill-yellow"/>
+          <text x="110" y="48" text-anchor="middle" font-size="13" font-weight="700">CADA ESFUERZO</text>
+          <text x="110" y="64" text-anchor="middle" font-size="13" font-weight="700">PIDE UN MATERIAL</text>
+          <text x="110" y="80" text-anchor="middle" font-size="13" font-weight="700">DISTINTO</text>
+          <line x1="40" y1="92" x2="180" y2="92" class="stroke-thin"/>
+          <text x="110" y="110" text-anchor="middle" font-size="11" class="lbl-teja">Tracción → acero, cable</text>
+          <text x="110" y="125" text-anchor="middle" font-size="11" class="lbl-teja">Compresión → ladrillo, piedra</text>
+        </g>
+      </svg>
+      <div class="fig-cap">Los 5 esfuerzos básicos. Cada elemento estructural sufre uno o varios a la vez</div>
+    </div>
+
+    <div class="esf-grid">
+      <div class="esf-card">
+        <h5>Tracción</h5>
+        <p>Dos fuerzas tiran del elemento en sentidos opuestos: lo <strong>alargan</strong>.</p>
+        <p class="ejemplo-mini">Cables de una grúa, tirantes de un puente colgante, una cuerda de tender.</p>
+      </div>
+      <div class="esf-card">
+        <h5>Compresión</h5>
+        <p>Dos fuerzas empujan al elemento desde sus extremos hacia el centro: lo <strong>acortan o aprietan</strong>.</p>
+        <p class="ejemplo-mini">Pilares de un edificio, patas de una mesa, columnas de la Mezquita de Córdoba.</p>
+      </div>
+      <div class="esf-card">
+        <h5>Flexión</h5>
+        <p>La pieza se <strong>curva</strong> bajo una fuerza perpendicular. La cara superior se comprime, la inferior se estira.</p>
+        <p class="ejemplo-mini">Vigas de un techo, balda de una estantería, tablero de un puente.</p>
+      </div>
+      <div class="esf-card">
+        <h5>Torsión</h5>
+        <p>Dos pares de fuerzas <strong>retuercen</strong> el elemento alrededor de su eje.</p>
+        <p class="ejemplo-mini">Cuando giras un destornillador, un eje de transmisión, una llave abriendo una puerta.</p>
+      </div>
+      <div class="esf-card">
+        <h5>Cortadura</h5>
+        <p>Dos fuerzas opuestas y paralelas, muy próximas, intentan <strong>cizallar</strong> el elemento.</p>
+        <p class="ejemplo-mini">Las tijeras al cortar, un tornillo en un coche que aguanta un golpe lateral.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-warn">
+      <span class="ic">🔬</span>
+      <p><strong>Ojo a la flexión:</strong> es el esfuerzo más complejo porque <em>combina dos esfuerzos simples</em>. La parte superior de una viga flexionada está sometida a compresión, y la parte inferior, a tracción. Por eso las vigas de hormigón armado llevan varillas de acero <strong>en la parte de abajo</strong>: el acero compensa la tracción que el hormigón no aguanta.</p>
+    </div>
+  </article>
+
+  <!-- ─── 4. Elementos estructurales ─── -->
+  <article class="section" id="s4">
+    <div class="section-num">Sección 4</div>
+    <h3>Los elementos estructurales</h3>
+
+    <p>Cualquier estructura compleja se compone de unas <strong>piezas básicas</strong>. Conocer su nombre y su función te permite "leer" una estructura como quien lee un texto.</p>
+
+    <table>
+      <tr><th>Elemento</th><th>Función</th><th>Esfuerzo principal</th><th>Ejemplo</th></tr>
+      <tr><td><strong>Pilar o columna</strong></td><td>Soporta cargas verticales y las transmite al suelo</td><td>Compresión</td><td>Pilares de un edificio, columnas de la Mezquita de Córdoba</td></tr>
+      <tr><td><strong>Viga</strong></td><td>Cubre un espacio horizontal apoyada en pilares</td><td>Flexión</td><td>Vigas del techo, tablero de un puente</td></tr>
+      <tr><td><strong>Tirante</strong></td><td>Mantiene unidos dos puntos que tienden a separarse</td><td>Tracción</td><td>Cables de un puente colgante, tirantes de una bóveda</td></tr>
+      <tr><td><strong>Dintel</strong></td><td>Viga horizontal sobre una abertura (puerta, ventana)</td><td>Flexión</td><td>Dinteles de granito sobre las ventanas tradicionales</td></tr>
+      <tr><td><strong>Arco</strong></td><td>Cubre una abertura repartiendo cargas hacia los lados</td><td>Compresión</td><td>Arcos del acueducto de Segovia, arcos de la Mezquita</td></tr>
+      <tr><td><strong>Cimentación</strong></td><td>Transmite todo el peso al terreno repartiendo la carga</td><td>Compresión</td><td>Zapatas, losas y pilotes bajo cualquier edificio</td></tr>
+    </table>
+
+    <h4>Pilar vs columna · viga vs dintel · tirante vs cable</h4>
+    <p>Tres pares fáciles de confundir:</p>
+
+    <div class="cols3">
+      <div class="col-card">
+        <h4>Pilar y columna</h4>
+        <p>Son la misma idea: una pieza vertical que aguanta peso. Llamamos <strong>columna</strong> a la versión decorativa (mármol, capitel), y <strong>pilar</strong> a la funcional (hormigón, acero).</p>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Viga y dintel</h4>
+        <p>Ambos cubren un espacio horizontal y trabajan a flexión. La <strong>viga</strong> es del esqueleto general; el <strong>dintel</strong> es la viga concreta que va encima de una abertura (puerta o ventana).</p>
+      </div>
+      <div class="col-card">
+        <h4 class="green">Tirante y cable</h4>
+        <p>Los dos trabajan a tracción. El <strong>cable</strong> es flexible (se pliega); el <strong>tirante</strong> es rígido (no se pliega, solo se estira). Un puente colgante usa cables; una bóveda romana usa tirantes.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">🏛️</span>
+      <p><strong>El arco, invento revolucionario:</strong> antes del arco, los romanos cubrían aberturas con un dintel apoyado en dos jambas. Pero el dintel sufre flexión, y la piedra aguanta mal la flexión. Con el <strong>arco</strong>, el peso se transmite por compresión hacia los lados: las dovelas se "aprietan" entre sí y todo el conjunto resiste mucho más. Es uno de los mayores inventos estructurales de la historia.</p>
+    </div>
+  </article>
+
+  <!-- ─── 5. Triangulación y centro de gravedad ─── -->
+  <article class="section" id="s5">
+    <div class="section-num">Sección 5</div>
+    <h3>Triangulación y centro de gravedad</h3>
+
+    <p>Las dos herramientas más potentes para conseguir <strong>rigidez</strong> y <strong>estabilidad</strong> en una estructura tienen miles de años. La triangulación entra en juego cuando hay que evitar que algo se deforme; el centro de gravedad, cuando hay que evitar que algo vuelque.</p>
+
+    <h4>El truco de la triangulación</h4>
+
+    <p>El <strong>cuadrado</strong> es una figura geométrica muy poco rígida: si lo empujas por una esquina, se convierte en un rombo sin esfuerzo. En cambio, el <strong>triángulo</strong> es <strong>indeformable</strong>: una vez fijada la longitud de sus tres lados, su forma queda completamente determinada.</p>
+
+    <div class="fig">
+      <svg class="svg-fig" viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg" aria-label="Cuadrado deformable vs triángulo rígido y refuerzo por triangulación">
+        <!-- Cuadrado deformable -->
+        <g transform="translate(20,30)">
+          <text x="80" y="-8" text-anchor="middle" font-size="13" font-weight="700">CUADRADO</text>
+          <text x="80" y="6" text-anchor="middle" font-size="11">deformable</text>
+          <polygon points="20,20 140,20 140,140 20,140" class="stroke-main fill-light"/>
+        </g>
+        <!-- Flecha indicando empuje -->
+        <g transform="translate(180,90)">
+          <text x="25" y="-30" text-anchor="middle" font-size="11" class="lbl-teja">empujar</text>
+          <line x1="0" y1="0" x2="50" y2="0" class="stroke-force" stroke-width="3"/>
+          <polygon points="50,0 40,-6 40,6" class="arrow-teja"/>
+        </g>
+        <!-- Cuadrado deformado (rombo) -->
+        <g transform="translate(250,30)">
+          <text x="80" y="-8" text-anchor="middle" font-size="13" font-weight="700">SE DEFORMA</text>
+          <text x="80" y="6" text-anchor="middle" font-size="11">a rombo</text>
+          <polygon points="50,20 170,20 140,140 20,140" class="stroke-main fill-teja"/>
+        </g>
+        <!-- Triángulo rígido -->
+        <g transform="translate(450,30)">
+          <text x="80" y="-8" text-anchor="middle" font-size="13" font-weight="700">TRIÁNGULO</text>
+          <text x="80" y="6" text-anchor="middle" font-size="11">indeformable</text>
+          <polygon points="20,140 140,140 80,30" class="stroke-main fill-green"/>
+        </g>
+        <!-- Solución abajo -->
+        <g transform="translate(150,200)">
+          <text x="170" y="0" text-anchor="middle" font-size="13" font-weight="700" class="lbl-teja">SOLUCIÓN · TRIANGULAR EL CUADRADO</text>
+          <polygon points="20,20 140,20 140,80 20,80" class="stroke-main fill-light"/>
+          <line x1="20" y1="20" x2="140" y2="80" class="stroke-main" stroke-width="2.5"/>
+          <text x="80" y="50" text-anchor="middle" font-size="10" class="lbl-teja" font-weight="700">DIAGONAL</text>
+          <text x="170" y="55" text-anchor="middle" font-size="22" font-weight="700">→</text>
+          <polygon points="220,20 340,20 340,80 220,80" class="stroke-main fill-green"/>
+          <line x1="220" y1="20" x2="340" y2="80" class="stroke-main" stroke-width="2.5"/>
+          <text x="280" y="50" text-anchor="middle" font-size="10" class="lbl-teja" font-weight="700">RÍGIDO</text>
+        </g>
+      </svg>
+      <div class="fig-cap">El cuadrado se deforma con un simple empujón lateral; el triángulo no. Añadir una diagonal a un cuadrado lo convierte en dos triángulos rígidos</div>
+    </div>
+
+    <div class="keybox">
+      <div class="ktit">Por qué el triángulo es indeformable</div>
+      <p>En geometría se demuestra que <strong>tres longitudes fijas determinan un único triángulo</strong>. Pero cuatro longitudes (cuadrado) admiten infinitas formas (cuadrado, rombo, cualquier paralelogramo…). Por eso, al añadir una <strong>diagonal</strong> a un cuadrado, lo descomponemos en dos triángulos: ya no se puede deformar.</p>
+    </div>
+
+    <p>Esta idea, llamada <strong>triangulación</strong>, está detrás de TODAS las estructuras rígidas modernas:</p>
+    <ul>
+      <li>Las <strong>cerchas</strong> de los tejados de naves industriales.</li>
+      <li>Las <strong>vigas en celosía</strong> de puentes y grúas.</li>
+      <li>La Torre Eiffel y todos los rascacielos.</li>
+      <li>La estructura de una bicicleta (el cuadro, formado por triángulos).</li>
+      <li>Los andamios de obra: barras horizontales, verticales… y diagonales.</li>
+    </ul>
+
+    <h4>El centro de gravedad y la estabilidad</h4>
+
+    <p>El <strong>centro de gravedad</strong> es el punto donde se concentra todo el peso de un objeto. La estructura es <strong>estable</strong> si la <strong>vertical que baja desde el centro de gravedad cae dentro de su base de apoyo</strong>. Si la vertical sale fuera de la base, el objeto vuelca.</p>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4>Cómo conseguir estabilidad</h4>
+        <ul>
+          <li><strong>Centro de gravedad bajo</strong> (mejor cerca del suelo)</li>
+          <li><strong>Base ancha</strong> (cuanto más amplia, mejor)</li>
+          <li>El centro de gravedad debe quedar <strong>centrado</strong> sobre la base</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Ejemplos cotidianos</h4>
+        <ul>
+          <li>Un <strong>cono</strong> de pie es muy estable: base ancha, centro bajo.</li>
+          <li>Un <strong>cono boca abajo</strong> es inestable: base mínima, centro alto.</li>
+          <li>Una <strong>botella vacía</strong> en una mesa que se mueve se cae antes que una llena: por el centro de gravedad.</li>
+          <li>Los <strong>coches deportivos</strong> son bajos a propósito: para no volcar al girar.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <div class="et">Ejemplo · Torre de Pisa</div>
+      <h5>¿Por qué la Torre inclinada de Pisa no se cae?</h5>
+      <p>La Torre de Pisa lleva inclinada más de 800 años. ¿Cómo es posible que no se haya caído todavía?</p>
+      <div class="steps">
+        <div class="step">La torre se inclinó cuando el terreno blando cedió en uno de sus lados, durante la construcción.</div>
+        <div class="step">La inclinación hace que el centro de gravedad se desplace lateralmente.</div>
+        <div class="step">Mientras la <strong>vertical desde el centro de gravedad caiga dentro de la base</strong> circular, la torre se mantiene en pie.</div>
+        <div class="step">Si la inclinación siguiese aumentando, en algún momento esa vertical saldría de la base… y la torre caería. Por eso se han hecho obras para frenar la inclinación.</div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PARTE 3 · TIPOLOGÍAS
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="parte3">
+  <div class="parte-cabecera">
+    <div class="parte-num">Parte 3</div>
+    <h2>Tipos de estructuras</h2>
+    <p>Cualquier construcción del mundo entra en una de las seis grandes familias: masivas, abovedadas, entramadas, trianguladas, colgantes o neumáticas.</p>
+  </div>
+
+  <!-- ─── 6. Masivas y abovedadas ─── -->
+  <article class="section" id="s6">
+    <div class="section-num">Sección 6</div>
+    <h3>Estructuras masivas y abovedadas</h3>
+
+    <p>Son las dos familias <strong>más antiguas</strong>: las usaron los egipcios para las pirámides y los romanos para sus acueductos. Trabajan principalmente a <strong>compresión</strong>, que es el esfuerzo que mejor aguantan la piedra, el ladrillo y el hormigón.</p>
+
+    <h4>Estructuras masivas</h4>
+
+    <p>Son las que tienen <strong>tanto material que ningún punto sufre demasiado</strong>. Funcionan a base de "mucho material trabajando un poco". Soportan su propio peso y las cargas porque tienen masa de sobra.</p>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4>Características</h4>
+        <ul>
+          <li>Mucho material, poco volumen útil dentro.</li>
+          <li>Soportan grandes pesos y aguantan terremotos.</li>
+          <li>Caras y lentas de construir.</li>
+          <li>Pasivas: no aprovechan trucos geométricos.</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Ejemplos famosos</h4>
+        <ul>
+          <li>Pirámides de Egipto</li>
+          <li>Muralla China</li>
+          <li>Castillos y muros defensivos medievales</li>
+          <li>Presas hidráulicas</li>
+          <li>Pirámides aztecas</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4>Estructuras abovedadas</h4>
+
+    <p>Son la <strong>evolución de las masivas</strong>: usan la geometría del <strong>arco</strong> para cubrir un espacio amplio con poco material. Las cargas se transmiten por compresión a los lados, hasta llegar al suelo.</p>
+
+    <table>
+      <tr><th>Tipo</th><th>Forma</th><th>Ejemplo famoso</th></tr>
+      <tr><td><strong>Arco</strong></td><td>Curva en 2D</td><td>Acueducto de Segovia, arcos de la Mezquita de Córdoba</td></tr>
+      <tr><td><strong>Bóveda</strong></td><td>Arco extendido en 3D</td><td>Catedrales románicas y góticas</td></tr>
+      <tr><td><strong>Cúpula</strong></td><td>Bóveda esférica (3D)</td><td>Panteón de Roma, San Pedro del Vaticano</td></tr>
+    </table>
+
+    <div class="callout callout-info">
+      <span class="ic">🕌</span>
+      <p><strong>Andalucía y las bóvedas:</strong> los romanos llevaron las bóvedas a la península, pero los árabes las llevaron a otro nivel en Al-Ándalus. La Mezquita-Catedral de Córdoba combina <strong>arcos de medio punto y arcos de herradura</strong> en una doble arcada que distribuye el peso de forma magistral. La cúpula de la Capilla del Mihrab es una joya estructural.</p>
+    </div>
+  </article>
+
+  <!-- ─── 7. Entramadas y trianguladas ─── -->
+  <article class="section" id="s7">
+    <div class="section-num">Sección 7</div>
+    <h3>Estructuras entramadas y trianguladas</h3>
+
+    <p>Son la base de la <strong>arquitectura moderna</strong>. Sustituyen la masa por una <strong>retícula de barras delgadas</strong> conectadas: el peso ya no descansa en un muro, sino en un esqueleto que deja huecos enormes para puertas, ventanas y espacios abiertos.</p>
+
+    <h4>Estructuras entramadas</h4>
+
+    <p>Una <strong>estructura entramada</strong> es un esqueleto rectangular formado por <strong>pilares verticales y vigas horizontales</strong>. La pueden hacer de madera (casas tradicionales), acero o hormigón armado. Casi todos los edificios modernos son entramados.</p>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4>Cómo funciona</h4>
+        <ul>
+          <li><strong>Pilares</strong> verticales transmiten las cargas al suelo (compresión).</li>
+          <li><strong>Vigas</strong> horizontales cubren los espacios entre pilares (flexión).</li>
+          <li>Las paredes no soportan peso: son solo <strong>cerramiento</strong>. Por eso pueden quitarse o ponerse ventanales enormes.</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Tipos modernos</h4>
+        <ul>
+          <li><strong>Hormigón armado:</strong> el más común en España. Pilares y vigas de hormigón con varillas de acero.</li>
+          <li><strong>Acero:</strong> en rascacielos, naves industriales y aparcamientos.</li>
+          <li><strong>Madera laminada:</strong> renacimiento ecológico en edificios pequeños.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4>Estructuras trianguladas</h4>
+
+    <p>Las <strong>estructuras trianguladas</strong> (también llamadas <strong>en celosía</strong>) llevan la idea del entramado a otro nivel: añaden <strong>diagonales</strong> que descomponen cada cuadrilátero en dos triángulos. El resultado es una estructura ultra-rígida con muy poco material.</p>
+
+    <div class="callout callout-key">
+      <span class="ic">🗼</span>
+      <p><strong>La Torre Eiffel (1889)</strong> es el ejemplo paradigmático: 300 m de altura, 7300 toneladas de hierro forjado triangulado. Una estructura masiva equivalente pesaría miles de veces más.</p>
+    </div>
+
+    <div class="cols3">
+      <div class="col-card">
+        <h4>Cerchas</h4>
+        <p>Triangulación plana para cubrir un tejado de nave industrial o pabellón.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Vigas en celosía</h4>
+        <p>Barras paralelas unidas por diagonales. Más resistentes que una viga maciza con la mitad de material.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="green">Puentes metálicos</h4>
+        <p>Puentes de ferrocarril, pasarelas. La triangulación se ve a simple vista en sus laterales.</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ─── 8. Colgantes y neumáticas ─── -->
+  <article class="section" id="s8">
+    <div class="section-num">Sección 8</div>
+    <h3>Estructuras colgantes, neumáticas y geodésicas</h3>
+
+    <p>Las dos primeras familias que veremos aquí son tan distintas a las anteriores que parecen de otro planeta. Y la tercera es la más sorprendente: una estructura hecha solo de <strong>aire a presión</strong>.</p>
+
+    <h4>Estructuras colgantes</h4>
+
+    <p>En las estructuras colgantes, la carga <strong>cuelga de cables o tirantes</strong> que trabajan exclusivamente a <strong>tracción</strong>. Los cables se anclan en pilares altos o en torres laterales, y el peso se transmite por los cables hacia los anclajes.</p>
+
+    <div class="cols2">
+      <div class="col-card">
+        <h4>Cómo funciona</h4>
+        <p>Imagina dos torres muy altas, y un cable que cuelga entre ambas formando una curva (catenaria). El cable está en <strong>tracción pura</strong>. Si cuelgas un tablero de ese cable, tienes un puente colgante.</p>
+        <p>Ventaja: con poco material se cubren <strong>distancias enormes</strong>. El puente colgante más largo del mundo supera los 2000 m de longitud entre apoyos.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Ejemplos famosos</h4>
+        <ul>
+          <li><strong>Golden Gate Bridge</strong> (San Francisco)</li>
+          <li><strong>Puente Akashi Kaikyō</strong> (Japón, 1991 m de vano libre)</li>
+          <li><strong>Puente del Centenario</strong> (Sevilla)</li>
+          <li>Telecabinas y teleféricos de la sierra</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4>Estructuras neumáticas</h4>
+
+    <p>Una <strong>estructura neumática</strong> mantiene su forma gracias a la <strong>presión del aire</strong>. Una tela cerrada se infla y queda rígida porque el aire de dentro empuja hacia fuera. Son ligerísimas y se montan en horas.</p>
+
+    <div class="cols3">
+      <div class="col-card">
+        <h4>Hinchables de feria</h4>
+        <p>Castillos, toboganes, casas saltarinas. La estructura es la propia tela inflada.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Cúpulas hinchables</h4>
+        <p>Cubiertas temporales para pistas deportivas o ferias. Se mantienen con sobrepresión interior.</p>
+      </div>
+      <div class="col-card">
+        <h4 class="green">Balones de fútbol y neumáticos</h4>
+        <p>También son estructuras neumáticas: sin aire no mantienen forma.</p>
+      </div>
+    </div>
+
+    <h4>Estructuras geodésicas</h4>
+
+    <p>Inventadas por Buckminster Fuller en los años 1950, son <strong>cúpulas formadas por triángulos</strong> distribuidos sobre una superficie esférica. Combinan lo mejor del arco y de la triangulación: máxima resistencia con mínimo material.</p>
+
+    <div class="callout callout-info">
+      <span class="ic">🌍</span>
+      <p><strong>Las cúpulas geodésicas</strong> se usan en planetarios, biocúpulas (como Eden Project en Inglaterra), invernaderos científicos y refugios en climas extremos. La cúpula del pabellón de EE. UU. en la Expo 67 de Montreal es la más famosa.</p>
+    </div>
+
+    <div class="ejemplo">
+      <div class="et">Resumen</div>
+      <h5>Las 6 tipologías de un vistazo</h5>
+      <div class="tipos-grid">
+        <div class="tipo-card">
+          <div class="em">🏔️</div>
+          <h5>Masivas</h5>
+          <p>Mucho material, todo a compresión.</p>
+          <div class="ej">Pirámides, murallas</div>
+        </div>
+        <div class="tipo-card">
+          <div class="em">🕌</div>
+          <h5>Abovedadas</h5>
+          <p>Arcos y bóvedas que reparten el peso.</p>
+          <div class="ej">Mezquita, Panteón</div>
+        </div>
+        <div class="tipo-card">
+          <div class="em">🏢</div>
+          <h5>Entramadas</h5>
+          <p>Esqueleto de pilares y vigas.</p>
+          <div class="ej">Edificios modernos</div>
+        </div>
+        <div class="tipo-card">
+          <div class="em">🗼</div>
+          <h5>Trianguladas</h5>
+          <p>Barras unidas en triángulos rígidos.</p>
+          <div class="ej">Torre Eiffel, naves industriales</div>
+        </div>
+        <div class="tipo-card">
+          <div class="em">🌉</div>
+          <h5>Colgantes</h5>
+          <p>Carga colgada de cables a tracción.</p>
+          <div class="ej">Golden Gate, Centenario</div>
+        </div>
+        <div class="tipo-card">
+          <div class="em">🎪</div>
+          <h5>Neumáticas</h5>
+          <p>Aire a presión que mantiene la forma.</p>
+          <div class="ej">Hinchables, cubiertas temporales</div>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PARTE 4 · PATRIMONIO
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="parte4">
+  <div class="parte-cabecera">
+    <div class="parte-num">Parte 4</div>
+    <h2>Andalucía en pie</h2>
+    <p>Una mirada estructural al patrimonio que tenemos al lado de casa: por qué la Alhambra sigue ahí, cómo aguanta el peso la Mezquita de Córdoba y qué proeza ingenieril fue el Puente del Centenario.</p>
+  </div>
+
+  <!-- ─── 9. Andalucía en pie ─── -->
+  <article class="section" id="s9">
+    <div class="section-num">Sección 9</div>
+    <h3>El patrimonio estructural andaluz</h3>
+
+    <p>Andalucía es un libro abierto de estructuras. En menos de doscientos kilómetros tenemos ejemplos de las seis tipologías y de casi todos los esfuerzos. Si aprendes a leerlas, no vuelves a mirar igual ninguna construcción.</p>
+
+    <h4>La Alhambra (Granada, s. XIII)</h4>
+
+    <div class="cols2">
+      <div class="col-card">
+        <span class="tag">Tipología</span>
+        <h4>Mezcla de masiva y abovedada</h4>
+        <p>Las <strong>murallas</strong> exteriores son masivas: muros gruesos de tapial (tierra apisonada) que aguantaron asedios. Los <strong>palacios</strong> interiores son abovedados: arcos, bóvedas de mocárabes y cúpulas.</p>
+      </div>
+      <div class="col-card">
+        <span class="tag azul">Por qué sigue en pie</span>
+        <h4 class="azul">Centro de gravedad bajo y muros gruesos</h4>
+        <p>La Alhambra está construida sobre roca firme, con muros de gran espesor en la base. Su centro de gravedad cae siempre dentro de la base. Ha sobrevivido a terremotos, asedios y siglos de abandono.</p>
+      </div>
+    </div>
+
+    <h4>La Mezquita-Catedral de Córdoba (s. VIII-X)</h4>
+
+    <div class="callout callout-key">
+      <span class="ic">🏛️</span>
+      <p><strong>El truco de la doble arcada:</strong> los maestros andalusíes tenían columnas relativamente bajas pero querían un techo alto y luminoso. Su solución fue genial: superpusieron <strong>dos arcadas</strong>. La inferior, de herradura, descansa sobre columnas reutilizadas de edificios romanos y visigodos. La superior, de medio punto, multiplica la altura. Es una solución estructural tan elegante como bella.</p>
+    </div>
+
+    <h4>El Puente de Triana (Sevilla, 1845)</h4>
+    <p>El primer <strong>puente de hierro</strong> construido en España, inspirado en los puentes del Sena de París. Sus arcos de hierro fundido son una estructura abovedada metálica: combinan la idea milenaria del arco con un material moderno.</p>
+
+    <h4>El Puente del Centenario (Sevilla, 1992)</h4>
+    <p>Un <strong>puente colgante atirantado</strong> de 945 m de longitud, inaugurado para la Expo'92. Su tablero está sostenido por <strong>tirantes</strong> que parten de dos torres laterales. Es uno de los ejemplos más bellos de estructura colgante en España y combina elementos a tracción (cables) con elementos a compresión (las torres).</p>
+
+    <h4>La Torre Sevilla (Sevilla, 2015)</h4>
+    <p>180 m de altura, el edificio más alto de Andalucía. Es una <strong>estructura entramada de hormigón armado y acero</strong> con un núcleo central rigidizador (ascensores y escaleras) que actúa como espina dorsal. La fachada exterior es solo cerramiento: el peso lo soportan los pilares interiores.</p>
+
+    <div class="ejemplo">
+      <div class="et">Tarea de observación</div>
+      <h5>Un paseo estructural por tu pueblo</h5>
+      <p>La próxima vez que salgas, fíjate en cinco construcciones distintas y trata de clasificarlas:</p>
+      <div class="steps">
+        <div class="step"><strong>El centro educativo</strong>: probablemente entramada de hormigón armado. Identifica las columnas y vigas.</div>
+        <div class="step"><strong>La iglesia</strong>: si es antigua, abovedada (arcos, bóvedas). Si es moderna, entramada.</div>
+        <div class="step"><strong>Un puente sobre el Genil o el Guadalquivir</strong>: identifica si es abovedado (arcos de piedra), triangulado (vigas metálicas) o colgante.</div>
+        <div class="step"><strong>Una nave industrial</strong>: casi siempre triangulada (cerchas en el tejado).</div>
+        <div class="step"><strong>Un castillo o muralla histórica</strong>: masiva pura. Muros gruesos, poca apertura.</div>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">📚</span>
+      <p><strong>Conexión con la unidad de materiales:</strong> los maestros andalusíes usaron piedra y ladrillo, materiales muy buenos a compresión pero malos a tracción. Por eso sus estructuras son abovedadas (todo trabaja a compresión). Hoy combinamos hormigón (excelente a compresión) con acero (excelente a tracción) para sacar lo mejor de cada material. La estructura es siempre <strong>la pareja perfecta entre forma y material</strong>.</p>
+    </div>
+  </article>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     CIERRE · RECUERDA
+     ════════════════════════════════════════════════════════════════ -->
+
+<section class="parte" id="cierre">
+  <div class="parte-cabecera" style="background: linear-gradient(135deg, var(--teja) 0%, #b8431c 100%); border-left-color: var(--yellow);">
+    <div class="parte-num">Cierre</div>
+    <h2>Recuerda lo que has aprendido</h2>
+    <p>Las cinco ideas clave de la unidad y un glosario para tener a mano durante las actividades y el examen.</p>
+  </div>
+
+  <article class="section">
+    <div class="cols2">
+      <div class="col-card">
+        <h4>Las 5 ideas clave</h4>
+        <ol>
+          <li>Una estructura debe cumplir <strong>tres condiciones</strong>: rigidez, estabilidad y resistencia.</li>
+          <li>Hay <strong>5 esfuerzos básicos</strong>: tracción, compresión, flexión, torsión y cortadura.</li>
+          <li>Cada elemento estructural (pilar, viga, tirante, arco) sufre principalmente <strong>un tipo de esfuerzo</strong>.</li>
+          <li>El <strong>triángulo es indeformable</strong>; el cuadrado, no. La triangulación es el truco más usado para dar rigidez.</li>
+          <li>Hay <strong>6 tipologías</strong> de estructuras: masivas, abovedadas, entramadas, trianguladas, colgantes y neumáticas.</li>
+        </ol>
+      </div>
+      <div class="col-card">
+        <h4 class="azul">Lo que debes saber hacer</h4>
+        <ul>
+          <li>Identificar los <strong>esfuerzos</strong> que sufre un elemento mirando una imagen.</li>
+          <li>Reconocer la <strong>tipología</strong> de cualquier construcción del entorno.</li>
+          <li>Saber dónde <strong>añadir una diagonal</strong> para rigidizar una estructura.</li>
+          <li>Explicar por qué un <strong>arco</strong> es mejor que un dintel para cubrir un vano grande.</li>
+          <li>Calcular si una estructura es <strong>estable</strong> sabiendo dónde está su centro de gravedad.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="glos">
+      <h3>📖 Glosario</h3>
+      <dl>
+        <dt>Arco</dt>
+        <dd>Elemento estructural curvo que cubre una abertura repartiendo cargas hacia los lados. Trabaja a compresión.</dd>
+
+        <dt>Carga</dt>
+        <dd>Fuerza que debe soportar una estructura: peso propio, peso de objetos, viento, agua, terremoto…</dd>
+
+        <dt>Celosía</dt>
+        <dd>Estructura formada por barras unidas en triángulos. Sinónimo aproximado de "triangulada".</dd>
+
+        <dt>Centro de gravedad</dt>
+        <dd>Punto donde se concentra el peso total de un objeto. La estructura es estable si la vertical desde el centro de gravedad cae dentro de la base de apoyo.</dd>
+
+        <dt>Cimentación</dt>
+        <dd>Elementos enterrados que transmiten el peso del edificio al terreno: zapatas, losas, pilotes.</dd>
+
+        <dt>Compresión</dt>
+        <dd>Esfuerzo que aprieta o aplasta un elemento. Lo sufren pilares y arcos.</dd>
+
+        <dt>Cortadura (o cizalladura)</dt>
+        <dd>Esfuerzo en el que dos fuerzas opuestas paralelas, muy próximas, tienden a cortar el elemento. Lo sufre un tornillo cortado, las tijeras.</dd>
+
+        <dt>Dintel</dt>
+        <dd>Viga horizontal colocada sobre una abertura (puerta, ventana). Trabaja a flexión.</dd>
+
+        <dt>Esfuerzo</dt>
+        <dd>Respuesta interna que ofrece un material cuando es sometido a una fuerza externa. Los 5 esfuerzos básicos son tracción, compresión, flexión, torsión y cortadura.</dd>
+
+        <dt>Estabilidad</dt>
+        <dd>Capacidad de una estructura para no caerse ni volcar con su propio peso o con cargas habituales.</dd>
+
+        <dt>Estructura</dt>
+        <dd>Conjunto de elementos conectados cuya función es soportar cargas sin deformarse en exceso ni romperse.</dd>
+
+        <dt>Flexión</dt>
+        <dd>Esfuerzo que curva un elemento. Combina compresión (en la cara superior) y tracción (en la inferior). Lo sufren las vigas.</dd>
+
+        <dt>Pilar</dt>
+        <dd>Elemento vertical que soporta cargas y las transmite al suelo. Trabaja principalmente a compresión.</dd>
+
+        <dt>Resistencia</dt>
+        <dd>Capacidad de un material o estructura para no romperse bajo carga.</dd>
+
+        <dt>Rigidez</dt>
+        <dd>Capacidad de una estructura para no deformarse demasiado bajo carga.</dd>
+
+        <dt>Tirante</dt>
+        <dd>Elemento rígido que une dos puntos para evitar que se separen. Trabaja a tracción.</dd>
+
+        <dt>Torsión</dt>
+        <dd>Esfuerzo que retuerce un elemento alrededor de su eje. Lo sufren los ejes de motor y los tornillos al apretarse.</dd>
+
+        <dt>Tracción</dt>
+        <dd>Esfuerzo que tira de un elemento estirándolo. Lo sufren cables, cuerdas y tirantes.</dd>
+
+        <dt>Triangulación</dt>
+        <dd>Técnica de rigidización que consiste en dividir un cuadrilátero en triángulos añadiendo diagonales. El triángulo es la única figura geométrica indeformable.</dd>
+
+        <dt>Viga</dt>
+        <dd>Elemento horizontal apoyado en pilares que cubre un espacio. Trabaja a flexión.</dd>
+      </dl>
+    </div>
+  </article>
+</section>
+
+<footer class="book-foot">
+  <p>📘 Libro digital · TyD 2º ESO · Unidad 3 · Las estructuras en pie</p>
+  <p><a href="index.html">← Volver al hub de la unidad</a> · <a href="actividades/index.html">📝 Actividades resueltas</a></p>
+  <p style="margin-top: 16px;">IES Jiménez de Quesada · Santa Fe (Granada) · Curso 2025-26 · Manuel Alonso Herrera</p>
+  <p class="v">v1.0</p>
+</footer>
+
+</main>
+</div>
+
+</body>
+</html>
