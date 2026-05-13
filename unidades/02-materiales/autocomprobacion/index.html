@@ -1,9 +1,479 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Autocomprobación</title>
-<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/hub.css">
-</head><body>
-<div class="hub-main" id="main-content">
-<section class="unidad-titulo-hero"><h1>✅ Autocomprobación</h1><div class="duracion">Este apartado se irá completando durante el curso.</div></section>
-<div class="bg"><a class="bc" href="../index.html"><span class="bi">⬅️</span><span class="bk">Volver a la unidad</span><span class="bn">Hub U principal</span></a></div>
-</div></body></html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Autocomprobación · U02 Materiales · TyD 2º ESO</title>
+<meta name="description" content="Autocomprobación de la unidad 02 · Los materiales y sus propiedades · 18 preguntas con feedback inmediato · TyD 2º ESO · IES Jiménez de Quesada.">
+
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/02-materiales/autocomprobacion/">
+
+<meta property="og:title" content="Autocomprobación · U02 Materiales · TyD 2º ESO">
+<meta property="og:description" content="18 preguntas para repasar propiedades, familias de materiales y reciclaje.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/02-materiales/autocomprobacion/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+.ac-hero{max-width:1100px;margin:22px auto 8px;padding:0 20px;text-align:center}
+.ac-hero h1{font-family:var(--cond);font-size:1.9rem;color:var(--principal);margin:0 0 6px;letter-spacing:.5px}
+.ac-hero .subt{font-size:.95rem;color:var(--texto2);margin:0 0 16px}
+.ac-camino{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;font-family:var(--cond);font-size:.78rem;letter-spacing:.4px;margin-bottom:10px}
+.ac-camino span{padding:4px 12px;border-radius:14px;background:#F4F6F9;color:#8C97A8;border:1px solid #D8DDE5}
+.ac-camino span.activo{background:linear-gradient(135deg,var(--principal),var(--principal2));color:#fff;border-color:var(--principal)}
+.ac-camino .sep{background:transparent;border:none;color:#B8C0CC;padding:4px 2px}
+.ac-instrucciones{max-width:900px;margin:0 auto 18px;padding:14px 20px;background:#FFF8F0;border-left:4px solid var(--principal);border-radius:6px;font-size:.92rem;color:var(--texto2);line-height:1.55}
+.ac-instrucciones strong{color:var(--principal)}
+.ac-wrap{max-width:900px;margin:0 auto;padding:0 16px 50px}
+.bloque-encabezado{display:flex;align-items:baseline;gap:10px;margin:22px 0 6px;padding:0 4px}
+.bloque-encabezado .num{font-family:var(--cond);font-size:1.05rem;background:var(--principal);color:#fff;padding:3px 11px;border-radius:14px}
+.bloque-encabezado h2{font-family:var(--cond);font-size:1.4rem;color:var(--texto);margin:0;flex:1}
+.bloque-encabezado .meta{font-size:.8rem;color:var(--texto2)}
+.bloque-ancla{font-size:.88rem;color:var(--texto2);margin:0 4px 10px}
+.bloque-ancla a{color:var(--principal2);text-decoration:none;border-bottom:1px dotted var(--principal2)}
+.bloque-ancla a:hover{color:var(--principal)}
+.bloque-marcador{margin-top:8px;padding:9px 14px;background:#F4F6F9;border-radius:6px;font-size:.88rem;color:var(--texto2);display:none;text-align:right;font-family:var(--cond);letter-spacing:.3px}
+.bloque-marcador.activo{display:block}
+.bloque-marcador .acierto{color:var(--verde);font-weight:600}
+.bloque-marcador .fallo{color:var(--rojo);font-weight:600}
+.test-q .test-num{display:inline-block;font-family:var(--cond);font-size:.78rem;color:var(--principal);background:var(--principal-bg);padding:2px 8px;border-radius:10px;margin-right:7px;vertical-align:1px}
+.test-q .test-tipo-tag{display:inline-block;font-family:var(--cond);font-size:.7rem;color:var(--texto2);background:#EEF1F5;padding:2px 7px;border-radius:10px;margin-left:6px;vertical-align:1px}
+.ac-resumen{max-width:900px;margin:28px auto 0;padding:22px 24px;background:linear-gradient(180deg,#FFF8F0,#fff);border:2px solid var(--principal);border-radius:10px;text-align:center}
+.ac-resumen h2{font-family:var(--cond);font-size:1.5rem;color:var(--principal);margin:0 0 8px}
+.ac-resumen .puntuacion{font-family:var(--cond);font-size:2.3rem;color:var(--texto);margin:6px 0}
+.ac-resumen .puntuacion .num-grande{color:var(--principal);font-size:3rem}
+.ac-resumen .veredicto{font-size:1rem;color:var(--texto2);margin:0 0 14px;min-height:1.4em}
+.ac-resumen .progreso-barra{height:14px;background:#F4F6F9;border-radius:7px;overflow:hidden;margin:14px 0;border:1px solid #E0E5EC}
+.ac-resumen .progreso-barra-fill{height:100%;background:linear-gradient(90deg,var(--principal),var(--principal2));width:0;transition:width .5s ease}
+.ac-resumen .acciones{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.ac-resumen button,.ac-resumen .btn-link{font-family:var(--cond);font-size:.88rem;letter-spacing:.5px;padding:9px 18px;border-radius:20px;cursor:pointer;border:1.5px solid var(--principal);background:#fff;color:var(--principal);text-decoration:none;transition:all .15s}
+.ac-resumen button:hover,.ac-resumen .btn-link:hover{background:var(--principal);color:#fff}
+.ac-resumen button.primario{background:var(--principal);color:#fff}
+.ac-resumen button.primario:hover{background:var(--principal2)}
+.ac-resumen button:disabled{opacity:.4;cursor:not-allowed}
+.ac-resumen button:disabled:hover{background:#fff;color:var(--principal)}
+@media(max-width:640px){.ac-hero h1{font-size:1.5rem}.bloque-encabezado{flex-wrap:wrap}.ac-resumen .puntuacion .num-grande{font-size:2.4rem}}
+@media print{.curso-hd,.curso-navcross,.ac-camino,.ac-instrucciones,.ac-resumen{display:none!important}.test-q{break-inside:avoid;border:1px solid #999;margin-bottom:8px}.test-fb{display:block!important;background:#f6f6f6;color:#333;border-left:3px solid #999}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <a href="../../../index.html" class="curso-lg">TyD 2º ESO</a>
+  <span class="curso-sb">U02 · Materiales · Autocomprobación</span>
+  <a href="../../../index.html" class="curso-home-btn">🏠 Inicio</a>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U02</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../actividades/index.html"><span>✏️</span><span class="nc-lbl">Actividades</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>✅</span><span class="nc-lbl">Autocomprobación</span></span>
+</nav>
+
+<main id="main-content">
+
+<section class="ac-hero">
+  <div class="ac-camino" aria-label="Camino de aprendizaje">
+    <span>📖 Aprende</span>
+    <span class="sep">▸</span>
+    <span>✏️ Practica</span>
+    <span class="sep">▸</span>
+    <span class="activo">✅ Comprueba</span>
+    <span class="sep">▸</span>
+    <span>🔁 Repasa</span>
+  </div>
+  <h1>✅ Autocomprobación · U02 Materiales</h1>
+  <p class="subt">18 preguntas para comprobar si lo has entendido · 10-15 minutos</p>
+</section>
+
+<div class="ac-instrucciones">
+  <p>Lee con calma cada pregunta y pulsa la respuesta que creas correcta. <strong>Solo tienes una oportunidad por pregunta</strong>: al pulsar, el botón se quedará verde (acierto) o rojo (fallo) y aparecerá una pequeña explicación con un enlace al apartado del libro digital donde puedes repasarlo.</p>
+  <p style="margin-bottom:0">Al final tendrás tu puntuación total y podrás <strong>reintentar solo las falladas</strong>. No hay nota: es solo para que sepas dónde estás antes del examen.</p>
+</div>
+
+<div class="ac-wrap">
+
+<!-- ════════ BLOQUE 1: CONCEPTO Y PROPIEDADES ════════ -->
+<div class="bloque-encabezado">
+  <span class="num">B1</span>
+  <h2>Concepto y propiedades</h2>
+  <span class="meta">4 preguntas</span>
+</div>
+<p class="bloque-ancla">📖 Si dudas, repasa el apartado <a href="../libro-digital.html#parte1">«El mundo de los materiales»</a> del libro digital.</p>
+
+<section class="test-section" data-bloque="1">
+  <p class="test-sub">Materia prima vs material, propiedades físicas y mecánicas.</p>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P1</span>¿Cuál es la diferencia entre <strong>materia prima</strong> y <strong>material</strong>? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Son sinónimos</button>
+      <button class="test-opt" data-opt="b">La materia prima se obtiene directamente de la naturaleza; el material se obtiene transformando una materia prima</button>
+      <button class="test-opt" data-opt="c">La materia prima siempre es de origen vegetal</button>
+      <button class="test-opt" data-opt="d">El material es siempre artificial</button>
+    </div>
+    <div class="test-fb">La <strong>materia prima</strong> es lo que sacamos de la naturaleza (madera del árbol, petróleo, arcilla, hierro). El <strong>material</strong> es el producto ya elaborado y listo para usar (tablero contrachapado, plástico, ladrillo, acero). <a href="../libro-digital.html#parte1">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P2</span>Que un material sea <strong>dúctil</strong> significa que... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Se rompe fácilmente</button>
+      <button class="test-opt" data-opt="b">Se puede estirar formando hilos (alambres) sin romperse</button>
+      <button class="test-opt" data-opt="c">Aguanta el calor</button>
+      <button class="test-opt" data-opt="d">Es muy duro de rayar</button>
+    </div>
+    <div class="test-fb"><strong>Ductilidad</strong> = capacidad de estirarse en hilos. Es típica de metales como cobre y aluminio. Por eso los cables eléctricos son de cobre: se pueden estirar en hilos largos y finos. La <em>maleabilidad</em> es parecida pero en forma de láminas. <a href="../libro-digital.html#parte1">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P3</span>Un material que «vuelve a su forma original tras estirarlo o doblarlo» es... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Plástico (en sentido de propiedad)</button>
+      <button class="test-opt" data-opt="b">Elástico</button>
+      <button class="test-opt" data-opt="c">Frágil</button>
+      <button class="test-opt" data-opt="d">Aislante</button>
+    </div>
+    <div class="test-fb"><strong>Elástico</strong> = recupera su forma cuando dejas de aplicar fuerza (goma, muelle). <em>Plástico</em> (como propiedad) significa lo contrario: el material se queda deformado. <em>Frágil</em> = se rompe sin deformarse antes. <a href="../libro-digital.html#parte1">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P4</span>Un material <strong>conductor eléctrico</strong>... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">No deja pasar la electricidad</button>
+      <button class="test-opt" data-opt="b">Deja pasar la electricidad con facilidad (típico de metales)</button>
+      <button class="test-opt" data-opt="c">Solo deja pasar el calor</button>
+      <button class="test-opt" data-opt="d">Solo deja pasar la luz</button>
+    </div>
+    <div class="test-fb">Los <strong>conductores</strong> (cobre, aluminio, oro, hierro) permiten el paso de la corriente. Los <strong>aislantes</strong> (plástico, madera, vidrio, caucho) NO la dejan pasar. Por eso los cables son metálicos por dentro (conducen) y plásticos por fuera (aíslan). <a href="../libro-digital.html#parte1">Repasar →</a></div>
+  </div>
+
+  <div class="bloque-marcador" data-bloque="1"></div>
+</section>
+
+
+<!-- ════════ BLOQUE 2: MADERA, PAPEL Y CARTÓN ════════ -->
+<div class="bloque-encabezado">
+  <span class="num">B2</span>
+  <h2>Madera, papel y cartón</h2>
+  <span class="meta">4 preguntas</span>
+</div>
+<p class="bloque-ancla">📖 Si dudas, repasa el apartado <a href="../libro-digital.html#parte2">«Las familias de materiales»</a> del libro digital.</p>
+
+<section class="test-section" data-bloque="2">
+  <p class="test-sub">Maderas duras y blandas, derivados (contrachapado, MDF…) y papel.</p>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P5</span>La <strong>madera</strong> se obtiene de... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Los minerales</button>
+      <button class="test-opt" data-opt="b">El tronco y las ramas de los árboles</button>
+      <button class="test-opt" data-opt="c">El petróleo</button>
+      <button class="test-opt" data-opt="d">Las plantas en general (cualquier hoja vale)</button>
+    </div>
+    <div class="test-fb">La madera procede del <strong>tronco y ramas</strong> de los árboles. Es renovable si se gestiona bien (talando solo lo que se repone), pero el ritmo de tala mundial no siempre lo cumple. <a href="../libro-digital.html#parte2">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P6</span>Maderas como roble, haya o nogal son... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Blandas (de coníferas, crecen rápido)</button>
+      <button class="test-opt" data-opt="b">Duras (de frondosas, crecen lento y son más resistentes y caras)</button>
+      <button class="test-opt" data-opt="c">Plásticas</button>
+      <button class="test-opt" data-opt="d">No son maderas</button>
+    </div>
+    <div class="test-fb">Las <strong>maderas duras</strong> vienen de frondosas (roble, haya, nogal, cerezo): crecen lentamente, son resistentes y caras. Las <strong>blandas</strong> (pino, abeto) son de coníferas, crecen rápido, son más baratas y se usan en construcción. <a href="../libro-digital.html#parte2">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P7</span>El <strong>DM o MDF</strong> es... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Una madera maciza (un solo tronco)</button>
+      <button class="test-opt" data-opt="b">Un tablero hecho con virutas y fibras de madera prensadas con cola: barato y uniforme</button>
+      <button class="test-opt" data-opt="c">Un tipo de plástico</button>
+      <button class="test-opt" data-opt="d">Un nombre comercial del corcho</button>
+    </div>
+    <div class="test-fb">El <strong>MDF (Medium Density Fibreboard)</strong> es un derivado de la madera: virutas y serrín se prensan con resina formando un tablero uniforme. Es barato, fácil de trabajar y se usa muchísimo en mobiliario tipo Ikea. <a href="../libro-digital.html#parte2">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P8</span>El <strong>papel</strong> se fabrica a partir de... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Algodón únicamente</button>
+      <button class="test-opt" data-opt="b">Pasta de celulosa que se obtiene de la madera (también de papel reciclado)</button>
+      <button class="test-opt" data-opt="c">Petróleo</button>
+      <button class="test-opt" data-opt="d">Hierro fundido</button>
+    </div>
+    <div class="test-fb">El papel sale de la <strong>celulosa</strong> de la madera. Se machaca la madera hasta obtener pasta, se aclara, se prensa y se seca en láminas. Además, se puede reutilizar papel ya usado como materia prima (papel reciclado). <a href="../libro-digital.html#parte2">Repasar →</a></div>
+  </div>
+
+  <div class="bloque-marcador" data-bloque="2"></div>
+</section>
+
+
+<!-- ════════ BLOQUE 3: PLÁSTICOS, METALES Y CERÁMICOS ════════ -->
+<div class="bloque-encabezado">
+  <span class="num">B3</span>
+  <h2>Plásticos, metales y cerámicos</h2>
+  <span class="meta">6 preguntas</span>
+</div>
+<p class="bloque-ancla">📖 Si dudas, repasa el apartado <a href="../libro-digital.html#parte2">«Las familias de materiales»</a> del libro digital.</p>
+
+<section class="test-section" data-bloque="3">
+  <p class="test-sub">Polímeros, metales ferrosos / no ferrosos y materiales cerámicos.</p>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P9</span>Los <strong>plásticos</strong> se obtienen mayoritariamente de... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">La madera</button>
+      <button class="test-opt" data-opt="b">El petróleo (también del gas natural)</button>
+      <button class="test-opt" data-opt="c">Minerales de hierro</button>
+      <button class="test-opt" data-opt="d">El aire</button>
+    </div>
+    <div class="test-fb">La mayoría de plásticos son <strong>derivados del petróleo</strong>: PET, PVC, polipropileno, poliestireno… son polímeros de carbono e hidrógeno obtenidos de hidrocarburos. <a href="../libro-digital.html#parte2">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P10</span>Un plástico <strong>termoplástico</strong> es aquel que... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">No se puede fundir nunca</button>
+      <button class="test-opt" data-opt="b">Se ablanda con el calor y se endurece al enfriar; se puede moldear muchas veces y reciclar</button>
+      <button class="test-opt" data-opt="c">Es de origen vegetal</button>
+      <button class="test-opt" data-opt="d">Solo se usa en electricidad</button>
+    </div>
+    <div class="test-fb"><strong>Termoplásticos</strong> (PET, PE, PVC, PP): se funden con calor y se vuelven sólidos al enfriar → se pueden reciclar muchas veces. <strong>Termoestables</strong> (baquelita): una vez moldeados no se funden, se queman → no se reciclan fácilmente. <strong>Elastómeros</strong>: cauchos elásticos. <a href="../libro-digital.html#parte2">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P11</span>Los <strong>metales ferrosos</strong> son... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Aluminio, cobre y plomo</button>
+      <button class="test-opt" data-opt="b">Aquellos que contienen hierro (Fe): acero, fundición</button>
+      <button class="test-opt" data-opt="c">Solo el oro</button>
+      <button class="test-opt" data-opt="d">Los metales que se oxidan</button>
+    </div>
+    <div class="test-fb">Los <strong>ferrosos</strong> tienen hierro como base: hierro puro, <em>acero</em> (hierro + carbono), <em>fundición</em> (más carbono). Los <strong>no ferrosos</strong> son los demás: cobre, aluminio, plomo, oro, estaño, zinc… <a href="../libro-digital.html#parte2">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P12</span>Para llevar la corriente eléctrica en cables se usa principalmente... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Plomo</button>
+      <button class="test-opt" data-opt="b">Cobre (o aluminio en líneas de alta tensión)</button>
+      <button class="test-opt" data-opt="c">Hierro</button>
+      <button class="test-opt" data-opt="d">Oro siempre</button>
+    </div>
+    <div class="test-fb">El <strong>cobre</strong> es el rey de los cables: muy buen conductor eléctrico, dúctil (se estira en hilos) y a un precio razonable. En líneas eléctricas de alta tensión se usa <em>aluminio</em>: peor conductor pero mucho más ligero. <a href="../libro-digital.html#parte2">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P13</span>El <strong>vidrio</strong> es un material... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Metálico</button>
+      <button class="test-opt" data-opt="b">Cerámico (transparente, duro pero frágil; aislante eléctrico)</button>
+      <button class="test-opt" data-opt="c">Polímero</button>
+      <button class="test-opt" data-opt="d">Textil</button>
+    </div>
+    <div class="test-fb">El <strong>vidrio</strong> es un material cerámico de origen mineral (se funde arena de sílice). Es transparente, duro, aislante… y frágil: se rompe sin deformarse. Se recicla bien (iglú verde). <a href="../libro-digital.html#parte2">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="a">
+    <p class="test-qtext"><span class="test-num">P14</span>De estos materiales, ¿cuál sufre la <strong>oxidación / corrosión</strong> con más facilidad si no se protege? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">El hierro (forma óxido rojizo)</button>
+      <button class="test-opt" data-opt="b">El oro</button>
+      <button class="test-opt" data-opt="c">El plástico</button>
+      <button class="test-opt" data-opt="d">El vidrio</button>
+    </div>
+    <div class="test-fb">El <strong>hierro</strong> se oxida muy rápido en presencia de oxígeno y agua: se forma óxido férrico (el típico color rojizo). Por eso se protege con pintura, esmalte o galvanizado. El oro casi no se oxida, y el plástico y el vidrio no se oxidan en sentido químico. <a href="../libro-digital.html#parte2">Repasar →</a></div>
+  </div>
+
+  <div class="bloque-marcador" data-bloque="3"></div>
+</section>
+
+
+<!-- ════════ BLOQUE 4: TEXTILES Y RECICLAJE ════════ -->
+<div class="bloque-encabezado">
+  <span class="num">B4</span>
+  <h2>Textiles y reciclaje</h2>
+  <span class="meta">4 preguntas</span>
+</div>
+<p class="bloque-ancla">📖 Si dudas, repasa los apartados <a href="../libro-digital.html#parte2">«Las fibras textiles»</a> y <a href="../libro-digital.html#parte3">«Materiales y planeta»</a>.</p>
+
+<section class="test-section" data-bloque="4">
+  <p class="test-sub">Fibras naturales y sintéticas, contenedores y reciclaje.</p>
+
+  <div class="test-q" data-answer="a">
+    <p class="test-qtext"><span class="test-num">P15</span>El <strong>algodón</strong> y la <strong>lana</strong> son fibras... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Naturales (de origen vegetal y animal, respectivamente)</button>
+      <button class="test-opt" data-opt="b">Sintéticas, derivadas del petróleo</button>
+      <button class="test-opt" data-opt="c">Minerales</button>
+      <button class="test-opt" data-opt="d">Cerámicas</button>
+    </div>
+    <div class="test-fb">El <strong>algodón</strong> es vegetal (de la planta del algodón); la <strong>lana</strong> es animal (de la oveja). Otras naturales: seda (gusano), lino (planta). Las <em>sintéticas</em> (poliéster, nailon, lycra) vienen del petróleo. <a href="../libro-digital.html#parte2">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P16</span>El <strong>contenedor amarillo</strong> es para... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Vidrio</button>
+      <button class="test-opt" data-opt="b">Envases ligeros: plásticos, latas (metal) y briks</button>
+      <button class="test-opt" data-opt="c">Papel y cartón</button>
+      <button class="test-opt" data-opt="d">Materia orgánica</button>
+    </div>
+    <div class="test-fb"><strong>Amarillo</strong>: envases ligeros (plástico, metal, brik). <strong>Azul</strong>: papel y cartón. <strong>Verde</strong>: vidrio. <strong>Marrón</strong>: orgánico. <strong>Gris</strong>: resto. Las latas (aunque sean metal) van al amarillo. <a href="../libro-digital.html#parte3">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P17</span>Un teléfono móvil viejo debería tirarse... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Al contenedor amarillo (es plástico)</button>
+      <button class="test-opt" data-opt="b">A un punto limpio o tienda autorizada (RAEE: residuos de aparatos eléctricos y electrónicos)</button>
+      <button class="test-opt" data-opt="c">A la basura normal</button>
+      <button class="test-opt" data-opt="d">Al contenedor de vidrio</button>
+    </div>
+    <div class="test-fb">Los <strong>RAEE</strong> (móviles, ordenadores, electrodomésticos) llevan metales valiosos y también componentes tóxicos (baterías, pantallas). Se llevan a <strong>punto limpio</strong> o a una <em>tienda autorizada</em>. Algunos comercios están obligados a aceptar el viejo al comprar uno nuevo. <a href="../libro-digital.html#parte3">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P18</span>«El plástico, el vidrio y el papel se pueden reciclar infinitamente sin perder calidad». <span class="test-tipo-tag">verdadero / falso</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Verdadero, todos infinitamente</button>
+      <button class="test-opt" data-opt="b">Falso: el vidrio y los metales sí se reciclan casi infinitamente, pero el papel y el plástico se degradan con cada reciclaje</button>
+    </div>
+    <div class="test-fb"><strong>Falso.</strong> El <em>vidrio</em> y los <em>metales</em> se pueden reciclar prácticamente sin pérdida de calidad. El <em>papel</em> pierde longitud de fibra con cada ciclo (al cabo de 5-7 ya no sirve). El <em>plástico</em> también se degrada (downcycling): de una botella PET sale fibra textil, no otra botella idéntica. <a href="../libro-digital.html#parte3">Repasar →</a></div>
+  </div>
+
+  <div class="bloque-marcador" data-bloque="4"></div>
+</section>
+
+
+<!-- ════════ RESUMEN FINAL ════════ -->
+<section class="ac-resumen" id="ac-resumen">
+  <h2 id="ac-resumen-titulo">Resultado de la autocomprobación</h2>
+  <div class="puntuacion"><span class="num-grande" id="ac-aciertos">0</span> / <span id="ac-total">18</span> aciertos</div>
+  <div class="progreso-barra"><div class="progreso-barra-fill" id="ac-bar"></div></div>
+  <p class="veredicto" id="ac-veredicto">Responde las preguntas para ver tu resultado.</p>
+  <div class="acciones">
+    <button id="ac-reintentar" class="primario" disabled>🔁 Reintentar las falladas</button>
+    <button id="ac-todo" disabled>🔄 Empezar de nuevo</button>
+    <a class="btn-link" href="../libro-digital.html">📖 Ir al libro digital</a>
+    <a class="btn-link" href="../index.html">📋 Volver al hub U02</a>
+  </div>
+</section>
+
+</div>
+
+</main>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+
+<script>
+(function(){
+  'use strict';
+  var qs = document.querySelectorAll('.test-q');
+  var totalEl = document.getElementById('ac-total');
+  var aciertosEl = document.getElementById('ac-aciertos');
+  var barEl = document.getElementById('ac-bar');
+  var veredictoEl = document.getElementById('ac-veredicto');
+  var btnReintentar = document.getElementById('ac-reintentar');
+  var btnTodo = document.getElementById('ac-todo');
+  totalEl.textContent = qs.length;
+
+  function refrescar(){
+    var aciertos = 0, contestadas = 0, falladas = 0;
+    var porBloque = {};
+    qs.forEach(function(q){
+      var b = q.closest('.test-section').dataset.bloque;
+      if(!porBloque[b]) porBloque[b] = {ok:0, ko:0, total:0};
+      porBloque[b].total++;
+      if(q.classList.contains('answered')){
+        contestadas++;
+        var ok = q.querySelector('.test-opt.correct') && !q.querySelector('.test-opt.wrong');
+        if(ok){ aciertos++; porBloque[b].ok++; }
+        else  { falladas++; porBloque[b].ko++; }
+      }
+    });
+    aciertosEl.textContent = aciertos;
+    var pct = Math.round((aciertos / qs.length) * 100);
+    barEl.style.width = pct + '%';
+    if(contestadas === 0){
+      veredictoEl.textContent = 'Responde las preguntas para ver tu resultado.';
+    } else if(contestadas < qs.length){
+      veredictoEl.innerHTML = 'Llevas <strong>' + contestadas + '</strong> de ' + qs.length + ' preguntas respondidas.';
+    } else {
+      var msg = '';
+      if(pct >= 90)       msg = '🌟 ¡Excelente! Dominas la unidad de materiales.';
+      else if(pct >= 75)  msg = '👍 Muy bien. Repasa los puntos fallados y estarás listo para el examen.';
+      else if(pct >= 50)  msg = '🙂 Vas por buen camino, pero conviene volver al libro digital y al apartado donde hayas tenido más fallos.';
+      else                msg = '📚 Tranquilo: repasa con calma el libro digital y vuelve a probar.';
+      veredictoEl.innerHTML = msg + '<br><small>' + aciertos + ' aciertos · ' + falladas + ' fallos · ' + pct + '%</small>';
+    }
+    btnReintentar.disabled = (falladas === 0);
+    btnTodo.disabled = (contestadas === 0);
+    Object.keys(porBloque).forEach(function(b){
+      var m = document.querySelector('.bloque-marcador[data-bloque="'+b+'"]');
+      var p = porBloque[b];
+      var done = p.ok + p.ko;
+      if(done === 0){ m.classList.remove('activo'); return; }
+      m.classList.add('activo');
+      if(done < p.total){
+        m.innerHTML = 'Bloque ' + b + ': ' + done + ' / ' + p.total + ' respondidas';
+      } else {
+        m.innerHTML = 'Bloque ' + b + ': <span class="acierto">' + p.ok + ' acierto' + (p.ok===1?'':'s') + '</span> · <span class="fallo">' + p.ko + ' fallo' + (p.ko===1?'':'s') + '</span>';
+      }
+    });
+  }
+  document.addEventListener('click', function(e){
+    if(e.target.classList && e.target.classList.contains('test-opt')){
+      setTimeout(refrescar, 0);
+    }
+  });
+  function resetPregunta(q){
+    q.classList.remove('answered');
+    q.querySelectorAll('.test-opt').forEach(function(b){
+      b.classList.remove('correct','wrong');
+      b.disabled = false;
+    });
+  }
+  btnReintentar.addEventListener('click', function(){
+    qs.forEach(function(q){
+      if(q.classList.contains('answered')){
+        var hayFallo = q.querySelector('.test-opt.wrong');
+        if(hayFallo) resetPregunta(q);
+      }
+    });
+    refrescar();
+    var primera = document.querySelector('.test-q:not(.answered)');
+    if(primera) primera.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+  btnTodo.addEventListener('click', function(){
+    if(!confirm('¿Seguro que quieres empezar de nuevo? Se borrarán todas tus respuestas.')) return;
+    qs.forEach(resetPregunta);
+    refrescar();
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+  refrescar();
+})();
+</script>
+</body>
+</html>

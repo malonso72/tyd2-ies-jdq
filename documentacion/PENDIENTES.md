@@ -32,10 +32,25 @@ Lista de lo que queda por completar. Se actualiza con cada sprint.
   de las tarjetas U6, U7 y U8 en el `index.html` cuando su material esté
   integrado (U0–U5 ya pueden quitarlo: tienen contenido real).
 
-## Sub-bloque: completar autocomprobación y proyecto
+## ✅ Completado en v1.2.0 (2026-05-13, sesión Cowork)
 
-- [ ] `autocomprobacion/index.html` de U0–U5 sigue siendo placeholder
-  (8 líneas). Construir batería de preguntas de autoevaluación.
+- [x] **Autocomprobaciones de U0–U5**: 6 archivos con 18 preguntas cada uno
+  (4 bloques · marcador parcial · feedback con enlace al libro digital ·
+  reintentar falladas · compatible con impresión). Total: **108 preguntas**.
+  - U0 Dibujo técnico: fundamentos, vistas/perspectivas, escalas, acotación + CAD.
+  - U1 Tecnología y proceso: fundamentos, 6 fases, memoria/fabricación, medio ambiente.
+  - U2 Materiales: propiedades, madera/papel, plásticos/metales/cerámicos, textiles/reciclaje.
+  - U3 Estructuras: fundamentos, esfuerzos/elementos, tipos, patrimonio andaluz.
+  - U4 Mecanismos: conceptos, palancas, poleas/plano/tornillo, transmisión.
+  - U5 Electricidad: corriente, circuito, magnitudes/Ohm, asociaciones/consumo.
+- [x] **Favicon del departamento** (`tecnologia-ies-jdq/favicon.svg`)
+  renovado: silueta del edificio JdQ en blanco sobre azul (sustituye al
+  texto "JdQ" anterior).
+- [x] **Badges "Contenido en desarrollo"** eliminados de todas las páginas
+  (25 spans + 4 divs + 13 cards con alert reenlazadas a su destino real).
+
+## Pendiente: completar proyecto
+
 - [ ] `proyecto/index.html` de U0–U5 sigue siendo placeholder. Definir
   proyectos concretos (taller, montaje, programación, etc.).
 

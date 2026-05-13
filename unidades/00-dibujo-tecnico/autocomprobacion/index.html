@@ -1,9 +1,479 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Autocomprobación</title>
-<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/hub.css">
-</head><body>
-<div class="hub-main" id="main-content">
-<section class="unidad-titulo-hero"><h1>✅ Autocomprobación</h1><div class="duracion">Este apartado se irá completando durante el curso.</div></section>
-<div class="bg"><a class="bc" href="../index.html"><span class="bi">⬅️</span><span class="bk">Volver a la unidad</span><span class="bn">Hub U principal</span></a></div>
-</div></body></html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Autocomprobación · U00 Dibujo técnico · TyD 2º ESO</title>
+<meta name="description" content="Autocomprobación de la unidad 00 · Dibujo técnico · 18 preguntas con feedback inmediato · TyD 2º ESO · IES Jiménez de Quesada.">
+
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/00-dibujo-tecnico/autocomprobacion/">
+
+<meta property="og:title" content="Autocomprobación · U00 Dibujo técnico · TyD 2º ESO">
+<meta property="og:description" content="18 preguntas para repasar fundamentos, vistas, perspectivas, escalas, acotación y CAD.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/00-dibujo-tecnico/autocomprobacion/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+.ac-hero{max-width:1100px;margin:22px auto 8px;padding:0 20px;text-align:center}
+.ac-hero h1{font-family:var(--cond);font-size:1.9rem;color:var(--principal);margin:0 0 6px;letter-spacing:.5px}
+.ac-hero .subt{font-size:.95rem;color:var(--texto2);margin:0 0 16px}
+.ac-camino{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;font-family:var(--cond);font-size:.78rem;letter-spacing:.4px;margin-bottom:10px}
+.ac-camino span{padding:4px 12px;border-radius:14px;background:#F4F6F9;color:#8C97A8;border:1px solid #D8DDE5}
+.ac-camino span.activo{background:linear-gradient(135deg,var(--principal),var(--principal2));color:#fff;border-color:var(--principal)}
+.ac-camino .sep{background:transparent;border:none;color:#B8C0CC;padding:4px 2px}
+.ac-instrucciones{max-width:900px;margin:0 auto 18px;padding:14px 20px;background:#FFF8F0;border-left:4px solid var(--principal);border-radius:6px;font-size:.92rem;color:var(--texto2);line-height:1.55}
+.ac-instrucciones strong{color:var(--principal)}
+.ac-wrap{max-width:900px;margin:0 auto;padding:0 16px 50px}
+.bloque-encabezado{display:flex;align-items:baseline;gap:10px;margin:22px 0 6px;padding:0 4px}
+.bloque-encabezado .num{font-family:var(--cond);font-size:1.05rem;background:var(--principal);color:#fff;padding:3px 11px;border-radius:14px}
+.bloque-encabezado h2{font-family:var(--cond);font-size:1.4rem;color:var(--texto);margin:0;flex:1}
+.bloque-encabezado .meta{font-size:.8rem;color:var(--texto2)}
+.bloque-ancla{font-size:.88rem;color:var(--texto2);margin:0 4px 10px}
+.bloque-ancla a{color:var(--principal2);text-decoration:none;border-bottom:1px dotted var(--principal2)}
+.bloque-ancla a:hover{color:var(--principal)}
+.bloque-marcador{margin-top:8px;padding:9px 14px;background:#F4F6F9;border-radius:6px;font-size:.88rem;color:var(--texto2);display:none;text-align:right;font-family:var(--cond);letter-spacing:.3px}
+.bloque-marcador.activo{display:block}
+.bloque-marcador .acierto{color:var(--verde);font-weight:600}
+.bloque-marcador .fallo{color:var(--rojo);font-weight:600}
+.test-q .test-num{display:inline-block;font-family:var(--cond);font-size:.78rem;color:var(--principal);background:var(--principal-bg);padding:2px 8px;border-radius:10px;margin-right:7px;vertical-align:1px}
+.test-q .test-tipo-tag{display:inline-block;font-family:var(--cond);font-size:.7rem;color:var(--texto2);background:#EEF1F5;padding:2px 7px;border-radius:10px;margin-left:6px;vertical-align:1px}
+.ac-resumen{max-width:900px;margin:28px auto 0;padding:22px 24px;background:linear-gradient(180deg,#FFF8F0,#fff);border:2px solid var(--principal);border-radius:10px;text-align:center}
+.ac-resumen h2{font-family:var(--cond);font-size:1.5rem;color:var(--principal);margin:0 0 8px}
+.ac-resumen .puntuacion{font-family:var(--cond);font-size:2.3rem;color:var(--texto);margin:6px 0}
+.ac-resumen .puntuacion .num-grande{color:var(--principal);font-size:3rem}
+.ac-resumen .veredicto{font-size:1rem;color:var(--texto2);margin:0 0 14px;min-height:1.4em}
+.ac-resumen .progreso-barra{height:14px;background:#F4F6F9;border-radius:7px;overflow:hidden;margin:14px 0;border:1px solid #E0E5EC}
+.ac-resumen .progreso-barra-fill{height:100%;background:linear-gradient(90deg,var(--principal),var(--principal2));width:0;transition:width .5s ease}
+.ac-resumen .acciones{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.ac-resumen button,.ac-resumen .btn-link{font-family:var(--cond);font-size:.88rem;letter-spacing:.5px;padding:9px 18px;border-radius:20px;cursor:pointer;border:1.5px solid var(--principal);background:#fff;color:var(--principal);text-decoration:none;transition:all .15s}
+.ac-resumen button:hover,.ac-resumen .btn-link:hover{background:var(--principal);color:#fff}
+.ac-resumen button.primario{background:var(--principal);color:#fff}
+.ac-resumen button.primario:hover{background:var(--principal2)}
+.ac-resumen button:disabled{opacity:.4;cursor:not-allowed}
+.ac-resumen button:disabled:hover{background:#fff;color:var(--principal)}
+@media(max-width:640px){.ac-hero h1{font-size:1.5rem}.bloque-encabezado{flex-wrap:wrap}.ac-resumen .puntuacion .num-grande{font-size:2.4rem}}
+@media print{.curso-hd,.curso-navcross,.ac-camino,.ac-instrucciones,.ac-resumen{display:none!important}.test-q{break-inside:avoid;border:1px solid #999;margin-bottom:8px}.test-fb{display:block!important;background:#f6f6f6;color:#333;border-left:3px solid #999}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <a href="../../../index.html" class="curso-lg">TyD 2º ESO</a>
+  <span class="curso-sb">U00 · Dibujo técnico · Autocomprobación</span>
+  <a href="../../../index.html" class="curso-home-btn">🏠 Inicio</a>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U00</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../actividades/index.html"><span>✏️</span><span class="nc-lbl">Actividades</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>✅</span><span class="nc-lbl">Autocomprobación</span></span>
+</nav>
+
+<main id="main-content">
+
+<section class="ac-hero">
+  <div class="ac-camino" aria-label="Camino de aprendizaje">
+    <span>📖 Aprende</span>
+    <span class="sep">▸</span>
+    <span>✏️ Practica</span>
+    <span class="sep">▸</span>
+    <span class="activo">✅ Comprueba</span>
+    <span class="sep">▸</span>
+    <span>🔁 Repasa</span>
+  </div>
+  <h1>✅ Autocomprobación · U00 Dibujo técnico</h1>
+  <p class="subt">18 preguntas para comprobar si lo has entendido · 10-15 minutos</p>
+</section>
+
+<div class="ac-instrucciones">
+  <p>Lee con calma cada pregunta y pulsa la respuesta que creas correcta. <strong>Solo tienes una oportunidad por pregunta</strong>: al pulsar, el botón se quedará verde (acierto) o rojo (fallo) y aparecerá una pequeña explicación con un enlace al apartado del libro digital donde puedes repasarlo.</p>
+  <p style="margin-bottom:0">Al final tendrás tu puntuación total y podrás <strong>reintentar solo las falladas</strong>. No hay nota: es solo para que sepas dónde estás antes del examen.</p>
+</div>
+
+<div class="ac-wrap">
+
+<!-- ════════ BLOQUE 1: FUNDAMENTOS ════════ -->
+<div class="bloque-encabezado">
+  <span class="num">B1</span>
+  <h2>Fundamentos del dibujo técnico</h2>
+  <span class="meta">4 preguntas</span>
+</div>
+<p class="bloque-ancla">📖 Si dudas, repasa el apartado <a href="../libro-digital.html#parte1">«Fundamentos»</a> del libro digital.</p>
+
+<section class="test-section" data-bloque="1">
+  <p class="test-sub">Qué es el dibujo técnico, formatos de papel, boceto / croquis / plano y cajetín.</p>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P1</span>¿Qué <strong>diferencia</strong> al dibujo técnico del dibujo artístico? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">El técnico es a color y el artístico en blanco y negro</button>
+      <button class="test-opt" data-opt="b">El técnico es preciso y sigue normas (todos lo interpretan igual); el artístico es libre y subjetivo</button>
+      <button class="test-opt" data-opt="c">El artístico necesita ordenador y el técnico no</button>
+      <button class="test-opt" data-opt="d">No hay diferencia, son sinónimos</button>
+    </div>
+    <div class="test-fb">El dibujo técnico está pensado para <strong>comunicar información sin ambigüedad</strong>: sigue normas (UNE/ISO), usa medidas exactas y escalas. El dibujo artístico busca expresar emociones o estética; admite interpretaciones distintas. <a href="../libro-digital.html#parte1">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P2</span>El formato de papel <strong>A4</strong> mide... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">594 × 841 mm</button>
+      <button class="test-opt" data-opt="b">210 × 297 mm</button>
+      <button class="test-opt" data-opt="c">100 × 200 mm</button>
+      <button class="test-opt" data-opt="d">420 × 297 mm</button>
+    </div>
+    <div class="test-fb">El <strong>A4 mide 210 × 297 mm</strong> (la hoja de toda la vida). Cada formato A es el doble del siguiente: A3 = 2 × A4, A2 = 2 × A3… Es un sistema normalizado para que los planos encajen y se archiven bien. <a href="../libro-digital.html#parte1">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="c">
+    <p class="test-qtext"><span class="test-num">P3</span>Dibujas una idea rápida <strong>a mano alzada</strong>, sin instrumentos y solo para que se entienda. Eso es un... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Plano</button>
+      <button class="test-opt" data-opt="b">Croquis</button>
+      <button class="test-opt" data-opt="c">Boceto</button>
+      <button class="test-opt" data-opt="d">Esquema eléctrico</button>
+    </div>
+    <div class="test-fb">El <strong>boceto</strong> es a mano alzada, rápido y sin medidas. El <em>croquis</em> ya añade cotas (medidas) aunque siga siendo a mano alzada. El <em>plano</em> es el documento final, hecho con instrumentos o CAD y completamente acotado. <a href="../libro-digital.html#parte1">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="a">
+    <p class="test-qtext"><span class="test-num">P4</span>¿Para qué sirve el <strong>cajetín</strong> de un plano? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Para guardar los datos del plano: nombre del autor, escala, fecha, número de plano…</button>
+      <button class="test-opt" data-opt="b">Es un dibujo decorativo</button>
+      <button class="test-opt" data-opt="c">Sirve para meter el lápiz</button>
+      <button class="test-opt" data-opt="d">Es el rectángulo donde van las vistas</button>
+    </div>
+    <div class="test-fb">El <strong>cajetín</strong> es el recuadro de la esquina inferior derecha donde se anotan los <em>metadatos</em> del plano: autor, asignatura, fecha, escala, número y nombre del plano. Sirve para identificar quién lo hizo y de qué va, sin tener que leer todo el dibujo. <a href="../libro-digital.html#parte1">Repasar →</a></div>
+  </div>
+
+  <div class="bloque-marcador" data-bloque="1"></div>
+</section>
+
+
+<!-- ════════ BLOQUE 2: VISTAS Y PERSPECTIVAS ════════ -->
+<div class="bloque-encabezado">
+  <span class="num">B2</span>
+  <h2>Vistas y perspectivas</h2>
+  <span class="meta">5 preguntas</span>
+</div>
+<p class="bloque-ancla">📖 Si dudas, repasa el apartado <a href="../libro-digital.html#parte2">«Representar en el papel»</a> del libro digital.</p>
+
+<section class="test-section" data-bloque="2">
+  <p class="test-sub">Sistema diédrico (alzado/planta/perfil) y perspectivas (isométrica y caballera).</p>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P5</span>Las <strong>tres vistas básicas</strong> del sistema diédrico son... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Frente, atrás y arriba</button>
+      <button class="test-opt" data-opt="b">Alzado, planta y perfil</button>
+      <button class="test-opt" data-opt="c">Norte, sur y este</button>
+      <button class="test-opt" data-opt="d">Cara, cruz y canto</button>
+    </div>
+    <div class="test-fb">El sistema diédrico representa un objeto con <strong>alzado</strong> (de frente), <strong>planta</strong> (desde arriba) y <strong>perfil</strong> (de lado). Con estas tres vistas se puede reconstruir cualquier pieza en 3D. <a href="../libro-digital.html#parte2">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="c">
+    <p class="test-qtext"><span class="test-num">P6</span>El <strong>alzado</strong> es la vista que se obtiene mirando el objeto... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Desde arriba</button>
+      <button class="test-opt" data-opt="b">Desde un lado</button>
+      <button class="test-opt" data-opt="c">De frente (perpendicular a su cara principal)</button>
+      <button class="test-opt" data-opt="d">Desde abajo</button>
+    </div>
+    <div class="test-fb">El <strong>alzado</strong> es la vista frontal — la que enseña la cara más significativa del objeto. La <em>planta</em> se ve desde arriba y el <em>perfil</em> desde un lado. <a href="../libro-digital.html#parte2">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P7</span>En la correspondencia entre vistas: el <strong>alzado y la planta</strong> comparten... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">La altura</button>
+      <button class="test-opt" data-opt="b">La anchura (ambos miden lo mismo en horizontal)</button>
+      <button class="test-opt" data-opt="c">La profundidad</button>
+      <button class="test-opt" data-opt="d">No comparten ninguna medida</button>
+    </div>
+    <div class="test-fb">Alzado y planta comparten la <strong>anchura</strong>: si la planta se dibuja debajo del alzado, los puntos quedan alineados verticalmente. Alzado y perfil comparten la altura. Planta y perfil comparten la profundidad. <a href="../libro-digital.html#parte2">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="c">
+    <p class="test-qtext"><span class="test-num">P8</span>En la <strong>perspectiva isométrica</strong>, los tres ejes (X, Y, Z) forman entre ellos ángulos de... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">90°</button>
+      <button class="test-opt" data-opt="b">45°</button>
+      <button class="test-opt" data-opt="c">120°</button>
+      <button class="test-opt" data-opt="d">180°</button>
+    </div>
+    <div class="test-fb">En isométrica los ejes forman entre sí ángulos de <strong>120°</strong> (uno vertical y dos a 30° respecto a la horizontal). Las medidas se conservan en los tres ejes, sin distorsión. <a href="../libro-digital.html#parte2">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P9</span>En la <strong>perspectiva caballera</strong>, el alzado se ve en verdadera magnitud y... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Los otros ejes son verticales</button>
+      <button class="test-opt" data-opt="b">El eje de profundidad se inclina (suele ir a 30°, 45° o 60°) y, a menudo, se reduce a la mitad</button>
+      <button class="test-opt" data-opt="c">Se ven solo dos caras</button>
+      <button class="test-opt" data-opt="d">Es lo mismo que la isométrica</button>
+    </div>
+    <div class="test-fb">En la <strong>caballera</strong>, la cara frontal se dibuja sin deformar y el eje de profundidad va oblicuo (típicamente 45°). Las longitudes en ese eje suelen reducirse (coeficiente 1/2) para que el dibujo no parezca alargado. <a href="../libro-digital.html#parte2">Repasar →</a></div>
+  </div>
+
+  <div class="bloque-marcador" data-bloque="2"></div>
+</section>
+
+
+<!-- ════════ BLOQUE 3: INSTRUMENTOS Y ESCALAS ════════ -->
+<div class="bloque-encabezado">
+  <span class="num">B3</span>
+  <h2>Instrumentos y escalas</h2>
+  <span class="meta">5 preguntas</span>
+</div>
+<p class="bloque-ancla">📖 Si dudas, repasa el apartado <a href="../libro-digital.html#parte3">«Herramientas y normas»</a> del libro digital.</p>
+
+<section class="test-section" data-bloque="3">
+  <p class="test-sub">Escuadra y cartabón, compás, transportador, y la escala (natural, reducción, ampliación).</p>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P10</span>El <strong>cartabón</strong> tiene los ángulos de... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">45° - 45° - 90°</button>
+      <button class="test-opt" data-opt="b">30° - 60° - 90°</button>
+      <button class="test-opt" data-opt="c">15° - 75° - 90°</button>
+      <button class="test-opt" data-opt="d">Tres ángulos de 60°</button>
+    </div>
+    <div class="test-fb">El <strong>cartabón</strong> tiene 30° - 60° - 90°. La <em>escuadra</em> es el de 45° - 45° - 90° (un triángulo rectángulo isósceles). Combinando ambos puedes trazar ángulos de 15°, 75°, 105°… <a href="../libro-digital.html#parte3">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P11</span>La escala <strong>1:1</strong> significa que... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">El dibujo es el doble del objeto real</button>
+      <button class="test-opt" data-opt="b">El dibujo tiene exactamente el mismo tamaño que el objeto real (escala natural)</button>
+      <button class="test-opt" data-opt="c">El dibujo es la mitad del objeto real</button>
+      <button class="test-opt" data-opt="d">El dibujo no tiene escala</button>
+    </div>
+    <div class="test-fb"><strong>1:1 = escala natural</strong>: 1 cm en el papel = 1 cm en la realidad. Es la escala ideal cuando el objeto cabe en el papel sin reducir ni ampliar. <a href="../libro-digital.html#parte3">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="c">
+    <p class="test-qtext"><span class="test-num">P12</span>Un mueble mide <strong>200 cm</strong> de largo. Si lo dibujas a escala <strong>1:5</strong>, en el papel medirá... <span class="test-tipo-tag">cálculo</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">5 cm</button>
+      <button class="test-opt" data-opt="b">20 cm</button>
+      <button class="test-opt" data-opt="c">40 cm</button>
+      <button class="test-opt" data-opt="d">1 000 cm</button>
+    </div>
+    <div class="test-fb">Escala 1:5 significa que el dibujo es 5 veces más pequeño que la realidad. <strong>Medida_papel = 200 / 5 = 40 cm</strong>. <a href="../libro-digital.html#parte3">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P13</span>Una pieza pequeña mide <strong>5 cm</strong>. La dibujas a escala <strong>2:1</strong>. En el papel medirá... <span class="test-tipo-tag">cálculo</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">2,5 cm</button>
+      <button class="test-opt" data-opt="b">10 cm (la dibujamos el doble de grande)</button>
+      <button class="test-opt" data-opt="c">5 cm (igual que la realidad)</button>
+      <button class="test-opt" data-opt="d">25 cm</button>
+    </div>
+    <div class="test-fb">Escala 2:1 es <strong>ampliación</strong>: el dibujo es 2 veces más grande que la realidad. 5 cm × 2 = <strong>10 cm</strong>. Se usa cuando la pieza es muy pequeña (relojería, electrónica). <a href="../libro-digital.html#parte3">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="a">
+    <p class="test-qtext"><span class="test-num">P14</span>La escala <strong>1:50</strong> es de... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Reducción (el dibujo es más pequeño que la realidad)</button>
+      <button class="test-opt" data-opt="b">Ampliación (el dibujo es más grande)</button>
+      <button class="test-opt" data-opt="c">Natural (igual)</button>
+      <button class="test-opt" data-opt="d">No es una escala válida</button>
+    </div>
+    <div class="test-fb">Si el primer número es <strong>menor que el segundo (1:50, 1:100…)</strong> es <em>reducción</em>: el dibujo es más pequeño. Si es mayor (2:1, 5:1) es <em>ampliación</em>. Si son iguales (1:1) es natural. La 1:50 es típica de planos de viviendas. <a href="../libro-digital.html#parte3">Repasar →</a></div>
+  </div>
+
+  <div class="bloque-marcador" data-bloque="3"></div>
+</section>
+
+
+<!-- ════════ BLOQUE 4: ACOTACIÓN Y CAD ════════ -->
+<div class="bloque-encabezado">
+  <span class="num">B4</span>
+  <h2>Acotación y diseño con ordenador</h2>
+  <span class="meta">4 preguntas</span>
+</div>
+<p class="bloque-ancla">📖 Si dudas, repasa los apartados <a href="../libro-digital.html#parte3">«Acotación»</a> y <a href="../libro-digital.html#parte4">«Diseño con ordenador»</a>.</p>
+
+<section class="test-section" data-bloque="4">
+  <p class="test-sub">Cómo acotar correctamente, símbolos especiales y CAD.</p>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P15</span>El símbolo <strong>Ø</strong> delante de una medida significa... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Radio</button>
+      <button class="test-opt" data-opt="b">Diámetro</button>
+      <button class="test-opt" data-opt="c">Ángulo</button>
+      <button class="test-opt" data-opt="d">Escala</button>
+    </div>
+    <div class="test-fb"><strong>Ø</strong> = diámetro (medida que atraviesa un círculo de lado a lado). <strong>R</strong> = radio (mitad del diámetro, desde el centro al borde). Por ejemplo, Ø20 mm = círculo de 20 mm de diámetro. <a href="../libro-digital.html#parte3">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="a">
+    <p class="test-qtext"><span class="test-num">P16</span>«Una línea de cota puede colocarse <strong>encima de una arista</strong> del objeto». <span class="test-tipo-tag">verdadero / falso</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Falso (la línea de cota va separada del objeto, no encima de él)</button>
+      <button class="test-opt" data-opt="b">Verdadero, da igual donde se ponga</button>
+    </div>
+    <div class="test-fb"><strong>Falso.</strong> Las líneas de cota van <em>fuera</em> del objeto, separadas unos milímetros de las aristas. Tampoco se colocan sobre ejes de simetría ni se cortan con otras líneas. <a href="../libro-digital.html#parte3">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P17</span>La <strong>cota</strong> de una pieza indica... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">La medida que ocupa en el papel</button>
+      <button class="test-opt" data-opt="b">La medida real del objeto (independientemente de la escala del dibujo)</button>
+      <button class="test-opt" data-opt="c">El precio del objeto</button>
+      <button class="test-opt" data-opt="d">El número de plano</button>
+    </div>
+    <div class="test-fb">La cota indica <strong>siempre la medida real</strong>. Si dibujas un tornillo de 30 mm a escala 1:2, en el papel mide 15 mm pero la cota sigue siendo «30». Por eso el cajetín lleva la escala: para que el lector sepa cómo se ha hecho el dibujo. <a href="../libro-digital.html#parte3">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="c">
+    <p class="test-qtext"><span class="test-num">P18</span>La principal <strong>ventaja del CAD</strong> (diseño asistido por ordenador) frente al dibujo a mano es... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Que es más barato</button>
+      <button class="test-opt" data-opt="b">Que no necesita escalas</button>
+      <button class="test-opt" data-opt="c">Que permite modificar, copiar, ampliar y reutilizar el dibujo sin volver a empezar; además es muy preciso</button>
+      <button class="test-opt" data-opt="d">Que es siempre más rápido en el primer dibujo</button>
+    </div>
+    <div class="test-fb">El CAD destaca por <strong>precisión y reutilización</strong>: si te equivocas, deshaces; si quieres una variante, copias; el archivo es eternamente editable. La curva de aprendizaje es alta, pero a la larga ahorra muchísimo tiempo. <a href="../libro-digital.html#parte4">Repasar →</a></div>
+  </div>
+
+  <div class="bloque-marcador" data-bloque="4"></div>
+</section>
+
+
+<!-- ════════ RESUMEN FINAL ════════ -->
+<section class="ac-resumen" id="ac-resumen">
+  <h2 id="ac-resumen-titulo">Resultado de la autocomprobación</h2>
+  <div class="puntuacion"><span class="num-grande" id="ac-aciertos">0</span> / <span id="ac-total">18</span> aciertos</div>
+  <div class="progreso-barra"><div class="progreso-barra-fill" id="ac-bar"></div></div>
+  <p class="veredicto" id="ac-veredicto">Responde las preguntas para ver tu resultado.</p>
+  <div class="acciones">
+    <button id="ac-reintentar" class="primario" disabled>🔁 Reintentar las falladas</button>
+    <button id="ac-todo" disabled>🔄 Empezar de nuevo</button>
+    <a class="btn-link" href="../libro-digital.html">📖 Ir al libro digital</a>
+    <a class="btn-link" href="../index.html">📋 Volver al hub U00</a>
+  </div>
+</section>
+
+</div><!-- /.ac-wrap -->
+
+</main>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+
+<script>
+(function(){
+  'use strict';
+  var qs = document.querySelectorAll('.test-q');
+  var totalEl = document.getElementById('ac-total');
+  var aciertosEl = document.getElementById('ac-aciertos');
+  var barEl = document.getElementById('ac-bar');
+  var veredictoEl = document.getElementById('ac-veredicto');
+  var btnReintentar = document.getElementById('ac-reintentar');
+  var btnTodo = document.getElementById('ac-todo');
+  totalEl.textContent = qs.length;
+
+  function refrescar(){
+    var aciertos = 0, contestadas = 0, falladas = 0;
+    var porBloque = {};
+    qs.forEach(function(q){
+      var b = q.closest('.test-section').dataset.bloque;
+      if(!porBloque[b]) porBloque[b] = {ok:0, ko:0, total:0};
+      porBloque[b].total++;
+      if(q.classList.contains('answered')){
+        contestadas++;
+        var ok = q.querySelector('.test-opt.correct') && !q.querySelector('.test-opt.wrong');
+        if(ok){ aciertos++; porBloque[b].ok++; }
+        else  { falladas++; porBloque[b].ko++; }
+      }
+    });
+    aciertosEl.textContent = aciertos;
+    var pct = Math.round((aciertos / qs.length) * 100);
+    barEl.style.width = pct + '%';
+    if(contestadas === 0){
+      veredictoEl.textContent = 'Responde las preguntas para ver tu resultado.';
+    } else if(contestadas < qs.length){
+      veredictoEl.innerHTML = 'Llevas <strong>' + contestadas + '</strong> de ' + qs.length + ' preguntas respondidas.';
+    } else {
+      var msg = '';
+      if(pct >= 90)       msg = '🌟 ¡Excelente! Dominas el dibujo técnico.';
+      else if(pct >= 75)  msg = '👍 Muy bien. Repasa los puntos fallados y estarás listo para el examen.';
+      else if(pct >= 50)  msg = '🙂 Vas por buen camino, pero conviene volver al libro digital y al apartado donde hayas tenido más fallos.';
+      else                msg = '📚 Tranquilo: repasa con calma el libro digital y vuelve a probar. El dibujo técnico necesita varias vueltas y mucha práctica con el lápiz.';
+      veredictoEl.innerHTML = msg + '<br><small>' + aciertos + ' aciertos · ' + falladas + ' fallos · ' + pct + '%</small>';
+    }
+    btnReintentar.disabled = (falladas === 0);
+    btnTodo.disabled = (contestadas === 0);
+    Object.keys(porBloque).forEach(function(b){
+      var m = document.querySelector('.bloque-marcador[data-bloque="'+b+'"]');
+      var p = porBloque[b];
+      var done = p.ok + p.ko;
+      if(done === 0){ m.classList.remove('activo'); return; }
+      m.classList.add('activo');
+      if(done < p.total){
+        m.innerHTML = 'Bloque ' + b + ': ' + done + ' / ' + p.total + ' respondidas';
+      } else {
+        m.innerHTML = 'Bloque ' + b + ': <span class="acierto">' + p.ok + ' acierto' + (p.ok===1?'':'s') + '</span> · <span class="fallo">' + p.ko + ' fallo' + (p.ko===1?'':'s') + '</span>';
+      }
+    });
+  }
+  document.addEventListener('click', function(e){
+    if(e.target.classList && e.target.classList.contains('test-opt')){
+      setTimeout(refrescar, 0);
+    }
+  });
+  function resetPregunta(q){
+    q.classList.remove('answered');
+    q.querySelectorAll('.test-opt').forEach(function(b){
+      b.classList.remove('correct','wrong');
+      b.disabled = false;
+    });
+  }
+  btnReintentar.addEventListener('click', function(){
+    qs.forEach(function(q){
+      if(q.classList.contains('answered')){
+        var hayFallo = q.querySelector('.test-opt.wrong');
+        if(hayFallo) resetPregunta(q);
+      }
+    });
+    refrescar();
+    var primera = document.querySelector('.test-q:not(.answered)');
+    if(primera) primera.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+  btnTodo.addEventListener('click', function(){
+    if(!confirm('¿Seguro que quieres empezar de nuevo? Se borrarán todas tus respuestas.')) return;
+    qs.forEach(resetPregunta);
+    refrescar();
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+  refrescar();
+})();
+</script>
+</body>
+</html>
