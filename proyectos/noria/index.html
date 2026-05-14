@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<title>Proyecto Noria motorizada · Proyecto integrador · TyD 2º ESO</title>
+<meta name="description" content="Proyecto integrador transversal de 2º ESO: noria motorizada con estructura triangulada, transmisión por poleas y circuito eléctrico con conmutador inversor. Cuadernillo y póster descargables.">
+
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/proyectos/noria/">
+<meta property="og:title" content="Proyecto Noria motorizada · TyD 2º ESO">
+<meta property="og:description" content="Proyecto integrador: estructuras, mecanismos, electricidad y dibujo técnico en un solo trabajo de grupo. Cuadernillo y póster incluidos.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/proyectos/noria/assets/Noria_Poster_2ESO.png">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/proyectos/noria/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/common.css">
+<link rel="stylesheet" href="../../assets/css/unidad.css">
+
+<style>
+.np-wrap{max-width:980px;margin:24px auto 50px;padding:0 20px}
+.np-hero{text-align:center;margin-bottom:30px}
+.np-hero .badge{display:inline-block;background:var(--principal2);color:#fff;font-family:var(--cond);font-size:.78rem;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:14px;margin-bottom:10px}
+.np-hero h1{font-family:var(--cond);font-size:2.3rem;color:var(--principal);margin:0 0 8px;letter-spacing:.5px}
+.np-hero p{font-size:1.05rem;color:var(--texto2);margin:0;line-height:1.55;max-width:720px;margin-left:auto;margin-right:auto}
+
+.poster-wrap{margin:30px 0;text-align:center}
+.poster-wrap img{max-width:100%;height:auto;border-radius:12px;box-shadow:0 4px 18px rgba(0,0,0,.12);cursor:pointer;transition:transform .2s}
+.poster-wrap img:hover{transform:scale(1.01)}
+.poster-cap{font-size:.85rem;color:var(--texto2);margin-top:8px;font-style:italic}
+
+.np-card{background:#fff;border:1px solid var(--borde);border-radius:10px;padding:20px 24px;margin-bottom:18px}
+.np-card h2{font-family:var(--cond);font-size:1.3rem;color:var(--principal);margin:0 0 10px;display:flex;align-items:center;gap:10px}
+.np-card h2 .num{display:inline-block;width:36px;height:36px;line-height:36px;text-align:center;background:var(--principal);color:#fff;border-radius:50%;font-size:1rem;flex-shrink:0}
+.np-card p,.np-card li{font-size:.96rem;line-height:1.6}
+.np-card ul,.np-card ol{margin:8px 0 8px 22px;padding-left:0}
+
+.unidades-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}
+.uni-card{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:#FFF8F0;border-left:4px solid var(--principal);border-radius:0 8px 8px 0;text-decoration:none;color:inherit;transition:transform .15s,box-shadow .15s}
+.uni-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(212,112,10,.15)}
+.uni-card .ic{font-size:1.7rem;line-height:1}
+.uni-card .txt strong{display:block;font-family:var(--cond);color:var(--principal);font-size:1rem;margin-bottom:2px}
+.uni-card .txt span{font-size:.85rem;color:var(--texto2);line-height:1.4}
+
+.descargas{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:14px 0}
+.desc-btn{display:flex;align-items:center;gap:14px;padding:14px 18px;background:#fff;border:2px solid var(--principal);border-radius:10px;text-decoration:none;color:inherit;transition:all .15s}
+.desc-btn:hover{background:var(--principal);color:#fff}
+.desc-btn:hover .desc-info,.desc-btn:hover .desc-info small{color:#fff}
+.desc-btn .icono{font-size:1.8rem;line-height:1;color:var(--principal);flex-shrink:0}
+.desc-btn:hover .icono{color:#fff}
+.desc-btn .desc-info strong{display:block;font-family:var(--cond);font-size:1rem;color:var(--principal)}
+.desc-btn .desc-info small{display:block;font-size:.78rem;color:var(--texto2);margin-top:2px}
+
+.fases-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:14px 0}
+.fase-pill{background:#F4F6F9;border-radius:8px;padding:10px 12px;text-align:center;font-size:.88rem}
+.fase-pill .n{display:block;font-family:var(--cond);color:var(--principal);font-size:1.4rem;line-height:1;margin-bottom:2px}
+.fase-pill .l{color:var(--texto2);line-height:1.3;display:block}
+
+.materiales-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:14px 0}
+.mat{background:#F4F6F9;border-radius:6px;padding:9px 12px;font-size:.92rem}
+.mat strong{color:var(--principal2);font-family:var(--cond)}
+
+.rubrica-tabla{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+.rubrica-tabla th{background:var(--principal);color:#fff;padding:8px 10px;font-family:var(--cond);text-align:left}
+.rubrica-tabla td{padding:8px 10px;border-bottom:1px solid var(--borde);vertical-align:top}
+.rubrica-tabla td:first-child{font-weight:600;width:55%;color:var(--principal2)}
+.rubrica-tabla td:last-child{width:20%;text-align:center;font-family:var(--cond);font-size:1.05rem;color:var(--principal)}
+
+.callout{background:#E6F1FB;border-left:4px solid #378ADD;border-radius:0 8px 8px 0;padding:14px 18px;margin:14px 0;font-size:.94rem;line-height:1.55}
+.callout-ok{background:#E1F5EE;border-left-color:var(--verde)}
+.callout-warn{background:#FFF4E6;border-left-color:#F59E0B}
+
+@media print{
+  .desc-btn,.uni-card{break-inside:avoid}
+  .poster-wrap img{max-height:80vh}
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">Proyecto integrador · Noria motorizada</span>
+</header>
+
+<nav class="curso-navcross" role="navigation">
+  <a href="../../index.html"><span>🏠</span><span class="nc-lbl">Índice del curso</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🎡</span><span class="nc-lbl">Proyecto Noria</span></span>
+</nav>
+
+<main id="main-content" class="np-wrap">
+
+  <section class="np-hero">
+    <span class="badge">Proyecto integrador transversal</span>
+    <h1>🎡 Noria motorizada</h1>
+    <p>Diseñar y construir, en grupo, una <strong>noria motorizada de papel</strong> que combina estructura triangulada, transmisión por poleas, circuito eléctrico con conmutador inversor y reostato, y plano técnico acotado. <strong>Cuatro unidades del curso en un solo trabajo.</strong></p>
+  </section>
+
+  <div class="poster-wrap">
+    <a href="assets/Noria_Poster_2ESO.png" target="_blank" aria-label="Ver póster a tamaño completo">
+      <img src="assets/Noria_Poster_2ESO.png" alt="Póster del proyecto Noria con medidas, materiales y 10 pasos de fabricación">
+    </a>
+    <div class="poster-cap">Pulsa el póster para verlo a tamaño completo. Está pensado para proyectarse en clase durante el montaje.</div>
+  </div>
+
+  <div class="np-card">
+    <h2><span class="num">📥</span>Material descargable</h2>
+    <p>Estos dos documentos forman el pack completo del proyecto. El póster es para proyectar en clase como manual visual; el cuadernillo es lo que cada grupo rellena.</p>
+    <div class="descargas">
+      <a class="desc-btn" href="assets/Noria_Poster_2ESO.pdf" target="_blank">
+        <span class="icono">📋</span>
+        <div class="desc-info"><strong>Póster (PDF)</strong><small>Manual visual de construcción · 1 lámina A3 · 3,2 MB</small></div>
+      </a>
+      <a class="desc-btn" href="assets/Noria_Cuadernillo_Alumno.pdf" target="_blank">
+        <span class="icono">📔</span>
+        <div class="desc-info"><strong>Cuadernillo (PDF)</strong><small>Para imprimir y entregar · 11 páginas · 476 KB</small></div>
+      </a>
+      <a class="desc-btn" href="assets/Noria_Cuadernillo_Alumno.docx" target="_blank">
+        <span class="icono">✏️</span>
+        <div class="desc-info"><strong>Cuadernillo (DOCX)</strong><small>Editable para adaptar al grupo · 2,4 MB</small></div>
+      </a>
+      <a class="desc-btn" href="assets/Noria_Poster_2ESO.png" target="_blank">
+        <span class="icono">🖼️</span>
+        <div class="desc-info"><strong>Póster (PNG)</strong><small>Imagen para web o pizarra digital · 1,2 MB</small></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="np-card">
+    <h2><span class="num">🧩</span>Unidades del curso que integra</h2>
+    <p>Este proyecto es el cierre natural del curso. Repasa de un solo golpe los aprendizajes de cuatro unidades:</p>
+    <div class="unidades-grid">
+      <a class="uni-card" href="../../unidades/00-dibujo-tecnico/index.html">
+        <span class="ic">📐</span>
+        <div class="txt"><strong>U0 · Dibujo técnico</strong><span>Plano acotado del grupo, escala 1:2, bocetos iniciales</span></div>
+      </a>
+      <a class="uni-card" href="../../unidades/03-estructuras/index.html">
+        <span class="ic">🏗️</span>
+        <div class="txt"><strong>U3 · Estructuras</strong><span>Triangulación de torres y rueda, estabilidad de la base</span></div>
+      </a>
+      <a class="uni-card" href="../../unidades/04-maquinas-simples/index.html">
+        <span class="ic">⚙️</span>
+        <div class="txt"><strong>U4 · Mecanismos</strong><span>Poleas y correa, cálculo de relación de transmisión</span></div>
+      </a>
+      <a class="uni-card" href="../../unidades/05-electricidad/index.html">
+        <span class="ic">⚡</span>
+        <div class="txt"><strong>U5 · Electricidad</strong><span>Pila, interruptor, conmutador inversor, reostato y motor</span></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="np-card">
+    <h2><span class="num">📏</span>Medidas principales</h2>
+    <ul>
+      <li><strong>Diámetro de la rueda:</strong> 26 cm</li>
+      <li><strong>Altura total:</strong> 27-30 cm · <strong>Ancho del eje:</strong> 22 cm</li>
+      <li><strong>Base:</strong> 30 × 18 cm · <strong>Barras de cabina:</strong> 5-6 cm · <strong>Cabinas:</strong> 6</li>
+      <li><strong>Eje:</strong> brocheta interna (3 mm) + pajitas (5 mm) como cojinete</li>
+      <li><strong>Polea motor:</strong> 12-15 mm · <strong>Polea noria:</strong> 50-60 mm</li>
+      <li><strong>Relación de transmisión:</strong> 1:4 a 1:6 → la rueda gira lenta y con torque</li>
+      <li><strong>Alimentación:</strong> pila de petaca 4,5 V con motorreductor (~150 rpm)</li>
+    </ul>
+  </div>
+
+  <div class="np-card">
+    <h2><span class="num">🛒</span>Materiales por grupo</h2>
+    <div class="materiales-grid">
+      <div class="mat"><strong>~60 folios</strong> de papel A4 enrollado (barras)</div>
+      <div class="mat"><strong>Brochetas</strong> de madera (eje)</div>
+      <div class="mat"><strong>Pajitas</strong> de plástico (cojinetes)</div>
+      <div class="mat"><strong>Motorreductor</strong> 5 V (~150 rpm)</div>
+      <div class="mat"><strong>Pila petaca</strong> 4,5 V + portapilas</div>
+      <div class="mat"><strong>Interruptor</strong> + <strong>conmutador inversor</strong></div>
+      <div class="mat"><strong>Reostato</strong> (potenciómetro)</div>
+      <div class="mat"><strong>Cartón corrugado</strong> (base 30 × 18 cm)</div>
+      <div class="mat"><strong>Goma elástica</strong> o correa</div>
+      <div class="mat"><strong>Cola caliente</strong> · <strong>silicona</strong> · cinta</div>
+    </div>
+  </div>
+
+  <div class="np-card">
+    <h2><span class="num">🔄</span>10 pasos de fabricación</h2>
+    <p>El póster lo desglosa visualmente. En orden:</p>
+    <div class="fases-grid">
+      <div class="fase-pill"><span class="n">1</span><span class="l">Barras de papel</span></div>
+      <div class="fase-pill"><span class="n">2</span><span class="l">La base</span></div>
+      <div class="fase-pill"><span class="n">3</span><span class="l">Soportes</span></div>
+      <div class="fase-pill"><span class="n">4</span><span class="l">Rueda</span></div>
+      <div class="fase-pill"><span class="n">5</span><span class="l">Unión de aros</span></div>
+      <div class="fase-pill"><span class="n">6</span><span class="l">Eje y cojinete</span></div>
+      <div class="fase-pill"><span class="n">7</span><span class="l">Cabinas</span></div>
+      <div class="fase-pill"><span class="n">8</span><span class="l">Transmisión</span></div>
+      <div class="fase-pill"><span class="n">9</span><span class="l">Circuito</span></div>
+      <div class="fase-pill"><span class="n">10</span><span class="l">Ampliación</span></div>
+    </div>
+  </div>
+
+  <div class="np-card">
+    <h2><span class="num">📋</span>Lo que tienen que entregar los grupos</h2>
+    <ol>
+      <li><strong>La noria construida y funcionando.</strong> Demostración en clase.</li>
+      <li><strong>El cuadernillo del alumno</strong> (PDF arriba) relleno por el grupo, con:
+        <ul>
+          <li>Bocetos individuales de cada integrante.</li>
+          <li>Plano acotado del grupo a escala 1:2.</li>
+          <li>Cálculo de la relación de transmisión con sus datos reales.</li>
+          <li>Esquema eléctrico con símbolos normalizados.</li>
+          <li>Cuestionario (6 preguntas conceptuales).</li>
+          <li>Memoria del proceso y autoevaluación.</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <div class="np-card">
+    <h2><span class="num">📊</span>Rúbrica de evaluación</h2>
+    <table class="rubrica-tabla">
+      <thead><tr><th>Apartado</th><th>Peso</th></tr></thead>
+      <tbody>
+        <tr><td>Funcionamiento de la noria (gira con suavidad y soporta carga)</td><td>35%</td></tr>
+        <tr><td>Estructura y estabilidad (triangulación correcta, no vibra)</td><td>20%</td></tr>
+        <tr><td>Transmisión y mecanismos (cálculo correcto + montaje limpio)</td><td>15%</td></tr>
+        <tr><td>Circuito eléctrico (básico + ampliación con conmutador / reostato)</td><td>15%</td></tr>
+        <tr><td>Acabado y presentación visual</td><td>5%</td></tr>
+        <tr><td>Cuadernillo del alumno completo y bien razonado</td><td>10%</td></tr>
+        <tr><td><em>Trabajo en grupo (modificador)</em></td><td>±1</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    💡 <strong>Sugerencia de organización:</strong> conviene dedicar al menos 6-8 sesiones (2-3 semanas) y dividir el aula en grupos de 4. Una sesión inicial para bocetos y plano, 4-5 sesiones de taller, una de cableado y pruebas, una final de exposición y entrega del cuadernillo.
+  </div>
+
+  <div class="callout callout-ok">
+    🌟 <strong>Ampliaciones posibles</strong> para grupos que terminen antes:
+    <ul style="margin-top:8px">
+      <li>Cabinas decoradas con figuras a escala.</li>
+      <li>Iluminación LED dentro de las cabinas.</li>
+      <li>Inversión de sentido con el conmutador.</li>
+      <li>Música con un mini altavoz alimentado de la misma pila.</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-warn">
+    ⚠️ <strong>Seguridad:</strong> con cola caliente, supervisión del profesor o pegamento alternativo (blanca, contacto). Trabajar SIEMPRE con baja tensión (4,5 V), nunca con la red.
+  </div>
+
+</main>
+
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/header.js"></script>
+</body>
+</html>
