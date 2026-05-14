@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Autocomprobación · U06 Ordenador y digital · TyD 2º ESO</title>
+<meta name="description" content="Autocomprobación de la unidad 06 · Hardware, software, internet y seguridad digital · 18 preguntas con feedback inmediato · TyD 2º ESO · IES Jiménez de Quesada.">
+
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/06-ordenador-digital/autocomprobacion/">
+
+<meta property="og:title" content="Autocomprobación · U06 Ordenador y digital · TyD 2º ESO">
+<meta property="og:description" content="18 preguntas para repasar hardware, software, internet y, sobre todo, seguridad y ciudadanía digital.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/06-ordenador-digital/autocomprobacion/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+.ac-hero{max-width:1100px;margin:22px auto 8px;padding:0 20px;text-align:center}
+.ac-hero h1{font-family:var(--cond);font-size:1.9rem;color:var(--principal);margin:0 0 6px;letter-spacing:.5px}
+.ac-hero .subt{font-size:.95rem;color:var(--texto2);margin:0 0 16px}
+.ac-camino{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;font-family:var(--cond);font-size:.78rem;letter-spacing:.4px;margin-bottom:10px}
+.ac-camino span{padding:4px 12px;border-radius:14px;background:#F4F6F9;color:#8C97A8;border:1px solid #D8DDE5}
+.ac-camino span.activo{background:linear-gradient(135deg,var(--principal),var(--principal2));color:#fff;border-color:var(--principal)}
+.ac-camino .sep{background:transparent;border:none;color:#B8C0CC;padding:4px 2px}
+.ac-instrucciones{max-width:900px;margin:0 auto 18px;padding:14px 20px;background:#FFF8F0;border-left:4px solid var(--principal);border-radius:6px;font-size:.92rem;color:var(--texto2);line-height:1.55}
+.ac-instrucciones strong{color:var(--principal)}
+.ac-wrap{max-width:900px;margin:0 auto;padding:0 16px 50px}
+.bloque-encabezado{display:flex;align-items:baseline;gap:10px;margin:22px 0 6px;padding:0 4px}
+.bloque-encabezado .num{font-family:var(--cond);font-size:1.05rem;background:var(--principal);color:#fff;padding:3px 11px;border-radius:14px}
+.bloque-encabezado h2{font-family:var(--cond);font-size:1.4rem;color:var(--texto);margin:0;flex:1}
+.bloque-encabezado .meta{font-size:.8rem;color:var(--texto2)}
+.bloque-ancla{font-size:.88rem;color:var(--texto2);margin:0 4px 10px}
+.bloque-ancla a{color:var(--principal2);text-decoration:none;border-bottom:1px dotted var(--principal2)}
+.bloque-ancla a:hover{color:var(--principal)}
+.bloque-marcador{margin-top:8px;padding:9px 14px;background:#F4F6F9;border-radius:6px;font-size:.88rem;color:var(--texto2);display:none;text-align:right;font-family:var(--cond);letter-spacing:.3px}
+.bloque-marcador.activo{display:block}
+.bloque-marcador .acierto{color:var(--verde);font-weight:600}
+.bloque-marcador .fallo{color:var(--rojo);font-weight:600}
+.test-q .test-num{display:inline-block;font-family:var(--cond);font-size:.78rem;color:var(--principal);background:var(--principal-bg);padding:2px 8px;border-radius:10px;margin-right:7px;vertical-align:1px}
+.test-q .test-tipo-tag{display:inline-block;font-family:var(--cond);font-size:.7rem;color:var(--texto2);background:#EEF1F5;padding:2px 7px;border-radius:10px;margin-left:6px;vertical-align:1px}
+.ac-resumen{max-width:900px;margin:28px auto 0;padding:22px 24px;background:linear-gradient(180deg,#FFF8F0,#fff);border:2px solid var(--principal);border-radius:10px;text-align:center}
+.ac-resumen h2{font-family:var(--cond);font-size:1.5rem;color:var(--principal);margin:0 0 8px}
+.ac-resumen .puntuacion{font-family:var(--cond);font-size:2.3rem;color:var(--texto);margin:6px 0}
+.ac-resumen .puntuacion .num-grande{color:var(--principal);font-size:3rem}
+.ac-resumen .veredicto{font-size:1rem;color:var(--texto2);margin:0 0 14px;min-height:1.4em}
+.ac-resumen .progreso-barra{height:14px;background:#F4F6F9;border-radius:7px;overflow:hidden;margin:14px 0;border:1px solid #E0E5EC}
+.ac-resumen .progreso-barra-fill{height:100%;background:linear-gradient(90deg,var(--principal),var(--principal2));width:0;transition:width .5s ease}
+.ac-resumen .acciones{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.ac-resumen button,.ac-resumen .btn-link{font-family:var(--cond);font-size:.88rem;letter-spacing:.5px;padding:9px 18px;border-radius:20px;cursor:pointer;border:1.5px solid var(--principal);background:#fff;color:var(--principal);text-decoration:none;transition:all .15s}
+.ac-resumen button:hover,.ac-resumen .btn-link:hover{background:var(--principal);color:#fff}
+.ac-resumen button.primario{background:var(--principal);color:#fff}
+.ac-resumen button.primario:hover{background:var(--principal2)}
+.ac-resumen button:disabled{opacity:.4;cursor:not-allowed}
+.ac-resumen button:disabled:hover{background:#fff;color:var(--principal)}
+@media(max-width:640px){.ac-hero h1{font-size:1.5rem}.bloque-encabezado{flex-wrap:wrap}.ac-resumen .puntuacion .num-grande{font-size:2.4rem}}
+@media print{.curso-hd,.curso-navcross,.ac-camino,.ac-instrucciones,.ac-resumen{display:none!important}.test-q{break-inside:avoid;border:1px solid #999;margin-bottom:8px}.test-fb{display:block!important;background:#f6f6f6;color:#333;border-left:3px solid #999}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <a href="../../../index.html" class="curso-lg">TyD 2º ESO</a>
+  <span class="curso-sb">U06 · Ordenador y digital · Autocomprobación</span>
+  <a href="../../../index.html" class="curso-home-btn">🏠 Inicio</a>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U06</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../actividades/index.html"><span>✏️</span><span class="nc-lbl">Actividades</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>✅</span><span class="nc-lbl">Autocomprobación</span></span>
+</nav>
+
+<main id="main-content">
+
+<section class="ac-hero">
+  <div class="ac-camino" aria-label="Camino de aprendizaje">
+    <span>📖 Aprende</span>
+    <span class="sep">▸</span>
+    <span>✏️ Practica</span>
+    <span class="sep">▸</span>
+    <span class="activo">✅ Comprueba</span>
+    <span class="sep">▸</span>
+    <span>🔁 Repasa</span>
+  </div>
+  <h1>✅ Autocomprobación · U06 Ordenador y digital</h1>
+  <p class="subt">18 preguntas para comprobar si lo has entendido · 10-15 minutos</p>
+</section>
+
+<div class="ac-instrucciones">
+  <p>Lee con calma cada pregunta y pulsa la respuesta que creas correcta. <strong>Solo tienes una oportunidad por pregunta</strong>: al pulsar, el botón se quedará verde (acierto) o rojo (fallo) y aparecerá una pequeña explicación con un enlace al apartado del libro digital donde puedes repasarlo.</p>
+  <p style="margin-bottom:0">Esta unidad pone especial peso en <strong>seguridad y ciudadanía digital</strong> (bloque 4, 6 preguntas): es lo que más te va a hacer falta fuera del aula.</p>
+</div>
+
+<div class="ac-wrap">
+
+<!-- ════════ BLOQUE 1: HARDWARE ════════ -->
+<div class="bloque-encabezado">
+  <span class="num">B1</span>
+  <h2>Hardware del ordenador</h2>
+  <span class="meta">4 preguntas</span>
+</div>
+<p class="bloque-ancla">📖 Si dudas, repasa el apartado <a href="../libro-digital.html#s2">«Hardware: componentes internos»</a> del libro digital.</p>
+
+<section class="test-section" data-bloque="1">
+  <p class="test-sub">CPU, RAM, almacenamiento, periféricos y tipos de ordenadores.</p>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P1</span>¿Cuál es la diferencia principal entre <strong>RAM</strong> y <strong>almacenamiento</strong> (disco/SSD)? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Son lo mismo, solo cambia el nombre</button>
+      <button class="test-opt" data-opt="b">La RAM es memoria temporal de trabajo (se borra al apagar); el almacenamiento guarda los archivos a largo plazo</button>
+      <button class="test-opt" data-opt="c">La RAM se usa solo para juegos</button>
+      <button class="test-opt" data-opt="d">El almacenamiento es más rápido que la RAM</button>
+    </div>
+    <div class="test-fb">La <strong>RAM</strong> es como la mesa donde trabajas (rápida pero al final del día se recoge): se borra al apagar. El <strong>almacenamiento</strong> (HDD/SSD) es como la estantería: guarda los archivos hasta mañana. Más RAM = más programas a la vez; más almacenamiento = más archivos. <a href="../libro-digital.html#s2">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P2</span>De estos componentes, ¿cuál es el <strong>"cerebro"</strong> del ordenador? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">La placa base</button>
+      <button class="test-opt" data-opt="b">La CPU (procesador)</button>
+      <button class="test-opt" data-opt="c">La fuente de alimentación</button>
+      <button class="test-opt" data-opt="d">El monitor</button>
+    </div>
+    <div class="test-fb">La <strong>CPU</strong> (Central Processing Unit) ejecuta las instrucciones del programa. Su velocidad se mide en GHz y el número de núcleos importa para hacer varias cosas a la vez. La placa base no procesa; solo conecta los componentes. <a href="../libro-digital.html#s2">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P3</span>¿Cuál de estos es un periférico <strong>de salida</strong>? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Teclado</button>
+      <button class="test-opt" data-opt="b">Impresora</button>
+      <button class="test-opt" data-opt="c">Micrófono</button>
+      <button class="test-opt" data-opt="d">Cámara web</button>
+    </div>
+    <div class="test-fb">La <strong>impresora</strong> saca información del ordenador (papel impreso). Los otros tres (teclado, micrófono, cámara) son periféricos de <em>entrada</em>: meten información en el ordenador. Una pantalla táctil sería mixta (entrada + salida). <a href="../libro-digital.html#s3">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P4</span>«Mi móvil es realmente un ordenador completo». <span class="test-tipo-tag">verdadero / falso</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Falso, son tecnologías muy distintas</button>
+      <button class="test-opt" data-opt="b">Verdadero: tiene CPU, RAM, almacenamiento, sistema operativo y todo lo que necesita un ordenador, solo que en miniatura</button>
+    </div>
+    <div class="test-fb"><strong>Verdadero.</strong> Tu móvil tiene CPU (Snapdragon, A-series…), RAM (4-12 GB), almacenamiento (64-512 GB), SO (Android o iOS), pantalla, cámara, micrófono, conectividad. Es un ordenador completo que cabe en la mano. <a href="../libro-digital.html#s3">Repasar →</a></div>
+  </div>
+
+  <div class="bloque-marcador" data-bloque="1"></div>
+</section>
+
+
+<!-- ════════ BLOQUE 2: SOFTWARE ════════ -->
+<div class="bloque-encabezado">
+  <span class="num">B2</span>
+  <h2>Software y sistemas operativos</h2>
+  <span class="meta">4 preguntas</span>
+</div>
+<p class="bloque-ancla">📖 Si dudas, repasa el apartado <a href="../libro-digital.html#s4">«Tipos de software»</a> del libro digital.</p>
+
+<section class="test-section" data-bloque="2">
+  <p class="test-sub">SO, aplicaciones, archivos y licencias (libre vs privativo).</p>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P5</span>El <strong>sistema operativo</strong> es... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Un componente hardware</button>
+      <button class="test-opt" data-opt="b">El software de sistema que gestiona el ordenador y permite que las aplicaciones funcionen</button>
+      <button class="test-opt" data-opt="c">Un tipo de archivo</button>
+      <button class="test-opt" data-opt="d">El navegador web</button>
+    </div>
+    <div class="test-fb">El <strong>sistema operativo</strong> (Windows, Linux, macOS, Android, iOS) hace de intermediario entre tú y el hardware. Sin SO, el ordenador es un cajón inerte. Es lo primero que arranca al encender. <a href="../libro-digital.html#s5">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P6</span>¿Cuál de estos NO es un sistema operativo? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Linux</button>
+      <button class="test-opt" data-opt="b">Microsoft Word</button>
+      <button class="test-opt" data-opt="c">Android</button>
+      <button class="test-opt" data-opt="d">macOS</button>
+    </div>
+    <div class="test-fb"><strong>Microsoft Word</strong> es una <em>aplicación</em> de procesamiento de textos. Funciona <em>sobre</em> un sistema operativo (normalmente Windows o macOS). Los otros tres sí son SO. <a href="../libro-digital.html#s5">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P7</span>«Software libre» significa que... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Es siempre gratis (la palabra "free" en inglés significa gratis)</button>
+      <button class="test-opt" data-opt="b">Su código fuente es abierto y se puede ver, modificar y compartir (suele ser gratuito, pero no es lo principal)</button>
+      <button class="test-opt" data-opt="c">No tiene virus</button>
+      <button class="test-opt" data-opt="d">Solo funciona en Linux</button>
+    </div>
+    <div class="test-fb"><strong>Libre ≠ gratis.</strong> Lo esencial del software libre es que su código se puede inspeccionar, modificar y redistribuir. La mayoría es gratuito, pero hay software gratuito que NO es libre (su código está cerrado). Ejemplos de libre: Linux, LibreOffice, GIMP, Firefox. <a href="../libro-digital.html#s4">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P8</span>La <strong>extensión</strong> de un archivo (las letras tras el último punto, como <code>.jpg</code> o <code>.docx</code>) sirve para... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Reducir el tamaño del archivo</button>
+      <button class="test-opt" data-opt="b">Indicar al sistema operativo qué tipo de archivo es y con qué aplicación abrirlo</button>
+      <button class="test-opt" data-opt="c">Protegerlo con contraseña</button>
+      <button class="test-opt" data-opt="d">No sirve para nada</button>
+    </div>
+    <div class="test-fb">La extensión le dice al SO cómo tratar el archivo. <code>.docx</code> → Word, <code>.mp3</code> → reproductor de audio, <code>.exe</code> → ejecutable. Por eso es peligroso un archivo llamado <code>foto.jpg.exe</code>: parece una imagen pero es un programa. Activa siempre en Windows «Mostrar extensiones de archivos». <a href="../libro-digital.html#s6">Repasar →</a></div>
+  </div>
+
+  <div class="bloque-marcador" data-bloque="2"></div>
+</section>
+
+
+<!-- ════════ BLOQUE 3: INTERNET ════════ -->
+<div class="bloque-encabezado">
+  <span class="num">B3</span>
+  <h2>Internet y servicios digitales</h2>
+  <span class="meta">4 preguntas</span>
+</div>
+<p class="bloque-ancla">📖 Si dudas, repasa el apartado <a href="../libro-digital.html#s7">«Internet vs Web»</a> del libro digital.</p>
+
+<section class="test-section" data-bloque="3">
+  <p class="test-sub">Internet vs Web, URL, HTTPS y verificación de información.</p>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P9</span>«Internet» y «Web» son sinónimos. <span class="test-tipo-tag">verdadero / falso</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Verdadero, da igual cómo lo llames</button>
+      <button class="test-opt" data-opt="b">Falso: Internet es la red mundial de ordenadores; la Web es solo uno de los servicios que funcionan sobre Internet</button>
+    </div>
+    <div class="test-fb"><strong>Falso.</strong> Internet es la infraestructura (cables, fibra, satélites). La Web es uno de muchos servicios que circulan por ella, junto con el correo electrónico, los videojuegos online, WhatsApp, Spotify… Cuando dices "voy a Internet" casi siempre quieres decir "voy a la Web". <a href="../libro-digital.html#s7">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P10</span>La diferencia clave entre <strong>HTTP</strong> y <strong>HTTPS</strong> es que... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">HTTPS es más rápido</button>
+      <button class="test-opt" data-opt="b">HTTPS añade cifrado: lo que envías (contraseñas, datos de tarjeta) viaja seguro y no puede leerlo nadie en el camino</button>
+      <button class="test-opt" data-opt="c">HTTP es para móviles y HTTPS para ordenadores</button>
+      <button class="test-opt" data-opt="d">No hay diferencia</button>
+    </div>
+    <div class="test-fb">La «S» de HTTPS es de <em>Secure</em>: cifra los datos. Por eso webs de banco, login y compras siempre usan HTTPS (el candadito de la barra del navegador). HTTP a secas (sin S) hoy se considera inseguro. <a href="../libro-digital.html#s7">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P11</span>Encuentras una noticia muy fuerte en redes sociales. <strong>Antes de compartirla</strong>, lo más sensato es... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Compartirla rápido para que la vea más gente</button>
+      <button class="test-opt" data-opt="b">Buscarla en 2-3 medios fiables y verificar autor, fecha y fuente antes de compartir</button>
+      <button class="test-opt" data-opt="c">Confiar porque la ha publicado un amigo</button>
+      <button class="test-opt" data-opt="d">Ignorarla siempre</button>
+    </div>
+    <div class="test-fb">Regla del «30 segundos»: antes de compartir algo que te alarme o asombre mucho, párate y verifica. Búscalo en medios serios o en verificadores como <em>Maldita.es</em> o <em>Newtral</em>. Si nadie serio lo confirma, no lo difundas. Compartir un bulo le da vida. <a href="../libro-digital.html#s13">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="c">
+    <p class="test-qtext"><span class="test-num">P12</span>Para buscar la frase exacta <em>«mecanismos de transmisión»</em> en Google, lo más eficaz es... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Escribir todas las palabras posibles</button>
+      <button class="test-opt" data-opt="b">Usar mayúsculas</button>
+      <button class="test-opt" data-opt="c">Poner la frase entre comillas: <code>"mecanismos de transmisión"</code></button>
+      <button class="test-opt" data-opt="d">Buscar en YouTube</button>
+    </div>
+    <div class="test-fb">Las <strong>comillas dobles</strong> obligan al buscador a encontrar esa frase exacta, en ese orden. Otros operadores útiles: <code>site:</code> (busca en una web concreta), <code>filetype:pdf</code> (un tipo de archivo), <code>-</code> (excluye una palabra). <a href="../libro-digital.html#s9">Repasar →</a></div>
+  </div>
+
+  <div class="bloque-marcador" data-bloque="3"></div>
+</section>
+
+
+<!-- ════════ BLOQUE 4: SEGURIDAD Y CIUDADANÍA (ÉNFASIS - 6 preguntas) ════════ -->
+<div class="bloque-encabezado">
+  <span class="num">B4</span>
+  <h2>Seguridad y ciudadanía digital</h2>
+  <span class="meta">6 preguntas</span>
+</div>
+<p class="bloque-ancla">📖 Si dudas, repasa los apartados <a href="../libro-digital.html#s10">«Contraseñas»</a> al <a href="../libro-digital.html#s14">«Bienestar digital»</a> del libro digital.</p>
+
+<section class="test-section" data-bloque="4">
+  <p class="test-sub">Contraseñas, phishing, privacidad, bulos y bienestar digital.</p>
+
+  <div class="test-q" data-answer="c">
+    <p class="test-qtext"><span class="test-num">P13</span>De estas cuatro, ¿cuál es una <strong>contraseña fuerte</strong>? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">123456</button>
+      <button class="test-opt" data-opt="b">manuel2010 (mi nombre + año de nacimiento)</button>
+      <button class="test-opt" data-opt="c">ElGato7AzulDanzaBajoLaLluvia! (frase larga, mezcla, sin datos personales)</button>
+      <button class="test-opt" data-opt="d">password</button>
+    </div>
+    <div class="test-fb">Una buena contraseña: <strong>larga</strong> (12+ caracteres), <strong>mezcla</strong> (mayúsculas, minúsculas, números, símbolos), <strong>sin datos personales</strong> obvios y <strong>distinta</strong> en cada servicio. La técnica de <em>frase de paso</em> es de las más útiles. <a href="../libro-digital.html#s10">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P14</span>¿Qué hace el <strong>doble factor (2FA)</strong>? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Reduce a la mitad la longitud necesaria de la contraseña</button>
+      <button class="test-opt" data-opt="b">Añade una segunda barrera: aunque te roben la contraseña, hace falta otro código que solo tú tienes (app, SMS, llave)</button>
+      <button class="test-opt" data-opt="c">Permite tener dos contraseñas a la vez</button>
+      <button class="test-opt" data-opt="d">Cambia la contraseña automáticamente cada día</button>
+    </div>
+    <div class="test-fb">El <strong>2FA</strong> añade un segundo cerrojo. Aunque alguien obtenga tu contraseña, no podrá entrar sin el segundo código (de una app autenticadora, un SMS o una llave física). Actívalo en correo, banca y redes sociales. <a href="../libro-digital.html#s10">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="c">
+    <p class="test-qtext"><span class="test-num">P15</span>Recibes un SMS: <em>«Su paquete está retenido. Pague 0,75 € de gastos: https://correos-pagos.com/xyz»</em>. ¿Qué haces? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Pinchar y pagar rápido, son solo 0,75 €</button>
+      <button class="test-opt" data-opt="b">Reenviarlo a un familiar para que también pague</button>
+      <button class="test-opt" data-opt="c">Borrarlo y, si esperaba un paquete, ir directamente a la web oficial o app de la empresa (escrita por ti, no por el enlace)</button>
+      <button class="test-opt" data-opt="d">Llamar al número que viene en el SMS</button>
+    </div>
+    <div class="test-fb">Es <strong>smishing</strong> (phishing por SMS). Correos NUNCA cobra "0,75 €" por SMS. Los 0,75 € son el cebo: la idea es que pongas tu tarjeta y robarte muchísimo más. <strong>Regla de oro</strong>: nunca uses enlaces de SMS o correos sospechosos. Ve TÚ a la web oficial. <a href="../libro-digital.html#s11">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P16</span>La <strong>huella digital</strong> es... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">El sensor para desbloquear el móvil con el dedo</button>
+      <button class="test-opt" data-opt="b">El rastro de información (publicaciones, búsquedas, ubicaciones…) que dejas al usar internet</button>
+      <button class="test-opt" data-opt="c">Solo lo que publicas voluntariamente</button>
+      <button class="test-opt" data-opt="d">Algo que se borra al desconectar el móvil</button>
+    </div>
+    <div class="test-fb">Tu <strong>huella digital</strong> incluye lo que publicas voluntariamente (huella <em>activa</em>: fotos, comentarios) y lo que se registra sin que lo veas (huella <em>pasiva</em>: historial, cookies, ubicaciones, qué móvil tienes). Es muy difícil de borrar. <strong>Internet no olvida.</strong> <a href="../libro-digital.html#s12">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P17</span>Un compañero te pide la contraseña de Instagram «un momento, para gastar una broma». ¿Qué haces? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Se la doy, es solo un momento</button>
+      <button class="test-opt" data-opt="b">No la doy: una contraseña no se comparte con nadie, ni siquiera por un rato (y si "es broma" puede acabar siendo suplantación de identidad)</button>
+      <button class="test-opt" data-opt="c">Se la doy pero le pongo condiciones</button>
+      <button class="test-opt" data-opt="d">Se la doy si me deja la suya</button>
+    </div>
+    <div class="test-fb"><strong>Nunca compartas contraseñas</strong>, ni siquiera con tu mejor amigo. Si "gasta una broma" desde tu cuenta (insultar, publicar algo feo), todo el mundo verá que has sido tú. Es <strong>suplantación de identidad</strong>: lo que firmen con tu cuenta queda como tuyo. <a href="../libro-digital.html#s11">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P18</span>«Pasar muchas horas en redes sociales mirando lo que hacen otros y compararse no afecta al bienestar». <span class="test-tipo-tag">verdadero / falso</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Verdadero, no influye</button>
+      <button class="test-opt" data-opt="b">Falso: las redes están diseñadas para enganchar; pasar mucho tiempo comparándote suele empeorar el estado de ánimo y el descanso</button>
+    </div>
+    <div class="test-fb"><strong>Falso.</strong> Las apps están diseñadas para que pases todo el tiempo posible (más tiempo = más anuncios = más dinero). Algunos hábitos sanos: revisar tu tiempo de pantalla, desactivar notificaciones no urgentes, móvil fuera de la mesilla por la noche y acordar momentos sin móvil en familia o con amigos. <a href="../libro-digital.html#s14">Repasar →</a></div>
+  </div>
+
+  <div class="bloque-marcador" data-bloque="4"></div>
+</section>
+
+
+<!-- ════════ RESUMEN FINAL ════════ -->
+<section class="ac-resumen" id="ac-resumen">
+  <h2 id="ac-resumen-titulo">Resultado de la autocomprobación</h2>
+  <div class="puntuacion"><span class="num-grande" id="ac-aciertos">0</span> / <span id="ac-total">18</span> aciertos</div>
+  <div class="progreso-barra"><div class="progreso-barra-fill" id="ac-bar"></div></div>
+  <p class="veredicto" id="ac-veredicto">Responde las preguntas para ver tu resultado.</p>
+  <div class="acciones">
+    <button id="ac-reintentar" class="primario" disabled>🔁 Reintentar las falladas</button>
+    <button id="ac-todo" disabled>🔄 Empezar de nuevo</button>
+    <a class="btn-link" href="../libro-digital.html">📖 Ir al libro digital</a>
+    <a class="btn-link" href="../index.html">📋 Volver al hub U06</a>
+  </div>
+</section>
+
+</div>
+
+</main>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+
+<script>
+(function(){
+  'use strict';
+  var qs = document.querySelectorAll('.test-q');
+  var totalEl = document.getElementById('ac-total');
+  var aciertosEl = document.getElementById('ac-aciertos');
+  var barEl = document.getElementById('ac-bar');
+  var veredictoEl = document.getElementById('ac-veredicto');
+  var btnReintentar = document.getElementById('ac-reintentar');
+  var btnTodo = document.getElementById('ac-todo');
+  totalEl.textContent = qs.length;
+  function refrescar(){
+    var aciertos = 0, contestadas = 0, falladas = 0;
+    var porBloque = {};
+    qs.forEach(function(q){
+      var b = q.closest('.test-section').dataset.bloque;
+      if(!porBloque[b]) porBloque[b] = {ok:0, ko:0, total:0};
+      porBloque[b].total++;
+      if(q.classList.contains('answered')){
+        contestadas++;
+        var ok = q.querySelector('.test-opt.correct') && !q.querySelector('.test-opt.wrong');
+        if(ok){ aciertos++; porBloque[b].ok++; }
+        else  { falladas++; porBloque[b].ko++; }
+      }
+    });
+    aciertosEl.textContent = aciertos;
+    var pct = Math.round((aciertos / qs.length) * 100);
+    barEl.style.width = pct + '%';
+    if(contestadas === 0){
+      veredictoEl.textContent = 'Responde las preguntas para ver tu resultado.';
+    } else if(contestadas < qs.length){
+      veredictoEl.innerHTML = 'Llevas <strong>' + contestadas + '</strong> de ' + qs.length + ' preguntas respondidas.';
+    } else {
+      var msg = '';
+      if(pct >= 90)       msg = '🌟 ¡Excelente! Dominas la unidad de ordenador y digital.';
+      else if(pct >= 75)  msg = '👍 Muy bien. Repasa los puntos fallados y estarás listo para el examen.';
+      else if(pct >= 50)  msg = '🙂 Vas por buen camino, pero conviene volver al libro digital, sobre todo al bloque de seguridad digital.';
+      else                msg = '📚 Tranquilo: repasa con calma el libro digital y vuelve a probar. La parte de seguridad digital es lo que más te va a hacer falta fuera del aula.';
+      veredictoEl.innerHTML = msg + '<br><small>' + aciertos + ' aciertos · ' + falladas + ' fallos · ' + pct + '%</small>';
+    }
+    btnReintentar.disabled = (falladas === 0);
+    btnTodo.disabled = (contestadas === 0);
+    Object.keys(porBloque).forEach(function(b){
+      var m = document.querySelector('.bloque-marcador[data-bloque="'+b+'"]');
+      var p = porBloque[b];
+      var done = p.ok + p.ko;
+      if(done === 0){ m.classList.remove('activo'); return; }
+      m.classList.add('activo');
+      if(done < p.total){
+        m.innerHTML = 'Bloque ' + b + ': ' + done + ' / ' + p.total + ' respondidas';
+      } else {
+        m.innerHTML = 'Bloque ' + b + ': <span class="acierto">' + p.ok + ' acierto' + (p.ok===1?'':'s') + '</span> · <span class="fallo">' + p.ko + ' fallo' + (p.ko===1?'':'s') + '</span>';
+      }
+    });
+  }
+  document.addEventListener('click', function(e){
+    if(e.target.classList && e.target.classList.contains('test-opt')){
+      setTimeout(refrescar, 0);
+    }
+  });
+  function resetPregunta(q){
+    q.classList.remove('answered');
+    q.querySelectorAll('.test-opt').forEach(function(b){
+      b.classList.remove('correct','wrong');
+      b.disabled = false;
+    });
+  }
+  btnReintentar.addEventListener('click', function(){
+    qs.forEach(function(q){
+      if(q.classList.contains('answered')){
+        var hayFallo = q.querySelector('.test-opt.wrong');
+        if(hayFallo) resetPregunta(q);
+      }
+    });
+    refrescar();
+    var primera = document.querySelector('.test-q:not(.answered)');
+    if(primera) primera.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+  btnTodo.addEventListener('click', function(){
+    if(!confirm('¿Seguro que quieres empezar de nuevo? Se borrarán todas tus respuestas.')) return;
+    qs.forEach(resetPregunta);
+    refrescar();
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+  refrescar();
+})();
+</script>
+</body>
+</html>

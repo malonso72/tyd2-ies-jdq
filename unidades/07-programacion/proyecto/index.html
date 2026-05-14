@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Proyecto · U07 Programación · TyD 2º ESO</title>
+<meta name="description" content="Proyecto integrador: diseña y publica tu propio juego o historia en Scratch.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+.pr-wrap{max-width:880px;margin:24px auto 50px;padding:0 20px}
+.pr-hero{text-align:center;margin-bottom:28px}
+.pr-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 8px}
+.pr-hero p{font-size:1rem;color:var(--texto2);margin:0;line-height:1.55}
+.pr-card{background:#fff;border:1px solid var(--borde);border-radius:10px;padding:20px 24px;margin-bottom:18px}
+.pr-card h2{font-family:var(--cond);font-size:1.3rem;color:var(--principal);margin:0 0 10px;display:flex;align-items:center;gap:10px}
+.pr-card h2 .num{display:inline-block;width:36px;height:36px;line-height:36px;text-align:center;background:var(--principal);color:#fff;border-radius:50%;font-size:1rem;flex-shrink:0}
+.pr-card p,.pr-card li{font-size:.96rem;line-height:1.6}
+.pr-card ul,.pr-card ol{margin:8px 0 8px 22px;padding-left:0}
+.pr-card ul li,.pr-card ol li{margin-bottom:4px}
+.pr-tipos{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0}
+.pr-tipo{background:#FFF8F0;border-left:4px solid var(--principal);border-radius:0 6px 6px 0;padding:12px 14px;font-size:.92rem}
+.pr-tipo strong{display:block;color:var(--principal);font-family:var(--cond);font-size:1rem;margin-bottom:4px}
+.pr-fases{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:14px 0}
+.pr-fase{background:#F4F6F9;border-radius:8px;padding:12px 14px}
+.pr-fase h4{font-family:var(--cond);color:var(--principal);margin:0 0 6px;font-size:.95rem}
+.pr-fase p{font-size:.88rem;color:var(--texto2);margin:0;line-height:1.5}
+.pr-rubrica{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+.pr-rubrica th{background:var(--principal);color:#fff;padding:8px 10px;font-family:var(--cond);text-align:left}
+.pr-rubrica td{padding:8px 10px;border-bottom:1px solid var(--borde);vertical-align:top}
+.pr-rubrica td:first-child{font-weight:600;width:30%;color:var(--principal2)}
+.pr-rubrica td:last-child{width:15%;text-align:center;font-family:var(--cond);font-size:1.1rem;color:var(--principal)}
+.pr-callout{background:#E6F1FB;border-left:4px solid #378ADD;border-radius:0 6px 6px 0;padding:12px 16px;margin:14px 0;font-size:.92rem;line-height:1.55}
+.pr-callout-ok{background:#E1F5EE;border-left-color:var(--verde)}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U07 · Programación · Proyecto</span>
+</header>
+
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U07</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../actividades/index.html"><span>✏️</span><span class="nc-lbl">Actividades</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🚀</span><span class="nc-lbl">Proyecto</span></span>
+</nav>
+
+<main id="main-content" class="pr-wrap">
+
+  <section class="pr-hero">
+    <h1>🚀 Proyecto: tu propio Scratch</h1>
+    <p>El reto: <strong>diseñar, programar y publicar</strong> tu propio juego, animación o historia interactiva en Scratch. Trabajaréis solos o en pareja.</p>
+  </section>
+
+  <div class="pr-card">
+    <h2><span class="num">1</span>Idea del proyecto</h2>
+    <p>Hasta ahora has hecho mini-proyectos guiados. En este, <strong>eres el director</strong>: tú decides qué construir. Lo único obligatorio es que use los conceptos de la unidad: eventos, bucles, condicionales, variables y mensajes.</p>
+    <p>El proyecto se publica en tu cuenta de <a href="https://scratch.mit.edu" target="_blank">scratch.mit.edu</a> (si no tienes cuenta, crea una gratis) y se entrega el enlace por Moodle.</p>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">2</span>Elige el tipo de proyecto</h2>
+    <div class="pr-tipos">
+      <div class="pr-tipo"><strong>🎮 Juego clásico</strong>Pong, captura de objetos, laberinto, asteroides, snake…</div>
+      <div class="pr-tipo"><strong>📚 Historia interactiva</strong>Cuento, sketch, entrevista ficticia con 3+ escenas y diálogos.</div>
+      <div class="pr-tipo"><strong>🎨 Animación</strong>Corto animado con sprites, fondos y música. Sin interacción del usuario.</div>
+      <div class="pr-tipo"><strong>🧮 Aplicación útil</strong>Calculadora de notas, conversor de unidades, tabla periódica visual, "elige tu mochila"…</div>
+      <div class="pr-tipo"><strong>📝 Trivia / quiz</strong>Preguntas y respuestas sobre un tema que te guste (música, deporte, historia…).</div>
+      <div class="pr-tipo"><strong>🎵 Instrumento</strong>Las teclas del ordenador tocan notas musicales. Composición sencilla con sonidos.</div>
+    </div>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">3</span>Requisitos técnicos mínimos</h2>
+    <p>Tu proyecto, sea del tipo que sea, debe incluir <strong>todos</strong> estos elementos:</p>
+    <ul>
+      <li>✅ Al menos <strong>2 sprites</strong> con scripts propios.</li>
+      <li>✅ Al menos <strong>1 evento</strong> que arranque la acción (bandera verde, tecla, clic…).</li>
+      <li>✅ Al menos <strong>1 bucle</strong> (por siempre, repetir N, o repetir hasta que).</li>
+      <li>✅ Al menos <strong>1 condicional</strong> (si... entonces, si... si no).</li>
+      <li>✅ Al menos <strong>1 variable</strong> (puntos, vidas, tiempo, nombre…).</li>
+      <li>✅ Al menos <strong>1 mensaje</strong> que conecte sprites o escenas.</li>
+      <li>✅ <strong>Comentarios</strong> en los scripts más complejos (botón derecho del ratón → "Añadir comentario").</li>
+    </ul>
+    <div class="pr-callout-ok">
+      💡 <strong>Bonus</strong> (sube nota): sonidos, varios fondos, animación de disfraces, controles del ratón, varios niveles, sistema de récords…
+    </div>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">4</span>Fases del proyecto</h2>
+    <div class="pr-fases">
+      <div class="pr-fase"><h4>💡 1. Idea</h4><p>Decide qué quieres hacer. Cuanto más simple, mejor. Un Pong terminado es mejor que un Zelda a medias.</p></div>
+      <div class="pr-fase"><h4>📝 2. Plan</h4><p>Lista de sprites, escenarios, variables y mecánicas. Boceto en papel.</p></div>
+      <div class="pr-fase"><h4>🧩 3. Núcleo</h4><p>Programa la mecánica principal primero. Sin gráficos finos, sin sonidos. Que <em>funcione</em>.</p></div>
+      <div class="pr-fase"><h4>🎨 4. Pulido</h4><p>Disfraces, sonidos, fondos, instrucciones para el jugador.</p></div>
+      <div class="pr-fase"><h4>🧪 5. Pruebas</h4><p>Pide a 2 compañeros que lo prueben. Anota los bugs y corrígelos.</p></div>
+      <div class="pr-fase"><h4>🌍 6. Publicar</h4><p>Sube el proyecto, escribe instrucciones y créditos, entrega el enlace.</p></div>
+    </div>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">5</span>Memoria técnica (entrega aparte)</h2>
+    <p>Acompaña el proyecto con una <strong>memoria técnica</strong> de 2-3 páginas (PDF). Debe incluir:</p>
+    <ol>
+      <li><strong>Portada</strong>: nombre del proyecto, autor/es, fecha.</li>
+      <li><strong>Descripción</strong>: en 5 líneas, ¿qué hace tu proyecto?</li>
+      <li><strong>Sprites y variables</strong>: lista de cada uno con su función.</li>
+      <li><strong>Mecánica principal</strong>: explica los scripts clave (puedes pegar pantallazos).</li>
+      <li><strong>Decisiones</strong>: ¿por qué elegiste este tipo de proyecto? ¿qué problema tuviste y cómo lo resolviste?</li>
+      <li><strong>Autoevaluación</strong>: 5 líneas honestas. ¿Qué has aprendido? ¿Qué mejorarías?</li>
+      <li><strong>Créditos</strong>: si has usado sprites/fondos de la biblioteca de Scratch o de internet, cítalos. Si te has inspirado en otro proyecto, enlázalo.</li>
+    </ol>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">6</span>Rúbrica de evaluación</h2>
+    <table class="pr-rubrica">
+      <thead>
+        <tr><th>Criterio</th><th>Qué se valora</th><th>Peso</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Funciona</td><td>El proyecto se ejecuta sin errores, los controles responden, la mecánica es clara</td><td>30%</td></tr>
+        <tr><td>Conceptos aplicados</td><td>Eventos, bucles, condicionales, variables, mensajes. Buen uso, no forzado</td><td>25%</td></tr>
+        <tr><td>Originalidad y pulido</td><td>Idea propia, dificultad bien medida, gráficos cuidados, sonidos, créditos</td><td>20%</td></tr>
+        <tr><td>Memoria técnica</td><td>Bien estructurada, explica las decisiones, fácil de entender por otro</td><td>15%</td></tr>
+        <tr><td>Defensa oral</td><td>Sabes explicar tu proyecto en 3 minutos a la clase, respondes preguntas</td><td>10%</td></tr>
+      </tbody>
+    </table>
+    <div class="pr-callout">
+      📌 <strong>Importante:</strong> mejor un proyecto pequeño que funcione muy bien que un proyecto enorme a medio terminar. El "feature creep" (querer meter más y más cosas) es el principal motivo de fracaso en proyectos de programación.
+    </div>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">7</span>Inspiración: explora Scratch</h2>
+    <p>Antes de empezar, mira proyectos de otros (tienen el código abierto):</p>
+    <ul>
+      <li><a href="https://scratch.mit.edu/explore/projects/games/" target="_blank">Sección de juegos</a> en Scratch.</li>
+      <li><a href="https://scratch.mit.edu/explore/projects/animations/" target="_blank">Sección de animaciones</a>.</li>
+      <li><a href="https://scratch.mit.edu/studios/660884/" target="_blank">Estudios con proyectos de iniciación</a>.</li>
+    </ul>
+    <p>Cuando un proyecto te guste, pulsa <strong>"Ver dentro"</strong> para examinar su código. Está permitido <strong>remixar</strong> (modificar y publicar como variante), pero hay que dar crédito al autor original.</p>
+    <div class="pr-callout-ok">
+      🌐 La cultura de Scratch es <em>libre</em>: aprendes leyendo el código de otros. Lo que no vale es copiar y entregar como propio sin remixar.
+    </div>
+  </div>
+
+</main>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

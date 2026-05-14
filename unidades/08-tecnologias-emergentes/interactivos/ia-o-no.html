@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>¿IA o no IA? · U08 · TyD 2º ESO</title>
+<meta name="description" content="Identifica qué tecnologías usan IA y cuáles no. Quiz interactivo.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+.io-wrap{max-width:780px;margin:30px auto;padding:0 20px 50px}
+.io-hero{text-align:center;margin-bottom:24px}
+.io-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 8px}
+.io-hero p{font-size:1rem;color:var(--texto2);margin:0;line-height:1.5}
+.io-progress{display:flex;justify-content:space-between;align-items:center;background:#F4F6F9;padding:10px 16px;border-radius:8px;margin-bottom:20px;font-family:var(--cond);font-size:.92rem}
+.io-score{color:var(--principal);font-size:1.05rem}
+.io-card{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:24px;box-shadow:0 1px 6px rgba(0,0,0,.05);margin-bottom:20px;text-align:center}
+.io-emoji{font-size:3.5rem;line-height:1;margin-bottom:8px}
+.io-titulo{font-family:var(--cond);font-size:1.4rem;color:var(--texto);margin:0 0 8px}
+.io-desc{font-size:.95rem;color:var(--texto2);margin:0 0 20px;line-height:1.5}
+.io-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.io-btn{font-family:var(--cond);font-size:.95rem;letter-spacing:.5px;padding:12px 26px;border-radius:24px;cursor:pointer;border:2px solid transparent;transition:all .15s;font-weight:600;min-width:140px}
+.io-btn-si{background:#fff;color:#1E8E3E;border-color:#1E8E3E}
+.io-btn-si:hover{background:#1E8E3E;color:#fff}
+.io-btn-no{background:#fff;color:#C44536;border-color:#C44536}
+.io-btn-no:hover{background:#C44536;color:#fff}
+.io-btn:disabled{cursor:default;opacity:.55}
+.io-fb{display:none;margin-top:16px;padding:14px 18px;border-radius:8px;font-size:.94rem;line-height:1.55;text-align:left}
+.io-fb.show{display:block}
+.io-fb.acierto{background:#E1F5EE;color:#0F6E56;border-left:5px solid #1E8E3E}
+.io-fb.fallo{background:#FCEBEB;color:#9A2A2A;border-left:5px solid #C44536}
+.io-fb h4{font-family:var(--cond);margin:0 0 8px;font-size:1.05rem}
+.io-next{margin-top:14px;text-align:center}
+.io-next button{font-family:var(--cond);font-size:.92rem;letter-spacing:.5px;padding:9px 22px;border-radius:22px;cursor:pointer;border:2px solid var(--principal);background:var(--principal);color:#fff;font-weight:600}
+.io-next button:hover{background:var(--principal2)}
+.io-resumen{background:linear-gradient(180deg,#FFF8F0,#fff);border:2px solid var(--principal);border-radius:12px;padding:24px;text-align:center;margin-top:24px;display:none}
+.io-resumen.show{display:block}
+.io-resumen h2{font-family:var(--cond);color:var(--principal);margin:0 0 8px;font-size:1.5rem}
+.io-resumen .num{font-family:var(--cond);font-size:3rem;color:var(--principal);line-height:1;margin:10px 0}
+.io-resumen .num small{font-size:1.5rem;color:var(--texto2)}
+.io-resumen button{font-family:var(--cond);font-size:.92rem;letter-spacing:.5px;padding:10px 22px;border-radius:22px;cursor:pointer;border:2px solid var(--principal);background:var(--principal);color:#fff;font-weight:600;margin-top:8px}
+.io-resumen button:hover{background:var(--principal2)}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U08 · Tecnologías emergentes · ¿IA o no IA?</span>
+</header>
+
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U08</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🧠</span><span class="nc-lbl">¿IA o no IA?</span></span>
+</nav>
+
+<main id="main-content" class="io-wrap">
+
+  <section class="io-hero">
+    <h1>🧠 ¿IA o no IA?</h1>
+    <p>Vas a ver <strong>10 tecnologías</strong>. Para cada una, decide si usa IA (inteligencia artificial real) o no. Verás que a veces "tener internet" o "ser inteligente" no implica que haya IA detrás.</p>
+  </section>
+
+  <div class="io-progress">
+    <span id="io-counter">Tecnología 1 de 10</span>
+    <span class="io-score">Aciertos: <span id="io-aciertos">0</span> / 10</span>
+  </div>
+
+  <div id="io-actual"></div>
+
+  <div class="io-resumen" id="io-resumen">
+    <h2>¡Has terminado!</h2>
+    <div class="num"><span id="io-final">0</span><small> / 10 aciertos</small></div>
+    <p id="io-veredicto">—</p>
+    <button id="io-reset">🔁 Volver a empezar</button>
+  </div>
+
+</main>
+
+<script>
+(function(){
+  'use strict';
+
+  var tecnologias = [
+    {emoji:'💬', titulo:'ChatGPT respondiendo a tu pregunta', desc:'Le escribes "explícame qué es Linux" y te da una respuesta elaborada.', usaIA:true, fb:'Sí usa IA generativa. Es un modelo de lenguaje entrenado con miles de millones de textos. Aprende patrones del lenguaje y genera respuestas nuevas.'},
+    {emoji:'📅', titulo:'Calculadora del móvil sumando 7 + 5', desc:'Pulsas las teclas y te da 12.', usaIA:false, fb:'NO usa IA. Es aritmética clásica: el programa aplica una operación matemática definida por un programador. Es predecible y no aprende.'},
+    {emoji:'🛒', titulo:'Recomendaciones "te puede gustar" de Amazon', desc:'Compras una mochila y luego te sugiere botellas, cuadernos, fundas.', usaIA:true, fb:'Sí usa IA. Algoritmos de aprendizaje automático analizan millones de compras anteriores para predecir qué te interesará. No te lo recomienda un humano caso por caso.'},
+    {emoji:'⏰', titulo:'Despertador del móvil', desc:'Le pones la alarma a las 7:30 y suena a las 7:30.', usaIA:false, fb:'NO usa IA. Es un temporizador clásico: el reloj compara la hora actual con la programada y dispara una alarma. No hay aprendizaje ni decisión inteligente.'},
+    {emoji:'🚦', titulo:'Filtro anti-spam de Gmail', desc:'Reconoce automáticamente qué correos son basura y los manda a la carpeta de spam.', usaIA:true, fb:'Sí usa IA. Aprende qué patrones (palabras, remitentes, formato) suelen aparecer en spam. Mejora con el tiempo: cuando marcas algo como spam, el sistema aprende.'},
+    {emoji:'🚪', titulo:'Sensor de puerta que enciende la luz', desc:'Cuando entras al baño, se enciende la luz; cuando sales, se apaga.', usaIA:false, fb:'NO usa IA. Es un sensor de presencia conectado a un relé. La lógica es: "si detecta movimiento → encender". No hay aprendizaje ni decisión adaptativa.'},
+    {emoji:'🎵', titulo:'Spotify recomendándote canciones "para ti"', desc:'Te crea playlists basadas en lo que escuchas.', usaIA:true, fb:'Sí usa IA. Modelos de recomendación analizan tu historial de escucha, lo comparan con millones de usuarios similares y sugieren música que probablemente te gustará.'},
+    {emoji:'🌡️', titulo:'Termómetro digital de la fiebre', desc:'Mide la temperatura corporal y la muestra en pantalla.', usaIA:false, fb:'NO usa IA. Es un sensor térmico que convierte una medida física en un número. La pantalla muestra el resultado tal cual. No hay inteligencia: solo medición.'},
+    {emoji:'🎨', titulo:'Midjourney generando una imagen a partir de "un dragón rojo volando sobre Granada"', desc:'Escribes una descripción y te genera una imagen única.', usaIA:true, fb:'Sí usa IA generativa. Es un modelo de imagen entrenado con miles de millones de imágenes etiquetadas. A partir del texto crea una composición nueva nunca vista antes.'},
+    {emoji:'📺', titulo:'Mando a distancia de la tele cambiando de canal', desc:'Pulsas el 5 y la tele cambia al canal 5.', usaIA:false, fb:'NO usa IA. Es comunicación infrarroja básica: el mando emite un código, la tele lo interpreta y cambia. Programado de fábrica, sin aprendizaje.'}
+  ];
+
+  var idx = 0;
+  var aciertos = 0;
+  var counter = document.getElementById('io-counter');
+  var aciertosEl = document.getElementById('io-aciertos');
+  var cont = document.getElementById('io-actual');
+  var resumen = document.getElementById('io-resumen');
+  var finalEl = document.getElementById('io-final');
+  var veredictoEl = document.getElementById('io-veredicto');
+  document.getElementById('io-reset').addEventListener('click', function(){
+    idx = 0; aciertos = 0;
+    resumen.classList.remove('show');
+    render();
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  function render(){
+    if(idx >= tecnologias.length){
+      counter.textContent = 'Completado';
+      finalEl.textContent = aciertos;
+      var pct = aciertos / tecnologias.length;
+      var msg;
+      if(pct === 1) msg = '🌟 Perfecto. Distingues lo que es IA de lo que no.';
+      else if(pct >= 0.7) msg = '👍 Muy bien. Mira las explicaciones de los que has fallado.';
+      else if(pct >= 0.5) msg = '🙂 La línea no es siempre obvia. Vuelve al apartado "Qué es la IA" del libro digital.';
+      else msg = '📚 Esta confusión es muy normal. Repasa el libro digital con atención y prueba otra vez.';
+      veredictoEl.textContent = msg;
+      resumen.classList.add('show');
+      cont.innerHTML = '';
+      return;
+    }
+    var t = tecnologias[idx];
+    counter.textContent = 'Tecnología ' + (idx+1) + ' de ' + tecnologias.length;
+    aciertosEl.textContent = aciertos;
+
+    var html = '<div class="io-card">';
+    html += '<div class="io-emoji">' + t.emoji + '</div>';
+    html += '<h2 class="io-titulo">' + t.titulo + '</h2>';
+    html += '<p class="io-desc">' + t.desc + '</p>';
+    html += '<div class="io-actions">';
+    html += '<button class="io-btn io-btn-si" data-r="si">✓ Sí usa IA</button>';
+    html += '<button class="io-btn io-btn-no" data-r="no">✗ No usa IA</button>';
+    html += '</div>';
+    html += '<div class="io-fb"></div>';
+    html += '</div>';
+    cont.innerHTML = html;
+
+    cont.querySelectorAll('.io-btn').forEach(function(b){
+      b.addEventListener('click', function(){ contestar(b.dataset.r); });
+    });
+  }
+
+  function contestar(r){
+    var t = tecnologias[idx];
+    var ok = (r === 'si' && t.usaIA) || (r === 'no' && !t.usaIA);
+    if(ok) aciertos++;
+    cont.querySelectorAll('.io-btn').forEach(function(b){ b.disabled = true; });
+    var fb = cont.querySelector('.io-fb');
+    fb.innerHTML = '<h4>' + (ok ? '✓ Correcto' : '✗ Incorrecto') + ' · La respuesta era: ' + (t.usaIA ? 'Sí usa IA' : 'NO usa IA') + '</h4><p>' + t.fb + '</p><div class="io-next"><button>Siguiente →</button></div>';
+    fb.classList.add('show');
+    fb.classList.add(ok ? 'acierto' : 'fallo');
+    aciertosEl.textContent = aciertos;
+    fb.querySelector('button').addEventListener('click', function(){
+      idx++;
+      render();
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>

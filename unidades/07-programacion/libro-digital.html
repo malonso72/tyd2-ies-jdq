@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<title>Libro digital · U07 Programación (Scratch) · TyD 2º ESO</title>
+<meta name="description" content="Libro digital de la unidad 7 para 2º ESO: pensamiento computacional, Scratch, bucles, condicionales, variables y proyectos. IES Jiménez de Quesada (Santa Fe, Granada).">
+
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/07-programacion/libro-digital.html">
+
+<meta property="og:title" content="Libro digital · U07 Programación (Scratch) · TyD 2º ESO">
+<meta property="og:description" content="Pensamiento computacional, bloques de Scratch, eventos, bucles, condicionales, variables y proyectos creativos.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/07-programacion/libro-digital.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/common.css">
+<link rel="stylesheet" href="../../assets/css/unidad.css">
+
+<style>
+/* ── Estilos específicos del libro digital U7 ─────────────────────── */
+.parte-titulo{font-family:var(--cond);font-size:.78rem;letter-spacing:2.5px;color:var(--principal);text-transform:uppercase;font-weight:700;margin:30px 0 10px;padding-bottom:5px;border-bottom:1px dashed var(--principal)}
+.parte-titulo:first-of-type{margin-top:0}
+
+.callout{display:flex;gap:12px;align-items:flex-start;background:#F4F6F9;border-left:4px solid var(--principal2);border-radius:0 6px 6px 0;padding:12px 16px;margin:14px 0}
+.callout .ic{font-size:1.4rem;flex-shrink:0;line-height:1}
+.callout p{margin:0;font-size:.94rem;line-height:1.55}
+.callout-warn{background:#FFF4E6;border-left-color:#F59E0B}
+.callout-info{background:#E6F1FB;border-left-color:#378ADD}
+.callout-ok{background:#E1F5EE;border-left-color:var(--verde)}
+
+.ejemplo{background:#FFFCF5;border:1px solid #E8DCB8;border-radius:8px;padding:14px 18px;margin:16px 0}
+.ejemplo .et{display:inline-block;font-family:var(--cond);font-size:.74rem;letter-spacing:1.5px;color:#A47B0C;background:#FBEBC2;padding:3px 9px;border-radius:10px;margin-bottom:6px}
+.ejemplo h5{font-family:var(--cond);color:var(--texto);margin:0 0 8px;font-size:1.05rem}
+
+/* ── Simulación de bloques Scratch (CSS puro, sin imágenes) ─────── */
+.scratch-script{background:#FAFAFA;border:1px solid var(--borde);border-radius:8px;padding:14px;margin:14px 0;font-family:var(--mono,'JetBrains Mono',monospace);font-size:.86rem;line-height:1.4}
+.sb{display:block;color:#fff;padding:6px 10px;margin:2px 0;border-radius:4px;border-top:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(0,0,0,.15);font-weight:500;width:fit-content;min-width:180px}
+.sb.evento{background:#C88330}
+.sb.control{background:#CF8B17}
+.sb.movimiento{background:#4C97FF}
+.sb.apariencia{background:#9966FF}
+.sb.sonido{background:#CF63CF}
+.sb.sensor{background:#5CB1D6}
+.sb.operador{background:#59C059}
+.sb.variable{background:#FF8C1A}
+.sb.mensaje{background:#FFBF00;color:#000}
+.sb.indent{margin-left:24px;border-left:3px solid rgba(0,0,0,.12)}
+.sb.indent2{margin-left:48px;border-left:3px solid rgba(0,0,0,.12)}
+.sb .num,.sb .txt{color:#fff;background:rgba(255,255,255,.22);padding:1px 7px;border-radius:8px;font-family:var(--mono,'JetBrains Mono',monospace);font-size:.82rem;margin:0 1px}
+
+.cat-bloques{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:14px 0}
+.cat-bloques .cat{padding:9px 12px;border-radius:6px;color:#fff;font-family:var(--cond);font-size:.92rem;text-align:center;font-weight:600;letter-spacing:.3px}
+.cat-mov{background:#4C97FF}
+.cat-apa{background:#9966FF}
+.cat-son{background:#CF63CF}
+.cat-eve{background:#C88330}
+.cat-con{background:#CF8B17}
+.cat-sen{background:#5CB1D6}
+.cat-ope{background:#59C059}
+.cat-var{background:#FF8C1A}
+.cat-mis{background:#FF6680}
+
+.flow{display:flex;flex-direction:column;align-items:center;gap:8px;margin:14px 0;font-family:var(--sans);font-size:.92rem}
+.flow .nodo{padding:10px 18px;border:2px solid var(--principal);background:#fff;border-radius:8px;min-width:160px;text-align:center}
+.flow .nodo.inicio,.flow .nodo.fin{border-radius:24px;background:var(--principal-bg)}
+.flow .nodo.cond{border-radius:6px;transform:rotate(0);background:#FFF8F0;border-color:var(--principal2);padding:10px 28px}
+.flow .conector{font-size:1.4rem;color:var(--principal);line-height:1}
+
+table.tipo-tabla{width:100%;border-collapse:collapse;margin:14px 0;font-size:.94rem}
+table.tipo-tabla th{background:var(--principal);color:#fff;padding:8px 10px;text-align:left;font-family:var(--cond);font-weight:600}
+table.tipo-tabla td{padding:8px 10px;border-bottom:1px solid var(--borde);vertical-align:top}
+table.tipo-tabla tr:nth-child(even){background:#FAFAFA}
+table.tipo-tabla td strong{color:var(--principal2)}
+
+.glosario-tabla{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+.glosario-tabla th{background:var(--principal-bg);color:var(--principal);font-family:var(--cond);padding:8px 10px;text-align:left;font-weight:600}
+.glosario-tabla td{padding:8px 10px;border-bottom:1px solid var(--borde)}
+.glosario-tabla td:first-child{font-weight:600;color:var(--principal2);white-space:nowrap;width:25%}
+
+@media print{
+  .curso-hd,.curso-navcross,.sb-side{display:none!important}
+  .apartado{break-inside:avoid}
+  .scratch-script{background:#fff}
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U07 · Programación (Scratch) · Libro digital</span>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="index.html"><span>📋</span><span class="nc-lbl">Hub U07</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>📖</span><span class="nc-lbl">Libro digital</span></span>
+  <span class="nc-sep">·</span>
+  <a href="actividades/index.html"><span>✏️</span><span class="nc-lbl">Actividades</span></a>
+  <span class="nc-sep">·</span>
+  <a href="autocomprobacion/index.html"><span>✅</span><span class="nc-lbl">Autocomprobación</span></a>
+</nav>
+
+<div class="unidad-layout">
+
+<aside class="sb-side">
+  <h3>Apartados</h3>
+
+  <div class="parte-titulo">Parte 1 · Pensamiento computacional</div>
+  <a href="#s1">1. Qué es un algoritmo</a>
+  <a href="#s2">2. Pensamiento computacional</a>
+  <a href="#s3">3. Diagramas de flujo</a>
+
+  <div class="parte-titulo">Parte 2 · Conoce Scratch</div>
+  <a href="#s4">4. Qué es Scratch</a>
+  <a href="#s5">5. Categorías de bloques</a>
+  <a href="#s6">6. Tu primer proyecto</a>
+
+  <div class="parte-titulo">Parte 3 · Conceptos clave</div>
+  <a href="#s7">7. Eventos</a>
+  <a href="#s8">8. Secuencias y bucles</a>
+  <a href="#s9">9. Condicionales</a>
+  <a href="#s10">10. Variables</a>
+  <a href="#s11">11. Mensajes entre objetos</a>
+
+  <div class="parte-titulo">Parte 4 · Proyectos creativos</div>
+  <a href="#s12">12. Animaciones</a>
+  <a href="#s13">13. Juegos</a>
+  <a href="#s14">14. Historias y depurar</a>
+
+  <div class="parte-titulo">Cierre</div>
+  <a href="#glosario">📖 Glosario</a>
+</aside>
+
+<main class="ct" id="main-content">
+
+  <h1 class="unidad-titulo">U07 · Programar a través del juego (Scratch)</h1>
+  <p class="unidad-subt">Aprender a pensar como un programador y construir tus propios juegos, animaciones e historias con Scratch.</p>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PARTE 1 · PENSAMIENTO COMPUTACIONAL
+     ═══════════════════════════════════════════════════════════ -->
+
+  <section class="apartado" id="s1">
+    <h2>1. ¿Qué es un algoritmo?</h2>
+    <p>Un <strong>algoritmo</strong> es una serie de pasos ordenados que resuelven un problema. No es algo "de ordenador": tú usas algoritmos todos los días. Una receta de cocina es un algoritmo. Las instrucciones de un juego de mesa también.</p>
+
+    <div class="ejemplo">
+      <div class="et">Ejemplo cotidiano</div>
+      <h5>Algoritmo para hacer un sándwich</h5>
+      <ol style="margin-left:20px;line-height:1.7">
+        <li>Coger dos rebanadas de pan.</li>
+        <li>Untar mantequilla en una rebanada.</li>
+        <li>Poner una loncha de jamón encima.</li>
+        <li>Poner queso encima del jamón.</li>
+        <li>Tapar con la otra rebanada.</li>
+        <li>Cortar el sándwich por la mitad.</li>
+      </ol>
+      <p>Si te saltas un paso o los cambias de orden, el resultado puede ser distinto (o no funcionar). Los algoritmos en programación son igual de literales.</p>
+    </div>
+
+    <p>Características de un buen algoritmo: <strong>preciso</strong> (cada paso no admite dudas), <strong>finito</strong> (acaba en algún momento), <strong>ordenado</strong> (el orden importa).</p>
+  </section>
+
+
+  <section class="apartado" id="s2">
+    <h2>2. Pensamiento computacional</h2>
+    <p>El <strong>pensamiento computacional</strong> es la forma de razonar que usan los programadores para resolver problemas. Tiene cuatro pilares que vale la pena aprender porque sirven para programación pero también para muchas otras cosas:</p>
+
+    <table class="tipo-tabla">
+      <thead>
+        <tr><th>Pilar</th><th>Qué es</th><th>Ejemplo</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Descomposición</strong></td><td>Partir un problema grande en problemas pequeños</td><td>Hacer una pizza = preparar masa + hacer tomate + cortar ingredientes + hornear</td></tr>
+        <tr><td><strong>Reconocer patrones</strong></td><td>Ver lo que se repite</td><td>Todos los juegos de plataformas tienen: personaje, suelo, obstáculos, vidas, salto</td></tr>
+        <tr><td><strong>Abstracción</strong></td><td>Quedarse con lo importante e ignorar el resto</td><td>Un plano del metro: no muestra distancias reales ni edificios, solo lo útil</td></tr>
+        <tr><td><strong>Algoritmos</strong></td><td>Dar los pasos ordenados de la solución</td><td>La receta de la pizza, paso a paso</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-info">
+      <span class="ic">💡</span>
+      <p>Cuando juegas a Minecraft y construyes una casa, ya estás usando pensamiento computacional: divides el trabajo (paredes, tejado, puerta), repites patrones (los bloques del muro), abstraes (no necesitas pensar en cada bloque individual) y sigues un orden lógico.</p>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s3">
+    <h2>3. Diagramas de flujo</h2>
+    <p>Un <strong>diagrama de flujo</strong> es un dibujo que muestra los pasos de un algoritmo. Es muy útil <em>antes</em> de programar: te ayuda a pensar la solución sin enredarte con el código.</p>
+
+    <p>Cada figura significa una cosa:</p>
+    <ul style="margin-left:20px;line-height:1.7">
+      <li><strong>Óvalo</strong>: inicio o fin del programa.</li>
+      <li><strong>Rectángulo</strong>: una acción ("sumar 1 a la puntuación").</li>
+      <li><strong>Rombo</strong>: una decisión, una pregunta de sí/no.</li>
+      <li><strong>Flechas</strong>: el orden de ejecución.</li>
+    </ul>
+
+    <div class="ejemplo">
+      <div class="et">Ejemplo</div>
+      <h5>Diagrama: "¿Llevo paraguas hoy?"</h5>
+      <div class="flow">
+        <div class="nodo inicio">INICIO</div>
+        <div class="conector">↓</div>
+        <div class="nodo cond">¿Está lloviendo?</div>
+        <div class="conector">↓ sí · → no</div>
+        <div class="nodo">Coger paraguas</div>
+        <div class="conector">↓</div>
+        <div class="nodo">Salir de casa</div>
+        <div class="conector">↓</div>
+        <div class="nodo fin">FIN</div>
+      </div>
+      <p>Si llueve, sigue el "sí" y coge el paraguas. Si no, salta directamente a "Salir de casa".</p>
+    </div>
+  </section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PARTE 2 · CONOCE SCRATCH
+     ═══════════════════════════════════════════════════════════ -->
+
+  <section class="apartado" id="s4">
+    <h2>4. ¿Qué es Scratch?</h2>
+    <p><strong>Scratch</strong> es un lenguaje de programación visual creado por el MIT pensado para aprender a programar de forma divertida. En lugar de escribir código de texto (que tiene comas y puntos por todos lados), <em>encajas</em> bloques como piezas de Lego. Si un bloque no puede ir en un sitio, no encaja: imposible cometer errores de sintaxis.</p>
+
+    <h3>La interfaz de Scratch (4 zonas)</h3>
+    <table class="tipo-tabla">
+      <thead>
+        <tr><th>Zona</th><th>Qué hay</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Escenario (arriba der.)</strong></td><td>Donde se ve el resultado: tus personajes moviéndose, los fondos, etc.</td></tr>
+        <tr><td><strong>Lista de objetos (abajo der.)</strong></td><td>Los <em>sprites</em> (personajes) y los fondos que tienes en el proyecto</td></tr>
+        <tr><td><strong>Paleta de bloques (izquierda)</strong></td><td>Todos los bloques disponibles, agrupados por categorías de colores</td></tr>
+        <tr><td><strong>Área de programación (centro)</strong></td><td>Donde arrastras los bloques y los encajas para construir tu programa</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-info">
+      <span class="ic">🌐</span>
+      <p>Puedes usar Scratch <strong>sin instalar nada</strong> entrando a <a href="https://scratch.mit.edu" target="_blank">scratch.mit.edu</a>. Para guardar tus proyectos online y publicarlos hace falta una cuenta gratuita; para usarlo sin más, no.</p>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s5">
+    <h2>5. Categorías de bloques</h2>
+    <p>Los bloques de Scratch están agrupados por <strong>colores y categorías</strong>. Cada categoría tiene una función distinta:</p>
+
+    <div class="cat-bloques">
+      <div class="cat cat-mov">Movimiento</div>
+      <div class="cat cat-apa">Apariencia</div>
+      <div class="cat cat-son">Sonido</div>
+      <div class="cat cat-eve">Eventos</div>
+      <div class="cat cat-con">Control</div>
+      <div class="cat cat-sen">Sensores</div>
+      <div class="cat cat-ope">Operadores</div>
+      <div class="cat cat-var">Variables</div>
+      <div class="cat cat-mis">Mis bloques</div>
+    </div>
+
+    <table class="tipo-tabla">
+      <thead>
+        <tr><th>Categoría</th><th>Para qué sirve</th><th>Bloque típico</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong style="color:#4C97FF">Movimiento</strong></td><td>Mover y girar el sprite</td><td>"mover 10 pasos", "girar 15 grados"</td></tr>
+        <tr><td><strong style="color:#9966FF">Apariencia</strong></td><td>Cambiar el disfraz, decir cosas, mostrarse/ocultarse</td><td>"decir Hola por 2 segundos", "cambiar disfraz"</td></tr>
+        <tr><td><strong style="color:#CF63CF">Sonido</strong></td><td>Reproducir efectos y melodías</td><td>"tocar sonido Miau"</td></tr>
+        <tr><td><strong style="color:#C88330">Eventos</strong></td><td>Cuándo se ejecuta tu programa (clic, tecla, mensaje…)</td><td>"al hacer clic en 🏁"</td></tr>
+        <tr><td><strong style="color:#CF8B17">Control</strong></td><td>Bucles, condicionales, esperas</td><td>"por siempre", "si... entonces"</td></tr>
+        <tr><td><strong style="color:#5CB1D6">Sensores</strong></td><td>Detectar el ratón, teclas, colores, otros sprites</td><td>"¿tocando borde?"</td></tr>
+        <tr><td><strong style="color:#59C059">Operadores</strong></td><td>Matemáticas y lógica</td><td>"+", "&lt;", "y", "número aleatorio"</td></tr>
+        <tr><td><strong style="color:#FF8C1A">Variables</strong></td><td>Crear variables y listas para guardar datos</td><td>"sumar 1 a puntos"</td></tr>
+        <tr><td><strong style="color:#FF6680">Mis bloques</strong></td><td>Bloques propios para reutilizar código</td><td>"saltar"</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+
+  <section class="apartado" id="s6">
+    <h2>6. Tu primer proyecto: el gato que se mueve</h2>
+    <p>Vamos a hacer el clásico "Hola mundo" de Scratch: que el gato se mueva por el escenario.</p>
+
+    <p><strong>Paso 1.</strong> Entra a <a href="https://scratch.mit.edu" target="_blank">scratch.mit.edu</a> y dale a <em>«Crear»</em>. Verás al gato Scratch en el centro del escenario.</p>
+
+    <p><strong>Paso 2.</strong> Arrastra al área de programación los siguientes bloques y encájalos:</p>
+
+    <div class="scratch-script">
+      <div class="sb evento">al hacer clic en 🏁</div>
+      <div class="sb movimiento indent">mover <span class="num">10</span> pasos</div>
+      <div class="sb apariencia indent">decir <span class="txt">¡Hola!</span> por <span class="num">2</span> segundos</div>
+    </div>
+
+    <p><strong>Paso 3.</strong> Pulsa la <span style="color:#1E8E3E;font-weight:600">bandera verde 🏁</span> arriba del escenario. El gato dará un saltito a la derecha y dirá "¡Hola!".</p>
+
+    <div class="callout callout-ok">
+      <span class="ic">🎉</span>
+      <p>¡Acabas de programar! Lo difícil ya pasó: empezar. Ahora pruebas a cambiar "10" por "100", o "Hola" por otra cosa, y vuelves a darle a la bandera. Eso es lo bonito de Scratch: pruebas, ves qué pasa, ajustas.</p>
+    </div>
+  </section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PARTE 3 · CONCEPTOS CLAVE
+     ═══════════════════════════════════════════════════════════ -->
+
+  <section class="apartado" id="s7">
+    <h2>7. Eventos: cuándo arranca el programa</h2>
+    <p>Un <strong>evento</strong> es algo que pasa y dispara tu programa. Si no hay evento, los bloques se quedan ahí mirando: no ocurre nada. Los bloques de eventos tienen forma de "sombrero" y siempre van <em>arriba del todo</em>.</p>
+
+    <p>Los eventos más usados en Scratch:</p>
+    <div class="scratch-script">
+      <div class="sb evento">al hacer clic en 🏁</div>
+    </div>
+    <p style="font-size:.9rem;color:var(--texto2);margin-bottom:14px">Se ejecuta cuando pulsas la bandera verde. Es el más típico para arrancar el juego.</p>
+
+    <div class="scratch-script">
+      <div class="sb evento">al presionar tecla <span class="txt">flecha derecha</span></div>
+    </div>
+    <p style="font-size:.9rem;color:var(--texto2);margin-bottom:14px">Cuando el jugador pulsa una tecla. Útil para controles del personaje.</p>
+
+    <div class="scratch-script">
+      <div class="sb evento">al hacer clic en este objeto</div>
+    </div>
+    <p style="font-size:.9rem;color:var(--texto2);margin-bottom:14px">Cuando el ratón pincha el sprite.</p>
+
+    <div class="scratch-script">
+      <div class="sb evento">al recibir <span class="txt">empezar</span></div>
+    </div>
+    <p style="font-size:.9rem;color:var(--texto2);margin-bottom:0">Cuando otro sprite (o el escenario) le manda un mensaje. Es la forma de "hablar" entre objetos.</p>
+  </section>
+
+
+  <section class="apartado" id="s8">
+    <h2>8. Secuencias y bucles</h2>
+    <p>Una <strong>secuencia</strong> es una serie de bloques uno detrás de otro. Se ejecutan en orden, de arriba abajo.</p>
+    <p>Un <strong>bucle</strong> repite acciones. Sirve para no tener que copiar mil veces el mismo bloque. En Scratch hay tres bucles principales:</p>
+
+    <h3>Bucle "por siempre"</h3>
+    <p>Repite indefinidamente, hasta que pares el programa.</p>
+    <div class="scratch-script">
+      <div class="sb evento">al hacer clic en 🏁</div>
+      <div class="sb control indent">por siempre</div>
+      <div class="sb movimiento indent2">mover <span class="num">5</span> pasos</div>
+      <div class="sb movimiento indent2">si toca borde, rebotar</div>
+    </div>
+    <p style="font-size:.9rem;color:var(--texto2)">El gato se mueve sin parar de un lado a otro hasta que pulses el botón rojo.</p>
+
+    <h3>Bucle "repetir N veces"</h3>
+    <p>Repite un número fijo de veces y para.</p>
+    <div class="scratch-script">
+      <div class="sb evento">al hacer clic en 🏁</div>
+      <div class="sb control indent">repetir <span class="num">10</span></div>
+      <div class="sb movimiento indent2">girar <span class="num">36</span> grados</div>
+      <div class="sb movimiento indent2">mover <span class="num">20</span> pasos</div>
+    </div>
+    <p style="font-size:.9rem;color:var(--texto2)">El gato dibuja un decágono (un polígono de 10 lados): 10 vueltas × 36° = 360°.</p>
+
+    <h3>Bucle "repetir hasta que"</h3>
+    <p>Repite hasta que se cumpla una condición.</p>
+    <div class="scratch-script">
+      <div class="sb evento">al hacer clic en 🏁</div>
+      <div class="sb control indent">repetir hasta que <span class="txt">¿tocando borde?</span></div>
+      <div class="sb movimiento indent2">mover <span class="num">3</span> pasos</div>
+    </div>
+    <p style="font-size:.9rem;color:var(--texto2)">El gato avanza hasta chocar con el borde, entonces se detiene.</p>
+  </section>
+
+
+  <section class="apartado" id="s9">
+    <h2>9. Condicionales: tomar decisiones</h2>
+    <p>Un <strong>condicional</strong> es un bloque "si... entonces". Hace que tu programa decida qué hacer según lo que ocurre. Es la base de cualquier juego.</p>
+
+    <h3>Si... entonces</h3>
+    <div class="scratch-script">
+      <div class="sb evento">al hacer clic en 🏁</div>
+      <div class="sb control indent">por siempre</div>
+      <div class="sb control indent2">si <span class="txt">¿tecla espacio presionada?</span> entonces</div>
+      <div class="sb apariencia" style="margin-left:72px">decir <span class="txt">¡Salto!</span> por <span class="num">1</span> seg</div>
+    </div>
+    <p style="font-size:.9rem;color:var(--texto2)">Mientras el programa esté funcionando, comprueba todo el tiempo si tecla espacio está pulsada. Si lo está, hace algo.</p>
+
+    <h3>Si... entonces... si no</h3>
+    <p>Permite dos caminos: uno si la condición es verdadera, otro si es falsa.</p>
+    <div class="scratch-script">
+      <div class="sb control">si <span class="txt">¿puntos &gt; 10?</span> entonces</div>
+      <div class="sb apariencia indent">decir <span class="txt">¡Has ganado!</span></div>
+      <div class="sb control">si no</div>
+      <div class="sb apariencia indent">decir <span class="txt">Sigue intentándolo</span></div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">💡</span>
+      <p>Los condicionales se combinan con <strong>operadores</strong> de la categoría verde: mayor que (&gt;), menor (&lt;), igual (=), y, o, no. Por ejemplo: "si <code>x &gt; 50 y vidas &gt; 0</code> entonces…". Cuanto más afinas las condiciones, más interesante es tu juego.</p>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s10">
+    <h2>10. Variables: guardar información</h2>
+    <p>Una <strong>variable</strong> es una "caja" con nombre donde el programa guarda un dato que puede cambiar: la puntuación, las vidas, el tiempo, el nombre del jugador… Sin variables, no hay juegos.</p>
+
+    <p>Pasos para usar variables en Scratch:</p>
+    <ol style="margin-left:20px;line-height:1.7">
+      <li>Ve a la categoría <strong style="color:#FF8C1A">Variables</strong> y pulsa "Crear una variable". Ponle un nombre claro: <code>puntos</code>, <code>vidas</code>, <code>tiempo</code>.</li>
+      <li>Aparecen bloques para usarla:
+        <ul style="margin:6px 0 6px 20px">
+          <li><strong>Fijar puntos a 0</strong> (al empezar la partida).</li>
+          <li><strong>Sumar 1 a puntos</strong> (cuando aciertas).</li>
+          <li><strong>(puntos)</strong> usar el valor en una comparación.</li>
+        </ul>
+      </li>
+      <li>La variable se muestra en pantalla automáticamente. Puedes ocultarla si no quieres que se vea.</li>
+    </ol>
+
+    <h3>Ejemplo: marcador de un juego</h3>
+    <div class="scratch-script">
+      <div class="sb evento">al hacer clic en 🏁</div>
+      <div class="sb variable indent">fijar <span class="txt">puntos</span> a <span class="num">0</span></div>
+      <div class="sb variable indent">fijar <span class="txt">vidas</span> a <span class="num">3</span></div>
+      <div class="sb control indent">por siempre</div>
+      <div class="sb control indent2">si <span class="txt">¿tocando Manzana?</span> entonces</div>
+      <div class="sb variable" style="margin-left:72px">sumar <span class="num">1</span> a <span class="txt">puntos</span></div>
+      <div class="sb sonido" style="margin-left:72px">tocar sonido <span class="txt">pop</span></div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">📚</span>
+      <p>Si necesitas guardar <em>muchos</em> datos (por ejemplo, una lista de jugadores o los disfraces a usar), Scratch tiene también <strong>listas</strong>: una variable que guarda varios valores en orden, numerados.</p>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s11">
+    <h2>11. Mensajes: que los objetos se hablen</h2>
+    <p>En un proyecto con varios sprites, necesitas que se coordinen. Por ejemplo, el botón "Empezar" enciende al jugador y a los enemigos. Para eso están los <strong>mensajes</strong>.</p>
+
+    <p>Un sprite envía un mensaje, todos los demás que estén escuchando ese mensaje reaccionan.</p>
+
+    <div class="scratch-script">
+      <div style="margin-bottom:8px;font-family:var(--cond);color:var(--principal2)">En el botón "Empezar":</div>
+      <div class="sb evento">al hacer clic en este objeto</div>
+      <div class="sb mensaje indent">enviar a todos <span class="txt">empezar</span></div>
+    </div>
+
+    <div class="scratch-script">
+      <div style="margin-bottom:8px;font-family:var(--cond);color:var(--principal2)">En el sprite Jugador:</div>
+      <div class="sb evento">al recibir <span class="txt">empezar</span></div>
+      <div class="sb apariencia indent">mostrar</div>
+      <div class="sb movimiento indent">ir a x: <span class="num">0</span> y: <span class="num">-100</span></div>
+    </div>
+
+    <div class="scratch-script">
+      <div style="margin-bottom:8px;font-family:var(--cond);color:var(--principal2)">En el sprite Enemigo:</div>
+      <div class="sb evento">al recibir <span class="txt">empezar</span></div>
+      <div class="sb apariencia indent">mostrar</div>
+      <div class="sb control indent">por siempre</div>
+      <div class="sb movimiento indent2">mover <span class="num">5</span> pasos</div>
+    </div>
+
+    <p style="margin-top:14px">Es como llamar a varios amigos a la vez con un megáfono: gritas "empezar" y todos los que estaban esperando esa palabra entran en acción.</p>
+  </section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PARTE 4 · PROYECTOS CREATIVOS
+     ═══════════════════════════════════════════════════════════ -->
+
+  <section class="apartado" id="s12">
+    <h2>12. Animaciones</h2>
+    <p>Una animación es un sprite que cambia de <strong>disfraz</strong> rápidamente y, a veces, se mueve. Los sprites de Scratch suelen venir con 2-3 disfraces para animar.</p>
+
+    <div class="ejemplo">
+      <div class="et">Ejemplo</div>
+      <h5>Gato caminando</h5>
+      <p>El gato Scratch viene con dos disfraces (cat-a y cat-b) que simulan las patas en distinto paso. Cambiándolos rápido se ve como si caminara.</p>
+      <div class="scratch-script">
+        <div class="sb evento">al hacer clic en 🏁</div>
+        <div class="sb control indent">por siempre</div>
+        <div class="sb apariencia indent2">siguiente disfraz</div>
+        <div class="sb movimiento indent2">mover <span class="num">10</span> pasos</div>
+        <div class="sb control indent2">esperar <span class="num">0.2</span> segundos</div>
+        <div class="sb movimiento indent2">si toca borde, rebotar</div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s13">
+    <h2>13. Juegos: el bote-bote (mini-Pong)</h2>
+    <p>Vamos a ver el corazón de un juego: el clásico Pong simplificado. Necesitas dos sprites: una <strong>pelota</strong> y una <strong>raqueta</strong>.</p>
+
+    <h3>La pelota</h3>
+    <div class="scratch-script">
+      <div class="sb evento">al hacer clic en 🏁</div>
+      <div class="sb movimiento indent">ir a x: <span class="num">0</span> y: <span class="num">0</span></div>
+      <div class="sb movimiento indent">apuntar en dirección <span class="num">45</span></div>
+      <div class="sb control indent">por siempre</div>
+      <div class="sb movimiento indent2">mover <span class="num">7</span> pasos</div>
+      <div class="sb movimiento indent2">si toca borde, rebotar</div>
+      <div class="sb control indent2">si <span class="txt">¿tocando Raqueta?</span> entonces</div>
+      <div class="sb movimiento" style="margin-left:72px">apuntar en dirección <span class="num">-90 - dirección</span></div>
+    </div>
+
+    <h3>La raqueta (sigue al ratón en horizontal)</h3>
+    <div class="scratch-script">
+      <div class="sb evento">al hacer clic en 🏁</div>
+      <div class="sb control indent">por siempre</div>
+      <div class="sb movimiento indent2">ir a x: <span class="txt">posición x del ratón</span> y: <span class="num">-150</span></div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">🎮</span>
+      <p>Añadiendo un marcador (variable <code>puntos</code>) y un final (variable <code>vidas</code>, decrece cuando la pelota toca el suelo), ya tienes un juego completo. Esto se hace típicamente en una sesión de clase.</p>
+    </div>
+
+    <h3>Otros juegos típicos para empezar</h3>
+    <ul style="margin-left:20px;line-height:1.7">
+      <li><strong>Captura de objetos</strong>: un sprite cae, lo coges con otro sprite controlado por flechas.</li>
+      <li><strong>Laberinto</strong>: te mueves con flechas, no puedes tocar las paredes (sensor "tocando color").</li>
+      <li><strong>Trivia / preguntas</strong>: el escenario hace preguntas, el jugador responde y suma puntos.</li>
+    </ul>
+  </section>
+
+
+  <section class="apartado" id="s14">
+    <h2>14. Historias interactivas y cómo depurar</h2>
+    <p>Una <strong>historia interactiva</strong> es un proyecto donde varios personajes hablan, cambian de escena y el espectador (o el jugador) puede tomar decisiones que cambian el final. Es ideal para combinar todo lo aprendido.</p>
+
+    <p>Ingredientes habituales:</p>
+    <ul style="margin-left:20px;line-height:1.7">
+      <li>Varios <strong>fondos</strong> en el escenario (las "escenas").</li>
+      <li>Varios <strong>sprites</strong> (los personajes).</li>
+      <li>Mensajes para cambiar de escena: "<code>enviar a todos: escena 2</code>".</li>
+      <li>Bloques de apariencia para que los sprites hablen (<code>decir</code>) y se muestren/oculten en cada escena.</li>
+      <li>Si el jugador decide: condicionales (<code>si... entonces</code>).</li>
+    </ul>
+
+    <h3>Depurar: el arte de encontrar errores</h3>
+    <p>Programar es <em>fallar muchas veces</em>. Depurar (<em>debug</em>) es encontrar y corregir los errores. Tres trucos que funcionan siempre:</p>
+    <ol style="margin-left:20px;line-height:1.7">
+      <li><strong>Probar a menudo</strong>: pulsa la bandera cada vez que añadas 2-3 bloques. Si falla, sabes dónde.</li>
+      <li><strong>Hacer hablar al sprite</strong>: pon un bloque <code>decir (variable) por 1 seg</code> dentro del bucle para "ver" qué vale la variable en cada momento.</li>
+      <li><strong>Romper en trozos</strong>: si un script no funciona y es largo, cómentalo en mitad (arrastra la mitad de abajo a otro lado) y ve añadiendo de uno en uno hasta que falle.</li>
+    </ol>
+
+    <div class="callout callout-ok">
+      <span class="ic">🐛</span>
+      <p>Un buen programador no es el que no comete errores: es el que sabe encontrarlos y corregirlos rápido. El primer error documentado del mundo fue una <em>polilla</em> (en inglés "bug") metida en un ordenador en 1947. Por eso "debug" significa quitar bichos.</p>
+    </div>
+  </section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     GLOSARIO
+     ═══════════════════════════════════════════════════════════ -->
+
+  <section class="apartado" id="glosario">
+    <h2>📖 Glosario de la unidad</h2>
+    <table class="glosario-tabla">
+      <thead><tr><th>Término</th><th>Significado breve</th></tr></thead>
+      <tbody>
+        <tr><td>Algoritmo</td><td>Serie ordenada y finita de pasos para resolver un problema.</td></tr>
+        <tr><td>Bloque</td><td>Pieza de programación de Scratch. Encajan como Lego.</td></tr>
+        <tr><td>Bucle</td><td>Estructura que repite acciones (por siempre, repetir N, hasta que…).</td></tr>
+        <tr><td>Condicional</td><td>Bloque "si... entonces" que toma decisiones.</td></tr>
+        <tr><td>Depurar (debug)</td><td>Encontrar y corregir errores en un programa.</td></tr>
+        <tr><td>Diagrama de flujo</td><td>Dibujo con figuras y flechas que representa un algoritmo.</td></tr>
+        <tr><td>Disfraz</td><td>Cada una de las "apariencias" alternativas de un sprite.</td></tr>
+        <tr><td>Escenario</td><td>El fondo de tu proyecto Scratch.</td></tr>
+        <tr><td>Evento</td><td>Algo que dispara la ejecución de un script (clic, tecla, mensaje…).</td></tr>
+        <tr><td>Mensaje</td><td>Aviso que un sprite envía y otros pueden escuchar para coordinarse.</td></tr>
+        <tr><td>Operador</td><td>Bloque de matemáticas o lógica (+, &gt;, y, o, no).</td></tr>
+        <tr><td>Pensamiento computacional</td><td>Forma de razonar para resolver problemas: descomponer, patrones, abstracción, algoritmos.</td></tr>
+        <tr><td>Script</td><td>Una pila de bloques encajados que forma un programa.</td></tr>
+        <tr><td>Sensor</td><td>Bloque que detecta algo del entorno (teclas, ratón, colores, otros sprites).</td></tr>
+        <tr><td>Sprite</td><td>Cada uno de los personajes/objetos de Scratch.</td></tr>
+        <tr><td>Variable</td><td>"Caja" con nombre que guarda un dato que puede cambiar (puntos, vidas…).</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-info" style="margin-top:24px">
+      <span class="ic">✅</span>
+      <p>¿Te has quedado con todo? Pasa a la <a href="autocomprobacion/index.html"><strong>autocomprobación</strong></a> y comprueba si lo has entendido. 18 preguntas en 4 bloques.</p>
+    </div>
+  </section>
+
+</main>
+
+</div>
+
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/header.js"></script>
+</body>
+</html>

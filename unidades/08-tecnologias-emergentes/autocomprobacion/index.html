@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Autocomprobación · U08 Tecnologías emergentes · TyD 2º ESO</title>
+<meta name="description" content="Autocomprobación de la unidad 08 · IA, IoT, robótica, VR/AR, vehículos autónomos · 18 preguntas con feedback inmediato.">
+
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/08-tecnologias-emergentes/autocomprobacion/">
+
+<meta property="og:title" content="Autocomprobación · U08 Tecnologías emergentes · TyD 2º ESO">
+<meta property="og:description" content="18 preguntas para repasar IA, IoT, robótica, VR/AR, vehículos autónomos y ética tecnológica.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/08-tecnologias-emergentes/autocomprobacion/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+.ac-hero{max-width:1100px;margin:22px auto 8px;padding:0 20px;text-align:center}
+.ac-hero h1{font-family:var(--cond);font-size:1.9rem;color:var(--principal);margin:0 0 6px;letter-spacing:.5px}
+.ac-hero .subt{font-size:.95rem;color:var(--texto2);margin:0 0 16px}
+.ac-camino{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;font-family:var(--cond);font-size:.78rem;letter-spacing:.4px;margin-bottom:10px}
+.ac-camino span{padding:4px 12px;border-radius:14px;background:#F4F6F9;color:#8C97A8;border:1px solid #D8DDE5}
+.ac-camino span.activo{background:linear-gradient(135deg,var(--principal),var(--principal2));color:#fff;border-color:var(--principal)}
+.ac-camino .sep{background:transparent;border:none;color:#B8C0CC;padding:4px 2px}
+.ac-instrucciones{max-width:900px;margin:0 auto 18px;padding:14px 20px;background:#FFF8F0;border-left:4px solid var(--principal);border-radius:6px;font-size:.92rem;color:var(--texto2);line-height:1.55}
+.ac-instrucciones strong{color:var(--principal)}
+.ac-wrap{max-width:900px;margin:0 auto;padding:0 16px 50px}
+.bloque-encabezado{display:flex;align-items:baseline;gap:10px;margin:22px 0 6px;padding:0 4px}
+.bloque-encabezado .num{font-family:var(--cond);font-size:1.05rem;background:var(--principal);color:#fff;padding:3px 11px;border-radius:14px}
+.bloque-encabezado h2{font-family:var(--cond);font-size:1.4rem;color:var(--texto);margin:0;flex:1}
+.bloque-encabezado .meta{font-size:.8rem;color:var(--texto2)}
+.bloque-ancla{font-size:.88rem;color:var(--texto2);margin:0 4px 10px}
+.bloque-ancla a{color:var(--principal2);text-decoration:none;border-bottom:1px dotted var(--principal2)}
+.bloque-ancla a:hover{color:var(--principal)}
+.bloque-marcador{margin-top:8px;padding:9px 14px;background:#F4F6F9;border-radius:6px;font-size:.88rem;color:var(--texto2);display:none;text-align:right;font-family:var(--cond);letter-spacing:.3px}
+.bloque-marcador.activo{display:block}
+.bloque-marcador .acierto{color:var(--verde);font-weight:600}
+.bloque-marcador .fallo{color:var(--rojo);font-weight:600}
+.test-q .test-num{display:inline-block;font-family:var(--cond);font-size:.78rem;color:var(--principal);background:var(--principal-bg);padding:2px 8px;border-radius:10px;margin-right:7px;vertical-align:1px}
+.test-q .test-tipo-tag{display:inline-block;font-family:var(--cond);font-size:.7rem;color:var(--texto2);background:#EEF1F5;padding:2px 7px;border-radius:10px;margin-left:6px;vertical-align:1px}
+.ac-resumen{max-width:900px;margin:28px auto 0;padding:22px 24px;background:linear-gradient(180deg,#FFF8F0,#fff);border:2px solid var(--principal);border-radius:10px;text-align:center}
+.ac-resumen h2{font-family:var(--cond);font-size:1.5rem;color:var(--principal);margin:0 0 8px}
+.ac-resumen .puntuacion{font-family:var(--cond);font-size:2.3rem;color:var(--texto);margin:6px 0}
+.ac-resumen .puntuacion .num-grande{color:var(--principal);font-size:3rem}
+.ac-resumen .veredicto{font-size:1rem;color:var(--texto2);margin:0 0 14px;min-height:1.4em}
+.ac-resumen .progreso-barra{height:14px;background:#F4F6F9;border-radius:7px;overflow:hidden;margin:14px 0;border:1px solid #E0E5EC}
+.ac-resumen .progreso-barra-fill{height:100%;background:linear-gradient(90deg,var(--principal),var(--principal2));width:0;transition:width .5s ease}
+.ac-resumen .acciones{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.ac-resumen button,.ac-resumen .btn-link{font-family:var(--cond);font-size:.88rem;letter-spacing:.5px;padding:9px 18px;border-radius:20px;cursor:pointer;border:1.5px solid var(--principal);background:#fff;color:var(--principal);text-decoration:none;transition:all .15s}
+.ac-resumen button:hover,.ac-resumen .btn-link:hover{background:var(--principal);color:#fff}
+.ac-resumen button.primario{background:var(--principal);color:#fff}
+.ac-resumen button.primario:hover{background:var(--principal2)}
+.ac-resumen button:disabled{opacity:.4;cursor:not-allowed}
+.ac-resumen button:disabled:hover{background:#fff;color:var(--principal)}
+@media(max-width:640px){.ac-hero h1{font-size:1.5rem}.bloque-encabezado{flex-wrap:wrap}.ac-resumen .puntuacion .num-grande{font-size:2.4rem}}
+@media print{.curso-hd,.curso-navcross,.ac-camino,.ac-instrucciones,.ac-resumen{display:none!important}.test-q{break-inside:avoid;border:1px solid #999;margin-bottom:8px}.test-fb{display:block!important;background:#f6f6f6;color:#333;border-left:3px solid #999}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <a href="../../../index.html" class="curso-lg">TyD 2º ESO</a>
+  <span class="curso-sb">U08 · Tecnologías emergentes · Autocomprobación</span>
+  <a href="../../../index.html" class="curso-home-btn">🏠 Inicio</a>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U08</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../actividades/index.html"><span>✏️</span><span class="nc-lbl">Actividades</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>✅</span><span class="nc-lbl">Autocomprobación</span></span>
+</nav>
+
+<main id="main-content">
+
+<section class="ac-hero">
+  <div class="ac-camino" aria-label="Camino de aprendizaje">
+    <span>📖 Aprende</span>
+    <span class="sep">▸</span>
+    <span>✏️ Practica</span>
+    <span class="sep">▸</span>
+    <span class="activo">✅ Comprueba</span>
+    <span class="sep">▸</span>
+    <span>🔁 Repasa</span>
+  </div>
+  <h1>✅ Autocomprobación · U08 Tecnologías emergentes</h1>
+  <p class="subt">18 preguntas para comprobar si lo has entendido · 10-15 minutos</p>
+</section>
+
+<div class="ac-instrucciones">
+  <p>Lee con calma cada pregunta y pulsa la respuesta que creas correcta. <strong>Solo tienes una oportunidad por pregunta</strong>: al pulsar, el botón se quedará verde (acierto) o rojo (fallo) y aparecerá una pequeña explicación con un enlace al apartado del libro digital donde puedes repasarlo.</p>
+</div>
+
+<div class="ac-wrap">
+
+<!-- ════════ BLOQUE 1: INTELIGENCIA ARTIFICIAL ════════ -->
+<div class="bloque-encabezado">
+  <span class="num">B1</span>
+  <h2>Inteligencia Artificial</h2>
+  <span class="meta">5 preguntas</span>
+</div>
+<p class="bloque-ancla">📖 Si dudas, repasa los apartados <a href="../libro-digital.html#s1">«Qué es la IA»</a> al <a href="../libro-digital.html#s4">«Usar IA con criterio»</a>.</p>
+
+<section class="test-section" data-bloque="1">
+  <p class="test-sub">IA, IA generativa, deepfakes y uso responsable.</p>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P1</span>¿Cómo aprende una IA actual a reconocer un gato en una foto? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Un programador le escribe la definición de gato bigote a bigote</button>
+      <button class="test-opt" data-opt="b">Se le enseñan millones de fotos etiquetadas y la IA aprende los patrones estadísticos sola</button>
+      <button class="test-opt" data-opt="c">La IA "piensa" como un humano</button>
+      <button class="test-opt" data-opt="d">No puede, las IAs no reconocen imágenes</button>
+    </div>
+    <div class="test-fb">La IA actual aprende por <strong>ejemplos masivos</strong> (aprendizaje automático). No "sabe" lo que es un gato; aprende patrones estadísticos. Por eso a veces se equivoca de formas raras: confunde un gato con una tostada si la imagen tiene rayas oscuras parecidas. <a href="../libro-digital.html#s1">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P2</span>ChatGPT, DALL-E, Midjourney y Suno son ejemplos de... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Sistemas operativos</button>
+      <button class="test-opt" data-opt="b">IA generativa (crean contenido nuevo: texto, imagen, música)</button>
+      <button class="test-opt" data-opt="c">Lenguajes de programación</button>
+      <button class="test-opt" data-opt="d">Buscadores</button>
+    </div>
+    <div class="test-fb">Son <strong>IAs generativas</strong>: a partir de una instrucción (prompt) crean texto, imágenes, música o vídeo. Aprenden de cantidades enormes de datos extraídos de internet. <a href="../libro-digital.html#s2">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P3</span>Una IA generativa te da una respuesta con datos falsos pero presentados con seguridad. Esto se llama... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Mentira deliberada de la IA</button>
+      <button class="test-opt" data-opt="b">Alucinación (la IA inventa con confianza porque no "sabe" si lo que dice es cierto)</button>
+      <button class="test-opt" data-opt="c">Error del usuario</button>
+      <button class="test-opt" data-opt="d">Bug del programa</button>
+    </div>
+    <div class="test-fb">Se llama <strong>alucinación</strong>. La IA está diseñada para "completar texto plausible", no para distinguir verdad de mentira. Por eso siempre hay que <em>verificar</em> los datos importantes que te dé una IA antes de usarlos en un trabajo. <a href="../libro-digital.html#s2">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P4</span>«Crear un deepfake porno con la cara de una compañera sin su consentimiento es...» <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Una broma sin más</button>
+      <button class="test-opt" data-opt="b">Un delito grave que puede acabar en prisión, además de un daño tremendo para la víctima</button>
+      <button class="test-opt" data-opt="c">Legal porque "no es real"</button>
+      <button class="test-opt" data-opt="d">Solo es problema si se difunde</button>
+    </div>
+    <div class="test-fb"><strong>Es delito.</strong> En España puede acarrear varios años de prisión. La víctima sufre un daño emocional muy grave (ansiedad, depresión, abandono escolar) aunque sea "falso". Los menores no son inmunes: a los 14 años ya hay responsabilidad penal. Y los rastros digitales no se borran. <a href="../libro-digital.html#s3">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P5</span>Usar ChatGPT para que <strong>te haga el trabajo entero</strong> y entregarlo tal cual es... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Una forma legítima de usar tecnología</button>
+      <button class="test-opt" data-opt="b">Plagio: el trabajo no es tuyo. Hay detectores que lo identifican y, además, no aprendes nada</button>
+      <button class="test-opt" data-opt="c">Permitido si no lo sabe el profesor</button>
+      <button class="test-opt" data-opt="d">Recomendable, ahorra tiempo</button>
+    </div>
+    <div class="test-fb">Es <strong>plagio</strong>. La IA puede ser una herramienta brutal de aprendizaje si la usas para explicarte conceptos, hacer resúmenes o practicar. Pero hacer pasar por tuyo lo que ha escrito una IA es deshonesto, te impide aprender y, además, hoy hay detectores que lo pillan con bastante precisión. <a href="../libro-digital.html#s4">Repasar →</a></div>
+  </div>
+
+  <div class="bloque-marcador" data-bloque="1"></div>
+</section>
+
+
+<!-- ════════ BLOQUE 2: IoT Y ROBÓTICA ════════ -->
+<div class="bloque-encabezado">
+  <span class="num">B2</span>
+  <h2>IoT y robótica</h2>
+  <span class="meta">4 preguntas</span>
+</div>
+<p class="bloque-ancla">📖 Si dudas, repasa los apartados <a href="../libro-digital.html#s5">«IoT»</a> al <a href="../libro-digital.html#s7">«Robótica»</a>.</p>
+
+<section class="test-section" data-bloque="2">
+  <p class="test-sub">Internet de las cosas, domótica y robots.</p>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P6</span>El <strong>Internet de las cosas (IoT)</strong> se refiere a... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Una nueva versión de internet más rápida</button>
+      <button class="test-opt" data-opt="b">La red de objetos cotidianos (sensores, neveras, relojes, cámaras…) conectados a internet</button>
+      <button class="test-opt" data-opt="c">Un buscador alternativo a Google</button>
+      <button class="test-opt" data-opt="d">Solo a los móviles</button>
+    </div>
+    <div class="test-fb">El <strong>IoT</strong> conecta cosas que antes eran "tontas" (una bombilla, una nevera, un sensor de humedad) a internet, dándoles algo de inteligencia. Hoy hay más de 15.000 millones de dispositivos IoT en el mundo. <a href="../libro-digital.html#s5">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P7</span>De estas ventajas del hogar inteligente, ¿cuál es FALSA? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Permite ahorrar energía (apagar lo que no usas)</button>
+      <button class="test-opt" data-opt="b">Funciona aunque se caiga el wifi, es totalmente independiente</button>
+      <button class="test-opt" data-opt="c">Mejora la accesibilidad para personas mayores</button>
+      <button class="test-opt" data-opt="d">Permite vigilancia desde el móvil</button>
+    </div>
+    <div class="test-fb">La afirmación <strong>B</strong> es falsa. La domótica <em>depende</em> del wifi y, a menudo, de la nube. Si se cae el wifi o el servidor de la marca, muchos dispositivos dejan de funcionar. Eso es un inconveniente real del hogar inteligente, no una ventaja. <a href="../libro-digital.html#s6">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P8</span>¿Qué diferencia a un <strong>robot</strong> de un dispositivo IoT (como un termostato inteligente)? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">El robot es más caro</button>
+      <button class="test-opt" data-opt="b">El robot <em>actúa físicamente</em> sobre el entorno con motores; un IoT solo mide y reporta</button>
+      <button class="test-opt" data-opt="c">El robot no se conecta a internet</button>
+      <button class="test-opt" data-opt="d">No hay diferencia</button>
+    </div>
+    <div class="test-fb">Un robot <strong>percibe + decide + actúa físicamente</strong>. Un IoT a menudo solo percibe y reporta. Un robot aspirador SÍ es un robot (se mueve y limpia). Una bombilla inteligente es IoT puro (se enciende pero no se desplaza). <a href="../libro-digital.html#s7">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P9</span>«Los robots actuales son muy buenos sustituyendo profesores y médicos». <span class="test-tipo-tag">verdadero / falso</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Verdadero, en pocos años no harán falta</button>
+      <button class="test-opt" data-opt="b">Falso: los robots son excelentes en tareas repetitivas y predecibles, malos en trato humano, improvisación y juicio profesional</button>
+    </div>
+    <div class="test-fb"><strong>Falso.</strong> Profesores, médicos, fontaneros, peluqueros y otros oficios que requieren <em>flexibilidad</em>, <em>trato humano</em> e <em>improvisación</em> resisten muy bien la automatización. Lo que sí se automatiza fácilmente son tareas repetitivas (cajeros, peajes, traducciones básicas). <a href="../libro-digital.html#s7">Repasar →</a></div>
+  </div>
+
+  <div class="bloque-marcador" data-bloque="2"></div>
+</section>
+
+
+<!-- ════════ BLOQUE 3: REALIDAD E IMPRESIÓN 3D ════════ -->
+<div class="bloque-encabezado">
+  <span class="num">B3</span>
+  <h2>Realidad virtual, aumentada e impresión 3D</h2>
+  <span class="meta">4 preguntas</span>
+</div>
+<p class="bloque-ancla">📖 Si dudas, repasa los apartados <a href="../libro-digital.html#s8">«VR / AR»</a> y <a href="../libro-digital.html#s9">«Impresión 3D»</a>.</p>
+
+<section class="test-section" data-bloque="3">
+  <p class="test-sub">VR, AR, MR y fabricación aditiva.</p>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P10</span>Pokémon GO es un ejemplo de... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Realidad virtual (VR)</button>
+      <button class="test-opt" data-opt="b">Realidad aumentada (AR)</button>
+      <button class="test-opt" data-opt="c">Inteligencia Artificial pura</button>
+      <button class="test-opt" data-opt="d">Blockchain</button>
+    </div>
+    <div class="test-fb">Pokémon GO es <strong>AR</strong>: la cámara del móvil muestra el mundo real y la aplicación <em>añade</em> el Pokémon encima. Los filtros de Instagram, TikTok o Google Lens también son AR. La VR te aísla del mundo real (necesitas gafas opacas). <a href="../libro-digital.html#s8">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P11</span>Para entrar en un mundo digital completamente inmersivo (no ves el real) necesitas... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Solo tu móvil sin gafas</button>
+      <button class="test-opt" data-opt="b">Unas gafas de VR opacas (Meta Quest, PlayStation VR…)</button>
+      <button class="test-opt" data-opt="c">Una webcam normal</button>
+      <button class="test-opt" data-opt="d">Solo auriculares</button>
+    </div>
+    <div class="test-fb">La <strong>realidad virtual (VR)</strong> requiere gafas opacas que tapan el mundo real y proyectan el digital en su lugar. Los modelos comunes: Meta Quest, PlayStation VR, Apple Vision Pro (esta también hace MR). <a href="../libro-digital.html#s8">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P12</span>La <strong>impresión 3D</strong> es una técnica de fabricación... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Sustractiva: quita material de un bloque</button>
+      <button class="test-opt" data-opt="b">Aditiva: añade material capa a capa hasta formar el objeto</button>
+      <button class="test-opt" data-opt="c">No fabrica, solo escanea</button>
+      <button class="test-opt" data-opt="d">Igual que la fotocopiadora</button>
+    </div>
+    <div class="test-fb">La impresión 3D es <strong>aditiva</strong>: construye capa a capa. Es lo contrario de las técnicas tradicionales (torno, fresa) que son <em>sustractivas</em> (quitan material). Ventaja: poco desperdicio. Inconveniente: lenta para series grandes. <a href="../libro-digital.html#s9">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P13</span>¿Cuál de estos NO es un uso real de la impresión 3D? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Imprimir prótesis personalizadas</button>
+      <button class="test-opt" data-opt="b">Imprimir comida líquida sin diseñarla previamente en ningún sitio</button>
+      <button class="test-opt" data-opt="c">Imprimir recambios de electrodomésticos descatalogados</button>
+      <button class="test-opt" data-opt="d">Imprimir maquetas y prototipos rápidos</button>
+    </div>
+    <div class="test-fb">La afirmación B es falsa: la impresión 3D <strong>siempre</strong> parte de un modelo digital previo (diseñado en Tinkercad, FreeCAD, Blender…). Existen impresoras 3D de alimentos, pero requieren igualmente un diseño previo. Los demás (prótesis, recambios, prototipos) sí son usos reales y comunes. <a href="../libro-digital.html#s9">Repasar →</a></div>
+  </div>
+
+  <div class="bloque-marcador" data-bloque="3"></div>
+</section>
+
+
+<!-- ════════ BLOQUE 4: MOVILIDAD, BLOCKCHAIN Y FUTURO ════════ -->
+<div class="bloque-encabezado">
+  <span class="num">B4</span>
+  <h2>Movilidad, blockchain y futuro</h2>
+  <span class="meta">5 preguntas</span>
+</div>
+<p class="bloque-ancla">📖 Si dudas, repasa los apartados <a href="../libro-digital.html#s10">«Vehículos autónomos»</a> al <a href="../libro-digital.html#s14">«Ética»</a>.</p>
+
+<section class="test-section" data-bloque="4">
+  <p class="test-sub">Vehículos autónomos, drones, blockchain, big data y ética.</p>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P14</span>Los niveles de autonomía de un coche van del 0 al 5. ¿Qué nivel estamos viendo hoy en coches Tesla con Autopilot? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Nivel 0 (sin automatización)</button>
+      <button class="test-opt" data-opt="b">Nivel 2 (automatización parcial: mantiene carril y velocidad, pero el conductor debe estar atento)</button>
+      <button class="test-opt" data-opt="c">Nivel 5 (totalmente autónomo)</button>
+      <button class="test-opt" data-opt="d">Nivel 4 (sin volante en zonas concretas)</button>
+    </div>
+    <div class="test-fb">El Autopilot de Tesla actual es <strong>nivel 2</strong>. El conductor sigue siendo legalmente responsable y debe vigilar. El nivel 5 (totalmente autónomo en cualquier situación) <em>todavía no existe</em>. <a href="../libro-digital.html#s10">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P15</span>«En España puedo volar un dron de 500 g donde y como quiera, sin registrar nada». <span class="test-tipo-tag">verdadero / falso</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Verdadero, no hay normas</button>
+      <button class="test-opt" data-opt="b">Falso: AESA exige registro del piloto, prohibe volar cerca de aeropuertos, sobre multitudes o a más de 120 m, entre otras normas</button>
+    </div>
+    <div class="test-fb"><strong>Falso.</strong> En España la <strong>AESA</strong> regula los drones. Si pesa más de 250 g, el piloto debe registrarse y, según el nivel, hacer un cursillo. Volar cerca de aeropuertos, sobre multitudes o saltarse la altura máxima se multa con varios miles de euros. <a href="../libro-digital.html#s11">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P16</span>El <strong>blockchain</strong> es... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Una empresa de criptomonedas</button>
+      <button class="test-opt" data-opt="b">Un libro de cuentas digital, repartido entre miles de ordenadores, donde las operaciones quedan registradas y son muy difíciles de falsificar</button>
+      <button class="test-opt" data-opt="c">Un tipo de hardware</button>
+      <button class="test-opt" data-opt="d">Sinónimo de Bitcoin</button>
+    </div>
+    <div class="test-fb">El <strong>blockchain</strong> es la tecnología; <strong>Bitcoin</strong> es una <em>aplicación</em> de ella (la primera). Hay muchas otras: contratos inteligentes, trazabilidad de productos, registro de propiedad intelectual. La fortaleza del blockchain es que no depende de una autoridad central. <a href="../libro-digital.html#s12">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P17</span>De estos perfiles profesionales, ¿cuál tiene más probabilidad de <strong>crecer</strong> en los próximos años? <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Cajero/a de supermercado</button>
+      <button class="test-opt" data-opt="b">Especialista en ciberseguridad</button>
+      <button class="test-opt" data-opt="c">Empleado/a de peaje</button>
+      <button class="test-opt" data-opt="d">Operador/a telefónico de telemarketing genérico</button>
+    </div>
+    <div class="test-fb">La <strong>ciberseguridad</strong> crece sin parar: cada vez hay más dispositivos conectados, más datos sensibles y más ataques. Los otros tres pierden empleo: cajeros automáticos, peajes electrónicos, chatbots de IA. Otros perfiles que crecen: programadores, ingenieros de IA, salud mental, profesores, oficios manuales (fontanero, electricista). <a href="../libro-digital.html#s13">Repasar →</a></div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext"><span class="test-num">P18</span>«La tecnología siempre va por delante de las leyes». Esto significa que... <span class="test-tipo-tag">opción única</span></p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">Las leyes son inútiles</button>
+      <button class="test-opt" data-opt="b">Las leyes tardan tiempo en regular cada tecnología nueva. Mientras tanto, la ética y el sentido común tienen que llenar ese hueco</button>
+      <button class="test-opt" data-opt="c">No hace falta pensar en ética</button>
+      <button class="test-opt" data-opt="d">Las tecnologías son ilegales por defecto</button>
+    </div>
+    <div class="test-fb">Las leyes regulan <em>después</em> de que aparezca una tecnología (cuando ya hay problemas). Entre que la tecnología existe y se regula, pasan años. En ese tiempo, las decisiones individuales y colectivas (lo que como sociedad consideramos aceptable o no) son las que marcan el rumbo. Por eso esta unidad termina con una pregunta: ¿qué sociedad queremos construir con estas herramientas? <a href="../libro-digital.html#s14">Repasar →</a></div>
+  </div>
+
+  <div class="bloque-marcador" data-bloque="4"></div>
+</section>
+
+
+<!-- ════════ RESUMEN FINAL ════════ -->
+<section class="ac-resumen" id="ac-resumen">
+  <h2 id="ac-resumen-titulo">Resultado de la autocomprobación</h2>
+  <div class="puntuacion"><span class="num-grande" id="ac-aciertos">0</span> / <span id="ac-total">18</span> aciertos</div>
+  <div class="progreso-barra"><div class="progreso-barra-fill" id="ac-bar"></div></div>
+  <p class="veredicto" id="ac-veredicto">Responde las preguntas para ver tu resultado.</p>
+  <div class="acciones">
+    <button id="ac-reintentar" class="primario" disabled>🔁 Reintentar las falladas</button>
+    <button id="ac-todo" disabled>🔄 Empezar de nuevo</button>
+    <a class="btn-link" href="../libro-digital.html">📖 Ir al libro digital</a>
+    <a class="btn-link" href="../index.html">📋 Volver al hub U08</a>
+  </div>
+</section>
+
+</div>
+
+</main>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+
+<script>
+(function(){
+  'use strict';
+  var qs = document.querySelectorAll('.test-q');
+  var totalEl = document.getElementById('ac-total');
+  var aciertosEl = document.getElementById('ac-aciertos');
+  var barEl = document.getElementById('ac-bar');
+  var veredictoEl = document.getElementById('ac-veredicto');
+  var btnReintentar = document.getElementById('ac-reintentar');
+  var btnTodo = document.getElementById('ac-todo');
+  totalEl.textContent = qs.length;
+  function refrescar(){
+    var aciertos = 0, contestadas = 0, falladas = 0;
+    var porBloque = {};
+    qs.forEach(function(q){
+      var b = q.closest('.test-section').dataset.bloque;
+      if(!porBloque[b]) porBloque[b] = {ok:0, ko:0, total:0};
+      porBloque[b].total++;
+      if(q.classList.contains('answered')){
+        contestadas++;
+        var ok = q.querySelector('.test-opt.correct') && !q.querySelector('.test-opt.wrong');
+        if(ok){ aciertos++; porBloque[b].ok++; }
+        else  { falladas++; porBloque[b].ko++; }
+      }
+    });
+    aciertosEl.textContent = aciertos;
+    var pct = Math.round((aciertos / qs.length) * 100);
+    barEl.style.width = pct + '%';
+    if(contestadas === 0){
+      veredictoEl.textContent = 'Responde las preguntas para ver tu resultado.';
+    } else if(contestadas < qs.length){
+      veredictoEl.innerHTML = 'Llevas <strong>' + contestadas + '</strong> de ' + qs.length + ' preguntas respondidas.';
+    } else {
+      var msg = '';
+      if(pct >= 90)       msg = '🌟 ¡Excelente! Tienes una visión clara de las tecnologías emergentes.';
+      else if(pct >= 75)  msg = '👍 Muy bien. Repasa los puntos fallados y a por el examen.';
+      else if(pct >= 50)  msg = '🙂 Aprobado. Vuelve al libro digital para reforzar los conceptos que has fallado.';
+      else                msg = '📚 La unidad tiene mucho contenido pero a alto nivel. Vuelve al libro digital con calma; cada apartado es corto.';
+      veredictoEl.innerHTML = msg + '<br><small>' + aciertos + ' aciertos · ' + falladas + ' fallos · ' + pct + '%</small>';
+    }
+    btnReintentar.disabled = (falladas === 0);
+    btnTodo.disabled = (contestadas === 0);
+    Object.keys(porBloque).forEach(function(b){
+      var m = document.querySelector('.bloque-marcador[data-bloque="'+b+'"]');
+      var p = porBloque[b];
+      var done = p.ok + p.ko;
+      if(done === 0){ m.classList.remove('activo'); return; }
+      m.classList.add('activo');
+      if(done < p.total){
+        m.innerHTML = 'Bloque ' + b + ': ' + done + ' / ' + p.total + ' respondidas';
+      } else {
+        m.innerHTML = 'Bloque ' + b + ': <span class="acierto">' + p.ok + ' acierto' + (p.ok===1?'':'s') + '</span> · <span class="fallo">' + p.ko + ' fallo' + (p.ko===1?'':'s') + '</span>';
+      }
+    });
+  }
+  document.addEventListener('click', function(e){
+    if(e.target.classList && e.target.classList.contains('test-opt')){
+      setTimeout(refrescar, 0);
+    }
+  });
+  function resetPregunta(q){
+    q.classList.remove('answered');
+    q.querySelectorAll('.test-opt').forEach(function(b){
+      b.classList.remove('correct','wrong');
+      b.disabled = false;
+    });
+  }
+  btnReintentar.addEventListener('click', function(){
+    qs.forEach(function(q){
+      if(q.classList.contains('answered')){
+        var hayFallo = q.querySelector('.test-opt.wrong');
+        if(hayFallo) resetPregunta(q);
+      }
+    });
+    refrescar();
+    var primera = document.querySelector('.test-q:not(.answered)');
+    if(primera) primera.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+  btnTodo.addEventListener('click', function(){
+    if(!confirm('¿Seguro que quieres empezar de nuevo? Se borrarán todas tus respuestas.')) return;
+    qs.forEach(resetPregunta);
+    refrescar();
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+  refrescar();
+})();
+</script>
+</body>
+</html>

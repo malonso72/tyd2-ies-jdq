@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>¿Es segura tu contraseña? · U06 · TyD 2º ESO</title>
+<meta name="description" content="Comprobador interactivo de la fortaleza de una contraseña. Aprende a crear claves seguras.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+.pw-wrap{max-width:780px;margin:30px auto;padding:0 20px 50px}
+.pw-hero{text-align:center;margin-bottom:24px}
+.pw-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 8px}
+.pw-hero p{font-size:1rem;color:var(--texto2);margin:0}
+.pw-card{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:24px;box-shadow:0 1px 6px rgba(0,0,0,.04)}
+.pw-input-row{position:relative;margin-bottom:18px}
+.pw-input{width:100%;font-family:var(--mono,'JetBrains Mono',monospace);font-size:1.15rem;padding:14px 50px 14px 16px;border:2px solid var(--borde);border-radius:8px;background:#FAFAFA;letter-spacing:.05em;color:var(--texto);transition:border-color .2s}
+.pw-input:focus{outline:none;border-color:var(--principal);background:#fff}
+.pw-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1.3rem;padding:6px 10px;color:var(--texto2)}
+.pw-toggle:hover{color:var(--principal)}
+
+.pw-meter{height:14px;background:#F4F6F9;border-radius:7px;overflow:hidden;border:1px solid var(--borde);margin-bottom:6px}
+.pw-meter-bar{height:100%;width:0;transition:width .25s,background-color .25s}
+.pw-level{font-family:var(--cond);font-size:1.1rem;text-align:center;margin-bottom:18px;letter-spacing:.5px}
+.pw-level.l0{color:#888}
+.pw-level.l1{color:#C44536}
+.pw-level.l2{color:#E07B22}
+.pw-level.l3{color:#A47B0C}
+.pw-level.l4{color:#5A8F33}
+.pw-level.l5{color:#1E8E3E}
+
+.pw-time{background:#F4F6F9;border-radius:6px;padding:10px 14px;text-align:center;font-size:.94rem;color:var(--texto2);margin-bottom:18px}
+.pw-time strong{color:var(--texto);font-family:var(--cond);font-size:1.1rem}
+
+.pw-checks{list-style:none;padding:0;margin:0}
+.pw-checks li{padding:8px 12px;background:#FAFAFA;border-radius:6px;margin-bottom:6px;font-size:.92rem;display:flex;gap:10px;align-items:flex-start;transition:background .2s,color .2s}
+.pw-checks li::before{content:"○";color:#B8C0CC;font-weight:700;font-size:1.1rem;line-height:1;width:18px;flex-shrink:0}
+.pw-checks li.ok{background:#E1F5EE;color:#0F6E56}
+.pw-checks li.ok::before{content:"✓";color:#1E8E3E}
+.pw-checks li.ko{background:#FCEBEB;color:#9A2A2A}
+.pw-checks li.ko::before{content:"✗";color:#C44536}
+
+.pw-tips{background:#FFF8F0;border-left:4px solid var(--principal);border-radius:0 8px 8px 0;padding:16px 20px;margin-top:24px;font-size:.92rem;line-height:1.6}
+.pw-tips h3{font-family:var(--cond);color:var(--principal);font-size:1.1rem;margin:0 0 8px}
+.pw-tips ul{margin:0;padding-left:20px}
+.pw-tips li{margin-bottom:4px}
+
+.pw-priv{font-size:.78rem;color:var(--texto2);text-align:center;margin-top:18px;line-height:1.5}
+
+.pw-examples{margin-top:24px}
+.pw-examples h3{font-family:var(--cond);color:var(--texto);font-size:1.1rem;margin:0 0 10px}
+.pw-examples button{font-family:var(--mono,'JetBrains Mono',monospace);font-size:.85rem;padding:6px 10px;margin:0 4px 6px 0;background:#fff;border:1px solid var(--borde);border-radius:5px;cursor:pointer;color:var(--texto)}
+.pw-examples button:hover{background:var(--principal-bg);border-color:var(--principal);color:var(--principal)}
+
+@media print{.pw-toggle,.pw-examples{display:none}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U06 · Ordenador y digital · Interactivo: contraseñas</span>
+</header>
+
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U06</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🔒</span><span class="nc-lbl">Contraseña</span></span>
+</nav>
+
+<main id="main-content" class="pw-wrap">
+
+  <section class="pw-hero">
+    <h1>🔒 ¿Es segura tu contraseña?</h1>
+    <p>Escribe una contraseña y comprueba al momento qué tan fuerte es. <strong>Todo el cálculo ocurre en tu navegador — nada se envía a ningún servidor.</strong></p>
+  </section>
+
+  <div class="pw-card">
+    <div class="pw-input-row">
+      <input type="password" class="pw-input" id="pw" placeholder="Escribe aquí una contraseña…" autocomplete="off" spellcheck="false">
+      <button class="pw-toggle" id="pw-toggle" aria-label="Mostrar contraseña">👁️</button>
+    </div>
+
+    <div class="pw-meter"><div class="pw-meter-bar" id="pw-bar"></div></div>
+    <div class="pw-level l0" id="pw-level">— Escribe algo para empezar —</div>
+
+    <div class="pw-time">Tiempo estimado para que un atacante la adivine probando combinaciones: <strong id="pw-time">—</strong></div>
+
+    <ul class="pw-checks">
+      <li id="c-len">Al menos 12 caracteres</li>
+      <li id="c-low">Letras minúsculas</li>
+      <li id="c-up">Letras mayúsculas</li>
+      <li id="c-num">Números</li>
+      <li id="c-sym">Símbolos (! @ # $ % &amp; …)</li>
+      <li id="c-common">No es una contraseña común (123456, password…)</li>
+      <li id="c-seq">No tiene secuencias obvias (abc, 1234, qwerty…)</li>
+    </ul>
+
+    <div class="pw-examples">
+      <h3>Pruébalas para ver la diferencia:</h3>
+      <button data-ex="123456">123456</button>
+      <button data-ex="password">password</button>
+      <button data-ex="manuel2010">manuel2010</button>
+      <button data-ex="Granada25">Granada25</button>
+      <button data-ex="MiClave_2024!">MiClave_2024!</button>
+      <button data-ex="ElGato7AzulDanzaBajoLaLluvia!">ElGato7AzulDanzaBajoLaLluvia!</button>
+    </div>
+  </div>
+
+  <div class="pw-tips">
+    <h3>💡 Receta para una contraseña fuerte</h3>
+    <ul>
+      <li><strong>Larga</strong>: mínimo 12 caracteres, mejor 16.</li>
+      <li><strong>Frase de paso</strong>: 4-5 palabras random unidas, fáciles de recordar y difíciles de adivinar.</li>
+      <li><strong>Sin datos personales</strong>: nombre, fecha de nacimiento, mascota, equipo… no.</li>
+      <li><strong>Una distinta para cada servicio</strong>: si te roban una, no se llevan todas.</li>
+      <li><strong>Activa el doble factor (2FA)</strong> donde puedas.</li>
+      <li><strong>Gestor de contraseñas</strong> (Bitwarden, KeePass): recuerdas <em>una</em>, te genera todas las demás.</li>
+    </ul>
+  </div>
+
+  <p class="pw-priv">🔒 Esta página no envía nada a ningún servidor. Toda la comprobación se ejecuta solo en tu navegador. Aun así, no escribas aquí una contraseña que uses de verdad: úsala como aprendizaje para inventar otra.</p>
+
+</main>
+
+<script>
+(function(){
+  'use strict';
+  var pw = document.getElementById('pw');
+  var bar = document.getElementById('pw-bar');
+  var lvl = document.getElementById('pw-level');
+  var timeEl = document.getElementById('pw-time');
+  var toggle = document.getElementById('pw-toggle');
+  var checks = {
+    len: document.getElementById('c-len'),
+    low: document.getElementById('c-low'),
+    up:  document.getElementById('c-up'),
+    num: document.getElementById('c-num'),
+    sym: document.getElementById('c-sym'),
+    common: document.getElementById('c-common'),
+    seq: document.getElementById('c-seq')
+  };
+
+  var commonPasswords = [
+    '123456','password','12345678','qwerty','123456789','12345','1234','111111',
+    '1234567','dragon','123123','admin','letmein','welcome','monkey','password1',
+    'abc123','iloveyou','000000','passw0rd','sunshine','princess','football','baseball'
+  ];
+
+  function hasSequence(s){
+    s = s.toLowerCase();
+    var seqs = ['0123456789','abcdefghijklmnopqrstuvwxyz','qwertyuiop','asdfghjkl','zxcvbnm'];
+    for(var i=0;i<seqs.length;i++){
+      for(var j=0;j<seqs[i].length-3;j++){
+        var sub = seqs[i].substring(j, j+4);
+        if(s.indexOf(sub) !== -1) return true;
+        if(s.indexOf(sub.split('').reverse().join('')) !== -1) return true;
+      }
+    }
+    if(/(.)\1{3,}/.test(s)) return true;
+    return false;
+  }
+
+  function alphabetSize(s){
+    var size = 0;
+    if(/[a-z]/.test(s)) size += 26;
+    if(/[A-Z]/.test(s)) size += 26;
+    if(/[0-9]/.test(s)) size += 10;
+    if(/[^a-zA-Z0-9]/.test(s)) size += 32;
+    return Math.max(size, 1);
+  }
+
+  function formatTime(seconds){
+    if(seconds < 1) return 'instantáneo';
+    if(seconds < 60) return Math.round(seconds) + ' segundos';
+    var minutes = seconds / 60;
+    if(minutes < 60) return Math.round(minutes) + ' minutos';
+    var hours = minutes / 60;
+    if(hours < 24) return Math.round(hours) + ' horas';
+    var days = hours / 24;
+    if(days < 365) return Math.round(days) + ' días';
+    var years = days / 365;
+    if(years < 1000) return Math.round(years).toLocaleString('es-ES') + ' años';
+    if(years < 1e6) return Math.round(years/1000) + ' mil años';
+    if(years < 1e9) return Math.round(years/1e6) + ' millones de años';
+    if(years < 1e12) return Math.round(years/1e9) + ' miles de millones de años';
+    return 'más que la edad del universo';
+  }
+
+  function evaluar(s){
+    var r = {len:false,low:false,up:false,num:false,sym:false,common:true,seq:true};
+    r.len = s.length >= 12;
+    r.low = /[a-z]/.test(s);
+    r.up  = /[A-Z]/.test(s);
+    r.num = /[0-9]/.test(s);
+    r.sym = /[^a-zA-Z0-9]/.test(s);
+    r.common = !commonPasswords.indexOf(s.toLowerCase()) > -1 ? true : false;
+    r.common = commonPasswords.indexOf(s.toLowerCase()) === -1;
+    r.seq = !hasSequence(s);
+    return r;
+  }
+
+  function actualizarUI(){
+    var s = pw.value;
+    if(!s){
+      bar.style.width = '0';
+      lvl.textContent = '— Escribe algo para empezar —';
+      lvl.className = 'pw-level l0';
+      timeEl.textContent = '—';
+      Object.keys(checks).forEach(function(k){
+        checks[k].className = '';
+      });
+      return;
+    }
+
+    var r = evaluar(s);
+
+    Object.keys(checks).forEach(function(k){
+      checks[k].className = r[k] ? 'ok' : 'ko';
+    });
+
+    var passed = 0;
+    Object.keys(r).forEach(function(k){ if(r[k]) passed++; });
+
+    var combinations = Math.pow(alphabetSize(s), s.length);
+    var guessesPerSecond = 1e10;
+    var seconds = combinations / (2 * guessesPerSecond);
+
+    if(!r.common) seconds = 0;
+    else if(!r.seq) seconds = Math.min(seconds, 60);
+
+    var nivel, color, etq;
+    if(s.length < 4 || !r.common){
+      nivel = 1; color = '#C44536'; etq = '❌ Muy débil';
+    } else if(passed <= 3){
+      nivel = 2; color = '#E07B22'; etq = '⚠️ Débil';
+    } else if(passed === 4 || passed === 5){
+      nivel = 3; color = '#E0A92C'; etq = '🙂 Aceptable';
+    } else if(passed === 6){
+      nivel = 4; color = '#5A8F33'; etq = '👍 Fuerte';
+    } else {
+      nivel = 5; color = '#1E8E3E'; etq = '🛡️ Excelente';
+    }
+
+    var pct = Math.min(100, (nivel/5)*100);
+    bar.style.width = pct + '%';
+    bar.style.backgroundColor = color;
+    lvl.textContent = etq;
+    lvl.className = 'pw-level l' + nivel;
+    timeEl.textContent = formatTime(seconds);
+  }
+
+  pw.addEventListener('input', actualizarUI);
+
+  toggle.addEventListener('click', function(){
+    if(pw.type === 'password'){
+      pw.type = 'text';
+      toggle.textContent = '🙈';
+      toggle.setAttribute('aria-label','Ocultar contraseña');
+    } else {
+      pw.type = 'password';
+      toggle.textContent = '👁️';
+      toggle.setAttribute('aria-label','Mostrar contraseña');
+    }
+  });
+
+  document.querySelectorAll('.pw-examples button').forEach(function(b){
+    b.addEventListener('click', function(){
+      pw.value = b.dataset.ex;
+      pw.type = 'text';
+      toggle.textContent = '🙈';
+      actualizarUI();
+      pw.focus();
+    });
+  });
+
+  actualizarUI();
+})();
+</script>
+</body>
+</html>

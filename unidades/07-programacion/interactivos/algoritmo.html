@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Ordena el algoritmo · U07 · TyD 2º ESO</title>
+<meta name="description" content="Ordena los pasos de algoritmos cotidianos. Aprende a pensar como un programador.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+.al-wrap{max-width:780px;margin:30px auto;padding:0 20px 50px}
+.al-hero{text-align:center;margin-bottom:24px}
+.al-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 8px}
+.al-hero p{font-size:1rem;color:var(--texto2);margin:0;line-height:1.5}
+.al-progress{display:flex;justify-content:space-between;align-items:center;background:#F4F6F9;padding:10px 16px;border-radius:8px;margin-bottom:20px;font-family:var(--cond);font-size:.92rem}
+.al-score{color:var(--principal);font-size:1.05rem}
+.al-card{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:22px;box-shadow:0 1px 6px rgba(0,0,0,.04);margin-bottom:20px}
+.al-titulo{font-family:var(--cond);font-size:1.3rem;color:var(--principal);margin:0 0 6px}
+.al-instr{font-size:.92rem;color:var(--texto2);margin:0 0 16px}
+.al-pasos{list-style:none;padding:0;margin:0 0 16px;counter-reset:p}
+.al-paso{background:#FAFAFA;border:1px solid var(--borde);border-radius:8px;padding:10px 14px;margin-bottom:8px;font-size:.95rem;line-height:1.4;cursor:grab;user-select:none;display:flex;align-items:center;gap:12px;transition:all .15s}
+.al-paso::before{content:counter(p);counter-increment:p;display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;background:var(--principal);color:#fff;border-radius:50%;font-family:var(--cond);font-weight:700;font-size:.95rem;flex-shrink:0}
+.al-paso:hover{background:#FFF8F0;border-color:var(--principal)}
+.al-paso.dragging{opacity:.4}
+.al-paso.over{border-color:var(--principal);border-style:dashed;background:#FFF8F0}
+.al-paso .texto{flex:1}
+.al-paso .arrows{display:flex;flex-direction:column;gap:2px}
+.al-paso .arrows button{background:#fff;border:1px solid var(--borde);width:24px;height:18px;cursor:pointer;border-radius:4px;line-height:.6;color:var(--principal);font-size:.85rem}
+.al-paso .arrows button:hover{background:var(--principal);color:#fff}
+.al-paso .arrows button:disabled{opacity:.3;cursor:default}
+.al-paso.ok{background:#E1F5EE;border-color:#1E8E3E}
+.al-paso.ok::before{background:#1E8E3E}
+.al-paso.ko{background:#FCEBEB;border-color:#C44536}
+.al-paso.ko::before{background:#C44536}
+.al-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.al-btn{font-family:var(--cond);font-size:.92rem;letter-spacing:.5px;padding:10px 22px;border-radius:22px;cursor:pointer;border:2px solid var(--principal);background:var(--principal);color:#fff;font-weight:600}
+.al-btn:hover{background:var(--principal2)}
+.al-btn.sec{background:#fff;color:var(--principal)}
+.al-btn.sec:hover{background:var(--principal);color:#fff}
+.al-btn:disabled{opacity:.4;cursor:default}
+.al-fb{display:none;margin-top:14px;padding:12px 16px;background:#F4F6F9;border-left:4px solid var(--principal);border-radius:0 6px 6px 0;font-size:.94rem;line-height:1.55}
+.al-fb.show{display:block}
+.al-fb.acierto{background:#E1F5EE;color:#0F6E56;border-left-color:#1E8E3E}
+.al-fb.fallo{background:#FCEBEB;color:#9A2A2A;border-left-color:#C44536}
+.al-fb h4{font-family:var(--cond);margin:0 0 8px;font-size:1.05rem}
+.al-resumen{background:linear-gradient(180deg,#FFF8F0,#fff);border:2px solid var(--principal);border-radius:12px;padding:24px;text-align:center;margin-top:24px;display:none}
+.al-resumen.show{display:block}
+.al-resumen h2{font-family:var(--cond);color:var(--principal);margin:0 0 8px;font-size:1.5rem}
+.al-resumen .num{font-family:var(--cond);font-size:3rem;color:var(--principal);line-height:1;margin:10px 0}
+.al-resumen .num small{font-size:1.5rem;color:var(--texto2)}
+@media print{.al-pasos{counter-reset:none}.al-paso{cursor:default}.al-actions{display:none}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U07 · Programación · Interactivo: ordena el algoritmo</span>
+</header>
+
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U07</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🍞</span><span class="nc-lbl">Algoritmos</span></span>
+</nav>
+
+<main id="main-content" class="al-wrap">
+
+  <section class="al-hero">
+    <h1>🍞 Ordena el algoritmo</h1>
+    <p>Vas a ver 4 algoritmos cotidianos con los pasos <strong>desordenados</strong>. Usa las flechas (↑ ↓) o arrastra para ponerlos en orden y comprueba.</p>
+  </section>
+
+  <div class="al-progress">
+    <span id="al-counter">Algoritmo 1 de 4</span>
+    <span class="al-score">Aciertos: <span id="al-aciertos">0</span> / 4</span>
+  </div>
+
+  <div id="al-cont"></div>
+
+  <div class="al-resumen" id="al-resumen">
+    <h2>¡Has terminado!</h2>
+    <div class="num"><span id="al-final">0</span><small> / 4 aciertos</small></div>
+    <p id="al-veredicto">—</p>
+    <button class="al-btn" id="al-reset">🔁 Volver a empezar</button>
+  </div>
+
+</main>
+
+<script>
+(function(){
+  'use strict';
+
+  var algoritmos = [
+    {
+      titulo:'🥪 Hacer un sándwich de jamón y queso',
+      instr:'Ordena los 6 pasos para preparar el sándwich.',
+      ordenCorrecto:[
+        'Coger dos rebanadas de pan',
+        'Untar mantequilla en una rebanada',
+        'Poner una loncha de jamón encima',
+        'Poner queso encima del jamón',
+        'Tapar con la otra rebanada',
+        'Cortar el sándwich por la mitad'
+      ]
+    },
+    {
+      titulo:'🎒 Salir de casa hacia el instituto',
+      instr:'Ordena los 5 pasos para irte al insti.',
+      ordenCorrecto:[
+        'Levantarme y vestirme',
+        'Desayunar',
+        'Coger la mochila con el material',
+        'Despedirme y cerrar la puerta',
+        'Caminar al instituto'
+      ]
+    },
+    {
+      titulo:'💻 Hacer login en una web del centro',
+      instr:'Ordena los pasos típicos para entrar en Moodle.',
+      ordenCorrecto:[
+        'Abrir el navegador',
+        'Escribir la URL de Moodle',
+        'Pulsar el botón "Iniciar sesión"',
+        'Escribir el usuario y la contraseña',
+        'Hacer clic en "Entrar"'
+      ]
+    },
+    {
+      titulo:'🎮 Algoritmo de juego: la bola rebota',
+      instr:'Ordena los pasos que ejecuta el ordenador en cada vuelta del bucle de un juego.',
+      ordenCorrecto:[
+        'Leer la posición actual de la bola',
+        'Calcular la nueva posición sumando velocidad',
+        'Comprobar si toca un borde o un objeto',
+        'Si toca, invertir la dirección',
+        'Dibujar la bola en la nueva posición'
+      ]
+    }
+  ];
+
+  function shuffle(a){
+    var b = a.slice();
+    for(var i=b.length-1;i>0;i--){
+      var j = Math.floor(Math.random()*(i+1));
+      var t = b[i]; b[i] = b[j]; b[j] = t;
+    }
+    if(JSON.stringify(b) === JSON.stringify(a)) return shuffle(a);
+    return b;
+  }
+
+  var idx = 0;
+  var aciertos = 0;
+  var ordenActual = [];
+  var contestado = false;
+
+  var cont = document.getElementById('al-cont');
+  var counter = document.getElementById('al-counter');
+  var aciertosEl = document.getElementById('al-aciertos');
+  var resumen = document.getElementById('al-resumen');
+  var finalEl = document.getElementById('al-final');
+  var veredictoEl = document.getElementById('al-veredicto');
+  document.getElementById('al-reset').addEventListener('click', function(){
+    idx = 0; aciertos = 0;
+    resumen.classList.remove('show');
+    render();
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  function render(){
+    if(idx >= algoritmos.length){
+      counter.textContent = 'Completado';
+      finalEl.textContent = aciertos;
+      var pct = aciertos / algoritmos.length;
+      var msg;
+      if(pct === 1) msg = '🌟 Perfecto. Tienes mentalidad algorítmica.';
+      else if(pct >= 0.5) msg = '👍 Bien. Repasa los fallos para afinar.';
+      else msg = '📚 Vuelve a leer el apartado de algoritmos del libro digital y prueba otra vez.';
+      veredictoEl.textContent = msg;
+      resumen.classList.add('show');
+      cont.innerHTML = '';
+      return;
+    }
+    contestado = false;
+    var a = algoritmos[idx];
+    ordenActual = shuffle(a.ordenCorrecto);
+    counter.textContent = 'Algoritmo ' + (idx+1) + ' de ' + algoritmos.length;
+    aciertosEl.textContent = aciertos;
+
+    var html = '<div class="al-card">';
+    html += '<h2 class="al-titulo">' + a.titulo + '</h2>';
+    html += '<p class="al-instr">' + a.instr + '</p>';
+    html += '<ol class="al-pasos">';
+    ordenActual.forEach(function(p, i){
+      html += '<li class="al-paso" data-i="' + i + '">';
+      html += '<span class="texto">' + p + '</span>';
+      html += '<span class="arrows"><button class="up" aria-label="Subir">▲</button><button class="dn" aria-label="Bajar">▼</button></span>';
+      html += '</li>';
+    });
+    html += '</ol>';
+    html += '<div class="al-actions">';
+    html += '<button class="al-btn" id="al-comprobar">Comprobar</button>';
+    html += '<button class="al-btn sec" id="al-reorden">🔀 Reordenar al azar</button>';
+    html += '</div>';
+    html += '<div class="al-fb"></div>';
+    html += '</div>';
+    cont.innerHTML = html;
+    attachArrows();
+    document.getElementById('al-comprobar').addEventListener('click', comprobar);
+    document.getElementById('al-reorden').addEventListener('click', function(){
+      if(contestado) return;
+      ordenActual = shuffle(ordenActual);
+      repintar();
+    });
+  }
+
+  function repintar(){
+    var ul = cont.querySelector('.al-pasos');
+    ul.innerHTML = '';
+    ordenActual.forEach(function(p, i){
+      var li = document.createElement('li');
+      li.className = 'al-paso';
+      li.dataset.i = i;
+      li.innerHTML = '<span class="texto">' + p + '</span><span class="arrows"><button class="up" aria-label="Subir">▲</button><button class="dn" aria-label="Bajar">▼</button></span>';
+      ul.appendChild(li);
+    });
+    attachArrows();
+  }
+
+  function attachArrows(){
+    var ul = cont.querySelector('.al-pasos');
+    var items = Array.from(ul.querySelectorAll('.al-paso'));
+    items.forEach(function(li, i){
+      var up = li.querySelector('.up');
+      var dn = li.querySelector('.dn');
+      if(i === 0) up.disabled = true;
+      if(i === items.length-1) dn.disabled = true;
+      up.addEventListener('click', function(){
+        if(contestado) return;
+        var t = ordenActual[i]; ordenActual[i] = ordenActual[i-1]; ordenActual[i-1] = t;
+        repintar();
+      });
+      dn.addEventListener('click', function(){
+        if(contestado) return;
+        var t = ordenActual[i]; ordenActual[i] = ordenActual[i+1]; ordenActual[i+1] = t;
+        repintar();
+      });
+    });
+  }
+
+  function comprobar(){
+    if(contestado) return;
+    contestado = true;
+    var a = algoritmos[idx];
+    var todoOk = ordenActual.every(function(p, i){ return p === a.ordenCorrecto[i]; });
+    if(todoOk) aciertos++;
+
+    var ul = cont.querySelector('.al-pasos');
+    ul.querySelectorAll('.al-paso').forEach(function(li, i){
+      if(ordenActual[i] === a.ordenCorrecto[i]) li.classList.add('ok');
+      else li.classList.add('ko');
+      li.querySelectorAll('.arrows button').forEach(function(b){ b.disabled = true; });
+    });
+
+    var fb = cont.querySelector('.al-fb');
+    var html = '<h4>' + (todoOk ? '✓ ¡Correcto!' : '✗ El orden no es correcto') + '</h4>';
+    if(!todoOk){
+      html += '<p>El orden correcto era:</p><ol style="margin-left:20px;line-height:1.6">';
+      a.ordenCorrecto.forEach(function(p){ html += '<li>' + p + '</li>'; });
+      html += '</ol>';
+    } else {
+      html += '<p>¡Bien! Has ordenado los pasos correctamente. En programación pasa exactamente igual: el orden es lo que hace que un algoritmo funcione.</p>';
+    }
+    html += '<p style="margin-top:10px;text-align:center"><button class="al-btn" id="al-sig">Siguiente →</button></p>';
+    fb.innerHTML = html;
+    fb.classList.add('show');
+    fb.classList.add(todoOk ? 'acierto' : 'fallo');
+    aciertosEl.textContent = aciertos;
+    document.getElementById('al-comprobar').disabled = true;
+    document.getElementById('al-reorden').disabled = true;
+    document.getElementById('al-sig').addEventListener('click', function(){
+      idx++;
+      render();
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>

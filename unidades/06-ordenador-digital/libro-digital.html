@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<title>Libro digital · U06 El ordenador, digitalización y creación de contenidos · TyD 2º ESO</title>
+<meta name="description" content="Libro digital de la unidad 6 para 2º ESO: hardware, software, internet y seguridad digital. IES Jiménez de Quesada (Santa Fe, Granada).">
+
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/06-ordenador-digital/libro-digital.html">
+
+<meta property="og:title" content="Libro digital · U06 Ordenador y digital · TyD 2º ESO">
+<meta property="og:description" content="Hardware, software, internet y seguridad digital. Con énfasis en ciudadanía digital y privacidad.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/06-ordenador-digital/libro-digital.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/common.css">
+<link rel="stylesheet" href="../../assets/css/unidad.css">
+
+<style>
+/* ── Estilos específicos del libro digital U6 ─────────────────────── */
+.parte-titulo{font-family:var(--cond);font-size:.78rem;letter-spacing:2.5px;color:var(--principal);text-transform:uppercase;font-weight:700;margin:30px 0 10px;padding-bottom:5px;border-bottom:1px dashed var(--principal)}
+.parte-titulo:first-of-type{margin-top:0}
+
+.tipo-box{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:14px 0}
+.tipo-box .ti{background:#fff;border:1px solid var(--borde);border-radius:8px;padding:14px 16px}
+.tipo-box .ti h4{margin:0 0 6px;font-family:var(--cond);color:var(--principal);font-size:1.05rem}
+.tipo-box .ti p{margin:0;font-size:.92rem;color:var(--texto2);line-height:1.5}
+.tipo-box .ti.azul h4{color:var(--principal2)}
+
+.componente-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0}
+.componente{background:#FFF8F0;border-left:3px solid var(--principal);border-radius:0 6px 6px 0;padding:10px 14px;font-size:.92rem}
+.componente strong{display:block;color:var(--principal);font-family:var(--cond);font-size:1rem;margin-bottom:4px}
+
+table.tipo-tabla{width:100%;border-collapse:collapse;margin:14px 0;font-size:.94rem}
+table.tipo-tabla th{background:var(--principal);color:#fff;padding:8px 10px;text-align:left;font-family:var(--cond);font-weight:600}
+table.tipo-tabla td{padding:8px 10px;border-bottom:1px solid var(--borde);vertical-align:top}
+table.tipo-tabla tr:nth-child(even){background:#FAFAFA}
+table.tipo-tabla td strong{color:var(--principal2)}
+
+.callout{display:flex;gap:12px;align-items:flex-start;background:#F4F6F9;border-left:4px solid var(--principal2);border-radius:0 6px 6px 0;padding:12px 16px;margin:14px 0}
+.callout .ic{font-size:1.4rem;flex-shrink:0;line-height:1}
+.callout p{margin:0;font-size:.94rem;line-height:1.55}
+.callout-warn{background:#FFF4E6;border-left-color:#F59E0B}
+.callout-info{background:#E6F1FB;border-left-color:#378ADD}
+.callout-danger{background:#FCEBEB;border-left-color:#E24B4A}
+.callout-ok{background:#E1F5EE;border-left-color:var(--verde)}
+
+.ejemplo{background:#FFFCF5;border:1px solid #E8DCB8;border-radius:8px;padding:14px 18px;margin:16px 0}
+.ejemplo .et{display:inline-block;font-family:var(--cond);font-size:.74rem;letter-spacing:1.5px;color:#A47B0C;background:#FBEBC2;padding:3px 9px;border-radius:10px;margin-bottom:6px}
+.ejemplo h5{font-family:var(--cond);color:var(--texto);margin:0 0 8px;font-size:1.05rem}
+.ejemplo p{margin:5px 0;font-size:.94rem}
+
+.glosario-tabla{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+.glosario-tabla th{background:var(--principal-bg);color:var(--principal);font-family:var(--cond);padding:8px 10px;text-align:left;font-weight:600}
+.glosario-tabla td{padding:8px 10px;border-bottom:1px solid var(--borde)}
+.glosario-tabla td:first-child{font-weight:600;color:var(--principal2);white-space:nowrap;width:25%}
+
+.password-demo{font-family:var(--mono,'JetBrains Mono',monospace);padding:6px 10px;background:#F4F6F9;border:1px solid var(--borde);border-radius:4px;display:inline-block;font-size:.92rem}
+.password-bad{color:var(--rojo);background:#FCEBEB;border-color:#F09595}
+.password-good{color:var(--verde);background:#E1F5EE;border-color:#9FE1CB}
+
+.regla-3-2-1{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.regla-3-2-1 .r{background:#fff;border:1px solid var(--borde);border-radius:8px;padding:14px;text-align:center}
+.regla-3-2-1 .r .num{font-family:var(--cond);font-size:2rem;color:var(--principal);line-height:1;margin-bottom:4px}
+.regla-3-2-1 .r .lbl{font-size:.85rem;color:var(--texto2)}
+
+.huella-lista{list-style:none;padding:0;margin:14px 0}
+.huella-lista li{padding:8px 14px;background:#F4F6F9;margin-bottom:6px;border-radius:6px;font-size:.94rem;display:flex;gap:10px;align-items:flex-start}
+.huella-lista li::before{content:"·";color:var(--principal);font-weight:700;font-size:1.4rem;line-height:1}
+
+@media(max-width:640px){
+  .regla-3-2-1{grid-template-columns:1fr}
+  .tipo-box,.componente-grid{grid-template-columns:1fr}
+}
+
+@media print{
+  .curso-hd,.curso-navcross,.sb-side{display:none!important}
+  .test-opt{display:none}
+  .test-fb{display:block!important;background:#f6f6f6}
+  .apartado{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U06 · El ordenador, digitalización y creación de contenidos · Libro digital</span>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="index.html"><span>📋</span><span class="nc-lbl">Hub U06</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>📖</span><span class="nc-lbl">Libro digital</span></span>
+  <span class="nc-sep">·</span>
+  <a href="actividades/index.html"><span>✏️</span><span class="nc-lbl">Actividades</span></a>
+  <span class="nc-sep">·</span>
+  <a href="autocomprobacion/index.html"><span>✅</span><span class="nc-lbl">Autocomprobación</span></a>
+</nav>
+
+<div class="unidad-layout">
+
+<aside class="sb-side">
+  <h3>Apartados</h3>
+
+  <div class="parte-titulo">Parte 1 · Hardware</div>
+  <a href="#s1">1. Qué es un ordenador</a>
+  <a href="#s2">2. Hardware: componentes internos</a>
+  <a href="#s3">3. Periféricos y tipos de ordenadores</a>
+
+  <div class="parte-titulo">Parte 2 · Software</div>
+  <a href="#s4">4. Tipos de software</a>
+  <a href="#s5">5. Sistemas operativos</a>
+  <a href="#s6">6. Archivos, carpetas y aplicaciones</a>
+
+  <div class="parte-titulo">Parte 3 · Internet</div>
+  <a href="#s7">7. Internet vs Web</a>
+  <a href="#s8">8. Servicios de internet</a>
+  <a href="#s9">9. Buscar y verificar información</a>
+
+  <div class="parte-titulo">Parte 4 · Seguridad digital</div>
+  <a href="#s10">10. Contraseñas y autenticación</a>
+  <a href="#s11">11. Phishing y suplantación</a>
+  <a href="#s12">12. Privacidad y huella digital</a>
+  <a href="#s13">13. Bulos y desinformación</a>
+  <a href="#s14">14. Bienestar digital</a>
+
+  <div class="parte-titulo">Cierre</div>
+  <a href="#glosario">📖 Glosario</a>
+</aside>
+
+<main class="ct" id="main-content">
+
+  <h1 class="unidad-titulo">U06 · El ordenador, digitalización y creación de contenidos</h1>
+  <p class="unidad-subt">Hardware, software, internet y, sobre todo, <strong>seguridad y ciudadanía digital</strong>. Lo que necesitas saber para moverte con cabeza por el mundo digital.</p>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PARTE 1 · HARDWARE
+     ═══════════════════════════════════════════════════════════ -->
+
+  <section class="apartado" id="s1">
+    <h2>1. ¿Qué es un ordenador?</h2>
+    <p>Un <strong>ordenador</strong> es una máquina que recibe datos, los <em>procesa</em> según unas instrucciones (un programa) y devuelve un resultado. Todos los ordenadores —tu móvil, una consola, un PC de sobremesa, el reloj inteligente— hacen lo mismo: entrada → procesado → salida, con memoria para guardar lo que les pasa.</p>
+
+    <div class="tipo-box">
+      <div class="ti"><h4>📥 Entrada</h4><p>Datos que el ordenador recibe: lo que tecleas, lo que dictas, lo que detecta una cámara.</p></div>
+      <div class="ti"><h4>⚙️ Proceso</h4><p>El procesador trabaja con los datos siguiendo las instrucciones del programa.</p></div>
+      <div class="ti"><h4>📤 Salida</h4><p>Resultado: texto en la pantalla, sonido por los altavoces, una foto enviada.</p></div>
+      <div class="ti"><h4>💾 Memoria</h4><p>Donde se guardan los datos: en uso (RAM) o a largo plazo (disco).</p></div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">💡</span>
+      <p>Cuando envías un mensaje por WhatsApp: <strong>entrada</strong> = lo que escribes; <strong>proceso</strong> = el móvil cifra el mensaje y lo prepara; <strong>salida</strong> = lo envía por internet; <strong>memoria</strong> = se guarda en tu chat para que puedas releerlo.</p>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s2">
+    <h2>2. Hardware: los componentes internos</h2>
+    <p>El <strong>hardware</strong> es la parte física del ordenador: todo lo que puedes tocar. Aunque haya muchas piezas, hay 5 que son las más importantes.</p>
+
+    <div class="componente-grid">
+      <div class="componente"><strong>CPU (procesador)</strong>El cerebro. Ejecuta las instrucciones del programa. Cuanta más velocidad (GHz) y más núcleos, más rápido va.</div>
+      <div class="componente"><strong>RAM (memoria)</strong>Memoria de trabajo: aquí se cargan los programas y datos mientras los usas. Más RAM = más cosas a la vez sin que se ralentice. Se borra al apagar.</div>
+      <div class="componente"><strong>Almacenamiento</strong>Disco duro (HDD) o SSD. Aquí se guardan los archivos, las fotos, el sistema operativo. NO se borra al apagar.</div>
+      <div class="componente"><strong>Placa base</strong>El "esqueleto" que conecta todos los componentes y permite que se comuniquen.</div>
+      <div class="componente"><strong>Fuente de alimentación</strong>Convierte la corriente del enchufe (230 V CA) en la que necesitan los componentes (5 / 12 V CC).</div>
+      <div class="componente"><strong>GPU (tarjeta gráfica)</strong>Procesa los gráficos. Imprescindible para videojuegos, vídeo 3D o edición de fotos.</div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">📊</span>
+      <p><strong>RAM ≠ Almacenamiento.</strong> La RAM es como la mesa donde trabajas: amplia y cómoda, pero al final del día la recoges. El disco es como la estantería: ahí guardas las cosas hasta mañana. Por eso si el ordenador "va lento" abriendo muchos programas, suele faltar <em>RAM</em>; si no te caben los archivos, falta <em>almacenamiento</em>.</p>
+    </div>
+
+    <div class="ejemplo">
+      <div class="et">Ejemplo resuelto 1</div>
+      <h5>Comparar dos ordenadores</h5>
+      <p><strong>Equipo A:</strong> CPU Intel i5 a 3 GHz, 8 GB de RAM, SSD de 256 GB.<br>
+      <strong>Equipo B:</strong> CPU Intel i3 a 2 GHz, 16 GB de RAM, HDD de 1 TB.</p>
+      <p>El <strong>A</strong> es más rápido procesando (CPU mejor) y arrancando (SSD), pero el <strong>B</strong> aguanta más programas abiertos a la vez (más RAM) y cabe más material (HDD más grande). Para gaming o edición: A. Para guardar muchos archivos: B.</p>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s3">
+    <h2>3. Periféricos y tipos de ordenadores</h2>
+    <p>Los <strong>periféricos</strong> son los dispositivos externos que se conectan al ordenador. Se clasifican según su función:</p>
+
+    <table class="tipo-tabla">
+      <thead>
+        <tr><th>Tipo</th><th>Función</th><th>Ejemplos</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>De entrada</strong></td><td>Meten información en el ordenador</td><td>Teclado, ratón, micrófono, cámara, escáner, lector de huella</td></tr>
+        <tr><td><strong>De salida</strong></td><td>Sacan información del ordenador</td><td>Monitor, altavoces, impresora, proyector</td></tr>
+        <tr><td><strong>Mixtos</strong></td><td>Entrada y salida</td><td>Pantalla táctil, auriculares con micro, multifunción</td></tr>
+        <tr><td><strong>De almacenamiento</strong></td><td>Guardar datos</td><td>USB, disco externo, tarjeta SD, DVD, nube</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Tipos de ordenadores</h3>
+    <table class="tipo-tabla">
+      <thead>
+        <tr><th>Tipo</th><th>Características</th><th>Para qué se usa</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Sobremesa</strong></td><td>Potente, ampliable, no se mueve</td><td>Oficina, gaming, edición</td></tr>
+        <tr><td><strong>Portátil</strong></td><td>Todo integrado, con batería</td><td>Trabajo en movilidad, estudio</td></tr>
+        <tr><td><strong>Tableta</strong></td><td>Pantalla táctil, ligera</td><td>Lectura, consumo de medios, dibujo</td></tr>
+        <tr><td><strong>Smartphone</strong></td><td>De bolsillo, con conectividad móvil</td><td>Comunicación, fotos, apps</td></tr>
+        <tr><td><strong>Wearable / IoT</strong></td><td>Reloj, pulsera, sensor de hogar</td><td>Salud, deporte, automatización</td></tr>
+        <tr><td><strong>Servidor</strong></td><td>Funciona 24/7, en centros de datos</td><td>Aloja webs, apps, juegos online</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-info">
+      <span class="ic">📱</span>
+      <p>Tu <strong>móvil</strong> es un ordenador completo: tiene CPU, RAM, almacenamiento, sistema operativo, pantalla, cámara… Solo que todo cabe en la mano.</p>
+    </div>
+  </section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PARTE 2 · SOFTWARE
+     ═══════════════════════════════════════════════════════════ -->
+
+  <section class="apartado" id="s4">
+    <h2>4. Tipos de software</h2>
+    <p>El <strong>software</strong> es la parte "no física": los programas y datos. Sin software, el hardware es solo un cajón de circuitos. Se divide en dos grandes grupos:</p>
+
+    <div class="tipo-box">
+      <div class="ti azul"><h4>🪟 Software de sistema</h4><p>El que hace funcionar el ordenador. Lo más importante: el <strong>sistema operativo</strong> (Windows, macOS, Linux, Android, iOS). También los <em>drivers</em> (programas que controlan cada componente).</p></div>
+      <div class="ti"><h4>📦 Software de aplicación</h4><p>Los programas que tú usas: navegador (Firefox, Chrome), procesador de textos (Word, Google Docs), edición (Photoshop, GIMP), juegos, mensajería (WhatsApp), redes sociales (Instagram).</p></div>
+    </div>
+
+    <h3>¿Privativo o libre?</h3>
+    <table class="tipo-tabla">
+      <thead>
+        <tr><th>Tipo</th><th>Características</th><th>Ejemplos</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Privativo</strong></td><td>Empresa propietaria, código cerrado, suele ser de pago o ofrecer versión gratuita con limitaciones</td><td>Windows, Photoshop, Microsoft Office</td></tr>
+        <tr><td><strong>Libre</strong></td><td>Gratuito, código abierto, puedes verlo, modificarlo y compartirlo</td><td>Linux, LibreOffice, GIMP, Firefox</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-info">
+      <span class="ic">🔓</span>
+      <p><strong>Software libre ≠ gratis.</strong> Lo principal es que el <em>código fuente</em> es accesible. La mayoría del software libre es gratuito, pero podría cobrarse. Y, al revés: hay software gratuito que NO es libre (su código sigue oculto y propiedad de una empresa).</p>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s5">
+    <h2>5. Sistemas operativos</h2>
+    <p>El <strong>sistema operativo (SO)</strong> es el software más importante de un ordenador. Hace de "intermediario" entre el hardware y tú: gestiona la memoria, los archivos, los programas, los permisos y los periféricos.</p>
+
+    <table class="tipo-tabla">
+      <thead>
+        <tr><th>SO</th><th>Dónde se usa</th><th>Tipo</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Windows</strong> (Microsoft)</td><td>Mayoría de PC del mundo</td><td>Privativo</td></tr>
+        <tr><td><strong>macOS</strong> (Apple)</td><td>Ordenadores Mac</td><td>Privativo</td></tr>
+        <tr><td><strong>Linux</strong> (Ubuntu, Mint…)</td><td>PC, servidores, supercomputadoras</td><td>Libre</td></tr>
+        <tr><td><strong>Android</strong></td><td>Mayoría de móviles y tablets</td><td>Libre (Google añade capas privativas)</td></tr>
+        <tr><td><strong>iOS</strong></td><td>iPhone, iPad</td><td>Privativo</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-info">
+      <span class="ic">💡</span>
+      <p>El sistema operativo está siempre arrancado cuando enciendes el aparato. Si <em>cierras</em> el navegador, sigue habiendo sistema operativo; si <em>cierras</em> el sistema operativo, el ordenador se apaga.</p>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s6">
+    <h2>6. Archivos, carpetas y aplicaciones</h2>
+    <p>Cada cosa que guardas en el ordenador es un <strong>archivo</strong>. El sistema operativo los organiza dentro de <strong>carpetas</strong> (también llamadas "directorios"). Cada archivo tiene un nombre y una <strong>extensión</strong> (las letras tras el último punto) que indica de qué tipo es.</p>
+
+    <table class="tipo-tabla">
+      <thead>
+        <tr><th>Categoría</th><th>Extensiones típicas</th><th>Se abren con</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Texto</strong></td><td>.txt .docx .odt .pdf</td><td>Word, LibreOffice Writer, Acrobat</td></tr>
+        <tr><td><strong>Imagen</strong></td><td>.jpg .png .gif .svg .webp</td><td>Visor de imágenes, GIMP, Photoshop</td></tr>
+        <tr><td><strong>Audio</strong></td><td>.mp3 .wav .ogg .m4a</td><td>Reproductor, VLC, Audacity</td></tr>
+        <tr><td><strong>Vídeo</strong></td><td>.mp4 .avi .mov .mkv</td><td>VLC, reproductor de Windows</td></tr>
+        <tr><td><strong>Web</strong></td><td>.html .css .js</td><td>Navegador, editor de texto</td></tr>
+        <tr><td><strong>Hoja de cálculo</strong></td><td>.xlsx .ods .csv</td><td>Excel, Google Sheets, Calc</td></tr>
+        <tr><td><strong>Comprimido</strong></td><td>.zip .rar .7z</td><td>WinRAR, 7-Zip, descompresor del SO</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-warn">
+      <span class="ic">⚠️</span>
+      <p><strong>Cuidado con las extensiones engañosas.</strong> Un archivo malicioso puede llamarse <code>foto_vacaciones.jpg.exe</code>: el sistema operativo lo trata como ejecutable (<code>.exe</code>) y, si lo abres, puede instalar virus. Activa siempre en Windows la opción «Mostrar extensiones de archivos» para verlas.</p>
+    </div>
+
+    <div class="callout callout-ok">
+      <span class="ic">💡</span>
+      <p>Buena práctica: organiza tus archivos del instituto en una sola carpeta tipo <code>2ESO_TyD/</code>, dentro de ella una subcarpeta por unidad (<code>U01_proceso/</code>, <code>U02_materiales/</code>…) y dentro de cada una <code>teoria/</code>, <code>actividades/</code>, <code>proyectos/</code>. Te ahorrarás muchos disgustos.</p>
+    </div>
+  </section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PARTE 3 · INTERNET
+     ═══════════════════════════════════════════════════════════ -->
+
+  <section class="apartado" id="s7">
+    <h2>7. Internet vs Web (no son lo mismo)</h2>
+    <p>Mucha gente usa "internet" y "web" como sinónimos. Pero son cosas distintas:</p>
+
+    <div class="tipo-box">
+      <div class="ti azul"><h4>🌐 Internet</h4><p>La red mundial de ordenadores conectados entre sí. Es la <em>infraestructura</em>: cables submarinos, fibra óptica, antenas, satélites, routers. Existe desde finales de los 60.</p></div>
+      <div class="ti"><h4>🕸️ Web (WWW)</h4><p>Uno de los muchos servicios que funcionan <em>sobre</em> internet. Las páginas web que ves con un navegador. Existe desde 1989 (Tim Berners-Lee).</p></div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">💡</span>
+      <p>Analogía: <strong>internet</strong> son las carreteras; la <strong>web</strong> es uno de los muchos servicios que circulan por ellas (como el correo electrónico, los videojuegos online, WhatsApp, Spotify…). Cuando dices "voy a internet" en realidad casi siempre quieres decir "voy a la web".</p>
+    </div>
+
+    <h3>Conceptos clave del navegador</h3>
+    <div class="componente-grid">
+      <div class="componente"><strong>URL</strong>La dirección de una página, como <code>https://www.iesjdq.es</code>. Tiene partes (protocolo + dominio + ruta).</div>
+      <div class="componente"><strong>HTTP / HTTPS</strong>El protocolo de comunicación. HTTPS añade cifrado: nadie puede leer lo que mandas (importante en bancos, compras, login).</div>
+      <div class="componente"><strong>Dominio</strong>El nombre principal de la web (<code>iesjdq.es</code>). Lo compras y lo registras.</div>
+      <div class="componente"><strong>Buscador</strong>Google, Bing, DuckDuckGo… Una web que rastrea las demás y te las muestra ordenadas.</div>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s8">
+    <h2>8. Servicios de internet</h2>
+    <p>Internet ofrece muchos servicios además de la web:</p>
+
+    <table class="tipo-tabla">
+      <thead>
+        <tr><th>Servicio</th><th>Para qué</th><th>Ejemplos</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Web</strong></td><td>Consultar páginas</td><td>Wikipedia, prensa, esta misma página</td></tr>
+        <tr><td><strong>Correo electrónico</strong></td><td>Enviar mensajes con archivos adjuntos</td><td>Gmail, Outlook, ProtonMail</td></tr>
+        <tr><td><strong>Mensajería instantánea</strong></td><td>Chats individuales o de grupo</td><td>WhatsApp, Telegram, Signal</td></tr>
+        <tr><td><strong>Redes sociales</strong></td><td>Compartir contenidos y conectar con gente</td><td>Instagram, TikTok, X, YouTube</td></tr>
+        <tr><td><strong>Almacenamiento en la nube</strong></td><td>Guardar archivos para tenerlos en cualquier dispositivo</td><td>Google Drive, OneDrive, iCloud</td></tr>
+        <tr><td><strong>Streaming</strong></td><td>Ver vídeos o escuchar música en directo sin descargar</td><td>Netflix, Spotify, YouTube, Twitch</td></tr>
+        <tr><td><strong>Juegos online</strong></td><td>Jugar con otras personas en tiempo real</td><td>Fortnite, Minecraft, FIFA, Roblox</td></tr>
+        <tr><td><strong>Banca y compras</strong></td><td>Operaciones económicas</td><td>Banco online, Amazon, Wallapop</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+
+  <section class="apartado" id="s9">
+    <h2>9. Buscar y verificar información</h2>
+    <p>Saber <strong>buscar bien</strong> es una superpotencia. Y saber <strong>verificar</strong> lo que encuentras, todavía más.</p>
+
+    <h3>Buscar mejor en Google</h3>
+    <ul style="margin-left:20px;line-height:1.7">
+      <li>Usa <strong>palabras clave</strong>, no frases enteras: «receta tortilla patatas» en vez de «¿cómo se hace una tortilla de patatas paso a paso?».</li>
+      <li><strong>Comillas</strong> para frase exacta: <code>"mecanismos de transmisión"</code>.</li>
+      <li><strong>site:</strong> para buscar dentro de una web concreta: <code>tinkercad site:autodesk.com</code>.</li>
+      <li><strong>filetype:</strong> para un tipo de archivo: <code>plan de trabajo filetype:pdf</code>.</li>
+      <li>Operador <strong>-</strong> (menos) para excluir: <code>jaguar -coche</code> (busca el animal, no la marca).</li>
+    </ul>
+
+    <h3>Verificar antes de creer (y compartir)</h3>
+    <p>Una de las habilidades más importantes hoy. Para cualquier información que veas en internet:</p>
+    <div class="huella-lista">
+      <li><strong>¿Quién lo dice?</strong> Web fiable, autor identificable, ¿tiene fecha?</li>
+      <li><strong>¿Lo dice alguien más?</strong> Contrasta con 2-3 fuentes distintas (no copia-pega).</li>
+      <li><strong>¿La imagen es real?</strong> Búsqueda inversa de imagen (Google Lens / TinEye).</li>
+      <li><strong>¿Es una broma o sátira?</strong> Webs como <em>El Mundo Today</em> son humor, no noticias.</li>
+      <li><strong>¿Apela a emociones extremas?</strong> Si te indigna o asombra muchísimo, sospecha.</li>
+      <li><strong>Verificadores profesionales:</strong> Maldita.es, Newtral, FactCheck.org.</li>
+    </div>
+  </section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PARTE 4 · SEGURIDAD Y CIUDADANÍA DIGITAL (LA MÁS IMPORTANTE)
+     ═══════════════════════════════════════════════════════════ -->
+
+  <section class="apartado" id="s10">
+    <h2>10. Contraseñas y autenticación</h2>
+    <p>La contraseña es la primera barrera entre tus datos y un atacante. Una mala contraseña es como dejar la puerta de casa con un cordel.</p>
+
+    <h3>Qué hace una contraseña <em>débil</em></h3>
+    <div style="margin:14px 0">
+      <span class="password-demo password-bad">123456</span>
+      <span class="password-demo password-bad">password</span>
+      <span class="password-demo password-bad">qwerty</span>
+      <span class="password-demo password-bad">tu_nombre</span>
+      <span class="password-demo password-bad">fechanacimiento</span>
+      <span class="password-demo password-bad">equipo_favorito</span>
+    </div>
+    <p>Cualquier herramienta automática las prueba en segundos. Y además, son las primeras 100 que un atacante intenta.</p>
+
+    <h3>Qué hace una contraseña <em>fuerte</em></h3>
+    <div class="huella-lista">
+      <li><strong>Larga</strong> (mínimo 12 caracteres; más siempre es mejor).</li>
+      <li><strong>Mezcla</strong> mayúsculas, minúsculas, números y símbolos.</li>
+      <li><strong>Sin datos personales</strong> obvios (nombre, fecha de nacimiento, nombre de la mascota, equipo).</li>
+      <li><strong>Distinta</strong> para cada servicio (si te roban una, no se llevan todas).</li>
+      <li><strong>Memorable</strong> para ti, no para otros. Usa una <em>frase de paso</em>: <span class="password-demo password-good">ElGato7AzulDanzaBajoLaLluvia!</span></li>
+    </div>
+
+    <div class="callout callout-ok">
+      <span class="ic">🔑</span>
+      <p><strong>Truco del gestor de contraseñas.</strong> Como nadie puede recordar 80 contraseñas distintas, usa un <em>gestor</em> (Bitwarden, KeePass, 1Password). Tú solo recuerdas <em>una</em> contraseña maestra muy fuerte y el gestor te genera y guarda todas las demás.</p>
+    </div>
+
+    <h3>Doble factor (2FA): el otro cerrojo</h3>
+    <p>Aunque tu contraseña sea robada, el <strong>doble factor</strong> añade una segunda barrera: un código que solo tú tienes en el momento (app autenticadora, SMS, llave física). Activa el 2FA en todo lo importante: correo, banca, redes sociales, plataformas escolares.</p>
+
+    <div class="callout callout-info">
+      <span class="ic">💡</span>
+      <p>El correo electrónico es la <em>llave maestra</em>: si lo controlan, pueden restablecer la contraseña de tus demás cuentas. Protege el correo con el doble factor antes que nada.</p>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s11">
+    <h2>11. Phishing y suplantación de identidad</h2>
+    <p>El <strong>phishing</strong> (de <em>fishing</em>, pescar) es uno de los engaños más comunes: te llega un correo, SMS o mensaje que <em>parece</em> de un servicio legítimo (banco, Correos, Hacienda, Netflix, Instagram) y te pide que hagas clic en un enlace o introduzcas tus datos. El enlace lleva a una web falsa que <em>imita</em> a la real para robarte usuario y contraseña.</p>
+
+    <h3>Señales típicas de phishing</h3>
+    <div class="huella-lista">
+      <li><strong>Urgencia exagerada:</strong> "Su cuenta será bloqueada en 24 horas".</li>
+      <li><strong>Faltas de ortografía</strong> o frases mal traducidas.</li>
+      <li><strong>Saludo genérico:</strong> "Estimado cliente" en vez de tu nombre.</li>
+      <li><strong>Dominio raro</strong> en el enlace: <code>banc0santander-cliente.com</code> (con 0 en vez de o, o subdominios extraños).</li>
+      <li><strong>Te pide la contraseña</strong> o datos personales. Ningún servicio legítimo lo pide por correo.</li>
+      <li><strong>Promesas absurdas:</strong> "Has ganado un iPhone", "Te ha tocado una herencia".</li>
+    </div>
+
+    <div class="callout callout-danger">
+      <span class="ic">🚨</span>
+      <p><strong>Regla de oro:</strong> nunca hagas clic en enlaces de correos sospechosos. Si la noticia podría ser cierta, ve <em>tú</em> a la web del banco / servicio escribiendo la dirección en el navegador, o llama directamente. Nunca a través del enlace que te mandaron.</p>
+    </div>
+
+    <h3>Variantes que también conviene conocer</h3>
+    <table class="tipo-tabla">
+      <thead>
+        <tr><th>Nombre</th><th>Qué es</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Smishing</strong></td><td>Phishing por SMS (típico de Correos, paquetería)</td></tr>
+        <tr><td><strong>Vishing</strong></td><td>Phishing por llamada de teléfono ("soy de Microsoft, su PC tiene un virus")</td></tr>
+        <tr><td><strong>Spear phishing</strong></td><td>Phishing personalizado (saben tu nombre, dónde estudias, etc.)</td></tr>
+        <tr><td><strong>Suplantación</strong></td><td>Crear una cuenta falsa que parece tuya o de un conocido para engañar a otros</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+
+  <section class="apartado" id="s12">
+    <h2>12. Privacidad y huella digital</h2>
+    <p>Cada cosa que haces online deja un rastro: lo que buscas, lo que ves, lo que escribes, dónde estás. A ese rastro se le llama <strong>huella digital</strong>. Y tiene una propiedad importante: <em>es muy difícil de borrar</em>.</p>
+
+    <div class="callout callout-warn">
+      <span class="ic">📌</span>
+      <p>Una foto que mandas por WhatsApp puede acabar en cualquier sitio. Un comentario que escribes hoy se puede recuperar años después. Un vídeo subido a TikTok lo descargan otros antes de que tú lo borres. <strong>Internet no olvida.</strong></p>
+    </div>
+
+    <h3>Qué incluye tu huella digital</h3>
+    <div class="huella-lista">
+      <li><strong>Activa</strong>: lo que <em>publicas</em> voluntariamente (fotos, comentarios, vídeos, perfiles, etiquetas).</li>
+      <li><strong>Pasiva</strong>: lo que se registra sin que lo veas (historial, ubicaciones, cookies, qué tipo de móvil tienes, cuándo te conectas).</li>
+    </div>
+
+    <h3>Buenas prácticas</h3>
+    <div class="huella-lista">
+      <li><strong>Piensa antes de publicar.</strong> ¿Te gustaría que esto lo viera tu jefe dentro de 10 años? Si la respuesta es no, no lo publiques.</li>
+      <li><strong>Revisa la privacidad</strong> de tus redes sociales. Las cuentas pueden ser <em>públicas</em> o <em>privadas</em>; lo público es accesible a todo el mundo.</li>
+      <li><strong>Cuidado con la ubicación.</strong> Las apps comparten dónde estás. Desactívala salvo cuando la necesites (Maps, ir al cine, etc.).</li>
+      <li><strong>Imágenes con metadatos</strong> (EXIF) pueden revelar dónde se hizo la foto. Hay apps para limpiarlos.</li>
+      <li><strong>Cierra sesiones</strong> en dispositivos compartidos (clase, biblioteca).</li>
+      <li><strong>Derecho al olvido:</strong> en la UE puedes pedir que Google quite resultados sobre ti que sean obsoletos o lesivos.</li>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s13">
+    <h2>13. Bulos, desinformación y deepfakes</h2>
+    <p>Un <strong>bulo</strong> (o <em>fake news</em>) es una noticia falsa diseñada para engañar. Hoy se propagan más rápido que las noticias reales porque suelen apelar a emociones fuertes (miedo, indignación, sorpresa).</p>
+
+    <h3>Por qué los bulos funcionan</h3>
+    <div class="huella-lista">
+      <li>Refuerzan lo que <em>ya queremos creer</em> (sesgo de confirmación).</li>
+      <li>Son <em>simples</em>: una afirmación tajante en 280 caracteres.</li>
+      <li>Activan emociones: <em>compártelo, esto es vergonzoso</em>.</li>
+      <li>Usan datos o gráficos (a veces inventados) para parecer rigurosos.</li>
+    </div>
+
+    <h3>Antes de compartir, pregunta:</h3>
+    <div class="huella-lista">
+      <li>¿La fuente es seria y conocida?</li>
+      <li>¿Hay fecha y autor? ¿Otros medios lo confirman?</li>
+      <li>¿Por qué me lo están enseñando justo ahora?</li>
+      <li>Si la noticia es de imagen o vídeo: ¿podría ser un <strong>deepfake</strong>? (IA puede crear caras y voces falsas).</li>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">🧠</span>
+      <p><strong>Norma 30 segundos:</strong> antes de compartir algo que te alarme, párate 30 segundos. Búscalo en Google añadiendo "bulo" o "verificación". Si nadie serio lo confirma, no lo difundas.</p>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s14">
+    <h2>14. Bienestar digital: uso consciente del móvil</h2>
+    <p>El móvil es una herramienta brutal, pero las apps están diseñadas para que pases en ellas el máximo tiempo posible (cuanto más te enganchen, más anuncios te muestran, más dinero ganan). Esa es la verdad incómoda. Por eso conviene poner límites tú.</p>
+
+    <h3>Señales de un uso problemático</h3>
+    <div class="huella-lista">
+      <li>Coges el móvil <em>sin querer</em> (efecto reflejo).</li>
+      <li>Te cuesta dormir porque te quedas con vídeos hasta tarde.</li>
+      <li>Estás físicamente con gente pero mentalmente en el chat.</li>
+      <li>Te sientes mal o ansioso si te lo quitan / no tienes batería.</li>
+      <li>Te comparas constantemente con lo que ves en redes.</li>
+    </div>
+
+    <h3>Buenas prácticas (sin moralina)</h3>
+    <div class="huella-lista">
+      <li><strong>Tiempo de pantalla</strong>: revisa cuánto usas el móvil al día (todos los móviles lo miden). Suele sorprender.</li>
+      <li><strong>Notificaciones</strong>: desactiva las que no son urgentes. WhatsApp del grupo de la clase no es urgente.</li>
+      <li><strong>Pantalla en escala de grises</strong> a partir de cierta hora. Pierde su atractivo y te aburre.</li>
+      <li><strong>Móvil fuera de la mesilla.</strong> Despertador analógico, móvil en otra habitación.</li>
+      <li><strong>"Modo no molestar"</strong> durante el estudio. 25 minutos seguidos sin tocarlo = una sesión Pomodoro.</li>
+      <li><strong>Acuerdos con tu grupo:</strong> "en la cena, móviles en una caja". Mucho más fácil hacerlo juntos.</li>
+    </div>
+
+    <div class="callout callout-ok">
+      <span class="ic">🌳</span>
+      <p>Un buen uso del móvil no es "no usarlo": es saber <em>cuándo</em> y <em>para qué</em>. Es una herramienta. Tú decides cuándo se usa, no al revés.</p>
+    </div>
+  </section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     GLOSARIO
+     ═══════════════════════════════════════════════════════════ -->
+
+  <section class="apartado" id="glosario">
+    <h2>📖 Glosario de la unidad</h2>
+    <table class="glosario-tabla">
+      <thead><tr><th>Término</th><th>Significado breve</th></tr></thead>
+      <tbody>
+        <tr><td>2FA</td><td>Doble factor de autenticación. Pide un segundo código además de la contraseña.</td></tr>
+        <tr><td>CPU</td><td>Unidad central de procesamiento. El "cerebro" del ordenador.</td></tr>
+        <tr><td>Deepfake</td><td>Vídeo o audio falso creado con IA que imita a una persona real.</td></tr>
+        <tr><td>Hardware</td><td>Parte física del ordenador: lo que se puede tocar.</td></tr>
+        <tr><td>HTTP / HTTPS</td><td>Protocolo de comunicación web. HTTPS añade cifrado (más seguro).</td></tr>
+        <tr><td>Huella digital</td><td>Rastro de información que dejas al usar internet.</td></tr>
+        <tr><td>IoT</td><td>"Internet of Things": dispositivos cotidianos conectados (reloj, nevera, sensor…).</td></tr>
+        <tr><td>Phishing</td><td>Engaño que imita a un servicio legítimo para robar contraseñas.</td></tr>
+        <tr><td>RAM</td><td>Memoria de trabajo. Rápida, se borra al apagar.</td></tr>
+        <tr><td>Sistema operativo</td><td>Software que gestiona todo el ordenador (Windows, Linux…).</td></tr>
+        <tr><td>SSD</td><td>Disco de estado sólido. Almacenamiento mucho más rápido que un HDD.</td></tr>
+        <tr><td>Software</td><td>Programas y datos. Lo "no físico" del ordenador.</td></tr>
+        <tr><td>Software libre</td><td>Software con código abierto, modificable y compartible.</td></tr>
+        <tr><td>Suplantación de identidad</td><td>Hacerse pasar por otra persona online.</td></tr>
+        <tr><td>URL</td><td>Dirección de una página web.</td></tr>
+        <tr><td>Web (WWW)</td><td>Servicio de páginas enlazadas que funciona sobre internet.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-info" style="margin-top:24px">
+      <span class="ic">✅</span>
+      <p>¿Te has quedado con todo? Pasa a la <a href="autocomprobacion/index.html"><strong>autocomprobación</strong></a> y comprueba si lo has entendido. 18 preguntas en 4 bloques, con feedback inmediato.</p>
+    </div>
+  </section>
+
+</main>
+
+</div>
+
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/header.js"></script>
+</body>
+</html>

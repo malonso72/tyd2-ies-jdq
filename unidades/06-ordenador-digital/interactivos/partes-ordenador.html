@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Partes del ordenador · U06 · TyD 2º ESO</title>
+<meta name="description" content="Identifica los componentes hardware de un ordenador y conoce su función. Quiz visual interactivo.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+.po-wrap{max-width:880px;margin:30px auto;padding:0 20px 50px}
+.po-hero{text-align:center;margin-bottom:24px}
+.po-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 8px}
+.po-hero p{font-size:1rem;color:var(--texto2);margin:0;line-height:1.5}
+
+.po-progress{display:flex;justify-content:space-between;align-items:center;background:#F4F6F9;padding:10px 16px;border-radius:8px;margin-bottom:20px;font-family:var(--cond);font-size:.92rem}
+.po-score{color:var(--principal);font-size:1.05rem}
+
+.po-card{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:24px;box-shadow:0 1px 6px rgba(0,0,0,.05);margin-bottom:24px}
+.po-componente{text-align:center;margin-bottom:20px}
+.po-componente .emoji{font-size:4rem;line-height:1;margin-bottom:12px}
+.po-componente .nombre{font-family:var(--cond);font-size:1.6rem;color:var(--principal);margin:0 0 6px}
+.po-componente .pista{font-size:.94rem;color:var(--texto2);margin:0;line-height:1.55}
+
+.po-opciones{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px}
+.po-opt{font-family:var(--sans);font-size:.95rem;padding:12px 16px;background:#FAFAFA;border:2px solid var(--borde);border-radius:8px;cursor:pointer;text-align:left;transition:all .15s;line-height:1.4;color:var(--texto)}
+.po-opt:hover:not(:disabled){background:var(--principal-bg);border-color:var(--principal)}
+.po-opt:disabled{cursor:default}
+.po-opt.correct{background:#E1F5EE;border-color:#1E8E3E;color:#0F6E56;font-weight:600}
+.po-opt.wrong{background:#FCEBEB;border-color:#C44536;color:#9A2A2A}
+
+.po-fb{display:none;margin-top:14px;padding:12px 16px;background:#F4F6F9;border-left:4px solid var(--principal);border-radius:0 6px 6px 0;font-size:.94rem;line-height:1.55}
+.po-fb.show{display:block}
+.po-fb strong{color:var(--principal)}
+.po-fb-next{margin-top:14px;text-align:center}
+.po-fb-next button{font-family:var(--cond);font-size:.92rem;letter-spacing:.5px;padding:9px 22px;border-radius:22px;cursor:pointer;border:2px solid var(--principal);background:var(--principal);color:#fff;font-weight:600}
+.po-fb-next button:hover{background:var(--principal2)}
+
+.po-resumen{background:linear-gradient(180deg,#FFF8F0,#fff);border:2px solid var(--principal);border-radius:12px;padding:24px;text-align:center;margin-top:24px;display:none}
+.po-resumen.show{display:block}
+.po-resumen h2{font-family:var(--cond);color:var(--principal);margin:0 0 8px;font-size:1.5rem}
+.po-resumen .num{font-family:var(--cond);font-size:3rem;color:var(--principal);line-height:1;margin:10px 0}
+.po-resumen .num small{font-size:1.5rem;color:var(--texto2)}
+.po-resumen button{font-family:var(--cond);font-size:.92rem;letter-spacing:.5px;padding:10px 22px;border-radius:22px;cursor:pointer;border:2px solid var(--principal);background:var(--principal);color:#fff;font-weight:600;margin-top:8px}
+.po-resumen button:hover{background:var(--principal2)}
+
+@media(max-width:560px){.po-opciones{grid-template-columns:1fr}}
+@media print{.po-opciones,.po-fb-next{display:none}.po-fb{display:block!important}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U06 · Ordenador y digital · Interactivo: partes del ordenador</span>
+</header>
+
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U06</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🖥️</span><span class="nc-lbl">Partes</span></span>
+</nav>
+
+<main id="main-content" class="po-wrap">
+
+  <section class="po-hero">
+    <h1>🖥️ Partes del ordenador</h1>
+    <p>Vas a ver 8 componentes hardware. Para cada uno, elige cuál es su función principal.</p>
+  </section>
+
+  <div class="po-progress">
+    <span id="po-counter">Componente 1 de 8</span>
+    <span class="po-score">Aciertos: <span id="po-aciertos">0</span> / 8</span>
+  </div>
+
+  <div id="po-actual"></div>
+
+  <div class="po-resumen" id="po-resumen">
+    <h2>¡Has terminado!</h2>
+    <div class="num"><span id="po-final">0</span><small> / 8 aciertos</small></div>
+    <p id="po-veredicto">—</p>
+    <button id="po-reset">🔁 Volver a empezar</button>
+  </div>
+
+</main>
+
+<script>
+(function(){
+  'use strict';
+
+  var componentes = [
+    {emoji:'🧠', nombre:'CPU (procesador)', pista:'Es el componente que ejecuta las instrucciones de los programas. Cuanta más velocidad (GHz) y más núcleos, más rápido va el ordenador.',
+     opciones:[
+       {t:'Ejecutar las instrucciones de los programas',ok:true},
+       {t:'Guardar archivos a largo plazo',ok:false},
+       {t:'Conectarse a internet',ok:false},
+       {t:'Reproducir sonido',ok:false}
+     ],
+     fb:'La <strong>CPU</strong> (Central Processing Unit) es "el cerebro": ejecuta las instrucciones del programa, hace cálculos y coordina al resto de componentes.'},
+
+    {emoji:'⚡', nombre:'Memoria RAM', pista:'Memoria de trabajo muy rápida. Aquí se cargan los programas y datos mientras los usas. Si tienes más, puedes tener más cosas abiertas a la vez.',
+     opciones:[
+       {t:'Memoria temporal de trabajo (se borra al apagar)',ok:true},
+       {t:'Almacenamiento permanente de tus archivos',ok:false},
+       {t:'Procesar gráficos 3D',ok:false},
+       {t:'Conectar el teclado',ok:false}
+     ],
+     fb:'La <strong>RAM</strong> (Random Access Memory) es como tu mesa de trabajo: rápida y amplia, pero al final del día se recoge (se borra al apagar). Más RAM = más programas abiertos a la vez.'},
+
+    {emoji:'💾', nombre:'Disco SSD / HDD', pista:'Donde se guardan permanentemente el sistema operativo, las aplicaciones y todos tus archivos. NO se borra al apagar.',
+     opciones:[
+       {t:'Mostrar imágenes en la pantalla',ok:false},
+       {t:'Guardar archivos a largo plazo (sistema, fotos, documentos)',ok:true},
+       {t:'Refrigerar la placa base',ok:false},
+       {t:'Acelerar la conexión wifi',ok:false}
+     ],
+     fb:'El <strong>almacenamiento</strong> (SSD o HDD) guarda los archivos de forma permanente. SSD es mucho más rápido pero más caro. HDD es lento pero barato y de gran capacidad.'},
+
+    {emoji:'🔌', nombre:'Placa base', pista:'Es la "tabla" donde se conectan todos los componentes y por la que se comunican entre sí.',
+     opciones:[
+       {t:'Procesar las instrucciones',ok:false},
+       {t:'Conectar y comunicar todos los componentes del ordenador',ok:true},
+       {t:'Reproducir música',ok:false},
+       {t:'Almacenar fotos',ok:false}
+     ],
+     fb:'La <strong>placa base</strong> (motherboard) es el "esqueleto" que conecta CPU, RAM, almacenamiento, GPU, periféricos… Todo pasa por ella.'},
+
+    {emoji:'🎮', nombre:'GPU (tarjeta gráfica)', pista:'Componente especializado en procesar imágenes. Si juegas a videojuegos modernos o haces edición de vídeo, te hará falta.',
+     opciones:[
+       {t:'Procesar gráficos: videojuegos, vídeo, 3D',ok:true},
+       {t:'Almacenar películas',ok:false},
+       {t:'Conectar a internet',ok:false},
+       {t:'Reproducir audio',ok:false}
+     ],
+     fb:'La <strong>GPU</strong> (Graphics Processing Unit) está especializada en cálculos gráficos. Imprescindible para gaming, edición de vídeo, modelado 3D y entrenamiento de IA.'},
+
+    {emoji:'⌨️', nombre:'Teclado', pista:'Te permite escribir texto y dar órdenes al ordenador pulsando teclas.',
+     opciones:[
+       {t:'Periférico de entrada',ok:true},
+       {t:'Periférico de salida',ok:false},
+       {t:'Periférico mixto',ok:false},
+       {t:'Componente interno (no periférico)',ok:false}
+     ],
+     fb:'El <strong>teclado</strong> es un periférico de <em>entrada</em>: mete información en el ordenador (lo que escribes). Otros periféricos de entrada: ratón, micrófono, cámara, escáner.'},
+
+    {emoji:'🖨️', nombre:'Impresora', pista:'Coge documentos digitales y los pasa a papel.',
+     opciones:[
+       {t:'Periférico de entrada',ok:false},
+       {t:'Periférico de salida',ok:true},
+       {t:'Componente interno (no periférico)',ok:false},
+       {t:'Sistema operativo',ok:false}
+     ],
+     fb:'La <strong>impresora</strong> es un periférico de <em>salida</em>: saca información del ordenador (texto, imágenes) al mundo físico. Otros de salida: monitor, altavoces, proyector.'},
+
+    {emoji:'🔋', nombre:'Fuente de alimentación', pista:'Componente que conecta el ordenador a la red eléctrica.',
+     opciones:[
+       {t:'Convierte la corriente de la red (230 V CA) en la que necesitan los componentes (5/12 V CC)',ok:true},
+       {t:'Guarda los archivos cuando no hay luz',ok:false},
+       {t:'Es la pantalla',ok:false},
+       {t:'Genera electricidad por sí misma',ok:false}
+     ],
+     fb:'La <strong>fuente de alimentación</strong> (PSU) coge la corriente alterna del enchufe (230 V CA en España) y la transforma en la corriente continua (5 V y 12 V) que necesitan los componentes. En portátiles hace ese papel el cargador, y la batería suple la energía cuando no hay enchufe.'}
+  ];
+
+  var idx = 0;
+  var aciertos = 0;
+  var counter = document.getElementById('po-counter');
+  var aciertosEl = document.getElementById('po-aciertos');
+  var cont = document.getElementById('po-actual');
+  var resumen = document.getElementById('po-resumen');
+  var finalEl = document.getElementById('po-final');
+  var veredictoEl = document.getElementById('po-veredicto');
+  var btnReset = document.getElementById('po-reset');
+
+  function render(){
+    if(idx >= componentes.length){
+      counter.textContent = 'Completado';
+      finalEl.textContent = aciertos;
+      var pct = aciertos / componentes.length;
+      var msg;
+      if(pct === 1) msg = '🌟 Perfecto. Dominas las partes del ordenador.';
+      else if(pct >= 0.75) msg = '👍 Muy bien. Repasa los fallos para terminar de afinar.';
+      else if(pct >= 0.5) msg = '🙂 Aprobado, pero conviene volver al libro digital antes del examen.';
+      else msg = '📚 Repasa con calma el apartado de hardware y vuelve a probar.';
+      veredictoEl.textContent = msg;
+      resumen.classList.add('show');
+      cont.innerHTML = '';
+      return;
+    }
+
+    var c = componentes[idx];
+    counter.textContent = 'Componente ' + (idx+1) + ' de ' + componentes.length;
+    aciertosEl.textContent = aciertos;
+
+    var html = '<div class="po-card">';
+    html += '<div class="po-componente"><div class="emoji">' + c.emoji + '</div><div class="nombre">' + c.nombre + '</div><p class="pista">' + c.pista + '</p></div>';
+    html += '<div class="po-opciones">';
+    c.opciones.forEach(function(o,i){
+      html += '<button class="po-opt" data-i="' + i + '">' + o.t + '</button>';
+    });
+    html += '</div>';
+    html += '<div class="po-fb"></div>';
+    html += '</div>';
+    cont.innerHTML = html;
+
+    cont.querySelectorAll('.po-opt').forEach(function(b){
+      b.addEventListener('click', function(){
+        contestar(parseInt(b.dataset.i));
+      });
+    });
+  }
+
+  function contestar(i){
+    var c = componentes[idx];
+    var ok = c.opciones[i].ok;
+    if(ok) aciertos++;
+
+    cont.querySelectorAll('.po-opt').forEach(function(b, j){
+      b.disabled = true;
+      if(c.opciones[j].ok) b.classList.add('correct');
+      else if(j === i) b.classList.add('wrong');
+    });
+
+    var fb = cont.querySelector('.po-fb');
+    fb.innerHTML = '<p>' + (ok ? '✓ ' : '✗ ') + c.fb + '</p><div class="po-fb-next"><button>Siguiente →</button></div>';
+    fb.classList.add('show');
+    aciertosEl.textContent = aciertos;
+
+    fb.querySelector('button').addEventListener('click', function(){
+      idx++;
+      render();
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  }
+
+  btnReset.addEventListener('click', function(){
+    idx = 0;
+    aciertos = 0;
+    resumen.classList.remove('show');
+    render();
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

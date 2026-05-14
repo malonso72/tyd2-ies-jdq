@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Actividades · U06 Ordenador y digital · TyD 2º ESO</title>
+<meta name="description" content="Actividades de la unidad 06 con soluciones colapsables: hardware, software, internet y seguridad digital.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+.act-wrap{max-width:900px;margin:24px auto 50px;padding:0 20px}
+.act-intro{background:#FFF8F0;border-left:4px solid var(--principal);padding:14px 18px;border-radius:0 6px 6px 0;margin-bottom:24px;font-size:.94rem;line-height:1.55}
+.act-intro strong{color:var(--principal)}
+.seccion{background:#fff;border:1px solid var(--borde);border-radius:8px;padding:18px 22px;margin-bottom:18px}
+.seccion h2{font-family:var(--cond);color:var(--principal);font-size:1.15rem;margin:0 0 12px;display:flex;align-items:center;gap:8px}
+.seccion h2 .num{display:inline-block;width:32px;height:32px;line-height:32px;text-align:center;background:var(--principal);color:#fff;border-radius:50%;font-size:.9rem}
+.bloque-titulo{font-family:var(--cond);font-size:.78rem;letter-spacing:2px;color:var(--principal);text-transform:uppercase;margin:28px 0 12px;padding-bottom:4px;border-bottom:1px dashed var(--principal)}
+.bloque-titulo:first-of-type{margin-top:0}
+.enunciado{margin-bottom:10px;font-size:.96rem;line-height:1.55}
+.enunciado ol,.enunciado ul{margin:8px 0 8px 20px;padding-left:0}
+.sol-btn{font-family:var(--cond);font-size:.85rem;letter-spacing:.5px;padding:7px 16px;border-radius:18px;cursor:pointer;border:1.5px solid var(--principal);background:#fff;color:var(--principal);font-weight:600;margin-top:4px}
+.sol-btn:hover{background:var(--principal);color:#fff}
+.sol-btn.open{background:var(--principal);color:#fff}
+.sol-btn::before{content:"▶ ";font-size:.7rem}
+.sol-btn.open::before{content:"▼ "}
+.sol-content{display:none;margin-top:12px;padding:14px 16px;background:#F4F6F9;border-left:4px solid var(--verde);border-radius:0 6px 6px 0;font-size:.92rem;line-height:1.55}
+.sol-content.show{display:block}
+.sol-content .resultado{display:inline-block;background:#E1F5EE;color:#0F6E56;padding:5px 12px;border-radius:6px;font-weight:600;margin-top:6px}
+@media print{.sol-btn{display:none}.sol-content{display:block!important;background:#fafafa}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U06 · Ordenador y digital · Actividades</span>
+</header>
+
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U06</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>✏️</span><span class="nc-lbl">Actividades</span></span>
+  <span class="nc-sep">·</span>
+  <a href="../autocomprobacion/index.html"><span>✅</span><span class="nc-lbl">Autocomprobación</span></a>
+</nav>
+
+<main id="main-content" class="act-wrap">
+
+  <h1 class="unidad-titulo">Actividades · U06 Ordenador y digital</h1>
+
+  <div class="act-intro">
+    <p>Estas <strong>12 actividades</strong> están organizadas por bloques (igual que el libro digital). Cada una incluye una solución colapsable: intenta resolverla por tu cuenta y luego abre la solución para comprobar. Si fallas mucho en un bloque, vuelve al libro digital.</p>
+  </div>
+
+  <div class="bloque-titulo">Bloque 1 · Hardware</div>
+
+  <section class="seccion">
+    <h2><span class="num">1</span>Diferencia RAM y almacenamiento</h2>
+    <div class="enunciado">
+      <p>Tu primo dice: «Mi ordenador tiene 256 GB de RAM, es muy rápido». ¿Qué hay raro en esa frase? Explícale brevemente la diferencia entre RAM y almacenamiento.</p>
+    </div>
+    <button class="sol-btn">Ver solución</button>
+    <div class="sol-content">
+      <p>256 GB es una cantidad típica de <strong>almacenamiento</strong>, no de RAM. Lo normal es: RAM = 4, 8, 16 o 32 GB; almacenamiento = 256, 512 GB o 1 TB.</p>
+      <p>Diferencia: la <strong>RAM</strong> es la memoria de trabajo (rápida, se borra al apagar; aquí se cargan los programas que están abiertos). El <strong>almacenamiento</strong> guarda los archivos a largo plazo (más lento, no se borra). Por eso decir "256 GB de RAM" probablemente es un error.</p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">2</span>Identifica periféricos</h2>
+    <div class="enunciado">
+      <p>Clasifica estos periféricos en <strong>entrada</strong>, <strong>salida</strong> o <strong>mixtos</strong>: teclado, monitor, impresora, micrófono, pantalla táctil, cámara web, altavoces, escáner, auriculares con micrófono.</p>
+    </div>
+    <button class="sol-btn">Ver solución</button>
+    <div class="sol-content">
+      <p><strong>Entrada</strong>: teclado, micrófono, cámara web, escáner.<br>
+      <strong>Salida</strong>: monitor, impresora, altavoces.<br>
+      <strong>Mixtos</strong>: pantalla táctil (es pantalla + entrada táctil), auriculares con micrófono.</p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">3</span>Equipos para distintos usos</h2>
+    <div class="enunciado">
+      <p>Recomienda el tipo de ordenador más adecuado para cada caso:</p>
+      <ol>
+        <li>Una abogada que necesita movilidad y batería.</li>
+        <li>Un editor de vídeo profesional que trabaja desde casa.</li>
+        <li>Un usuario que solo quiere leer prensa y ver Netflix en el sofá.</li>
+        <li>Una empresa que aloja una web en internet.</li>
+      </ol>
+    </div>
+    <button class="sol-btn">Ver solución</button>
+    <div class="sol-content">
+      <p><strong>1.</strong> Portátil (movilidad + batería).<br>
+      <strong>2.</strong> Sobremesa potente (CPU + GPU + RAM altas, sin movilidad).<br>
+      <strong>3.</strong> Tableta (cómoda, suficiente para consumo de medios).<br>
+      <strong>4.</strong> Servidor (24/7, fiabilidad, en centro de datos).</p>
+    </div>
+  </section>
+
+
+  <div class="bloque-titulo">Bloque 2 · Software</div>
+
+  <section class="seccion">
+    <h2><span class="num">4</span>Sistema vs aplicación</h2>
+    <div class="enunciado">
+      <p>De estos programas, indica cuáles son software <strong>de sistema</strong> y cuáles <strong>de aplicación</strong>: Windows 11, WhatsApp, macOS, Adobe Photoshop, Linux Ubuntu, Spotify, Android, GIMP.</p>
+    </div>
+    <button class="sol-btn">Ver solución</button>
+    <div class="sol-content">
+      <p><strong>Sistema</strong> (sistemas operativos): Windows 11, macOS, Linux Ubuntu, Android.<br>
+      <strong>Aplicación</strong>: WhatsApp, Adobe Photoshop, Spotify, GIMP.</p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">5</span>Software libre vs privativo</h2>
+    <div class="enunciado">
+      <p>Clasifica como software <strong>libre</strong> o <strong>privativo</strong>: Microsoft Word, LibreOffice Writer, Photoshop, GIMP, Windows, Linux, Firefox, Chrome, WhatsApp, Signal.</p>
+    </div>
+    <button class="sol-btn">Ver solución</button>
+    <div class="sol-content">
+      <p><strong>Libre</strong>: LibreOffice Writer, GIMP, Linux, Firefox, Signal.<br>
+      <strong>Privativo</strong>: Microsoft Word, Photoshop, Windows, Chrome (su base es libre pero la versión final no), WhatsApp.</p>
+      <p>Recuerda: libre ≠ gratis. Lo importante es si el código está abierto.</p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">6</span>Extensiones de archivos</h2>
+    <div class="enunciado">
+      <p>Asocia cada archivo con su categoría:</p>
+      <ol>
+        <li>foto_playa.jpg</li>
+        <li>cancion.mp3</li>
+        <li>trabajo.docx</li>
+        <li>presentacion.pdf</li>
+        <li>juego.exe</li>
+        <li>backup.zip</li>
+        <li>video_familia.mp4</li>
+      </ol>
+      <p>Y explica: ¿por qué es peligroso un archivo llamado <code>foto.jpg.exe</code>?</p>
+    </div>
+    <button class="sol-btn">Ver solución</button>
+    <div class="sol-content">
+      <p>1. Imagen · 2. Audio · 3. Texto · 4. Texto (PDF) · 5. Ejecutable · 6. Comprimido · 7. Vídeo.</p>
+      <p>Sobre el archivo <code>foto.jpg.exe</code>: <strong>la extensión que cuenta es la última</strong> (.exe). El sistema lo trata como ejecutable: si lo abres, ejecuta código que puede ser un virus. Es una técnica clásica de engaño. Para evitarlo: activa en Windows «Mostrar extensiones de archivos» y desconfía de archivos con dos puntos en el nombre.</p>
+    </div>
+  </section>
+
+
+  <div class="bloque-titulo">Bloque 3 · Internet</div>
+
+  <section class="seccion">
+    <h2><span class="num">7</span>Internet ≠ Web</h2>
+    <div class="enunciado">
+      <p>Explica con tus palabras la diferencia entre <strong>Internet</strong> y la <strong>Web</strong>. Pon dos ejemplos de servicios de internet que NO son la web.</p>
+    </div>
+    <button class="sol-btn">Ver solución</button>
+    <div class="sol-content">
+      <p><strong>Internet</strong> es la infraestructura: la red mundial de ordenadores conectados por cables, fibra y satélites. <strong>La Web</strong> es uno de los muchos servicios que funcionan <em>sobre</em> internet (las páginas que ves con un navegador).</p>
+      <p>Servicios de internet que no son la web: correo electrónico, mensajería (WhatsApp, Telegram), videojuegos online, videollamadas, streaming de música (Spotify), almacenamiento en la nube.</p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">8</span>Buscar mejor en Google</h2>
+    <div class="enunciado">
+      <p>Escribe la <em>consulta exacta</em> para buscar:</p>
+      <ol>
+        <li>La frase exacta «electrónica básica» (no resultados que tengan las palabras sueltas).</li>
+        <li>Documentos PDF sobre programación en Scratch.</li>
+        <li>Información sobre «jaguar» pero solo del animal (sin la marca de coches).</li>
+        <li>Resultados dentro del dominio del IES Jiménez de Quesada (iesjdq.es).</li>
+      </ol>
+    </div>
+    <button class="sol-btn">Ver solución</button>
+    <div class="sol-content">
+      <p>1. <code>"electrónica básica"</code><br>
+      2. <code>programación scratch filetype:pdf</code><br>
+      3. <code>jaguar -coche -marca</code> (o más específico: <code>jaguar animal</code>)<br>
+      4. <code>tecnología site:iesjdq.es</code></p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">9</span>Verificar una noticia</h2>
+    <div class="enunciado">
+      <p>Te llega por WhatsApp este mensaje: «<em>URGENTE: en la próxima reunión de padres del IES JdQ van a vacunar obligatoriamente a todos los alumnos sin avisar. Compártelo antes de que lo borren!!</em>». Explica en 4 pasos cómo verificarías si es cierto antes de difundirlo.</p>
+    </div>
+    <button class="sol-btn">Ver solución</button>
+    <div class="sol-content">
+      <p>1. <strong>Quién lo dice</strong>: la fuente es un reenvío de WhatsApp anónimo. No hay autor, ni medio, ni fecha. Cero credibilidad.<br>
+      2. <strong>Lo dice alguien más</strong>: ¿lo publican Granada Hoy, Ideal, Junta de Andalucía, web del centro? Si nadie más lo dice, es bulo.<br>
+      3. <strong>Patrón sospechoso</strong>: usa MAYÚSCULAS, urgencia ("antes de que lo borren"), apela a miedo ("vacunación obligatoria sin avisar"), pide difusión inmediata.<br>
+      4. <strong>Verificadores</strong>: busca en Maldita.es o Newtral; o llama directamente al centro.</p>
+      <p>Conclusión: no compartirlo. Si compartes un bulo, lo amplificas.</p>
+    </div>
+  </section>
+
+
+  <div class="bloque-titulo">Bloque 4 · Seguridad y ciudadanía digital</div>
+
+  <section class="seccion">
+    <h2><span class="num">10</span>Crea una contraseña fuerte</h2>
+    <div class="enunciado">
+      <p>Diseña una contraseña fuerte usando la técnica de la <strong>frase de paso</strong>:</p>
+      <ol>
+        <li>Piensa una frase rara y memorable (mínimo 4 palabras inventadas).</li>
+        <li>Únelas en una palabra.</li>
+        <li>Añade mayúsculas, al menos un número y un símbolo.</li>
+        <li>Comprueba la fortaleza en el <a href="../interactivos/contrasena.html">interactivo de contraseña</a>.</li>
+      </ol>
+      <p>Importante: la contraseña que crees aquí <strong>no la uses</strong> en tus cuentas (queda escrita en clase). Es solo práctica.</p>
+    </div>
+    <button class="sol-btn">Ver solución</button>
+    <div class="sol-content">
+      <p>Ejemplo: <em>el gato azul danza bajo la lluvia</em> → <code>ElGatoAzulDanzaBajoLaLluvia</code> → <code>ElGato7AzulDanzaBajoLaLluvia!</code> (28 caracteres, mezcla, sin datos personales).</p>
+      <p>El interactivo te dirá: «Excelente · Tiempo para forzarla: más que la edad del universo». Una contraseña corta tipo "manuel2010" caería en segundos.</p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">11</span>Detecta el phishing</h2>
+    <div class="enunciado">
+      <p>Lee este SMS y señala <strong>tres señales</strong> que indican que es un fraude:</p>
+      <p style="background:#F4F6F9;padding:14px;border-radius:6px;font-family:monospace;font-size:.9rem"><strong>BANCO BBVA:</strong> Estimado cliente, hemos detectado un intento de acceso no autorizado a su cuenta. Verifique inmediatamente sus credenciales para evitar el bloqueo en 12h. https://bbva-clientes-verificacion.com/login</p>
+    </div>
+    <button class="sol-btn">Ver solución</button>
+    <div class="sol-content">
+      <p>Señales claras:</p>
+      <ol>
+        <li><strong>Dominio falso</strong>: <code>bbva-clientes-verificacion.com</code> no es de BBVA (el real es bbva.es o bbva.com). Usar guiones para "parecer" oficial es un truco clásico.</li>
+        <li><strong>Urgencia exagerada</strong>: «12 horas» o «bloqueo inmediato». Tu banco real te da semanas para resolver cualquier asunto importante.</li>
+        <li><strong>Pide verificar credenciales por enlace</strong>: ningún banco te pide la contraseña por SMS o correo. NUNCA.</li>
+        <li><strong>Saludo genérico</strong> ("Estimado cliente") en vez de tu nombre.</li>
+      </ol>
+      <p>Qué hacer: <em>no</em> pinchar el enlace. Si dudas, abre la app oficial o llama al teléfono del banco que aparece en el reverso de tu tarjeta.</p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">12</span>Tu huella digital</h2>
+    <div class="enunciado">
+      <p>Buscadte en Google escribiendo tu nombre y apellidos entre comillas: <code>"Tu Nombre Apellidos"</code>. Después responde:</p>
+      <ol>
+        <li>¿Aparece algo? Si sí, ¿qué tipo de información?</li>
+        <li>¿Hay algo que te gustaría que NO apareciera? ¿Por qué?</li>
+        <li>¿Qué configuración de privacidad podrías cambiar en tus redes para reducir tu huella pasiva?</li>
+        <li>¿Conoces a alguien que tenga sus cuentas <em>públicas</em> y publique todo? ¿Qué consejo le darías?</li>
+      </ol>
+    </div>
+    <button class="sol-btn">Ver guía de reflexión</button>
+    <div class="sol-content">
+      <p>No hay solución única: es una reflexión personal. Posibles respuestas que merece la pena tener en cuenta:</p>
+      <p>1. Quizá aparezcas en publicaciones del centro, listas de equipos deportivos, redes sociales públicas, comentarios antiguos…</p>
+      <p>2. Cualquier cosa que dentro de 10 años te avergonzaría que la viera un empleador, una pareja o tus hijos.</p>
+      <p>3. Cuentas en privado, ubicación desactivada en publicaciones, etiquetado controlado, revisar permisos de apps en el móvil.</p>
+      <p>4. Le diría que las cuentas públicas son como gritar tu vida en mitad de la plaza del pueblo. No hace falta. Privacidad por defecto, público solo lo que <em>conscientemente</em> quieres compartir.</p>
+    </div>
+  </section>
+
+</main>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Actividades · U08 Tecnologías emergentes · TyD 2º ESO</title>
+<meta name="description" content="Actividades de la unidad 08 con soluciones colapsables: IA, IoT, robótica, VR/AR, vehículos autónomos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+.act-wrap{max-width:900px;margin:24px auto 50px;padding:0 20px}
+.act-intro{background:#FFF8F0;border-left:4px solid var(--principal);padding:14px 18px;border-radius:0 6px 6px 0;margin-bottom:24px;font-size:.94rem;line-height:1.55}
+.act-intro strong{color:var(--principal)}
+.seccion{background:#fff;border:1px solid var(--borde);border-radius:8px;padding:18px 22px;margin-bottom:18px}
+.seccion h2{font-family:var(--cond);color:var(--principal);font-size:1.15rem;margin:0 0 12px;display:flex;align-items:center;gap:8px}
+.seccion h2 .num{display:inline-block;width:32px;height:32px;line-height:32px;text-align:center;background:var(--principal);color:#fff;border-radius:50%;font-size:.9rem}
+.bloque-titulo{font-family:var(--cond);font-size:.78rem;letter-spacing:2px;color:var(--principal);text-transform:uppercase;margin:28px 0 12px;padding-bottom:4px;border-bottom:1px dashed var(--principal)}
+.bloque-titulo:first-of-type{margin-top:0}
+.enunciado{margin-bottom:10px;font-size:.96rem;line-height:1.55}
+.enunciado ol,.enunciado ul{margin:8px 0 8px 20px;padding-left:0}
+.sol-btn{font-family:var(--cond);font-size:.85rem;letter-spacing:.5px;padding:7px 16px;border-radius:18px;cursor:pointer;border:1.5px solid var(--principal);background:#fff;color:var(--principal);font-weight:600;margin-top:4px}
+.sol-btn:hover{background:var(--principal);color:#fff}
+.sol-btn.open{background:var(--principal);color:#fff}
+.sol-btn::before{content:"▶ ";font-size:.7rem}
+.sol-btn.open::before{content:"▼ "}
+.sol-content{display:none;margin-top:12px;padding:14px 16px;background:#F4F6F9;border-left:4px solid var(--verde);border-radius:0 6px 6px 0;font-size:.92rem;line-height:1.55}
+.sol-content.show{display:block}
+@media print{.sol-btn{display:none}.sol-content{display:block!important;background:#fafafa}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U08 · Tecnologías emergentes · Actividades</span>
+</header>
+
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U08</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>✏️</span><span class="nc-lbl">Actividades</span></span>
+  <span class="nc-sep">·</span>
+  <a href="../autocomprobacion/index.html"><span>✅</span><span class="nc-lbl">Autocomprobación</span></a>
+</nav>
+
+<main id="main-content" class="act-wrap">
+
+  <h1 class="unidad-titulo">Actividades · U08 Tecnologías emergentes</h1>
+
+  <div class="act-intro">
+    <p><strong>12 actividades</strong> repartidas en 4 bloques. Esta unidad tiene mucho contenido reflexivo: pensar críticamente sobre la tecnología es parte del aprendizaje. Algunas respuestas son abiertas y se valora la argumentación, no la "respuesta única".</p>
+  </div>
+
+  <div class="bloque-titulo">Bloque 1 · Inteligencia Artificial</div>
+
+  <section class="seccion">
+    <h2><span class="num">1</span>IA en tu vida diaria</h2>
+    <div class="enunciado">
+      <p>Haz una lista de <strong>5 momentos de tu día</strong> en los que crees que hay IA detrás. Para cada uno, explica qué hace la IA exactamente.</p>
+    </div>
+    <button class="sol-btn">Ver ejemplos posibles</button>
+    <div class="sol-content">
+      <ol>
+        <li><strong>Mañana, despertar:</strong> el algoritmo de Spotify suena tu playlist "Para empezar el día". IA: recomendaciones musicales.</li>
+        <li><strong>Móvil, redes:</strong> TikTok te muestra vídeos que te enganchan. IA: algoritmo de recomendación basado en lo que ves y cuánto tiempo.</li>
+        <li><strong>Cámara:</strong> al hacer una foto, el móvil mejora el retrato automáticamente. IA: procesamiento de imagen.</li>
+        <li><strong>Mapas:</strong> Google Maps te calcula la ruta más rápida con tráfico actual. IA: predicción de tiempo de viaje.</li>
+        <li><strong>Estudio:</strong> consultas a ChatGPT/Claude para explicarte algo. IA: modelo de lenguaje generativo.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">2</span>Detective de IA</h2>
+    <div class="enunciado">
+      <p>Lee este texto: «Las hormigas viven en colonias muy organizadas. Se comunican mediante feromonas, sustancias químicas que dejan rastros…». ¿Cómo podrías saber si lo ha escrito una persona o ChatGPT?</p>
+    </div>
+    <button class="sol-btn">Ver pistas</button>
+    <div class="sol-content">
+      <p>Trucos para sospechar de IA:</p>
+      <ul>
+        <li><strong>Demasiado equilibrado:</strong> párrafos del mismo tamaño, sin frase corta de "remate".</li>
+        <li><strong>Sin opinión personal:</strong> nunca dice "yo creo", "me sorprende", etc.</li>
+        <li><strong>Datos demasiado generales:</strong> "las hormigas son organizadas" pero sin cifras concretas ni fuente.</li>
+        <li><strong>Tono de manual:</strong> sin gracia, sin humor.</li>
+        <li><strong>Detectores automáticos:</strong> hay webs (GPTZero, ZeroGPT) que dan un porcentaje de probabilidad de ser IA. No son perfectos pero ayudan.</li>
+      </ul>
+      <p>Lo más definitivo: si conoces a la persona, ¿escribiría así normalmente?</p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">3</span>El examen y la IA</h2>
+    <div class="enunciado">
+      <p>Imagina que un compañero te pide hacerle el trabajo de Biología con ChatGPT a cambio de 5 €. Argumenta en 6-8 líneas si lo harías o no, y por qué.</p>
+    </div>
+    <button class="sol-btn">Ver una respuesta de referencia</button>
+    <div class="sol-content">
+      <p>Posible argumentación (no hay "respuesta correcta", se valora el razonamiento):</p>
+      <p><em>«No lo haría por tres razones. Primera: si lo descubre el profesor, mi amigo suspende y yo me meto en un lío también. Hay detectores automáticos cada vez mejores. Segunda: él no aprende nada, y en el siguiente examen sin IA va a sacar un cero. Le hago un favor solo en apariencia. Tercera: ofrecer dinero a cambio convierte un favor en un servicio comercial; pierdo la amistad sin ganar nada que valga la pena. Le diría que le ayudo a entender el tema gratis si quiere, pero el trabajo lo hace él.»</em></p>
+    </div>
+  </section>
+
+
+  <div class="bloque-titulo">Bloque 2 · IoT y robótica</div>
+
+  <section class="seccion">
+    <h2><span class="num">4</span>Imagina un hogar inteligente</h2>
+    <div class="enunciado">
+      <p>Diseña una <strong>habitación inteligente</strong> para una persona mayor que vive sola. Incluye al menos 5 dispositivos IoT y explica qué hace cada uno y para qué problema concreto sirve.</p>
+    </div>
+    <button class="sol-btn">Ver ejemplo</button>
+    <div class="sol-content">
+      <ol>
+        <li><strong>Botón de pánico</strong> en el cuello o pulsera: si la persona se cae o se siente mal, lo pulsa y avisa a familia o emergencias automáticamente.</li>
+        <li><strong>Sensor de movimiento bajo la cama</strong>: si lleva más de 12 h sin levantarse, manda alerta.</li>
+        <li><strong>Pastillero electrónico</strong>: avisa con luz y sonido a la hora de la medicación; si no la coge, manda mensaje.</li>
+        <li><strong>Bombilla inteligente</strong>: se enciende cuando se mueve por la habitación de noche para evitar caídas.</li>
+        <li><strong>Asistente de voz (Alexa)</strong>: para encender la radio, llamar a alguien, recordar tareas, sin usar las manos.</li>
+        <li><strong>Detector de gas y humo</strong>: corta el gas y avisa si detecta fugas o fuego.</li>
+      </ol>
+      <p>Cualquier idea bien justificada y realista vale. Lo importante: que resuelva un problema concreto, no que sea "futurista por futurista".</p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">5</span>Robot o IoT, ¿cuál es cuál?</h2>
+    <div class="enunciado">
+      <p>Clasifica como <strong>robot</strong>, <strong>IoT puro</strong> o <strong>ninguno de los dos</strong>: aspiradora Roomba, termostato Nest, calculadora, dron, brazo industrial de fábrica de coches, persiana eléctrica controlada por app, Tesla Autopilot, cámara web USB, lavavajillas con conexión wifi.</p>
+    </div>
+    <button class="sol-btn">Ver solución</button>
+    <div class="sol-content">
+      <p><strong>Robot</strong> (percibe + decide + actúa físicamente): Roomba, dron, brazo industrial, Tesla Autopilot (es un robot móvil con IA).</p>
+      <p><strong>IoT puro</strong> (conectado pero sin actuación móvil/compleja): termostato Nest, persiana eléctrica con app, cámara web, lavavajillas con wifi.</p>
+      <p><strong>Ninguno</strong>: calculadora (sin conexión a internet, sin sensores).</p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">6</span>¿Qué pasa si falla?</h2>
+    <div class="enunciado">
+      <p>Tu casa tiene puertas con cerradura inteligente, luces conectadas, cámaras, asistente Alexa y termostato Nest. <strong>Se cae el wifi durante 24 horas</strong>. Enumera 5 problemas que tendrías y cómo los resolverías sin esa tecnología.</p>
+    </div>
+    <button class="sol-btn">Ver ejemplo</button>
+    <div class="sol-content">
+      <ol>
+        <li><strong>No entras a casa</strong> si la cerradura solo abre con app. Solución: tener llave física siempre y guardar pin de respaldo.</li>
+        <li><strong>Luces fijas</strong> en un estado raro. Solución: las inteligentes deberían tener interruptor físico también.</li>
+        <li><strong>Cámaras a ciegas</strong>. Solución: si la seguridad depende solo de cámaras, no es seguridad. Reforzar puertas y ventanas físicamente.</li>
+        <li><strong>Alexa "muda"</strong>. Solución: para tareas básicas (poner música, ver hora) tener radio normal o reloj.</li>
+        <li><strong>Termostato sin servidor</strong>. Solución: que tenga modo manual offline.</li>
+      </ol>
+      <p>Conclusión general: la <strong>resiliencia</strong> (que algo siga funcionando si lo demás falla) es clave en domótica. No conviene tener todo "100% smart".</p>
+    </div>
+  </section>
+
+
+  <div class="bloque-titulo">Bloque 3 · Realidad e impresión 3D</div>
+
+  <section class="seccion">
+    <h2><span class="num">7</span>VR, AR, MR</h2>
+    <div class="enunciado">
+      <p>Pon ejemplos cotidianos de cada uno:</p>
+      <ol>
+        <li>Una aplicación de <strong>VR</strong> que te gustaría probar.</li>
+        <li>Una aplicación de <strong>AR</strong> que ya hayas usado.</li>
+        <li>Imagina una aplicación de <strong>MR</strong> útil para tu instituto.</li>
+      </ol>
+    </div>
+    <button class="sol-btn">Ver ejemplos posibles</button>
+    <div class="sol-content">
+      <ol>
+        <li><strong>VR:</strong> visitar un museo a distancia (Louvre, Prado), montar una montaña rusa virtual, simulador de vuelo, juego inmersivo como Beat Saber.</li>
+        <li><strong>AR:</strong> filtros de Instagram/TikTok, Pokémon GO, Google Lens para identificar plantas, Snapchat con orejas de perro, IKEA Place (visualizar muebles en tu casa).</li>
+        <li><strong>MR para el instituto:</strong> ver el cuerpo humano flotando sobre la mesa en clase de Biología, manipular moléculas en Química, recrear batallas históricas con gafas Apple Vision Pro/HoloLens.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">8</span>Imprimir o no imprimir</h2>
+    <div class="enunciado">
+      <p>Tienes acceso a una impresora 3D en el centro. ¿Qué imprimirías y qué NO? Justifica:</p>
+      <ol>
+        <li>Recambio del mango roto de la batidora.</li>
+        <li>Un mueble completo para tu habitación.</li>
+        <li>Una réplica funcional de la cerradura de tu casa.</li>
+        <li>Un soporte personalizado para tu móvil.</li>
+        <li>Un cuchillo de cocina.</li>
+        <li>Una maqueta del IES Jiménez de Quesada para una exposición.</li>
+      </ol>
+    </div>
+    <button class="sol-btn">Ver análisis</button>
+    <div class="sol-content">
+      <ol>
+        <li><strong>Sí.</strong> Pieza pequeña, plástica, sin esfuerzo grande. Impresión perfecta.</li>
+        <li><strong>No.</strong> Demasiado grande, demasiado material y demasiado tiempo. Para muebles, otras técnicas son mejores.</li>
+        <li><strong>No.</strong> Es <em>ilegal</em> reproducir cerraduras de otros. Si es para abrir la tuya, además sería poco seguro: el plástico no aguanta el uso de una cerradura.</li>
+        <li><strong>Sí.</strong> Pieza pequeña, personalizada, sin esfuerzo grande. Clásico de uso doméstico.</li>
+        <li><strong>No.</strong> El plástico PLA no aguanta cocinar ni filo cortante. Para un objeto que toca comida y se usa con fuerza, usa metal.</li>
+        <li><strong>Sí.</strong> Las maquetas son uno de los grandes usos de la impresión 3D: rápidas, personalizadas y de prototipado.</li>
+      </ol>
+      <p>Aprende: la impresión 3D es <strong>excelente</strong> para piezas pequeñas, personalizadas y de prototipo. Es <strong>mala</strong> para objetos grandes, que aguanten esfuerzo intenso o que toquen comida.</p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">9</span>Reflexión: ¿metaverso o no?</h2>
+    <div class="enunciado">
+      <p>Argumenta en 6-8 líneas si te gustaría pasar una hora diaria en un metaverso (mundo virtual con tus amigos) o si lo evitarías. Razona ventajas y riesgos.</p>
+    </div>
+    <button class="sol-btn">Ver respuesta de referencia</button>
+    <div class="sol-content">
+      <p>(Respuesta abierta. Se valora la argumentación.) Ejemplo:</p>
+      <p><em>«Para una hora puntual sí, para hábito diario no. Ventajas: ver a amigos que viven lejos, viajes virtuales que no me puedo permitir, aprendizaje inmersivo. Riesgos: aislamiento social real, dependencia de unas gafas, fatiga visual y mareo, posible adicción (las experiencias inmersivas enganchan más que las redes), riesgo de privacidad (la empresa sabe todo lo que haces dentro). La clave es la dosis: un rato de vez en cuando puede ser muy enriquecedor; sustituir la vida real por el metaverso, peligroso.»</em></p>
+    </div>
+  </section>
+
+
+  <div class="bloque-titulo">Bloque 4 · Futuro y ética</div>
+
+  <section class="seccion">
+    <h2><span class="num">10</span>El coche autónomo y el dilema del tranvía</h2>
+    <div class="enunciado">
+      <p>Un coche autónomo (nivel 5) circula por una calle. Imprevisto: un grupo de 5 niños sale corriendo y es imposible frenar a tiempo. El coche tiene que decidir entre:</p>
+      <ol>
+        <li>Seguir recto y atropellar a los 5 niños.</li>
+        <li>Girar bruscamente al carril contrario y atropellar a 1 anciano.</li>
+        <li>Estrellarse contra una pared, sacrificando al conductor.</li>
+      </ol>
+      <p><strong>¿Quién debe tomar esa decisión?</strong> ¿El fabricante (al programar el coche)? ¿El conductor (al configurar prioridades)? ¿La ley?</p>
+    </div>
+    <button class="sol-btn">Ver reflexión</button>
+    <div class="sol-content">
+      <p>No hay respuesta única. Es uno de los <strong>dilemas éticos más debatidos</strong> de la robótica.</p>
+      <p>Argumentos típicos:</p>
+      <ul>
+        <li><strong>El fabricante:</strong> es quien escribe el código. Pero ningún fabricante quiere admitir que su coche "elige a quién matar". Por eso suelen evitar la decisión y dejan al coche en modo "frenar y rezar".</li>
+        <li><strong>El conductor:</strong> "deja al ocupante elegir si prefiere sacrificarse" — pero pocos comprarían un coche que se autodestruye.</li>
+        <li><strong>La ley:</strong> en Alemania ya hay normativa: <em>nunca</em> es ético sacrificar a una persona para salvar a otra. La máquina debe minimizar daños sin discriminar por edad, género o número.</li>
+      </ul>
+      <p>El dilema no es teórico: estos algoritmos ya se están programando hoy. Tu generación votará leyes sobre esto.</p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">11</span>Profesiones del 2040</h2>
+    <div class="enunciado">
+      <p>Cuando tengas 30 años, muchas profesiones de hoy ya no existirán y aparecerán otras nuevas. Investiga y propón:</p>
+      <ol>
+        <li><strong>3 profesiones que crees que desaparecerán</strong> (o se reducirán mucho).</li>
+        <li><strong>3 profesiones que crees que crecerán</strong>.</li>
+        <li><strong>1 profesión "del futuro"</strong> que no exista todavía pero podría existir en 2040.</li>
+      </ol>
+    </div>
+    <button class="sol-btn">Ver ejemplos posibles</button>
+    <div class="sol-content">
+      <p><strong>Desaparecen o se reducen:</strong> cajeros (supermercado), telemarketing genérico, traductores de textos simples, taquilleros, conductores de larga distancia.</p>
+      <p><strong>Crecen:</strong> programadores e ingenieros de IA, especialistas en ciberseguridad, profesionales de salud mental, técnicos de robótica, profesores especializados, oficios manuales (fontanería, electricidad), cuidadores.</p>
+      <p><strong>Profesiones nuevas del 2040 (especulación):</strong></p>
+      <ul>
+        <li>"Auditor ético de algoritmos" — revisa que la IA de empresas no discrimine.</li>
+        <li>"Diseñador de personalidades para asistentes virtuales".</li>
+        <li>"Médico/a de prótesis cerebrales" (interfaces cerebro-máquina).</li>
+        <li>"Granjero/a vertical urbano" (cultivos en edificios).</li>
+        <li>"Gestor/a de identidad digital de menores".</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">12</span>El uso del móvil y la atención</h2>
+    <div class="enunciado">
+      <p>Investiga tu propio <strong>tiempo de pantalla</strong> de la semana pasada (Ajustes → Tiempo en pantalla en iPhone; Bienestar Digital en Android). Anota:</p>
+      <ol>
+        <li>Total de horas al día (media).</li>
+        <li>App donde pasas más tiempo.</li>
+        <li>Cuántas veces coges el móvil al día (de media).</li>
+        <li>Reflexión personal (4-6 líneas): ¿te sorprendió algo? ¿Quieres cambiar algo? ¿Cómo lo harías?</li>
+      </ol>
+    </div>
+    <button class="sol-btn">Ver guía de reflexión</button>
+    <div class="sol-content">
+      <p>Datos medios de adolescentes españoles (2024):</p>
+      <ul>
+        <li>5-7 horas al día de pantalla del móvil.</li>
+        <li>App más usada: TikTok, Instagram o YouTube.</li>
+        <li>Coger el móvil: 70-100 veces al día.</li>
+      </ul>
+      <p>Si tu cifra es similar o superior, no eres "raro": estás en la media. Si es muy inferior, mejor para ti. Lo importante de la reflexión: ¿te aporta lo que pasas en el móvil o se te va el tiempo sin querer? Si quieres reducir, las apps modernas tienen herramientas: límites de tiempo, modo no molestar, escala de grises. No hace falta ser ascético. Solo consciente.</p>
+    </div>
+  </section>
+
+</main>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

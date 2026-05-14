@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Detector de deepfakes · U08 · TyD 2º ESO</title>
+<meta name="description" content="Aprende a identificar imágenes y vídeos generados por IA. Casos reales y pistas a buscar.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+.df-wrap{max-width:820px;margin:30px auto;padding:0 20px 50px}
+.df-hero{text-align:center;margin-bottom:24px}
+.df-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 8px}
+.df-hero p{font-size:1rem;color:var(--texto2);margin:0;line-height:1.5}
+.df-progress{display:flex;justify-content:space-between;align-items:center;background:#F4F6F9;padding:10px 16px;border-radius:8px;margin-bottom:20px;font-family:var(--cond);font-size:.92rem}
+.df-score{color:var(--principal);font-size:1.05rem}
+.df-card{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:24px;box-shadow:0 1px 6px rgba(0,0,0,.05);margin-bottom:20px}
+.df-escena{background:#FFF8F0;border-left:4px solid var(--principal);border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:18px;font-size:.96rem;line-height:1.6}
+.df-escena strong{color:var(--principal)}
+.df-pregunta{font-family:var(--cond);font-size:1.05rem;color:var(--texto);margin:0 0 14px;text-align:center}
+.df-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:6px}
+.df-btn{font-family:var(--cond);font-size:.95rem;letter-spacing:.5px;padding:12px 24px;border-radius:24px;cursor:pointer;border:2px solid transparent;font-weight:600;min-width:140px;transition:all .15s}
+.df-btn-real{background:#fff;color:#1E8E3E;border-color:#1E8E3E}
+.df-btn-real:hover{background:#1E8E3E;color:#fff}
+.df-btn-fake{background:#fff;color:#C44536;border-color:#C44536}
+.df-btn-fake:hover{background:#C44536;color:#fff}
+.df-btn:disabled{cursor:default;opacity:.55}
+.df-fb{display:none;margin-top:18px;padding:16px 20px;border-radius:8px;font-size:.94rem;line-height:1.55}
+.df-fb.show{display:block}
+.df-fb.acierto{background:#E1F5EE;color:#0F6E56;border-left:5px solid #1E8E3E}
+.df-fb.fallo{background:#FCEBEB;color:#9A2A2A;border-left:5px solid #C44536}
+.df-fb h4{font-family:var(--cond);margin:0 0 8px;font-size:1.05rem}
+.df-fb ul{margin:6px 0 0;padding-left:20px}
+.df-fb li{margin-bottom:3px}
+.df-next{margin-top:14px;text-align:center}
+.df-next button{font-family:var(--cond);font-size:.92rem;letter-spacing:.5px;padding:9px 22px;border-radius:22px;cursor:pointer;border:2px solid var(--principal);background:var(--principal);color:#fff;font-weight:600}
+.df-next button:hover{background:var(--principal2)}
+.df-resumen{background:linear-gradient(180deg,#FFF8F0,#fff);border:2px solid var(--principal);border-radius:12px;padding:24px;text-align:center;margin-top:24px;display:none}
+.df-resumen.show{display:block}
+.df-resumen h2{font-family:var(--cond);color:var(--principal);margin:0 0 8px;font-size:1.5rem}
+.df-resumen .num{font-family:var(--cond);font-size:3rem;color:var(--principal);line-height:1;margin:10px 0}
+.df-resumen .num small{font-size:1.5rem;color:var(--texto2)}
+.df-resumen button{font-family:var(--cond);font-size:.92rem;letter-spacing:.5px;padding:10px 22px;border-radius:22px;cursor:pointer;border:2px solid var(--principal);background:var(--principal);color:#fff;font-weight:600;margin-top:8px}
+.df-resumen button:hover{background:var(--principal2)}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U08 · Tecnologías emergentes · Detector de deepfakes</span>
+</header>
+
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U08</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>👁️</span><span class="nc-lbl">Deepfakes</span></span>
+</nav>
+
+<main id="main-content" class="df-wrap">
+
+  <section class="df-hero">
+    <h1>👁️ Detector de deepfakes</h1>
+    <p>Vas a leer 6 situaciones (basadas en casos reales). Para cada una, decide si el contenido es <strong>real</strong> o un <strong>deepfake</strong> y por qué.</p>
+  </section>
+
+  <div class="df-progress">
+    <span id="df-counter">Caso 1 de 6</span>
+    <span class="df-score">Aciertos: <span id="df-aciertos">0</span> / 6</span>
+  </div>
+
+  <div id="df-actual"></div>
+
+  <div class="df-resumen" id="df-resumen">
+    <h2>¡Has terminado!</h2>
+    <div class="num"><span id="df-final">0</span><small> / 6 aciertos</small></div>
+    <p id="df-veredicto">—</p>
+    <button id="df-reset">🔁 Volver a empezar</button>
+  </div>
+
+</main>
+
+<script>
+(function(){
+  'use strict';
+
+  var casos = [
+    {
+      tipo:'fake',
+      escena:'<strong>Caso 1:</strong> En TikTok aparece un vídeo del presidente del Gobierno anunciando que <em>«España va a abandonar la Unión Europea mañana mismo»</em>. El vídeo tiene 2 millones de visualizaciones. La voz suena exactamente como la suya. Los labios se mueven bien. Pero ningún periódico, ni La Moncloa, ni la televisión han dado la noticia.',
+      pistas:['Ningún medio fiable confirma la "noticia"','El contenido es disruptivo y emocional (perfecto para enganchar)','Las redes son el único canal','Una decisión así de grave no se anuciaría en TikTok'],
+      explicacion:'Es un <strong>deepfake</strong>. Hoy es trivial clonar la voz de cualquier figura pública con 30 segundos de audio. Antes de creer un vídeo así, busca confirmación en 2-3 medios serios. Si no aparece, es bulo.'
+    },
+    {
+      tipo:'real',
+      escena:'<strong>Caso 2:</strong> Un canal de YouTube oficial de la NASA publica un vídeo de la última misión a Marte. Se ve el rover, el paisaje, datos científicos en pantalla. El canal está verificado, lleva 10 años activo y tiene 7 millones de suscriptores.',
+      pistas:['Canal oficial verificado','Historial largo y consistente','Información contrastable con la web de la NASA','Otros medios serios cubren la misma misión'],
+      explicacion:'Es <strong>real</strong>. La NASA publica regularmente imágenes y vídeos verificables. El canal está verificado por YouTube. La información se puede contrastar en nasa.gov y en cualquier medio científico serio.'
+    },
+    {
+      tipo:'fake',
+      escena:'<strong>Caso 3:</strong> Aparece en Instagram una foto del Papa con un abrigo blanco enorme de plumas, estilo rapero. El Papa nunca ha vestido así. La imagen es muy realista pero, mirando de cerca, los dedos de la mano tienen forma rara.',
+      pistas:['Comportamiento totalmente fuera del personaje (vestimenta papal)','Defectos en zonas que la IA dibuja mal: manos, orejas, dientes','No hay foto del fotógrafo, ni medio que la publique','Caso real de marzo 2023: una imagen así se hizo viral y mucha gente la creyó'],
+      explicacion:'Es <strong>deepfake</strong>. Es un caso real (marzo 2023) que demostró lo fácil que es engañar con imágenes generadas por IA. La pista clave: las <em>manos</em>. La IA tiene problemas para dibujar manos correctamente (a veces 6 dedos, falanges raras).'
+    },
+    {
+      tipo:'fake',
+      escena:'<strong>Caso 4:</strong> Te llega un audio de WhatsApp. Es tu tía Loli pidiéndote por favor que le mandes 200 € por Bizum a un número desconocido porque está en un apuro y no tiene su móvil. La voz es claramente la suya.',
+      pistas:['Petición urgente y económica','Cuenta destino desconocida','Imposible verificar por otro medio (dice no tener su móvil)','La clonación de voz solo necesita 30 seg de audio'],
+      explicacion:'Es <strong>vishing con deepfake de voz</strong>. Un estafador ha clonado la voz de tu tía a partir de algún vídeo o nota de voz suya. <strong>Regla de oro:</strong> ante peticiones urgentes de dinero, llama tú directamente al teléfono que ya tienes guardado (no al del audio). Si no contesta, contrasta con otro familiar.'
+    },
+    {
+      tipo:'real',
+      escena:'<strong>Caso 5:</strong> Una compañera de clase sube a su Instagram (privado) una foto del campamento de verano con sus amigas. Llevas siguiéndola desde primero y conoces a esas amigas. La foto tiene metadatos (fecha, hora, ubicación). El estilo y la luz coinciden con la realidad.',
+      pistas:['Cuenta privada y conocida personalmente','Metadatos coherentes','Contexto cuadra con lo que sabes','Habrías visto cualquier deepfake notorio rápidamente'],
+      explicacion:'Es <strong>real</strong>. No todo lo que ves online es deepfake. Las fotos de gente de tu entorno, publicadas en cuentas que conoces, son lo más fiable que existe online. La paranoia constante también es un problema: hay que distinguir cuándo sospechar y cuándo no.'
+    },
+    {
+      tipo:'fake',
+      escena:'<strong>Caso 6:</strong> Te llega por DM de Instagram un mensaje de un perfil que parece de tu compañera Lucía, pidiéndote fotos íntimas para "una broma entre nosotros". El perfil tiene su foto, pero solo 3 publicaciones y 0 amigos en común contigo.',
+      pistas:['Pocas publicaciones y sin amigos en común: perfil falso','Petición fuera de carácter de la persona real','Cuenta creada recientemente','Patrón típico de suplantación o sextorsión'],
+      explicacion:'Es <strong>suplantación de identidad</strong> (con o sin IA detrás). Alguien creó una cuenta falsa con la foto de Lucía. El objetivo: obtener material para chantajear. <strong>Nunca</strong> envíes fotos íntimas, ni siquiera "a alguien de confianza" por DM. Verifica siempre por otro canal (llamada, en persona) cualquier petición rara.'
+    }
+  ];
+
+  var idx = 0;
+  var aciertos = 0;
+  var counter = document.getElementById('df-counter');
+  var aciertosEl = document.getElementById('df-aciertos');
+  var cont = document.getElementById('df-actual');
+  var resumen = document.getElementById('df-resumen');
+  var finalEl = document.getElementById('df-final');
+  var veredictoEl = document.getElementById('df-veredicto');
+  document.getElementById('df-reset').addEventListener('click', function(){
+    idx = 0; aciertos = 0;
+    resumen.classList.remove('show');
+    render();
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  function render(){
+    if(idx >= casos.length){
+      counter.textContent = 'Completado';
+      finalEl.textContent = aciertos;
+      var pct = aciertos / casos.length;
+      var msg;
+      if(pct === 1) msg = '🌟 Perfecto. Ojo entrenado para detectar deepfakes.';
+      else if(pct >= 0.66) msg = '👍 Bien. Mira los fallos para afinar.';
+      else if(pct >= 0.33) msg = '🙂 Vas aprendiendo. Repasa el apartado "Deepfakes" del libro digital.';
+      else msg = '📚 Es un tema clave. Lee con calma el libro digital y vuelve a probar.';
+      veredictoEl.textContent = msg;
+      resumen.classList.add('show');
+      cont.innerHTML = '';
+      return;
+    }
+    var c = casos[idx];
+    counter.textContent = 'Caso ' + (idx+1) + ' de ' + casos.length;
+    aciertosEl.textContent = aciertos;
+    var html = '<div class="df-card">';
+    html += '<div class="df-escena">' + c.escena + '</div>';
+    html += '<p class="df-pregunta">¿Real o deepfake?</p>';
+    html += '<div class="df-actions">';
+    html += '<button class="df-btn df-btn-real" data-r="real">✓ Es real</button>';
+    html += '<button class="df-btn df-btn-fake" data-r="fake">⚠ Es deepfake / falso</button>';
+    html += '</div>';
+    html += '<div class="df-fb"></div>';
+    html += '</div>';
+    cont.innerHTML = html;
+    cont.querySelectorAll('.df-btn').forEach(function(b){
+      b.addEventListener('click', function(){ contestar(b.dataset.r); });
+    });
+  }
+
+  function contestar(r){
+    var c = casos[idx];
+    var ok = (r === c.tipo);
+    if(ok) aciertos++;
+    cont.querySelectorAll('.df-btn').forEach(function(b){ b.disabled = true; });
+    var fb = cont.querySelector('.df-fb');
+    var titulo = ok ? '✓ Correcto' : '✗ Incorrecto';
+    var respuesta = c.tipo === 'fake' ? 'Es DEEPFAKE / falso' : 'Es REAL';
+    var html = '<h4>' + titulo + ' · ' + respuesta + '</h4>';
+    html += '<p><strong>Pistas a tener en cuenta:</strong></p><ul>';
+    c.pistas.forEach(function(p){ html += '<li>' + p + '</li>'; });
+    html += '</ul>';
+    html += '<p style="margin-top:10px"><em>' + c.explicacion + '</em></p>';
+    html += '<div class="df-next"><button>Siguiente →</button></div>';
+    fb.innerHTML = html;
+    fb.classList.add('show');
+    fb.classList.add(ok ? 'acierto' : 'fallo');
+    aciertosEl.textContent = aciertos;
+    fb.querySelector('button').addEventListener('click', function(){
+      idx++;
+      render();
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>

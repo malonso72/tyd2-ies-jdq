@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Asocia bloques de Scratch · U07 · TyD 2º ESO</title>
+<meta name="description" content="Identifica cada bloque de Scratch con su categoría y su función. Quiz visual interactivo.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+
+<style>
+.bq-wrap{max-width:780px;margin:30px auto;padding:0 20px 50px}
+.bq-hero{text-align:center;margin-bottom:24px}
+.bq-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 8px}
+.bq-hero p{font-size:1rem;color:var(--texto2);margin:0;line-height:1.5}
+.bq-progress{display:flex;justify-content:space-between;align-items:center;background:#F4F6F9;padding:10px 16px;border-radius:8px;margin-bottom:20px;font-family:var(--cond);font-size:.92rem}
+.bq-score{color:var(--principal);font-size:1.05rem}
+.bq-card{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:24px;box-shadow:0 1px 6px rgba(0,0,0,.04);margin-bottom:20px;text-align:center}
+.bq-pregunta{font-size:1.05rem;color:var(--texto);margin:0 0 16px}
+.bq-bloque{display:inline-block;padding:14px 22px;border-radius:6px;color:#fff;font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:600;margin:14px 0;border-top:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(0,0,0,.15);min-width:240px}
+.bq-bloque .num,.bq-bloque .txt{background:rgba(255,255,255,.22);padding:1px 7px;border-radius:8px;font-size:.9em;margin:0 1px}
+.bq-mov{background:#4C97FF}
+.bq-apa{background:#9966FF}
+.bq-son{background:#CF63CF}
+.bq-eve{background:#C88330}
+.bq-con{background:#CF8B17}
+.bq-sen{background:#5CB1D6}
+.bq-ope{background:#59C059}
+.bq-var{background:#FF8C1A}
+.bq-mensaje{background:#FFBF00;color:#000}
+.bq-opciones{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px}
+.bq-opt{font-family:var(--sans);font-size:.95rem;padding:12px 16px;background:#FAFAFA;border:2px solid var(--borde);border-radius:8px;cursor:pointer;text-align:left;transition:all .15s;line-height:1.4;color:var(--texto)}
+.bq-opt:hover:not(:disabled){background:var(--principal-bg);border-color:var(--principal)}
+.bq-opt:disabled{cursor:default}
+.bq-opt.correct{background:#E1F5EE;border-color:#1E8E3E;color:#0F6E56;font-weight:600}
+.bq-opt.wrong{background:#FCEBEB;border-color:#C44536;color:#9A2A2A}
+.bq-fb{display:none;margin-top:14px;padding:12px 16px;background:#F4F6F9;border-left:4px solid var(--principal);border-radius:0 6px 6px 0;font-size:.94rem;line-height:1.55;text-align:left}
+.bq-fb.show{display:block}
+.bq-next{text-align:center;margin-top:14px}
+.bq-next button{font-family:var(--cond);font-size:.92rem;letter-spacing:.5px;padding:9px 22px;border-radius:22px;cursor:pointer;border:2px solid var(--principal);background:var(--principal);color:#fff;font-weight:600}
+.bq-next button:hover{background:var(--principal2)}
+.bq-resumen{background:linear-gradient(180deg,#FFF8F0,#fff);border:2px solid var(--principal);border-radius:12px;padding:24px;text-align:center;margin-top:24px;display:none}
+.bq-resumen.show{display:block}
+.bq-resumen h2{font-family:var(--cond);color:var(--principal);margin:0 0 8px;font-size:1.5rem}
+.bq-resumen .num{font-family:var(--cond);font-size:3rem;color:var(--principal);line-height:1;margin:10px 0}
+.bq-resumen .num small{font-size:1.5rem;color:var(--texto2)}
+.bq-resumen button{font-family:var(--cond);font-size:.92rem;letter-spacing:.5px;padding:10px 22px;border-radius:22px;cursor:pointer;border:2px solid var(--principal);background:var(--principal);color:#fff;font-weight:600;margin-top:8px}
+.bq-resumen button:hover{background:var(--principal2)}
+@media(max-width:560px){.bq-opciones{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U07 · Programación · Interactivo: bloques de Scratch</span>
+</header>
+
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U07</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🧩</span><span class="nc-lbl">Bloques</span></span>
+</nav>
+
+<main id="main-content" class="bq-wrap">
+
+  <section class="bq-hero">
+    <h1>🧩 Asocia los bloques de Scratch</h1>
+    <p>Para cada bloque, identifica de qué categoría es y para qué sirve. <strong>10 bloques</strong> en total.</p>
+  </section>
+
+  <div class="bq-progress">
+    <span id="bq-counter">Bloque 1 de 10</span>
+    <span class="bq-score">Aciertos: <span id="bq-aciertos">0</span> / 10</span>
+  </div>
+
+  <div id="bq-actual"></div>
+
+  <div class="bq-resumen" id="bq-resumen">
+    <h2>¡Has terminado!</h2>
+    <div class="num"><span id="bq-final">0</span><small> / 10 aciertos</small></div>
+    <p id="bq-veredicto">—</p>
+    <button id="bq-reset">🔁 Volver a empezar</button>
+  </div>
+
+</main>
+
+<script>
+(function(){
+  'use strict';
+
+  var bloques = [
+    {html:'<span class="bq-bloque bq-mov">mover <span class="num">10</span> pasos</span>',
+     pregunta:'¿De qué categoría es este bloque?',
+     opciones:[{t:'Movimiento (azul)',ok:true},{t:'Apariencia (violeta)',ok:false},{t:'Control (amarillo)',ok:false},{t:'Eventos (naranja)',ok:false}],
+     fb:'Es de <strong>Movimiento</strong> (azul). Mueve el sprite la cantidad de pasos indicada en la dirección a la que apunta.'},
+
+    {html:'<span class="bq-bloque bq-eve">al hacer clic en 🏁</span>',
+     pregunta:'¿De qué categoría es este bloque?',
+     opciones:[{t:'Apariencia (violeta)',ok:false},{t:'Eventos (marrón-naranja, sombrero)',ok:true},{t:'Sensores (azul claro)',ok:false},{t:'Variables (naranja oscuro)',ok:false}],
+     fb:'Es de <strong>Eventos</strong>. Tiene forma de sombrero y arranca el script cuando pulsas la bandera verde. Casi todos los proyectos empiezan con este bloque.'},
+
+    {html:'<span class="bq-bloque bq-con">por siempre</span>',
+     pregunta:'¿Para qué sirve este bloque?',
+     opciones:[{t:'Repetir el contenido indefinidamente, hasta que pares el programa',ok:true},{t:'Mostrar un mensaje en pantalla',ok:false},{t:'Cambiar el disfraz del sprite',ok:false},{t:'Reproducir un sonido',ok:false}],
+     fb:'Es un bucle de <strong>Control</strong>. Repite los bloques de su interior <em>siempre</em>, hasta que pulses el botón rojo o haya un <code>parar todo</code>. Es la base del bucle principal de cualquier juego.'},
+
+    {html:'<span class="bq-bloque bq-con">si <span class="txt">¿tocando borde?</span> entonces</span>',
+     pregunta:'¿Qué tipo de bloque es?',
+     opciones:[{t:'Un sensor',ok:false},{t:'Un condicional (control)',ok:true},{t:'Un bucle',ok:false},{t:'Una variable',ok:false}],
+     fb:'Es un <strong>condicional</strong> de la categoría Control. Su forma con hueco permite meter dentro otros bloques que solo se ejecutan si la condición es verdadera (en este caso, si el sprite toca un borde).'},
+
+    {html:'<span class="bq-bloque bq-var">sumar <span class="num">1</span> a <span class="txt">puntos</span></span>',
+     pregunta:'¿Para qué sirve este bloque?',
+     opciones:[{t:'Incrementar el valor de una variable',ok:true},{t:'Crear un sonido',ok:false},{t:'Mover el sprite',ok:false},{t:'Cambiar de escenario',ok:false}],
+     fb:'Es de <strong>Variables</strong>. Suma 1 (o el número que indiques) al valor actual de la variable. Muy típico para marcadores: cada vez que el jugador acierta, "sumar 1 a puntos".'},
+
+    {html:'<span class="bq-bloque bq-apa">decir <span class="txt">¡Hola!</span> por <span class="num">2</span> segundos</span>',
+     pregunta:'¿Qué hace este bloque?',
+     opciones:[{t:'Reproduce un sonido',ok:false},{t:'Muestra un bocadillo de texto durante el tiempo indicado',ok:true},{t:'Cambia el fondo',ok:false},{t:'Mueve el sprite',ok:false}],
+     fb:'Es de <strong>Apariencia</strong>. Muestra un bocadillo con el texto durante los segundos indicados y luego desaparece. Útil para diálogos en historias o instrucciones al jugador.'},
+
+    {html:'<span class="bq-bloque bq-sen">¿tocando <span class="txt">Manzana</span>?</span>',
+     pregunta:'¿Qué tipo de bloque es?',
+     opciones:[{t:'Un sensor',ok:true},{t:'Un evento',ok:false},{t:'Una variable',ok:false},{t:'Un operador matemático',ok:false}],
+     fb:'Es un <strong>sensor</strong>. Detecta si el sprite actual está tocando otro sprite (aquí, Manzana). Devuelve verdadero o falso, así que se mete dentro de un condicional o un bucle "hasta que".'},
+
+    {html:'<span class="bq-bloque bq-ope"><span class="num">3</span> + <span class="num">4</span></span>',
+     pregunta:'¿De qué categoría es?',
+     opciones:[{t:'Operadores (verde)',ok:true},{t:'Variables (naranja)',ok:false},{t:'Sensores (azul claro)',ok:false},{t:'Control (amarillo)',ok:false}],
+     fb:'Es un <strong>operador</strong> matemático. La categoría verde incluye + - × ÷, comparaciones (&gt; &lt; =), lógica (y, o, no) y generadores de aleatorios.'},
+
+    {html:'<span class="bq-bloque bq-mensaje">enviar a todos <span class="txt">empezar</span></span>',
+     pregunta:'¿Para qué sirve este bloque?',
+     opciones:[{t:'Reiniciar el juego',ok:false},{t:'Avisar a todos los sprites de que un evento ha pasado (mensaje broadcast)',ok:true},{t:'Mover todos los sprites a la vez',ok:false},{t:'Borrar el escenario',ok:false}],
+     fb:'Es de <strong>Eventos</strong> y se usa para coordinar varios sprites. Cuando se envía el mensaje "empezar", todos los sprites que tengan un script <code>al recibir empezar</code> reaccionan a la vez.'},
+
+    {html:'<span class="bq-bloque bq-mov">apuntar en dirección <span class="num">90</span></span>',
+     pregunta:'¿Hacia dónde apuntará el sprite?',
+     opciones:[{t:'Hacia arriba',ok:false},{t:'Hacia la derecha',ok:true},{t:'Hacia abajo',ok:false},{t:'Hacia la izquierda',ok:false}],
+     fb:'En Scratch, dirección <strong>90° = derecha</strong>. Otros valores típicos: 0° = arriba, 180° = abajo, -90° = izquierda. La dirección se mide desde la vertical (arriba) en sentido horario.'}
+  ];
+
+  var idx = 0;
+  var aciertos = 0;
+  var counter = document.getElementById('bq-counter');
+  var aciertosEl = document.getElementById('bq-aciertos');
+  var cont = document.getElementById('bq-actual');
+  var resumen = document.getElementById('bq-resumen');
+  var finalEl = document.getElementById('bq-final');
+  var veredictoEl = document.getElementById('bq-veredicto');
+  document.getElementById('bq-reset').addEventListener('click', function(){
+    idx = 0; aciertos = 0;
+    resumen.classList.remove('show');
+    render();
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  function render(){
+    if(idx >= bloques.length){
+      counter.textContent = 'Completado';
+      finalEl.textContent = aciertos;
+      var pct = aciertos / bloques.length;
+      var msg;
+      if(pct === 1) msg = '🌟 Perfecto. Conoces los bloques al dedillo.';
+      else if(pct >= 0.7) msg = '👍 Muy bien. Repasa los que has fallado.';
+      else if(pct >= 0.5) msg = '🙂 Aceptable. Vuelve a abrir Scratch y juega con los bloques que has fallado.';
+      else msg = '📚 Repasa el apartado "Categorías de bloques" del libro digital y prueba otra vez.';
+      veredictoEl.textContent = msg;
+      resumen.classList.add('show');
+      cont.innerHTML = '';
+      return;
+    }
+    var b = bloques[idx];
+    counter.textContent = 'Bloque ' + (idx+1) + ' de ' + bloques.length;
+    aciertosEl.textContent = aciertos;
+
+    var html = '<div class="bq-card">';
+    html += '<p class="bq-pregunta">' + b.pregunta + '</p>';
+    html += b.html;
+    html += '<div class="bq-opciones">';
+    b.opciones.forEach(function(o, i){
+      html += '<button class="bq-opt" data-i="' + i + '">' + o.t + '</button>';
+    });
+    html += '</div>';
+    html += '<div class="bq-fb"></div>';
+    html += '</div>';
+    cont.innerHTML = html;
+    cont.querySelectorAll('.bq-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){ contestar(parseInt(btn.dataset.i)); });
+    });
+  }
+
+  function contestar(i){
+    var b = bloques[idx];
+    var ok = b.opciones[i].ok;
+    if(ok) aciertos++;
+    cont.querySelectorAll('.bq-opt').forEach(function(btn, j){
+      btn.disabled = true;
+      if(b.opciones[j].ok) btn.classList.add('correct');
+      else if(j === i) btn.classList.add('wrong');
+    });
+    var fb = cont.querySelector('.bq-fb');
+    fb.innerHTML = '<p>' + (ok ? '✓ ' : '✗ ') + b.fb + '</p><div class="bq-next"><button>Siguiente →</button></div>';
+    fb.classList.add('show');
+    aciertosEl.textContent = aciertos;
+    fb.querySelector('button').addEventListener('click', function(){
+      idx++;
+      render();
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>

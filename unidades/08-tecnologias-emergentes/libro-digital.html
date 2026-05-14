@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<title>Libro digital · U08 Tecnologías emergentes · TyD 2º ESO</title>
+<meta name="description" content="Libro digital de la unidad 8 para 2º ESO: IA, IoT, robótica, realidad virtual y aumentada, vehículos autónomos, drones, blockchain. IES Jiménez de Quesada.">
+
+<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/08-tecnologias-emergentes/libro-digital.html">
+
+<meta property="og:title" content="Libro digital · U08 Tecnologías emergentes · TyD 2º ESO">
+<meta property="og:description" content="Tecnologías que están cambiando el mundo: IA, IoT, robótica, VR/AR, vehículos autónomos, drones y blockchain.">
+<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/08-tecnologias-emergentes/libro-digital.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/common.css">
+<link rel="stylesheet" href="../../assets/css/unidad.css">
+
+<style>
+.parte-titulo{font-family:var(--cond);font-size:.78rem;letter-spacing:2.5px;color:var(--principal);text-transform:uppercase;font-weight:700;margin:30px 0 10px;padding-bottom:5px;border-bottom:1px dashed var(--principal)}
+.parte-titulo:first-of-type{margin-top:0}
+
+.callout{display:flex;gap:12px;align-items:flex-start;background:#F4F6F9;border-left:4px solid var(--principal2);border-radius:0 6px 6px 0;padding:12px 16px;margin:14px 0}
+.callout .ic{font-size:1.4rem;flex-shrink:0;line-height:1}
+.callout p{margin:0;font-size:.94rem;line-height:1.55}
+.callout-warn{background:#FFF4E6;border-left-color:#F59E0B}
+.callout-info{background:#E6F1FB;border-left-color:#378ADD}
+.callout-ok{background:#E1F5EE;border-left-color:var(--verde)}
+.callout-danger{background:#FCEBEB;border-left-color:#E24B4A}
+
+.ejemplo{background:#FFFCF5;border:1px solid #E8DCB8;border-radius:8px;padding:14px 18px;margin:16px 0}
+.ejemplo .et{display:inline-block;font-family:var(--cond);font-size:.74rem;letter-spacing:1.5px;color:#A47B0C;background:#FBEBC2;padding:3px 9px;border-radius:10px;margin-bottom:6px}
+.ejemplo h5{font-family:var(--cond);color:var(--texto);margin:0 0 8px;font-size:1.05rem}
+
+table.tipo-tabla{width:100%;border-collapse:collapse;margin:14px 0;font-size:.94rem}
+table.tipo-tabla th{background:var(--principal);color:#fff;padding:8px 10px;text-align:left;font-family:var(--cond);font-weight:600}
+table.tipo-tabla td{padding:8px 10px;border-bottom:1px solid var(--borde);vertical-align:top}
+table.tipo-tabla tr:nth-child(even){background:#FAFAFA}
+
+.tech-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.tech-card{background:#fff;border:1px solid var(--borde);border-radius:8px;padding:14px 16px}
+.tech-card .ic{font-size:2rem;line-height:1;display:block;margin-bottom:6px}
+.tech-card h4{font-family:var(--cond);color:var(--principal);margin:0 0 6px;font-size:1rem}
+.tech-card p{margin:0;font-size:.9rem;color:var(--texto2);line-height:1.5}
+
+.huella-lista{list-style:none;padding:0;margin:14px 0}
+.huella-lista li{padding:8px 14px;background:#F4F6F9;margin-bottom:6px;border-radius:6px;font-size:.94rem;line-height:1.5;display:flex;gap:10px;align-items:flex-start}
+.huella-lista li::before{content:"▸";color:var(--principal);font-weight:700;font-size:1rem;line-height:1.4}
+
+.pro-contra{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.pro,.contra{padding:14px 16px;border-radius:8px;border:1px solid var(--borde)}
+.pro{background:#E1F5EE;border-color:#9FE1CB}
+.contra{background:#FCEBEB;border-color:#F09595}
+.pro h4{font-family:var(--cond);color:#1E8E3E;margin:0 0 8px;font-size:1rem}
+.contra h4{font-family:var(--cond);color:#C44536;margin:0 0 8px;font-size:1rem}
+.pro ul,.contra ul{margin:0;padding-left:18px;font-size:.9rem;line-height:1.55}
+
+.glosario-tabla{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+.glosario-tabla th{background:var(--principal-bg);color:var(--principal);font-family:var(--cond);padding:8px 10px;text-align:left;font-weight:600}
+.glosario-tabla td{padding:8px 10px;border-bottom:1px solid var(--borde)}
+.glosario-tabla td:first-child{font-weight:600;color:var(--principal2);white-space:nowrap;width:25%}
+
+@media(max-width:640px){.pro-contra{grid-template-columns:1fr}}
+@media print{.curso-hd,.curso-navcross,.sb-side{display:none!important}.apartado{break-inside:avoid}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U08 · Tecnologías emergentes · Libro digital</span>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="index.html"><span>📋</span><span class="nc-lbl">Hub U08</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>📖</span><span class="nc-lbl">Libro digital</span></span>
+  <span class="nc-sep">·</span>
+  <a href="actividades/index.html"><span>✏️</span><span class="nc-lbl">Actividades</span></a>
+  <span class="nc-sep">·</span>
+  <a href="autocomprobacion/index.html"><span>✅</span><span class="nc-lbl">Autocomprobación</span></a>
+</nav>
+
+<div class="unidad-layout">
+
+<aside class="sb-side">
+  <h3>Apartados</h3>
+
+  <div class="parte-titulo">Parte 1 · Inteligencia Artificial</div>
+  <a href="#s1">1. Qué es la IA</a>
+  <a href="#s2">2. IA generativa</a>
+  <a href="#s3">3. Deepfakes y riesgos</a>
+  <a href="#s4">4. Usar IA con criterio</a>
+
+  <div class="parte-titulo">Parte 2 · IoT y robótica</div>
+  <a href="#s5">5. Internet de las cosas</a>
+  <a href="#s6">6. Hogar inteligente</a>
+  <a href="#s7">7. Robótica y automatización</a>
+
+  <div class="parte-titulo">Parte 3 · Realidad e impresión</div>
+  <a href="#s8">8. Realidad VR / AR / MR</a>
+  <a href="#s9">9. Impresión 3D</a>
+
+  <div class="parte-titulo">Parte 4 · Movilidad y futuro</div>
+  <a href="#s10">10. Vehículos autónomos</a>
+  <a href="#s11">11. Drones</a>
+  <a href="#s12">12. Blockchain y big data</a>
+  <a href="#s13">13. Futuro del trabajo</a>
+  <a href="#s14">14. Ética tecnológica</a>
+
+  <div class="parte-titulo">Cierre</div>
+  <a href="#glosario">📖 Glosario</a>
+</aside>
+
+<main class="ct" id="main-content">
+
+  <h1 class="unidad-titulo">U08 · Tecnologías emergentes</h1>
+  <p class="unidad-subt">Las tecnologías que están cambiando el mundo <em>ahora mismo</em>. No se trata de adivinar el futuro, sino de entender lo que ya tienes alrededor para tomar mejores decisiones.</p>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PARTE 1 · INTELIGENCIA ARTIFICIAL
+     ═══════════════════════════════════════════════════════════ -->
+
+  <section class="apartado" id="s1">
+    <h2>1. ¿Qué es la Inteligencia Artificial?</h2>
+    <p>La <strong>Inteligencia Artificial (IA)</strong> es la rama de la tecnología que enseña a las máquinas a hacer cosas que, hasta hace poco, solo podían hacer los humanos: reconocer imágenes, traducir idiomas, conducir un coche, jugar al ajedrez, escribir texto…</p>
+
+    <p>¿Cómo lo consigue? A diferencia de un programa "clásico" (donde el programador le dice cada paso), una IA <strong>aprende a partir de ejemplos</strong>. Se le muestran millones de fotos de perros y gatos, y la IA aprende a distinguirlos sola.</p>
+
+    <table class="tipo-tabla">
+      <thead>
+        <tr><th>Tipo</th><th>Qué es</th><th>Ejemplos</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>IA débil (específica)</strong></td><td>Sirve para <em>una</em> tarea concreta</td><td>Filtro de spam, traductor, Siri, asistente del coche</td></tr>
+        <tr><td><strong>IA generativa</strong></td><td>Crea contenido nuevo (texto, imagen, audio)</td><td>ChatGPT, DALL-E, Midjourney, Suno</td></tr>
+        <tr><td><strong>IA general</strong></td><td>Inteligencia humana completa: aprender cualquier tarea</td><td>No existe (todavía)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-info">
+      <span class="ic">🧠</span>
+      <p>La <strong>IA no es magia</strong>. Es matemáticas a gran escala: un programa que reconoce gatos no "sabe" lo que es un gato. Solo aprende patrones estadísticos a partir de millones de fotos. Por eso a veces se equivoca de formas raras (confunde un gato con una tostada).</p>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s2">
+    <h2>2. IA generativa: ChatGPT y compañía</h2>
+    <p>La <strong>IA generativa</strong> es la que crea contenido nuevo a partir de instrucciones (prompts). Los modelos más conocidos:</p>
+
+    <div class="tech-grid">
+      <div class="tech-card"><span class="ic">💬</span><h4>ChatGPT / Gemini / Claude</h4><p>Generan texto: respuestas a preguntas, redacciones, código, traducciones, resúmenes.</p></div>
+      <div class="tech-card"><span class="ic">🎨</span><h4>DALL-E / Midjourney</h4><p>Generan imágenes a partir de descripciones de texto.</p></div>
+      <div class="tech-card"><span class="ic">🎵</span><h4>Suno / Udio</h4><p>Generan canciones completas con letra y música.</p></div>
+      <div class="tech-card"><span class="ic">🎬</span><h4>Sora / Runway</h4><p>Generan vídeos a partir de texto o imágenes.</p></div>
+    </div>
+
+    <p>¿Cómo aprenden? Se entrenan con <strong>cantidades enormes</strong> de datos extraídos de internet: textos, imágenes, vídeos, libros, conversaciones. La IA "memoriza" patrones de cómo está escrito el lenguaje, cómo se ven los gatos o cómo suena el pop, y luego genera contenido nuevo siguiendo esos patrones.</p>
+
+    <div class="callout callout-warn">
+      <span class="ic">⚠️</span>
+      <p>La IA puede <strong>equivocarse con confianza</strong>: te da datos falsos, fechas inventadas o citas que no existen, todo presentado como si fuera verdad. Se llama <em>alucinación</em>. Por eso siempre hay que verificar lo que te dice una IA antes de usarlo en un trabajo.</p>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s3">
+    <h2>3. Deepfakes y riesgos de la IA</h2>
+    <p>Un <strong>deepfake</strong> es un vídeo, audio o imagen falsa creada con IA que imita a una persona real. La voz, la cara, los gestos: todo parece auténtico.</p>
+
+    <h3>Aplicaciones legítimas</h3>
+    <div class="huella-lista">
+      <li>Cine: rejuvenecer actores, doblar sin perder labios.</li>
+      <li>Educación: histórico contado por el propio personaje.</li>
+      <li>Accesibilidad: sintetizar la voz de alguien que ha perdido el habla.</li>
+    </div>
+
+    <h3>Usos abusivos (mucho más comunes)</h3>
+    <div class="huella-lista">
+      <li><strong>Estafas</strong>: imitan la voz de un familiar para pedir dinero urgente.</li>
+      <li><strong>Bulos políticos</strong>: vídeo falso de un político diciendo lo que nunca dijo.</li>
+      <li><strong>Pornografía sin consentimiento</strong>: poner la cara de una persona en cuerpo ajeno.</li>
+      <li><strong>Acoso escolar</strong>: hacer "vídeos vergonzosos" falsos de compañeros.</li>
+    </div>
+
+    <div class="callout callout-danger">
+      <span class="ic">🚨</span>
+      <p><strong>Crear o difundir un deepfake con la cara de otra persona sin su permiso es delito.</strong> En España puede llegar a varios años de prisión, sobre todo si tiene contenido sexual o perjudica el honor. No es "una broma": destroza vidas y la ley es clara.</p>
+    </div>
+
+    <h3>Cómo detectar un deepfake</h3>
+    <div class="huella-lista">
+      <li><strong>Parpadeo raro o ausente</strong> en vídeos antiguos generados.</li>
+      <li><strong>Sombras y reflejos</strong> que no encajan en la cara.</li>
+      <li><strong>Dientes y orejas</strong>: la IA las dibuja con poca precisión.</li>
+      <li><strong>Bordes del pelo</strong>: el "corte" suele tener artefactos.</li>
+      <li><strong>El audio</strong>: tono plano, sin titubeos naturales.</li>
+      <li><strong>Búsqueda inversa</strong>: si el vídeo es real, otro medio fiable lo tendría también.</li>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s4">
+    <h2>4. Usar IA con criterio</h2>
+    <p>La IA generativa es una herramienta espectacular si se usa bien. Y un atajo perezoso si se usa mal. Tres principios:</p>
+
+    <h3>1. Para aprender, no para reemplazar tu cerebro</h3>
+    <p>Pedirle a una IA que te resuma un tema es útil <em>si</em> después contrastas y entiendes. Si solo copias, no aprendes. El día del examen no podrás llamar a ChatGPT.</p>
+
+    <h3>2. Cita la fuente</h3>
+    <p>Si un párrafo de tu trabajo es de IA, dilo. Igual que citarías un libro o una web. Hacer pasar por tuyo lo que ha escrito una IA es plagio. Hoy hay <em>detectores</em> de IA que los profesores pueden usar.</p>
+
+    <h3>3. Cuidado con qué le cuentas</h3>
+    <p>Cuando escribes a ChatGPT, tus mensajes se guardan en servidores de la empresa. No le pegues:</p>
+    <div class="huella-lista">
+      <li>Datos personales (DNI, dirección, teléfono).</li>
+      <li>Contraseñas o información de tarjetas.</li>
+      <li>Información confidencial de tu familia o del centro.</li>
+      <li>Fotos privadas tuyas o de otros.</li>
+    </div>
+
+    <div class="callout callout-ok">
+      <span class="ic">💡</span>
+      <p><strong>Buen uso:</strong> "Explícame qué es la ley de Ohm como si tuviera 14 años, con ejemplos cotidianos". <strong>Mal uso:</strong> "Hazme el trabajo de la unidad 5 y me lo entregas tal cual". El primero te ayuda a aprender. El segundo te impide aprender (y se nota).</p>
+    </div>
+  </section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PARTE 2 · IoT Y ROBÓTICA
+     ═══════════════════════════════════════════════════════════ -->
+
+  <section class="apartado" id="s5">
+    <h2>5. Internet de las cosas (IoT)</h2>
+    <p>El <strong>Internet de las cosas</strong> (en inglés <em>Internet of Things</em>, IoT) es la red de dispositivos cotidianos conectados a internet: relojes inteligentes, neveras, bombillas, sensores de temperatura, cámaras de seguridad…</p>
+
+    <p>Tienen tres ingredientes:</p>
+    <div class="tech-grid">
+      <div class="tech-card"><span class="ic">🌡️</span><h4>Sensores</h4><p>Miden algo: temperatura, movimiento, luz, humedad, pulso.</p></div>
+      <div class="tech-card"><span class="ic">📶</span><h4>Conectividad</h4><p>Mandan los datos por wifi, bluetooth o 4G/5G.</p></div>
+      <div class="tech-card"><span class="ic">🧠</span><h4>Procesamiento</h4><p>Una app o un servidor analiza los datos y reacciona.</p></div>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">📊</span>
+      <p>En el mundo hay más de <strong>15.000 millones de dispositivos IoT</strong> conectados (más que personas en el planeta). Y se espera que en 2030 sean 30.000 millones. La gran mayoría son sensores industriales y de hogar.</p>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s6">
+    <h2>6. Hogar inteligente</h2>
+    <p>El <strong>hogar inteligente</strong> (o <em>domótica</em>) es la aplicación del IoT a la vivienda. Aparatos cotidianos que se controlan desde el móvil o por voz.</p>
+
+    <h3>Ejemplos típicos</h3>
+    <div class="huella-lista">
+      <li><strong>Luces inteligentes</strong>: encender, apagar, cambiar de color y programar desde el móvil.</li>
+      <li><strong>Termostato inteligente</strong>: aprende cuándo estás en casa y regula la calefacción.</li>
+      <li><strong>Asistentes de voz</strong>: Alexa, Google Home, Siri. Activan otros dispositivos al hablarles.</li>
+      <li><strong>Cámaras y alarmas</strong>: vigilan la casa y mandan alerta al móvil.</li>
+      <li><strong>Robot aspirador</strong>: limpia solo siguiendo un mapa de la casa.</li>
+      <li><strong>Persianas y enchufes</strong>: se controlan a distancia.</li>
+    </div>
+
+    <div class="pro-contra">
+      <div class="pro">
+        <h4>✓ Ventajas</h4>
+        <ul>
+          <li>Comodidad</li>
+          <li>Ahorro energético (apagar lo que no uses)</li>
+          <li>Accesibilidad para personas mayores o con movilidad reducida</li>
+          <li>Seguridad (vigilancia, sensores de humo)</li>
+        </ul>
+      </div>
+      <div class="contra">
+        <h4>✗ Inconvenientes</h4>
+        <ul>
+          <li>Coste de instalación</li>
+          <li>Dependencia: si falla el wifi o la nube, no funciona</li>
+          <li>Privacidad: tu casa "escucha" todo (los asistentes de voz)</li>
+          <li>Vulnerabilidad: una cámara mal protegida puede ser hackeada</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s7">
+    <h2>7. Robótica y automatización</h2>
+    <p>Un <strong>robot</strong> es una máquina que percibe el entorno (con sensores), toma decisiones (con un programa) y actúa físicamente sobre él (con motores y actuadores). Va más allá del IoT porque <em>se mueve y actúa</em>.</p>
+
+    <h3>Tipos de robots</h3>
+    <table class="tipo-tabla">
+      <thead>
+        <tr><th>Tipo</th><th>Función</th><th>Ejemplos</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Industriales</strong></td><td>Fabricación en serie en una posición fija</td><td>Brazos robóticos de fábricas de coches</td></tr>
+        <tr><td><strong>De servicio</strong></td><td>Ayudan a personas en tareas cotidianas</td><td>Robot aspirador, robot quirúrgico, robot camarero</td></tr>
+        <tr><td><strong>Móviles autónomos</strong></td><td>Se desplazan por su cuenta</td><td>Drones, vehículos autónomos, rovers de Marte</td></tr>
+        <tr><td><strong>Humanoides</strong></td><td>Imitan la forma humana</td><td>Tesla Optimus, Atlas (Boston Dynamics)</td></tr>
+        <tr><td><strong>Educativos</strong></td><td>Para aprender programación y mecatrónica</td><td>LEGO Spike, Arduino, micro:bit, mBot</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-info">
+      <span class="ic">🤖</span>
+      <p>Los robots actuales son <strong>muy buenos en tareas repetitivas y entornos controlados</strong> (una cadena de montaje). Son <strong>muy malos</strong> en tareas que requieren sentido común, flexibilidad o trato humano. Por eso difícilmente sustituyen profesiones donde toca improvisar (profesor, médico, fontanero, peluquero).</p>
+    </div>
+  </section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PARTE 3 · REALIDAD E IMPRESIÓN
+     ═══════════════════════════════════════════════════════════ -->
+
+  <section class="apartado" id="s8">
+    <h2>8. Realidad virtual, aumentada y mixta</h2>
+    <p>Tres tecnologías que mezclan lo real y lo digital, pero de forma muy distinta:</p>
+
+    <table class="tipo-tabla">
+      <thead>
+        <tr><th>Tecnología</th><th>Qué es</th><th>Aparato típico</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>VR · Realidad virtual</strong></td><td>Te sumerge en un mundo 100% digital, no ves nada del real</td><td>Meta Quest, PlayStation VR, gafas opacas</td></tr>
+        <tr><td><strong>AR · Realidad aumentada</strong></td><td>Añade objetos digitales sobre el mundo real (que sigues viendo)</td><td>Pokémon GO, filtros Instagram/TikTok, Google Lens</td></tr>
+        <tr><td><strong>MR · Realidad mixta</strong></td><td>VR + AR. Los objetos digitales interactúan con el entorno real</td><td>Microsoft HoloLens, Apple Vision Pro</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Aplicaciones reales</h3>
+    <div class="huella-lista">
+      <li><strong>Educación</strong>: visitar el Antiguo Egipto o el interior del cuerpo humano en VR.</li>
+      <li><strong>Medicina</strong>: simuladores quirúrgicos, tratamiento de fobias, rehabilitación.</li>
+      <li><strong>Industria</strong>: entrenamiento de mecánicos, mantenimiento guiado con AR.</li>
+      <li><strong>Diseño y arquitectura</strong>: visitar un edificio antes de construirlo.</li>
+      <li><strong>Videojuegos</strong>: experiencias mucho más inmersivas.</li>
+    </div>
+
+    <div class="callout callout-warn">
+      <span class="ic">⚠️</span>
+      <p>El uso prolongado de VR puede causar mareo, dolor de cabeza y fatiga visual. Los fabricantes recomiendan no más de 30-45 minutos seguidos y descansar 15 minutos. Y siempre con espacio físico libre alrededor.</p>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s9">
+    <h2>9. Impresión 3D</h2>
+    <p>La <strong>impresión 3D</strong> (también llamada <em>fabricación aditiva</em>) construye objetos físicos capa a capa, en lugar de quitarles material (como hace un torno o una fresadora). El material más común es plástico fundido (PLA, PETG, ABS).</p>
+
+    <p>Pasos típicos:</p>
+    <ol style="margin-left:20px;line-height:1.7">
+      <li><strong>Diseñar</strong> el objeto en un programa 3D (Tinkercad, FreeCAD, Blender).</li>
+      <li><strong>Exportar</strong> a formato STL.</li>
+      <li><strong>Laminar</strong>: un programa (Cura, PrusaSlicer) lo corta en capas y genera el código para la impresora.</li>
+      <li><strong>Imprimir</strong>: la impresora deposita capas de plástico fundido durante minutos u horas.</li>
+    </ol>
+
+    <h3>¿Para qué se usa?</h3>
+    <div class="huella-lista">
+      <li><strong>Prototipos rápidos</strong>: probar un diseño antes de fabricar en serie.</li>
+      <li><strong>Piezas personalizadas</strong>: prótesis adaptadas, audífonos, plantillas ortopédicas.</li>
+      <li><strong>Recambios</strong>: imprimir piezas de electrodomésticos descatalogados.</li>
+      <li><strong>Construcción</strong>: ya hay casas impresas en 3D con hormigón.</li>
+      <li><strong>Espacio</strong>: las estaciones espaciales imprimen sus propias piezas.</li>
+      <li><strong>Educación</strong>: tu instituto puede tener una y la usaréis en proyectos.</li>
+    </div>
+  </section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PARTE 4 · MOVILIDAD Y FUTURO
+     ═══════════════════════════════════════════════════════════ -->
+
+  <section class="apartado" id="s10">
+    <h2>10. Vehículos autónomos</h2>
+    <p>Un <strong>vehículo autónomo</strong> es un coche, camión o autobús que conduce solo, sin necesidad de conductor humano. Pero "autónomo" tiene grados:</p>
+
+    <table class="tipo-tabla">
+      <thead>
+        <tr><th>Nivel</th><th>Qué hace el coche</th><th>Estado actual</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>0</strong></td><td>Sin automatización. Tú lo controlas todo</td><td>Coches antiguos</td></tr>
+        <tr><td><strong>1</strong></td><td>Asistencia: control de velocidad de crucero</td><td>Mayoría de coches modernos</td></tr>
+        <tr><td><strong>2</strong></td><td>Automatización parcial: mantiene carril y velocidad</td><td>Tesla Autopilot, Mercedes Drive Pilot</td></tr>
+        <tr><td><strong>3</strong></td><td>Conducción condicional: el coche conduce solo en ciertas vías. El conductor puede leer un libro</td><td>Recién aprobado en algunos países</td></tr>
+        <tr><td><strong>4</strong></td><td>Alta automatización: sin volante en zonas concretas</td><td>Waymo en algunas ciudades de EE.UU.</td></tr>
+        <tr><td><strong>5</strong></td><td>Totalmente autónomo en cualquier situación</td><td>No existe aún</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-info">
+      <span class="ic">🚗</span>
+      <p>Lo más difícil no es la velocidad ni la carretera: son las <strong>situaciones raras</strong>. Una pelota que cruza, un peatón despistado, una obra señalizada con un saco. Un humano improvisa; un coche autónomo necesita haberlo visto antes.</p>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s11">
+    <h2>11. Drones</h2>
+    <p>Un <strong>dron</strong> (UAV en jerga técnica) es una aeronave no tripulada, controlada a distancia o autónomamente. Empezaron como tecnología militar y hoy tienen mil aplicaciones civiles.</p>
+
+    <h3>Aplicaciones útiles</h3>
+    <div class="tech-grid">
+      <div class="tech-card"><span class="ic">🎥</span><h4>Audiovisual</h4><p>Tomas aéreas en cine, documentales, eventos deportivos.</p></div>
+      <div class="tech-card"><span class="ic">🌾</span><h4>Agricultura</h4><p>Mapear cultivos, detectar plagas, aplicar fertilizantes.</p></div>
+      <div class="tech-card"><span class="ic">🚑</span><h4>Emergencias</h4><p>Búsqueda y rescate, llegar a zonas inaccesibles tras un terremoto.</p></div>
+      <div class="tech-card"><span class="ic">📦</span><h4>Reparto</h4><p>Entrega de medicamentos, paquetería urbana (Amazon, Wing).</p></div>
+      <div class="tech-card"><span class="ic">🔧</span><h4>Inspección</h4><p>Líneas eléctricas, torres, presas. Sin riesgo para personas.</p></div>
+      <div class="tech-card"><span class="ic">🎆</span><h4>Espectáculos</h4><p>Coreografías de cientos de drones en lugar de fuegos artificiales.</p></div>
+    </div>
+
+    <div class="callout callout-warn">
+      <span class="ic">📋</span>
+      <p><strong>Volar un dron tiene normas</strong>. En España (AESA): registro obligatorio del piloto si pesa más de 250 g, no volar cerca de aeropuertos, no sobre multitudes, no más de 120 m de altura, no perder de vista el dron. Saltarse las normas se multa con varios miles de euros.</p>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s12">
+    <h2>12. Blockchain, criptomonedas y Big Data</h2>
+    <p>Tres conceptos muy ligados al mundo digital actual. Vamos al grano:</p>
+
+    <h3>Blockchain</h3>
+    <p>Un <strong>blockchain</strong> ("cadena de bloques") es un libro de cuentas digital, repartido entre miles de ordenadores del mundo. Nadie lo controla solo. Cada operación que se anota queda <em>para siempre</em> y es muy difícil de falsificar.</p>
+    <p>Se usa principalmente en <strong>criptomonedas</strong> (Bitcoin, Ethereum), pero también en contratos digitales, propiedad intelectual o trazabilidad de productos.</p>
+
+    <div class="callout callout-warn">
+      <span class="ic">⚠️</span>
+      <p>Las <strong>criptomonedas</strong> son una inversión muy arriesgada (su valor sube y baja muchísimo) y consumen una cantidad enorme de energía. Bitcoin solo, en 2024, consumió más electricidad que países como Argentina o Suecia.</p>
+    </div>
+
+    <h3>Big Data</h3>
+    <p><strong>Big Data</strong> es el manejo de cantidades enormes de datos para sacar conclusiones. Las empresas (Google, Amazon, Meta) saben:</p>
+    <div class="huella-lista">
+      <li>Qué buscas, qué compras, dónde vas, con quién hablas.</li>
+      <li>A qué hora estás más activo, cuánto duermes.</li>
+      <li>Qué cosas te enganchan en redes (y te ponen más).</li>
+      <li>Predicciones sobre lo que comprarás antes que tú mismo lo decidas.</li>
+    </div>
+
+    <p>El Big Data es muy potente para investigación médica, predicción del clima o optimización del tráfico. También es la base del modelo de negocio de muchas empresas que <em>te ofrecen servicios gratis</em>: el producto eres tú.</p>
+  </section>
+
+
+  <section class="apartado" id="s13">
+    <h2>13. ¿Cómo será el futuro del trabajo?</h2>
+    <p>Estas tecnologías están cambiando el mercado laboral muy rápido. Algunas profesiones desaparecerán, otras nuevas aparecerán. La regla general: <strong>las tareas repetitivas y predecibles se automatizan; las creativas y de trato humano resisten</strong>.</p>
+
+    <h3>Profesiones que pierden empleo (parcial o total)</h3>
+    <div class="huella-lista">
+      <li>Cajeros, taquilleros, peajes (cajeros automáticos, tarjetas, lectura de matrículas).</li>
+      <li>Conductores de larga distancia (vehículos autónomos, a medio plazo).</li>
+      <li>Traductores básicos (DeepL, Google Translate).</li>
+      <li>Telemarketing y servicios al cliente nivel 1 (chatbots de IA).</li>
+      <li>Diseñadores de imágenes de stock (IA generativa).</li>
+    </div>
+
+    <h3>Profesiones que crecen</h3>
+    <div class="huella-lista">
+      <li>Programadores, científicos de datos, especialistas en IA.</li>
+      <li>Ciberseguridad y forense digital.</li>
+      <li>Especialistas en salud mental, profesores, cuidadores.</li>
+      <li>Ingenieros de robótica y bioingenieros.</li>
+      <li>Creadores de contenido digital (con criterio).</li>
+      <li>Oficios con manos: fontanería, electricidad, carpintería (difíciles de robotizar).</li>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="ic">🎯</span>
+      <p>El consejo profesional clásico para vuestra generación: <strong>aprende a aprender</strong>. La carrera que estudiéis a los 20 puede no existir a los 30. Lo que sí seguirá siendo útil: pensamiento crítico, comunicación, resolución de problemas, trabajo en equipo, manos hábiles.</p>
+    </div>
+  </section>
+
+
+  <section class="apartado" id="s14">
+    <h2>14. Ética tecnológica</h2>
+    <p>Cada tecnología nueva trae preguntas éticas. No hay respuestas únicas, pero es importante <em>plantearlas</em>:</p>
+
+    <table class="tipo-tabla">
+      <thead>
+        <tr><th>Tecnología</th><th>Pregunta ética</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>IA generativa</td><td>¿Es plagio si un alumno usa ChatGPT? ¿Y un periodista? ¿Y un escritor?</td></tr>
+        <tr><td>Vehículo autónomo</td><td>Ante un accidente inevitable, ¿a quién protege? ¿al conductor o al peatón?</td></tr>
+        <tr><td>Reconocimiento facial</td><td>¿Vigilancia masiva en la calle? ¿Quién accede a los datos?</td></tr>
+        <tr><td>Deepfakes</td><td>¿Quién paga el daño cuando un vídeo falso destruye una carrera?</td></tr>
+        <tr><td>Drones armados</td><td>¿Puede una IA decidir disparar a un objetivo humano?</td></tr>
+        <tr><td>Big data</td><td>¿Cuánta privacidad cedes a cambio de un servicio "gratis"?</td></tr>
+        <tr><td>Robots de compañía</td><td>¿Pueden sustituir a humanos en cuidado de mayores?</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-info">
+      <span class="ic">🤔</span>
+      <p>La tecnología <em>siempre</em> va por delante de las leyes. Las decisiones que tomemos como sociedad en los próximos 10-15 años marcarán el siglo. Y eso os toca a vosotros: la próxima generación de votantes, profesionales y ciudadanos. Por eso pensar críticamente sobre esto importa.</p>
+    </div>
+  </section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     GLOSARIO
+     ═══════════════════════════════════════════════════════════ -->
+
+  <section class="apartado" id="glosario">
+    <h2>📖 Glosario de la unidad</h2>
+    <table class="glosario-tabla">
+      <thead><tr><th>Término</th><th>Significado breve</th></tr></thead>
+      <tbody>
+        <tr><td>AR</td><td>Realidad aumentada. Añade objetos digitales sobre lo real.</td></tr>
+        <tr><td>Big Data</td><td>Manejo de cantidades enormes de datos para sacar conclusiones.</td></tr>
+        <tr><td>Blockchain</td><td>Libro de cuentas digital distribuido y casi imposible de falsificar.</td></tr>
+        <tr><td>Chatbot</td><td>Programa que conversa con humanos por chat (a menudo con IA).</td></tr>
+        <tr><td>Criptomoneda</td><td>Moneda digital basada en blockchain (Bitcoin, Ethereum…).</td></tr>
+        <tr><td>Deepfake</td><td>Vídeo, audio o imagen falsa creada con IA imitando a alguien real.</td></tr>
+        <tr><td>Dron (UAV)</td><td>Aeronave no tripulada, controlada a distancia o autónomamente.</td></tr>
+        <tr><td>IA</td><td>Inteligencia Artificial. Sistemas que aprenden de datos para hacer tareas humanas.</td></tr>
+        <tr><td>IA generativa</td><td>IA que crea contenido nuevo (texto, imagen, audio, vídeo).</td></tr>
+        <tr><td>Impresión 3D</td><td>Fabricación por capas. Se construye, no se talla.</td></tr>
+        <tr><td>IoT</td><td>Internet de las cosas. Dispositivos cotidianos conectados a la red.</td></tr>
+        <tr><td>MR</td><td>Realidad mixta. Combinación de VR y AR.</td></tr>
+        <tr><td>Prompt</td><td>Instrucción de texto que se le da a una IA generativa.</td></tr>
+        <tr><td>Robot</td><td>Máquina que percibe, decide y actúa físicamente.</td></tr>
+        <tr><td>VR</td><td>Realidad virtual. Mundo digital que sustituye totalmente al real.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-info" style="margin-top:24px">
+      <span class="ic">✅</span>
+      <p>¿Te has quedado con todo? Pasa a la <a href="autocomprobacion/index.html"><strong>autocomprobación</strong></a> y comprueba si lo has entendido. 18 preguntas en 4 bloques.</p>
+    </div>
+  </section>
+
+</main>
+
+</div>
+
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/header.js"></script>
+</body>
+</html>

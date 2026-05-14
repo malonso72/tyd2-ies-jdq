@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Actividades · U07 Programación · TyD 2º ESO</title>
+<meta name="description" content="Actividades de la unidad 07 con soluciones colapsables: pensamiento computacional y Scratch.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+.act-wrap{max-width:900px;margin:24px auto 50px;padding:0 20px}
+.act-intro{background:#FFF8F0;border-left:4px solid var(--principal);padding:14px 18px;border-radius:0 6px 6px 0;margin-bottom:24px;font-size:.94rem;line-height:1.55}
+.act-intro strong{color:var(--principal)}
+.seccion{background:#fff;border:1px solid var(--borde);border-radius:8px;padding:18px 22px;margin-bottom:18px}
+.seccion h2{font-family:var(--cond);color:var(--principal);font-size:1.15rem;margin:0 0 12px;display:flex;align-items:center;gap:8px}
+.seccion h2 .num{display:inline-block;width:32px;height:32px;line-height:32px;text-align:center;background:var(--principal);color:#fff;border-radius:50%;font-size:.9rem}
+.bloque-titulo{font-family:var(--cond);font-size:.78rem;letter-spacing:2px;color:var(--principal);text-transform:uppercase;margin:28px 0 12px;padding-bottom:4px;border-bottom:1px dashed var(--principal)}
+.bloque-titulo:first-of-type{margin-top:0}
+.enunciado{margin-bottom:10px;font-size:.96rem;line-height:1.55}
+.enunciado code{background:#F4F6F9;padding:1px 6px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:.86rem}
+.enunciado ol,.enunciado ul{margin:8px 0 8px 20px;padding-left:0}
+.sol-btn{font-family:var(--cond);font-size:.85rem;letter-spacing:.5px;padding:7px 16px;border-radius:18px;cursor:pointer;border:1.5px solid var(--principal);background:#fff;color:var(--principal);font-weight:600;margin-top:4px}
+.sol-btn:hover{background:var(--principal);color:#fff}
+.sol-btn.open{background:var(--principal);color:#fff}
+.sol-btn::before{content:"▶ ";font-size:.7rem}
+.sol-btn.open::before{content:"▼ "}
+.sol-content{display:none;margin-top:12px;padding:14px 16px;background:#F4F6F9;border-left:4px solid var(--verde);border-radius:0 6px 6px 0;font-size:.92rem;line-height:1.55}
+.sol-content.show{display:block}
+.sol-content .resultado{display:inline-block;background:#E1F5EE;color:#0F6E56;padding:5px 12px;border-radius:6px;font-weight:600;margin-top:6px}
+.script{background:#FAFAFA;border:1px solid var(--borde);border-radius:6px;padding:10px;margin:10px 0;font-family:'JetBrains Mono',monospace;font-size:.85rem;line-height:1.4}
+.sb{display:block;color:#fff;padding:5px 10px;margin:2px 0;border-radius:4px;width:fit-content;min-width:160px;font-weight:500}
+.sb.eve{background:#C88330}.sb.con{background:#CF8B17}.sb.mov{background:#4C97FF}.sb.apa{background:#9966FF}.sb.var{background:#FF8C1A}.sb.sen{background:#5CB1D6}
+.sb.indent{margin-left:20px}.sb.indent2{margin-left:40px}
+.sb .num{background:rgba(255,255,255,.22);padding:1px 6px;border-radius:7px;font-size:.85rem}
+@media print{.sol-btn{display:none}.sol-content{display:block!important;background:#fafafa}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">U07 · Programación · Actividades</span>
+</header>
+
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U07</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>✏️</span><span class="nc-lbl">Actividades</span></span>
+  <span class="nc-sep">·</span>
+  <a href="../autocomprobacion/index.html"><span>✅</span><span class="nc-lbl">Autocomprobación</span></a>
+</nav>
+
+<main id="main-content" class="act-wrap">
+
+  <h1 class="unidad-titulo">Actividades · U07 Programación</h1>
+
+  <div class="act-intro">
+    <p><strong>12 actividades</strong> repartidas en 4 bloques. Las primeras se resuelven con lápiz y papel; las últimas requieren tener Scratch abierto (<a href="https://scratch.mit.edu" target="_blank">scratch.mit.edu</a>). Cada actividad tiene solución colapsable.</p>
+  </div>
+
+  <div class="bloque-titulo">Bloque 1 · Pensamiento computacional</div>
+
+  <section class="seccion">
+    <h2><span class="num">1</span>Algoritmo de la abuela</h2>
+    <div class="enunciado">
+      <p>Escribe el algoritmo (paso a paso) para hacer una <strong>tortilla de patatas</strong>. Mínimo 8 pasos, ordenados. Imagínate que se lo explicas a alguien que nunca la ha hecho.</p>
+    </div>
+    <button class="sol-btn">Ver una solución posible</button>
+    <div class="sol-content">
+      <ol>
+        <li>Coger patatas y pelarlas.</li>
+        <li>Cortarlas en láminas finas.</li>
+        <li>Echar aceite en la sartén y calentarlo.</li>
+        <li>Freír las patatas a fuego medio.</li>
+        <li>Sacarlas y escurrir el aceite.</li>
+        <li>Batir 4 huevos en un bol con sal.</li>
+        <li>Mezclar las patatas con los huevos.</li>
+        <li>Verter la mezcla en la sartén con poco aceite.</li>
+        <li>Cuajar por un lado y dar la vuelta con un plato.</li>
+        <li>Cuajar por el otro lado y servir.</li>
+      </ol>
+      <p>Cualquier algoritmo equivalente vale. Lo importante: <em>pasos ordenados y precisos</em>, sin saltos lógicos.</p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">2</span>Descomponer un problema</h2>
+    <div class="enunciado">
+      <p>Imagina que tienes que diseñar un <strong>videojuego de plataformas</strong> tipo Mario. Descompón el problema en al menos 6 sub-problemas más pequeños y manejables.</p>
+    </div>
+    <button class="sol-btn">Ver una solución posible</button>
+    <div class="sol-content">
+      <p>Posible descomposición:</p>
+      <ol>
+        <li><strong>Personaje principal</strong>: dibujarlo, animarlo (caminar, saltar).</li>
+        <li><strong>Control del jugador</strong>: flechas para mover, espacio para saltar.</li>
+        <li><strong>Gravedad y colisiones</strong>: el personaje cae al suelo.</li>
+        <li><strong>Escenarios</strong>: dibujar varios fondos con plataformas.</li>
+        <li><strong>Enemigos</strong>: aparición, movimiento, daño al jugador.</li>
+        <li><strong>Puntos y vidas</strong>: variables que se actualizan.</li>
+        <li><strong>Sonidos</strong>: salto, golpe, monedas.</li>
+        <li><strong>Inicio y final</strong>: pantalla de portada y de "Has ganado / Game over".</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">3</span>Diagrama de flujo</h2>
+    <div class="enunciado">
+      <p>Dibuja en tu cuaderno el <strong>diagrama de flujo</strong> de este algoritmo: «Comprobar si soy mayor de edad para sacar el carnet».</p>
+      <p>Pista: usa óvalo para inicio/fin, rectángulo para acciones y rombo para la pregunta «¿edad ≥ 18?».</p>
+    </div>
+    <button class="sol-btn">Ver solución</button>
+    <div class="sol-content">
+      <p>Estructura:</p>
+      <ol>
+        <li>INICIO (óvalo)</li>
+        <li>Pedir edad (rectángulo)</li>
+        <li>¿edad ≥ 18? (rombo) → <strong>Sí</strong>: "Puedes sacar el carnet" → FIN<br>→ <strong>No</strong>: "Tienes que esperar" → FIN</li>
+      </ol>
+      <p>Cada rama del rombo termina en su propio FIN. Es un caso típico de condicional simple.</p>
+    </div>
+  </section>
+
+
+  <div class="bloque-titulo">Bloque 2 · Conoce Scratch</div>
+
+  <section class="seccion">
+    <h2><span class="num">4</span>Identifica las categorías</h2>
+    <div class="enunciado">
+      <p>Asocia cada bloque con su categoría:</p>
+      <ol>
+        <li><code>mover 10 pasos</code></li>
+        <li><code>al hacer clic en 🏁</code></li>
+        <li><code>decir "Hola" por 2 seg</code></li>
+        <li><code>si... entonces</code></li>
+        <li><code>¿tocando borde?</code></li>
+        <li><code>3 + 4</code></li>
+        <li><code>sumar 1 a puntos</code></li>
+      </ol>
+    </div>
+    <button class="sol-btn">Ver solución</button>
+    <div class="sol-content">
+      <p>1. Movimiento (azul) · 2. Eventos (sombrero naranja) · 3. Apariencia (violeta) · 4. Control (amarillo) · 5. Sensores (azul claro) · 6. Operadores (verde) · 7. Variables (naranja oscuro).</p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">5</span>Tu primer proyecto en Scratch</h2>
+    <div class="enunciado">
+      <p>Abre <a href="https://scratch.mit.edu" target="_blank">scratch.mit.edu</a> y haz que el gato:</p>
+      <ol>
+        <li>Al hacer clic en la bandera 🏁, diga «¡Hola, soy Scratch!» durante 2 segundos.</li>
+        <li>Después, dé 4 pasos a la derecha.</li>
+        <li>Por último, diga «Adiós» durante 1 segundo.</li>
+      </ol>
+    </div>
+    <button class="sol-btn">Ver solución (script)</button>
+    <div class="sol-content">
+      <div class="script">
+        <span class="sb eve">al hacer clic en 🏁</span>
+        <span class="sb apa indent">decir "¡Hola, soy Scratch!" por <span class="num">2</span> seg</span>
+        <span class="sb mov indent">mover <span class="num">40</span> pasos</span>
+        <span class="sb apa indent">decir "Adiós" por <span class="num">1</span> seg</span>
+      </div>
+      <p>Detalle: 4 "pasos" en Scratch son 4 píxeles, casi nada. He puesto 40 para que se note. Si querías literalmente 4, está bien.</p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">6</span>Dibuja con el lápiz</h2>
+    <div class="enunciado">
+      <p>Activa la extensión <strong>Lápiz</strong> en Scratch (esquina inferior izquierda, "Añadir extensión"). Haz que el gato dibuje un <strong>cuadrado</strong> al pulsar la bandera. Usa un bucle <code>repetir</code>.</p>
+    </div>
+    <button class="sol-btn">Ver solución (script)</button>
+    <div class="sol-content">
+      <div class="script">
+        <span class="sb eve">al hacer clic en 🏁</span>
+        <span class="sb apa indent">borrar todo</span>
+        <span class="sb apa indent">bajar lápiz</span>
+        <span class="sb con indent">repetir <span class="num">4</span></span>
+        <span class="sb mov indent2">mover <span class="num">100</span> pasos</span>
+        <span class="sb mov indent2">girar <span class="num">90</span> grados</span>
+        <span class="sb apa indent">subir lápiz</span>
+      </div>
+      <p>Truco general: para cualquier polígono de N lados, usa <code>repetir N</code> y <code>girar 360/N</code> grados. Triángulo: 3 / 120°. Hexágono: 6 / 60°. Círculo: 360 / 1°.</p>
+    </div>
+  </section>
+
+
+  <div class="bloque-titulo">Bloque 3 · Bucles, condicionales y variables</div>
+
+  <section class="seccion">
+    <h2><span class="num">7</span>Cuenta atrás</h2>
+    <div class="enunciado">
+      <p>En Scratch, haz que el gato diga: «10, 9, 8, 7, 6, 5, 4, 3, 2, 1, ¡FIN!». Usa un <strong>bucle</strong> con una variable <code>n</code>.</p>
+    </div>
+    <button class="sol-btn">Ver solución (script)</button>
+    <div class="sol-content">
+      <p>Crea una variable llamada <code>n</code>:</p>
+      <div class="script">
+        <span class="sb eve">al hacer clic en 🏁</span>
+        <span class="sb var indent">fijar n a <span class="num">10</span></span>
+        <span class="sb con indent">repetir <span class="num">10</span></span>
+        <span class="sb apa indent2">decir (n) por <span class="num">1</span> seg</span>
+        <span class="sb var indent2">sumar <span class="num">-1</span> a n</span>
+        <span class="sb apa indent">decir "¡FIN!"</span>
+      </div>
+      <p>Truco: para usar el valor de <code>n</code> dentro del bloque "decir", arrastra el "globo" de la variable n dentro del hueco blanco.</p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">8</span>Control con flechas</h2>
+    <div class="enunciado">
+      <p>Haz que el gato se mueva con las <strong>4 flechas del teclado</strong>: arriba sube, abajo baja, izquierda va a la izquierda, derecha a la derecha. Pista: 4 eventos "al presionar tecla" o un bucle "por siempre" con cuatro condicionales.</p>
+    </div>
+    <button class="sol-btn">Ver solución (con bucle único)</button>
+    <div class="sol-content">
+      <div class="script">
+        <span class="sb eve">al hacer clic en 🏁</span>
+        <span class="sb con indent">por siempre</span>
+        <span class="sb con indent2">si ¿tecla flecha derecha presionada? entonces</span>
+        <span class="sb mov" style="margin-left:60px">sumar <span class="num">5</span> a x</span>
+        <span class="sb con indent2">si ¿tecla flecha izquierda presionada? entonces</span>
+        <span class="sb mov" style="margin-left:60px">sumar <span class="num">-5</span> a x</span>
+        <span class="sb con indent2">si ¿tecla flecha arriba presionada? entonces</span>
+        <span class="sb mov" style="margin-left:60px">sumar <span class="num">5</span> a y</span>
+        <span class="sb con indent2">si ¿tecla flecha abajo presionada? entonces</span>
+        <span class="sb mov" style="margin-left:60px">sumar <span class="num">-5</span> a y</span>
+      </div>
+      <p>Alternativa: cuatro scripts separados con sombrero "al presionar tecla". Las dos formas funcionan. El bucle único es más fluido.</p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">9</span>Marcador de aciertos</h2>
+    <div class="enunciado">
+      <p>Tienes un sprite "Manzana" en posiciones aleatorias. Cuando el gato la toca, debe:</p>
+      <ol>
+        <li>Sumar 1 a la variable <code>puntos</code>.</li>
+        <li>Mover la manzana a una posición aleatoria.</li>
+        <li>Reproducir un sonido.</li>
+      </ol>
+    </div>
+    <button class="sol-btn">Ver solución (script de la Manzana)</button>
+    <div class="sol-content">
+      <div class="script">
+        <span class="sb eve">al hacer clic en 🏁</span>
+        <span class="sb var indent">fijar puntos a <span class="num">0</span></span>
+        <span class="sb con indent">por siempre</span>
+        <span class="sb con indent2">si ¿tocando Gato? entonces</span>
+        <span class="sb var" style="margin-left:60px">sumar <span class="num">1</span> a puntos</span>
+        <span class="sb mov" style="margin-left:60px">ir a x: (número aleatorio entre -200 y 200) y: (aleat. -150 a 150)</span>
+        <span class="sb" style="margin-left:60px;background:#CF63CF;color:#fff;padding:5px 10px;border-radius:4px;width:fit-content;display:block">tocar sonido "pop"</span>
+      </div>
+    </div>
+  </section>
+
+
+  <div class="bloque-titulo">Bloque 4 · Mini-proyectos</div>
+
+  <section class="seccion">
+    <h2><span class="num">10</span>Pong simplificado</h2>
+    <div class="enunciado">
+      <p>Construye un mini-Pong (consulta el libro digital, sección 13). Debe tener:</p>
+      <ol>
+        <li>Una pelota que se mueve y rebota en bordes.</li>
+        <li>Una raqueta que sigue al ratón en horizontal.</li>
+        <li>Variable <code>puntos</code> que sube cada vez que la pelota toca la raqueta.</li>
+      </ol>
+      <p>Sube el proyecto a tu cuenta de Scratch y comparte el enlace en Moodle.</p>
+    </div>
+    <button class="sol-btn">Ver pistas y enlace de referencia</button>
+    <div class="sol-content">
+      <p>Esto es un mini-proyecto: revisa la <strong>sección 13 del libro digital</strong> donde está el código de la pelota y la raqueta. Cuando lo tengas funcionando, mejora con:</p>
+      <ul>
+        <li>Sonido al rebotar en la raqueta.</li>
+        <li>Variable <code>vidas</code> que baja si la pelota toca el suelo.</li>
+        <li>"Game over" cuando vidas = 0.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">11</span>Historia interactiva (3 escenas)</h2>
+    <div class="enunciado">
+      <p>Crea una historia con 3 escenas (3 fondos distintos) y al menos 2 personajes que hablen entre sí. Usa <strong>mensajes</strong> para pasar de una escena a otra. La historia puede ser cualquier cosa: un cuento, una entrevista, un sketch…</p>
+    </div>
+    <button class="sol-btn">Ver guía mínima</button>
+    <div class="sol-content">
+      <p>Estructura típica con mensajes:</p>
+      <ol>
+        <li>Al hacer clic en 🏁, el escenario cambia al fondo 1 y envía mensaje "escena1".</li>
+        <li>Los personajes que aparezcan en escena 1 tienen scripts <code>al recibir escena1</code> con su diálogo. Al terminar, el último envía "escena2".</li>
+        <li>El escenario tiene un script <code>al recibir escena2</code> que cambia al fondo 2.</li>
+        <li>Repetir para la escena 3.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <h2><span class="num">12</span>Depurar este script</h2>
+    <div class="enunciado">
+      <p>Este script debería dibujar un cuadrado, pero dibuja una espiral. Identifica el bug:</p>
+      <div class="script">
+        <span class="sb eve">al hacer clic en 🏁</span>
+        <span class="sb apa indent">bajar lápiz</span>
+        <span class="sb con indent">por siempre</span>
+        <span class="sb mov indent2">mover <span class="num">100</span> pasos</span>
+        <span class="sb mov indent2">girar <span class="num">85</span> grados</span>
+      </div>
+    </div>
+    <button class="sol-btn">Ver solución</button>
+    <div class="sol-content">
+      <p>Hay <strong>dos bugs</strong>:</p>
+      <ol>
+        <li>El bucle es <strong>"por siempre"</strong> en vez de <strong>"repetir 4"</strong>. Un cuadrado tiene 4 lados; con "por siempre" no para nunca.</li>
+        <li>Gira <strong>85°</strong> en lugar de <strong>90°</strong>. Por eso dibuja una espiral en vez de cerrar el cuadrado.</li>
+      </ol>
+      <p>Corregido:</p>
+      <div class="script">
+        <span class="sb eve">al hacer clic en 🏁</span>
+        <span class="sb apa indent">bajar lápiz</span>
+        <span class="sb con indent">repetir <span class="num">4</span></span>
+        <span class="sb mov indent2">mover <span class="num">100</span> pasos</span>
+        <span class="sb mov indent2">girar <span class="num">90</span> grados</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>
