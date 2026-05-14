@@ -16,7 +16,6 @@ import os, re, glob, sys
 from pathlib import Path
 
 # Forzar UTF-8 en stdout para que funcione en consolas Windows (cp1252)
-# que no soportan caracteres Unicode como ✗ o ✓.
 try:
     sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 except Exception:
@@ -27,6 +26,7 @@ except Exception:
 os.chdir(Path(__file__).resolve().parent.parent)
 
 EXCLUDE = ["documentacion/", "_soluciones/", ".git/", "node_modules/", ".wrangler/", "assets/templates/"]
+
 
 def main():
     # Normaliza separadores a '/' para que las exclusiones funcionen
@@ -45,10 +45,15 @@ def main():
             # Saltar enlaces externos, mailto, anclas puras y URLs sin protocolo (//ejemplo.com)
             if link.startswith(("http", "https", "mailto:", "#", "data:", "javascript:", "//")):
                 continue
+            # Saltar template literals de JavaScript (${...}) que aparecen dentro
+            # de bloques <script> de los libros digitales y se interpolan en runtime.
+            if "${" in link:
+                continue
             total_links += 1
             # Quitar query y ancla
             target = link.split("?")[0].split("#")[0]
-            if not target: continue
+            if not target:
+                continue
             # Resolver ruta relativa
             base_dir = os.path.dirname(f)
             full_target = os.path.normpath(os.path.join(base_dir, target))
@@ -67,11 +72,12 @@ def main():
             print(f"    busca:  {target}")
             print()
         if len(broken) > 50:
-            print(f"  ... y {len(broken)-50} más.")
-        return 1  # exit code 1 si hay enlaces rotos
+            print(f"  ... y {len(broken)-50} mas.")
+        return 1
     else:
         print("[OK] Todos los enlaces internos validos.")
         return 0
+
 
 if __name__ == "__main__":
     sys.exit(main())

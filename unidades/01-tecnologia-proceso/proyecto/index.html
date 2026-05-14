@@ -1,9 +1,120 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Proyecto</title>
-<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/hub.css">
-</head><body>
-<div class="hub-main" id="main-content">
-<section class="unidad-titulo-hero"><h1>🚀 Proyecto</h1><div class="duracion">Este apartado se irá completando durante el curso.</div></section>
-<div class="bg"><a class="bc" href="../index.html"><span class="bi">⬅️</span><span class="bk">Volver a la unidad</span><span class="bn">Hub U principal</span></a></div>
-</div></body></html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Proyecto · U01 Tecnología y proceso · TyD 2º ESO</title>
+<meta name="description" content="Proyecto integrador: resuelve un problema real del aula aplicando las 6 fases del proceso tecnológico, con memoria técnica completa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+.pr-wrap{max-width:880px;margin:24px auto 50px;padding:0 20px}
+.pr-hero{text-align:center;margin-bottom:28px}
+.pr-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 8px}
+.pr-hero p{font-size:1rem;color:var(--texto2);margin:0;line-height:1.55}
+.pr-card{background:#fff;border:1px solid var(--borde);border-radius:10px;padding:20px 24px;margin-bottom:18px}
+.pr-card h2{font-family:var(--cond);font-size:1.3rem;color:var(--principal);margin:0 0 10px;display:flex;align-items:center;gap:10px}
+.pr-card h2 .num{display:inline-block;width:36px;height:36px;line-height:36px;text-align:center;background:var(--principal);color:#fff;border-radius:50%;font-size:1rem;flex-shrink:0}
+.pr-card p,.pr-card li{font-size:.96rem;line-height:1.6}
+.pr-card ul,.pr-card ol{margin:8px 0 8px 22px;padding-left:0}
+.pr-fases{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:14px 0}
+.pr-fase{background:#F4F6F9;border-radius:8px;padding:12px 14px}
+.pr-fase h4{font-family:var(--cond);color:var(--principal);margin:0 0 6px;font-size:.95rem}
+.pr-fase p{font-size:.88rem;color:var(--texto2);margin:0;line-height:1.5}
+.pr-rubrica{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+.pr-rubrica th{background:var(--principal);color:#fff;padding:8px 10px;font-family:var(--cond);text-align:left}
+.pr-rubrica td{padding:8px 10px;border-bottom:1px solid var(--borde);vertical-align:top}
+.pr-rubrica td:first-child{font-weight:600;width:30%;color:var(--principal2)}
+.pr-rubrica td:last-child{width:15%;text-align:center;font-family:var(--cond);color:var(--principal)}
+.pr-callout{background:#E6F1FB;border-left:4px solid #378ADD;border-radius:0 6px 6px 0;padding:12px 16px;margin:14px 0;font-size:.92rem;line-height:1.55}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+<header class="curso-hd"><span class="curso-sb">U01 · Tecnología y proceso · Proyecto</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U01</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../actividades/index.html"><span>✏️</span><span class="nc-lbl">Actividades</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🚀</span><span class="nc-lbl">Proyecto</span></span>
+</nav>
+
+<main id="main-content" class="pr-wrap">
+
+  <section class="pr-hero">
+    <h1>🚀 Proyecto: resuelve un problema real</h1>
+    <p>Por parejas, vais a <strong>aplicar las 6 fases del proceso tecnológico</strong> para resolver un problema real del aula, del centro o de vuestra casa. Y vais a <em>documentarlo todo</em> en una memoria técnica.</p>
+  </section>
+
+  <div class="pr-card">
+    <h2><span class="num">1</span>Elegid un problema real</h2>
+    <p>Algunas ideas — podéis proponer otra al profesor:</p>
+    <ul>
+      <li>El estuche se desordena y nunca encuentras el boli rojo.</li>
+      <li>Las mochilas se caen al suelo y se ensucian.</li>
+      <li>En clase hace ruido el aire acondicionado.</li>
+      <li>El cargador del móvil se enreda en el cajón.</li>
+      <li>Los abrigos se acumulan en la silla porque no hay perchero.</li>
+      <li>El profe no encuentra los rotuladores de la pizarra.</li>
+    </ul>
+    <p>El reto: <em>buscar una solución de bajo coste</em>, que se pueda construir con materiales habituales del taller.</p>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">2</span>Aplicad las 6 fases del proceso</h2>
+    <div class="pr-fases">
+      <div class="pr-fase"><h4>1. Necesidad</h4><p>Identificad el problema con datos: ¿a quién afecta? ¿cuándo? ¿por qué es un problema?</p></div>
+      <div class="pr-fase"><h4>2. Soluciones</h4><p>Generad al menos <strong>3 ideas distintas</strong>. Ninguna es absurda en esta fase.</p></div>
+      <div class="pr-fase"><h4>3. Selección</h4><p>Elegid una usando criterios objetivos: coste, dificultad, tiempo, materiales disponibles.</p></div>
+      <div class="pr-fase"><h4>4. Diseño</h4><p>Bocetos, croquis, planos con cotas, plan de trabajo (qué, cuándo, quién, con qué).</p></div>
+      <div class="pr-fase"><h4>5. Construcción</h4><p>Llevad el plan al taller. Documentad imprevistos y cómo los resolvéis.</p></div>
+      <div class="pr-fase"><h4>6. Evaluación</h4><p>¿Funciona? ¿Resuelve el problema inicial? ¿Qué mejoraríais?</p></div>
+    </div>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">3</span>Memoria técnica (entrega principal)</h2>
+    <p>Documento de 4-6 páginas con esta estructura:</p>
+    <ol>
+      <li><strong>Portada e índice</strong>: nombre del proyecto, autores, curso, fecha.</li>
+      <li><strong>Problema</strong>: descripción y datos que lo respaldan.</li>
+      <li><strong>Soluciones consideradas</strong>: las 3 ideas y por qué elegisteis una.</li>
+      <li><strong>Diseño</strong>: bocetos, croquis acotados, lista de materiales, presupuesto.</li>
+      <li><strong>Plan de trabajo</strong>: tabla con tareas, tiempo, responsables.</li>
+      <li><strong>Construcción</strong>: fotos del proceso + descripción de los pasos.</li>
+      <li><strong>Evaluación</strong>: ¿funciona? Mejoras propuestas. Autoevaluación honesta.</li>
+      <li><strong>Conclusión</strong>: aprendizajes técnicos y de trabajo en equipo.</li>
+    </ol>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">4</span>Rúbrica de evaluación</h2>
+    <table class="pr-rubrica">
+      <thead><tr><th>Criterio</th><th>Qué se valora</th><th>Peso</th></tr></thead>
+      <tbody>
+        <tr><td>Aplicación de las 6 fases</td><td>Cada fase está bien identificada y desarrollada</td><td>30%</td></tr>
+        <tr><td>Funcionamiento</td><td>La solución resuelve realmente el problema planteado</td><td>20%</td></tr>
+        <tr><td>Memoria técnica</td><td>Completa, estructurada, con croquis, plan de trabajo y fotos del proceso</td><td>25%</td></tr>
+        <tr><td>Trabajo en equipo</td><td>Reparto claro de tareas, cumplimiento de plazos, resolución de conflictos</td><td>15%</td></tr>
+        <tr><td>Sostenibilidad</td><td>Uso de materiales reciclados o reutilizados cuando es posible</td><td>10%</td></tr>
+      </tbody>
+    </table>
+    <div class="pr-callout">📌 El valor del proyecto no está en el resultado físico (puede ser sencillo), está en <em>documentar todo el proceso</em> de manera que otra persona pueda reproducirlo.</div>
+  </div>
+
+</main>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

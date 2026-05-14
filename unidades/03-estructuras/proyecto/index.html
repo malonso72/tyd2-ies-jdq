@@ -1,9 +1,113 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Proyecto</title>
-<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/hub.css">
-</head><body>
-<div class="hub-main" id="main-content">
-<section class="unidad-titulo-hero"><h1>🚀 Proyecto</h1><div class="duracion">Este apartado se irá completando durante el curso.</div></section>
-<div class="bg"><a class="bc" href="../index.html"><span class="bi">⬅️</span><span class="bk">Volver a la unidad</span><span class="bn">Hub U principal</span></a></div>
-</div></body></html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Proyecto · U03 Estructuras · TyD 2º ESO</title>
+<meta name="description" content="Proyecto integrador: construye un puente de papel y palillos que aguante el máximo peso posible. Concurso de eficiencia estructural.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+.pr-wrap{max-width:880px;margin:24px auto 50px;padding:0 20px}
+.pr-hero{text-align:center;margin-bottom:28px}
+.pr-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 8px}
+.pr-hero p{font-size:1rem;color:var(--texto2);margin:0;line-height:1.55}
+.pr-card{background:#fff;border:1px solid var(--borde);border-radius:10px;padding:20px 24px;margin-bottom:18px}
+.pr-card h2{font-family:var(--cond);font-size:1.3rem;color:var(--principal);margin:0 0 10px;display:flex;align-items:center;gap:10px}
+.pr-card h2 .num{display:inline-block;width:36px;height:36px;line-height:36px;text-align:center;background:var(--principal);color:#fff;border-radius:50%;font-size:1rem;flex-shrink:0}
+.pr-card p,.pr-card li{font-size:.96rem;line-height:1.6}
+.pr-card ul,.pr-card ol{margin:8px 0 8px 22px;padding-left:0}
+.pr-fases{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:14px 0}
+.pr-fase{background:#F4F6F9;border-radius:8px;padding:12px 14px}
+.pr-fase h4{font-family:var(--cond);color:var(--principal);margin:0 0 6px;font-size:.95rem}
+.pr-fase p{font-size:.88rem;color:var(--texto2);margin:0;line-height:1.5}
+.pr-rubrica{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+.pr-rubrica th{background:var(--principal);color:#fff;padding:8px 10px;font-family:var(--cond);text-align:left}
+.pr-rubrica td{padding:8px 10px;border-bottom:1px solid var(--borde);vertical-align:top}
+.pr-rubrica td:first-child{font-weight:600;width:30%;color:var(--principal2)}
+.pr-rubrica td:last-child{width:15%;text-align:center;font-family:var(--cond);color:var(--principal)}
+.pr-callout{background:#E6F1FB;border-left:4px solid #378ADD;border-radius:0 6px 6px 0;padding:12px 16px;margin:14px 0;font-size:.92rem;line-height:1.55}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+<header class="curso-hd"><span class="curso-sb">U03 · Estructuras · Proyecto</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U03</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../actividades/index.html"><span>✏️</span><span class="nc-lbl">Actividades</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🚀</span><span class="nc-lbl">Proyecto</span></span>
+</nav>
+
+<main id="main-content" class="pr-wrap">
+
+  <section class="pr-hero">
+    <h1>🚀 Proyecto: el puente más resistente</h1>
+    <p>Por equipos, vais a <strong>construir un puente</strong> con materiales pobres (papel, palillos, cola) que cubra un vano de <strong>30 cm</strong> y aguante el máximo peso posible. Concurso final en clase.</p>
+  </section>
+
+  <div class="pr-card">
+    <h2><span class="num">1</span>Reglas del concurso</h2>
+    <ul>
+      <li><strong>Vano (luz):</strong> 30 cm entre los dos apoyos. El puente se posará sobre dos mesas separadas 30 cm.</li>
+      <li><strong>Ancho mínimo del tablero:</strong> 6 cm (debe pasar un cochecito de juguete).</li>
+      <li><strong>Materiales permitidos:</strong> folios A4, palillos de dientes, palos de helado, cola blanca, hilo. Nada de cinta adhesiva ni grapas estructurales.</li>
+      <li><strong>Masa máxima del puente:</strong> 100 g (se pesa antes del concurso).</li>
+      <li><strong>Prueba de carga:</strong> se cuelga una bolsa del centro y se van añadiendo pesos hasta que el puente falla.</li>
+      <li><strong>Ganador:</strong> el que tenga la mejor <em>relación carga/masa</em> (eficiencia estructural), no el más pesado.</li>
+    </ul>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">2</span>Lo que tenéis que aplicar</h2>
+    <ul>
+      <li><strong>Triangulación</strong>: convertir cuadriláteros en triángulos para que la estructura sea rígida.</li>
+      <li><strong>Esfuerzos</strong>: identificar qué partes trabajan a tracción y cuáles a compresión, y reforzar adecuadamente.</li>
+      <li><strong>Tipo de puente</strong>: viga, arco, colgante, atirantado, triangulado. Justificad cuál habéis elegido y por qué.</li>
+      <li><strong>Base ancha</strong>: si el puente tiene torres, deben tener buena estabilidad.</li>
+    </ul>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">3</span>Fases del proyecto</h2>
+    <div class="pr-fases">
+      <div class="pr-fase"><h4>📚 1. Investigar</h4><p>Buscad 3 tipos de puentes reales que aguanten gran carga y entendéis por qué.</p></div>
+      <div class="pr-fase"><h4>✏️ 2. Diseñar</h4><p>Boceto + croquis acotado. Decidid el tipo de puente.</p></div>
+      <div class="pr-fase"><h4>🧪 3. Prototipo</h4><p>Maqueta pequeña en miniatura para validar la idea.</p></div>
+      <div class="pr-fase"><h4>🛠️ 4. Construir</h4><p>Versión final con tiempo suficiente para que seque la cola.</p></div>
+      <div class="pr-fase"><h4>⚖️ 5. Pesar</h4><p>Comprobad que cumple las reglas (peso, ancho, vano).</p></div>
+      <div class="pr-fase"><h4>🏆 6. Concurso</h4><p>Prueba de carga ante todo el grupo. Documentar con vídeo.</p></div>
+    </div>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">4</span>Rúbrica de evaluación</h2>
+    <table class="pr-rubrica">
+      <thead><tr><th>Criterio</th><th>Qué se valora</th><th>Peso</th></tr></thead>
+      <tbody>
+        <tr><td>Eficiencia estructural</td><td>Relación carga aguantada / masa del puente</td><td>25%</td></tr>
+        <tr><td>Triangulación y refuerzos</td><td>Aplicáis los principios de la unidad: triángulos, identificación de esfuerzos</td><td>20%</td></tr>
+        <tr><td>Diseño justificado</td><td>El tipo de puente elegido se justifica con argumentos técnicos</td><td>20%</td></tr>
+        <tr><td>Construcción y limpieza</td><td>Bien acabado, sin chapuzas, dentro del peso y dimensiones</td><td>15%</td></tr>
+        <tr><td>Memoria + vídeo</td><td>Memoria técnica (3 páginas) + vídeo corto del proceso y la prueba</td><td>20%</td></tr>
+      </tbody>
+    </table>
+    <div class="pr-callout">📌 El equipo con el puente <em>más bonito</em> no necesariamente gana. Lo que cuenta es la <strong>eficiencia</strong>: aguantar mucho con poco material. Es la esencia de la ingeniería estructural.</div>
+  </div>
+
+</main>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

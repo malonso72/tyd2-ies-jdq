@@ -1,9 +1,144 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Proyecto de electricidad · En desarrollo</title>
-<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/hub.css">
-</head><body>
-<div class="hub-main" id="main-content">
-<section class="unidad-titulo-hero"><h1>🚀 Proyecto de electricidad</h1><div class="duracion">Este recurso está previsto dentro de la arquitectura de la unidad.</div></section>
-<div class="bg"><a class="bc" href="../index.html"><span class="bi">⬅️</span><span class="bk">Volver a la unidad</span><span class="bn">Este apartado se completará progresivamente</span></a></div>
-</div></body></html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Proyecto · U05 Electricidad · TyD 2º ESO</title>
+<meta name="description" content="Proyecto integrador: monta una vivienda eléctrica de cartón con circuitos serie y paralelo, conmutación y elementos de protección. Maqueta funcional.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+.pr-wrap{max-width:880px;margin:24px auto 50px;padding:0 20px}
+.pr-hero{text-align:center;margin-bottom:28px}
+.pr-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 8px}
+.pr-hero p{font-size:1rem;color:var(--texto2);margin:0;line-height:1.55}
+.pr-card{background:#fff;border:1px solid var(--borde);border-radius:10px;padding:20px 24px;margin-bottom:18px}
+.pr-card h2{font-family:var(--cond);font-size:1.3rem;color:var(--principal);margin:0 0 10px;display:flex;align-items:center;gap:10px}
+.pr-card h2 .num{display:inline-block;width:36px;height:36px;line-height:36px;text-align:center;background:var(--principal);color:#fff;border-radius:50%;font-size:1rem;flex-shrink:0}
+.pr-card p,.pr-card li{font-size:.96rem;line-height:1.6}
+.pr-card ul,.pr-card ol{margin:8px 0 8px 22px;padding-left:0}
+.pr-fases{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:14px 0}
+.pr-fase{background:#F4F6F9;border-radius:8px;padding:12px 14px}
+.pr-fase h4{font-family:var(--cond);color:var(--principal);margin:0 0 6px;font-size:.95rem}
+.pr-fase p{font-size:.88rem;color:var(--texto2);margin:0;line-height:1.5}
+.pr-rubrica{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+.pr-rubrica th{background:var(--principal);color:#fff;padding:8px 10px;font-family:var(--cond);text-align:left}
+.pr-rubrica td{padding:8px 10px;border-bottom:1px solid var(--borde);vertical-align:top}
+.pr-rubrica td:first-child{font-weight:600;width:30%;color:var(--principal2)}
+.pr-rubrica td:last-child{width:15%;text-align:center;font-family:var(--cond);color:var(--principal)}
+.pr-callout{background:#E6F1FB;border-left:4px solid #378ADD;border-radius:0 6px 6px 0;padding:12px 16px;margin:14px 0;font-size:.92rem;line-height:1.55}
+.pr-callout-warn{background:#FFF4E6;border-left-color:#F59E0B}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+<header class="curso-hd"><span class="curso-sb">U05 · Electricidad · Proyecto</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U05</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../actividades/index.html"><span>✏️</span><span class="nc-lbl">Actividades</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🚀</span><span class="nc-lbl">Proyecto</span></span>
+</nav>
+
+<main id="main-content" class="pr-wrap">
+
+  <section class="pr-hero">
+    <h1>🚀 Proyecto: vivienda eléctrica</h1>
+    <p>Por parejas, vais a <strong>construir una maqueta de vivienda</strong> (de cartón, una sola planta, mínimo 3 habitaciones) con instalación eléctrica real y funcional, alimentada por una pila o batería de 4,5-9 V.</p>
+  </section>
+
+  <div class="pr-card">
+    <h2><span class="num">1</span>Lo que tiene que llevar la maqueta</h2>
+    <ul>
+      <li><strong>Mínimo 3 habitaciones</strong> con su techo y paredes (cartón pluma o cartón corrugado).</li>
+      <li><strong>1 bombilla LED por habitación</strong> (también valen LEDs pequeños de 3-5 mm con su resistencia).</li>
+      <li><strong>Conmutación de paso</strong> (escalera) en una habitación: una luz se enciende y apaga desde DOS puntos distintos con conmutadores.</li>
+      <li><strong>1 timbre o zumbador</strong> en la entrada activado con un pulsador.</li>
+      <li><strong>1 fusible o interruptor general</strong> para apagar toda la instalación.</li>
+      <li><strong>Esquema eléctrico completo</strong> con los símbolos normalizados, dibujado en una lámina A4 aparte.</li>
+    </ul>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">2</span>Conceptos que tenéis que aplicar</h2>
+    <ul>
+      <li><strong>Conexión en paralelo</strong> para las bombillas (porque si se funde una, las demás siguen funcionando).</li>
+      <li><strong>Ley de Ohm</strong> para calcular la resistencia limitadora de los LEDs (V = I·R).</li>
+      <li><strong>Conmutación</strong> con dos conmutadores para la escalera.</li>
+      <li><strong>Elementos de protección</strong>: fusible o interruptor general.</li>
+      <li><strong>Símbolos normalizados</strong> en el esquema eléctrico.</li>
+    </ul>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">3</span>Materiales recomendados</h2>
+    <ul>
+      <li>Cartón pluma / cartón corrugado para las paredes.</li>
+      <li>Pila de 4,5 V o batería de 9 V (con porta-pilas).</li>
+      <li>LEDs pequeños (3 mm) + resistencias de 220 Ω (calculadas a 9 V).</li>
+      <li>Cables flexibles de colores (rojo + para fase, negro − para neutro, otro para retorno).</li>
+      <li>Pulsadores e interruptores miniatura (los del taller).</li>
+      <li>Zumbador piezoeléctrico de 9 V.</li>
+      <li>Cinta aislante, soldador con estaño (con supervisión) o regletas de conexión.</li>
+    </ul>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">4</span>Fases del proyecto</h2>
+    <div class="pr-fases">
+      <div class="pr-fase"><h4>📋 1. Planificar</h4><p>Plano de la vivienda en A4 con las medidas. Listado de elementos eléctricos por habitación.</p></div>
+      <div class="pr-fase"><h4>📐 2. Esquema</h4><p>Esquema eléctrico con símbolos normalizados. Cálculo de la resistencia limitadora de los LEDs.</p></div>
+      <div class="pr-fase"><h4>🧪 3. Probar en protoboard</h4><p>Antes de montar, probad todos los circuitos en una placa protoboard. Si algo no enciende, depurar AHÍ.</p></div>
+      <div class="pr-fase"><h4>🏠 4. Maqueta</h4><p>Construir las paredes, techo y suelos. Hacer los huecos para los componentes.</p></div>
+      <div class="pr-fase"><h4>🔌 5. Instalación</h4><p>Cablear cada habitación, conectar todo a la pila central. Asegurar que no haya cortocircuitos.</p></div>
+      <div class="pr-fase"><h4>🎤 6. Defender</h4><p>Demostración en clase: encender, conmutar la escalera, tocar el timbre. Explicar el esquema.</p></div>
+    </div>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">5</span>Memoria técnica</h2>
+    <p>4-6 páginas. Incluye:</p>
+    <ol>
+      <li>Portada y descripción del proyecto.</li>
+      <li>Plano de la vivienda (acotado) y descripción de habitaciones.</li>
+      <li>Esquema eléctrico completo con símbolos normalizados (fotocopia/escaneo de la lámina A4).</li>
+      <li>Cálculos: resistencia limitadora de LEDs, consumo total estimado.</li>
+      <li>Lista de materiales con cantidades y presupuesto aproximado.</li>
+      <li>Fotos del proceso de montaje (5-7).</li>
+      <li>Pruebas: ¿qué falló y cómo lo arreglasteis?</li>
+      <li>Autoevaluación.</li>
+    </ol>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">6</span>Rúbrica de evaluación</h2>
+    <table class="pr-rubrica">
+      <thead><tr><th>Criterio</th><th>Qué se valora</th><th>Peso</th></tr></thead>
+      <tbody>
+        <tr><td>Funcionamiento eléctrico</td><td>Todas las luces, el timbre y los conmutadores funcionan correctamente</td><td>30%</td></tr>
+        <tr><td>Esquema y cálculos</td><td>Esquema con símbolos normalizados + cálculos de la ley de Ohm aplicados al circuito</td><td>25%</td></tr>
+        <tr><td>Maqueta</td><td>Vivienda bien construida, limpia, con cables ordenados (sin marañas)</td><td>15%</td></tr>
+        <tr><td>Memoria técnica</td><td>Completa con plano, esquema, cálculos, fotos y autoevaluación</td><td>20%</td></tr>
+        <tr><td>Seguridad y orden</td><td>Sin cortocircuitos, fusible operativo, polaridad correcta</td><td>10%</td></tr>
+      </tbody>
+    </table>
+    <div class="pr-callout pr-callout-warn">⚠️ <strong>Seguridad:</strong> SIEMPRE trabajaréis con baja tensión (4,5-9 V). NUNCA con corriente de la red (230 V). Si necesitáis soldar, hacedlo con supervisión del profesor.</div>
+    <div class="pr-callout">📌 La maqueta más grande no gana. Lo que cuenta es la <em>coherencia entre esquema y montaje</em>: que se vea claramente la conexión en paralelo, los elementos de protección y los conmutadores funcionando.</div>
+  </div>
+
+</main>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

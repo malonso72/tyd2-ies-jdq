@@ -1,9 +1,111 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Proyecto</title>
-<link rel="stylesheet" href="../../../assets/css/common.css"><link rel="stylesheet" href="../../../assets/css/hub.css">
-</head><body>
-<div class="hub-main" id="main-content">
-<section class="unidad-titulo-hero"><h1>🚀 Proyecto</h1><div class="duracion">Este apartado se irá completando durante el curso.</div></section>
-<div class="bg"><a class="bc" href="../index.html"><span class="bi">⬅️</span><span class="bk">Volver a la unidad</span><span class="bn">Hub U principal</span></a></div>
-</div></body></html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#D4700A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Proyecto · U00 Dibujo técnico · TyD 2º ESO</title>
+<meta name="description" content="Proyecto integrador: diseña y representa en sistema diédrico un objeto real del aula. Vistas, escala, acotación y perspectiva isométrica.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+.pr-wrap{max-width:880px;margin:24px auto 50px;padding:0 20px}
+.pr-hero{text-align:center;margin-bottom:28px}
+.pr-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 8px}
+.pr-hero p{font-size:1rem;color:var(--texto2);margin:0;line-height:1.55}
+.pr-card{background:#fff;border:1px solid var(--borde);border-radius:10px;padding:20px 24px;margin-bottom:18px}
+.pr-card h2{font-family:var(--cond);font-size:1.3rem;color:var(--principal);margin:0 0 10px;display:flex;align-items:center;gap:10px}
+.pr-card h2 .num{display:inline-block;width:36px;height:36px;line-height:36px;text-align:center;background:var(--principal);color:#fff;border-radius:50%;font-size:1rem;flex-shrink:0}
+.pr-card p,.pr-card li{font-size:.96rem;line-height:1.6}
+.pr-card ul,.pr-card ol{margin:8px 0 8px 22px;padding-left:0}
+.pr-fases{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:14px 0}
+.pr-fase{background:#F4F6F9;border-radius:8px;padding:12px 14px}
+.pr-fase h4{font-family:var(--cond);color:var(--principal);margin:0 0 6px;font-size:.95rem}
+.pr-fase p{font-size:.88rem;color:var(--texto2);margin:0;line-height:1.5}
+.pr-rubrica{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+.pr-rubrica th{background:var(--principal);color:#fff;padding:8px 10px;font-family:var(--cond);text-align:left}
+.pr-rubrica td{padding:8px 10px;border-bottom:1px solid var(--borde);vertical-align:top}
+.pr-rubrica td:first-child{font-weight:600;width:30%;color:var(--principal2)}
+.pr-rubrica td:last-child{width:15%;text-align:center;font-family:var(--cond);color:var(--principal)}
+.pr-callout{background:#E6F1FB;border-left:4px solid #378ADD;border-radius:0 6px 6px 0;padding:12px 16px;margin:14px 0;font-size:.92rem;line-height:1.55}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+<header class="curso-hd"><span class="curso-sb">U00 · Dibujo técnico · Proyecto</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U00</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📖</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../actividades/index.html"><span>✏️</span><span class="nc-lbl">Actividades</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🚀</span><span class="nc-lbl">Proyecto</span></span>
+</nav>
+
+<main id="main-content" class="pr-wrap">
+
+  <section class="pr-hero">
+    <h1>🚀 Proyecto: representa tu objeto</h1>
+    <p>Elige un <strong>objeto sencillo del aula</strong> (estuche, sacapuntas grande, taco de Post-its, calculadora…) y represéntalo siguiendo las normas del dibujo técnico que has aprendido.</p>
+  </section>
+
+  <div class="pr-card">
+    <h2><span class="num">1</span>Qué tienes que entregar</h2>
+    <p>Una <strong>lámina A4</strong> dibujada a mano con instrumentos (lápiz, escuadra, cartabón, regla) que contenga:</p>
+    <ol>
+      <li>Las <strong>3 vistas</strong> del objeto (alzado, planta, perfil) correctamente colocadas y proporcionadas.</li>
+      <li>Una <strong>perspectiva isométrica</strong> o caballera del mismo objeto en otra parte de la lámina.</li>
+      <li>Las <strong>cotas principales</strong> bien acotadas (sin línea de cota sobre aristas, símbolo Ø si hay agujeros, R si hay redondeados).</li>
+      <li><strong>Cajetín</strong> en la esquina inferior derecha con: tu nombre, curso y grupo, fecha, escala, asignatura, número de lámina (1/1) y título («Vistas y perspectiva de [objeto]»).</li>
+    </ol>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">2</span>Cómo elegir el objeto</h2>
+    <ul>
+      <li>Que <strong>quepa en la mesa</strong> y se pueda medir con una regla.</li>
+      <li>Que tenga al menos una cara <em>no totalmente rectangular</em> (algún chaflán, agujero, ranura, redondeado).</li>
+      <li>Que no sea <strong>demasiado complejo</strong>: nada de móviles ni objetos llenos de detalles. Mejor un sacapuntas grande o un taco de papel.</li>
+    </ul>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">3</span>Fases del proyecto</h2>
+    <div class="pr-fases">
+      <div class="pr-fase"><h4>📏 1. Medir</h4><p>Mide el objeto con una regla. Anota largo, ancho y alto en milímetros.</p></div>
+      <div class="pr-fase"><h4>📐 2. Escala</h4><p>Elige la escala adecuada para que las tres vistas quepan bien en la mitad de la lámina. (Si el objeto mide 100 mm, escala 1:1 o 1:2.)</p></div>
+      <div class="pr-fase"><h4>✏️ 3. Vistas</h4><p>Dibuja alzado, planta y perfil con escuadra y cartabón. Comprueba la correspondencia entre vistas.</p></div>
+      <div class="pr-fase"><h4>🎲 4. Perspectiva</h4><p>Dibuja la perspectiva (isométrica o caballera) en la otra mitad de la lámina.</p></div>
+      <div class="pr-fase"><h4>🔢 5. Acotar</h4><p>Acota las medidas principales siguiendo las normas: cotas fuera del dibujo, símbolos correctos.</p></div>
+      <div class="pr-fase"><h4>🗂️ 6. Cajetín</h4><p>Rellena el cajetín. Repasa el grosor de las líneas (más gruesas las visibles, más finas las auxiliares).</p></div>
+    </div>
+  </div>
+
+  <div class="pr-card">
+    <h2><span class="num">4</span>Rúbrica de evaluación</h2>
+    <table class="pr-rubrica">
+      <thead><tr><th>Criterio</th><th>Qué se valora</th><th>Peso</th></tr></thead>
+      <tbody>
+        <tr><td>Vistas correctas</td><td>Alzado, planta y perfil bien situados, en proporción y con correspondencia entre ellos</td><td>30%</td></tr>
+        <tr><td>Perspectiva</td><td>Isométrica o caballera con los ejes y proporciones correctos</td><td>20%</td></tr>
+        <tr><td>Acotación</td><td>Cotas legibles, fuera del objeto, símbolos Ø/R correctos, sin acotar dos veces lo mismo</td><td>20%</td></tr>
+        <tr><td>Limpieza y precisión</td><td>Líneas con grosor adecuado, sin manchas, sin tachones, lápiz afilado</td><td>15%</td></tr>
+        <tr><td>Cajetín</td><td>Completo, ordenado y legible</td><td>15%</td></tr>
+      </tbody>
+    </table>
+    <div class="pr-callout">📌 La lámina la haces a mano <em>con instrumentos</em>, no a ordenador (eso ya lo verás en cursos superiores). Lápiz HB para auxiliares, 2B para líneas finales.</div>
+  </div>
+
+</main>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>
