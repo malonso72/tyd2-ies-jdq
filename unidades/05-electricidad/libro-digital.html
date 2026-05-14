@@ -599,7 +599,7 @@ function renderEjercicio(bloque, idx, ej) {
           <label>${p.label}${p.unidad ? `<span class="unidad">${p.unidad}</span>` : ''}</label>
           <select id="${qId}">
             <option value="">— elige —</option>
-            ${p.opciones.map(o => `<option value="${o}">${o}</option>`).join('')}
+            ${p.opciones.map(o => `<option value="${String(o).replace(/"/g, '&quot;')}">${o}</option>`).join('')}
           </select>
           <button class="check" onclick="comprobar('${qId}', ${bloque}, ${idx}, ${pi})">Comprobar</button>
           <div class="feedback" id="${qId}-fb"></div>
@@ -644,7 +644,11 @@ function comprobar(qId, bloque, ejIdx, pIdx) {
   const input = document.getElementById(qId);
   const wrap = document.getElementById(`${qId}-wrap`);
   const fb = document.getElementById(`${qId}-fb`);
-  const valor = input.value.trim().replace(',', '.');
+  // Para selects no transformamos el texto (los valores pueden contener comas, p. ej. "1,5 voltios").
+  // Para inputs numéricos sí: convertimos la coma decimal a punto para parseFloat.
+  const valor = p.tipo === 'select'
+    ? input.value.trim()
+    : input.value.trim().replace(',', '.');
 
   if (!valor) {
     fb.textContent = 'Escribe una respuesta primero.';
