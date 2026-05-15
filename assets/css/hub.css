@@ -110,8 +110,32 @@ details.criterios .criterios-body{padding:14px 18px;border:1px solid var(--bd);b
 /* ── Scroll fix anchors ── */
 [id]{scroll-margin-top:110px}
 
+/* ── Bloque "Empieza aquí" (guía de uso para el alumno) ── */
+.empieza-aqui{max-width:1100px;margin:0 auto 28px;padding:18px 22px 16px;background:linear-gradient(135deg,var(--principal-bg) 0%,#FFF8EE 100%);border-left:4px solid var(--principal);border-radius:8px;box-shadow:0 3px 12px rgba(212,112,10,.05)}
+.empieza-aqui h2{font-family:var(--cond);font-size:1.15rem;font-weight:700;color:var(--principal);margin-bottom:10px;letter-spacing:.01em;display:flex;align-items:center;gap:8px}
+.empieza-aqui ol{margin:0;padding-left:24px;list-style:decimal}
+.empieza-aqui ol li{font-size:.92rem;line-height:1.55;color:var(--tx);padding:3px 0 3px 4px}
+.empieza-aqui ol li::marker{color:var(--principal);font-weight:700}
+.empieza-aqui ol li strong{color:var(--principal);font-weight:600}
+.empieza-aqui .empieza-nota{margin-top:12px;padding-top:10px;border-top:1px dashed rgba(212,112,10,.25);font-size:.84rem;color:var(--t2);line-height:1.5}
+.empieza-aqui .empieza-nota strong{color:var(--principal);font-weight:600}
+
+/* ── Sección "En preparación" (relegada, colapsable) ── */
+.en-preparacion{max-width:1100px;margin:24px auto 18px}
+.en-preparacion summary{font-family:var(--cond);font-size:1rem;font-weight:600;color:var(--t2);cursor:pointer;list-style:none;padding:10px 14px;border:1px dashed var(--bd);border-radius:8px;background:#FAFBFC;display:flex;align-items:center;gap:8px;transition:background .15s,border-color .15s}
+.en-preparacion summary::-webkit-details-marker{display:none}
+.en-preparacion summary::after{content:'▾';margin-left:auto;transition:transform .2s;color:var(--t2)}
+.en-preparacion[open] summary::after{transform:rotate(180deg)}
+.en-preparacion summary:hover{background:#F4F5F7;border-color:var(--principal)}
+.en-preparacion .en-prep-body{padding:16px 18px 14px;border:1px dashed var(--bd);border-top:0;border-radius:0 0 8px 8px;background:#FCFCFD;margin-top:-1px}
+.en-preparacion .en-prep-section{margin-bottom:14px}
+.en-preparacion .en-prep-section:last-child{margin-bottom:0}
+.en-preparacion .en-prep-section h4{font-family:var(--cond);font-size:.92rem;font-weight:600;color:var(--t2);margin-bottom:6px;letter-spacing:.02em;display:flex;align-items:center;gap:6px}
+.en-preparacion .en-prep-section p{font-size:.84rem;color:var(--t2);line-height:1.5;margin:0}
+
 @media print{
   html,body{background:#fff!important}
   .hd-hero,.searchbar,.aviso{box-shadow:none!important}
   .bc{break-inside:avoid}
+  .en-preparacion{display:none}
 }
