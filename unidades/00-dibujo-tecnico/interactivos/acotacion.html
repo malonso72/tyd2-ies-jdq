@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#D4700A">
+<meta name="theme-color" content="#1B4F8A">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
 <title>Practica acotación · U00 Dibujo técnico · TyD 2º ESO</title>
 <meta name="description" content="Interactivo para practicar acotación: identifica cotas correctas e incorrectas sobre figuras reales. TyD 2º ESO.">
@@ -58,11 +58,11 @@
   transition: all 0.15s;
   text-align: center;
 }
-.fig-tab:hover { background: rgba(212,112,10,0.1); color: var(--principal, #D4700A); }
+.fig-tab:hover { background: rgba(27,79,138,0.1); color: var(--principal, #1B4F8A); }
 .fig-tab.active {
-  background: var(--principal, #D4700A);
+  background: var(--principal, #1B4F8A);
   color: #fff;
-  box-shadow: 0 2px 6px rgba(212,112,10,0.3);
+  box-shadow: 0 2px 6px rgba(27,79,138,0.3);
 }
 .fig-tab.completed::after { content: ' ✓'; color: var(--aco-ok); font-weight: 700; }
 .fig-tab.active.completed::after { color: #fff; }
@@ -79,14 +79,14 @@
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 1.3rem;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
   margin-bottom: 0.3rem;
-  border-bottom: 2px solid var(--principal, #D4700A);
+  border-bottom: 2px solid var(--principal, #1B4F8A);
   padding-bottom: 0.3rem;
 }
 .fig-instructions {
   background: #fffaf3;
-  border-left: 4px solid var(--principal, #D4700A);
+  border-left: 4px solid var(--principal, #1B4F8A);
   border-radius: 0 8px 8px 0;
   padding: 0.8rem 1rem;
   margin: 0.8rem 0 1rem;
@@ -94,7 +94,7 @@
   color: #444;
   line-height: 1.55;
 }
-.fig-instructions strong { color: var(--principal, #D4700A); }
+.fig-instructions strong { color: var(--principal, #1B4F8A); }
 
 .svg-canvas {
   background: linear-gradient(to bottom, #fafafa, #fff);
@@ -112,8 +112,8 @@
   cursor: pointer;
   transition: all 0.15s;
 }
-.cota:hover .cota-bg { fill: rgba(212,112,10,0.15); }
-.cota.selected .cota-bg { fill: rgba(212,112,10,0.3); stroke: var(--principal, #D4700A); stroke-width: 2; }
+.cota:hover .cota-bg { fill: rgba(27,79,138,0.15); }
+.cota.selected .cota-bg { fill: rgba(27,79,138,0.3); stroke: var(--principal, #1B4F8A); stroke-width: 2; }
 .cota.solved-ok .cota-bg { fill: rgba(46,125,79,0.18); stroke: var(--aco-ok); stroke-width: 2; }
 .cota.solved-err .cota-bg { fill: rgba(196,69,54,0.18); stroke: var(--aco-err); stroke-width: 2; }
 .cota.solved-miss .cota-bg { fill: rgba(232,182,71,0.25); stroke: var(--aco-warn); stroke-width: 2; stroke-dasharray: 3 3; }
@@ -158,7 +158,7 @@
   transition: all 0.15s;
 }
 .btn-comprobar {
-  background: var(--principal, #D4700A);
+  background: var(--principal, #1B4F8A);
   color: #fff;
 }
 .btn-comprobar:hover { background: #b85e08; transform: translateY(-1px); }
@@ -167,7 +167,7 @@
   border: 1px solid #ccc;
   color: #666;
 }
-.btn-resetear:hover { border-color: var(--principal, #D4700A); color: var(--principal, #D4700A); }
+.btn-resetear:hover { border-color: var(--principal, #1B4F8A); color: var(--principal, #1B4F8A); }
 .btn-pista {
   background: var(--secundario, #1B4F8A);
   color: #fff;
@@ -181,7 +181,7 @@
   padding: 0.8rem 1.2rem;
   margin: 1rem 0;
   display: none;
-  border-left: 4px solid var(--principal, #D4700A);
+  border-left: 4px solid var(--principal, #1B4F8A);
 }
 .score-box.show { display: block; }
 .score-box.perfect { border-left-color: var(--aco-ok); background: #f4faf6; }
@@ -215,7 +215,7 @@
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 1.1rem;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
   margin-bottom: 0.5rem;
 }
 .error-item {
@@ -267,7 +267,7 @@
   color: #666;
 }
 .modo-toggle button.active {
-  background: var(--principal, #D4700A);
+  background: var(--principal, #1B4F8A);
   color: #fff;
 }
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#D4700A">
+<meta name="theme-color" content="#1B4F8A">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
 <title>Línea del tiempo de la tecnología · U01 · TyD 2º ESO</title>
 <meta name="description" content="Línea del tiempo interactiva de la historia de la tecnología: 7 épocas con sus inventos y necesidades cubiertas. Modo explorar + 2 modos de quiz. TyD 2º ESO.">
@@ -58,9 +58,9 @@
   transition: all 0.15s;
 }
 .modo-toggle button.active {
-  background: var(--principal, #D4700A);
+  background: var(--principal, #1B4F8A);
   color: #fff;
-  box-shadow: 0 2px 6px rgba(212,112,10,0.3);
+  box-shadow: 0 2px 6px rgba(27,79,138,0.3);
 }
 
 /* ─── Modo explorar: línea visual ─── */
@@ -82,7 +82,7 @@
   left: 5%;
   right: 5%;
   height: 4px;
-  background: linear-gradient(90deg, #D4700A, #e89947, #1B4F8A);
+  background: linear-gradient(90deg, #1B4F8A, #e89947, #1B4F8A);
   border-radius: 2px;
   z-index: 0;
 }
@@ -107,20 +107,20 @@
   width: 22px;
   height: 22px;
   background: #fff;
-  border: 4px solid var(--principal, #D4700A);
+  border: 4px solid var(--principal, #1B4F8A);
   border-radius: 50%;
   z-index: 2;
   transition: all 0.18s;
 }
-.epoca-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); border-color: var(--principal, #D4700A); }
-.epoca-card:hover::before { background: var(--principal, #D4700A); }
-.epoca-card.active { background: #fffaf3; border-color: var(--principal, #D4700A); box-shadow: 0 4px 14px rgba(212,112,10,0.15); }
-.epoca-card.active::before { background: var(--principal, #D4700A); transform: translateX(-50%) scale(1.15); }
+.epoca-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); border-color: var(--principal, #1B4F8A); }
+.epoca-card:hover::before { background: var(--principal, #1B4F8A); }
+.epoca-card.active { background: #fffaf3; border-color: var(--principal, #1B4F8A); box-shadow: 0 4px 14px rgba(27,79,138,0.15); }
+.epoca-card.active::before { background: var(--principal, #1B4F8A); transform: translateX(-50%) scale(1.15); }
 .epoca-card .nombre {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 0.95rem;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
   line-height: 1.1;
   margin-bottom: 4px;
 }
@@ -150,7 +150,7 @@
   overflow: hidden;
 }
 .epoca-detail-header {
-  background: linear-gradient(135deg, var(--principal, #D4700A), #e89947);
+  background: linear-gradient(135deg, var(--principal, #1B4F8A), #e89947);
   color: #fff;
   padding: 1.2rem 1.6rem;
 }
@@ -192,7 +192,7 @@
 .invento-card {
   background: #fafafa;
   border: 1px solid #e3e3e3;
-  border-left: 3px solid var(--principal, #D4700A);
+  border-left: 3px solid var(--principal, #1B4F8A);
   border-radius: 8px;
   padding: 0.6rem 0.8rem;
   font-size: 0.9rem;
@@ -237,7 +237,7 @@
   cursor: pointer;
   transition: all 0.15s;
 }
-.nav-arrow:hover:not(:disabled) { border-color: var(--principal, #D4700A); color: var(--principal, #D4700A); }
+.nav-arrow:hover:not(:disabled) { border-color: var(--principal, #1B4F8A); color: var(--principal, #1B4F8A); }
 .nav-arrow:disabled { opacity: 0.35; cursor: not-allowed; }
 
 /* ─── Modo Quiz ─── */
@@ -257,9 +257,9 @@
   font-size: 0.92rem;
   color: #555;
 }
-.quiz-progress strong { color: var(--principal, #D4700A); font-family: 'JetBrains Mono', monospace; }
+.quiz-progress strong { color: var(--principal, #1B4F8A); font-family: 'JetBrains Mono', monospace; }
 .quiz-progress .score {
-  background: var(--principal, #D4700A);
+  background: var(--principal, #1B4F8A);
   color: #fff;
   padding: 4px 10px;
   border-radius: 6px;
@@ -269,7 +269,7 @@
 }
 .quiz-prompt {
   background: #fffaf3;
-  border-left: 4px solid var(--principal, #D4700A);
+  border-left: 4px solid var(--principal, #1B4F8A);
   border-radius: 0 10px 10px 0;
   padding: 1.1rem 1.4rem;
   margin-bottom: 1.2rem;
@@ -278,7 +278,7 @@
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 1.05rem;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -309,7 +309,7 @@
   transition: all 0.15s;
   text-align: left;
 }
-.quiz-opcion:hover:not(:disabled) { background: #fffaf3; border-color: var(--principal, #D4700A); }
+.quiz-opcion:hover:not(:disabled) { background: #fffaf3; border-color: var(--principal, #1B4F8A); }
 .quiz-opcion.correct { background: #dff2e6; border-color: var(--tl-ok); color: var(--tl-ok); }
 .quiz-opcion.wrong { background: #fce4e1; border-color: var(--tl-err); color: var(--tl-err); }
 .quiz-opcion:disabled { cursor: not-allowed; opacity: 0.85; }
@@ -334,7 +334,7 @@
   flex-wrap: wrap;
 }
 .btn-next, .btn-restart {
-  background: var(--principal, #D4700A);
+  background: var(--principal, #1B4F8A);
   color: #fff;
   border: none;
   padding: 0.55rem 1.4rem;
@@ -351,7 +351,7 @@
   color: #444;
   border: 1px solid #ccc;
 }
-.btn-restart:hover { border-color: var(--principal, #D4700A); color: var(--principal, #D4700A); background: #fff; }
+.btn-restart:hover { border-color: var(--principal, #1B4F8A); color: var(--principal, #1B4F8A); background: #fff; }
 
 /* Quiz final */
 .quiz-final {
@@ -363,7 +363,7 @@
   font-weight: 700;
   font-size: 1.8rem;
   margin-bottom: 0.8rem;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
 }
 .quiz-final .nota {
   font-family: 'JetBrains Mono', monospace;

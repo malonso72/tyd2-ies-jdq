@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#D4700A">
+<meta name="theme-color" content="#1B4F8A">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
 <title>Calculadora de escalas · U00 Dibujo técnico · TyD 2º ESO</title>
 <meta name="description" content="Calculadora interactiva de escalas para dibujo técnico de 2º ESO: convierte entre medida real y medida en el dibujo con cualquier escala.">
@@ -54,9 +54,9 @@
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 1.3rem;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
   margin-bottom: 0.4rem;
-  border-bottom: 2px solid var(--principal, #D4700A);
+  border-bottom: 2px solid var(--principal, #1B4F8A);
   padding-bottom: 0.3rem;
 }
 .calc-panel .panel-sub {
@@ -92,12 +92,12 @@
 }
 .calc-row input[type="number"]:focus {
   outline: none;
-  border-color: var(--principal, #D4700A);
-  box-shadow: 0 0 0 3px rgba(212,112,10,0.15);
+  border-color: var(--principal, #1B4F8A);
+  box-shadow: 0 0 0 3px rgba(27,79,138,0.15);
 }
 .calc-row input[type="number"].locked {
   background: #f3eee2;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
   border-color: #e89947;
 }
 .calc-row select {
@@ -116,11 +116,11 @@
   font-family: 'JetBrains Mono', monospace;
   font-size: 2rem;
   font-weight: 700;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
   text-align: center;
   padding: 1rem;
   background: #fffaf3;
-  border: 2px dashed var(--principal, #D4700A);
+  border: 2px dashed var(--principal, #1B4F8A);
   border-radius: 12px;
   margin: 0.8rem 0;
   letter-spacing: 2px;
@@ -157,8 +157,8 @@
   cursor: pointer;
   transition: all 0.15s;
 }
-.preset-btn:hover { background: var(--principal, #D4700A); color: #fff; border-color: var(--principal, #D4700A); }
-.preset-btn.active { background: var(--principal, #D4700A); color: #fff; border-color: var(--principal, #D4700A); }
+.preset-btn:hover { background: var(--principal, #1B4F8A); color: #fff; border-color: var(--principal, #1B4F8A); }
+.preset-btn.active { background: var(--principal, #1B4F8A); color: #fff; border-color: var(--principal, #1B4F8A); }
 
 .escala-custom {
   display: flex;
@@ -178,8 +178,8 @@
   text-align: center;
   color: var(--secundario, #1B4F8A);
 }
-.escala-custom input:focus { outline: none; border-color: var(--principal, #D4700A); }
-.escala-custom .sep { font-size: 1.3rem; font-weight: 700; color: var(--principal, #D4700A); }
+.escala-custom input:focus { outline: none; border-color: var(--principal, #1B4F8A); }
+.escala-custom .sep { font-size: 1.3rem; font-weight: 700; color: var(--principal, #1B4F8A); }
 
 /* ─── Pasos del cálculo ─── */
 .pasos {
@@ -194,7 +194,7 @@
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 1.05rem;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
   margin-bottom: 0.5rem;
   letter-spacing: 0.5px;
 }
@@ -209,7 +209,7 @@
   content: '→';
   position: absolute;
   left: 0;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
   font-weight: 700;
 }
 .paso .calc-op {
@@ -221,7 +221,7 @@
   font-size: 0.9rem;
   color: var(--secundario, #1B4F8A);
 }
-.paso strong { color: var(--principal, #D4700A); }
+.paso strong { color: var(--principal, #1B4F8A); }
 
 .modo-toggle {
   display: flex;
@@ -245,9 +245,9 @@
   transition: all 0.15s;
 }
 .modo-toggle button.active {
-  background: var(--principal, #D4700A);
+  background: var(--principal, #1B4F8A);
   color: #fff;
-  box-shadow: 0 2px 6px rgba(212,112,10,0.3);
+  box-shadow: 0 2px 6px rgba(27,79,138,0.3);
 }
 
 /* ─── Comparativa visual ─── */
@@ -263,9 +263,9 @@
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 1.3rem;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
   margin-bottom: 0.4rem;
-  border-bottom: 2px solid var(--principal, #D4700A);
+  border-bottom: 2px solid var(--principal, #1B4F8A);
   padding-bottom: 0.3rem;
 }
 .compara-wrap .panel-sub {
@@ -303,24 +303,24 @@
   border: 1px solid #333;
 }
 .leyenda-real .leyenda-swatch { background: rgba(44,95,141,0.4); border-color: var(--secundario, #1B4F8A); }
-.leyenda-dibujo .leyenda-swatch { background: rgba(212,112,10,0.45); border-color: var(--principal, #D4700A); }
+.leyenda-dibujo .leyenda-swatch { background: rgba(27,79,138,0.45); border-color: var(--principal, #1B4F8A); }
 
 /* ─── Ayudas ─── */
 .tip-card {
   background: #fffaf3;
-  border-left: 4px solid var(--principal, #D4700A);
+  border-left: 4px solid var(--principal, #1B4F8A);
   border-radius: 0 10px 10px 0;
   padding: 0.9rem 1.1rem;
   margin: 1.5rem 0;
   font-size: 0.93rem;
   color: #444;
 }
-.tip-card strong { color: var(--principal, #D4700A); }
+.tip-card strong { color: var(--principal, #1B4F8A); }
 .tip-card .tip-title {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 1rem;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
   margin-bottom: 0.3rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -688,9 +688,9 @@
     txt(startX + real_px + 8, 60, fmt(realMm) + ' mm', {fill: '#1B4F8A'});
 
     // Dibujo (naranja, abajo)
-    rect(startX, 110, dib_px, 30, 'rgba(212,112,10,0.45)', '#D4700A');
-    txt(startX, 102, 'TAMAÑO EN EL DIBUJO', {fill: '#D4700A', size: '11', weight: '700'});
-    txt(startX + dib_px + 8, 130, fmt(dibujoMm) + ' mm', {fill: '#D4700A'});
+    rect(startX, 110, dib_px, 30, 'rgba(27,79,138,0.45)', '#1B4F8A');
+    txt(startX, 102, 'TAMAÑO EN EL DIBUJO', {fill: '#1B4F8A', size: '11', weight: '700'});
+    txt(startX + dib_px + 8, 130, fmt(dibujoMm) + ' mm', {fill: '#1B4F8A'});
 
     // línea de referencia
     line(startX, 75, startX, 105, '#aaa');

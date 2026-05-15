@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#D4700A">
+<meta name="theme-color" content="#1B4F8A">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
 <title>Actividades · U04 Mecanismos · TyD 2º ESO</title>
 <meta name="description" content="35 actividades interactivas sobre mecanismos para 2º ESO con autocorrección: palancas, poleas, plano inclinado, transmisión por correa y engranajes.">
@@ -26,31 +26,31 @@
 <link rel="stylesheet" href="../../../assets/css/unidad.css">
 <style>
 :root { --act-ok: #2e7d4f; --act-err: #c44536; --act-warn: #e8b647; --act-card-bg: #fafafa; --act-border: #e3e3e3; }
-.bloque-titulo { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.6rem; color: var(--principal, #D4700A); margin: 2.5rem 0 0.4rem; padding-bottom: 0.4rem; border-bottom: 3px solid var(--principal, #D4700A); letter-spacing: 0.5px; }
+.bloque-titulo { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.6rem; color: var(--principal, #1B4F8A); margin: 2.5rem 0 0.4rem; padding-bottom: 0.4rem; border-bottom: 3px solid var(--principal, #1B4F8A); letter-spacing: 0.5px; }
 .bloque-intro { color: #555; font-size: 0.95rem; margin-bottom: 1.2rem; font-style: italic; }
-.activity-card { background: var(--act-card-bg); border: 1px solid var(--act-border); border-left: 4px solid var(--principal, #D4700A); border-radius: 10px; padding: 1.2rem 1.4rem; margin: 1rem 0; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.activity-card { background: var(--act-card-bg); border: 1px solid var(--act-border); border-left: 4px solid var(--principal, #1B4F8A); border-radius: 10px; padding: 1.2rem 1.4rem; margin: 1rem 0; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
 .activity-card.solved { border-left-color: var(--act-ok); background: #f4faf6; }
 .activity-card.wrong { border-left-color: var(--act-err); background: #fdf6f5; }
-.act-num { display: inline-block; background: var(--principal, #D4700A); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-right: 8px; letter-spacing: 0.5px; }
+.act-num { display: inline-block; background: var(--principal, #1B4F8A); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-right: 8px; letter-spacing: 0.5px; }
 .activity-card.solved .act-num { background: var(--act-ok); }
 .activity-card.wrong .act-num { background: var(--act-err); }
 .statement { font-size: 1rem; color: #222; margin-bottom: 1rem; line-height: 1.5; }
 .statement strong { color: #111; } .statement em { color: var(--secundario, #1B4F8A); font-style: italic; }
 .options { display: grid; gap: 0.5rem; margin: 0.8rem 0; }
 .option { display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.6rem 0.8rem; background: #fff; border: 1px solid var(--act-border); border-radius: 8px; cursor: pointer; transition: all 0.15s ease; font-size: 0.95rem; }
-.option:hover { background: #fffaf3; border-color: var(--principal, #D4700A); }
+.option:hover { background: #fffaf3; border-color: var(--principal, #1B4F8A); }
 .option input { margin-top: 3px; cursor: pointer; flex-shrink: 0; }
 .option input:checked + .option-label { color: var(--secundario, #1B4F8A); font-weight: 600; }
 .options.cols2 { grid-template-columns: 1fr 1fr; } .options.cols3 { grid-template-columns: 1fr 1fr 1fr; }
 .answer-box { display: flex; align-items: center; gap: 0.5rem; margin: 0.8rem 0; flex-wrap: wrap; }
 .answer-box label { font-weight: 600; color: #444; font-size: 0.95rem; }
 .answer-box input[type="number"] { font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 600; padding: 0.45rem 0.7rem; border: 2px solid var(--act-border); border-radius: 8px; width: 110px; background: #fff; color: var(--secundario, #1B4F8A); }
-.answer-box input:focus { outline: none; border-color: var(--principal, #D4700A); box-shadow: 0 0 0 3px rgba(212,112,10,0.15); }
+.answer-box input:focus { outline: none; border-color: var(--principal, #1B4F8A); box-shadow: 0 0 0 3px rgba(27,79,138,0.15); }
 .answer-box .unit { font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; color: #666; font-weight: 500; }
 .order-list { display: grid; gap: 0.5rem; margin: 0.8rem 0; }
 .order-item { display: grid; grid-template-columns: 60px 1fr; gap: 0.7rem; align-items: center; padding: 0.6rem 0.9rem; background: #fff; border: 1px solid var(--act-border); border-radius: 8px; }
-.order-item input { width: 50px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; padding: 0.35rem; border: 2px solid var(--act-border); border-radius: 6px; color: var(--principal, #D4700A); }
-.order-item input:focus { outline: none; border-color: var(--principal, #D4700A); }
+.order-item input { width: 50px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; padding: 0.35rem; border: 2px solid var(--act-border); border-radius: 6px; color: var(--principal, #1B4F8A); }
+.order-item input:focus { outline: none; border-color: var(--principal, #1B4F8A); }
 .order-item input.ok-input { background: #dff2e6; border-color: var(--act-ok); }
 .order-item input.err-input { background: #fce4e1; border-color: var(--act-err); }
 .order-item .order-text { font-size: 0.95rem; color: #333; font-weight: 500; }
@@ -60,7 +60,7 @@
 .match-item select { font-family: 'Barlow', sans-serif; font-size: 0.92rem; padding: 0.35rem 0.5rem; border: 2px solid var(--act-border); border-radius: 6px; background: #fff; cursor: pointer; min-width: 160px; font-weight: 500; }
 .match-item select.ok-input { background: #dff2e6; border-color: var(--act-ok); color: var(--act-ok); }
 .match-item select.err-input { background: #fce4e1; border-color: var(--act-err); color: var(--act-err); }
-.check-btn { background: var(--principal, #D4700A); color: #fff; border: none; padding: 0.55rem 1.1rem; border-radius: 8px; font-family: 'Barlow', sans-serif; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.15s ease; }
+.check-btn { background: var(--principal, #1B4F8A); color: #fff; border: none; padding: 0.55rem 1.1rem; border-radius: 8px; font-family: 'Barlow', sans-serif; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.15s ease; }
 .check-btn:hover { background: #b85e08; transform: translateY(-1px); }
 .feedback { margin-top: 0.7rem; padding: 0.6rem 0.9rem; border-radius: 6px; font-size: 0.93rem; font-weight: 600; display: none; }
 .feedback.show { display: block; }
@@ -68,20 +68,20 @@
 .feedback.err { background: #fce4e1; color: var(--act-err); border-left: 4px solid var(--act-err); }
 .feedback .icon { margin-right: 6px; font-size: 1.1rem; }
 details.solution { margin-top: 0.9rem; background: #fffaf3; border: 1px dashed #d4a373; border-radius: 8px; padding: 0.6rem 0.9rem; }
-details.solution > summary { cursor: pointer; font-weight: 600; color: var(--principal, #D4700A); font-size: 0.92rem; list-style: none; user-select: none; }
+details.solution > summary { cursor: pointer; font-weight: 600; color: var(--principal, #1B4F8A); font-size: 0.92rem; list-style: none; user-select: none; }
 details.solution > summary::before { content: "▸ "; display: inline-block; }
 details.solution[open] > summary::before { content: "▾ "; }
 details.solution .sol-body { margin-top: 0.6rem; padding-top: 0.6rem; border-top: 1px dashed #d4a373; font-size: 0.92rem; color: #444; line-height: 1.55; }
 details.solution .steps-sol { display: grid; gap: 0.4rem; counter-reset: stp; margin-top: 0.4rem; }
 details.solution .step-sol { position: relative; padding: 0.4rem 0.5rem 0.4rem 1.9rem; background: #fff; border-radius: 6px; border: 1px solid #f0e6d3; font-size: 0.9rem; }
-details.solution .step-sol::before { counter-increment: stp; content: counter(stp); position: absolute; left: 0.4rem; top: 0.45rem; width: 18px; height: 18px; background: var(--principal, #D4700A); color: #fff; border-radius: 50%; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700; display: grid; place-items: center; }
-.progreso { position: sticky; top: 0; background: #fff; border-bottom: 2px solid var(--principal, #D4700A); padding: 0.6rem 1rem; margin-bottom: 1.5rem; z-index: 50; display: flex; justify-content: space-between; align-items: center; font-family: 'Barlow', sans-serif; font-size: 0.92rem; border-radius: 0 0 10px 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+details.solution .step-sol::before { counter-increment: stp; content: counter(stp); position: absolute; left: 0.4rem; top: 0.45rem; width: 18px; height: 18px; background: var(--principal, #1B4F8A); color: #fff; border-radius: 50%; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700; display: grid; place-items: center; }
+.progreso { position: sticky; top: 0; background: #fff; border-bottom: 2px solid var(--principal, #1B4F8A); padding: 0.6rem 1rem; margin-bottom: 1.5rem; z-index: 50; display: flex; justify-content: space-between; align-items: center; font-family: 'Barlow', sans-serif; font-size: 0.92rem; border-radius: 0 0 10px 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
 .progreso .bar-wrap { flex: 1; margin: 0 1rem; background: #eee; height: 8px; border-radius: 4px; overflow: hidden; }
-.progreso .bar { height: 100%; background: linear-gradient(90deg, var(--principal, #D4700A), #e89947); width: 0%; transition: width 0.4s ease; }
+.progreso .bar { height: 100%; background: linear-gradient(90deg, var(--principal, #1B4F8A), #e89947); width: 0%; transition: width 0.4s ease; }
 .progreso .stat { font-weight: 600; color: var(--secundario, #1B4F8A); }
-.progreso .stat strong { color: var(--principal, #D4700A); }
+.progreso .stat strong { color: var(--principal, #1B4F8A); }
 .progreso .reset-btn { background: transparent; border: 1px solid #ccc; color: #666; padding: 0.3rem 0.7rem; border-radius: 6px; font-size: 0.82rem; cursor: pointer; font-family: 'Barlow', sans-serif; }
-.progreso .reset-btn:hover { border-color: var(--principal, #D4700A); color: var(--principal, #D4700A); }
+.progreso .reset-btn:hover { border-color: var(--principal, #1B4F8A); color: var(--principal, #1B4F8A); }
 @media (max-width: 720px) { .options.cols2, .options.cols3 { grid-template-columns: 1fr; } .progreso { flex-wrap: wrap; gap: 0.5rem; } .progreso .bar-wrap { margin: 0; order: 99; flex-basis: 100%; } .order-item { grid-template-columns: 45px 1fr; } .match-item { grid-template-columns: 1fr; } .match-item select { min-width: 0; width: 100%; } }
 @media print { .progreso, .check-btn, .reset-btn { display: none; } .feedback.show { display: block !important; } details.solution { background: #fff; } details.solution > summary { display: none; } details.solution > .sol-body { display: block !important; } }
 </style>
@@ -562,7 +562,7 @@ details.solution .step-sol::before { counter-increment: stp; content: counter(st
 
 <footer style="text-align:center; padding:2rem 1rem 1rem; color:#888; font-size:0.85rem; border-top: 1px dashed #ddd; margin-top: 3rem;">
   <p>📝 Actividades · TyD 2º ESO · Unidad 4 · Mecanismos</p>
-  <p><a href="../index.html" style="color:#D4700A; text-decoration:none;">← Volver al hub de la unidad</a> · <a href="../libro-digital.html" style="color:#D4700A; text-decoration:none;">📘 Libro digital</a></p>
+  <p><a href="../index.html" style="color:#1B4F8A; text-decoration:none;">← Volver al hub de la unidad</a> · <a href="../libro-digital.html" style="color:#1B4F8A; text-decoration:none;">📘 Libro digital</a></p>
   <p style="margin-top:8px; font-family:'JetBrains Mono', monospace; font-size:0.72rem; opacity:0.6;">v1.0</p>
 </footer>
 

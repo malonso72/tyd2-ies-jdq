@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#D4700A">
+<meta name="theme-color" content="#1B4F8A">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
 <title>Simulador del proceso tecnológico · U01 · TyD 2º ESO</title>
 <meta name="description" content="Simulador interactivo del proceso tecnológico: ordena las 6 fases y aplícalas a un caso real paso a paso. TyD 2º ESO.">
@@ -56,9 +56,9 @@
   transition: all 0.15s;
 }
 .modo-toggle button.active {
-  background: var(--principal, #D4700A);
+  background: var(--principal, #1B4F8A);
   color: #fff;
-  box-shadow: 0 2px 6px rgba(212,112,10,0.3);
+  box-shadow: 0 2px 6px rgba(27,79,138,0.3);
 }
 
 /* ════ MODO 1 · Ordenar las 6 fases ════ */
@@ -74,9 +74,9 @@
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 1.3rem;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
   margin: 0 0 0.5rem;
-  border-bottom: 2px solid var(--principal, #D4700A);
+  border-bottom: 2px solid var(--principal, #1B4F8A);
   padding-bottom: 0.4rem;
 }
 .order-area .descripcion {
@@ -100,10 +100,10 @@
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 1.4rem;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
   text-align: center;
   background: #fffaf3;
-  border: 2px solid var(--principal, #D4700A);
+  border: 2px solid var(--principal, #1B4F8A);
   border-radius: 8px;
   padding: 0.5rem;
 }
@@ -120,14 +120,14 @@
   align-items: center;
 }
 .dropzone.has-card { background: #fff; border-style: solid; border-color: #ccc; color: #222; font-style: normal; }
-.dropzone.drag-over { background: #fff5e6; border-color: var(--principal, #D4700A); }
+.dropzone.drag-over { background: #fff5e6; border-color: var(--principal, #1B4F8A); }
 .dropzone.solved-ok { background: #dff2e6; border-color: var(--ok); }
 .dropzone.solved-err { background: #fce4e1; border-color: var(--err); }
 
 .fase-card-draggable {
   background: #fff;
   border: 1px solid #ddd;
-  border-left: 4px solid var(--principal, #D4700A);
+  border-left: 4px solid var(--principal, #1B4F8A);
   border-radius: 8px;
   padding: 0.7rem 0.9rem;
   cursor: grab;
@@ -180,7 +180,7 @@
   padding: 0.8rem 1.2rem;
   margin: 1rem 0;
   display: none;
-  border-left: 4px solid var(--principal, #D4700A);
+  border-left: 4px solid var(--principal, #1B4F8A);
 }
 .score-box.show { display: block; }
 .score-box.perfect { border-left-color: var(--ok); background: #f4faf6; }
@@ -190,7 +190,7 @@
   font-weight: 700;
   font-size: 1.1rem;
   margin-bottom: 0.3rem;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
 }
 .score-box.perfect .score-titulo { color: var(--ok); }
 .score-box.partial .score-titulo { color: #8a6d1a; }
@@ -213,11 +213,11 @@
   cursor: pointer;
   transition: all 0.15s;
 }
-.btn-primary { background: var(--principal, #D4700A); color: #fff; }
+.btn-primary { background: var(--principal, #1B4F8A); color: #fff; }
 .btn-primary:hover:not(:disabled) { background: #b85e08; transform: translateY(-1px); }
 .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
 .btn-secondary { background: #fff; color: #444; border: 1px solid #ccc; }
-.btn-secondary:hover { border-color: var(--principal, #D4700A); color: var(--principal, #D4700A); }
+.btn-secondary:hover { border-color: var(--principal, #1B4F8A); color: var(--principal, #1B4F8A); }
 
 /* ════ MODO 2 · Aplicar a caso real ════ */
 .caso-selector {
@@ -235,14 +235,14 @@
   text-align: left;
   transition: all 0.15s;
 }
-.caso-btn:hover { border-color: var(--principal, #D4700A); background: #fffaf3; }
-.caso-btn.active { background: #fffaf3; border-color: var(--principal, #D4700A); box-shadow: 0 4px 12px rgba(212,112,10,0.15); }
+.caso-btn:hover { border-color: var(--principal, #1B4F8A); background: #fffaf3; }
+.caso-btn.active { background: #fffaf3; border-color: var(--principal, #1B4F8A); box-shadow: 0 4px 12px rgba(27,79,138,0.15); }
 .caso-btn .ico { font-size: 1.6rem; display: block; margin-bottom: 4px; }
 .caso-btn .ttl {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 1.05rem;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
 }
 .caso-btn .dsc { font-size: 0.85rem; color: #666; margin-top: 4px; line-height: 1.3; }
 
@@ -258,7 +258,7 @@
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 1.2rem;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
   display: inline-block;
   vertical-align: middle;
 }
@@ -284,7 +284,7 @@
   border-radius: 4px;
 }
 .fase-progress .pill.done { background: var(--ok); }
-.fase-progress .pill.current { background: var(--principal, #D4700A); }
+.fase-progress .pill.current { background: var(--principal, #1B4F8A); }
 .fase-progress .pill.err { background: var(--err); }
 .fase-progress .num-display {
   font-family: 'JetBrains Mono', monospace;
@@ -294,7 +294,7 @@
   white-space: nowrap;
 }
 .fase-banner {
-  background: var(--principal, #D4700A);
+  background: var(--principal, #1B4F8A);
   color: #fff;
   padding: 0.6rem 1rem;
   border-radius: 8px;
@@ -328,7 +328,7 @@
   transition: all 0.15s;
   text-align: left;
 }
-.fase-op:hover:not(:disabled) { background: #fffaf3; border-color: var(--principal, #D4700A); }
+.fase-op:hover:not(:disabled) { background: #fffaf3; border-color: var(--principal, #1B4F8A); }
 .fase-op.correct { background: #dff2e6; border-color: var(--ok); color: var(--ok); font-weight: 600; }
 .fase-op.wrong { background: #fce4e1; border-color: var(--err); color: var(--err); }
 .fase-op:disabled { cursor: not-allowed; opacity: 0.85; }
@@ -356,7 +356,7 @@
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 1.6rem;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
   margin-bottom: 0.6rem;
   text-align: center;
 }

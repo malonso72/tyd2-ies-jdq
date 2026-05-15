@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#D4700A">
+<meta name="theme-color" content="#1B4F8A">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
 <title>Actividades resueltas · Electricidad · TyD 2º ESO</title>
 <meta name="description" content="Actividades resueltas guiadas: Ley de Ohm, resistencias en serie y paralelo, potencia, energía y cálculos del CGMP de una vivienda.">
@@ -16,9 +16,9 @@
 .activity-list{display:grid;gap:24px;margin:24px 0 42px}
 .activity-card{background:#fff;border:1px solid rgba(25,31,43,.12);border-radius:22px;padding:24px;box-shadow:0 12px 30px rgba(25,31,43,.07)}
 .activity-head{display:flex;gap:16px;align-items:flex-start;margin-bottom:16px}
-.activity-num{font-family:"JetBrains Mono",monospace;font-weight:700;color:#fff;background:#D4700A;border-radius:999px;padding:7px 12px;font-size:.85rem;white-space:nowrap}
+.activity-num{font-family:"JetBrains Mono",monospace;font-weight:700;color:#fff;background:#1B4F8A;border-radius:999px;padding:7px 12px;font-size:.85rem;white-space:nowrap}
 .activity-card h2{font-family:"Barlow Condensed",sans-serif;font-size:clamp(1.55rem,3vw,2.1rem);line-height:1.05;margin:0 0 6px}
-.statement{background:#f7f2e8;border-left:5px solid #D4700A;border-radius:12px;padding:16px 18px;margin:16px 0}
+.statement{background:#f7f2e8;border-left:5px solid #1B4F8A;border-radius:12px;padding:16px 18px;margin:16px 0}
 .data-row{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
 .data-pill{font-family:"JetBrains Mono",monospace;background:#1a2238;color:#fffaf0;border-radius:999px;padding:6px 12px;font-size:.9rem}
 .answer-box{display:grid;grid-template-columns:minmax(160px,1fr) auto auto;gap:10px;align-items:center;margin:18px 0 8px}
@@ -31,17 +31,17 @@
 details.solution{margin-top:16px;background:#f9fbff;border:1px solid rgba(44,95,141,.18);border-radius:16px;overflow:hidden}
 details.solution summary{cursor:pointer;padding:14px 18px;font-weight:700;color:#1a2238;background:#eaf3fb}
 .solution-body{padding:18px}
-.solution-body h4{font-family:"Barlow Condensed",sans-serif;font-size:1.2rem;color:#D4700A;margin:14px 0 8px;letter-spacing:.02em}
+.solution-body h4{font-family:"Barlow Condensed",sans-serif;font-size:1.2rem;color:#1B4F8A;margin:14px 0 8px;letter-spacing:.02em}
 .solution-body h4:first-child{margin-top:0}
 .steps{counter-reset:step;display:grid;gap:12px}
 .step{position:relative;padding:14px 16px 14px 48px;background:white;border-radius:12px;border:1px solid rgba(26,34,56,.10)}
-.step::before{counter-increment:step;content:counter(step);position:absolute;left:14px;top:14px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#D4700A;color:white;font-family:"JetBrains Mono",monospace;font-size:.8rem;font-weight:700}
+.step::before{counter-increment:step;content:counter(step);position:absolute;left:14px;top:14px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#1B4F8A;color:white;font-family:"JetBrains Mono",monospace;font-size:.8rem;font-weight:700}
 .note{color:#4a5568;font-size:.95rem;margin-top:8px}
-.bloque-titulo{font-family:"Barlow Condensed",sans-serif;font-size:1.6rem;font-weight:700;color:#D4700A;margin:28px 0 4px;text-transform:uppercase;letter-spacing:.04em}
+.bloque-titulo{font-family:"Barlow Condensed",sans-serif;font-size:1.6rem;font-weight:700;color:#1B4F8A;margin:28px 0 4px;text-transform:uppercase;letter-spacing:.04em}
 .bloque-sub{font-size:.95rem;color:#4a5568;margin-bottom:8px}
 .schema{display:flex;justify-content:center;background:#fdfaf3;border:1px dashed #d4a070;border-radius:14px;padding:16px;margin:14px 0}
 .schema svg{max-width:100%;height:auto}
-.subactivity{margin:18px 0 0;padding:14px 16px;background:#f7f2e8;border-radius:12px;border-left:4px solid #D4700A}
+.subactivity{margin:18px 0 0;padding:14px 16px;background:#f7f2e8;border-radius:12px;border-left:4px solid #1B4F8A}
 .subactivity h3{font-family:"Barlow Condensed",sans-serif;font-size:1.15rem;color:#1a2238;margin:0 0 8px;text-transform:none;letter-spacing:0}
 .subactivity .answer-box{margin-top:10px}
 .aplicacion{margin-top:14px;padding:14px 16px;background:#eaf3fb;border-radius:12px;border-left:4px solid #1B4F8A}
@@ -498,9 +498,9 @@ function interruptor(cx, cy){
 function flechaI(x1, x2, y, label){
   const cx = (x1+x2)/2;
   return `
-    <line x1="${x1}" y1="${y}" x2="${x2-5}" y2="${y}" stroke="#D4700A" stroke-width="2" stroke-linecap="round"/>
-    <polygon points="${x2-5},${y-4} ${x2},${y} ${x2-5},${y+4}" fill="#D4700A"/>
-    <text x="${cx}" y="${y-6}" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" font-weight="700" fill="#D4700A">${label}</text>
+    <line x1="${x1}" y1="${y}" x2="${x2-5}" y2="${y}" stroke="#1B4F8A" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="${x2-5},${y-4} ${x2},${y} ${x2-5},${y+4}" fill="#1B4F8A"/>
+    <text x="${cx}" y="${y-6}" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" font-weight="700" fill="#1B4F8A">${label}</text>
   `;
 }
 

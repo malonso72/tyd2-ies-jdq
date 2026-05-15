@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#D4700A">
+<meta name="theme-color" content="#1B4F8A">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
 <title>Triangulador · U03 · TyD 2º ESO</title>
 <meta name="description" content="Interactivo del triangulador: comprueba visualmente cómo una diagonal convierte un cuadrado deformable en una estructura rígida. TyD 2º ESO.">
@@ -46,9 +46,9 @@
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 1.3rem;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
   margin: 0 0 0.5rem;
-  border-bottom: 2px solid var(--principal, #D4700A);
+  border-bottom: 2px solid var(--principal, #1B4F8A);
   padding-bottom: 0.4rem;
 }
 .bloque p.descripcion {
@@ -105,12 +105,12 @@
   font-family: 'JetBrains Mono', monospace;
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
 }
 .lab-slider input[type="range"] {
   width: 100%;
   margin-top: 8px;
-  accent-color: var(--principal, #D4700A);
+  accent-color: var(--principal, #1B4F8A);
 }
 .lab-slider input[type="range"]:disabled { opacity: 0.4; }
 
@@ -147,7 +147,7 @@
 .lab-estado.rigido .val { color: var(--ok); }
 
 .btn-primary {
-  background: var(--principal, #D4700A);
+  background: var(--principal, #1B4F8A);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -176,7 +176,7 @@
 
 .lab-callout {
   background: #fff7eb;
-  border-left: 4px solid var(--principal, #D4700A);
+  border-left: 4px solid var(--principal, #1B4F8A);
   border-radius: 8px;
   padding: 12px 16px;
   font-size: 0.92rem;
@@ -232,7 +232,7 @@
 .nave-hud-row span:first-child { color: #666; }
 .nave-hud-row strong {
   font-family: 'JetBrains Mono', monospace;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
 }
 
 .nave-mensaje {
@@ -267,21 +267,21 @@
 /* SVG components */
 .bar-elastic { stroke: #444; stroke-width: 3; stroke-linecap: round; fill: none; transition: all 0.3s ease; }
 .bar-rigid { stroke: var(--ok); stroke-width: 3; stroke-linecap: round; fill: none; transition: all 0.3s ease; }
-.diag-line { stroke: var(--principal, #D4700A); stroke-width: 3; stroke-linecap: round; fill: none; }
+.diag-line { stroke: var(--principal, #1B4F8A); stroke-width: 3; stroke-linecap: round; fill: none; }
 .diag-line.adding { stroke-dasharray: 4 4; opacity: 0.5; }
 .node { fill: #222; stroke: #fff; stroke-width: 1.5; }
 .node-fixed { fill: #444; }
 
 .cuad-clickable {
   cursor: pointer;
-  fill: rgba(212,112,10,0.05);
-  stroke: rgba(212,112,10,0.3);
+  fill: rgba(27,79,138,0.05);
+  stroke: rgba(27,79,138,0.3);
   stroke-width: 1.5;
   stroke-dasharray: 3 3;
   transition: all 0.15s;
 }
 .cuad-clickable:hover {
-  fill: rgba(212,112,10,0.18);
+  fill: rgba(27,79,138,0.18);
   stroke-dasharray: 0;
 }
 .cuad-triangulado .cuad-clickable {
@@ -787,7 +787,7 @@ actualizarHudNave();
 
 <footer style="text-align:center; padding:2rem 1rem 1rem; color:#888; font-size:0.85rem;">
   <p>📐 Triangulador · TyD 2º ESO · Unidad 3</p>
-  <p><a href="../index.html" style="color:#D4700A; text-decoration:none;">← Volver al hub de la unidad</a></p>
+  <p><a href="../index.html" style="color:#1B4F8A; text-decoration:none;">← Volver al hub de la unidad</a></p>
   <p style="margin-top:8px; font-family:'JetBrains Mono', monospace; font-size:0.72rem; opacity:0.6;">v1.0</p>
 </footer>
 

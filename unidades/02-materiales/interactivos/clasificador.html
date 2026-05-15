@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#D4700A">
+<meta name="theme-color" content="#1B4F8A">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
 <title>Clasificador de materiales · U02 · TyD 2º ESO</title>
 <meta name="description" content="Interactivo del clasificador de materiales: 30 objetos cotidianos en 6 familias. Explora primero, clasifica después. TyD 2º ESO.">
@@ -63,9 +63,9 @@
   transition: all 0.15s;
 }
 .modo-toggle button.active {
-  background: var(--principal, #D4700A);
+  background: var(--principal, #1B4F8A);
   color: #fff;
-  box-shadow: 0 2px 6px rgba(212,112,10,0.3);
+  box-shadow: 0 2px 6px rgba(27,79,138,0.3);
 }
 
 /* ════ TARJETAS BASE ════ */
@@ -81,9 +81,9 @@
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 1.3rem;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
   margin: 0 0 0.5rem;
-  border-bottom: 2px solid var(--principal, #D4700A);
+  border-bottom: 2px solid var(--principal, #1B4F8A);
   padding-bottom: 0.4rem;
 }
 .bloque p.descripcion {
@@ -116,8 +116,8 @@
 }
 .fam-filtros button:hover { border-color: #aaa; }
 .fam-filtros button.active {
-  background: var(--principal, #D4700A);
-  border-color: var(--principal, #D4700A);
+  background: var(--principal, #1B4F8A);
+  border-color: var(--principal, #1B4F8A);
   color: #fff;
 }
 .fam-filtros .dot {
@@ -145,11 +145,11 @@
 }
 .obj-card:hover {
   transform: translateY(-2px);
-  border-color: var(--principal, #D4700A);
-  box-shadow: 0 4px 14px rgba(212,112,10,0.15);
+  border-color: var(--principal, #1B4F8A);
+  box-shadow: 0 4px 14px rgba(27,79,138,0.15);
 }
 .obj-card.active {
-  border-color: var(--principal, #D4700A);
+  border-color: var(--principal, #1B4F8A);
   background: #fff7eb;
 }
 .obj-card .obj-emoji {
@@ -187,7 +187,7 @@
 .ficha {
   background: #fff;
   border: 1px solid #e0e0e0;
-  border-left: 5px solid var(--principal, #D4700A);
+  border-left: 5px solid var(--principal, #1B4F8A);
   border-radius: 12px;
   padding: 1.4rem 1.6rem;
   margin: 1rem 0;
@@ -243,7 +243,7 @@
 .ficha-item h4 {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 0.78rem;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
   margin: 0 0 4px;
   letter-spacing: 0.6px;
   text-transform: uppercase;
@@ -295,7 +295,7 @@
 }
 .cl-hud .hud-item strong {
   font-size: 1.4rem;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
   font-weight: 700;
 }
 .cl-hud .hud-item.aciertos strong { color: var(--ok); }
@@ -309,14 +309,14 @@
 }
 .cl-hud .hud-progress .bar {
   height: 100%;
-  background: linear-gradient(90deg, var(--principal, #D4700A), #f0a040);
+  background: linear-gradient(90deg, var(--principal, #1B4F8A), #f0a040);
   transition: width 0.3s;
   width: 0%;
 }
 
 .cl-obj {
   background: #fff;
-  border: 2px solid var(--principal, #D4700A);
+  border: 2px solid var(--principal, #1B4F8A);
   border-radius: 14px;
   padding: 2rem 1.6rem;
   text-align: center;
@@ -372,7 +372,7 @@
 }
 .cl-bt .bt-em { font-size: 1.6rem; line-height: 1; }
 .cl-bt:hover {
-  border-color: var(--principal, #D4700A);
+  border-color: var(--principal, #1B4F8A);
   background: #fff7eb;
 }
 .cl-bt:disabled {
@@ -430,7 +430,7 @@
   margin-top: 0.6rem;
 }
 .btn-primary {
-  background: var(--principal, #D4700A);
+  background: var(--principal, #1B4F8A);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -459,7 +459,7 @@
 /* ════ RESULTADO FINAL ════ */
 .resultado {
   background: linear-gradient(135deg, #fff7eb, #ffeed4);
-  border: 2px solid var(--principal, #D4700A);
+  border: 2px solid var(--principal, #1B4F8A);
   border-radius: 14px;
   padding: 1.8rem;
   margin: 1.4rem 0;
@@ -475,7 +475,7 @@
 .resultado h3 {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 1.8rem;
-  color: var(--principal, #D4700A);
+  color: var(--principal, #1B4F8A);
   margin: 0 0 6px;
 }
 .resultado .res-score {
@@ -908,7 +908,7 @@ renderGaleria();
 
 <footer style="text-align:center; padding:2rem 1rem 1rem; color:#888; font-size:0.85rem;">
   <p>🗂️ Clasificador de materiales · TyD 2º ESO · Unidad 2</p>
-  <p><a href="../index.html" style="color:#D4700A; text-decoration:none;">← Volver al hub de la unidad</a></p>
+  <p><a href="../index.html" style="color:#1B4F8A; text-decoration:none;">← Volver al hub de la unidad</a></p>
   <p style="margin-top:8px; font-family:'JetBrains Mono', monospace; font-size:0.72rem; opacity:0.6;">v1.0</p>
 </footer>
 
