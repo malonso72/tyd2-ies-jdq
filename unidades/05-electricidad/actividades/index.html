@@ -164,19 +164,28 @@ details.solution summary{cursor:pointer;padding:14px 18px;font-weight:700;color:
         <div class="steps">
           <div class="step">Sustituimos las dos resistencias en serie por <b>una sola</b> de valor R<sub>eq</sub> = 6 Ω. La pila de 12 V se queda igual.</div>
           <div class="step" style="text-align:center;background:#fff;padding:14px;border:1px solid var(--line)">
-            <svg viewBox="0 0 320 100" style="max-width:260px;height:auto">
-              <line x1="40" y1="50" x2="40" y2="30" stroke="#333" stroke-width="2"/>
-              <line x1="30" y1="30" x2="50" y2="30" stroke="#333" stroke-width="3"/>
-              <line x1="35" y1="40" x2="45" y2="40" stroke="#333" stroke-width="2"/>
-              <text x="15" y="35" font-size="11" font-family="sans-serif">12 V</text>
-              <line x1="40" y1="40" x2="40" y2="50" stroke="#333" stroke-width="2"/>
-              <line x1="40" y1="50" x2="120" y2="50" stroke="#333" stroke-width="2"/>
-              <rect x="120" y="40" width="80" height="20" fill="#FFE8A8" stroke="#333" stroke-width="2"/>
-              <text x="160" y="55" font-size="12" text-anchor="middle" font-family="sans-serif" font-weight="bold">6 Ω</text>
-              <line x1="200" y1="50" x2="280" y2="50" stroke="#333" stroke-width="2"/>
-              <line x1="40" y1="50" x2="40" y2="80" stroke="#333" stroke-width="2"/>
-              <line x1="40" y1="80" x2="280" y2="80" stroke="#333" stroke-width="2"/>
-              <line x1="280" y1="50" x2="280" y2="80" stroke="#333" stroke-width="2"/>
+            <svg viewBox="0 0 360 200" style="max-width:320px;height:auto;display:block;margin:0 auto">
+              <!-- Cable superior izquierdo -->
+              <line x1="60" y1="100" x2="60" y2="50" stroke="#222" stroke-width="2.5"/>
+              <line x1="60" y1="50" x2="140" y2="50" stroke="#222" stroke-width="2.5"/>
+              <!-- Resistencia (zig-zag estilo americano + rectángulo) -->
+              <rect x="140" y="38" width="80" height="24" rx="2" fill="#FFE8A8" stroke="#222" stroke-width="2"/>
+              <text x="180" y="55" font-size="13" text-anchor="middle" font-family="sans-serif" font-weight="bold" fill="#222">6 Ω</text>
+              <!-- Cable superior derecho -->
+              <line x1="220" y1="50" x2="300" y2="50" stroke="#222" stroke-width="2.5"/>
+              <!-- Cable lateral derecho -->
+              <line x1="300" y1="50" x2="300" y2="150" stroke="#222" stroke-width="2.5"/>
+              <!-- Cable inferior -->
+              <line x1="300" y1="150" x2="60" y2="150" stroke="#222" stroke-width="2.5"/>
+              <!-- Cable inferior izquierdo (hacia la pila) -->
+              <line x1="60" y1="150" x2="60" y2="120" stroke="#222" stroke-width="2.5"/>
+              <!-- Pila (vertical, lado izquierdo) - línea larga arriba (+), corta abajo (-) -->
+              <line x1="42" y1="105" x2="78" y2="105" stroke="#222" stroke-width="3"/>
+              <line x1="52" y1="115" x2="68" y2="115" stroke="#222" stroke-width="2.5"/>
+              <!-- Etiqueta voltaje -->
+              <text x="20" y="112" font-size="13" font-family="sans-serif" font-weight="bold" fill="#1B4F8A">12 V</text>
+              <text x="83" y="103" font-size="11" font-family="sans-serif" fill="#222">+</text>
+              <text x="83" y="121" font-size="11" font-family="sans-serif" fill="#222">−</text>
             </svg>
           </div>
         </div>
@@ -229,202 +238,29 @@ details.solution summary{cursor:pointer;padding:14px 18px;font-weight:700;color:
         <div class="steps">
           <div class="step">Sustituimos las tres resistencias en serie por <b>una sola</b> de R<sub>eq</sub> = 12 Ω. La pila de 24 V se queda igual.</div>
           <div class="step" style="text-align:center;background:#fff;padding:14px;border:1px solid var(--line)">
-            <svg viewBox="0 0 320 100" style="max-width:260px;height:auto">
-              <line x1="40" y1="50" x2="40" y2="30" stroke="#333" stroke-width="2"/>
-              <line x1="30" y1="30" x2="50" y2="30" stroke="#333" stroke-width="3"/>
-              <line x1="35" y1="40" x2="45" y2="40" stroke="#333" stroke-width="2"/>
-              <text x="15" y="35" font-size="11" font-family="sans-serif">24 V</text>
-              <line x1="40" y1="40" x2="40" y2="50" stroke="#333" stroke-width="2"/>
-              <line x1="40" y1="50" x2="120" y2="50" stroke="#333" stroke-width="2"/>
-              <rect x="120" y="40" width="80" height="20" fill="#FFE8A8" stroke="#333" stroke-width="2"/>
-              <text x="160" y="55" font-size="12" text-anchor="middle" font-family="sans-serif" font-weight="bold">12 Ω</text>
-              <line x1="200" y1="50" x2="280" y2="50" stroke="#333" stroke-width="2"/>
-              <line x1="40" y1="50" x2="40" y2="80" stroke="#333" stroke-width="2"/>
-              <line x1="40" y1="80" x2="280" y2="80" stroke="#333" stroke-width="2"/>
-              <line x1="280" y1="50" x2="280" y2="80" stroke="#333" stroke-width="2"/>
-            </svg>
-          </div>
-        </div>
-        <h4>c) Intensidad total</h4>
-        <div class="steps">
-          <div class="step">Ley de Ohm sobre el circuito completo: I = V / R<sub>eq</sub>.</div>
-          <div class="step">Sustituimos: I = 24 / 12 = <b>2 A</b>.</div>
-        </div>
-        <h4>d) Intensidad por cada resistencia</h4>
-        <div class="steps">
-          <div class="step">En serie, la corriente es la misma en todo el recorrido (un solo camino).</div>
-          <div class="step">I (R₁) = I (R₂) = I (R₃) = <b>2 A</b>.</div>
-        </div>
-      </div></details>
-    </article>
-
-    <!-- ============== BLOQUE 3 ============== -->
-    <div class="bloque-titulo">Bloque 3 · Resistencias en paralelo</div>
-    <div class="bloque-sub">En paralelo usamos la fórmula del <b>producto sobre la suma</b>:<br><b>R<sub>eq</sub> = (R₁ · R₂) / (R₁ + R₂)</b>. Para tres resistencias, aplicamos la misma fórmula <b>dos veces</b>.</div>
-
-    <article class="activity-card">
-      <div class="activity-head"><span class="activity-num">Ej. 6</span><div><h2>Dos resistencias en paralelo</h2><p class="note">Aplica la fórmula del producto sobre la suma.</p></div></div>
-      <div class="schema" id="sch6"></div>
-      <div class="statement">Dos resistencias de <b>R₁ = 6 Ω</b> y <b>R₂ = 3 Ω</b> están conectadas en paralelo a una pila de <b>12 V</b>.</div>
-      <div class="data-row"><span class="data-pill">R₁ = 6 Ω</span><span class="data-pill">R₂ = 3 Ω</span><span class="data-pill">V = 12 V</span></div>
-
-      <div class="subactivity">
-        <h3>a) Calcula la resistencia equivalente.</h3>
-        <div class="answer-box"><input id="ans6a" type="text" inputmode="decimal" placeholder="Resistencia equivalente"><span class="unit-label">Ω</span><button class="check-btn" onclick="checkAnswer('ans6a', 2, 0.05)">Comprobar</button></div>
-        <div id="fb-ans6a" class="feedback"></div>
-      </div>
-      <div class="subactivity">
-        <h3>b) Calcula la intensidad total que entrega la pila.</h3>
-        <div class="answer-box"><input id="ans6b" type="text" inputmode="decimal" placeholder="Intensidad total"><span class="unit-label">A</span><button class="check-btn" onclick="checkAnswer('ans6b', 6, 0.05)">Comprobar</button></div>
-        <div id="fb-ans6b" class="feedback"></div>
-      </div>
-
-      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body">
-        <h4>a) Resistencia equivalente</h4>
-        <div class="steps">
-          <div class="step">Fórmula del producto sobre la suma: R<sub>eq</sub> = (R₁ · R₂) / (R₁ + R₂).</div>
-          <div class="step">Sustituimos arriba: R₁ · R₂ = 6 · 3 = 18.</div>
-          <div class="step">Sustituimos abajo: R₁ + R₂ = 6 + 3 = 9.</div>
-          <div class="step">Dividimos: R<sub>eq</sub> = 18 / 9 = 2 Ω. ⚠️ Observa que <b>la R<sub>eq</sub> es menor</b> que cualquiera de las dos resistencias originales (siempre ocurre en paralelo).</div>
-        </div>
-        <h4>b) Intensidad total</h4>
-        <div class="steps">
-          <div class="step">Ley de Ohm aplicada al conjunto: I = V / R<sub>eq</sub>.</div>
-          <div class="step">Sustituimos: I = 12 / 2 = 6 A.</div>
-          <div class="step">Resultado: <b>I = 6 A</b>. Esta es la intensidad <b>total</b> que sale de la pila; luego se reparte entre las dos ramas.</div>
-        </div>
-      </div></details>
-    </article>
-
-
-    <!-- ============== BLOQUE 4 — BONUS ============== -->
-    <div class="bloque-titulo">Bloque 4 · Potencia eléctrica</div>
-    <div class="bloque-sub">Aplica la fórmula <b>P = V · I</b> en las tres formas posibles: calcular P, despejar I, despejar V.</div>
-
-    <article class="activity-card">
-      <div class="activity-head"><span class="activity-num">Ej. 8</span><div><h2>Calcular la potencia eléctrica</h2><p class="note">Aplica P = V · I.</p></div></div>
-      <div class="statement">Una bombilla está conectada a <b>230 V</b> y por ella circula una intensidad de <b>0,3 A</b>. ¿Cuál es la potencia que consume?</div>
-      <div class="data-row"><span class="data-pill">V = 230 V</span><span class="data-pill">I = 0,3 A</span><span class="data-pill">P = ?</span></div>
-      <div class="answer-box"><input id="ans8" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">W</span><button class="check-btn" onclick="checkAnswer('ans8', 69, 0.5)">Comprobar</button></div>
-      <div id="fb-ans8" class="feedback"></div>
-      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
-        <div class="step">Fórmula: P = V · I.</div>
-        <div class="step">Sustituimos: P = 230 · 0,3.</div>
-        <div class="step">P = 69 W.</div>
-        <div class="step">Resultado: <b>P = 69 W</b>.</div>
-      </div></div></details>
-    </article>
-
-    <article class="activity-card">
-      <div class="activity-head"><span class="activity-num">Ej. 9</span><div><h2>Calcular la intensidad a partir de la potencia</h2><p class="note">Despeja I de P = V · I → I = P / V.</p></div></div>
-      <div class="statement">Una bombilla de <b>60 W</b> está conectada a la red eléctrica de <b>230 V</b>. ¿Qué intensidad circula por ella?</div>
-      <div class="data-row"><span class="data-pill">P = 60 W</span><span class="data-pill">V = 230 V</span><span class="data-pill">I = ?</span></div>
-      <div class="answer-box"><input id="ans9" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">A</span><button class="check-btn" onclick="checkAnswer('ans9', 0.26, 0.02)">Comprobar</button></div>
-      <div id="fb-ans9" class="feedback"></div>
-      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
-        <div class="step">Fórmula: P = V · I.</div>
-        <div class="step">Despejamos I: I = P / V.</div>
-        <div class="step">Sustituimos: I = 60 / 230 ≈ <b>0,26 A</b>.</div>
-        <div class="step">Resultado: por la bombilla circulan unos <b>260 mA</b>. Una bombilla LED equivalente consumiría unas 5 veces menos.</div>
-      </div></div></details>
-    </article>
-
-    <article class="activity-card">
-      <div class="activity-head"><span class="activity-num">Ej. 10</span><div><h2>Calcular la tensión a partir de la potencia</h2><p class="note">Despeja V de P = V · I → V = P / I.</p></div></div>
-      <div class="statement">Un radiador eléctrico consume una potencia de <b>1500 W</b> y por él circula una intensidad de <b>6,5 A</b>. ¿A qué tensión está conectado?</div>
-      <div class="data-row"><span class="data-pill">P = 1500 W</span><span class="data-pill">I = 6,5 A</span><span class="data-pill">V = ?</span></div>
-      <div class="answer-box"><input id="ans10" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">V</span><button class="check-btn" onclick="checkAnswer('ans10', 230.77, 1)">Comprobar</button></div>
-      <div id="fb-ans10" class="feedback"></div>
-      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
-        <div class="step">Fórmula: P = V · I.</div>
-        <div class="step">Despejamos V: V = P / I.</div>
-        <div class="step">Sustituimos: V = 1500 / 6,5 ≈ <b>230,77 V</b>.</div>
-        <div class="step">Resultado: está conectado a la red eléctrica doméstica (los 230 V de toda la vida).</div>
-      </div></div></details>
-    </article>
-
-
-
-  </div>
-  <div class="bg">
-    <a href="../index.html" class="bc"><span class="bi">⬅️</span><span class="bk">Volver a Electricidad</span><span class="bn">Libro digital, interactivos y proyecto</span></a>
-    <a href="../interactivos/cgmp.html" class="bc"><span class="bi">⚡</span><span class="bk">Cuadro de la vivienda</span><span class="bn">Simulación interactiva del CGMP</span></a>
-    <a href="https://educacionadistancia.juntadeandalucia.es/centros/granada/login/index.php" class="bc tipo-tool" target="_blank"><span class="bi">📤</span><span class="bk">Entrega Moodle</span><span class="bn">Subir evidencias o consultar la tarea</span></a>
-  </div>
-</div>
-</div>
-
-<script>
-/* ============================================================
-   ESQUEMAS SVG · símbolos eléctricos didácticos
-   Flecha I siempre presente · sentido convencional (+→−)
-============================================================ */
-
-const wireStyle = 'stroke="#1a2238" stroke-width="2.5" fill="none" stroke-linecap="round"';
-const battStyle = 'stroke="#1a2238" stroke-width="3" stroke-linecap="round"';
-const labelStyle = 'font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="#1a2238"';
-const labelSmall = 'font-family="JetBrains Mono, monospace" font-size="11" fill="#4a5568"';
-
-// Pila vertical (en cable izquierdo): + arriba (línea larga), − abajo (línea corta)
-function pila(cx, cy, V){
-  return `
-    <line x1="${cx-18}" y1="${cy-5}" x2="${cx+18}" y2="${cy-5}" ${battStyle}/>
-    <line x1="${cx-10}" y1="${cy+5}" x2="${cx+10}" y2="${cy+5}" ${battStyle}/>
-    <text x="${cx-26}" y="${cy-2}" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="14" font-weight="700" fill="#b3261e">+</text>
-    <text x="${cx-26}" y="${cy+13}" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="14" font-weight="700" fill="#1a2238">−</text>
-    <text x="${cx+24}" y="${cy+4}" ${labelStyle}>${V}</text>
-  `;
-}
-
-// Resistencia horizontal entre (x1, y) y (x2, y)
-function resistenciaH(x1, x2, y, etiqueta){
-  const w = x2 - x1, cx = (x1+x2)/2;
-  return `
-    <rect x="${x1}" y="${y-10}" width="${w}" height="20" fill="#fff" stroke="#1a2238" stroke-width="2"/>
-    <text x="${cx}" y="${y-15}" text-anchor="middle" ${labelStyle}>${etiqueta}</text>
-  `;
-}
-
-// Interruptor horizontal en (cx, cy) — cerrado, palanca inclinada
-function interruptor(cx, cy){
-  return `
-    <circle cx="${cx-15}" cy="${cy}" r="3" fill="#1a2238"/>
-    <circle cx="${cx+15}" cy="${cy}" r="3" fill="#1a2238"/>
-    <line x1="${cx-13}" y1="${cy}" x2="${cx+13}" y2="${cy-7}" stroke="#1a2238" stroke-width="2" stroke-linecap="round"/>
-    <text x="${cx}" y="${cy+18}" text-anchor="middle" ${labelSmall}>interruptor</text>
-  `;
-}
-
-// Flecha de intensidad horizontal · sentido convencional (izq→dch en cable superior)
-function flechaI(x1, x2, y, label){
-  const cx = (x1+x2)/2;
-  return `
-    <line x1="${x1}" y1="${y}" x2="${x2-5}" y2="${y}" stroke="#1B4F8A" stroke-width="2" stroke-linecap="round"/>
-    <polygon points="${x2-5},${y-4} ${x2},${y} ${x2-5},${y+4}" fill="#1B4F8A"/>
-    <text x="${cx}" y="${y-6}" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" font-weight="700" fill="#1B4F8A">${label}</text>
-  `;
-}
-
-// Construye el label de la flecha: "I = ?" o "I = <valor>"
-function labelI(I){ return I === '?' ? 'I = ?' : 'I = ' + I; }
-
-/* 1) SIMPLE — pila, interruptor, 1 resistencia */
-function svgSimple(R, V, I){
-  return `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" style="max-width:340px">
-    <g ${wireStyle}>
-      <path d="M 40 40 L 110 40"/>
-      <path d="M 210 40 L 280 40"/>
-      <path d="M 280 40 L 280 160"/>
-      <path d="M 280 160 L 180 160"/>
-      <path d="M 150 160 L 40 160"/>
-      <path d="M 40 160 L 40 110"/>
-      <path d="M 40 90 L 40 40"/>
-    </g>
-    ${pila(40, 100, V)}
-    ${resistenciaH(110, 210, 40, R)}
-    ${interruptor(165, 160)}
-    ${flechaI(50, 105, 22, labelI(I))}
-  </svg>`;
+            <svg viewBox="0 0 360 200" style="max-width:320px;height:auto;display:block;margin:0 auto">
+              <!-- Cable superior izquierdo -->
+              <line x1="60" y1="100" x2="60" y2="50" stroke="#222" stroke-width="2.5"/>
+              <line x1="60" y1="50" x2="140" y2="50" stroke="#222" stroke-width="2.5"/>
+              <!-- Resistencia (zig-zag estilo americano + rectángulo) -->
+              <rect x="140" y="38" width="80" height="24" rx="2" fill="#FFE8A8" stroke="#222" stroke-width="2"/>
+              <text x="180" y="55" font-size="13" text-anchor="middle" font-family="sans-serif" font-weight="bold" fill="#222">6 Ω</text>
+              <!-- Cable superior derecho -->
+              <line x1="220" y1="50" x2="300" y2="50" stroke="#222" stroke-width="2.5"/>
+              <!-- Cable lateral derecho -->
+              <line x1="300" y1="50" x2="300" y2="150" stroke="#222" stroke-width="2.5"/>
+              <!-- Cable inferior -->
+              <line x1="300" y1="150" x2="60" y2="150" stroke="#222" stroke-width="2.5"/>
+              <!-- Cable inferior izquierdo (hacia la pila) -->
+              <line x1="60" y1="150" x2="60" y2="120" stroke="#222" stroke-width="2.5"/>
+              <!-- Pila (vertical, lado izquierdo) - línea larga arriba (+), corta abajo (-) -->
+              <line x1="42" y1="105" x2="78" y2="105" stroke="#222" stroke-width="3"/>
+              <line x1="52" y1="115" x2="68" y2="115" stroke="#222" stroke-width="2.5"/>
+              <!-- Etiqueta voltaje -->
+              <text x="20" y="112" font-size="13" font-family="sans-serif" font-weight="bold" fill="#1B4F8A">12 V</text>
+              <text x="83" y="103" font-size="11" font-family="sans-serif" fill="#222">+</text>
+              <text x="83" y="121" font-size="11" font-family="sans-serif" fill="#222">−</text>
+            </svg>`;
 }
 
 /* 2) SERIE 2R */
