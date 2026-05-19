@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#1B4F8A">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
 <title>Actividades resueltas · Electricidad · TyD 2º ESO</title>
-<meta name="description" content="Actividades resueltas guiadas: Ley de Ohm, resistencias en serie y paralelo, potencia, energía y cálculos del CGMP de una vivienda.">
+<meta name="description" content="Actividades resueltas guiadas: Ley de Ohm, resistencias en serie y paralelo, potencia y energía.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -232,47 +232,10 @@ details.solution summary{cursor:pointer;padding:14px 18px;font-weight:700;color:
       </div></details>
     </article>
 
-    <article class="activity-card">
-      <div class="activity-head"><span class="activity-num">Ej. 7</span><div><h2>Tres resistencias en paralelo</h2><p class="note">Aplicamos la fórmula del producto sobre la suma <b>dos veces</b>: primero asociamos R₁ con R₂, y luego ese resultado con R₃.</p></div></div>
-      <div class="schema" id="sch7"></div>
-      <div class="statement">Tres resistencias de <b>R₁ = 6 Ω</b>, <b>R₂ = 3 Ω</b> y <b>R₃ = 2 Ω</b> están conectadas en paralelo a una pila de <b>12 V</b>.</div>
-      <div class="data-row"><span class="data-pill">R₁ = 6 Ω</span><span class="data-pill">R₂ = 3 Ω</span><span class="data-pill">R₃ = 2 Ω</span><span class="data-pill">V = 12 V</span></div>
-
-      <div class="subactivity">
-        <h3>a) Calcula la resistencia equivalente aplicando dos veces la fórmula del producto sobre la suma.</h3>
-        <div class="answer-box"><input id="ans7a" type="text" inputmode="decimal" placeholder="Resistencia equivalente"><span class="unit-label">Ω</span><button class="check-btn" onclick="checkAnswer('ans7a', 1, 0.05)">Comprobar</button></div>
-        <div id="fb-ans7a" class="feedback"></div>
-      </div>
-      <div class="subactivity">
-        <h3>b) Calcula la intensidad total que entrega la pila.</h3>
-        <div class="answer-box"><input id="ans7b" type="text" inputmode="decimal" placeholder="Intensidad total"><span class="unit-label">A</span><button class="check-btn" onclick="checkAnswer('ans7b', 12, 0.1)">Comprobar</button></div>
-        <div id="fb-ans7b" class="feedback"></div>
-      </div>
-
-      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body">
-        <h4>a) Resistencia equivalente — método de asociar de dos en dos</h4>
-        <div class="steps">
-          <div class="step"><b>Paso 1.</b> Asociamos primero R₁ y R₂ con la fórmula del producto sobre la suma:<br>R₁₂ = (R₁ · R₂) / (R₁ + R₂) = (6 · 3) / (6 + 3) = 18 / 9 = <b>2 Ω</b>.</div>
-          <div class="step"><b>Paso 2.</b> Ahora asociamos ese resultado (R₁₂ = 2 Ω) con R₃ = 2 Ω, aplicando la misma fórmula:<br>R<sub>eq</sub> = (R₁₂ · R₃) / (R₁₂ + R₃) = (2 · 2) / (2 + 2) = 4 / 4 = <b>1 Ω</b>.</div>
-          <div class="step">Resultado: <b>R<sub>eq</sub> = 1 Ω</b>.</div>
-        </div>
-        <h4>b) Intensidad total</h4>
-        <div class="steps">
-          <div class="step">Ley de Ohm: I = V / R<sub>eq</sub>.</div>
-          <div class="step">Sustituimos: I = 12 / 1 = 12 A.</div>
-          <div class="step">Resultado: <b>I = 12 A</b>. Cuantas más resistencias añades en paralelo, <b>más intensidad</b> pide el circuito (la R<sub>eq</sub> baja). Por eso si conectas muchos aparatos a la vez en casa salta el PIA.</div>
-        </div>
-        <div class="aplicacion">
-          <h3>🔎 Aplicación: comprobación con la fórmula general</h3>
-          <p>La fórmula general para cualquier número de resistencias en paralelo es <b>1/R<sub>eq</sub> = 1/R₁ + 1/R₂ + 1/R₃</b>. Vamos a comprobar que sale lo mismo:</p>
-          <p style="margin-top:8px">1/R<sub>eq</sub> = 1/6 + 1/3 + 1/2 = 1/6 + 2/6 + 3/6 = 6/6 = 1. Por tanto <b>R<sub>eq</sub> = 1 Ω</b> ✓. Cuando dominas las fracciones, esta fórmula general es más rápida; mientras tanto, asociar de dos en dos funciona igual de bien.</p>
-        </div>
-      </div></details>
-    </article>
 
     <!-- ============== BLOQUE 4 — BONUS ============== -->
-    <div class="bloque-titulo">Bloque 4 · Potencia, energía y coste</div>
-    <div class="bloque-sub">Aplica las fórmulas <b>P = V · I</b>, <b>E = P · t</b> y el cálculo del coste eléctrico.</div>
+    <div class="bloque-titulo">Bloque 4 · Potencia y energía</div>
+    <div class="bloque-sub">Aplica las fórmulas <b>P = V · I</b>, <b>P = I² · R</b> y <b>E = P · t</b>.</div>
 
     <article class="activity-card">
       <div class="activity-head"><span class="activity-num">Ej. 8</span><div><h2>Calcular la potencia eléctrica</h2><p class="note">Aplica P = V · I.</p></div></div>
@@ -316,133 +279,7 @@ details.solution summary{cursor:pointer;padding:14px 18px;font-weight:700;color:
       </div></div></details>
     </article>
 
-    <article class="activity-card">
-      <div class="activity-head"><span class="activity-num">Ej. 11</span><div><h2>Coste de la energía consumida</h2><p class="note">Multiplica energía por precio.</p></div></div>
-      <div class="statement">El horno del ejercicio anterior consume <b>3 kWh</b>. Si la electricidad cuesta <b>0,20 €/kWh</b>, ¿cuánto cuesta su uso?</div>
-      <div class="data-row"><span class="data-pill">E = 3 kWh</span><span class="data-pill">Precio = 0,20 €/kWh</span><span class="data-pill">Coste = ?</span></div>
-      <div class="answer-box"><input id="ans11" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">€</span><button class="check-btn" onclick="checkAnswer('ans11', 0.6, 0.02)">Comprobar</button></div>
-      <div id="fb-ans11" class="feedback"></div>
-      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
-        <div class="step">Fórmula: Coste = E · precio.</div>
-        <div class="step">Sustituimos: Coste = 3 · 0,20.</div>
-        <div class="step">Coste = 0,60 €.</div>
-        <div class="step">Resultado: <b>Coste = 0,60 €</b>.</div>
-      </div></div></details>
-    </article>
 
-    <!-- ============== BLOQUE 5 — CGMP ============== -->
-    <div class="bloque-titulo">Bloque 5 · Cálculos del cuadro CGMP</div>
-    <div class="bloque-sub">Aplica las fórmulas a situaciones reales de tu vivienda. Recuerda: <b>V = 230 V</b> (red doméstica española).</div>
-
-    <article class="activity-card">
-      <div class="activity-head"><span class="activity-num">Ej. 12</span><div><h2>Intensidad que pide la vitrocerámica</h2><p class="note">Aplica la fórmula despejando I.</p></div></div>
-      <div class="statement">La vitrocerámica de tu casa consume <b>3 500 W</b> y está conectada a la red de <b>230 V</b>. Calcula la intensidad de corriente que circula por el circuito C3.</div>
-      <div class="data-row"><span class="data-pill">P = 3500 W</span><span class="data-pill">V = 230 V</span><span class="data-pill">I = ?</span></div>
-      <div class="answer-box"><input id="ans12" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">A</span><button class="check-btn" onclick="checkAnswer('ans12', 15.22, 0.1)">Comprobar</button></div>
-      <div id="fb-ans12" class="feedback"></div>
-      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
-        <div class="step">Partimos de la fórmula de la potencia: P = V · I.</div>
-        <div class="step">Despejamos la intensidad: I = P / V.</div>
-        <div class="step">Sustituimos: I = 3500 / 230 ≈ 15,22 A.</div>
-        <div class="step">Resultado: I ≈ 15,22 A. El circuito C3 lleva un PIA de 25 A, así que <b>no salta</b>: la vitro pide 15,22 A y el PIA aguanta hasta 25 A.</div>
-      </div></div></details>
-    </article>
-
-    <article class="activity-card">
-      <div class="activity-head"><span class="activity-num">Ej. 13</span><div><h2>Plancha en el circuito de enchufes</h2><p class="note">Comprueba si el PIA de C2 aguanta.</p></div></div>
-      <div class="statement">Enchufas una <b>plancha de 2 000 W</b> en un enchufe del circuito C2, protegido por un PIA de <b>16 A</b>. Calcula la intensidad que circula. (V = 230 V)</div>
-      <div class="data-row"><span class="data-pill">P = 2000 W</span><span class="data-pill">V = 230 V</span><span class="data-pill">PIA = 16 A</span><span class="data-pill">I = ?</span></div>
-      <div class="answer-box"><input id="ans13" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">A</span><button class="check-btn" onclick="checkAnswer('ans13', 8.70, 0.1)">Comprobar</button></div>
-      <div id="fb-ans13" class="feedback"></div>
-      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
-        <div class="step">Fórmula: I = P / V.</div>
-        <div class="step">Sustituimos: I = 2000 / 230 ≈ 8,70 A.</div>
-        <div class="step">Comparamos con el PIA: 8,70 A &lt; 16 A.</div>
-        <div class="step">Resultado: I ≈ 8,70 A. La plancha sola <b>no hace saltar</b> el PIA C2, pero si añades el secador (otros 8 A) sí saltaría.</div>
-      </div></div></details>
-    </article>
-
-    <article class="activity-card">
-      <div class="activity-head"><span class="activity-num">Ej. 14</span><div><h2>Potencia máxima de un PIA de 16 A</h2><p class="note">Calcula el "techo" de cada circuito.</p></div></div>
-      <div class="statement">Un circuito está protegido por un PIA de <b>16 A</b>. ¿Cuál es la potencia máxima que puede consumir ese circuito sin que el PIA salte? (V = 230 V)</div>
-      <div class="data-row"><span class="data-pill">I = 16 A</span><span class="data-pill">V = 230 V</span><span class="data-pill">P máx = ?</span></div>
-      <div class="answer-box"><input id="ans14" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">W</span><button class="check-btn" onclick="checkAnswer('ans14', 3680, 10)">Comprobar</button></div>
-      <div id="fb-ans14" class="feedback"></div>
-      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
-        <div class="step">Aplicamos la fórmula de la potencia: P = V · I.</div>
-        <div class="step">Sustituimos con el valor máximo: P = 230 · 16 = 3 680 W.</div>
-        <div class="step">Resultado: P máx ≈ 3 680 W. Si conectas aparatos que sumen más que eso en C2, el PIA saltará por sobrecarga.</div>
-      </div></div></details>
-    </article>
-
-    <article class="activity-card">
-      <div class="activity-head"><span class="activity-num">Ej. 15</span><div><h2>Suma de potencias</h2><p class="note">Cuánto consumes en este momento.</p></div></div>
-      <div class="statement">En tu casa están encendidos a la vez: <b>frigorífico (250 W)</b>, <b>televisor (150 W)</b>, <b>lavadora (2 200 W)</b> y <b>microondas (900 W)</b>. ¿Cuánta potencia total estás consumiendo?</div>
-      <div class="data-row"><span class="data-pill">Frigo 250 W</span><span class="data-pill">TV 150 W</span><span class="data-pill">Lavadora 2200 W</span><span class="data-pill">Micro 900 W</span></div>
-      <div class="answer-box"><input id="ans15" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">W</span><button class="check-btn" onclick="checkAnswer('ans15', 3500, 5)">Comprobar</button></div>
-      <div id="fb-ans15" class="feedback"></div>
-      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
-        <div class="step">La potencia total es la suma de las potencias de cada aparato.</div>
-        <div class="step">P total = 250 + 150 + 2 200 + 900.</div>
-        <div class="step">P total = 3 500 W = 3,5 kW.</div>
-        <div class="step">Resultado: 3 500 W. Si tu casa tiene contratados 4,6 kW, estás dentro del límite.</div>
-      </div></div></details>
-    </article>
-
-    <article class="activity-card">
-      <div class="activity-head"><span class="activity-num">Ej. 16</span><div><h2>¿Salta el ICP?</h2><p class="note">Compara consumo total con la potencia contratada.</p></div></div>
-      <div class="statement">Tu vivienda tiene contratados <b>4 600 W</b>. Si pones a calentar la <b>vitrocerámica (3 500 W)</b> y el <b>horno (2 500 W)</b> a la vez, ¿qué potencia total estás pidiendo? (Después decide si salta el ICP o no.)</div>
-      <div class="data-row"><span class="data-pill">Contratada 4600 W</span><span class="data-pill">Vitro 3500 W</span><span class="data-pill">Horno 2500 W</span><span class="data-pill">P total = ?</span></div>
-      <div class="answer-box"><input id="ans16" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">W</span><button class="check-btn" onclick="checkAnswer('ans16', 6000, 5)">Comprobar</button></div>
-      <div id="fb-ans16" class="feedback"></div>
-      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
-        <div class="step">Sumamos la potencia de los dos aparatos: 3 500 + 2 500 = 6 000 W.</div>
-        <div class="step">Comparamos con la contratada: 6 000 W &gt; 4 600 W.</div>
-        <div class="step">Como pides más potencia de la contratada, <b>salta el ICP</b> y se va la luz de toda la casa.</div>
-        <div class="step">Resultado: 6 000 W. Para usar ambos a la vez tendrías que subir la contratación o no encenderlos simultáneamente.</div>
-      </div></div></details>
-    </article>
-
-    <article class="activity-card">
-      <div class="activity-head"><span class="activity-num">Ej. 17</span><div><h2>¿Cuántos vatios me quedan libres?</h2><p class="note">Margen disponible antes de saltar el ICP.</p></div></div>
-      <div class="statement">Tu casa tiene contratados <b>4 600 W</b>. Llevas conectados aparatos que suman <b>3 000 W</b>. ¿Cuántos vatios más puedes conectar antes de superar la potencia contratada?</div>
-      <div class="data-row"><span class="data-pill">Contratada 4600 W</span><span class="data-pill">Ya conectado 3000 W</span><span class="data-pill">Margen = ?</span></div>
-      <div class="answer-box"><input id="ans17" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">W</span><button class="check-btn" onclick="checkAnswer('ans17', 1600, 5)">Comprobar</button></div>
-      <div id="fb-ans17" class="feedback"></div>
-      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
-        <div class="step">El margen libre es la diferencia entre la potencia contratada y la que ya consumes.</div>
-        <div class="step">Margen = 4 600 − 3 000 = 1 600 W.</div>
-        <div class="step">Resultado: 1 600 W. Podrías encender, por ejemplo, un microondas (900 W) y un secador (600 W) sin que salte el ICP. Pero si añades una plancha (2 000 W), ¡cataplás!</div>
-      </div></div></details>
-    </article>
-
-    <article class="activity-card">
-      <div class="activity-head"><span class="activity-num">Ej. 18</span><div><h2>Energía mensual del termo</h2><p class="note">Energía = potencia × tiempo.</p></div></div>
-      <div class="statement">Un <b>termo eléctrico de 1 500 W</b> está funcionando una media de <b>3 horas al día</b>. ¿Cuánta energía consume en <b>30 días</b>? Da el resultado en <b>kWh</b>.</div>
-      <div class="data-row"><span class="data-pill">P = 1500 W = 1,5 kW</span><span class="data-pill">t = 3 h/día</span><span class="data-pill">días = 30</span><span class="data-pill">E = ?</span></div>
-      <div class="answer-box"><input id="ans18" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">kWh</span><button class="check-btn" onclick="checkAnswer('ans18', 135, 1)">Comprobar</button></div>
-      <div id="fb-ans18" class="feedback"></div>
-      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
-        <div class="step">Para usar kWh, pasamos la potencia a kilovatios: 1 500 W = 1,5 kW.</div>
-        <div class="step">Calculamos las horas totales al mes: 3 h/día · 30 días = 90 h.</div>
-        <div class="step">Energía: E = P · t = 1,5 kW · 90 h = 135 kWh.</div>
-        <div class="step">Resultado: 135 kWh al mes solo por el termo. ¡Es uno de los aparatos que más consume!</div>
-      </div></div></details>
-    </article>
-
-    <article class="activity-card">
-      <div class="activity-head"><span class="activity-num">Ej. 19</span><div><h2>Coste mensual del termo</h2><p class="note">El último paso: lo que ve tu familia en la factura.</p></div></div>
-      <div class="statement">El termo del ejercicio anterior consume <b>135 kWh al mes</b>. Si la electricidad cuesta <b>0,15 €/kWh</b>, ¿cuánto dinero se gasta al mes solo por el termo?</div>
-      <div class="data-row"><span class="data-pill">E = 135 kWh</span><span class="data-pill">Precio = 0,15 €/kWh</span><span class="data-pill">Coste = ?</span></div>
-      <div class="answer-box"><input id="ans19" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">€</span><button class="check-btn" onclick="checkAnswer('ans19', 20.25, 0.1)">Comprobar</button></div>
-      <div id="fb-ans19" class="feedback"></div>
-      <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
-        <div class="step">El coste se calcula multiplicando la energía por el precio del kWh.</div>
-        <div class="step">Coste = 135 kWh · 0,15 €/kWh.</div>
-        <div class="step">Coste = 20,25 €.</div>
-        <div class="step">Resultado: 20,25 € al mes solo por el termo. Por eso es importante <b>aislar bien el termo</b> y programarlo para que no caliente todo el día.</div>
-      </div></div></details>
-    </article>
 
   </div>
   <div class="bg">
