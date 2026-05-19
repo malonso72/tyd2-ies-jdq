@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escape Room: Apagón BlackOhm · U5 Electricidad · TyD 2º ESO</title>
+<meta name="description" content="Escape room educativo de electricidad para 2º ESO con ambientación de ciberseguridad y retos de lógica. 30-45 min.">
+<style>
+  /* ============ BASE ============ */
+  *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root{
+    --bg-0:#05080f;
+    --bg-1:#0c1424;
+    --bg-2:#172238;
+    --neon:#39ff14;
+    --neon-soft:#7cff5e;
+    --cyan:#00e5ff;
+    --amber:#ffb300;
+    --warn:#ff9100;
+    --bad:#ff3860;
+    --good:#27e08d;
+    --ink:#e6f1ff;
+    --ink-dim:#9fb3c8;
+    --ink-faint:#6a7a90;
+    --line:rgba(0,229,255,0.18);
+    --line-strong:rgba(0,229,255,0.45);
+    --grid: rgba(0, 229, 255, 0.07);
+  }
+  html,body{height:100%}
+  body{
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background:
+      radial-gradient(ellipse at top, rgba(0,229,255,0.10) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom right, rgba(57,255,20,0.06) 0%, transparent 60%),
+      linear-gradient(180deg, var(--bg-0) 0%, var(--bg-1) 100%);
+    background-attachment: fixed;
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.55;
+  }
+  /* sutil rejilla cyber */
+  body::before{
+    content:"";
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  }
+
+  .container{
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 20px 18px 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ============ HEADER ============ */
+  header.top{
+    display:flex; justify-content:space-between; align-items:center;
+    gap:12px; flex-wrap:wrap;
+    padding: 10px 16px;
+    background: linear-gradient(90deg, rgba(0,229,255,0.06), rgba(57,255,20,0.04));
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    margin-bottom: 14px;
+    box-shadow: 0 0 30px rgba(0,229,255,0.05) inset;
+  }
+  .brand{
+    font-family: 'Courier New', monospace;
+    font-size: 1.05rem;
+    color: var(--neon);
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(57,255,20,0.5);
+  }
+  .brand .tag{ color: var(--cyan); }
+  .brand .blink{ animation: blink 1.2s steps(2) infinite; }
+  @keyframes blink{ 50%{opacity:0.2} }
+
+  .meta{
+    display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+  }
+  .timer{
+    font-family: 'Courier New', monospace;
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    letter-spacing: 2px;
+    box-shadow: 0 0 14px rgba(0,229,255,0.25);
+    min-width: 95px;
+    text-align:center;
+  }
+  .timer.warn{ color: var(--warn); border-color: var(--warn); box-shadow: 0 0 14px rgba(255,145,0,0.4); }
+  .timer.danger{ color: var(--bad); border-color: var(--bad); box-shadow: 0 0 18px rgba(255,56,96,0.5); animation: pulse 1s infinite; }
+  @keyframes pulse{ 50%{opacity:0.5} }
+
+  .score-pill{
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: rgba(57,255,20,0.08);
+    border: 1px solid rgba(57,255,20,0.4);
+    color: var(--neon);
+  }
+
+  /* ============ PROGRESS DOTS ============ */
+  .progress{
+    display:flex; gap:8px; justify-content:center; flex-wrap:wrap;
+    margin-bottom: 18px;
+  }
+  .step{
+    width: 34px; height: 34px; border-radius: 8px;
+    display:flex; align-items:center; justify-content:center;
+    font-weight: 700; font-size: 0.85rem;
+    font-family: 'Courier New', monospace;
+    border: 1.5px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.04);
+    color: var(--ink-faint);
+    transition: all 0.3s;
+  }
+  .step.active{
+    border-color: var(--amber); color: var(--amber);
+    box-shadow: 0 0 12px rgba(255,179,0,0.5);
+  }
+  .step.done{
+    background: rgba(39,224,141,0.25);
+    border-color: var(--good); color: var(--good);
+  }
+
+  /* ============ PANEL ============ */
+  .panel{
+    background: linear-gradient(180deg, rgba(23,34,56,0.85), rgba(12,20,36,0.85));
+    border: 1px solid var(--line-strong);
+    border-radius: 18px;
+    padding: 28px 24px;
+    backdrop-filter: blur(8px);
+    box-shadow:
+      0 10px 40px rgba(0,0,0,0.45),
+      0 0 50px rgba(0,229,255,0.06) inset;
+    animation: fadeIn 0.5s ease-out;
+    position: relative;
+    overflow: hidden;
+  }
+  .panel::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:3px;
+    background: linear-gradient(90deg, var(--neon), var(--cyan), var(--amber));
+    opacity: 0.6;
+  }
+  @keyframes fadeIn{ from{opacity:0; transform: translateY(15px);} to{opacity:1; transform: translateY(0);} }
+
+  h1{ font-size: 1.55rem; margin-bottom: 12px; color: var(--neon); text-shadow: 0 0 8px rgba(57,255,20,0.3); letter-spacing: 0.5px; }
+  h2{ font-size: 1.3rem; margin-bottom: 12px; color: var(--cyan); }
+  .subtitle{
+    font-family: 'Courier New', monospace;
+    color: var(--ink-dim);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  p{ margin-bottom: 12px; color: var(--ink); }
+  .narrativa{
+    background: rgba(0,0,0,0.35);
+    padding: 14px 16px;
+    border-left: 3px solid var(--neon);
+    border-radius: 6px;
+    margin: 14px 0 18px;
+    font-style: italic;
+    color: var(--ink-dim);
+    line-height: 1.6;
+  }
+  .narrativa strong{ color: var(--neon); font-style: normal; }
+  .narrativa .red{ color: var(--bad); font-style: normal; font-weight: bold; }
+
+  .question{
+    background: rgba(255,179,0,0.08);
+    border: 1px solid rgba(255,179,0,0.4);
+    padding: 14px 16px;
+    border-radius: 10px;
+    margin: 16px 0;
+    color: #ffe9b0;
+    font-size: 1.02rem;
+  }
+  .question strong{ color: var(--amber); }
+  .visual{
+    background: rgba(0,0,0,0.4);
+    border-radius: 12px;
+    padding: 16px;
+    margin: 14px 0;
+    text-align:center;
+    border: 1px dashed rgba(0,229,255,0.3);
+  }
+
+  /* ============ OPCIONES ============ */
+  .options{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    margin: 16px 0;
+  }
+  .option{
+    background: rgba(255,255,255,0.04);
+    border: 2px solid rgba(255,255,255,0.12);
+    padding: 14px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align:center;
+    transition: all 0.18s;
+    font-size: 0.98rem;
+    color: var(--ink);
+    user-select: none;
+  }
+  .option:hover{
+    border-color: var(--cyan);
+    background: rgba(0,229,255,0.10);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0,229,255,0.18);
+  }
+  .option.selected{
+    border-color: var(--amber);
+    background: rgba(255,179,0,0.15);
+    color: var(--amber);
+  }
+  .option svg{ display:block; margin: 0 auto 6px; }
+
+  /* ============ CHECKBOXES ============ */
+  .check-row{
+    display:flex; align-items:center; gap:12px;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.18s;
+  }
+  .check-row:hover{ background: rgba(255,255,255,0.08); border-color: var(--line-strong); }
+  .check-row input{ width: 20px; height: 20px; accent-color: var(--neon); cursor: pointer; }
+
+  /* ============ INPUT ============ */
+  .text-input{
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(0,0,0,0.35);
+    border: 2px solid var(--line-strong);
+    border-radius: 10px;
+    color: var(--ink);
+    font-size: 1.05rem;
+    font-family: 'Courier New', monospace;
+    outline: none;
+    transition: border 0.2s, box-shadow 0.2s;
+    letter-spacing: 1px;
+  }
+  .text-input:focus{
+    border-color: var(--neon);
+    box-shadow: 0 0 14px rgba(57,255,20,0.25);
+  }
+
+  /* ============ BOTONES ============ */
+  .actions{
+    display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+    margin-top: 14px;
+  }
+  .btn{
+    background: linear-gradient(135deg, var(--neon), var(--good));
+    color: #0a0f1f;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 0.98rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.18s;
+    box-shadow: 0 4px 14px rgba(57,255,20,0.3);
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .btn:hover{ transform: translateY(-2px); box-shadow: 0 6px 20px rgba(57,255,20,0.5); }
+  .btn:disabled{ opacity: 0.5; cursor: not-allowed; }
+  .btn-secondary{
+    background: rgba(0,229,255,0.12);
+    color: var(--cyan);
+    border: 1px solid var(--cyan);
+    box-shadow: none;
+  }
+  .btn-secondary:hover{ background: rgba(0,229,255,0.2); box-shadow: 0 4px 14px rgba(0,229,255,0.2); }
+  .btn-danger{
+    background: linear-gradient(135deg, var(--bad), #b71540);
+    color: white;
+    box-shadow: 0 4px 14px rgba(255,56,96,0.3);
+  }
+  .attempts{
+    margin-left:auto;
+    font-family: 'Courier New', monospace;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+  }
+
+  /* ============ FEEDBACK ============ */
+  .feedback{
+    padding: 14px 16px;
+    border-radius: 10px;
+    margin-top: 14px;
+    font-weight: 600;
+    animation: fadeIn 0.3s;
+    border: 1px solid;
+  }
+  .feedback.ok{
+    background: rgba(39,224,141,0.12);
+    border-color: var(--good);
+    color: #b4f5d0;
+  }
+  .feedback.err{
+    background: rgba(255,56,96,0.12);
+    border-color: var(--bad);
+    color: #ffc4cf;
+  }
+  .feedback.hint{
+    background: rgba(0,229,255,0.1);
+    border-color: var(--cyan);
+    color: #cdf2ff;
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  /* ============ TERMINAL ============ */
+  .terminal{
+    background: #02060b;
+    border: 1px solid rgba(57,255,20,0.4);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.92rem;
+    color: var(--neon);
+    margin: 12px 0;
+    line-height: 1.6;
+    box-shadow: 0 0 20px rgba(57,255,20,0.1) inset;
+  }
+  .terminal .prompt{ color: var(--cyan); }
+  .terminal .warn{ color: var(--warn); }
+  .terminal .bad{ color: var(--bad); }
+
+  /* ============ EMAIL UI ============ */
+  .email{
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 12px 0;
+    font-size: 0.95rem;
+  }
+  .email .from{
+    color: var(--ink-faint);
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+    font-family: 'Courier New', monospace;
+  }
+  .email .from b{ color: var(--ink); }
+  .email .subject{
+    color: var(--amber);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .email .body{ color: var(--ink-dim); }
+  .email .link{
+    display:inline-block;
+    background: rgba(0,229,255,0.15);
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    padding: 6px 12px;
+    border-radius: 6px;
+    margin-top: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    word-break: break-all;
+  }
+
+  /* ============ INTERRUPTORES BINARIOS ============ */
+  .switches{
+    display:flex; justify-content:center; gap: 18px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+  .switch-box{
+    text-align:center;
+    user-select:none;
+  }
+  .switch-box .label{
+    font-family: 'Courier New', monospace;
+    color: var(--ink-dim);
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+  }
+  .switch{
+    width: 70px; height: 100px;
+    background: linear-gradient(180deg, #1a2230, #0f1620);
+    border: 2px solid #2a3548;
+    border-radius: 10px;
+    position:relative;
+    cursor:pointer;
+    transition: all 0.2s;
+  }
+  .switch:hover{ border-color: var(--cyan); }
+  .switch .lever{
+    position:absolute;
+    left: 14px; right: 14px;
+    height: 36px;
+    background: linear-gradient(180deg, #e0e6ee, #98a4b8);
+    border-radius: 6px;
+    transition: top 0.25s cubic-bezier(.5,-0.2,.5,1.2);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.5);
+    top: 56px; /* OFF */
+  }
+  .switch.on .lever{
+    top: 8px;
+    background: linear-gradient(180deg, var(--neon), var(--good));
+    box-shadow: 0 3px 12px rgba(57,255,20,0.6);
+  }
+  .switch .state{
+    position:absolute;
+    bottom: -22px; left: 0; right: 0;
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    color: var(--ink-faint);
+    font-size: 0.9rem;
+  }
+  .switch.on .state{ color: var(--neon); }
+
+  .bulb-area{
+    margin: 24px auto 8px;
+    text-align:center;
+  }
+
+  /* ============ FINAL ============ */
+  .victory{ text-align:center; padding: 30px 16px; }
+  .victory h1{
+    font-size: 2.2rem;
+    background: linear-gradient(90deg, var(--neon), var(--cyan), var(--amber));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 3s linear infinite;
+  }
+  @keyframes shine{ to{ background-position: 200% center; } }
+  .stats{
+    display:flex; justify-content:center; gap: 14px; flex-wrap:wrap;
+    margin: 22px 0;
+  }
+  .stat{
+    background: rgba(0,0,0,0.4);
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: 1px solid var(--line-strong);
+    min-width: 110px;
+  }
+  .stat .num{ font-size: 1.6rem; font-weight: 700; color: var(--neon); font-family: 'Courier New', monospace; }
+  .stat .lbl{ font-size: 0.78rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 1px; }
+
+  footer{
+    text-align:center;
+    margin-top: 22px;
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+    font-family: 'Courier New', monospace;
+  }
+
+  .badge-row{
+    display:flex; gap:8px; flex-wrap:wrap; justify-content:center;
+    margin: 12px 0;
+  }
+  .badge{
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid;
+  }
+  .badge-cyber{ border-color: var(--cyan); color: var(--cyan); }
+  .badge-elec{ border-color: var(--amber); color: var(--amber); }
+  .badge-logic{ border-color: var(--neon); color: var(--neon); }
+
+  .hidden{ display:none; }
+
+  @media (max-width: 560px){
+    h1{ font-size: 1.25rem; }
+    .panel{ padding: 20px 16px; }
+    .timer{ font-size: 1rem; padding: 4px 10px; }
+    .switch{ width: 56px; height: 88px; }
+    .switch .lever{ left:10px; right:10px; height: 30px; top: 50px; }
+    .switch.on .lever{ top: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="top">
+    <div class="brand">
+      <a href="../index.html" style="color:var(--cyan);text-decoration:none;border:1px solid var(--line-strong);padding:3px 8px;border-radius:4px;font-size:.82rem;margin-right:10px" title="Salir del escape room">◀ /HUB</a>
+      [ <span class="tag">SYS</span> ] APAGÓN_BLACKOHM<span class="blink">_</span>
+    </div>
+    <div class="meta">
+      <div class="score-pill" id="scorePill">PTS: 0</div>
+      <div class="timer" id="timer">40:00</div>
+    </div>
+  </header>
+
+  <div class="progress" id="progress"></div>
+
+  <main id="screen"></main>
+
+  <footer>
+    IES Jiménez de Quesada · TyD 2º ESO · U5 Electricidad · Escape Room educativo<br>
+    Manuel Alonso Herrera · Curso 2025-26
+  </footer>
+</div>
+
+<script>
+// ============================================================
+//  ESTADO GLOBAL
+// ============================================================
+const TOTAL_MIN = 40;
+const state = {
+  current: -1,                 // -1 = intro
+  attempts: [],
+  hintsUsed: [],
+  done: [],
+  score: 0,
+  startTime: null,
+  timeLeft: TOTAL_MIN * 60,
+  timerInterval: null,
+  // valores temporales por reto
+  optSelected: null,
+  switches: [false, false, false]
+};
+
+// ============================================================
+//  DEFINICIÓN DE RETOS
+// ============================================================
+const retos = [
+
+  // ===== R1: CIBER - Contraseña fuerte =====
+  {
+    titulo: "RETO 1 · Acceso al sistema",
+    tag: "CIBER",
+    badgeClass: "badge-cyber",
+    narrativa: `Una banda llamada <span class="red">BlackOhm</span> ha hackeado el sistema eléctrico del IES y ha provocado un <strong>apagón</strong>. La única forma de devolver la luz es entrar al panel de control. <strong>Profesor Voltio</strong> te ha dejado un mensaje cifrado: «Solo una de estas contraseñas cumple las normas de seguridad que estudiasteis en 1º ESO. Esa es la que abre la sesión».`,
+    terminal: `<span class="prompt">root@iesjdq:~$</span> login<br><span class="warn">⚠ SISTEMA BLOQUEADO · Selecciona la contraseña SEGURA</span>`,
+    pregunta: "¿Cuál de las siguientes contraseñas es <strong>realmente segura</strong>?",
+    tipo: "opciones",
+    opciones: [
+      "Lucia2012",
+      "fortnite2025",
+      "Tr3n#L8nt0-Caballo_Bater1a!",
+      "12345678"
+    ],
+    correcta: 2,
+    pistas: [
+      "Una contraseña segura es LARGA y mezcla letras (mayús/minús), números y símbolos.",
+      "Nombres propios + año de nacimiento son las MÁS fáciles de adivinar.",
+      "La buena tiene más de 20 caracteres, mezcla todo y no contiene palabras simples."
+    ],
+    explicacion: "✓ Correcto. La contraseña larga con mezcla de letras, números y símbolos es la única segura. «Lucia2012» o «fortnite2025» se descifran en segundos: nombres y palabras comunes están en todos los diccionarios de los atacantes.",
+    puntos: 10
+  },
+
+  // ===== R2: CIBER - Phishing URL =====
+  {
+    titulo: "RETO 2 · ¿Quién es realmente el remitente?",
+    tag: "CIBER",
+    badgeClass: "badge-cyber",
+    narrativa: `Has entrado al correo del centro y hay <strong>4 mensajes</strong> esperándote. Uno de ellos es de los hackers de BlackOhm intentando engañarte para que entregues tus credenciales. <strong>Identifícalo y márcalo como phishing</strong>.`,
+    visual: `
+      <div class="email">
+        <div class="from">De: <b>Aula Virtual IES</b> &lt;noreply@iesjdq.es&gt;</div>
+        <div class="subject">📧 Email 1: Recordatorio: entrega tu cuaderno de Tecnología</div>
+        <div class="body">Tienes una tarea pendiente. Pulsa aquí para ir al aula virtual:</div>
+        <span class="link">https://educacionadistancia.juntadeandalucia.es</span>
+      </div>
+      <div class="email">
+        <div class="from">De: <b>Administrador IT</b> &lt;soporte-iesjdq@gnnaii-secure.tk&gt;</div>
+        <div class="subject">📧 Email 2: ¡URGENTE! Cuenta bloqueada · 2h para reactivar</div>
+        <div class="body">Tu cuenta del IES será borrada en 2 HORAS si no entras AHORA y confirmas tu contraseña. Pulsa aquí YA:</div>
+        <span class="link">http://iesjdq-recuperar-cuenta.gnnaii-secure.tk/login</span>
+      </div>
+      <div class="email">
+        <div class="from">De: <b>Manuel Alonso</b> &lt;malonso@iesjdq.es&gt;</div>
+        <div class="subject">📧 Email 3: Tarea de electricidad para mañana</div>
+        <div class="body">Recordad traer hechos los ejercicios 3 y 4 de la página 87.</div>
+      </div>
+      <div class="email">
+        <div class="from">De: <b>Moodle Andalucía</b> &lt;notificaciones@juntadeandalucia.es&gt;</div>
+        <div class="subject">📧 Email 4: Nueva calificación disponible</div>
+        <div class="body">Tu profesor ha publicado una nota nueva. Accede a Moodle para verla.</div>
+      </div>
+    `,
+    pregunta: "¿Cuál de los 4 emails es <strong>phishing</strong>?",
+    tipo: "opciones",
+    opciones: ["Email 1", "Email 2", "Email 3", "Email 4"],
+    correcta: 1,
+    pistas: [
+      "Mira con atención el DOMINIO del remitente, no solo el nombre. ¿Acaba en .es oficial o en algo raro?",
+      "El phishing siempre mete URGENCIA («en 2 horas», «o se borra tu cuenta»). Es una señal de alarma.",
+      "El dominio «.tk» y nombres como «gnnaii-secure» son típicos de phishing. Una web oficial NUNCA te pide la contraseña por email."
+    ],
+    explicacion: "✓ Bien hecho, detective. El email 2 mete urgencia falsa, usa un dominio rarísimo (.tk, gnnaii-secure) y te pide la contraseña por enlace. Tres banderas rojas clásicas del phishing.",
+    puntos: 15
+  },
+
+  // ===== R3: LÓGICA + ELECTRICIDAD - Interruptores binarios (AND/serie) =====
+  {
+    titulo: "RETO 3 · Sala de servidores: el circuito en serie",
+    tag: "MIX",
+    badgeClass: "badge-logic",
+    narrativa: `Has entrado al sistema. La sala de servidores está en penumbra: hay <strong>tres interruptores en SERIE</strong> controlando una bombilla. Como en un circuito en serie todos los interruptores deben estar <strong>cerrados</strong> para que circule la corriente (lógica AND), tienes que encender los necesarios.`,
+    customRender: "switches",
+    pregunta: "Pulsa los interruptores hasta que la <strong>bombilla se encienda</strong>, después confirma.",
+    tipo: "custom",
+    pistas: [
+      "En serie la corriente pasa por TODOS los componentes. Si uno está abierto, no pasa nada.",
+      "En lógica binaria: cerrado = 1, abierto = 0. ¿Qué combinación enciende la bombilla?",
+      "Los tres interruptores deben estar en posición ON (1·1·1 = 1, la bombilla enciende)."
+    ],
+    explicacion: "✓ Perfecto. En SERIE, la corriente solo circula si TODOS los interruptores están cerrados. Es el equivalente a la operación lógica AND: 1·1·1 = 1. Esta misma idea es la base del binario que usan los ordenadores: estados 0 (apagado) y 1 (encendido).",
+    puntos: 15
+  },
+
+  // ===== R4: ELECTRICIDAD - Símbolo eléctrico =====
+  {
+    titulo: "RETO 4 · El diagrama del intruso",
+    tag: "ELEC",
+    badgeClass: "badge-elec",
+    narrativa: `En la pantalla del laboratorio aparece un esquema parpadeando. BlackOhm ha sustituido un componente clave del circuito por su símbolo. <strong>Identifícalo</strong> para saber qué han manipulado.`,
+    visual: `
+      <svg viewBox="0 0 240 100" width="240" height="100">
+        <!-- líneas del circuito -->
+        <line x1="10" y1="50" x2="80" y2="50" stroke="#00e5ff" stroke-width="3"/>
+        <!-- símbolo pila -->
+        <line x1="80" y1="30" x2="80" y2="70" stroke="#00e5ff" stroke-width="3"/>
+        <line x1="95" y1="40" x2="95" y2="60" stroke="#00e5ff" stroke-width="5"/>
+        <line x1="110" y1="30" x2="110" y2="70" stroke="#00e5ff" stroke-width="3"/>
+        <line x1="125" y1="40" x2="125" y2="60" stroke="#00e5ff" stroke-width="5"/>
+        <!-- continuación -->
+        <line x1="125" y1="50" x2="230" y2="50" stroke="#00e5ff" stroke-width="3"/>
+        <text x="120" y="90" fill="#ffb300" font-size="13" font-family="monospace" text-anchor="middle">?</text>
+      </svg>
+    `,
+    pregunta: "¿Qué <strong>componente eléctrico</strong> representa este símbolo?",
+    tipo: "opciones",
+    opciones: ["Bombilla", "Pila / batería", "Resistencia", "Interruptor"],
+    correcta: 1,
+    pistas: [
+      "Tiene 2 rayas largas y 2 rayas cortas alternadas. Es una pila DOBLE (4 elementos = 2 pilas en serie).",
+      "Es el componente que aporta la energía al circuito.",
+      "Las rayas largas son los polos positivos (+), las cortas los negativos (–). Es una pila."
+    ],
+    explicacion: "✓ Bien. El símbolo de la pila tiene rayas largas (polo +) y cortas (polo –). Cuando aparecen varias parejas en fila, son varias pilas conectadas en serie (más voltaje total).",
+    puntos: 10
+  },
+
+  // ===== R5: ELECTRICIDAD - Conductores / aislantes =====
+  {
+    titulo: "RETO 5 · Reparar el cable cortado",
+    tag: "ELEC",
+    badgeClass: "badge-elec",
+    narrativa: `Los hackers han cortado un cable. En el armario del taller hay 8 materiales para repararlo, pero <strong>solo sirven los conductores</strong>. Marca TODOS los que dejan pasar la corriente.`,
+    pregunta: "Selecciona TODOS los materiales que sean <strong>conductores eléctricos</strong>:",
+    tipo: "checkboxes",
+    items: [
+      {nombre: "Cobre", conductor: true},
+      {nombre: "Plástico", conductor: false},
+      {nombre: "Madera seca", conductor: false},
+      {nombre: "Aluminio", conductor: true},
+      {nombre: "Vidrio", conductor: false},
+      {nombre: "Hierro", conductor: true},
+      {nombre: "Goma", conductor: false},
+      {nombre: "Plata", conductor: true}
+    ],
+    pistas: [
+      "Los METALES suelen ser conductores. Los no metales y plásticos suelen ser aislantes.",
+      "Hay exactamente 4 conductores en la lista.",
+      "Cobre, aluminio, hierro y plata son los conductores. El plástico, vidrio, madera seca y goma son aislantes."
+    ],
+    explicacion: "✓ Excelente. Los conductores son metales (cobre, aluminio, hierro, plata). El cobre se usa en cables porque conduce muy bien y no es caro. La plata conduce aún mejor, pero no se usa en cables por el precio. El resto son AISLANTES y se usan en fundas para protegernos.",
+    puntos: 15
+  },
+
+  // ===== R6: ELECTRICIDAD - Ley de Ohm =====
+  {
+    titulo: "RETO 6 · La caja fuerte del Profesor Voltio",
+    tag: "ELEC",
+    badgeClass: "badge-elec",
+    narrativa: `En la caja fuerte del laboratorio hay una pista para reactivar el sistema. La cerradura pide la <strong>intensidad de corriente</strong> del circuito principal del laboratorio. Aplica la <strong>Ley de Ohm</strong>.`,
+    visual: `
+      <svg viewBox="0 0 280 150" width="280" height="150">
+        <rect x="20" y="20" width="240" height="110" fill="none" stroke="#00e5ff" stroke-width="3" rx="6"/>
+        <!-- pila izquierda -->
+        <line x1="55" y1="8" x2="55" y2="32" stroke="#0c1424" stroke-width="10"/>
+        <line x1="48" y1="22" x2="62" y2="22" stroke="#00e5ff" stroke-width="3"/>
+        <line x1="52" y1="14" x2="58" y2="14" stroke="#00e5ff" stroke-width="5"/>
+        <text x="80" y="22" fill="#ffb300" font-size="15" font-family="monospace">V = 24 V</text>
+        <!-- resistencia derecha -->
+        <rect x="190" y="8" width="50" height="22" fill="#0c1424" stroke="#00e5ff" stroke-width="3"/>
+        <text x="215" y="50" fill="#ffb300" font-size="15" text-anchor="middle" font-family="monospace">R = 6 Ω</text>
+        <!-- I = ? -->
+        <text x="140" y="145" fill="#39ff14" font-size="16" text-anchor="middle" font-family="monospace">I = ?  (en amperios)</text>
+      </svg>
+    `,
+    pregunta: "Calcula la <strong>intensidad I</strong> del circuito (en amperios).",
+    tipo: "numero",
+    correcta: 4,
+    tolerancia: 0.01,
+    unidad: "A",
+    pistas: [
+      "Recuerda la Ley de Ohm: V = I · R",
+      "Despeja la intensidad: I = V / R",
+      "I = 24 V / 6 Ω = ?"
+    ],
+    explicacion: "✓ Correcto. Por la Ley de Ohm: I = V / R = 24 / 6 = 4 amperios. La cerradura se abre con un clic seco.",
+    puntos: 15
+  },
+
+  // ===== R7: ELECTRICIDAD - Serie vs Paralelo =====
+  {
+    titulo: "RETO 7 · ¿Serie o paralelo?",
+    tag: "ELEC",
+    badgeClass: "badge-elec",
+    narrativa: `En el panel principal hay <strong>dos circuitos</strong> con la misma pila y las mismas bombillas. BlackOhm te pregunta: «Si quito UNA bombilla, ¿qué circuito sigue funcionando? Ese es el que tienes que activar para iluminar el laboratorio».`,
+    visual: `
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <div style="text-align:center;">
+          <svg viewBox="0 0 220 130" width="220" height="130">
+            <text x="110" y="14" fill="#ffb300" font-family="monospace" font-size="13" text-anchor="middle">CIRCUITO A</text>
+            <rect x="15" y="25" width="190" height="90" fill="none" stroke="#00e5ff" stroke-width="3" rx="6"/>
+            <line x1="40" y1="13" x2="40" y2="37" stroke="#0c1424" stroke-width="10"/>
+            <line x1="33" y1="27" x2="47" y2="27" stroke="#00e5ff" stroke-width="3"/>
+            <line x1="37" y1="19" x2="43" y2="19" stroke="#00e5ff" stroke-width="5"/>
+            <circle cx="100" cy="25" r="11" fill="#0c1424" stroke="#ffb300" stroke-width="2"/>
+            <text x="100" y="29" fill="#ffb300" font-family="monospace" font-size="13" text-anchor="middle">×</text>
+            <circle cx="170" cy="25" r="11" fill="#0c1424" stroke="#ffb300" stroke-width="2"/>
+            <text x="170" y="29" fill="#ffb300" font-family="monospace" font-size="13" text-anchor="middle">×</text>
+          </svg>
+        </div>
+        <div style="text-align:center;">
+          <svg viewBox="0 0 220 130" width="220" height="130">
+            <text x="110" y="14" fill="#ffb300" font-family="monospace" font-size="13" text-anchor="middle">CIRCUITO B</text>
+            <rect x="15" y="25" width="190" height="90" fill="none" stroke="#00e5ff" stroke-width="3" rx="6"/>
+            <line x1="40" y1="13" x2="40" y2="37" stroke="#0c1424" stroke-width="10"/>
+            <line x1="33" y1="27" x2="47" y2="27" stroke="#00e5ff" stroke-width="3"/>
+            <line x1="37" y1="19" x2="43" y2="19" stroke="#00e5ff" stroke-width="5"/>
+            <!-- ramas paralelo -->
+            <line x1="100" y1="25" x2="100" y2="115" stroke="#00e5ff" stroke-width="3"/>
+            <line x1="160" y1="25" x2="160" y2="115" stroke="#00e5ff" stroke-width="3"/>
+            <circle cx="100" cy="70" r="11" fill="#0c1424" stroke="#ffb300" stroke-width="2"/>
+            <text x="100" y="74" fill="#ffb300" font-family="monospace" font-size="13" text-anchor="middle">×</text>
+            <circle cx="160" cy="70" r="11" fill="#0c1424" stroke="#ffb300" stroke-width="2"/>
+            <text x="160" y="74" fill="#ffb300" font-family="monospace" font-size="13" text-anchor="middle">×</text>
+          </svg>
+        </div>
+      </div>
+    `,
+    pregunta: "¿En qué circuito, si <strong>se rompe una bombilla, la otra sigue encendida</strong>?",
+    tipo: "opciones",
+    opciones: ["Circuito A (serie)", "Circuito B (paralelo)", "En los dos", "En ninguno"],
+    correcta: 1,
+    pistas: [
+      "En el circuito A, todo va en una única «autopista». Si un coche choca, se atasca todo.",
+      "En el circuito B hay dos «caminos» separados. Cada bombilla tiene su propio recorrido.",
+      "El paralelo es como las luces de tu casa: si una bombilla se funde, las demás siguen encendidas."
+    ],
+    explicacion: "✓ Exacto. En PARALELO cada bombilla tiene su propio camino, así que si una falla, la otra sigue encendida. Por eso las instalaciones de las casas son en paralelo. En SERIE en cambio (como en las luces de Navidad antiguas), si una se funde, se apagan TODAS.",
+    puntos: 15
+  },
+
+  // ===== R8: ELECTRICIDAD - CGMP / Seguridad =====
+  {
+    titulo: "RETO 8 · El cuadro eléctrico de la vivienda",
+    tag: "ELEC",
+    badgeClass: "badge-elec",
+    narrativa: `BlackOhm ha provocado una <strong>derivación a tierra</strong> en el laboratorio: hay un cable pelado tocando una carcasa metálica. Si alguien toca el aparato, ¡recibe una descarga! ¿Cuál es el elemento del <strong>cuadro general</strong> que debe SALTAR para cortar la corriente y proteger a las personas?`,
+    visual: `
+      <svg viewBox="0 0 320 140" width="320" height="140">
+        <!-- caja del cuadro -->
+        <rect x="20" y="15" width="280" height="110" fill="#0c1424" stroke="#00e5ff" stroke-width="2" rx="6"/>
+        <text x="160" y="32" fill="#00e5ff" font-family="monospace" font-size="12" text-anchor="middle">CUADRO GENERAL DE MANDO Y PROTECCIÓN</text>
+        <!-- elementos -->
+        <g>
+          <rect x="40" y="50" width="40" height="60" fill="#172238" stroke="#ffb300" stroke-width="2" rx="3"/>
+          <text x="60" y="125" fill="#ffb300" font-family="monospace" font-size="10" text-anchor="middle">ICP</text>
+        </g>
+        <g>
+          <rect x="100" y="50" width="40" height="60" fill="#172238" stroke="#ffb300" stroke-width="2" rx="3"/>
+          <text x="120" y="125" fill="#ffb300" font-family="monospace" font-size="10" text-anchor="middle">DIFEREN.</text>
+        </g>
+        <g>
+          <rect x="160" y="50" width="40" height="60" fill="#172238" stroke="#ffb300" stroke-width="2" rx="3"/>
+          <text x="180" y="125" fill="#ffb300" font-family="monospace" font-size="10" text-anchor="middle">PIA 1</text>
+        </g>
+        <g>
+          <rect x="220" y="50" width="40" height="60" fill="#172238" stroke="#ffb300" stroke-width="2" rx="3"/>
+          <text x="240" y="125" fill="#ffb300" font-family="monospace" font-size="10" text-anchor="middle">PIA 2</text>
+        </g>
+      </svg>
+    `,
+    pregunta: "¿Qué elemento del cuadro protege a <strong>las PERSONAS</strong> de descargas por contacto con partes activas?",
+    tipo: "opciones",
+    opciones: ["ICP (Interruptor de Control de Potencia)", "Interruptor diferencial", "PIA / Magnetotérmico", "El cable de tierra"],
+    correcta: 1,
+    pistas: [
+      "El diferencial detecta «fugas» de corriente: corriente que entra y no sale por donde debería.",
+      "El ICP solo limita la potencia contratada. El magnetotérmico (PIA) protege ante sobrecargas y cortocircuitos del propio circuito.",
+      "El INTERRUPTOR DIFERENCIAL es el que «salta» cuando una persona recibe una descarga y desvía la corriente al cuerpo (en lugar de volver al neutro)."
+    ],
+    explicacion: "✓ Correcto. El DIFERENCIAL protege a las personas. Cuando detecta que la corriente que entra por la fase no es la misma que sale por el neutro (porque parte se está «fugando» por una persona o por la tierra), salta en milisegundos. El magnetotérmico (PIA), en cambio, protege la INSTALACIÓN ante sobrecargas y cortocircuitos.",
+    puntos: 20
+  },
+
+  // ===== R9: LÓGICA - Código binario maestro =====
+  {
+    titulo: "RETO 9 · Código binario maestro",
+    tag: "LÓGICA",
+    badgeClass: "badge-logic",
+    narrativa: `Última pantalla. Para reactivar el sistema eléctrico tienes que introducir el <strong>código maestro</strong>. El Profesor Voltio te ha dejado escrita una pista: <em>«La corriente solo conoce dos estados: pasa (1) o no pasa (0). Convierte el número 13 a binario, en 4 bits, y ese es el código»</em>.`,
+    terminal: `<span class="prompt">root@iesjdq:/sys/power#</span> unlock --code=????<br><span class="warn">⚠ Introduce el número 13 en binario (4 dígitos)</span>`,
+    pregunta: "¿Cuál es la representación binaria de <strong>13</strong> en 4 bits?",
+    tipo: "texto",
+    respuestasValidas: ["1101"],
+    pistas: [
+      "Los 4 bits valen, de izquierda a derecha: 8, 4, 2, 1. Tienes que sumar 13 con esos números.",
+      "8 + 4 + 1 = 13. Pon 1 en esas posiciones y 0 en las que no uses.",
+      "13 = 8·1 + 4·1 + 2·0 + 1·1 → 1101"
+    ],
+    explicacion: "✓ ¡CÓDIGO ACEPTADO! 13 en binario es 1101 (8+4+0+1). Esta es la base del lenguaje de los ordenadores: en un transistor, igual que en un interruptor eléctrico, solo hay dos estados (encendido/apagado, 1/0). Has unido electricidad y lógica binaria.",
+    puntos: 20
+  }
+];
+
+// ============================================================
+//  RENDER
+// ============================================================
+const $ = id => document.getElementById(id);
+const screen = $('screen');
+
+retos.forEach(() => {
+  state.attempts.push(0);
+  state.hintsUsed.push(0);
+  state.done.push(false);
+});
+
+function renderProgress(){
+  $('progress').innerHTML = retos.map((r, i) => {
+    const cls = state.done[i] ? 'done' : (i === state.current ? 'active' : '');
+    return `<div class="step ${cls}" title="${r.titulo}">${state.done[i] ? '✓' : (i+1)}</div>`;
+  }).join('');
+}
+
+function updateScore(){
+  $('scorePill').textContent = `PTS: ${state.score}`;
+}
+
+function renderIntro(){
+  screen.innerHTML = `
+    <div class="panel">
+      <div class="subtitle">// MISIÓN CLASIFICADA · TYD 2º ESO</div>
+      <h1>⚡ APAGÓN BLACKOHM</h1>
+      <div class="terminal">
+        <span class="prompt">root@iesjdq:~$</span> status<br>
+        <span class="bad">[ERROR]</span> Suministro eléctrico: OFFLINE<br>
+        <span class="bad">[ERROR]</span> Acceso a aula virtual: BLOQUEADO<br>
+        <span class="warn">[WARN]</span> Sistema infiltrado por: <strong>BlackOhm</strong> (grupo hacker)<br>
+        <span class="prompt">root@iesjdq:~$</span> mission_start<br>
+        <span class="prompt">></span> Iniciando protocolo de recuperación...
+      </div>
+      <p>Una banda de hackers llamada <strong>BlackOhm</strong> ha provocado un apagón en el IES Jiménez de Quesada y ha bloqueado todos los sistemas eléctricos del laboratorio. El <strong>Profesor Voltio</strong> está intentando guiarte desde dentro por mensajes cifrados.</p>
+      <p>Tu misión: superar 9 retos que combinan <strong>ciberseguridad</strong> (acceso al sistema), <strong>electricidad</strong> (la base de todo el laboratorio) y <strong>lógica binaria</strong> (el lenguaje de las máquinas) para reactivar el suministro y restaurar la luz.</p>
+
+      <div class="badge-row">
+        <span class="badge badge-cyber">2 retos · CIBER</span>
+        <span class="badge badge-elec">5 retos · ELECTRICIDAD</span>
+        <span class="badge badge-logic">2 retos · LÓGICA</span>
+      </div>
+
+      <p style="font-size:0.92rem; color: var(--ink-dim);">
+        🕐 <strong>Tiempo:</strong> 40 minutos · 🧩 <strong>Retos:</strong> 9 · 💡 <strong>Pistas:</strong> 3 por reto (cada pista resta puntos)<br>
+        👥 <strong>Modo:</strong> individual o por parejas/equipos · 🏆 <strong>Puntuación máxima:</strong> 135 pts
+      </p>
+      <div class="actions">
+        <button class="btn" onclick="empezar()">▶ Iniciar misión</button>
+      </div>
+    </div>
+  `;
+  $('progress').innerHTML = '';
+  updateScore();
+}
+
+function renderReto(i){
+  const r = retos[i];
+  state.optSelected = null;
+  state.switches = [false, false, false];
+
+  let cuerpo = '';
+
+  if(r.tipo === 'opciones'){
+    cuerpo = `<div class="options" id="opts">${r.opciones.map((o, idx) =>
+      `<div class="option" data-i="${idx}" onclick="selectOpt(${idx})">${o}</div>`
+    ).join('')}</div>`;
+  } else if(r.tipo === 'checkboxes'){
+    cuerpo = `<div id="checks">${r.items.map((it, idx) =>
+      `<label class="check-row"><input type="checkbox" data-i="${idx}"><span>${it.nombre}</span></label>`
+    ).join('')}</div>`;
+  } else if(r.tipo === 'numero'){
+    cuerpo = `<input type="number" step="any" class="text-input" id="ans" placeholder="Introduce el valor (${r.unidad})">`;
+  } else if(r.tipo === 'texto'){
+    cuerpo = `<input type="text" class="text-input" id="ans" placeholder="Escribe tu respuesta...">`;
+  } else if(r.tipo === 'custom' && r.customRender === 'switches'){
+    cuerpo = renderSwitches();
+  }
+
+  screen.innerHTML = `
+    <div class="panel">
+      <div class="subtitle"><span class="badge ${r.badgeClass}">${r.tag}</span> &nbsp; ${i+1} / ${retos.length}</div>
+      <h2>${r.titulo}</h2>
+      <div class="narrativa">${r.narrativa}</div>
+      ${r.terminal ? `<div class="terminal">${r.terminal}</div>` : ''}
+      ${r.visual ? `<div class="visual">${r.visual}</div>` : ''}
+      <div class="question">${r.pregunta}</div>
+      ${cuerpo}
+      <div class="actions">
+        <button class="btn" onclick="comprobar()">✓ Comprobar</button>
+        <button class="btn btn-secondary" onclick="pedirPista()" id="hintBtn">💡 Pista (${r.pistas.length - state.hintsUsed[i]})</button>
+        <span class="attempts">Intentos: ${state.attempts[i]} · ${r.puntos} pts máx</span>
+      </div>
+      <div id="feedback"></div>
+    </div>
+  `;
+  renderProgress();
+}
+
+function renderSwitches(){
+  return `
+    <div class="bulb-area" id="bulbArea">${bulbSVG(false)}</div>
+    <div class="switches" id="switches">
+      ${[0,1,2].map(i => `
+        <div class="switch-box">
+          <div class="label">SW${i+1}</div>
+          <div class="switch ${state.switches[i] ? 'on' : ''}" onclick="toggleSwitch(${i})">
+            <div class="lever"></div>
+            <div class="state">${state.switches[i] ? '1 / ON' : '0 / OFF'}</div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function bulbSVG(on){
+  const color = on ? '#ffe14a' : '#3a4458';
+  const glow = on ? `<circle cx="60" cy="40" r="48" fill="${color}" opacity="0.25"/>` : '';
+  return `
+    <svg viewBox="0 0 120 110" width="120" height="110">
+      ${glow}
+      <path d="M40 70 Q40 30 60 20 Q80 30 80 70 Z" fill="${color}" stroke="#00e5ff" stroke-width="2"/>
+      <rect x="48" y="68" width="24" height="12" fill="#0c1424" stroke="#00e5ff" stroke-width="2"/>
+      <line x1="52" y1="84" x2="68" y2="84" stroke="#00e5ff" stroke-width="2"/>
+      <line x1="54" y1="92" x2="66" y2="92" stroke="#00e5ff" stroke-width="2"/>
+      <text x="60" y="105" fill="${on?'#39ff14':'#6a7a90'}" font-family="monospace" font-size="11" text-anchor="middle">${on?'ENCENDIDA':'APAGADA'}</text>
+    </svg>
+  `;
+}
+
+function toggleSwitch(i){
+  state.switches[i] = !state.switches[i];
+  // re-render switches + bulb
+  const allOn = state.switches.every(s => s);
+  $('bulbArea').innerHTML = bulbSVG(allOn);
+  const sw = document.querySelectorAll('#switches .switch');
+  sw[i].classList.toggle('on', state.switches[i]);
+  sw[i].querySelector('.state').textContent = state.switches[i] ? '1 / ON' : '0 / OFF';
+}
+
+function selectOpt(i){
+  state.optSelected = i;
+  document.querySelectorAll('#opts .option').forEach((el, idx) =>
+    el.classList.toggle('selected', idx === i)
+  );
+}
+
+function pedirPista(){
+  const i = state.current;
+  const r = retos[i];
+  if(state.hintsUsed[i] >= r.pistas.length){
+    mostrarFeedback('hint', 'Ya no quedan más pistas. ¡Tú puedes con esto!');
+    return;
+  }
+  const p = r.pistas[state.hintsUsed[i]];
+  state.hintsUsed[i]++;
+  mostrarFeedback('hint', `💡 Pista ${state.hintsUsed[i]}: ${p}`);
+  $('hintBtn').textContent = `💡 Pista (${r.pistas.length - state.hintsUsed[i]})`;
+}
+
+function mostrarFeedback(tipo, msg){
+  $('feedback').innerHTML = `<div class="feedback ${tipo}">${msg}</div>`;
+}
+
+function quitarAcentos(s){
+  return s.normalize('NFD').replace(/\p{Diacritic}/gu, '');
+}
+
+function comprobar(){
+  const i = state.current;
+  const r = retos[i];
+  state.attempts[i]++;
+  let correcto = false;
+
+  if(r.tipo === 'opciones'){
+    if(state.optSelected === null){
+      mostrarFeedback('err', '⚠ Selecciona una opción primero.');
+      state.attempts[i]--; return;
+    }
+    correcto = (state.optSelected === r.correcta);
+  } else if(r.tipo === 'checkboxes'){
+    const inputs = document.querySelectorAll('#checks input');
+    correcto = Array.from(inputs).every((inp, idx) =>
+      inp.checked === r.items[idx].conductor
+    );
+  } else if(r.tipo === 'numero'){
+    const v = parseFloat($('ans').value.replace(',','.'));
+    if(isNaN(v)){
+      mostrarFeedback('err', '⚠ Introduce un número.');
+      state.attempts[i]--; return;
+    }
+    correcto = Math.abs(v - r.correcta) <= r.tolerancia;
+  } else if(r.tipo === 'texto'){
+    const raw = $('ans').value.trim();
+    if(!raw){
+      mostrarFeedback('err', '⚠ Escribe una respuesta.');
+      state.attempts[i]--; return;
+    }
+    const v = quitarAcentos(raw.toLowerCase());
+    const validas = r.respuestasValidas.map(x => quitarAcentos(x.toLowerCase()));
+    correcto = validas.some(x => v === x || (v.includes(x) && v.length < x.length + 15));
+  } else if(r.tipo === 'custom' && r.customRender === 'switches'){
+    correcto = state.switches.every(s => s); // todos ON = serie cerrado
+  }
+
+  // actualiza intentos
+  const att = document.querySelector('.attempts');
+  if(att) att.textContent = `Intentos: ${state.attempts[i]} · ${r.puntos} pts máx`;
+
+  if(correcto){
+    state.done[i] = true;
+    // puntos: máx - 2 por intento extra - 2 por pista
+    const extra = Math.max(0, state.attempts[i] - 1);
+    const pts = Math.max(0, r.puntos - extra*2 - state.hintsUsed[i]*2);
+    state.score += pts;
+    updateScore();
+    mostrarFeedback('ok', `${r.explicacion}<br><br><strong>+${pts} pts</strong> (intentos: ${state.attempts[i]}, pistas: ${state.hintsUsed[i]})`);
+    // reemplazar botones
+    document.querySelector('.actions').innerHTML = (state.current === retos.length - 1)
+      ? `<button class="btn" onclick="finalizar()">🏆 Reactivar el sistema</button>`
+      : `<button class="btn" onclick="siguiente()">▶ Siguiente reto</button>`;
+    renderProgress();
+  } else {
+    let msg = '❌ No es correcto. Revisa tu respuesta o pide una pista.';
+    if(r.tipo === 'checkboxes'){
+      const inputs = document.querySelectorAll('#checks input');
+      let aciertos = 0;
+      inputs.forEach((inp, idx) => {
+        if(inp.checked === r.items[idx].conductor) aciertos++;
+      });
+      msg = `❌ No del todo. Tienes ${aciertos} de ${r.items.length} correctos. Revisa cuáles son metales.`;
+    }
+    mostrarFeedback('err', msg);
+  }
+}
+
+function empezar(){
+  state.current = 0;
+  state.startTime = Date.now();
+  iniciarTimer();
+  renderReto(0);
+}
+
+function siguiente(){
+  state.current++;
+  renderReto(state.current);
+}
+
+function iniciarTimer(){
+  clearInterval(state.timerInterval);
+  actualizarTimer();
+  state.timerInterval = setInterval(() => {
+    state.timeLeft--;
+    actualizarTimer();
+    if(state.timeLeft <= 0){
+      clearInterval(state.timerInterval);
+      tiempoAgotado();
+    }
+  }, 1000);
+}
+
+function actualizarTimer(){
+  const m = Math.floor(state.timeLeft / 60);
+  const s = state.timeLeft % 60;
+  const t = $('timer');
+  t.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  t.classList.remove('warn','danger');
+  if(state.timeLeft <= 60) t.classList.add('danger');
+  else if(state.timeLeft <= 5*60) t.classList.add('warn');
+}
+
+function tiempoAgotado(){
+  const completados = state.done.filter(x => x).length;
+  screen.innerHTML = `
+    <div class="panel victory">
+      <h1 style="-webkit-text-fill-color:#ff3860; color:#ff3860; background:none; animation:none;">⏰ TIEMPO AGOTADO</h1>
+      <div class="terminal" style="text-align:left;">
+        <span class="bad">[CRITICAL]</span> Batería de emergencia agotada<br>
+        <span class="warn">[INFO]</span> Retos completados: ${completados} / ${retos.length}<br>
+        <span class="warn">[INFO]</span> Puntuación parcial: ${state.score} pts<br>
+        <span class="prompt">></span> No pasa nada: el aprendizaje es lo importante.
+      </div>
+      <button class="btn" onclick="location.reload()">↻ Reiniciar misión</button>
+    </div>
+  `;
+}
+
+function finalizar(){
+  clearInterval(state.timerInterval);
+  const used = (TOTAL_MIN*60) - state.timeLeft;
+  const m = Math.floor(used / 60);
+  const s = used % 60;
+  const totalAtt = state.attempts.reduce((a,b) => a+b, 0);
+  const totalHints = state.hintsUsed.reduce((a,b) => a+b, 0);
+  const maxScore = retos.reduce((a,r) => a+r.puntos, 0);
+  const pct = Math.round((state.score / maxScore) * 100);
+
+  let medalla = '🥇 Oro · ¡Eres un crack!';
+  if(pct < 90) medalla = '🥈 Plata · Muy bien';
+  if(pct < 70) medalla = '🥉 Bronce · Bien hecho';
+  if(pct < 50) medalla = '🎖️ Participación · A repasar';
+
+  screen.innerHTML = `
+    <div class="panel victory">
+      <h1>⚡ SUMINISTRO RESTAURADO</h1>
+      <div class="terminal" style="text-align:left;">
+        <span class="ok" style="color:#27e08d">[OK]</span> Acceso al sistema: <strong>RECUPERADO</strong><br>
+        <span class="ok" style="color:#27e08d">[OK]</span> Suministro eléctrico: <strong>ONLINE</strong><br>
+        <span class="ok" style="color:#27e08d">[OK]</span> BlackOhm expulsado del sistema<br>
+        <span class="prompt">></span> El Profesor Voltio te da las gracias 🙏
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="num">${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}</div><div class="lbl">Tiempo</div></div>
+        <div class="stat"><div class="num">${state.score}/${maxScore}</div><div class="lbl">Puntos</div></div>
+        <div class="stat"><div class="num">${pct}%</div><div class="lbl">Rendimiento</div></div>
+        <div class="stat"><div class="num">${totalHints}</div><div class="lbl">Pistas usadas</div></div>
+        <div class="stat"><div class="num">${totalAtt}</div><div class="lbl">Intentos</div></div>
+      </div>
+
+      <p style="font-size:1.05rem; color:var(--amber); margin: 14px 0;">${medalla}</p>
+
+      <div style="text-align:left; background:rgba(0,0,0,0.3); padding:14px 16px; border-radius:10px; margin:18px 0; font-size:0.9rem; color:var(--ink-dim);">
+        <strong style="color:var(--neon)">Has repasado:</strong><br>
+        ⚡ Símbolos eléctricos · Conductores y aislantes · Ley de Ohm (V=I·R) · Circuitos en serie y paralelo · Cuadro general de mando y protección · Seguridad eléctrica<br>
+        🔒 Contraseñas seguras · Phishing y dominios sospechosos<br>
+        🧮 Lógica binaria (0/1) y su conexión con la electricidad
+      </div>
+
+      <button class="btn" onclick="location.reload()">↻ Volver a jugar</button>
+    </div>
+  `;
+  renderProgress();
+}
+
+// ============================================================
+//  ARRANQUE
+// ============================================================
+renderIntro();
+</script>
+</body>
+</html>
