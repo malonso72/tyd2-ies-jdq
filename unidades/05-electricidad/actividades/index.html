@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#1B4F8A">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
 <title>Actividades resueltas · Electricidad · TyD 2º ESO</title>
-<meta name="description" content="Actividades resueltas guiadas: Ley de Ohm, resistencias en serie y paralelo, potencia y energía.">
+<meta name="description" content="Actividades resueltas guiadas: Ley de Ohm, resistencias en serie y paralelo, potencia eléctrica.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -129,7 +129,7 @@ details.solution summary{cursor:pointer;padding:14px 18px;font-weight:700;color:
     <div class="bloque-sub">En serie, la resistencia equivalente es la <b>suma</b> de todas las resistencias: <b>R<sub>eq</sub> = R₁ + R₂ + ...</b></div>
 
     <article class="activity-card">
-      <div class="activity-head"><span class="activity-num">Ej. 4</span><div><h2>Dos resistencias en serie</h2><p class="note">Calcula primero la R<sub>eq</sub> y después la intensidad.</p></div></div>
+      <div class="activity-head"><span class="activity-num">Ej. 4</span><div><h2>Dos resistencias en serie</h2><p class="note">Resistencia equivalente, circuito simplificado e intensidades.</p></div></div>
       <div class="schema" id="sch4"></div>
       <div class="statement">Dos resistencias de <b>R₁ = 2 Ω</b> y <b>R₂ = 4 Ω</b> están conectadas en serie a una pila de <b>12 V</b>.</div>
       <div class="data-row"><span class="data-pill">R₁ = 2 Ω</span><span class="data-pill">R₂ = 4 Ω</span><span class="data-pill">V = 12 V</span></div>
@@ -140,56 +140,120 @@ details.solution summary{cursor:pointer;padding:14px 18px;font-weight:700;color:
         <div id="fb-ans4a" class="feedback"></div>
       </div>
       <div class="subactivity">
-        <h3>b) Calcula la intensidad que circula por el circuito.</h3>
-        <div class="answer-box"><input id="ans4b" type="text" inputmode="decimal" placeholder="Intensidad"><span class="unit-label">A</span><button class="check-btn" onclick="checkAnswer('ans4b', 2, 0.05)">Comprobar</button></div>
-        <div id="fb-ans4b" class="feedback"></div>
+        <h3>b) Dibuja en tu cuaderno el circuito equivalente simplificado.</h3>
+        <p class="note">Sustituye las dos resistencias por una sola con el valor de R<sub>eq</sub>. La pila no cambia. Compara con la solución cuando lo hayas dibujado.</p>
+      </div>
+      <div class="subactivity">
+        <h3>c) Calcula la intensidad total que suministra la pila al circuito.</h3>
+        <div class="answer-box"><input id="ans4c" type="text" inputmode="decimal" placeholder="Intensidad total"><span class="unit-label">A</span><button class="check-btn" onclick="checkAnswer('ans4c', 2, 0.05)">Comprobar</button></div>
+        <div id="fb-ans4c" class="feedback"></div>
+      </div>
+      <div class="subactivity">
+        <h3>d) Indica la intensidad que pasa por cada una de las resistencias.</h3>
+        <div class="answer-box"><input id="ans4d" type="text" inputmode="decimal" placeholder="Intensidad por cada R"><span class="unit-label">A</span><button class="check-btn" onclick="checkAnswer('ans4d', 2, 0.05)">Comprobar</button></div>
+        <div id="fb-ans4d" class="feedback"></div>
       </div>
 
       <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body">
         <h4>a) Resistencia equivalente</h4>
         <div class="steps">
-          <div class="step">Fórmula en serie: R<sub>eq</sub> = R₁ + R₂.</div>
-          <div class="step">Sustituimos: R<sub>eq</sub> = 2 + 4.</div>
-          <div class="step">R<sub>eq</sub> = 6 Ω.</div>
+          <div class="step">En serie, las resistencias se suman: R<sub>eq</sub> = R₁ + R₂.</div>
+          <div class="step">Sustituimos: R<sub>eq</sub> = 2 + 4 = <b>6 Ω</b>.</div>
         </div>
-        <h4>b) Intensidad</h4>
+        <h4>b) Circuito equivalente simplificado</h4>
         <div class="steps">
-          <div class="step">Ley de Ohm aplicada al circuito completo: I = V / R<sub>eq</sub>.</div>
-          <div class="step">Sustituimos: I = 12 / 6 = 2 A.</div>
-          <div class="step">Resultado: <b>I = 2 A</b>. En serie, esta intensidad es la misma a través de las dos resistencias.</div>
+          <div class="step">Sustituimos las dos resistencias en serie por <b>una sola</b> de valor R<sub>eq</sub> = 6 Ω. La pila de 12 V se queda igual.</div>
+          <div class="step" style="text-align:center;background:#fff;padding:14px;border:1px solid var(--line)">
+            <svg viewBox="0 0 320 100" style="max-width:260px;height:auto">
+              <line x1="40" y1="50" x2="40" y2="30" stroke="#333" stroke-width="2"/>
+              <line x1="30" y1="30" x2="50" y2="30" stroke="#333" stroke-width="3"/>
+              <line x1="35" y1="40" x2="45" y2="40" stroke="#333" stroke-width="2"/>
+              <text x="15" y="35" font-size="11" font-family="sans-serif">12 V</text>
+              <line x1="40" y1="40" x2="40" y2="50" stroke="#333" stroke-width="2"/>
+              <line x1="40" y1="50" x2="120" y2="50" stroke="#333" stroke-width="2"/>
+              <rect x="120" y="40" width="80" height="20" fill="#FFE8A8" stroke="#333" stroke-width="2"/>
+              <text x="160" y="55" font-size="12" text-anchor="middle" font-family="sans-serif" font-weight="bold">6 Ω</text>
+              <line x1="200" y1="50" x2="280" y2="50" stroke="#333" stroke-width="2"/>
+              <line x1="40" y1="50" x2="40" y2="80" stroke="#333" stroke-width="2"/>
+              <line x1="40" y1="80" x2="280" y2="80" stroke="#333" stroke-width="2"/>
+              <line x1="280" y1="50" x2="280" y2="80" stroke="#333" stroke-width="2"/>
+            </svg>
+          </div>
+        </div>
+        <h4>c) Intensidad total</h4>
+        <div class="steps">
+          <div class="step">Aplicamos la ley de Ohm al circuito completo: I = V / R<sub>eq</sub>.</div>
+          <div class="step">Sustituimos: I = 12 / 6 = <b>2 A</b>.</div>
+        </div>
+        <h4>d) Intensidad por cada resistencia</h4>
+        <div class="steps">
+          <div class="step">En un circuito en serie hay un <b>único camino</b> para la corriente. Por tanto, la misma intensidad atraviesa todas las resistencias.</div>
+          <div class="step">I (por R₁) = I (por R₂) = <b>2 A</b>. Es la misma que la total.</div>
         </div>
       </div></details>
     </article>
 
     <article class="activity-card">
-      <div class="activity-head"><span class="activity-num">Ej. 5</span><div><h2>Tres resistencias en serie</h2><p class="note">Mismo procedimiento que el anterior, pero con tres resistencias.</p></div></div>
+      <div class="activity-head"><span class="activity-num">Ej. 5</span><div><h2>Tres resistencias en serie</h2><p class="note">Mismo procedimiento que el anterior, ahora con tres resistencias.</p></div></div>
       <div class="schema" id="sch5"></div>
       <div class="statement">Tres resistencias de <b>R₁ = 2 Ω</b>, <b>R₂ = 4 Ω</b> y <b>R₃ = 6 Ω</b> están conectadas en serie a una pila de <b>24 V</b>.</div>
       <div class="data-row"><span class="data-pill">R₁ = 2 Ω</span><span class="data-pill">R₂ = 4 Ω</span><span class="data-pill">R₃ = 6 Ω</span><span class="data-pill">V = 24 V</span></div>
 
       <div class="subactivity">
         <h3>a) Calcula la resistencia equivalente del circuito.</h3>
-        <div class="answer-box"><input id="ans5a" type="text" inputmode="decimal" placeholder="Resistencia equivalente"><span class="unit-label">Ω</span><button class="check-btn" onclick="checkAnswer('ans5a', 12, 0.1)">Comprobar</button></div>
+        <div class="answer-box"><input id="ans5a" type="text" inputmode="decimal" placeholder="Resistencia equivalente"><span class="unit-label">Ω</span><button class="check-btn" onclick="checkAnswer('ans5a', 12, 0.05)">Comprobar</button></div>
         <div id="fb-ans5a" class="feedback"></div>
       </div>
       <div class="subactivity">
-        <h3>b) Calcula la intensidad que circula por el circuito.</h3>
-        <div class="answer-box"><input id="ans5b" type="text" inputmode="decimal" placeholder="Intensidad"><span class="unit-label">A</span><button class="check-btn" onclick="checkAnswer('ans5b', 2, 0.05)">Comprobar</button></div>
-        <div id="fb-ans5b" class="feedback"></div>
+        <h3>b) Dibuja en tu cuaderno el circuito equivalente simplificado.</h3>
+        <p class="note">Sustituye las tres resistencias por una sola con el valor de R<sub>eq</sub>. La pila no cambia.</p>
+      </div>
+      <div class="subactivity">
+        <h3>c) Calcula la intensidad total que suministra la pila al circuito.</h3>
+        <div class="answer-box"><input id="ans5c" type="text" inputmode="decimal" placeholder="Intensidad total"><span class="unit-label">A</span><button class="check-btn" onclick="checkAnswer('ans5c', 2, 0.05)">Comprobar</button></div>
+        <div id="fb-ans5c" class="feedback"></div>
+      </div>
+      <div class="subactivity">
+        <h3>d) Indica la intensidad que pasa por cada una de las resistencias.</h3>
+        <div class="answer-box"><input id="ans5d" type="text" inputmode="decimal" placeholder="Intensidad por cada R"><span class="unit-label">A</span><button class="check-btn" onclick="checkAnswer('ans5d', 2, 0.05)">Comprobar</button></div>
+        <div id="fb-ans5d" class="feedback"></div>
       </div>
 
       <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body">
         <h4>a) Resistencia equivalente</h4>
         <div class="steps">
-          <div class="step">Fórmula en serie: R<sub>eq</sub> = R₁ + R₂ + R₃.</div>
-          <div class="step">Sustituimos: R<sub>eq</sub> = 2 + 4 + 6.</div>
-          <div class="step">R<sub>eq</sub> = 12 Ω.</div>
+          <div class="step">En serie se suman: R<sub>eq</sub> = R₁ + R₂ + R₃.</div>
+          <div class="step">Sustituimos: R<sub>eq</sub> = 2 + 4 + 6 = <b>12 Ω</b>.</div>
         </div>
-        <h4>b) Intensidad</h4>
+        <h4>b) Circuito equivalente simplificado</h4>
         <div class="steps">
-          <div class="step">Ley de Ohm: I = V / R<sub>eq</sub>.</div>
-          <div class="step">Sustituimos: I = 24 / 12 = 2 A.</div>
-          <div class="step">Resultado: <b>I = 2 A</b>.</div>
+          <div class="step">Sustituimos las tres resistencias en serie por <b>una sola</b> de R<sub>eq</sub> = 12 Ω. La pila de 24 V se queda igual.</div>
+          <div class="step" style="text-align:center;background:#fff;padding:14px;border:1px solid var(--line)">
+            <svg viewBox="0 0 320 100" style="max-width:260px;height:auto">
+              <line x1="40" y1="50" x2="40" y2="30" stroke="#333" stroke-width="2"/>
+              <line x1="30" y1="30" x2="50" y2="30" stroke="#333" stroke-width="3"/>
+              <line x1="35" y1="40" x2="45" y2="40" stroke="#333" stroke-width="2"/>
+              <text x="15" y="35" font-size="11" font-family="sans-serif">24 V</text>
+              <line x1="40" y1="40" x2="40" y2="50" stroke="#333" stroke-width="2"/>
+              <line x1="40" y1="50" x2="120" y2="50" stroke="#333" stroke-width="2"/>
+              <rect x="120" y="40" width="80" height="20" fill="#FFE8A8" stroke="#333" stroke-width="2"/>
+              <text x="160" y="55" font-size="12" text-anchor="middle" font-family="sans-serif" font-weight="bold">12 Ω</text>
+              <line x1="200" y1="50" x2="280" y2="50" stroke="#333" stroke-width="2"/>
+              <line x1="40" y1="50" x2="40" y2="80" stroke="#333" stroke-width="2"/>
+              <line x1="40" y1="80" x2="280" y2="80" stroke="#333" stroke-width="2"/>
+              <line x1="280" y1="50" x2="280" y2="80" stroke="#333" stroke-width="2"/>
+            </svg>
+          </div>
+        </div>
+        <h4>c) Intensidad total</h4>
+        <div class="steps">
+          <div class="step">Ley de Ohm sobre el circuito completo: I = V / R<sub>eq</sub>.</div>
+          <div class="step">Sustituimos: I = 24 / 12 = <b>2 A</b>.</div>
+        </div>
+        <h4>d) Intensidad por cada resistencia</h4>
+        <div class="steps">
+          <div class="step">En serie, la corriente es la misma en todo el recorrido (un solo camino).</div>
+          <div class="step">I (R₁) = I (R₂) = I (R₃) = <b>2 A</b>.</div>
         </div>
       </div></details>
     </article>
@@ -234,8 +298,8 @@ details.solution summary{cursor:pointer;padding:14px 18px;font-weight:700;color:
 
 
     <!-- ============== BLOQUE 4 — BONUS ============== -->
-    <div class="bloque-titulo">Bloque 4 · Potencia y energía</div>
-    <div class="bloque-sub">Aplica las fórmulas <b>P = V · I</b>, <b>P = I² · R</b> y <b>E = P · t</b>.</div>
+    <div class="bloque-titulo">Bloque 4 · Potencia eléctrica</div>
+    <div class="bloque-sub">Aplica la fórmula <b>P = V · I</b> en las tres formas posibles: calcular P, despejar I, despejar V.</div>
 
     <article class="activity-card">
       <div class="activity-head"><span class="activity-num">Ej. 8</span><div><h2>Calcular la potencia eléctrica</h2><p class="note">Aplica P = V · I.</p></div></div>
@@ -252,30 +316,30 @@ details.solution summary{cursor:pointer;padding:14px 18px;font-weight:700;color:
     </article>
 
     <article class="activity-card">
-      <div class="activity-head"><span class="activity-num">Ej. 9</span><div><h2>Potencia con resistencia e intensidad</h2><p class="note">Usa P = I² · R.</p></div></div>
-      <div class="statement">Por una resistencia de <b>10 Ω</b> circula una intensidad de <b>2 A</b>. ¿Qué potencia disipa?</div>
-      <div class="data-row"><span class="data-pill">R = 10 Ω</span><span class="data-pill">I = 2 A</span><span class="data-pill">P = ?</span></div>
-      <div class="answer-box"><input id="ans9" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">W</span><button class="check-btn" onclick="checkAnswer('ans9', 40, 0.5)">Comprobar</button></div>
+      <div class="activity-head"><span class="activity-num">Ej. 9</span><div><h2>Calcular la intensidad a partir de la potencia</h2><p class="note">Despeja I de P = V · I → I = P / V.</p></div></div>
+      <div class="statement">Una bombilla de <b>60 W</b> está conectada a la red eléctrica de <b>230 V</b>. ¿Qué intensidad circula por ella?</div>
+      <div class="data-row"><span class="data-pill">P = 60 W</span><span class="data-pill">V = 230 V</span><span class="data-pill">I = ?</span></div>
+      <div class="answer-box"><input id="ans9" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">A</span><button class="check-btn" onclick="checkAnswer('ans9', 0.26, 0.02)">Comprobar</button></div>
       <div id="fb-ans9" class="feedback"></div>
       <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
-        <div class="step">Fórmula alternativa: P = I² · R.</div>
-        <div class="step">Sustituimos: P = 2² · 10 = 4 · 10.</div>
-        <div class="step">P = 40 W.</div>
-        <div class="step">Resultado: <b>P = 40 W</b>.</div>
+        <div class="step">Fórmula: P = V · I.</div>
+        <div class="step">Despejamos I: I = P / V.</div>
+        <div class="step">Sustituimos: I = 60 / 230 ≈ <b>0,26 A</b>.</div>
+        <div class="step">Resultado: por la bombilla circulan unos <b>260 mA</b>. Una bombilla LED equivalente consumiría unas 5 veces menos.</div>
       </div></div></details>
     </article>
 
     <article class="activity-card">
-      <div class="activity-head"><span class="activity-num">Ej. 10</span><div><h2>Energía consumida</h2><p class="note">Usa E = P · t (kWh).</p></div></div>
-      <div class="statement">Un horno de <b>2 000 W</b> funciona durante <b>1,5 horas</b>. ¿Cuánta energía consume? Da el resultado en <b>kWh</b>.</div>
-      <div class="data-row"><span class="data-pill">P = 2000 W = 2 kW</span><span class="data-pill">t = 1,5 h</span><span class="data-pill">E = ?</span></div>
-      <div class="answer-box"><input id="ans10" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">kWh</span><button class="check-btn" onclick="checkAnswer('ans10', 3, 0.05)">Comprobar</button></div>
+      <div class="activity-head"><span class="activity-num">Ej. 10</span><div><h2>Calcular la tensión a partir de la potencia</h2><p class="note">Despeja V de P = V · I → V = P / I.</p></div></div>
+      <div class="statement">Un radiador eléctrico consume una potencia de <b>1500 W</b> y por él circula una intensidad de <b>6,5 A</b>. ¿A qué tensión está conectado?</div>
+      <div class="data-row"><span class="data-pill">P = 1500 W</span><span class="data-pill">I = 6,5 A</span><span class="data-pill">V = ?</span></div>
+      <div class="answer-box"><input id="ans10" type="text" inputmode="decimal" placeholder="Escribe tu resultado"><span class="unit-label">V</span><button class="check-btn" onclick="checkAnswer('ans10', 230.77, 1)">Comprobar</button></div>
       <div id="fb-ans10" class="feedback"></div>
       <details class="solution"><summary>Ver solución paso a paso</summary><div class="solution-body"><div class="steps">
-        <div class="step">Pasamos la potencia a kW: 2 000 W = 2 kW.</div>
-        <div class="step">Fórmula: E = P · t.</div>
-        <div class="step">Sustituimos: E = 2 · 1,5 = 3 kWh.</div>
-        <div class="step">Resultado: <b>E = 3 kWh</b>.</div>
+        <div class="step">Fórmula: P = V · I.</div>
+        <div class="step">Despejamos V: V = P / I.</div>
+        <div class="step">Sustituimos: V = 1500 / 6,5 ≈ <b>230,77 V</b>.</div>
+        <div class="step">Resultado: está conectado a la red eléctrica doméstica (los 230 V de toda la vida).</div>
       </div></div></details>
     </article>
 
