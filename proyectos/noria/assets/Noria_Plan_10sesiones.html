@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Plan de trabajo · Noria motorizada · 10 sesiones · v2</title>
+<style>
+@page { size: A4 portrait; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #E8E5DD; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; color: #1A1A1A; -webkit-font-smoothing: antialiased; }
+
+.pag {
+  width: 794px; min-height: 1123px;
+  background: #FAFAF8;
+  margin: 0 auto 8mm;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  page-break-after: always;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+.pag:last-child { page-break-after: auto; }
+.pag-inner {
+  padding: 50px 60px 40px;
+  min-height: 1123px;
+  display: flex;
+  flex-direction: column;
+}
+.pag-flex { display: flex; flex-direction: column; flex: 1; }
+
+@media print {
+  body { background: white; }
+  .pag { margin: 0; box-shadow: none; }
+}
+
+/* ====== PORTADA ====== */
+.cover-pre { font-size: 10pt; color: #5F5E5A; letter-spacing: 4px; text-transform: uppercase; font-weight: 600; }
+.cover-titulo { font-weight: 900; font-size: 56pt; color: #1B4F8A; line-height: 0.92; margin: 5mm 0 2mm; letter-spacing: -1.5px; }
+.cover-sub { font-size: 13pt; color: #993C1D; font-style: italic; margin-bottom: 4mm; }
+.cover-meta { font-size: 10pt; color: #5F5E5A; }
+
+.cover-imgs { display: flex; gap: 5mm; margin: 9mm 0 7mm; }
+.cover-imgs > div { flex: 1; }
+.cover-imgs img { width: 100%; display: block; border-radius: 2mm; box-shadow: 0 2px 10px rgba(0,0,0,0.18); }
+.cover-cap { font-size: 9pt; color: #5F5E5A; font-style: italic; text-align: center; margin-top: 2mm; }
+
+.cover-resumen-h { font-weight: 900; font-size: 11pt; color: #1B4F8A; text-transform: uppercase; letter-spacing: 2px; margin: 3mm 0 3mm; border-bottom: 2px solid #1B4F8A; padding-bottom: 2mm; }
+.resumen-tabla { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+.resumen-tabla td { padding: 1.4mm 2mm; border-bottom: 1px solid #E8E5DD; vertical-align: middle; }
+.resumen-tabla tr:last-child td { border-bottom: none; }
+.resumen-tabla td:first-child { width: 11mm; color: #1B4F8A; font-weight: 900; font-size: 13pt; text-align: center; }
+.resumen-tabla td:nth-child(2) { width: 42mm; color: #993C1D; font-weight: bold; text-transform: uppercase; font-size: 9pt; letter-spacing: 0.5px; }
+.resumen-tabla td:nth-child(3) { color: #1A1A1A; }
+
+.aviso-cotas { background: #FFF8F0; border-left: 4px solid #993C1D; padding: 3mm 5mm; margin-top: 4mm; font-size: 9pt; line-height: 1.45; border-radius: 0 2mm 2mm 0; }
+.aviso-cotas strong { color: #993C1D; }
+
+.creditos { margin-top: auto; text-align: center; font-size: 8.5pt; color: #5F5E5A; font-style: italic; border-top: 1px solid #DDD9CE; padding-top: 3mm; }
+
+/* ====== CABECERA DE SESIÓN ====== */
+.s-header { display: flex; align-items: flex-end; gap: 6mm; padding-bottom: 3mm; border-bottom: 3px solid #1B4F8A; margin-bottom: 5mm; }
+.s-num-block { line-height: 0.85; }
+.s-num-meta { font-size: 9pt; color: #5F5E5A; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; }
+.s-num-big { font-weight: 900; font-size: 56pt; color: #1B4F8A; letter-spacing: -2px; }
+.s-titulo-new { font-weight: 900; font-size: 18pt; color: #993C1D; line-height: 1.05; text-transform: uppercase; letter-spacing: 0.4px; flex: 1; padding-bottom: 4mm; }
+.s-estado { display: inline-block; background: #2E7D5C; color: white; font-size: 8pt; font-weight: 900; padding: 1mm 3mm; border-radius: 1mm; letter-spacing: 1px; margin-left: 2mm; vertical-align: middle; }
+
+/* ====== BLOQUES POR SESIÓN ====== */
+.bloque { margin-bottom: 4mm; }
+.bloque-h {
+  display: inline-block;
+  font-weight: 900;
+  font-size: 8.5pt;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: white;
+  padding: 1mm 3mm;
+  border-radius: 1mm;
+  margin-bottom: 2.5mm;
+}
+.bh-mat { background: #1B4F8A; }
+.bh-pasos { background: #993C1D; }
+.bh-final { background: #2E7D5C; }
+.bh-ojo { background: #B85C00; }
+
+/* Materiales */
+.mat-cont { font-size: 9.5pt; line-height: 1.4; color: #1A1A1A; padding-left: 1mm; }
+.mat-cont strong { color: #1B4F8A; }
+
+/* Pasos con tiempo y rol */
+.pasos { list-style: none; padding: 0; }
+.pasos li {
+  display: grid;
+  grid-template-columns: 18mm 16mm 1fr;
+  gap: 2mm;
+  padding: 2mm 0;
+  border-bottom: 1px dashed #DDD9CE;
+  font-size: 10pt;
+  line-height: 1.4;
+  align-items: start;
+}
+.pasos li:last-child { border-bottom: none; }
+.pasos .tiempo { font-weight: 900; color: #1A1A1A; font-size: 9pt; padding-top: 0.3mm; }
+.pasos .rol {
+  font-weight: 900; font-size: 8pt; letter-spacing: 1px; text-transform: uppercase;
+  padding: 0.6mm 0; text-align: center; border-radius: 1mm;
+}
+.rol-profe { background: #E6F1FB; color: #1B4F8A; }
+.rol-alum { background: #FFEFE5; color: #993C1D; }
+.rol-ambos { background: #F0E5F5; color: #6B3B8F; }
+.pasos strong { color: #993C1D; }
+.pasos .medida { display: inline-block; background: #E6F1FB; color: #1B4F8A; font-weight: bold; padding: 0.2mm 1.5mm; border-radius: 1mm; font-size: 9pt; }
+
+/* Salida final */
+.salida {
+  background: #E1F5EE;
+  border-left: 4px solid #2E7D5C;
+  padding: 3mm 4mm;
+  font-size: 10pt;
+  line-height: 1.45;
+  border-radius: 0 1.5mm 1.5mm 0;
+}
+.salida strong { color: #2E7D5C; }
+
+/* Ojo con... */
+.ojo {
+  background: #FFF8F0;
+  border-left: 4px solid #B85C00;
+  padding: 3mm 4mm;
+  font-size: 9.5pt;
+  line-height: 1.4;
+  border-radius: 0 1.5mm 1.5mm 0;
+}
+.ojo-list { list-style: none; padding: 0; }
+.ojo-list li { padding: 0.6mm 0 0.6mm 4mm; position: relative; }
+.ojo-list li::before { content: "▸"; position: absolute; left: 0; color: #B85C00; font-weight: bold; }
+.ojo strong { color: #B85C00; }
+
+/* Pie */
+.pie { margin-top: auto; display: flex; justify-content: space-between; align-items: center; font-size: 8.5pt; color: #5F5E5A; font-style: italic; padding-top: 2.5mm; border-top: 1px solid #DDD9CE; }
+.pie .progreso { display: flex; gap: 1.5mm; align-items: center; }
+.pie .pdot { width: 2.5mm; height: 2.5mm; border-radius: 50%; background: #DDD9CE; }
+.pie .pdot.act { background: #1B4F8A; }
+.pie .pdot.done { background: #993C1D; }
+</style>
+</head>
+<body>
+
+<!-- ============================================== -->
+<!-- PORTADA -->
+<!-- ============================================== -->
+<div class="pag"><div class="pag-inner"><div class="pag-flex">
+  <div class="cover-pre">Plan de trabajo · 10 sesiones · v2</div>
+  <div class="cover-titulo">NORIA<br>MOTORIZADA</div>
+  <div class="cover-sub">Proyecto integrador · construcción pura</div>
+  <div class="cover-meta">Tecnología y Digitalización · 2.º ESO · IES Jiménez de Quesada</div>
+
+  <div class="cover-imgs">
+    <div>
+      <img src="noria_alzado.png" alt="Alzado frontal de la noria">
+      <div class="cover-cap">Alzado frontal</div>
+    </div>
+    <div>
+      <img src="noria_perfil.png" alt="Vista de perfil de la noria">
+      <div class="cover-cap">Vista de perfil</div>
+    </div>
+  </div>
+
+  <div class="cover-resumen-h">Las 10 sesiones de un vistazo</div>
+  <table class="resumen-tabla">
+    <tr><td>01</td><td>Inicio · barras</td><td>Explicación, grupos y 50 barras de papel sin cortar</td></tr>
+    <tr><td>02</td><td>Base</td><td>Cartón ≈40×30, plantillas y posición de las torres</td></tr>
+    <tr><td>03</td><td>Torre 1</td><td>Cortar piezas, montar 4 caras con cruces, ensamblar prisma</td></tr>
+    <tr><td>04</td><td>Torre 2</td><td>Repetir el proceso de la torre 1</td></tr>
+    <tr><td>05</td><td>Aros, radios y cubos</td><td>Dos aros hexagonales con sus cubos centrales y radios</td></tr>
+    <tr><td>06</td><td>Unión de aros</td><td>Barras axiales + diagonales en V → rueda terminada</td></tr>
+    <tr><td>07</td><td>Torres y eje</td><td>Pegar torres a la base + cojinetes + ensartar el eje</td></tr>
+    <tr><td>08</td><td>Transmisión</td><td>Polea, motor y correa: reducción 1 : 5</td></tr>
+    <tr><td>09</td><td>Circuito</td><td>Pila, interruptor, conmutador y reostato por capas</td></tr>
+    <tr><td>10</td><td>Pruebas y extras</td><td>Marcha continua, cabinas opcionales y entrega</td></tr>
+  </table>
+
+  <div class="aviso-cotas">
+    <strong>Sobre las medidas:</strong> las cotas en cm son <strong>aproximadas y orientativas</strong>. Antes de cortar, cada grupo debe comprobar in situ que las piezas encajan con el material real disponible. Las únicas cotas estructurales que conviene respetar son: <strong>base de cartón disponible</strong>, <strong>prisma 6 × 12 × 20 cm</strong> (torre) y <strong>Ø rueda ≈ 26 cm</strong>.
+  </div>
+
+  <div class="creditos">Manuel Alonso · IES Jiménez de Quesada (Santa Fe) · TyD 2.º ESO · curso 2025-26 · v2</div>
+</div></div></div>
+
+<!-- ============================================== -->
+<!-- DÍA 1 -->
+<!-- ============================================== -->
+<div class="pag"><div class="pag-inner"><div class="pag-flex">
+  <div class="s-header">
+    <div class="s-num-block">
+      <div class="s-num-meta">Sesión 01 / 10</div>
+      <div class="s-num-big">01</div>
+    </div>
+    <div class="s-titulo-new">Inicio y barras de papel<span class="s-estado">HECHO 25 MAY</span></div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-mat">Encima de la mesa</div>
+    <div class="mat-cont">Folios reciclados DIN A4 (3-4 por barra) · <strong>brochetas o lápices Ø 4 mm</strong> como mandril para enrollar · cola blanca · trapos · póster del proyecto proyectado en pantalla.</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-pasos">Paso a paso</div>
+    <ul class="pasos">
+      <li><span class="tiempo">0-10 min</span><span class="rol rol-profe">Profe</span><span>Proyectar el <strong>póster</strong>, explicar las 10 sesiones y formar los <strong>grupos de 4</strong>.</span></li>
+      <li><span class="tiempo">10-50 min</span><span class="rol rol-alum">Alumnos</span><span>Fabricar <span class="medida">50 barras</span> de papel por grupo, <strong>largas y sin cortar</strong>. Enrollar en diagonal, con tensión, y sellar el último triángulo con cola.</span></li>
+      <li><span class="tiempo">50-55 min</span><span class="rol rol-profe">Profe</span><span>Pasar mesa por mesa apretando barras con dos dedos: las que se abren se rehacen.</span></li>
+      <li><span class="tiempo">55 min</span><span class="rol rol-ambos">Ambos</span><span>Identificar las 50 barras con el nombre del grupo y guardarlas. Recoger mesas.</span></li>
+    </ul>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-final">Al final de la sesión</div>
+    <div class="salida"><strong>50 barras de papel</strong> firmes (no se abren al apretar) por cada grupo, <strong>largas y sin cortar</strong>, identificadas con el nombre del grupo.</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-ojo">Ojo con</div>
+    <div class="ojo"><ul class="ojo-list">
+      <li>Enrollar <strong>recto</strong> en vez de en diagonal: la barra queda blanda.</li>
+      <li>Poca cola en el sellado: se abre con el tiempo.</li>
+      <li><strong>Cortarlas hoy</strong>: NO. Las barras se guardan largas, se cortan en su sesión.</li>
+      <li>Grupos que terminan pronto: pueden empezar a enrollar barras de repuesto (siempre vienen bien).</li>
+    </ul></div>
+  </div>
+
+  <div class="pie">
+    <span>Plan de trabajo · Noria motorizada · v2</span>
+    <div class="progreso">
+      <span class="pdot done"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span>
+    </div>
+    <span>1 / 10</span>
+  </div>
+</div></div></div>
+
+<!-- ============================================== -->
+<!-- DÍA 2 -->
+<!-- ============================================== -->
+<div class="pag"><div class="pag-inner"><div class="pag-flex">
+  <div class="s-header">
+    <div class="s-num-block">
+      <div class="s-num-meta">Sesión 02 / 10</div>
+      <div class="s-num-big">02</div>
+    </div>
+    <div class="s-titulo-new">Base y posición de las torres</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-mat">Encima de la mesa</div>
+    <div class="mat-cont">Una plancha de <strong>cartón corrugado</strong> (la mayor que tengáis a mano, ≈ 50×40 cm) · regla larga (≥ 40 cm) · escuadra · lápiz · goma · cúter o tijeras fuertes · <strong>2 plantillas de cartón sueltas</strong> que dibujaréis hoy (huellas de torre y rectángulo de la rueda).</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-pasos">Paso a paso</div>
+    <ul class="pasos">
+      <li><span class="tiempo">0-10 min</span><span class="rol rol-profe">Profe</span><span>Recuerda: <strong>HOY no se pega nada</strong>. Solo se mide, se corta y se marca. Enseña cómo encajar las plantillas.</span></li>
+      <li><span class="tiempo">10-25 min</span><span class="rol rol-alum">Alumnos</span><span>Cortar la <strong>base</strong> aprox. <span class="medida">40 × 30 cm</span>. Marcar a lápiz el <strong>rectángulo de encaje</strong> aprox. <span class="medida">35 × 25 cm</span>.</span></li>
+      <li><span class="tiempo">25-40 min</span><span class="rol rol-alum">Alumnos</span><span>Recortar las <strong>2 plantillas</strong>: dos huellas de torre de <span class="medida">6 × 12 cm</span> y un rectángulo de rueda de <span class="medida">8 × 26 cm</span>.</span></li>
+      <li><span class="tiempo">40-50 min</span><span class="rol rol-alum">Alumnos</span><span>Mover las plantillas sobre el rectángulo de encaje hasta que la <strong>rueda quepa cómoda</strong> entre las dos torres. Marcar a lápiz las huellas.</span></li>
+      <li><span class="tiempo">50-55 min</span><span class="rol rol-profe">Profe</span><span>Valida la posición de cada grupo antes de cerrar la sesión. Firma la base.</span></li>
+    </ul>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-final">Al final de la sesión</div>
+    <div class="salida">Una <strong>base de cartón ≈ 40×30 cm</strong> con el rectángulo de encaje y las <strong>dos huellas de torre marcadas a lápiz</strong>. <strong>NADA pegado todavía.</strong></div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-ojo">Ojo con</div>
+    <div class="ojo"><ul class="ojo-list">
+      <li>Marcar con <strong>bolígrafo</strong> en vez de lápiz: queda y no se puede corregir.</li>
+      <li>Pegar las torres hoy: <strong>NO</strong>. El pegado va en el Día 7.</li>
+      <li>Olvidar dejar sitio fuera del rectángulo para el <strong>motor y el circuito</strong> (Días 8-9).</li>
+      <li>Plantillas demasiado pequeñas o torcidas: la rueda no encajará entre torres.</li>
+    </ul></div>
+  </div>
+
+  <div class="pie">
+    <span>Plan de trabajo · Noria motorizada · v2</span>
+    <div class="progreso">
+      <span class="pdot done"></span><span class="pdot act"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span>
+    </div>
+    <span>2 / 10</span>
+  </div>
+</div></div></div>
+
+<!-- ============================================== -->
+<!-- DÍA 3 -->
+<!-- ============================================== -->
+<div class="pag"><div class="pag-inner"><div class="pag-flex">
+  <div class="s-header">
+    <div class="s-num-block">
+      <div class="s-num-meta">Sesión 03 / 10</div>
+      <div class="s-num-big">03</div>
+    </div>
+    <div class="s-titulo-new">Torre 1 · prisma con cruces</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-mat">Encima de la mesa</div>
+    <div class="mat-cont">≈ 12-14 barras del Día 1 · <strong>tijeras o cúter</strong> · cola caliente con pistola · regla · lápiz · escuadra (para 90°) · base del Día 2 (de referencia, no se toca).</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-pasos">Paso a paso</div>
+    <ul class="pasos">
+      <li><span class="tiempo">0-10 min</span><span class="rol rol-profe">Profe</span><span>Demuestra el corte de barras y la <strong>cruz de San Andrés</strong> sobre una cara plana.</span></li>
+      <li><span class="tiempo">10-25 min</span><span class="rol rol-alum">Alumnos</span><span>Cortar las <strong>≈ 24 piezas</strong> (medir antes de cortar): 4 postes de <span class="medida">20 cm</span> · 6 travesaños de <span class="medida">12 cm</span> · 6 de <span class="medida">6 cm</span> · 8 diagonales (4 largas + 4 cortas, medir al hueco real).</span></li>
+      <li><span class="tiempo">25-45 min</span><span class="rol rol-alum">Alumnos</span><span>Montar las <strong>4 caras planas</strong> sobre la mesa (postes + travesaños + <strong>cruz de San Andrés</strong> en cada una). <strong>NO ensamblar el prisma todavía.</strong></span></li>
+      <li><span class="tiempo">45-55 min</span><span class="rol rol-alum">Alumnos</span><span><strong>Ensamblar el prisma</strong> 6 × 12 × 20 cm uniendo las 4 caras por sus postes compartidos.</span></li>
+    </ul>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-final">Al final de la sesión</div>
+    <div class="salida">Una <strong>torre prisma ≈ 6 × 12 × 20 cm</strong> con cruces en las <strong>4 caras</strong>, capaz de mantenerse en pie sola y no deformarse al apretarla.</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-ojo">Ojo con</div>
+    <div class="ojo"><ul class="ojo-list">
+      <li><strong>Ensamblar el prisma antes de poner las cruces</strong>: error cardinal. Hay que hacer las cruces sobre la mesa, con las caras planas.</li>
+      <li>Cruces solo en 2 ó 3 caras: la torre se vence. Las 4 caras llevan cruz.</li>
+      <li>Cola caliente <strong>excesiva</strong>: pegote, peso muerto y torre torcida.</li>
+      <li>Postes no perpendiculares: comprobar con la escuadra antes de pegar.</li>
+    </ul></div>
+  </div>
+
+  <div class="pie">
+    <span>Plan de trabajo · Noria motorizada · v2</span>
+    <div class="progreso">
+      <span class="pdot done"></span><span class="pdot done"></span><span class="pdot act"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span>
+    </div>
+    <span>3 / 10</span>
+  </div>
+</div></div></div>
+
+<!-- ============================================== -->
+<!-- DÍA 4 -->
+<!-- ============================================== -->
+<div class="pag"><div class="pag-inner"><div class="pag-flex">
+  <div class="s-header">
+    <div class="s-num-block">
+      <div class="s-num-meta">Sesión 04 / 10</div>
+      <div class="s-num-big">04</div>
+    </div>
+    <div class="s-titulo-new">Torre 2 · igual que la 1</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-mat">Encima de la mesa</div>
+    <div class="mat-cont">Igual que el Día 3 · <strong>la Torre 1 terminada</strong> al lado como referencia para comparar.</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-pasos">Paso a paso</div>
+    <ul class="pasos">
+      <li><span class="tiempo">0-5 min</span><span class="rol rol-profe">Profe</span><span>Repasa los <strong>aciertos y errores</strong> de las torres del Día 3 (las que han salido bien y las que no).</span></li>
+      <li><span class="tiempo">5-20 min</span><span class="rol rol-alum">Alumnos</span><span>Cortar las <strong>≈ 24 piezas</strong> idénticas a las del Día 3.</span></li>
+      <li><span class="tiempo">20-40 min</span><span class="rol rol-alum">Alumnos</span><span>Montar las <strong>4 caras planas</strong> con sus cruces de San Andrés.</span></li>
+      <li><span class="tiempo">40-50 min</span><span class="rol rol-alum">Alumnos</span><span><strong>Ensamblar el prisma</strong> de la segunda torre.</span></li>
+      <li><span class="tiempo">50-55 min</span><span class="rol rol-ambos">Ambos</span><span>Colocar las <strong>dos torres juntas</strong> y comprobar que son iguales en altura y anchura.</span></li>
+    </ul>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-final">Al final de la sesión</div>
+    <div class="salida"><strong>Dos torres ≈ idénticas</strong>, comparadas una junto a la otra. Si una es más alta o más estrecha, hay que arreglarla antes del Día 7.</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-ojo">Ojo con</div>
+    <div class="ojo"><ul class="ojo-list">
+      <li>Torre 2 <strong>más baja</strong> que la 1: la rueda quedará torcida.</li>
+      <li>Cruces solo en algunas caras: ambas torres llevan cruz en las <strong>4 caras</strong>.</li>
+      <li>Confundir las dos torres: marca con lápiz un punto en una cara igual en ambas, para identificar "cara interior" en el Día 7.</li>
+    </ul></div>
+  </div>
+
+  <div class="pie">
+    <span>Plan de trabajo · Noria motorizada · v2</span>
+    <div class="progreso">
+      <span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot act"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span>
+    </div>
+    <span>4 / 10</span>
+  </div>
+</div></div></div>
+
+<!-- ============================================== -->
+<!-- DÍA 5 -->
+<!-- ============================================== -->
+<div class="pag"><div class="pag-inner"><div class="pag-flex">
+  <div class="s-header">
+    <div class="s-num-block">
+      <div class="s-num-meta">Sesión 05 / 10</div>
+      <div class="s-num-big">05</div>
+    </div>
+    <div class="s-titulo-new">Aros, radios y cubos</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-mat">Encima de la mesa</div>
+    <div class="mat-cont">12-14 barras del Día 1 · cola caliente · regla · transportador (para los 60°) · cúter · <strong>2 discos de cartón Ø ≈ 3 cm</strong> con agujero ≈ 5 mm en el centro (cubos) · <strong>2 trozos de pajita Ø 6 mm</strong> de ≈ 1 cm · tiras de cartón corrugado de ≈ 13 × 1 cm para los radios (≈ 12 tiras).</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-pasos">Paso a paso</div>
+    <ul class="pasos">
+      <li><span class="tiempo">0-10 min</span><span class="rol rol-profe">Profe</span><span>Demuestra el corte a <strong>60°</strong> y explica por qué <strong>en el hexágono el lado = el radio</strong> (Ø 26 → lado 13).</span></li>
+      <li><span class="tiempo">10-30 min</span><span class="rol rol-alum">Alumnos</span><span>Cortar <strong>12 barras de <span class="medida">13 cm</span></strong> (6 por aro), con extremos a <strong>60°</strong>. Pegar los vértices y formar <strong>dos hexágonos idénticos</strong>.</span></li>
+      <li><span class="tiempo">30-45 min</span><span class="rol rol-alum">Alumnos</span><span>Preparar los <strong>dos cubos</strong>: disco + pajita Ø 6 mm pegada perpendicular al centro. Pegar un cubo en el centro de cada aro.</span></li>
+      <li><span class="tiempo">45-55 min</span><span class="rol rol-alum">Alumnos</span><span>Pegar los <strong>6 radios</strong> de cada aro desde cada vértice al cubo central.</span></li>
+    </ul>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-final">Al final de la sesión</div>
+    <div class="salida">Dos <strong>aros hexagonales</strong> ≈ Ø 26 cm con <strong>cubo central</strong> (pajita Ø 6 mm) y <strong>6 radios</strong> cada uno. La pajita debe quedar perpendicular al plano del aro.</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-ojo">Ojo con</div>
+    <div class="ojo"><ul class="ojo-list">
+      <li>Cortes a 60° <strong>imprecisos</strong>: el hexágono no cierra. Usar transportador.</li>
+      <li>Pajita pegada <strong>inclinada</strong> en el cubo: la rueda saldrá oscilando al girar.</li>
+      <li>Radios despegados del cubo: el aro se deforma al pegar las barras axiales del Día 6.</li>
+      <li>Los dos aros <strong>no idénticos</strong>: comparar uno encima del otro antes de seguir.</li>
+    </ul></div>
+  </div>
+
+  <div class="pie">
+    <span>Plan de trabajo · Noria motorizada · v2</span>
+    <div class="progreso">
+      <span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot act"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span>
+    </div>
+    <span>5 / 10</span>
+  </div>
+</div></div></div>
+
+<!-- ============================================== -->
+<!-- DÍA 6 -->
+<!-- ============================================== -->
+<div class="pag"><div class="pag-inner"><div class="pag-flex">
+  <div class="s-header">
+    <div class="s-num-block">
+      <div class="s-num-meta">Sesión 06 / 10</div>
+      <div class="s-num-big">06</div>
+    </div>
+    <div class="s-titulo-new">Unión de los dos aros → rueda</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-mat">Encima de la mesa</div>
+    <div class="mat-cont">Los <strong>dos aros del Día 5</strong> con sus cubos y radios · ≈ 6-8 barras del Día 1 · cola caliente · regla · cúter.</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-pasos">Paso a paso</div>
+    <ul class="pasos">
+      <li><span class="tiempo">0-10 min</span><span class="rol rol-profe">Profe</span><span>Demuestra cómo se unen los aros con <strong>barras axiales</strong> y explica para qué sirven las <strong>diagonales en V</strong>.</span></li>
+      <li><span class="tiempo">10-30 min</span><span class="rol rol-alum">Alumnos</span><span>Cortar <strong>6 barras axiales</strong> de aprox. <span class="medida">8 cm</span>. Pegarlas <strong>entre vértices coincidentes</strong> de los dos aros (una por par de vértices).</span></li>
+      <li><span class="tiempo">30-50 min</span><span class="rol rol-alum">Alumnos</span><span>Cortar <strong>6 diagonales</strong> (medir el hueco real, ≈ 15 cm) y pegarlas formando <strong>uves</strong> entre vértices alternos.</span></li>
+      <li><span class="tiempo">50-55 min</span><span class="rol rol-profe">Profe</span><span>Prueba de rigidez: aprieta la rueda con dos manos. No debe deformarse.</span></li>
+    </ul>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-final">Al final de la sesión</div>
+    <div class="salida">La <strong>rueda terminada</strong>: dos aros paralelos unidos por 6 barras axiales y rigidizados por 6 diagonales en V. Los dos cubos están enfrentados y listos para recibir el eje del Día 7.</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-ojo">Ojo con</div>
+    <div class="ojo"><ul class="ojo-list">
+      <li>Aros <strong>no paralelos</strong>: un lado queda más cerrado que el otro.</li>
+      <li>Diagonales <strong>muy largas</strong>: no cierran la V → cortarlas in situ midiendo el hueco.</li>
+      <li>Olvidar las diagonales: la rueda gira pero se deforma con el peso. <strong>Sin diagonales no hay rueda.</strong></li>
+      <li>Cubos no enfrentados: el eje no podrá atravesar la rueda recto.</li>
+    </ul></div>
+  </div>
+
+  <div class="pie">
+    <span>Plan de trabajo · Noria motorizada · v2</span>
+    <div class="progreso">
+      <span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot act"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span>
+    </div>
+    <span>6 / 10</span>
+  </div>
+</div></div></div>
+
+<!-- ============================================== -->
+<!-- DÍA 7 -->
+<!-- ============================================== -->
+<div class="pag"><div class="pag-inner"><div class="pag-flex">
+  <div class="s-header">
+    <div class="s-num-block">
+      <div class="s-num-meta">Sesión 07 / 10</div>
+      <div class="s-num-big">07</div>
+    </div>
+    <div class="s-titulo-new">Torres a la base + eje</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-mat">Encima de la mesa</div>
+    <div class="mat-cont">Base del Día 2 · dos torres de los Días 3-4 · <strong>rueda del Día 6</strong> · <strong>brocheta Ø 4 mm</strong> cortada a ≈ 30 cm (el eje) · <strong>2 pajitas Ø 6 mm</strong> de ≈ 2 cm (cojinetes) · cola caliente · regla.</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-pasos">Paso a paso</div>
+    <ul class="pasos">
+      <li><span class="tiempo">0-10 min</span><span class="rol rol-profe">Profe</span><span>Demuestra cómo se alinean las <strong>dos pajitas-cojinete</strong>: mirando desde un extremo, una debe tapar exactamente a la otra.</span></li>
+      <li><span class="tiempo">10-25 min</span><span class="rol rol-alum">Alumnos</span><span>Pegar las <strong>dos torres a la base</strong> sobre las huellas marcadas en el Día 2, con cola caliente abundante.</span></li>
+      <li><span class="tiempo">25-40 min</span><span class="rol rol-alum">Alumnos</span><span>Pegar la <strong>pajita-cojinete</strong> en el travesaño superior de la <strong>cara interior</strong> de cada torre. Comprobar alineación.</span></li>
+      <li><span class="tiempo">40-55 min</span><span class="rol rol-alum">Alumnos</span><span>Pasar el <strong>eje (brocheta Ø 4 mm)</strong> por una pajita, atravesar los dos cubos de la rueda y salir por la otra pajita. Probar girando con un dedo.</span></li>
+    </ul>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-final">Al final de la sesión</div>
+    <div class="salida">La <strong>noria sin motor</strong> ya gira: al soplar la rueda, debe dar varias vueltas suaves antes de detenerse. Las torres están firmes sobre la base y los cojinetes alineados.</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-ojo">Ojo con</div>
+    <div class="ojo"><ul class="ojo-list">
+      <li><strong>Cola entre la pajita y el eje</strong>: el eje no girará. La cola va solo en pajita-travesaño y, mañana, en cubo-eje.</li>
+      <li>Pajitas <strong>desalineadas</strong>: el eje no entra o entra forzado. Si entra forzado, frena la rueda.</li>
+      <li>Torres pegadas <strong>torcidas</strong> a la base: la rueda queda inclinada.</li>
+      <li>Eje <strong>demasiado corto</strong>: no asoma lo suficiente para la polea del Día 8.</li>
+    </ul></div>
+  </div>
+
+  <div class="pie">
+    <span>Plan de trabajo · Noria motorizada · v2</span>
+    <div class="progreso">
+      <span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot act"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span>
+    </div>
+    <span>7 / 10</span>
+  </div>
+</div></div></div>
+
+<!-- ============================================== -->
+<!-- DÍA 8 -->
+<!-- ============================================== -->
+<div class="pag"><div class="pag-inner"><div class="pag-flex">
+  <div class="s-header">
+    <div class="s-num-block">
+      <div class="s-num-meta">Sesión 08 / 10</div>
+      <div class="s-num-big">08</div>
+    </div>
+    <div class="s-titulo-new">Transmisión · polea, motor y correa</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-mat">Encima de la mesa</div>
+    <div class="mat-cont">Noria del Día 7 · <strong>una polea Ø ≈ 5 cm</strong> (para el eje) · <strong>motorreductor TT</strong> con su polea pequeña Ø ≈ 1 cm ya montada · goma elástica como correa · cola caliente · pila de prueba con cables (para probar el motor).</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-pasos">Paso a paso</div>
+    <ul class="pasos">
+      <li><span class="tiempo">0-10 min</span><span class="rol rol-profe">Profe</span><span>Explica la <strong>reducción 5 : 1</strong> y demuestra dónde se coloca el motor (lateral exterior de una torre, sobre la base).</span></li>
+      <li><span class="tiempo">10-25 min</span><span class="rol rol-alum">Alumnos</span><span>Pegar la <strong>polea Ø 5 cm</strong> en uno de los extremos del eje. Pegada <strong>al eje, no a la pajita</strong>.</span></li>
+      <li><span class="tiempo">25-40 min</span><span class="rol rol-alum">Alumnos</span><span>Pegar el <strong>motor</strong> en el lateral exterior de la torre del lado de la polea. Las dos poleas (motor y eje) deben quedar <strong>en el mismo plano</strong>.</span></li>
+      <li><span class="tiempo">40-55 min</span><span class="rol rol-alum">Alumnos</span><span>Montar la <strong>correa</strong> (goma elástica) entre la polea pequeña del motor y la polea grande del eje. Ajustar la <strong>tensión</strong> y probar con pila directa.</span></li>
+    </ul>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-final">Al final de la sesión</div>
+    <div class="salida">Noria que <strong>gira con motor</strong> al conectar directamente la pila. Sin circuito todavía (eso es el Día 9). Velocidad cómoda ≈ 30 rpm.</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-ojo">Ojo con</div>
+    <div class="ojo"><ul class="ojo-list">
+      <li>Pegar la polea <strong>en la pajita</strong> en vez de en el eje: el eje gira pero la polea no.</li>
+      <li>Motor <strong>desalineado</strong>: la correa salta o se sale.</li>
+      <li>Correa <strong>floja</strong>: patina sin transmitir. Correa <strong>muy tensa</strong>: frena el motor.</li>
+      <li>Relación: <strong>Ø polea del eje / Ø polea del motor = 5 / 1</strong>. Con motor de 150 rpm → rueda a 30 rpm (1 vuelta cada 2 s).</li>
+    </ul></div>
+  </div>
+
+  <div class="pie">
+    <span>Plan de trabajo · Noria motorizada · v2</span>
+    <div class="progreso">
+      <span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot act"></span><span class="pdot"></span><span class="pdot"></span>
+    </div>
+    <span>8 / 10</span>
+  </div>
+</div></div></div>
+
+<!-- ============================================== -->
+<!-- DÍA 9 -->
+<!-- ============================================== -->
+<div class="pag"><div class="pag-inner"><div class="pag-flex">
+  <div class="s-header">
+    <div class="s-num-block">
+      <div class="s-num-meta">Sesión 09 / 10</div>
+      <div class="s-num-big">09</div>
+    </div>
+    <div class="s-titulo-new">Circuito eléctrico por capas</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-mat">Encima de la mesa</div>
+    <div class="mat-cont">Noria del Día 8 · <strong>portapilas 4×AA</strong> con pilas · <strong>interruptor</strong> · <strong>conmutador inversor DPDT</strong> (6 patas) · <strong>reostato</strong> o potenciómetro 100-500 Ω · cables con cocodrilos · cola caliente · destornillador pequeño.</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-pasos">Paso a paso</div>
+    <ul class="pasos">
+      <li><span class="tiempo">0-15 min</span><span class="rol rol-profe">Profe</span><span>Repasa en pizarra el <strong>esquema de las 3 capas</strong>. Insiste en <strong>probar capa por capa</strong>, no montarlo todo a la vez.</span></li>
+      <li><span class="tiempo">15-25 min</span><span class="rol rol-alum">Alumnos</span><span><strong>Capa 1:</strong> pila + interruptor + motor. Probar que el motor gira al pulsar.</span></li>
+      <li><span class="tiempo">25-40 min</span><span class="rol rol-alum">Alumnos</span><span><strong>Capa 2:</strong> añadir el <strong>conmutador inversor</strong>. Probar que invierte el sentido de giro.</span></li>
+      <li><span class="tiempo">40-50 min</span><span class="rol rol-alum">Alumnos</span><span><strong>Capa 3:</strong> añadir el <strong>reostato</strong> en serie. Probar que regula la velocidad de forma progresiva.</span></li>
+      <li><span class="tiempo">50-55 min</span><span class="rol rol-alum">Alumnos</span><span>Pegar los componentes a la base con cola caliente, <strong>fuera del rectángulo de encaje</strong>.</span></li>
+    </ul>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-final">Al final de la sesión</div>
+    <div class="salida">Noria con <strong>encendido, inversión de giro y control de velocidad</strong> funcionando. Componentes pegados fuera del rectángulo de encaje.</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-ojo">Ojo con</div>
+    <div class="ojo"><ul class="ojo-list">
+      <li>Saltarse capas: si falla algo no se sabe dónde. <strong>Diagnóstico por eliminación.</strong></li>
+      <li>Conmutador <strong>mal cableado</strong>: cortocircuito. Probar siempre con interruptor abierto al principio.</li>
+      <li>Reostato al <strong>mínimo</strong> al arrancar: el motor no tiene fuerza para empezar a girar.</li>
+      <li>Componentes pegados <strong>dentro del rectángulo de encaje</strong>: estorban a la rueda.</li>
+    </ul></div>
+  </div>
+
+  <div class="pie">
+    <span>Plan de trabajo · Noria motorizada · v2</span>
+    <div class="progreso">
+      <span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot act"></span><span class="pdot"></span>
+    </div>
+    <span>9 / 10</span>
+  </div>
+</div></div></div>
+
+<!-- ============================================== -->
+<!-- DÍA 10 -->
+<!-- ============================================== -->
+<div class="pag"><div class="pag-inner"><div class="pag-flex">
+  <div class="s-header">
+    <div class="s-num-block">
+      <div class="s-num-meta">Sesión 10 / 10</div>
+      <div class="s-num-big">10</div>
+    </div>
+    <div class="s-titulo-new">Pruebas finales y ampliaciones</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-mat">Encima de la mesa</div>
+    <div class="mat-cont">Noria completa del Día 9 · cronómetro o reloj · <strong>cartulina</strong> para cabinas · <strong>hilo fino</strong> · perforadora o aguja · cola blanca · tijeras · vaselina o jabón seco (para chirridos) · opcional: LEDs + resistencia 220 Ω.</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-pasos">Paso a paso</div>
+    <ul class="pasos">
+      <li><span class="tiempo">0-10 min</span><span class="rol rol-profe">Profe</span><span>Prueba final de <strong>marcha continua 2 min</strong> en cada grupo. Anota si gira suave, si patina o chirría.</span></li>
+      <li><span class="tiempo">10-25 min</span><span class="rol rol-alum">Alumnos</span><span><strong>Reparaciones:</strong> si la goma patina → tensarla. Si chirría → vaselina o jabón seco en la pajita. Si la rueda saltea → revisar la alineación del eje.</span></li>
+      <li><span class="tiempo">25-50 min</span><span class="rol rol-alum">Alumnos</span><span><strong>Ampliación opcional:</strong> 6 cabinas de cartulina 4×4×3 cm (abiertas por arriba). Cada cabina se cuelga <strong>desde un vértice</strong> de la rueda, con <strong>hilo en V</strong> abrazando la barra axial correspondiente (dos enganches por cabina).</span></li>
+      <li><span class="tiempo">50-55 min</span><span class="rol rol-ambos">Ambos</span><span>Presentación final + entrega del <strong>cuadernillo del alumno</strong> relleno.</span></li>
+    </ul>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-final">Al final de la sesión</div>
+    <div class="salida"><strong>Noria validada</strong> (marcha continua 2 min sin fallo), presentada en clase y entregada con el cuadernillo. Lo que no dé tiempo se termina <strong>en casa</strong> antes de la fecha de entrega.</div>
+  </div>
+
+  <div class="bloque">
+    <div class="bloque-h bh-ojo">Ojo con</div>
+    <div class="ojo"><ul class="ojo-list">
+      <li>Cabinas <strong>demasiado pesadas</strong>: la rueda no las soporta y se vence.</li>
+      <li>Hilos de las cabinas <strong>enredados</strong> con el eje o los radios: cortan el giro.</li>
+      <li>LEDs <strong>sin resistencia</strong>: se funden al instante (220 Ω en serie es obligatorio).</li>
+      <li>Otras ampliaciones posibles: decoración, iluminación LED, buzzer con melodía, contador de vueltas con sensor Reed.</li>
+    </ul></div>
+  </div>
+
+  <div class="pie">
+    <span>Plan de trabajo · Noria motorizada · v2</span>
+    <div class="progreso">
+      <span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot done"></span><span class="pdot act"></span>
+    </div>
+    <span>10 / 10</span>
+  </div>
+</div></div></div>
+
+</body>
+</html>
