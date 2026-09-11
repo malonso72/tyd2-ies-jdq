@@ -1,746 +1,2127 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#1B4F8A">
-<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
-<title>Calculadora de escalas · U00 Dibujo técnico · TyD 2º ESO</title>
-<meta name="description" content="Calculadora interactiva de escalas para dibujo técnico de 2º ESO: convierte entre medida real y medida en el dibujo con cualquier escala.">
-<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/00-dibujo-tecnico/interactivos/escalas.html">
-
-<meta property="og:title" content="Calculadora de escalas · U00 Dibujo técnico · TyD 2º ESO">
-<meta property="og:description" content="Calculadora interactiva de escalas para dibujo técnico de 2º ESO.">
-<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
-<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/00-dibujo-tecnico/interactivos/escalas.html">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="es_ES">
-<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Calculadora de escalas · U00 Dibujo técnico · TyD 2º ESO">
-<meta name="twitter:description" content="Calculadora interactiva de escalas para dibujo técnico de 2º ESO.">
-<meta name="twitter:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../../assets/css/common.css">
-<link rel="stylesheet" href="../../../assets/css/unidad.css">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laboratorio de escalas · Dibujo técnico</title>
+<meta name="description" content="Recurso interactivo de escalas de dibujo técnico: explorar, medir con regla y compás y resolver retos con corrección explicada.">
 <style>
-:root {
-  --calc-ok: #2e7d4f;
-  --calc-err: #c44536;
-  --calc-bg: #fafafa;
-  --calc-border: #e3e3e3;
+:root{
+  --fondo:#eef1ee; --panel:#ffffff; --mesa:#c3cdc6; --mesa-borde:#aebbb2;
+  --tinta:#1c2430; --tinta2:#4b5565; --tinta3:#6b7482; --linea:#d3dad5;
+  --papel:#1d5c9f; --papel-bg:#e8f0fa;
+  --real:#bb481b; --real-bg:#fbeee8;
+  --ok:#23703f; --ok-bg:#e5f2e9; --err:#ad2a20; --err-bg:#fbe9e7; --aviso:#855800; --aviso-bg:#fdf3dc;
+  --foco:#e89a00;
+  --f:"Bahnschrift","DIN Alternate","D-DIN","Barlow","Roboto Condensed","Segoe UI",system-ui,-apple-system,sans-serif;
 }
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--fondo);color:var(--tinta);font-family:var(--f);font-size:16px;line-height:1.5;font-variant-numeric:tabular-nums}
+button,input{font:inherit;color:inherit}
+a{color:var(--papel)}
+.saltar{position:absolute;left:-999px;top:0;background:#fff;padding:8px 12px;z-index:10}
+.saltar:focus{left:8px}
+:focus-visible{outline:3px solid var(--foco);outline-offset:2px}
 
-.calc-wrap {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin: 1.5rem 0;
-}
-@media (max-width: 880px) { .calc-wrap { grid-template-columns: 1fr; } }
+/* ---------- cabecera ---------- */
+.cab{background:var(--panel);border-bottom:1px solid var(--linea)}
+.cab-in{max-width:1320px;margin:0 auto;padding:14px 20px 0}
+.migas{display:flex;gap:18px;flex-wrap:wrap;font-size:.9rem}
+.migas a{text-decoration:none;color:var(--tinta2)}
+.migas a:hover{color:var(--papel);text-decoration:underline}
+.titulo{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin:6px 0 2px}
+.titulo h1{font-size:2rem;font-weight:650;margin:0;letter-spacing:-.01em;line-height:1.15}
+.lema{margin:0;color:var(--tinta2);font-size:1.05rem}
+.pestanas{max-width:1320px;margin:0 auto;padding:0 20px;display:flex;gap:4px;margin-top:10px}
+.pestanas button{background:none;border:0;border-bottom:3px solid transparent;padding:10px 16px 9px;font-size:1.05rem;cursor:pointer;color:var(--tinta2)}
+.pestanas button[aria-selected="true"]{color:var(--tinta);border-bottom-color:var(--tinta);font-weight:600}
+.pestanas button:hover{color:var(--tinta)}
+.pestanas .n{display:inline-block;width:1.4em;height:1.4em;line-height:1.4em;text-align:center;border-radius:50%;background:var(--fondo);font-size:.8rem;margin-right:6px}
+.pestanas button[aria-selected="true"] .n{background:var(--tinta);color:#fff}
 
-.calc-panel {
-  background: #fff;
-  border: 1px solid var(--calc-border);
-  border-radius: 12px;
-  padding: 1.4rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-}
-.calc-panel h2 {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 1.3rem;
-  color: var(--principal, #1B4F8A);
-  margin-bottom: 0.4rem;
-  border-bottom: 2px solid var(--principal, #1B4F8A);
-  padding-bottom: 0.3rem;
-}
-.calc-panel .panel-sub {
-  color: #555;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-  font-style: italic;
-}
+main{max-width:1320px;margin:0 auto;padding:16px 20px 30px}
+.panel[hidden]{display:none}
+.intro{margin:0 0 14px;color:var(--tinta2);max-width:75ch}
 
-.calc-row {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 0.7rem 0;
-  flex-wrap: wrap;
-}
-.calc-row label {
-  font-weight: 600;
-  color: #333;
-  min-width: 90px;
-  font-size: 0.95rem;
-}
-.calc-row input[type="number"] {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 1rem;
-  font-weight: 600;
-  padding: 0.5rem 0.7rem;
-  border: 2px solid var(--calc-border);
-  border-radius: 8px;
-  width: 130px;
-  background: #fff;
-  color: var(--secundario, #1B4F8A);
-}
-.calc-row input[type="number"]:focus {
-  outline: none;
-  border-color: var(--principal, #1B4F8A);
-  box-shadow: 0 0 0 3px rgba(27,79,138,0.15);
-}
-.calc-row input[type="number"].locked {
-  background: #f3eee2;
-  color: var(--principal, #1B4F8A);
-  border-color: #e89947;
-}
-.calc-row select {
-  font-family: 'Barlow', sans-serif;
-  font-size: 0.95rem;
-  padding: 0.5rem 0.7rem;
-  border: 2px solid var(--calc-border);
-  border-radius: 8px;
-  background: #fff;
-  cursor: pointer;
-  font-weight: 500;
-}
+/* ---------- colores semánticos ---------- */
+.c-papel{color:var(--papel)} .c-real{color:var(--real)}
+.esc{white-space:nowrap;font-weight:650}
+.esc .dos{margin:0 .18em;color:var(--tinta3)}
+b.c-papel,b.c-real,strong.c-papel,strong.c-real{font-weight:650}
 
-/* ─── Escala selector ─── */
-.escala-display {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--principal, #1B4F8A);
-  text-align: center;
-  padding: 1rem;
-  background: #fffaf3;
-  border: 2px dashed var(--principal, #1B4F8A);
-  border-radius: 12px;
-  margin: 0.8rem 0;
-  letter-spacing: 2px;
-}
-.escala-display .tag {
-  display: block;
-  font-family: 'Barlow', sans-serif;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: #666;
-  letter-spacing: 0.5px;
-  margin-top: 4px;
-  text-transform: uppercase;
-}
-.escala-display.amp .tag { color: var(--calc-ok); }
-.escala-display.red .tag { color: var(--secundario, #1B4F8A); }
-.escala-display.nat .tag { color: #888; }
+/* ---------- controles Explorar ---------- */
+.fila{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.rot{font-size:.9rem;color:var(--tinta2);min-width:4.5em}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--linea);background:var(--panel);padding:6px 12px;border-radius:4px;cursor:pointer;font-size:.95rem}
+.chip:hover{border-color:var(--tinta3)}
+.chip[aria-pressed="true"]{background:var(--tinta);color:#fff;border-color:var(--tinta)}
 
-.escala-presets {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin: 0.6rem 0 1rem;
-}
-.preset-btn {
-  background: #fff;
-  border: 1px solid var(--calc-border);
-  color: #444;
-  padding: 0.4rem 0.7rem;
-  border-radius: 6px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.preset-btn:hover { background: var(--principal, #1B4F8A); color: #fff; border-color: var(--principal, #1B4F8A); }
-.preset-btn.active { background: var(--principal, #1B4F8A); color: #fff; border-color: var(--principal, #1B4F8A); }
+.selector-wrap{background:var(--panel);border:1px solid var(--linea);border-radius:4px;padding:10px 12px 12px;margin-bottom:12px}
+.sel-ejes{display:flex;justify-content:space-between;font-size:.85rem;color:var(--tinta2);margin-bottom:6px}
+.sel-ejes span:first-child::before{content:"◄ "} .sel-ejes span:last-child::after{content:" ►"}
+.selector{display:flex;gap:4px;overflow-x:auto;padding:3px 2px 6px;scrollbar-width:thin}
+.esc-chip{flex:1 0 auto;min-width:3.6em;border:1px solid var(--linea);background:#fbfcfb;padding:7px 6px;border-radius:4px;cursor:pointer;font-size:.98rem;text-align:center;white-space:nowrap}
+.esc-chip:hover{border-color:var(--tinta3);background:#fff}
+.esc-chip[aria-pressed="true"]{background:#fff;border-color:var(--tinta);box-shadow:inset 0 -3px 0 var(--tinta);font-weight:700}
+.esc-chip.nat{margin:0 8px;background:#f1f3f1}
+.esc-chip .dos{margin:0 .12em;color:var(--tinta3)}
+.sel-otra{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:8px;font-size:.92rem}
+.sel-otra input{width:4.6em;padding:4px 6px;border:1px solid var(--tinta3);border-radius:3px;text-align:center}
+.sel-otra .msg{color:var(--tinta2)}
+.btn{border:1px solid var(--tinta);background:var(--tinta);color:#fff;padding:7px 14px;border-radius:4px;cursor:pointer;font-weight:600}
+.btn:hover{background:#2c3747}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn.sec{background:var(--panel);color:var(--tinta)}
+.btn.sec:hover{background:var(--fondo)}
+.btn.peq{padding:4px 10px;font-weight:500;font-size:.9rem}
 
-.escala-custom {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 0.5rem 0;
-  font-family: 'JetBrains Mono', monospace;
-}
-.escala-custom input {
-  width: 80px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 1rem;
-  font-weight: 600;
-  padding: 0.45rem 0.6rem;
-  border: 2px solid var(--calc-border);
-  border-radius: 8px;
-  text-align: center;
-  color: var(--secundario, #1B4F8A);
-}
-.escala-custom input:focus { outline: none; border-color: var(--principal, #1B4F8A); }
-.escala-custom .sep { font-size: 1.3rem; font-weight: 700; color: var(--principal, #1B4F8A); }
+.lectura{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin:4px 0 14px}
+.lectura .gran{font-size:2.4rem;line-height:1;font-weight:700}
+.lectura .gran .dos{margin:0 .2em}
+.lectura .tipo{font-weight:600}
+.lectura .frase{color:var(--tinta2)}
+.etq{display:inline-block;font-size:.8rem;padding:1px 8px;border-radius:10px;border:1px solid currentColor;margin-left:6px;vertical-align:2px}
+.etq.norm{color:var(--ok)} .etq.nonorm{color:var(--aviso)}
 
-/* ─── Pasos del cálculo ─── */
-.pasos {
-  background: #fffaf3;
-  border: 1px solid #e89947;
-  border-radius: 10px;
-  padding: 1rem 1.2rem;
-  margin-top: 0.8rem;
-  font-size: 0.92rem;
-}
-.pasos h3 {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 1.05rem;
-  color: var(--principal, #1B4F8A);
-  margin-bottom: 0.5rem;
-  letter-spacing: 0.5px;
-}
-.paso {
-  margin: 0.35rem 0;
-  padding-left: 1.2rem;
-  position: relative;
-  color: #444;
-  line-height: 1.5;
-}
-.paso::before {
-  content: '→';
-  position: absolute;
-  left: 0;
-  color: var(--principal, #1B4F8A);
-  font-weight: 700;
-}
-.paso .calc-op {
-  font-family: 'JetBrains Mono', monospace;
-  background: #fff;
-  border: 1px solid #f0e6d3;
-  padding: 1px 6px;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  color: var(--secundario, #1B4F8A);
-}
-.paso strong { color: var(--principal, #1B4F8A); }
+/* ---------- banco de trabajo ---------- */
+.banco{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px;align-items:start}
+.escenario{background:var(--mesa);border:1px solid var(--mesa-borde);border-radius:4px;padding:6px}
+.barra{display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:2px 2px 6px}
+.btn-h{border:1px solid #9aa89f;background:#f5f7f5;border-radius:3px;padding:3px 10px;cursor:pointer;font-size:.9rem;min-width:2.2em}
+.btn-h:hover{background:#fff}
+.btn-h[aria-pressed="true"]{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+.barra .zoomtxt{font-size:.82rem;color:var(--tinta2);min-width:3.4em;text-align:center}
+.barra .sep{flex:1}
+.leyenda-f{display:inline-block;width:18px;height:0;border-top:2px dashed var(--real);vertical-align:middle;margin-right:4px}
+.lamina{touch-action:manipulation;display:block;width:100%;height:auto;background:var(--mesa);border-radius:2px;user-select:none;-webkit-user-select:none}
+.lamina.arrastrando{cursor:grabbing}
+.ayuda{font-size:.85rem;color:#33403a;margin:6px 4px 2px}
 
-.modo-toggle {
-  display: flex;
-  gap: 0.4rem;
-  background: #f0f0f0;
-  padding: 4px;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-}
-.modo-toggle button {
-  flex: 1;
-  background: transparent;
-  border: none;
-  padding: 0.5rem 0.8rem;
-  border-radius: 7px;
-  font-family: 'Barlow', sans-serif;
-  font-weight: 600;
-  font-size: 0.9rem;
-  cursor: pointer;
-  color: #666;
-  transition: all 0.15s;
-}
-.modo-toggle button.active {
-  background: var(--principal, #1B4F8A);
-  color: #fff;
-  box-shadow: 0 2px 6px rgba(27,79,138,0.3);
-}
+.lateral{display:flex;flex-direction:column;gap:12px}
+.caja{background:var(--panel);border:1px solid var(--linea);border-radius:4px;padding:12px 14px}
+.caja h3{font-size:1rem;margin:0 0 8px;font-weight:650}
+.caja p{margin:6px 0}
+.obj-fila{display:flex;gap:12px;align-items:center}
+.mini{width:110px;height:72px;flex:none;background:#fafbfa;border:1px solid var(--linea);border-radius:3px}
+.mini .l-vis,.mini .l-fina,.mini .l-oculta,.mini .l-eje{vector-effect:non-scaling-stroke;stroke-width:1.1px}
+.mini .l-fina,.mini .l-eje{stroke-width:.7px}
+.mini .l-oculta{stroke-dasharray:3 2}
+.medidas{font-size:1.25rem;font-weight:650}
+.nota-mini{font-size:.8rem;color:var(--tinta3)}
+.origen{font-size:.82rem;color:var(--tinta2);border-top:1px solid var(--linea);padding-top:6px;margin-top:8px}
+.formula{font-weight:650;margin:2px 0 8px}
+.op{font-size:.98rem;line-height:1.55}
+.op .lin{margin:3px 0}
+.op .res{font-weight:700}
+.estado{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:4px}
+.estado .ico{font-weight:800;font-size:1.1rem;line-height:1.3;width:1.2em;text-align:center;flex:none}
+.estado.ok{background:var(--ok-bg);color:var(--ok)} .estado.peq{background:var(--aviso-bg);color:var(--aviso)} .estado.no{background:var(--err-bg);color:var(--err)}
+.estado p{margin:0;color:var(--tinta)}
+.criterio{font-size:.8rem;color:var(--tinta2);margin-top:6px}
 
-/* ─── Comparativa visual ─── */
-.compara-wrap {
-  background: #fff;
-  border: 1px solid var(--calc-border);
-  border-radius: 12px;
-  padding: 1.2rem;
-  margin-top: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-}
-.compara-wrap h2 {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 1.3rem;
-  color: var(--principal, #1B4F8A);
-  margin-bottom: 0.4rem;
-  border-bottom: 2px solid var(--principal, #1B4F8A);
-  padding-bottom: 0.3rem;
-}
-.compara-wrap .panel-sub {
-  color: #555; font-size: 0.9rem; margin-bottom: 1rem; font-style: italic;
-}
+/* ---------- SVG de la lámina ---------- */
+.mesa{fill:var(--mesa)}
+.hoja-papel{fill:#fff}
+.hoja-marco{fill:none;stroke:var(--tinta);stroke-width:.5}
+.caj-l{fill:none;stroke:var(--tinta);stroke-width:.35}
+.caj-lab{font-size:2.3px;fill:var(--tinta3)}
+.caj-val{font-size:4.3px;fill:var(--tinta);font-weight:600}
+.caj-esc{font-size:6px;font-weight:700;fill:var(--tinta)}
+.f-papel{fill:var(--papel)} .f-real{fill:var(--real)}
+.l-vis{fill:none;stroke:var(--tinta);stroke-width:.6;stroke-linejoin:round;stroke-linecap:round}
+.l-fina{fill:none;stroke:var(--tinta);stroke-width:.3}
+.l-oculta{fill:none;stroke:var(--tinta);stroke-width:.35;stroke-dasharray:2.4 1.2}
+.l-eje{fill:none;stroke:var(--tinta2);stroke-width:.22;stroke-dasharray:6 1.2 1 1.2}
+.relleno-t{fill:var(--tinta);stroke:none}
+.blanco{fill:#fff;stroke:none}
+.cota .c-aux{stroke:var(--real);stroke-width:.25}
+.cota .c-lin{stroke:var(--real);stroke-width:.25}
+.cota .flecha{fill:var(--real)}
+.cota text{font-size:4.2px;fill:var(--real);font-weight:600}
+.cota.falta text{font-size:5.4px;font-weight:800}
+.fantasma{fill:none;stroke:var(--real);stroke-width:.45;stroke-dasharray:2 1.3}
+.rotulo{font-size:6px;font-weight:700;fill:var(--tinta)}
+.rotulo-s{font-size:3.6px;fill:var(--tinta2)}
+.alumno .l-vis,.alumno .l-fina{stroke:var(--err);stroke-dasharray:2 1.2}
+.correcto .l-vis{stroke:var(--ok)}
+.solucion .l-vis{stroke:var(--papel);stroke-dasharray:1.6 1.2;stroke-width:.5}
+.mapa-rio{fill:none;stroke:#7fa7c9;stroke-width:1.1;stroke-linecap:round}
+.mapa-carretera{fill:none;stroke:#b9b2a3;stroke-width:1.4;stroke-linecap:round}
+.mapa-pueblo{fill:var(--tinta)}
+.mapa-nombre{font-size:4.2px;font-weight:600;fill:var(--tinta)}
+.eg-neg{fill:var(--tinta)} .eg-pos{fill:#fff;stroke:var(--tinta);stroke-width:.3}
+.eg-tick{stroke:var(--tinta);stroke-width:.2}
+.eg-num{font-size:3.2px;fill:var(--tinta)}
+.eg-tit{font-size:3px;fill:var(--tinta2)}
 
-.compara-svg {
-  background: linear-gradient(to bottom, #fafafa, #fff);
-  border: 1px dashed #ccc;
-  border-radius: 10px;
-  padding: 1.2rem;
-  margin-top: 0.6rem;
-  text-align: center;
-  min-height: 200px;
-}
-.compara-svg svg { max-width: 100%; height: auto; }
-.compara-leyenda {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-top: 0.8rem;
-  font-size: 0.9rem;
-  flex-wrap: wrap;
-}
-.leyenda-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-weight: 600;
-}
-.leyenda-swatch {
-  width: 18px;
-  height: 12px;
-  border-radius: 3px;
-  border: 1px solid #333;
-}
-.leyenda-real .leyenda-swatch { background: rgba(44,95,141,0.4); border-color: var(--secundario, #1B4F8A); }
-.leyenda-dibujo .leyenda-swatch { background: rgba(27,79,138,0.45); border-color: var(--principal, #1B4F8A); }
+/* regla */
+.regla-cuerpo{fill:rgba(252,253,255,.82);stroke:#77839a;stroke-width:.3;cursor:grab}
+.regla-marcas{stroke:var(--papel);stroke-width:.2;pointer-events:none}
+.regla-num{font-size:3.1px;fill:var(--papel);font-weight:600;pointer-events:none}
+.regla-ud{font-size:2.6px;fill:var(--papel);pointer-events:none}
+.regla-giro circle{fill:#fff;stroke:var(--papel);stroke-width:.45;cursor:grab}
+.giro-ico{font-size:5px;fill:var(--papel);pointer-events:none;font-weight:700}
+.regla-foco{fill:none;stroke:transparent;stroke-width:.7;pointer-events:none}
+.regla.enfoque .regla-foco{stroke:var(--foco)}
+.regla.activa .regla-cuerpo{cursor:grabbing;fill:rgba(252,253,255,.7)}
+/* tirador */
+.tirador{cursor:nwse-resize}
+.tirador .hit{fill:transparent}
+.tirador .cuad{fill:var(--papel);stroke:#fff;stroke-width:.5}
+.tirador.horiz{cursor:ew-resize}
+/* compás */
+.compas-pata{stroke:#5b6574;stroke-width:1.1;stroke-linecap:round}
+.compas-cabeza circle{fill:#5b6574;stroke:#fff;stroke-width:.4;cursor:grab}
+.compas-punta .hit{fill:transparent;cursor:grab}
+.compas-punta .aguja{fill:var(--tinta)}
+.compas-punta .mina{fill:var(--real)}
+/* marcas didácticas */
+.mk-punto{fill:none;stroke:var(--papel);stroke-width:.55}
+.mk-bocadillo{fill:var(--papel)}
+.mk-txt{font-size:4px;fill:#fff;font-weight:700}
+.mk-linea{stroke:var(--papel);stroke-width:.35}
+.mk-caja{fill:none;stroke:var(--foco);stroke-width:.9}
+.mk-real .mk-bocadillo{fill:var(--real)}
 
-/* ─── Ayudas ─── */
-.tip-card {
-  background: #fffaf3;
-  border-left: 4px solid var(--principal, #1B4F8A);
-  border-radius: 0 10px 10px 0;
-  padding: 0.9rem 1.1rem;
-  margin: 1.5rem 0;
-  font-size: 0.93rem;
-  color: #444;
-}
-.tip-card strong { color: var(--principal, #1B4F8A); }
-.tip-card .tip-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 1rem;
-  color: var(--principal, #1B4F8A);
-  margin-bottom: 0.3rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
+/* ---------- Medir ---------- */
+.sit-lista{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.sit{border:1px solid var(--linea);background:var(--panel);padding:7px 12px;border-radius:4px;cursor:pointer;text-align:left;font-size:.93rem}
+.sit[aria-pressed="true"]{border-color:var(--tinta);box-shadow:inset 0 -3px 0 var(--tinta);font-weight:600}
+.sit .op-t{font-size:.78rem;color:var(--aviso);display:block;font-weight:500}
+.modo{display:flex;border:1px solid var(--tinta);border-radius:4px;overflow:hidden;margin-bottom:10px}
+.modo button{flex:1;border:0;background:var(--panel);padding:7px 8px;cursor:pointer;font-weight:600}
+.modo button[aria-pressed="true"]{background:var(--tinta);color:#fff}
+.pasos-nav{display:flex;align-items:center;gap:8px;margin-top:10px}
+.pasos-nav .cuenta{font-size:.85rem;color:var(--tinta2);flex:1;text-align:center}
+.paso-txt{font-size:1.02rem;min-height:4.5em}
+.op-box{background:#f6f8f6;border-left:3px solid var(--tinta3);padding:8px 10px;margin-top:10px;font-size:.98rem}
+.op-box:empty{display:none}
 
-@media print {
-  .escala-presets, .modo-toggle, .preset-btn { display: none; }
+/* ---------- respuestas y feedback ---------- */
+.preg{font-size:1.05rem;margin:4px 0 10px}
+.resp{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0}
+.resp label{font-size:.92rem;color:var(--tinta2)}
+.resp input[type=text]{width:7.2em;padding:6px 8px;border:1px solid var(--tinta3);border-radius:3px;font-size:1.08rem;text-align:right}
+.resp input.e{width:4.2em;text-align:center}
+.resp .ud{font-weight:600}
+.resp .dos-p{font-weight:700;font-size:1.2rem}
+.fb{margin-top:10px;padding:10px 12px;border-radius:4px;font-size:.98rem}
+.fb:empty{display:none}
+.fb.ok{background:var(--ok-bg);border-left:4px solid var(--ok)}
+.fb.err{background:var(--err-bg);border-left:4px solid var(--err)}
+.fb.aviso{background:var(--aviso-bg);border-left:4px solid var(--aviso)}
+.fb .t{font-weight:700;display:block;margin-bottom:2px}
+.fb .ok-t{color:var(--ok)} .fb .err-t{color:var(--err)} .fb .aviso-t{color:var(--aviso)}
+.fb .nota{margin-top:6px;font-size:.92rem;color:var(--tinta2)}
+.fb .proc{margin-top:8px;padding-top:6px;border-top:1px solid rgba(0,0,0,.08);font-size:.95rem}
+.pred{background:#f6f8f6;border:1px solid var(--linea);border-radius:4px;padding:8px 10px;margin:8px 0}
+.pred .q{font-size:.95rem;margin-bottom:6px}
+.pred .ops{display:flex;gap:6px;flex-wrap:wrap}
+.opc{border:1px solid var(--tinta3);background:var(--panel);padding:6px 14px;border-radius:4px;cursor:pointer}
+.opc:hover{border-color:var(--tinta)}
+.opc[aria-pressed="true"]{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+.opc.bien{background:var(--ok);border-color:var(--ok);color:#fff}
+.opc.mal{background:var(--err);border-color:var(--err);color:#fff}
+.opc[disabled]{cursor:default}
+.opc-col{display:flex;flex-direction:column;gap:6px;align-items:stretch}
+.opc-col .opc{text-align:left}
+.pred-fb{font-size:.92rem;margin-top:6px}
+
+/* ---------- Retos ---------- */
+.niveles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-bottom:14px}
+.nivel{border:1px solid var(--linea);background:var(--panel);border-radius:4px;padding:8px 10px;text-align:left;cursor:pointer}
+.nivel .num{font-size:.8rem;color:var(--tinta2)}
+.nivel .nom{display:block;font-weight:650;font-size:.95rem;line-height:1.25}
+.nivel .prog{display:block;font-size:.8rem;color:var(--tinta2);margin-top:2px}
+.nivel[aria-pressed="true"]{border-color:var(--tinta);box-shadow:inset 0 -3px 0 var(--tinta)}
+.nivel.hecho .prog{color:var(--ok)}
+.reto-cab{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.reto-cab .cuenta{font-size:.9rem;color:var(--tinta2)}
+.puntos{display:flex;gap:4px}
+.puntos i{width:12px;height:12px;border-radius:50%;background:var(--linea);display:inline-block}
+.puntos i.a1{background:var(--ok)} .puntos i.a2{background:#8fbf9f} .puntos i.f{background:var(--err)} .puntos i.act{outline:2px solid var(--tinta);outline-offset:1px}
+.reto-grid{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:18px;align-items:start}
+.reto-grid.sin-lamina{grid-template-columns:minmax(0,760px)}
+.acciones{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.resumen h3{margin-top:0}
+.resumen ul{margin:6px 0 10px;padding-left:1.2em}
+.reiniciar{font-size:.85rem;margin-top:14px;color:var(--tinta2)}
+.reiniciar button{background:none;border:0;color:var(--papel);text-decoration:underline;cursor:pointer;padding:0}
+
+footer{max-width:1320px;margin:0 auto;padding:12px 20px 30px;font-size:.82rem;color:var(--tinta2);border-top:1px solid var(--linea)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+@media (max-width:980px){
+  .banco,.reto-grid{grid-template-columns:minmax(0,1fr)}
+  .niveles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .titulo h1{font-size:1.6rem}
+  .lectura .gran{font-size:2rem}
 }
+@media (max-width:560px){
+  main{padding:12px 10px 24px}
+  .cab-in,.pestanas{padding-left:10px;padding-right:10px}
+  .pestanas button{padding:8px 10px}
+  .niveles{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
 </style>
 </head>
 <body>
-<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
-
-<header class="curso-hd">
-  <span class="curso-sb">U00 · Dibujo técnico · Calculadora de escalas</span>
+<a href="#contenido" class="saltar">Saltar al contenido</a>
+<header class="cab">
+  <div class="cab-in">
+    <nav class="migas" aria-label="Navegación">
+      <a href="../index.html">Unidad de dibujo técnico</a>
+      <a href="../libro-digital.html">Libro digital</a>
+    </nav>
+    <div class="titulo">
+      <h1>Laboratorio de escalas</h1>
+      <p class="lema">La escala cambia el dibujo, no el objeto.</p>
+    </div>
+  </div>
+  <div class="pestanas" role="tablist" aria-label="Partes del laboratorio">
+    <button role="tab" id="tab-explorar" aria-controls="p-explorar" aria-selected="true"><span class="n">1</span>Explorar</button>
+    <button role="tab" id="tab-medir" aria-controls="p-medir" aria-selected="false" tabindex="-1"><span class="n">2</span>Medir</button>
+    <button role="tab" id="tab-retos" aria-controls="p-retos" aria-selected="false" tabindex="-1"><span class="n">3</span>Retos</button>
+  </div>
 </header>
 
-<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
-  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Inicio</span></a>
-  <span class="nc-sep">·</span>
-  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U00</span></a>
-  <span class="nc-sep">·</span>
-  <a href="../libro-digital.html"><span>📘</span><span class="nc-lbl">Libro digital</span></a>
-  <span class="nc-sep">·</span>
-  <span class="nc-current"><span>📏</span><span class="nc-lbl">Calculadora de escalas</span></span>
-</nav>
+<main id="contenido">
 
-<div class="unidad-layout">
-
-<aside class="sb-side">
-  <h3>Cómo usarlo</h3>
-  <p style="padding: 0.6rem 1rem; font-size:0.88rem; color:#555; line-height:1.55;">
-    <strong>1.</strong> Elige la <strong>escala</strong> (presets o personalizada).<br>
-    <strong>2.</strong> Selecciona el modo: pasar de <em>real a dibujo</em> o al revés.<br>
-    <strong>3.</strong> Introduce la medida conocida. La otra se calcula al instante.<br>
-    <strong>4.</strong> Mira los pasos para entender el cálculo.
-  </p>
-  <h3>Lo que aprenderás</h3>
-  <ul style="font-size:0.88rem; color:#555; padding:0 1rem 0 2rem;">
-    <li>Diferenciar reducción, natural y ampliación.</li>
-    <li>Convertir medidas entre realidad y dibujo.</li>
-    <li>Trabajar con unidades coherentes.</li>
-  </ul>
-</aside>
-
-<main class="ct" id="main-content">
-
-<h1 class="unidad-titulo">📏 Calculadora de escalas</h1>
-<p class="unidad-subt">Convierte entre medida real y medida en el dibujo con cualquier escala. Comprueba los cálculos paso a paso y visualiza la diferencia de tamaños.</p>
-
-<!-- ─── Selector de escala ─── -->
-<section class="calc-panel">
-  <h2>Paso 1 · Elige la escala</h2>
-  <p class="panel-sub">Usa un preset o configura una escala personalizada.</p>
-
-  <div class="escala-presets" id="escala-presets">
-    <button class="preset-btn" data-num="1" data-den="2">1:2</button>
-    <button class="preset-btn" data-num="1" data-den="5">1:5</button>
-    <button class="preset-btn" data-num="1" data-den="10">1:10</button>
-    <button class="preset-btn" data-num="1" data-den="20">1:20</button>
-    <button class="preset-btn" data-num="1" data-den="50">1:50</button>
-    <button class="preset-btn active" data-num="1" data-den="100">1:100</button>
-    <button class="preset-btn" data-num="1" data-den="1000">1:1000</button>
-    <button class="preset-btn" data-num="1" data-den="25000">1:25 000</button>
-    <button class="preset-btn" data-num="1" data-den="1">1:1</button>
-    <button class="preset-btn" data-num="2" data-den="1">2:1</button>
-    <button class="preset-btn" data-num="5" data-den="1">5:1</button>
-    <button class="preset-btn" data-num="10" data-den="1">10:1</button>
+<!-- ===================== EXPLORAR ===================== -->
+<section class="panel" id="p-explorar" role="tabpanel" aria-labelledby="tab-explorar">
+  <p class="intro">Elige un objeto y una escala. La hoja no cambia y el objeto tampoco: lo único que cambia es el tamaño de su dibujo. Fíjate en la regla, que mide el papel, y en las cotas, que dicen siempre la medida real.</p>
+  <div class="fila">
+    <span class="rot" id="ex-obj-rot">Objeto</span>
+    <div class="chips" id="ex-objs" role="group" aria-labelledby="ex-obj-rot"></div>
   </div>
-
-  <div class="escala-custom">
-    <label style="font-size:0.92rem; font-weight:600; color:#444; margin-right: 0.4rem;">Personalizada:</label>
-    <input type="number" id="num-input" value="1" min="1" step="1" aria-label="Numerador de la escala">
-    <span class="sep">:</span>
-    <input type="number" id="den-input" value="100" min="1" step="1" aria-label="Denominador de la escala">
+  <div class="selector-wrap">
+    <div class="sel-ejes" aria-hidden="true"><span>Reducción: el dibujo es menor</span><span>Ampliación: el dibujo es mayor</span></div>
+    <div class="selector" id="ex-sel" role="group" aria-label="Escalas normalizadas"></div>
+    <div class="sel-otra">
+      <label for="ex-a">Otra escala:</label>
+      <input id="ex-a" type="text" inputmode="decimal" aria-label="Primer número de la escala (papel)" placeholder="1">
+      <span class="dos-p">:</span>
+      <input id="ex-b" type="text" inputmode="decimal" aria-label="Segundo número de la escala (realidad)" placeholder="3">
+      <button class="btn sec peq" id="ex-aplicar" type="button">Aplicar</button>
+      <span class="msg" id="ex-otra-msg" aria-live="polite"></span>
+    </div>
   </div>
-
-  <div class="escala-display nat" id="escala-display">
-    <span id="escala-text">1 : 100</span>
-    <span class="tag" id="escala-tag">Escala de reducción · ÷100</span>
+  <div class="lectura" id="ex-lectura" aria-live="polite"></div>
+  <div class="banco">
+    <div class="escenario">
+      <div class="barra" id="ex-barra"></div>
+      <div id="ex-stage"></div>
+      <p class="ayuda">Arrastra la regla para medir y usa su tirador ↻ para girarla. Arrastra el cuadrado azul de la esquina del dibujo para cambiar la escala a mano. Doble clic (o el botón +) para acercar.</p>
+    </div>
+    <aside class="lateral">
+      <div class="caja" id="ex-objeto"></div>
+      <div class="caja" id="ex-op"></div>
+      <div class="caja" id="ex-encaje"></div>
+    </aside>
   </div>
 </section>
 
-<!-- ─── Calculadora ─── -->
-<section class="calc-panel" style="margin-top: 1.5rem;">
-  <h2>Paso 2 · Calcula</h2>
-
-  <div class="modo-toggle" role="tablist" aria-label="Modo de cálculo">
-    <button id="modo-real" class="active" onclick="setModo('real')">📐 Real → Dibujo</button>
-    <button id="modo-dibujo" onclick="setModo('dibujo')">✏️ Dibujo → Real</button>
-  </div>
-
-  <div class="calc-row">
-    <label for="real-input" id="real-label">Medida real:</label>
-    <input type="number" id="real-input" step="any" value="9" aria-label="Medida real">
-    <select id="real-unit" aria-label="Unidad de la medida real">
-      <option value="mm">mm</option>
-      <option value="cm">cm</option>
-      <option value="m" selected>m</option>
-      <option value="km">km</option>
-    </select>
-  </div>
-
-  <div class="calc-row">
-    <label for="dibujo-input" id="dibujo-label">Medida dibujo:</label>
-    <input type="number" id="dibujo-input" step="any" readonly class="locked" aria-label="Medida en el dibujo">
-    <select id="dibujo-unit" aria-label="Unidad de la medida en el dibujo">
-      <option value="mm">mm</option>
-      <option value="cm" selected>cm</option>
-      <option value="m">m</option>
-    </select>
-  </div>
-
-  <div class="pasos" id="pasos-box">
-    <h3>Pasos del cálculo</h3>
-    <div id="pasos-content"></div>
+<!-- ===================== MEDIR ===================== -->
+<section class="panel" id="p-medir" role="tabpanel" aria-labelledby="tab-medir" hidden>
+  <p class="intro">Un plano se lee midiendo. En cada situación, primero verás cómo se hace paso a paso; después lo harás tú con otros datos.</p>
+  <div class="sit-lista" id="md-lista" role="group" aria-label="Situaciones"></div>
+  <div class="banco">
+    <div class="escenario">
+      <div class="barra" id="md-barra"></div>
+      <div id="md-stage"></div>
+      <p class="ayuda" id="md-ayuda"></p>
+    </div>
+    <aside class="lateral">
+      <div class="caja">
+        <h3 id="md-titulo"></h3>
+        <div class="modo" role="group" aria-label="Modo">
+          <button type="button" id="md-modo-demo" aria-pressed="true">Ver cómo se hace</button>
+          <button type="button" id="md-modo-tu" aria-pressed="false">Ahora tú</button>
+        </div>
+        <div id="md-demo">
+          <div class="paso-txt" id="md-paso" aria-live="polite"></div>
+          <div class="op-box" id="md-op"></div>
+          <div class="pasos-nav">
+            <button class="btn sec peq" id="md-ant" type="button">◀ Anterior</button>
+            <span class="cuenta" id="md-cuenta"></span>
+            <button class="btn peq" id="md-sig" type="button">Siguiente ▶</button>
+          </div>
+        </div>
+        <div id="md-tu" hidden></div>
+      </div>
+    </aside>
   </div>
 </section>
 
-<!-- ─── Comparativa visual ─── -->
-<section class="compara-wrap">
-  <h2>Comparativa visual</h2>
-  <p class="panel-sub">Una línea representa el objeto a tamaño real, la otra el dibujo. La proporción entre ellas es la escala.</p>
-  <div class="compara-svg">
-    <svg id="compara-svg" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-      <!-- dibujado por JS -->
-    </svg>
-  </div>
-  <div class="compara-leyenda">
-    <span class="leyenda-item leyenda-real"><span class="leyenda-swatch"></span><span>Tamaño real</span></span>
-    <span class="leyenda-item leyenda-dibujo"><span class="leyenda-swatch"></span><span>Tamaño en el dibujo</span></span>
-  </div>
+<!-- ===================== RETOS ===================== -->
+<section class="panel" id="p-retos" role="tabpanel" aria-labelledby="tab-retos" hidden>
+  <p class="intro">Cinco niveles, de reconocer escalas a leer planos. Todos están abiertos: empieza por donde quieras. Cada reto admite dos intentos y la corrección explica qué ha pasado.</p>
+  <div class="niveles" id="rt-niveles" role="group" aria-label="Niveles"></div>
+  <div id="rt-zona"></div>
+  <p class="reiniciar">El progreso se guarda en este navegador. <button type="button" id="rt-borrar">Borrar mi progreso</button></p>
 </section>
-
-<div class="tip-card">
-  <div class="tip-title">⚠️ Cuidado con las unidades</div>
-  Antes de comparar medidas, las dos tienen que estar en la misma unidad. La calculadora hace la conversión por ti, pero a mano siempre conviene <strong>pasar primero todo a la misma unidad</strong> (mm, cm, m o km) y luego aplicar la escala.
-</div>
-
-<div class="tip-card">
-  <div class="tip-title">💡 ¿Qué significa cada escala?</div>
-  La escala <strong>1:N</strong> significa <em>"1 en el dibujo por cada N en la realidad"</em> → el dibujo es <strong>más pequeño</strong> (reducción).<br>
-  La escala <strong>N:1</strong> significa <em>"N en el dibujo por cada 1 en la realidad"</em> → el dibujo es <strong>más grande</strong> (ampliación).<br>
-  La escala <strong>1:1</strong> es la natural: el dibujo tiene el mismo tamaño que la realidad.
-</div>
-
-<footer class="unidad-foot">
-  IES Jiménez de Quesada · Santa Fe (Granada)<br>
-  TyD 2º ESO · Curso 2026-27 · Manuel Alonso Herrera<br>
-  <a href="../index.html">← Volver al hub</a> · <a href="../libro-digital.html">📘 Libro digital</a>
-  <br><span class="version">Calculadora de escalas v1.0</span>
-</footer>
 
 </main>
-</div>
+<footer>
+  Laboratorio de escalas · v1.1 · IES Jiménez de Quesada (Santa Fe, Granada).
+  Las medidas marcadas como «dato del simulador» son ejemplos creados para este recurso y no proceden del libro.
+</footer>
 
 <script>
-(function() {
-  'use strict';
+(function(){
+'use strict';
+/* =====================================================================
+   NÚCLEO · utilidades, escalas, diagnóstico, escenario, instrumentos
+   Unidad interna del escenario: 1 unidad SVG = 1 mm de papel.
+   ===================================================================== */
+const NS = 'http://www.w3.org/2000/svg';
+const $ = s => document.querySelector(s);
+const REDUCIR_MOV = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+const U = { mm: 1, cm: 10, m: 1000, km: 1e6 };
+const UNOMBRE = { mm: 'milímetros', cm: 'centímetros', m: 'metros', km: 'kilómetros' };
 
-  // ── Conversión a mm como unidad base ───────────────────
-  const U = { mm: 1, cm: 10, m: 1000, km: 1000000 };
-
-  // ── Estado ─────────────────────────────────────────────
-  let num = 1, den = 100;
-  let modo = 'real';   // 'real' (real → dibujo) o 'dibujo' (dibujo → real)
-
-  // ── Elementos ──────────────────────────────────────────
-  const numIn = document.getElementById('num-input');
-  const denIn = document.getElementById('den-input');
-  const escalaText = document.getElementById('escala-text');
-  const escalaTag = document.getElementById('escala-tag');
-  const escalaDisplay = document.getElementById('escala-display');
-  const presets = document.querySelectorAll('.preset-btn');
-  const realIn = document.getElementById('real-input');
-  const dibujoIn = document.getElementById('dibujo-input');
-  const realUnit = document.getElementById('real-unit');
-  const dibujoUnit = document.getElementById('dibujo-unit');
-  const realLabel = document.getElementById('real-label');
-  const dibujoLabel = document.getElementById('dibujo-label');
-  const pasosContent = document.getElementById('pasos-content');
-  const compareSvg = document.getElementById('compara-svg');
-
-  function fmt(n) {
-    if (!isFinite(n)) return '—';
-    if (Math.abs(n) >= 1000) return n.toLocaleString('es-ES', {maximumFractionDigits: 2});
-    if (Math.abs(n) < 0.01) return n.toExponential(2);
-    return (Math.round(n * 1000) / 1000).toString().replace('.', ',');
+function el(tag, attrs, parent, html) {
+  const e = document.createElement(tag);
+  if (attrs) for (const k in attrs) {
+    if (attrs[k] == null) continue;
+    if (k === 'class') e.className = attrs[k];
+    else if (k === 'text') e.textContent = attrs[k];
+    else e.setAttribute(k, attrs[k]);
   }
+  if (html != null) e.innerHTML = html;
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function sv(tag, attrs, parent) {
+  const e = document.createElementNS(NS, tag);
+  if (attrs) for (const k in attrs) if (attrs[k] != null) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function svT(txt, attrs, parent) { const t = sv('text', attrs, parent); t.textContent = txt; return t; }
+function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+function pickN(a, n) { return shuffle(a.slice()).slice(0, n); }
+function casiEntero(x) { return Math.abs(x - Math.round(x)) < 1e-6 * Math.max(1, Math.abs(x)); }
 
-  function actualizarEscalaDisplay() {
-    let nFmt = num >= 1000 ? num.toLocaleString('es-ES') : num;
-    let dFmt = den >= 1000 ? den.toLocaleString('es-ES') : den;
-    escalaText.textContent = `${nFmt} : ${dFmt}`;
+/* Formato numérico español: coma decimal; espacio de millares a partir de 5 cifras */
+function fmt(n, dec = 2) {
+  if (n == null || !isFinite(n)) return '—';
+  const f = Math.pow(10, dec);
+  let r = Math.round(n * f) / f;
+  if (Object.is(r, -0)) r = 0;
+  const neg = r < 0; r = Math.abs(r);
+  let [i, d] = r.toFixed(dec).split('.');
+  d = d ? d.replace(/0+$/, '') : '';
+  if (i.length >= 5) i = i.replace(/\B(?=(\d{3})+(?!\d))/g, '\u00A0');
+  return (neg ? '−' : '') + i + (d ? ',' + d : '');
+}
+function fmtFijo(n, dec) { return n.toFixed(dec).replace('.', ','); }
 
-    escalaDisplay.classList.remove('amp', 'red', 'nat');
-    if (num === den) {
-      escalaTag.textContent = 'Escala natural · ×1';
-      escalaDisplay.classList.add('nat');
-    } else if (num < den) {
-      const r = den / num;
-      escalaTag.textContent = `Escala de reducción · ÷${fmt(r)}`;
-      escalaDisplay.classList.add('red');
-    } else {
-      const r = num / den;
-      escalaTag.textContent = `Escala de ampliación · ×${fmt(r)}`;
-      escalaDisplay.classList.add('amp');
+/* Lectura de números escritos por el alumnado.
+   Admite coma o punto decimal y espacios de millares.
+   «1.250» se interpreta como millares (1250) y se guarda la lectura decimal (1,25) como alternativa. */
+function leerNumero(txt) {
+  if (txt == null) return null;
+  let s = String(txt).trim().replace(/[\s\u00A0\u202F]/g, '');
+  if (!s) return null;
+  if (!/^[+-]?[\d.,]+$/.test(s)) return null;
+  let v, alt = null;
+  if (s.includes(',')) {
+    if ((s.match(/,/g) || []).length > 1) return null;
+    const [ent, dec] = s.split(',');
+    if (ent.includes('.') && !/^[+-]?\d{1,3}(\.\d{3})+$/.test(ent)) return null;
+    v = parseFloat(ent.replace(/\./g, '') + '.' + dec);
+  } else if (/^[+-]?\d{1,3}(\.\d{3})+$/.test(s)) {
+    v = parseFloat(s.replace(/\./g, ''));
+    if ((s.match(/\./g) || []).length === 1 && !/\.000$/.test(s)) alt = parseFloat(s);   // «1.250» podría ser 1,25
+  } else {
+    if ((s.match(/\./g) || []).length > 1) return null;
+    v = parseFloat(s);
+  }
+  if (!isFinite(v)) return null;
+  return { value: v, alt };
+}
+
+/* ---------------- Escalas ----------------
+   Una escala se guarda como dos números {n, d}: n va con el papel, d con la realidad.
+   E = n / d  ( = tamaño del dibujo / tamaño real, definición del libro) */
+const S = (n, d) => ({ n, d });
+const E = s => s.n / s.d;
+const SERIE_RED = [2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000];
+const SERIE_AMP = [2, 5, 10, 20, 50];
+const SELECTOR = [...[1000, 500, 200, 100, 50, 20, 10, 5, 2].map(N => S(1, N)), S(1, 1), ...SERIE_AMP.map(N => S(N, 1))];
+
+function canon(s) {
+  const e = E(s);
+  if (Math.abs(e - 1) < 1e-9) return { tipo: 'nat', N: 1 };
+  return s.n < s.d ? { tipo: 'red', N: s.d / s.n } : { tipo: 'amp', N: s.n / s.d };
+}
+function esNorm(s) {
+  const c = canon(s);
+  if (c.tipo === 'nat') return true;
+  return (c.tipo === 'red' ? SERIE_RED : SERIE_AMP).some(v => Math.abs(v - c.N) < 1e-9 * v);
+}
+function igualEsc(a, b) { return Math.abs(E(a) / E(b) - 1) < 1e-9; }
+function fmtN(N) { if (casiEntero(N)) return fmt(Math.round(N), 0); return N < 100 ? fmt(N, 1) : fmt(N, 0); }
+function partes(s) { const c = canon(s); if (c.tipo === 'red') return ['1', fmtN(c.N)]; if (c.tipo === 'amp') return [fmtN(c.N), '1']; return ['1', '1']; }
+function escTxt(s) { const p = partes(s); return p[0] + ' : ' + p[1]; }
+function escHTML(s) { const p = partes(s); return `<span class="esc"><span class="c-papel">${p[0]}</span><span class="dos">:</span><span class="c-real">${p[1]}</span></span>`; }
+function tipoTxt(s) { return { red: 'Reducción', amp: 'Ampliación', nat: 'Escala natural' }[canon(s).tipo]; }
+function exacta(s) { return casiEntero(canon(s).N); }
+function inversa(s) { return S(s.d, s.n); }
+function escalaDesdeE(e) { return e < 1 ? S(1, 1 / e) : S(e, 1); }
+function lecturaHTML(s) {
+  const c = canon(s), N = fmtN(c.N), ap = exacta(s) ? '' : 'unos ';
+  if (c.tipo === 'red') return `<span class="c-papel">1 mm del papel</span> representa <span class="c-real">${ap}${N} mm reales</span>`;
+  if (c.tipo === 'amp') return `<span class="c-papel">${ap}${N} mm del papel</span> representan <span class="c-real">1 mm real</span>`;
+  return `<span class="c-papel">1 mm del papel</span> representa <span class="c-real">1 mm real</span>`;
+}
+function fracTxt(s) { const c = canon(s); if (c.tipo === 'red') return '1/' + fmtN(c.N); if (c.tipo === 'amp') return fmtN(c.N) + '/1'; return '1/1'; }
+
+/* Procedimiento único (el del libro):  dibujo = real × escala   ·   real = dibujo ÷ escala   ·   escala = dibujo ÷ real */
+function opR2D(R, ud, s) {
+  const c = canon(s), eq = exacta(s) ? '=' : '≈', N = fmtN(c.N);
+  const res = R * E(s);
+  const oper = c.tipo === 'red' ? `${fmt(R, 3)} ÷ ${N}` : c.tipo === 'amp' ? `${fmt(R, 3)} × ${N}` : `${fmt(R, 3)} × 1`;
+  let t = `${fmt(R, 3)} ${ud} × ${fracTxt(s)} ${eq} ${oper} ${eq} <b class="c-papel">${fmt(res, 3)} ${ud}</b>`;
+  if (ud !== 'mm') t += ` = <b class="c-papel">${fmt(res * U[ud], 2)} mm</b>`;
+  return t;
+}
+function opD2R(D, ud, s, udOut) {
+  const c = canon(s), eq = exacta(s) ? '=' : '≈', N = fmtN(c.N);
+  const res = D / E(s);
+  const oper = c.tipo === 'red' ? `${fmt(D, 3)} × ${N}` : c.tipo === 'amp' ? `${fmt(D, 3)} ÷ ${N}` : `${fmt(D, 3)} × 1`;
+  let t = `${fmt(D, 3)} ${ud} ÷ ${fracTxt(s)} ${eq} ${oper} ${eq} <b class="c-real">${fmt(res, 3)} ${ud}</b>`;
+  if (udOut && udOut !== ud) t += ` = <b class="c-real">${fmt(res * U[ud] / U[udOut], 4)} ${udOut}</b>`;
+  return t;
+}
+function opEsc(D, Dud, R, Rud, s) {
+  // las dos medidas se pasan a la unidad más pequeña de las dos
+  let t = '', Dv = D, Rv = R, ud = Dud;
+  if (Dud !== Rud) {
+    if (U[Dud] > U[Rud]) { Dv = D * U[Dud] / U[Rud]; ud = Rud; t += `Primero, las dos medidas en la misma unidad: ${fmt(D, 3)} ${Dud} = ${fmt(Dv, 3)} ${Rud}.<br>`; }
+    else { Rv = R * U[Rud] / U[Dud]; t += `Primero, las dos medidas en la misma unidad: ${fmt(R, 3)} ${Rud} = ${fmt(Rv, 3)} ${Dud}.<br>`; }
+  }
+  const c = canon(s);
+  const val = c.tipo === 'red' ? '1/' + fmtN(c.N) : fmtN(c.N);
+  t += `escala = dibujo ÷ real = ${fmt(Dv, 3)} ÷ ${fmt(Rv, 3)} = ${val} → <b>${escHTML(s)}</b>`;
+  return t;
+}
+
+/* ---------------- Hoja A4 y encaje ----------------
+   A4 horizontal 297 × 210, recuadro a 10 mm, cajetín abajo a la derecha.
+   Zona de dibujo: la parte del recuadro libre del cajetín.
+   El dibujo se coloca con su esquina superior izquierda en ORIGEN y
+   debe caber con sus cotas (reserva de 14 mm abajo y a la derecha). */
+const HOJA = {
+  w: 297, h: 210,
+  caj: { x: 177, y: 172, w: 110, h: 28 },
+  zona: { x: 16, y: 16, w: 265, h: 150 },
+  origen: { x: 26, y: 26 },
+  reserva: 14
+};
+const MAXW = HOJA.zona.x + HOJA.zona.w - HOJA.origen.x - HOJA.reserva;   // 241 mm
+const MAXH = HOJA.zona.y + HOJA.zona.h - HOJA.origen.y - HOJA.reserva;   // 126 mm
+const UMBRAL_PEQ = 30;   // criterio interno del simulador (no es una norma)
+function cabe(w, h) { return w <= MAXW + 1e-9 && h <= MAXH + 1e-9; }
+function encaje(w, h) { if (!cabe(w, h)) return 'no'; if (Math.max(w, h) < UMBRAL_PEQ) return 'peq'; return 'ok'; }
+function mejorEscala(w, h) {
+  const cands = [...SERIE_AMP.slice().reverse().map(N => S(N, 1)), S(1, 1), ...SERIE_RED.map(N => S(1, N))];
+  for (const s of cands) if (cabe(w * E(s), h * E(s))) return s;
+  return null;
+}
+const FORMATOS = [['A4', 297, 210], ['A3', 420, 297], ['A2', 594, 420], ['A1', 841, 594], ['A0', 1189, 841]];
+/* Formato necesario conservando la misma disposición de la hoja (márgenes, cajetín y cotas a escala del formato).
+   Aproximación prudente: cada formato A es √2 veces mayor que el anterior. */
+function formatoNecesario(w, h) {
+  const F = [['A4', 1], ['A3', Math.SQRT2], ['A2', 2], ['A1', 2 * Math.SQRT2], ['A0', 4]];
+  for (const [n, f] of F) if (w <= MAXW * f + 1e-9 && h <= MAXH * f + 1e-9) return n;
+  return null;
+}
+function formatoMinimo(w, h) { const a = Math.max(w, h), b = Math.min(w, h); for (const [n, L, C] of FORMATOS) if (a <= L && b <= C) return n; return null; }
+
+/* ---------------- Diagnóstico de respuestas ---------------- */
+const ERR_TXT = {
+  invertida: 'Invertir la escala (confundir 1 : N con N : 1)',
+  unidad: 'Cambios de unidades',
+  sinEscala: 'Olvidar aplicar la escala',
+  origen: 'Medir sin partir del 0 de la regla',
+  magnitud: 'Resultados sin sentido físico',
+  prediccion: 'Predecir si el dibujo es mayor o menor',
+  tipo: 'Clasificar la escala',
+  nocabe: 'Elegir una escala con la que el dibujo no cabe',
+  menor: 'Elegir una escala más pequeña de lo necesario',
+  cota: 'Confundir la cota con la medida del papel',
+  calculo: 'Errores de cálculo',
+  otro: 'Otros errores'
+};
+function nombreUnidadFactor(ud, factor) {
+  // si la respuesta vale V·factor, ¿en qué unidad sería correcta?
+  const u = U[ud] / factor;
+  for (const k in U) if (Math.abs(U[k] / u - 1) < 1e-9) return k;
+  return null;
+}
+function msgInvertida(P) {
+  const e = P.sHTML || '';
+  if (P.dir === 'r2d') return P.tipo === 'red'
+    ? `Has multiplicado cuando había que dividir. En ${e} el dibujo es menor que el objeto: el resultado tiene que salir <b>menor</b> que la medida real.`
+    : `Has dividido cuando había que multiplicar. En ${e} el dibujo es mayor que el objeto: el resultado tiene que salir <b>mayor</b> que la medida real.`;
+  if (P.dir === 'd2r') return P.tipo === 'red'
+    ? `Has dividido cuando había que multiplicar. En ${e} cada milímetro del papel representa varios milímetros reales: la medida real tiene que salir <b>mayor</b> que la del dibujo.`
+    : `Has multiplicado cuando había que dividir. En ${e} el dibujo está ampliado: la medida real tiene que salir <b>menor</b> que la del dibujo.`;
+  return `Has invertido la escala: el primer número va con el papel y el segundo con la realidad.`;
+}
+/*  P = { V, ud, k (N de la escala), dir:'r2d'|'d2r'|'otro', tipo, sHTML,
+          dato:{v,ud} (valor de partida), tolAbs, medida:bool, F (mm reales por mm de papel, en ud),
+          plaus:[min,max], nombre, errSinEscala, msgSinEscala }  */
+function diagNum(a, P) {
+  const V = P.V;
+  const tol = Math.max(P.tolAbs || 0, Math.abs(V) * 0.005, 1e-9);
+  const cerca = (x, y, t) => Math.abs(x - y) <= t;
+  const rt = P.medida ? 0.035 : 0.012;
+  const rel = (x, y) => y !== 0 && Math.abs(x / y - 1) <= rt;
+  if (cerca(a.value, V, tol)) return { ok: true };
+  if (a.alt != null && cerca(a.alt, V, tol)) return { ok: true, nota: 'Recuerda: en español los decimales se escriben con coma (por ejemplo, 1,25).' };
+  const x = a.value, ud = P.ud;
+  // 1 · no se ha aplicado la escala
+  if (P.dato) {
+    const dv = P.dato.v * U[P.dato.ud] / U[ud];
+    if (rel(x, dv) || (P.dato.ud !== ud && rel(x, P.dato.v))) {
+      return { ok: false, err: P.errSinEscala || 'sinEscala', msg: P.msgSinEscala || `Has dado el mismo valor de partida: falta aplicar la escala ${P.sHTML || ''}.` };
     }
   }
+  const k = P.k || 1;
+  // 2 · escala invertida
+  if (k > 1 + 1e-9 && (rel(x, V * k * k) || rel(x, V / (k * k)))) {
+    const f = rel(x, V * k * k) ? k * k : 1 / (k * k);
+    const u2 = nombreUnidadFactor(ud, f);
+    let msg = msgInvertida(P);
+    if (u2) msg += ` (Tu número también sería correcto en ${UNOMBRE[u2]}: revisa además las unidades).`;
+    return { ok: false, err: 'invertida', msg };
+  }
+  // 3 · unidades
+  for (let p = -6; p <= 6; p++) {
+    if (!p) continue;
+    const f = Math.pow(10, p);
+    if (rel(x, V * f)) {
+      const u2 = nombreUnidadFactor(ud, f);
+      return { ok: false, err: 'unidad', msg: u2
+        ? `El número estaría bien en <b>${UNOMBRE[u2]}</b>, pero te lo piden en <b>${UNOMBRE[ud]}</b>. Revisa el cambio de unidades (1 cm = 10 mm · 1 m = 100 cm · 1 km = 1000 m).`
+        : `Tu resultado se aleja justo un factor ${fmt(f, 6)} del correcto: revisa el cambio de unidades (1 cm = 10 mm · 1 m = 100 cm · 1 km = 1000 m).` };
+    }
+  }
+  // 4 · invertida y además unidades
+  if (k > 1 + 1e-9) for (let p = -6; p <= 6; p++) {
+    if (!p) continue;
+    const f = Math.pow(10, p);
+    if (rel(x, V * k * k * f) || rel(x, V / (k * k) * f)) return { ok: false, err: 'invertida', msg: msgInvertida(P) + ' Además, revisa las unidades.' };
+  }
+  // 5 · medir desde el 1 o desde el borde de la regla
+  if (P.medida && P.F) {
+    const dif = Math.abs(x - V);
+    if (cerca(dif, 10 * P.F, Math.max(tol, 0.8 * P.F))) return { ok: false, err: 'origen', msg: 'La diferencia es justo de 1 cm en el papel. ¿Colocaste el <b>1</b> de la regla en el borde del dibujo en vez del <b>0</b>?' };
+    if (cerca(dif, 7 * P.F, Math.max(tol, 0.8 * P.F))) return { ok: false, err: 'origen', msg: 'La diferencia coincide con el margen de la regla antes del 0. ¿Mediste desde el <b>extremo</b> de la regla en vez de desde el <b>0</b>?' };
+  }
+  // 6 · magnitud absurda
+  if (P.plaus && (x < P.plaus[0] || x > P.plaus[1])) {
+    return { ok: false, err: 'magnitud', msg: `¿Tiene sentido ${P.nombre || 'ese resultado'} de ${fmt(x, 3)} ${ud}? Piensa en el tamaño real antes de calcular y revisa la operación.` };
+  }
+  return { ok: false, err: 'otro', msg: P.medida
+    ? 'No coincide. Vuelve a medir con cuidado: el 0 de la regla en un extremo y lee el otro (usa + para acercar). Después aplica la escala.'
+    : 'No coincide. Revisa la operación paso a paso.' };
+}
+/* Diagnóstico de una escala escrita como a : b.  P = { s, tolRel, contexto:'tecnico'|'mapa', trap } */
+function diagEsc(a, b, P) {
+  const ea = a / b, ee = E(P.s), r = ea / ee, tr = P.tolRel || 0.002;
+  const notas = [];
+  if (Math.abs(r - 1) <= tr) {
+    if (Math.abs(a - 1) > 1e-9 && Math.abs(b - 1) > 1e-9) notas.push(`${fmt(a, 3)} : ${fmt(b, 3)} equivale a ${escHTML(P.s)}. Exprésala así, con un 1 en uno de los lados.`);
+    else if (tr > 0.002 && Math.abs(r - 1) > 1e-6) notas.push(`Con la medida exacta sale ${escHTML(P.s)}: medir con regla siempre tiene un pequeño margen.`);
+    if (P.contexto !== 'mapa' && !esNorm(P.s)) notas.push(`${escHTML(P.s)} es una escala válida, pero no pertenece a la serie de escalas normalizadas.`);
+    return { ok: true, nota: notas.join('<br>') };
+  }
+  if (Math.abs(ee - 1) > 1e-9 && Math.abs(ea * ee - 1) <= tr * 2) {
+    return { ok: false, err: 'invertida', msg: `Has invertido la escala. escala = dibujo ÷ real, y el primer número va con el papel. Aquí el dibujo es ${ee < 1 ? 'menor' : 'mayor'} que la realidad, así que es una ${ee < 1 ? 'reducción' : 'ampliación'}.` };
+  }
+  for (let p = -6; p <= 6; p++) {
+    if (!p) continue;
+    if (Math.abs(r / Math.pow(10, p) - 1) <= tr * 2) return { ok: false, err: 'unidad', msg: P.trap || 'Revisa las unidades: para dividir dibujo entre real, las dos medidas tienen que estar en la misma unidad.' };
+  }
+  return { ok: false, err: 'otro', msg: 'No coincide. Calcula escala = dibujo ÷ real, con las dos medidas en la misma unidad, y escribe el resultado como 1 : N o N : 1.' };
+}
 
-  function setEscala(n, d) {
-    num = n; den = d;
-    numIn.value = n;
-    denIn.value = d;
-    // marca el preset activo
-    presets.forEach(b => {
-      b.classList.toggle('active',
-        parseInt(b.dataset.num) === n && parseInt(b.dataset.den) === d);
+/* ---------------- Animación ---------------- */
+function animar(ms, fn, fin) {
+  if (REDUCIR_MOV || ms <= 0) { fn(1); if (fin) fin(); return () => {}; }
+  let vivo = true; const t0 = performance.now();
+  function paso(t) {
+    if (!vivo) return;
+    let k = Math.min(1, (t - t0) / ms);
+    const q = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+    fn(q);
+    if (k < 1) requestAnimationFrame(paso); else if (fin) fin();
+  }
+  requestAnimationFrame(paso);
+  return () => { vivo = false; };
+}
+
+/* ---------------- Escenario SVG con zoom y desplazamiento ---------------- */
+let UID = 0;
+const ASPECTO = 321 / 250;   // hoja A4 + una franja de mesa abajo para dejar la regla
+class Escenario {
+  constructor(host, etiqueta) {
+    this.host = host; this.id = 'st' + (++UID);
+    this.svg = sv('svg', { class: 'lamina', role: 'group', 'aria-label': etiqueta || 'Hoja de dibujo' }, host);
+    const defs = this.defs = sv('defs', {}, this.svg);
+    const f = sv('filter', { id: this.id + '-sombra', x: '-5%', y: '-5%', width: '110%', height: '115%' }, defs);
+    sv('feDropShadow', { dx: 0, dy: 1, stdDeviation: 1.2, 'flood-color': '#26352c', 'flood-opacity': .3 }, f);
+    const pat = sv('pattern', { id: this.id + '-trama', width: 3, height: 3, patternUnits: 'userSpaceOnUse', patternTransform: 'rotate(45)' }, defs);
+    sv('rect', { width: 3, height: 3, fill: 'rgba(173,42,32,.12)' }, pat);
+    sv('line', { x1: 0, y1: 0, x2: 0, y2: 3, stroke: 'rgba(173,42,32,.6)', 'stroke-width': .8 }, pat);
+    const m = sv('mask', { id: this.id + '-fuera', maskUnits: 'userSpaceOnUse', x: -20000, y: -20000, width: 40000, height: 40000 }, defs);
+    sv('rect', { x: -20000, y: -20000, width: 40000, height: 40000, fill: '#fff' }, m);
+    this.maskZona = sv('rect', { x: HOJA.zona.x, y: HOJA.zona.y, width: HOJA.zona.w, height: HOJA.zona.h, fill: '#000' }, m);
+    sv('rect', { class: 'mesa', x: -20000, y: -20000, width: 40000, height: 40000 }, this.svg);
+    this.gEsc = sv('g', {}, this.svg);           // grupo escalable (fotocopia)
+    this.gHoja = sv('g', {}, this.gEsc);
+    this.gCont = sv('g', {}, this.gEsc);
+    this.gMarcas = sv('g', {}, this.svg);
+    this.gHerr = sv('g', {}, this.svg);
+    this.setBase({ x: -12, y: -12, w: 321, h: 250 });
+    this._eventos();
+  }
+  setBase(b) {
+    // mantiene siempre la misma proporción para que la lámina no cambie de alto
+    let { x, y, w, h } = b;
+    if (w / h > ASPECTO) { const nh = w / ASPECTO; y -= (nh - h) / 2; h = nh; } else { const nw = h * ASPECTO; x -= (nw - w) / 2; w = nw; }
+    this.base = { x, y, w, h }; this.z = 1; this.cx = x + w / 2; this.cy = y + h / 2; this.vista();
+  }
+  vista() {
+    const w = this.base.w / this.z, h = this.base.h / this.z, b = this.base;
+    this.cx = Math.min(b.x + b.w - w / 2, Math.max(b.x + w / 2, this.cx));
+    this.cy = Math.min(b.y + b.h - h / 2, Math.max(b.y + h / 2, this.cy));
+    this.svg.setAttribute('viewBox', `${this.cx - w / 2} ${this.cy - h / 2} ${w} ${h}`);
+    if (this.alZoom) this.alZoom(this.z);
+  }
+  zoom(f, px, py) {
+    const nz = Math.min(8, Math.max(1, this.z * f));
+    if (px != null) { const k = this.z / nz; this.cx = px + (this.cx - px) * k; this.cy = py + (this.cy - py) * k; }
+    this.z = nz; this.vista();
+  }
+  ajustar() { this.z = 1; this.cx = this.base.x + this.base.w / 2; this.cy = this.base.y + this.base.h / 2; this.vista(); }
+  mundo(cx, cy) {
+    const m = this.svg.getScreenCTM(); if (!m) return { x: 0, y: 0 };
+    const p = this.svg.createSVGPoint(); p.x = cx; p.y = cy;
+    const r = p.matrixTransform(m.inverse()); return { x: r.x, y: r.y };
+  }
+  pxmm() { const r = this.svg.getBoundingClientRect(); return (r.width / (this.base.w / this.z)) || 2; }
+  limpiar() { this.gCont.textContent = ''; this.gMarcas.textContent = ''; }
+  escalaHoja(k) { const t = k === 1 ? null : `scale(${k})`; if (t) this.gEsc.setAttribute('transform', t); else this.gEsc.removeAttribute('transform'); }
+  _eventos() {
+    let st = null;
+    this.svg.addEventListener('pointerdown', e => {
+      if (e.target.closest('[data-drag]') || this.z <= 1.001) return;
+      st = { x: e.clientX, y: e.clientY, cx: this.cx, cy: this.cy, k: this.pxmm() };
+      try { this.svg.setPointerCapture(e.pointerId); } catch (_) {}
+      this.svg.classList.add('arrastrando');
     });
-    actualizarEscalaDisplay();
-    calcular();
+    this.svg.addEventListener('pointermove', e => {
+      if (!st) return;
+      this.cx = st.cx - (e.clientX - st.x) / st.k; this.cy = st.cy - (e.clientY - st.y) / st.k; this.vista();
+    });
+    const fin = () => { st = null; this.svg.classList.remove('arrastrando'); };
+    this.svg.addEventListener('pointerup', fin); this.svg.addEventListener('pointercancel', fin);
+    this.svg.addEventListener('dblclick', e => {
+      if (e.target.closest('[data-drag]')) return;
+      const p = this.mundo(e.clientX, e.clientY); this.zoom(2, p.x, p.y);
+    });
+    // en pantallas táctiles: no desplazar la página al arrastrar instrumentos o al mover la lámina ampliada
+    this.svg.addEventListener('touchstart', e => {
+      if ((e.target.closest && e.target.closest('[data-drag]')) || this.z > 1.001) e.preventDefault();
+    }, { passive: false });
   }
+}
+/* arrastre genérico con Pointer Events */
+function arrastrable(st, elem, fx) {
+  elem.setAttribute('data-drag', '1');
+  elem.addEventListener('pointerdown', e => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    e.preventDefault(); e.stopPropagation();
+    try { elem.setPointerCapture(e.pointerId); } catch (_) {}
+    if (fx.ini) fx.ini(st.mundo(e.clientX, e.clientY), e);
+    const mv = ev => { if (fx.mover) fx.mover(st.mundo(ev.clientX, ev.clientY), ev); };
+    const up = () => { elem.removeEventListener('pointermove', mv); elem.removeEventListener('pointerup', up); elem.removeEventListener('pointercancel', up); if (fx.fin) fx.fin(); };
+    elem.addEventListener('pointermove', mv); elem.addEventListener('pointerup', up); elem.addEventListener('pointercancel', up);
+  });
+}
+/* barra de herramientas del escenario */
+function barraHerr(host, st, extras) {
+  host.textContent = '';
+  const b = (txt, lab, fn) => { const x = el('button', { class: 'btn-h', type: 'button', 'aria-label': lab, title: lab }, host, txt); x.addEventListener('click', fn); return x; };
+  b('−', 'Alejar', () => st.zoom(1 / 1.5));
+  const z = el('span', { class: 'zoomtxt', 'aria-live': 'polite' }, host, '100 %');
+  b('+', 'Acercar', () => st.zoom(1.5));
+  b('Ajustar', 'Ver la hoja entera', () => st.ajustar());
+  st.alZoom = zz => { z.textContent = Math.round(zz * 100) + ' %'; };
+  el('span', { class: 'sep' }, host);
+  const out = {};
+  (extras || []).forEach(x => {
+    const btn = el('button', { class: 'btn-h', type: 'button', 'aria-pressed': x.pulsado == null ? null : String(!!x.pulsado), title: x.titulo || null }, host, x.html);
+    btn.addEventListener('click', () => {
+      if (x.pulsado != null) { const v = btn.getAttribute('aria-pressed') !== 'true'; btn.setAttribute('aria-pressed', String(v)); x.fn(v, btn); } else x.fn(btn);
+    });
+    out[x.id] = btn;
+  });
+  return out;
+}
 
-  function setModo(m) {
-    modo = m;
-    document.getElementById('modo-real').classList.toggle('active', m === 'real');
-    document.getElementById('modo-dibujo').classList.toggle('active', m === 'dibujo');
-    if (m === 'real') {
-      realIn.readOnly = false;
-      realIn.classList.remove('locked');
-      dibujoIn.readOnly = true;
-      dibujoIn.classList.add('locked');
-      realLabel.textContent = 'Medida real:';
-      dibujoLabel.textContent = 'Medida dibujo:';
+/* ---------------- Regla de 30 cm graduada en mm ----------------
+   Pivote (x, y) = el 0 de la regla, sobre el borde graduado. */
+const A0_GIRO = Math.atan2(22, 240) * 180 / Math.PI;
+class Regla {
+  constructor(st) {
+    this.st = st; this.x = 16; this.y = 212; this.a = 0; this.puntos = []; this.visible = true; this.cancel = null;
+    const g = this.g = sv('g', { class: 'regla', tabindex: 0, role: 'group', 'aria-label': 'Regla graduada en milímetros. Arrástrala; con el teclado: flechas para moverla (Mayús = 5 mm), R para girarla 90°.' }, st.gHerr);
+    this.cuerpo = sv('g', {}, g);
+    sv('rect', { x: -7, y: 0, width: 314, height: 17, rx: 1.2, class: 'regla-cuerpo' }, this.cuerpo);
+    let d = '';
+    for (let i = 0; i <= 300; i++) { const L = i % 10 === 0 ? 6 : (i % 5 === 0 ? 4.4 : 2.9); d += `M${i} 0V${L}`; }
+    sv('path', { d, class: 'regla-marcas' }, this.cuerpo);
+    for (let i = 0; i <= 30; i++) svT(String(i), { x: i * 10, y: 10.6, class: 'regla-num', 'text-anchor': 'middle' }, this.cuerpo);
+    svT('cm', { x: 303.6, y: 15.2, class: 'regla-ud', 'text-anchor': 'middle' }, this.cuerpo);
+    sv('rect', { x: -8, y: -1, width: 316, height: 19, rx: 1.8, class: 'regla-foco' }, g);
+    this.giro = sv('g', { class: 'regla-giro' }, g);
+    sv('circle', { cx: 240, cy: 22, r: 4.3 }, this.giro);
+    svT('↻', { x: 240, y: 23.9, 'text-anchor': 'middle', class: 'giro-ico' }, this.giro);
+    this._arrastre(); this._teclas(); this.render();
+  }
+  _iman(x, y) {
+    const thr = 11 / this.st.pxmm(); let best = null, bd = thr;
+    for (const s of this.puntos) { const dd = Math.hypot(s.x - x, s.y - y); if (dd < bd) { bd = dd; best = s; } }
+    return best;
+  }
+  _arrastre() {
+    let off = null;
+    arrastrable(this.st, this.cuerpo, {
+      ini: p => { if (this.cancel) this.cancel(); off = { x: p.x - this.x, y: p.y - this.y }; this.g.classList.add('activa'); },
+      mover: p => { let nx = p.x - off.x, ny = p.y - off.y; const s = this._iman(nx, ny); if (s) { nx = s.x; ny = s.y; } this.x = nx; this.y = ny; this.render(); },
+      fin: () => this.g.classList.remove('activa')
+    });
+    arrastrable(this.st, this.giro, {
+      ini: () => { if (this.cancel) this.cancel(); },
+      mover: p => {
+        let a = Math.atan2(p.y - this.y, p.x - this.x) * 180 / Math.PI - A0_GIRO;
+        a = ((a % 360) + 360) % 360;
+        const q = Math.round(a / 90) * 90; if (Math.abs(a - q) < 5) a = q % 360;
+        this.a = a; this.render();
+      }
+    });
+  }
+  _teclas() {
+    this.g.addEventListener('keydown', e => {
+      const p = e.shiftKey ? 5 : 0.5; let h = true;
+      if (e.key === 'ArrowLeft') this.x -= p; else if (e.key === 'ArrowRight') this.x += p;
+      else if (e.key === 'ArrowUp') this.y -= p; else if (e.key === 'ArrowDown') this.y += p;
+      else if (e.key === 'r' || e.key === 'R') this.a = (Math.round(this.a / 90) * 90 + (e.shiftKey ? 270 : 90)) % 360;
+      else h = false;
+      if (h) { e.preventDefault(); this.render(); }
+    });
+    this.g.addEventListener('focus', () => this.g.classList.add('enfoque'));
+    this.g.addEventListener('blur', () => this.g.classList.remove('enfoque'));
+  }
+  render() { this.g.setAttribute('transform', `translate(${this.x} ${this.y}) rotate(${this.a})`); this.g.style.display = this.visible ? '' : 'none'; }
+  mostrar(v) { this.visible = v; this.render(); }
+  poner(x, y, a) { if (this.cancel) this.cancel(); this.x = x; this.y = y; this.a = a; this.render(); }
+  irA(x, y, a, ms = 700) {
+    if (this.cancel) this.cancel();
+    const x0 = this.x, y0 = this.y; let a0 = this.a, da = ((a - a0 + 540) % 360) - 180;
+    this.cancel = animar(ms, k => { this.x = x0 + (x - x0) * k; this.y = y0 + (y - y0) * k; this.a = (a0 + da * k + 360) % 360; this.render(); }, () => { this.x = x; this.y = y; this.a = a; this.render(); this.cancel = null; });
+  }
+}
+
+/* ---------------- Compás ----------------
+   A = punta seca, B = punta de lápiz, cabeza = asa para moverlo entero.
+   Con la abertura bloqueada, mover B lo hace girar alrededor de A. */
+class Compas {
+  constructor(st) {
+    this.st = st; this.A = { x: 225, y: 90 }; this.B = { x: 245, y: 90 }; this.bloq = false; this.puntos = []; this.cero = null; this.visible = false; this.cancel = null;
+    const g = this.g = sv('g', { class: 'compas' }, st.gHerr);
+    this.pa = sv('line', { class: 'compas-pata' }, g); this.pb = sv('line', { class: 'compas-pata' }, g);
+    this.hH = sv('g', { class: 'compas-cabeza', tabindex: 0, 'aria-label': 'Cabeza del compás: arrástrala para mover el compás sin cambiar su abertura' }, g);
+    sv('circle', { r: 3.2 }, this.hH);
+    this.hA = sv('g', { class: 'compas-punta', tabindex: 0, 'aria-label': 'Punta seca del compás' }, g);
+    sv('circle', { r: 4.6, class: 'hit' }, this.hA); sv('circle', { r: 1, class: 'aguja' }, this.hA);
+    this.hB = sv('g', { class: 'compas-punta', tabindex: 0, 'aria-label': 'Punta de lápiz del compás' }, g);
+    sv('circle', { r: 4.6, class: 'hit' }, this.hB); sv('circle', { r: 1.2, class: 'mina' }, this.hB);
+    this._arrastre(); this.render();
+  }
+  L() { return Math.hypot(this.B.x - this.A.x, this.B.y - this.A.y); }
+  H() {
+    const A = this.A, B = this.B, L = this.L();
+    if (L < 1e-6) return { x: A.x, y: A.y - 22 };
+    let nx = -(B.y - A.y) / L, ny = (B.x - A.x) / L;
+    if (ny > 0 || (Math.abs(ny) < 1e-9 && nx > 0)) { nx = -nx; ny = -ny; }
+    const h = Math.max(22, 0.55 * L);
+    return { x: (A.x + B.x) / 2 + nx * h, y: (A.y + B.y) / 2 + ny * h };
+  }
+  _iman(p) { const thr = 11 / this.st.pxmm(); let best = null, bd = thr; for (const s of this.puntos) { const d = Math.hypot(s.x - p.x, s.y - p.y); if (d < bd) { bd = d; best = s; } } return best ? { x: best.x, y: best.y } : p; }
+  _imanCero() {
+    if (!this.cero) return;
+    const thr = 11 / this.st.pxmm();
+    if (Math.hypot(this.A.x - this.cero.x, this.A.y - this.cero.y) < thr) {
+      const L = this.L(); this.A = { x: this.cero.x, y: this.cero.y }; this.B = { x: this.cero.x + L, y: this.cero.y };
+    }
+  }
+  _arrastre() {
+    let oA, oB;
+    arrastrable(this.st, this.hH, {
+      ini: p => { if (this.cancel) this.cancel(); oA = { x: this.A.x - p.x, y: this.A.y - p.y }; oB = { x: this.B.x - p.x, y: this.B.y - p.y }; },
+      mover: p => { this.A = { x: p.x + oA.x, y: p.y + oA.y }; this.B = { x: p.x + oB.x, y: p.y + oB.y }; this._imanCero(); this.render(); }
+    });
+    arrastrable(this.st, this.hA, {
+      ini: () => { if (this.cancel) this.cancel(); },
+      mover: p => {
+        if (this.bloq) { const dx = this.B.x - this.A.x, dy = this.B.y - this.A.y; this.A = { x: p.x, y: p.y }; this.B = { x: p.x + dx, y: p.y + dy }; this._imanCero(); }
+        else this.A = this._iman(p);
+        this.render();
+      }
+    });
+    arrastrable(this.st, this.hB, {
+      ini: () => { if (this.cancel) this.cancel(); },
+      mover: p => {
+        if (this.bloq) {
+          const L = this.L(); let ang = Math.atan2(p.y - this.A.y, p.x - this.A.x);
+          if (Math.abs(ang) < 3 * Math.PI / 180) ang = 0;
+          this.B = { x: this.A.x + L * Math.cos(ang), y: this.A.y + L * Math.sin(ang) };
+        } else this.B = this._iman(p);
+        this.render();
+      }
+    });
+  }
+  render() {
+    const H = this.H();
+    this.pa.setAttribute('x1', H.x); this.pa.setAttribute('y1', H.y); this.pa.setAttribute('x2', this.A.x); this.pa.setAttribute('y2', this.A.y);
+    this.pb.setAttribute('x1', H.x); this.pb.setAttribute('y1', H.y); this.pb.setAttribute('x2', this.B.x); this.pb.setAttribute('y2', this.B.y);
+    this.hH.setAttribute('transform', `translate(${H.x} ${H.y})`);
+    this.hA.setAttribute('transform', `translate(${this.A.x} ${this.A.y})`);
+    this.hB.setAttribute('transform', `translate(${this.B.x} ${this.B.y})`);
+    this.g.style.display = this.visible ? '' : 'none';
+  }
+  mostrar(v) { this.visible = v; this.render(); }
+  poner(A, B) { if (this.cancel) this.cancel(); this.A = { ...A }; this.B = { ...B }; this.render(); }
+  irA(A, B, ms = 800) {
+    if (this.cancel) this.cancel();
+    const A0 = { ...this.A }, B0 = { ...this.B };
+    this.cancel = animar(ms, k => { this.A = { x: A0.x + (A.x - A0.x) * k, y: A0.y + (A.y - A0.y) * k }; this.B = { x: B0.x + (B.x - B0.x) * k, y: B0.y + (B.y - B0.y) * k }; this.render(); }, () => { this.A = { ...A }; this.B = { ...B }; this.render(); this.cancel = null; });
+  }
+}
+
+/* ---------------- Dibujo técnico de piezas ----------------
+   Geometría en milímetros reales; se multiplica por E y se desplaza al origen. */
+const CLS = { vis: 'l-vis', fina: 'l-fina', oculta: 'l-oculta', eje: 'l-eje' };
+function dibujarPieza(g, pz, e, ox, oy, o) {
+  o = o || {};
+  const G = sv('g', { class: o.clase || 'pieza' }, g);
+  const X = x => ox + x * e, Y = y => oy + y * e;
+  for (const p of pz.geo) {
+    const c = p.relleno ? 'relleno-t' : (p.blanco ? 'blanco' : CLS[p.c || 'vis']);
+    if (p.t === 'rect') sv('rect', { x: X(p.x), y: Y(p.y), width: p.w * e, height: p.h * e, rx: p.r ? p.r * e : null, class: c }, G);
+    else if (p.t === 'circle') sv('circle', { cx: X(p.cx), cy: Y(p.cy), r: p.r * e, class: c }, G);
+    else if (p.t === 'line') sv('line', { x1: X(p.x1), y1: Y(p.y1), x2: X(p.x2), y2: Y(p.y2), class: c }, G);
+    else if (p.t === 'poly') sv(p.abierta ? 'polyline' : 'polygon', { points: p.pts.map(q => X(q[0]) + ',' + Y(q[1])).join(' '), class: c }, G);
+    else if (p.t === 'arc') {
+      const r = p.r, a0 = p.a0 * Math.PI / 180, a1 = p.a1 * Math.PI / 180;
+      const x0 = X(p.cx + r * Math.cos(a0)), y0 = Y(p.cy + r * Math.sin(a0)), x1 = X(p.cx + r * Math.cos(a1)), y1 = Y(p.cy + r * Math.sin(a1));
+      const large = Math.abs(p.a1 - p.a0) > 180 ? 1 : 0, sweep = p.a1 > p.a0 ? 1 : 0;
+      sv('path', { d: `M${x0} ${y0}A${r * e} ${r * e} 0 ${large} ${sweep} ${x1} ${y1}`, class: c }, G);
+    }
+  }
+  const cotas = o.cotas === false ? [] : (o.cotas || pz.cotas || []);
+  for (const q of cotas) dibujarCota(G, q, e, ox, oy, pz);
+  return G;
+}
+function flecha(g, x, y, ux, uy) {
+  // punta en (x,y) apuntando en la dirección (ux,uy)
+  const L = 3, w = 0.6, bx = x - ux * L, by = y - uy * L;
+  sv('polygon', { points: `${x},${y} ${bx - uy * w},${by + ux * w} ${bx + uy * w},${by - ux * w}`, class: 'flecha' }, g);
+}
+/* q: {d:'h', x1, x2, y, lado:'abajo'|'arriba', txt}  |  {d:'v', y1, y2, x, lado:'izq'|'der', txt} */
+function dibujarCota(g, q, e, ox, oy, pz) {
+  const OFF = 8, GAP = 1, SOB = 2;
+  const G = sv('g', { class: 'cota' + (q.falta ? ' falta' : '') }, g);
+  if (q.d === 'h') {
+    const xa = ox + q.x1 * e, xb = ox + q.x2 * e, yf = oy + q.y * e;
+    const s = q.lado === 'arriba' ? -1 : 1;
+    const yl = q.lado === 'arriba' ? oy - OFF : oy + pz.h * e + OFF;
+    sv('line', { x1: xa, y1: yf + s * GAP, x2: xa, y2: yl + s * SOB, class: 'c-aux' }, G);
+    sv('line', { x1: xb, y1: yf + s * GAP, x2: xb, y2: yl + s * SOB, class: 'c-aux' }, G);
+    const L = xb - xa;
+    if (L >= 9) {
+      sv('line', { x1: xa, y1: yl, x2: xb, y2: yl, class: 'c-lin' }, G);
+      flecha(G, xa, yl, -1, 0); flecha(G, xb, yl, 1, 0);
+      svT(q.txt, { x: (xa + xb) / 2, y: yl - 1.1, 'text-anchor': 'middle' }, G);
     } else {
-      realIn.readOnly = true;
-      realIn.classList.add('locked');
-      dibujoIn.readOnly = false;
-      dibujoIn.classList.remove('locked');
-      realLabel.textContent = 'Medida real:';
-      dibujoLabel.textContent = 'Medida dibujo:';
+      sv('line', { x1: xa - 6, y1: yl, x2: xb + 6, y2: yl, class: 'c-lin' }, G);
+      flecha(G, xa, yl, 1, 0); flecha(G, xb, yl, -1, 0);
+      svT(q.txt, { x: xb + 7, y: yl + 1.4, 'text-anchor': 'start' }, G);
     }
-    // Cuando se cambia de modo, vacía y deja un valor de partida
-    if (m === 'real') {
-      if (!realIn.value || realIn.value === '0') realIn.value = '9';
+  } else {
+    const ya = oy + q.y1 * e, yb = oy + q.y2 * e, xf = ox + q.x * e;
+    const s = q.lado === 'izq' ? -1 : 1;
+    const xl = q.lado === 'izq' ? ox - OFF : ox + pz.w * e + OFF;
+    sv('line', { x1: xf + s * GAP, y1: ya, x2: xl + s * SOB, y2: ya, class: 'c-aux' }, G);
+    sv('line', { x1: xf + s * GAP, y1: yb, x2: xl + s * SOB, y2: yb, class: 'c-aux' }, G);
+    const L = yb - ya;
+    if (L >= 9) {
+      sv('line', { x1: xl, y1: ya, x2: xl, y2: yb, class: 'c-lin' }, G);
+      flecha(G, xl, ya, 0, -1); flecha(G, xl, yb, 0, 1);
+      svT(q.txt, { x: xl - 1.1, y: (ya + yb) / 2, 'text-anchor': 'middle', transform: `rotate(-90 ${xl - 1.1} ${(ya + yb) / 2})` }, G);
     } else {
-      if (!dibujoIn.value || dibujoIn.value === '0') dibujoIn.value = '9';
+      sv('line', { x1: xl, y1: ya - 6, x2: xl, y2: yb + 6, class: 'c-lin' }, G);
+      flecha(G, xl, ya, 0, 1); flecha(G, xl, yb, 0, -1);
+      svT(q.txt, { x: xl - 1.1, y: yb + 7, 'text-anchor': 'end', transform: `rotate(-90 ${xl - 1.1} ${yb + 7})` }, G);
     }
-    calcular();
   }
-  window.setModo = setModo;
+}
+function txtCota(v, ud) { return ud === 'm' ? fmtFijo(v / 1000, 2) : fmt(v, 2); }
+function cotasHV(pz) {
+  return [
+    { d: 'h', x1: 0, x2: pz.w, y: pz.h, lado: 'abajo', txt: txtCota(pz.w, pz.ud) },
+    { d: 'v', y1: 0, y2: pz.h, x: pz.w, lado: 'der', txt: txtCota(pz.h, pz.ud) }
+  ];
+}
+function esquinas(ox, oy, w, h) { return [{ x: ox, y: oy }, { x: ox + w, y: oy }, { x: ox, y: oy + h }, { x: ox + w, y: oy + h }]; }
 
-  function calcular() {
-    let pasosHTML = '';
-    const ru = realUnit.value, du = dibujoUnit.value;
-
-    if (modo === 'real') {
-      const real = parseFloat(realIn.value);
-      if (isNaN(real) || real <= 0) {
-        dibujoIn.value = '';
-        pasosContent.innerHTML = '<div class="paso">Introduce una medida real positiva para calcular.</div>';
-        dibujarComparativa(null, null);
-        return;
-      }
-      // pasar a mm
-      const realMm = real * U[ru];
-      // aplicar escala
-      const dibujoMm = realMm * num / den;
-      // pasar a unidad seleccionada del dibujo
-      const dibujo = dibujoMm / U[du];
-      dibujoIn.value = Math.round(dibujo * 1000) / 1000;
-
-      pasosHTML += `<div class="paso"><strong>Dato:</strong> medida real = <span class="calc-op">${fmt(real)} ${ru}</span></div>`;
-      if (ru !== 'mm') {
-        pasosHTML += `<div class="paso">Paso a milímetros: <span class="calc-op">${fmt(real)} ${ru} × ${U[ru]} = ${fmt(realMm)} mm</span></div>`;
-      }
-      pasosHTML += `<div class="paso">Aplico la escala (dibujo = real × escala): <span class="calc-op">${fmt(realMm)} × (${num}/${den}) = ${fmt(dibujoMm)} mm</span></div>`;
-      if (du !== 'mm') {
-        pasosHTML += `<div class="paso">Paso a ${du}: <span class="calc-op">${fmt(dibujoMm)} mm ÷ ${U[du]} = ${fmt(dibujo)} ${du}</span></div>`;
-      }
-      pasosHTML += `<div class="paso"><strong>Resultado:</strong> en el dibujo medirá <span class="calc-op">${fmt(dibujo)} ${du}</span></div>`;
-      dibujarComparativa(realMm, dibujoMm);
-
-    } else {
-      const dibujo = parseFloat(dibujoIn.value);
-      if (isNaN(dibujo) || dibujo <= 0) {
-        realIn.value = '';
-        pasosContent.innerHTML = '<div class="paso">Introduce una medida positiva en el dibujo para calcular.</div>';
-        dibujarComparativa(null, null);
-        return;
-      }
-      const dibujoMm = dibujo * U[du];
-      const realMm = dibujoMm * den / num;
-      const real = realMm / U[ru];
-      realIn.value = Math.round(real * 1000) / 1000;
-
-      pasosHTML += `<div class="paso"><strong>Dato:</strong> medida en el dibujo = <span class="calc-op">${fmt(dibujo)} ${du}</span></div>`;
-      if (du !== 'mm') {
-        pasosHTML += `<div class="paso">Paso a milímetros: <span class="calc-op">${fmt(dibujo)} ${du} × ${U[du]} = ${fmt(dibujoMm)} mm</span></div>`;
-      }
-      pasosHTML += `<div class="paso">Aplico la escala (real = dibujo ÷ escala): <span class="calc-op">${fmt(dibujoMm)} × (${den}/${num}) = ${fmt(realMm)} mm</span></div>`;
-      if (ru !== 'mm') {
-        pasosHTML += `<div class="paso">Paso a ${ru}: <span class="calc-op">${fmt(realMm)} mm ÷ ${U[ru]} = ${fmt(real)} ${ru}</span></div>`;
-      }
-      pasosHTML += `<div class="paso"><strong>Resultado:</strong> en la realidad mide <span class="calc-op">${fmt(real)} ${ru}</span></div>`;
-      dibujarComparativa(realMm, dibujoMm);
-    }
-    pasosContent.innerHTML = pasosHTML;
+/* ---------------- Biblioteca de objetos ---------------- */
+function geoPlanta(w, h) {
+  const pw = Math.min(900, w * 0.12), px2 = w - 300, px1 = px2 - pw;
+  const vw = Math.min(1500, w * 0.18), v1 = w * 0.16, v2 = w * 0.56;
+  return [
+    { t: 'poly', abierta: true, pts: [[px1, h], [0, h], [0, 0], [w, 0], [w, h], [px2, h]] },
+    { t: 'line', x1: px2, y1: h, x2: px2, y2: h - pw, c: 'fina' },
+    { t: 'arc', cx: px2, cy: h, r: pw, a0: 180, a1: 270, c: 'fina' },
+    { t: 'rect', x: v1, y: -100, w: vw, h: 200, blanco: true }, { t: 'rect', x: v1, y: -100, w: vw, h: 200, c: 'fina' }, { t: 'line', x1: v1, y1: 0, x2: v1 + vw, y2: 0, c: 'fina' },
+    { t: 'rect', x: v2, y: -100, w: vw, h: 200, blanco: true }, { t: 'rect', x: v2, y: -100, w: vw, h: 200, c: 'fina' }, { t: 'line', x1: v2, y1: 0, x2: v2 + vw, y2: 0, c: 'fina' },
+    { t: 'rect', x: 0, y: h * 0.25, w: 120, h: h * 0.5, c: 'fina' }
+  ];
+}
+function geoPlaca(w, h, taladro) {
+  const g = [{ t: 'rect', x: 0, y: 0, w, h }];
+  if (taladro) {
+    const r = Math.min(w, h) * 0.17, cx = w * 0.72, cy = h / 2;
+    g.push({ t: 'circle', cx, cy, r }, { t: 'line', x1: cx - r * 1.5, y1: cy, x2: cx + r * 1.5, y2: cy, c: 'eje' }, { t: 'line', x1: cx, y1: cy - r * 1.5, x2: cx, y2: cy + r * 1.5, c: 'eje' });
   }
+  return g;
+}
+function geoTornillo(L) {
+  const hl = L * 0.2, hh = L * 0.34, sh = L * 0.2, H = hh;
+  return { w: L, h: H, geo: [
+    { t: 'rect', x: 0, y: 0, w: hl, h: hh },
+    { t: 'poly', pts: [[hl, (H - sh) / 2], [L - sh * 0.3, (H - sh) / 2], [L, H / 2], [L - sh * 0.3, (H + sh) / 2], [hl, (H + sh) / 2]] },
+    { t: 'line', x1: -L * 0.05, y1: H / 2, x2: L * 1.05, y2: H / 2, c: 'eje' }
+  ] };
+}
+function geoL(w, h, t, f) { return [{ t: 'poly', pts: [[0, 0], [t, 0], [t, h - f], [w, h - f], [w, h], [0, h]] }]; }
+const OBJETOS = {
+  chip: { nombre: 'Microchip', w: 10, h: 10, ud: 'mm',
+    geo: [{ t: 'rect', x: 0, y: 0, w: 10, h: 10, r: 0.4 }, { t: 'circle', cx: 1.9, cy: 1.9, r: 0.6, relleno: true }],
+    origen: 'Lado de 10 mm, como en la actividad F5 de la unidad. La forma cuadrada es un dato del simulador.' },
+  placa: { nombre: 'Placa', w: 40, h: 30, ud: 'mm', geo: geoPlaca(40, 30, false),
+    origen: 'Medidas del ejemplo resuelto 5 del libro (40 × 30 mm).' },
+  movil: { nombre: 'Teléfono móvil', w: 150, h: 70, ud: 'mm',
+    geo: [{ t: 'rect', x: 0, y: 0, w: 150, h: 70, r: 9 }, { t: 'rect', x: 12, y: 4, w: 126, h: 62, r: 3, c: 'fina' }, { t: 'circle', cx: 6, cy: 35, r: 1.6, c: 'fina' }],
+    origen: 'Dato del simulador.' },
+  pupitre: { nombre: 'Pupitre (planta)', w: 700, h: 500, ud: 'mm',
+    geo: [{ t: 'rect', x: 0, y: 0, w: 700, h: 500 }, { t: 'rect', x: 25, y: 25, w: 40, h: 40, c: 'oculta' }, { t: 'rect', x: 635, y: 25, w: 40, h: 40, c: 'oculta' }, { t: 'rect', x: 25, y: 435, w: 40, h: 40, c: 'oculta' }, { t: 'rect', x: 635, y: 435, w: 40, h: 40, c: 'oculta' }],
+    origen: 'Dato del simulador. Las líneas discontinuas son las patas, ocultas bajo el tablero.' },
+  aula: { nombre: 'Aula (planta)', w: 9000, h: 6000, ud: 'm', geo: geoPlanta(9000, 6000),
+    origen: 'Largo de 9 m: ejemplo resuelto 6 del libro. Ancho de 6 m: dato del simulador.' }
+};
+for (const k in OBJETOS) OBJETOS[k].cotas = cotasHV(OBJETOS[k]);
+const PUERTA = { nombre: 'Puerta (alzado)', w: 820, h: 2030, ud: 'mm',
+  geo: [{ t: 'rect', x: 0, y: 0, w: 820, h: 2030 }, { t: 'rect', x: 90, y: 90, w: 640, h: 1850, c: 'fina' }, { t: 'circle', cx: 730, cy: 1030, r: 28 }] };
+PUERTA.cotas = cotasHV(PUERTA);
 
-  function dibujarComparativa(realMm, dibujoMm) {
-    // Limpiar
-    while (compareSvg.firstChild) compareSvg.removeChild(compareSvg.firstChild);
-    if (realMm === null || dibujoMm === null) {
-      const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      t.setAttribute('x', 300); t.setAttribute('y', 100);
-      t.setAttribute('text-anchor', 'middle');
-      t.setAttribute('fill', '#888');
-      t.setAttribute('font-family', 'Barlow, sans-serif');
-      t.setAttribute('font-size', '14');
-      t.textContent = 'Introduce una medida para ver la comparativa';
-      compareSvg.appendChild(t);
-      return;
-    }
-    // Normalizar a anchura del SVG (≤500 px útil de 600 viewBox)
-    const maxLen = 480;
-    const bigger = Math.max(realMm, dibujoMm);
-    const real_px = (realMm / bigger) * maxLen;
-    const dib_px = (dibujoMm / bigger) * maxLen;
+function miniatura(pz) {
+  const m = 0.08 * Math.max(pz.w, pz.h);
+  const s = sv('svg', { class: 'mini', viewBox: `${-m} ${-m} ${pz.w + 2 * m} ${pz.h + 2 * m}`, 'aria-hidden': 'true' });
+  dibujarPieza(s, pz, 1, 0, 0, { cotas: false });
+  return s;
+}
 
-    const ns = 'http://www.w3.org/2000/svg';
-    const startX = 60;
-
-    function rect(x, y, w, h, fill, stroke) {
-      const r = document.createElementNS(ns, 'rect');
-      r.setAttribute('x', x); r.setAttribute('y', y);
-      r.setAttribute('width', w); r.setAttribute('height', h);
-      r.setAttribute('fill', fill); r.setAttribute('stroke', stroke);
-      r.setAttribute('stroke-width', '2');
-      r.setAttribute('rx', '3');
-      compareSvg.appendChild(r);
-    }
-    function txt(x, y, content, opts = {}) {
-      const t = document.createElementNS(ns, 'text');
-      t.setAttribute('x', x); t.setAttribute('y', y);
-      t.setAttribute('text-anchor', opts.anchor || 'start');
-      t.setAttribute('fill', opts.fill || '#333');
-      t.setAttribute('font-family', 'Barlow, sans-serif');
-      t.setAttribute('font-size', opts.size || '13');
-      t.setAttribute('font-weight', opts.weight || '600');
-      t.textContent = content;
-      compareSvg.appendChild(t);
-    }
-    function line(x1, y1, x2, y2, stroke) {
-      const l = document.createElementNS(ns, 'line');
-      l.setAttribute('x1', x1); l.setAttribute('y1', y1);
-      l.setAttribute('x2', x2); l.setAttribute('y2', y2);
-      l.setAttribute('stroke', stroke); l.setAttribute('stroke-width', '1');
-      compareSvg.appendChild(l);
-    }
-
-    // Real (azul, arriba)
-    rect(startX, 40, real_px, 30, 'rgba(44,95,141,0.4)', '#1B4F8A');
-    txt(startX, 32, 'TAMAÑO REAL', {fill: '#1B4F8A', size: '11', weight: '700'});
-    txt(startX + real_px + 8, 60, fmt(realMm) + ' mm', {fill: '#1B4F8A'});
-
-    // Dibujo (naranja, abajo)
-    rect(startX, 110, dib_px, 30, 'rgba(27,79,138,0.45)', '#1B4F8A');
-    txt(startX, 102, 'TAMAÑO EN EL DIBUJO', {fill: '#1B4F8A', size: '11', weight: '700'});
-    txt(startX + dib_px + 8, 130, fmt(dibujoMm) + ' mm', {fill: '#1B4F8A'});
-
-    // línea de referencia
-    line(startX, 75, startX, 105, '#aaa');
-
-    // Indicador de proporción
-    const factor = dibujoMm / realMm;
-    let factorStr;
-    if (factor === 1) factorStr = 'Tamaño natural · ×1';
-    else if (factor < 1) factorStr = 'Reducción · ×' + fmt(factor);
-    else factorStr = 'Ampliación · ×' + fmt(factor);
-    txt(300, 180, factorStr, {anchor: 'middle', fill: '#666', size: '13', weight: '500'});
+/* ---------------- Hoja y marcas ---------------- */
+function dibujarHoja(st, o) {
+  const g = st.gHoja; g.textContent = '';
+  sv('rect', { x: 0, y: 0, width: HOJA.w, height: HOJA.h, class: 'hoja-papel', filter: `url(#${st.id}-sombra)` }, g);
+  sv('rect', { x: 10, y: 10, width: 277, height: 190, class: 'hoja-marco' }, g);
+  const c = HOJA.caj;
+  sv('rect', { x: c.x, y: c.y, width: c.w, height: c.h, class: 'caj-l' }, g);
+  sv('line', { x1: c.x, y1: c.y + 12, x2: c.x + c.w, y2: c.y + 12, class: 'caj-l' }, g);
+  sv('line', { x1: c.x + 50, y1: c.y + 12, x2: c.x + 50, y2: c.y + c.h, class: 'caj-l' }, g);
+  sv('line', { x1: c.x + 80, y1: c.y + 12, x2: c.x + 80, y2: c.y + c.h, class: 'caj-l' }, g);
+  svT('Título', { x: c.x + 2, y: c.y + 3.6, class: 'caj-lab' }, g);
+  svT(o.titulo || '', { x: c.x + 2, y: c.y + 9.8, class: 'caj-val' }, g);
+  svT('Escala', { x: c.x + 2, y: c.y + 15.6, class: 'caj-lab' }, g);
+  const t = sv('text', { x: c.x + 25, y: c.y + 24.8, class: 'caj-esc', 'text-anchor': 'middle' }, g);
+  if (o.escala && typeof o.escala === 'object') {
+    const p = partes(o.escala);
+    const a = sv('tspan', { class: 'f-papel' }, t); a.textContent = p[0];
+    const m = sv('tspan', {}, t); m.textContent = ' : ';
+    const b = sv('tspan', { class: 'f-real' }, t); b.textContent = p[1];
+  } else t.textContent = o.escala || '—';
+  svT('Cotas en', { x: c.x + 52, y: c.y + 15.6, class: 'caj-lab' }, g);
+  svT(o.cotasEn || 'mm', { x: c.x + 65, y: c.y + 24.6, class: 'caj-val', 'text-anchor': 'middle' }, g);
+  svT('Formato', { x: c.x + 82, y: c.y + 15.6, class: 'caj-lab' }, g);
+  svT('A4', { x: c.x + 95, y: c.y + 24.6, class: 'caj-val', 'text-anchor': 'middle' }, g);
+}
+const CAJ_ESC = { x: HOJA.caj.x, y: HOJA.caj.y + 12, w: 50, h: 16 };
+function marca(st, m, g) {
+  g = g || st.gMarcas;
+  if (m.tipo === 'caja') { sv('rect', { x: m.x - 1, y: m.y - 1, width: m.w + 2, height: m.h + 2, rx: 1.5, class: 'mk-caja' }, g); return; }
+  if (m.tipo === 'lect') {
+    const G = sv('g', { class: m.real ? 'mk-real' : '' }, g);
+    const dx = m.dx != null ? m.dx : 0, dy = m.dy != null ? m.dy : -11;
+    const bx = m.x + dx, by = m.y + dy;
+    sv('line', { x1: m.x, y1: m.y, x2: bx, y2: by, class: 'mk-linea' }, G);
+    sv('circle', { cx: m.x, cy: m.y, r: 1.7, class: 'mk-punto' }, G);
+    const w = Math.max(9, m.txt.length * 2.35 + 4);
+    sv('rect', { x: bx - w / 2, y: by - 3.6, width: w, height: 6.4, rx: 1.4, class: 'mk-bocadillo' }, G);
+    svT(m.txt, { x: bx, y: by + 1.45, 'text-anchor': 'middle', class: 'mk-txt' }, G);
   }
+}
+function desborde(st, g, x, y, w, h) {
+  sv('rect', { x, y, width: w, height: h, fill: `url(#${st.id}-trama)`, mask: `url(#${st.id}-fuera)` }, g);
+}
+function fb(host, tipo, titulo, cuerpo, nota, proc) {
+  host.className = 'fb ' + tipo;
+  host.innerHTML = `<span class="t ${tipo}-t">${titulo}</span>${cuerpo || ''}${nota ? `<div class="nota">${nota}</div>` : ''}${proc ? `<div class="proc">${proc}</div>` : ''}`;
+}
 
-  // ── Event listeners ────────────────────────────────────
-  presets.forEach(b => b.addEventListener('click', () => {
-    setEscala(parseInt(b.dataset.num), parseInt(b.dataset.den));
-  }));
-  numIn.addEventListener('input', () => {
-    const n = parseInt(numIn.value);
-    if (n && n > 0) {
-      num = n;
-      presets.forEach(b => b.classList.toggle('active',
-        parseInt(b.dataset.num) === num && parseInt(b.dataset.den) === den));
-      actualizarEscalaDisplay();
-      calcular();
+/* =====================================================================
+   ESCENAS COMPARTIDAS
+   ===================================================================== */
+/* Escala gráfica: barra de 0 a `total` (en unidades reales `ud`), con `mmPorUd` mm de papel por unidad.
+   Divisiones principales cada `div`, marcas menores cada `sub`. Devuelve el punto del 0 para el compás. */
+function escalaGrafica(g, x, y, o) {
+  const G = sv('g', {}, g);
+  const L = o.total * o.mmPorUd, alto = 2.4;
+  const nDiv = Math.round(o.total / o.div);
+  for (let i = 0; i < nDiv; i++) {
+    sv('rect', { x: x + i * o.div * o.mmPorUd, y, width: o.div * o.mmPorUd, height: alto, class: i % 2 ? 'eg-pos' : 'eg-neg' }, G);
+  }
+  sv('rect', { x, y, width: L, height: alto, style: 'fill:none;stroke:var(--tinta);stroke-width:.3' }, G);
+  const nSub = Math.round(o.total / o.sub);
+  let d = '';
+  for (let i = 0; i <= nSub; i++) { const xx = x + i * o.sub * o.mmPorUd; const esDiv = Math.abs((i * o.sub) / o.div - Math.round((i * o.sub) / o.div)) < 1e-9; d += `M${xx} ${y}V${y - (esDiv ? 2.2 : 1.2)}`; }
+  sv('path', { d, class: 'eg-tick' }, G);
+  for (let i = 0; i <= nDiv; i++) {
+    const v = i * o.div;
+    svT(fmt(v, 2) + (i === nDiv ? ' ' + o.ud : ''), { x: x + v * o.mmPorUd, y: y - 3.2, class: 'eg-num', 'text-anchor': i === nDiv ? 'start' : 'middle', dx: i === nDiv ? -1 : null }, G);
+  }
+  svT('Escala gráfica', { x, y: y + alto + 3.6, class: 'eg-tit' }, G);
+  return { x, y, ux: 1, uy: 0 };
+}
+/* Mapa con dos pueblos a una distancia `d` (mm de papel) y escala gráfica a 1:25 000 */
+function escenaMapa(st, o) {
+  dibujarHoja(st, { titulo: 'Mapa de la comarca', escala: o.numerica ? S(1, 25000) : 'Gráfica', cotasEn: '—' });
+  const g = st.gCont;
+  const A = o.A || { x: 44, y: 56 };
+  const ang = (o.ang != null ? o.ang : 17) * Math.PI / 180;
+  const B = { x: A.x + o.d * Math.cos(ang), y: A.y + o.d * Math.sin(ang) };
+  sv('path', { d: `M18 128 C 60 110, 90 140, 130 118 S 200 96, 280 124`, class: 'mapa-rio' }, g);
+  svT('río', { x: 236, y: 110, class: 'eg-tit' }, g);
+  const mx = (A.x + B.x) / 2, my = (A.y + B.y) / 2;
+  sv('path', { d: `M${A.x} ${A.y} Q ${mx + 14} ${my - 26}, ${B.x} ${B.y}`, class: 'mapa-carretera' }, g);
+  for (const [P, n, lado] of [[A, 'Pueblo A', -1], [B, 'Pueblo B', 1]]) {
+    sv('circle', { cx: P.x, cy: P.y, r: 2.2, class: 'mapa-pueblo' }, g);
+    svT(n, { x: P.x, y: P.y + (lado < 0 ? -4.5 : 7.5), class: 'mapa-nombre', 'text-anchor': 'middle' }, g);
+  }
+  const cero = escalaGrafica(g, 30, 156, { total: 3, div: 0.5, sub: 0.1, mmPorUd: 40, ud: 'km' });
+  return { A, B, cero };
+}
+
+/* =====================================================================
+   PANTALLA 1 · EXPLORAR
+   ===================================================================== */
+const EX = { obj: 'placa', s: S(1, 1), fantasma: true, cancel: null };
+function iniciarExplorar() {
+  const st = EX.st = new Escenario($('#ex-stage'), 'Hoja A4 con el dibujo del objeto a escala');
+  EX.regla = new Regla(st);
+  // tirador de esquina (persistente: no se redibuja al cambiar la escala)
+  const t = EX.tirador = sv('g', { class: 'tirador', 'aria-hidden': 'true' }, st.gHerr);
+  sv('circle', { r: 5, class: 'hit' }, t); sv('rect', { x: -2, y: -2, width: 4, height: 4, class: 'cuad' }, t);
+  arrastrable(st, t, {
+    ini: () => { if (EX.cancel) EX.cancel(); },
+    mover: p => {
+      const pz = OBJETOS[EX.obj], o = HOJA.origen;
+      let e = ((p.x - o.x) * pz.w + (p.y - o.y) * pz.h) / (pz.w * pz.w + pz.h * pz.h);
+      e = Math.min(60, Math.max(1 / 3000, e));
+      EX.s = imanSerie(e) || escalaDesdeE(e);
+      $('#ex-otra-msg').textContent = '';
+      renderEx();
     }
   });
-  denIn.addEventListener('input', () => {
-    const d = parseInt(denIn.value);
-    if (d && d > 0) {
-      den = d;
-      presets.forEach(b => b.classList.toggle('active',
-        parseInt(b.dataset.num) === num && parseInt(b.dataset.den) === den));
-      actualizarEscalaDisplay();
-      calcular();
+  barraHerr($('#ex-barra'), st, [
+    { id: 'regla', html: 'Regla', pulsado: true, titulo: 'Mostrar u ocultar la regla', fn: v => EX.regla.mostrar(v) },
+    { id: 'reg0', html: 'Recolocar regla', titulo: 'Devolver la regla a su sitio', fn: () => EX.regla.irA(16, 212, 0, 400) },
+    { id: 'fant', html: '<span class="leyenda-f"></span>Objeto real', pulsado: true, titulo: 'Mostrar el contorno del objeto a tamaño real', fn: v => { EX.fantasma = v; renderEx(); } }
+  ]);
+  // objetos
+  const cObj = $('#ex-objs');
+  for (const k in OBJETOS) {
+    const b = el('button', { class: 'chip', type: 'button', 'aria-pressed': String(k === EX.obj), 'data-k': k }, cObj, OBJETOS[k].nombre);
+    b.addEventListener('click', () => {
+      EX.obj = k; cObj.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.k === k)));
+      renderEx();
+    });
+  }
+  // selector de escalas
+  const sel = $('#ex-sel');
+  SELECTOR.forEach((s, i) => {
+    const p = partes(s);
+    const b = el('button', { class: 'esc-chip' + (canon(s).tipo === 'nat' ? ' nat' : ''), type: 'button', 'aria-pressed': 'false', 'data-i': i,
+      'aria-label': `Escala ${p[0]} a ${p[1]}` }, sel, `<span class="c-papel">${p[0]}</span><span class="dos">:</span><span class="c-real">${p[1]}</span>`);
+    b.addEventListener('click', () => { $('#ex-otra-msg').textContent = ''; cambiarEscalaEx(s); });
+  });
+  const aplicar = () => {
+    const a = leerNumero($('#ex-a').value), b = leerNumero($('#ex-b').value), msg = $('#ex-otra-msg');
+    if (!a || !b || a.value <= 0 || b.value <= 0) { msg.textContent = 'Escribe dos números mayores que 0.'; return; }
+    const s = S(a.value, b.value), e = E(s);
+    if (e > 60 || e < 1 / 3000) { msg.textContent = 'Prueba una escala entre 1 : 3000 y 60 : 1.'; return; }
+    const esSimple = Math.abs(a.value - 1) < 1e-9 || Math.abs(b.value - 1) < 1e-9;
+    const txtS = escTxt(escalaDesdeE(e));
+    msg.innerHTML = (esSimple ? '' : `${fmt(a.value, 3)} : ${fmt(b.value, 3)} equivale a <b>${txtS}</b>. `) + (exacta(escalaDesdeE(e)) ? '' : 'El resultado no es exacto: se muestra redondeado.');
+    cambiarEscalaEx(escalaDesdeE(e));
+  };
+  $('#ex-aplicar').addEventListener('click', aplicar);
+  ['#ex-a', '#ex-b'].forEach(q => $(q).addEventListener('keydown', e => { if (e.key === 'Enter') aplicar(); }));
+  renderEx();
+}
+function imanSerie(e) { for (const s of SELECTOR) if (Math.abs(E(s) / e - 1) < 0.04) return s; return null; }
+function cambiarEscalaEx(s) {
+  if (EX.cancel) EX.cancel();
+  const e0 = E(EX.s), e1 = E(s);
+  EX.s = s; panelesEx();
+  EX.cancel = animar(380, k => renderEx(Math.exp(Math.log(e0) + (Math.log(e1) - Math.log(e0)) * k), true), () => { EX.cancel = null; renderEx(); });
+}
+function renderEx(eAnim, soloDibujo) {
+  const st = EX.st, pz = OBJETOS[EX.obj], s = EX.s, e = eAnim != null ? eAnim : E(s), o = HOJA.origen;
+  st.limpiar();
+  dibujarHoja(st, { titulo: pz.nombre, escala: s, cotasEn: pz.ud === 'm' ? 'm' : 'mm' });
+  const w = pz.w * e, h = pz.h * e;
+  dibujarPieza(st.gCont, pz, e, o.x, o.y);
+  if (EX.fantasma && pz.w <= 277 && pz.h <= 190) {
+    const c = pz.geo[0];
+    sv('rect', { x: o.x, y: o.y, width: pz.w, height: pz.h, rx: c.r || null, class: 'fantasma' }, st.gCont);
+  }
+  if (!cabe(w, h)) desborde(st, st.gCont, o.x, o.y, w + HOJA.reserva, h + HOJA.reserva);
+  EX.tirador.setAttribute('transform', `translate(${o.x + w} ${o.y + h})`);
+  EX.regla.puntos = esquinas(o.x, o.y, w, h);
+  if (!soloDibujo) panelesEx();
+}
+function panelesEx() {
+  const pz = OBJETOS[EX.obj], s = EX.s, e = E(s), w = pz.w * e, h = pz.h * e, norm = esNorm(s);
+  // selector
+  const selBox = $('#ex-sel');
+  selBox.querySelectorAll('.esc-chip').forEach(b => {
+    const on = igualEsc(SELECTOR[+b.dataset.i], s);
+    b.setAttribute('aria-pressed', String(on));
+    if (on && selBox.scrollWidth > selBox.clientWidth) selBox.scrollLeft = b.offsetLeft - selBox.offsetLeft - selBox.clientWidth / 2 + b.offsetWidth / 2;
+  });
+  // lectura grande
+  $('#ex-lectura').innerHTML = `<span class="gran">${escHTML(s)}</span><span><span class="tipo">${tipoTxt(s)}</span>
+    <span class="etq ${norm ? 'norm' : 'nonorm'}">${norm ? 'normalizada' : 'válida, no normalizada'}</span><br><span class="frase">${lecturaHTML(s)}.</span></span>`;
+  // objeto real
+  const ud = pz.ud, med = ud === 'm' ? `${fmt(pz.w / 1000)} × ${fmt(pz.h / 1000)} m` : `${fmt(pz.w)} × ${fmt(pz.h)} mm`;
+  const box = $('#ex-objeto'); box.innerHTML = '<h3>Objeto real</h3>';
+  const fila = el('div', { class: 'obj-fila' }, box);
+  fila.appendChild(miniatura(pz));
+  el('div', {}, fila, `<strong>${pz.nombre}</strong><div class="medidas c-real">${med}</div><div class="nota-mini">Ilustración sin escala</div>`);
+  const cabeReal = pz.w <= 277 && pz.h <= 190;
+  const nHojas = Math.floor(Math.max(pz.w, pz.h) / 297);
+  el('p', { class: 'nota-mini' }, box, cabeReal
+    ? 'El contorno discontinuo de la hoja es el objeto a tamaño real: no cambia nunca.'
+    : `El objeto real no cabe en la hoja: mide más de ${nHojas} hoja${nHojas === 1 ? '' : 's'} A4 puestas en fila por su lado largo.`);
+  el('p', { class: 'origen' }, box, 'Origen de los datos: ' + pz.origen);
+  // operación
+  const op = $('#ex-op'), c = canon(s);
+  const Rw = ud === 'm' ? pz.w / 1000 : pz.w, Rh = ud === 'm' ? pz.h / 1000 : pz.h;
+  op.innerHTML = `<h3>Operación</h3><p class="formula">dibujo = real × escala</p>
+    <div class="op"><div class="lin">Largo: ${opR2D(Rw, ud, s)}</div><div class="lin">Ancho: ${opR2D(Rh, ud, s)}</div></div>
+    <p class="nota-mini">${c.tipo === 'red' ? `En ${escTxt(s)} se divide entre ${fmtN(c.N)}: el dibujo sale menor.` : c.tipo === 'amp' ? `En ${escTxt(s)} se multiplica por ${fmtN(c.N)}: el dibujo sale mayor.` : 'En 1 : 1 el dibujo mide lo mismo que el objeto.'} Las cotas no cambian: siempre dicen la medida real.</p>`;
+  // encaje
+  const est = encaje(w, h), enc = $('#ex-encaje');
+  let html = '<h3>¿Cabe en la hoja?</h3>';
+  if (est === 'ok') html += `<div class="estado ok"><span class="ico">✓</span><p>Sí. El dibujo (${fmt(w, 1)} × ${fmt(h, 1)} mm) cabe con sus cotas y tiene un tamaño cómodo de leer.</p></div>`;
+  else if (est === 'peq') html += `<div class="estado peq"><span class="ico">!</span><p>Cabe, pero es demasiado pequeño para acotarlo con comodidad: mide ${fmt(Math.max(w, h), 1)} mm en su lado mayor.</p></div>
+      <p class="criterio">Criterio del simulador, no es una norma: aquí consideramos pequeño un dibujo de menos de ${UMBRAL_PEQ} mm.</p>`;
+  else { const f = formatoNecesario(w, h);
+    html += `<div class="estado no"><span class="ico">✗</span><p>No cabe con sus cotas. El dibujo mediría ${fmt(w, 1)} × ${fmt(h, 1)} mm en el papel; ${f ? `con la misma disposición haría falta, como mínimo, un ${f}` : 'no cabría ni en un A0'}. La parte rayada se sale de la zona de dibujo.</p></div>`; }
+  enc.innerHTML = html;
+}
+
+/* =====================================================================
+   PANTALLA 2 · MEDIR
+   Cada situación: demostración paso a paso (avance manual) + «Ahora tú».
+   ===================================================================== */
+const MD = { i: 0, modo: 'demo', paso: 0, var: null, k: 1 };
+const PARK = { x: 16, y: 212, a: 0 };
+const RAIZ2 = Math.SQRT2;
+const PARK_K = { x: 16 * RAIZ2, y: 212 * RAIZ2, a: 0 };
+
+function piezaPlaca(w, h) { return { w, h, ud: 'mm', geo: geoPlaca(w, h, true), cotas: [] }; }
+function piezaPlanta(w, h) { return { w, h, ud: 'm', geo: geoPlanta(w, h), cotas: [] }; }
+
+/* escena de una pieza sin cotas para medir */
+function escenaMedir(st, pz, s, o) {
+  o = o || {};
+  dibujarHoja(st, { titulo: o.titulo || 'Pieza', escala: o.cajEsc !== undefined ? o.cajEsc : s, cotasEn: o.cotasEn || (pz.ud === 'm' ? 'm' : 'mm') });
+  const ox = o.ox != null ? o.ox : 40, oy = o.oy != null ? o.oy : 40, e = E(s);
+  dibujarPieza(st.gCont, pz, e, ox, oy, { cotas: o.cotas || false });
+  return { ox, oy, w: pz.w * e, h: pz.h * e, pts: esquinas(ox, oy, pz.w * e, pz.h * e) };
+}
+
+const SITUACIONES = [
+  /* ---------- M1 ---------- */
+  { id: 'M1', nombre: 'Del dibujo a la realidad', herr: 'regla',
+    demo: {
+      escena: st => escenaMedir(st, piezaPlaca(90, 60), S(1, 2), { titulo: 'Placa' }),
+      pasos: [
+        { txt: `El cajetín indica la escala: ${escHTML(S(1, 2))}. Es decir, <span class="c-papel">1 mm del papel</span> representa <span class="c-real">2 mm reales</span>.`, regla: PARK, marcas: [{ tipo: 'caja', ...CAJ_ESC }] },
+        { txt: 'Coloca el <b>0</b> de la regla justo en la esquina izquierda de la placa, con el borde graduado sobre el lado que quieres medir.', regla: { x: 40, y: 70, a: 0 } },
+        { txt: 'Lee dónde termina la placa: <b class="c-papel">45 mm</b> en el papel. (La vista se acerca para leer mejor).', zoom: { z: 2.5, x: 70, y: 72 }, regla: { x: 40, y: 70, a: 0 }, marcas: [{ tipo: 'lect', x: 85, y: 70, txt: '45 mm', dy: -12 }] },
+        { txt: 'Aplica la escala para pasar del papel a la realidad.', regla: { x: 40, y: 70, a: 0 }, marcas: [{ tipo: 'lect', x: 85, y: 70, txt: '45 mm', dy: -12 }],
+          op: `real = dibujo ÷ escala<br>${opD2R(45, 'mm', S(1, 2))}` },
+        { txt: 'Comprueba que tiene sentido: 1 : 2 es una reducción, así que la placa real tiene que ser <b>mayor</b> que su dibujo. 90 mm es mayor que 45 mm. ✓', regla: { x: 40, y: 70, a: 0 },
+          op: `real = dibujo ÷ escala<br>${opD2R(45, 'mm', S(1, 2))}` }
+      ]
+    },
+    tu: {
+      pool: [{ w: 190, h: 120, s: S(1, 5) }, { w: 110, h: 70, s: S(1, 2) }, { w: 450, h: 300, s: S(1, 10) }, { w: 32, h: 20, s: S(2, 1) }],
+      escena: (st, v) => escenaMedir(st, piezaPlaca(v.w, v.h), v.s, { titulo: 'Placa' }),
+      preg: v => `Esta placa está dibujada a escala ${escHTML(v.s)}. Mide su <b>largo</b> con la regla y escribe cuánto mide la placa real.`,
+      campos: [{ id: 'l', label: 'Largo real', ud: 'mm' }],
+      corregir: (v, r) => diagNum(r.l, pMedida(v.w, 'mm', v.s, 'una placa')),
+      sol: v => `Largo en el papel: ${fmt(v.w * E(v.s))} mm.<br>real = dibujo ÷ escala = ${opD2R(v.w * E(v.s), 'mm', v.s)}`
+    }
+  },
+  /* ---------- M2 ---------- */
+  { id: 'M2', nombre: 'Hallar la escala', herr: 'regla',
+    demo: {
+      escena: (st, p) => escenaMedir(st, piezaPlaca(150, 100), S(1, 5), { titulo: 'Soporte', cajEsc: p && p.escOk ? S(1, 5) : '?' }),
+      pasos: [
+        { txt: 'Sabemos que la pieza real mide <b class="c-real">150 mm</b> de largo, pero el cajetín no indica la escala. La vamos a averiguar.', regla: PARK, marcas: [{ tipo: 'caja', ...CAJ_ESC }] },
+        { txt: 'Mide la pieza en el papel: el <b>0</b> de la regla en un extremo…', regla: { x: 40, y: 60, a: 0 } },
+        { txt: '…y lee el otro extremo: <b class="c-papel">30 mm</b>.', zoom: { z: 2.5, x: 60, y: 62 }, regla: { x: 40, y: 60, a: 0 }, marcas: [{ tipo: 'lect', x: 70, y: 60, txt: '30 mm', dy: -12 }] },
+        { txt: 'La escala compara el dibujo con la realidad. Las dos medidas están en milímetros, así que se pueden dividir directamente.', regla: { x: 40, y: 60, a: 0 }, marcas: [{ tipo: 'lect', x: 70, y: 60, txt: '30 mm', dy: -12 }],
+          op: opEsc(30, 'mm', 150, 'mm', S(1, 5)) },
+        { txt: `La escala es ${escHTML(S(1, 5))}: una reducción (el dibujo es menor) y además normalizada. Ya podemos completar el cajetín.`, regla: { x: 40, y: 60, a: 0 }, estado: { escOk: true }, marcas: [{ tipo: 'caja', ...CAJ_ESC }],
+          op: opEsc(30, 'mm', 150, 'mm', S(1, 5)) }
+      ]
+    },
+    tu: {
+      pool: [{ w: 25, h: 16, s: S(2, 1) }, { w: 120, h: 80, s: S(1, 2) }, { w: 16, h: 10, s: S(5, 1) }, { w: 600, h: 400, s: S(1, 10) }],
+      escena: (st, v) => escenaMedir(st, piezaPlaca(v.w, v.h), v.s, { titulo: 'Pieza', cajEsc: '?' }),
+      preg: v => `La pieza real mide <b class="c-real">${fmt(v.w)} mm</b> de largo. Mide su dibujo y halla la escala.`,
+      campos: [{ id: 'e', tipo: 'escala' }],
+      corregir: (v, r) => diagEsc(r.e[0].value, r.e[1].value, { s: v.s, tolRel: 0.04 }),
+      sol: v => `Largo en el papel: ${fmt(v.w * E(v.s))} mm.<br>${opEsc(v.w * E(v.s), 'mm', v.w, 'mm', v.s)}`
+    }
+  },
+  /* ---------- M3 ---------- */
+  { id: 'M3', nombre: 'Plano del aula', herr: 'regla',
+    demo: {
+      escena: st => escenaMedir(st, piezaPlanta(9000, 6000), S(1, 50), { titulo: 'Aula (planta)', ox: 26, oy: 26 }),
+      pasos: [
+        { txt: `Plano del aula a escala ${escHTML(S(1, 50))}: <span class="c-papel">1 mm del papel</span> representa <span class="c-real">50 mm reales</span>. El plano no tiene cotas: hay que medirlo.`, regla: PARK, marcas: [{ tipo: 'caja', ...CAJ_ESC }] },
+        { txt: 'Mide el largo: el 0 de la regla en la esquina de abajo a la izquierda y el borde sobre la pared.', regla: { x: 26, y: 146, a: 0 } },
+        { txt: 'Lee el otro extremo: <b class="c-papel">180 mm</b>.', zoom: { z: 2, x: 170, y: 148 }, regla: { x: 26, y: 146, a: 0 }, marcas: [{ tipo: 'lect', x: 206, y: 146, txt: '180 mm', dy: -12 }] },
+        { txt: 'Aplica la escala.', regla: { x: 26, y: 146, a: 0 }, marcas: [{ tipo: 'lect', x: 206, y: 146, txt: '180 mm', dy: -12 }], op: `real = dibujo ÷ escala<br>${opD2R(180, 'mm', S(1, 50))}` },
+        { txt: 'Un aula se mide en metros: 1 m = 1000 mm, así que 9000 mm = <b class="c-real">9 m</b>. Es el mismo largo que el aula del ejemplo resuelto 6 del libro, que allí se dibuja a 1 : 100.', regla: { x: 26, y: 146, a: 0 }, op: `real = ${opD2R(180, 'mm', S(1, 50), 'm')}` },
+        { txt: 'Para el ancho, gira la regla 90° (tirador ↻ o tecla R) y repite: 120 mm × 50 = 6000 mm = <b class="c-real">6 m</b> (el ancho es un dato del simulador).', regla: { x: 26, y: 26, a: 90 }, marcas: [{ tipo: 'lect', x: 26, y: 146, txt: '120 mm', dx: 16, dy: 0 }], op: `real = ${opD2R(120, 'mm', S(1, 50), 'm')}` }
+      ]
+    },
+    tu: {
+      pool: [{ n: 'Taller', art: 'un taller', w: 7000, h: 5000, s: S(1, 50) }, { n: 'Biblioteca', art: 'una biblioteca', w: 12000, h: 8000, s: S(1, 100) }, { n: 'Laboratorio', art: 'un laboratorio', w: 8000, h: 6000, s: S(1, 50) }],
+      escena: (st, v) => escenaMedir(st, piezaPlanta(v.w, v.h), v.s, { titulo: v.n + ' (planta)', ox: 26, oy: 26 }),
+      preg: v => `Plano de ${v.art} a escala ${escHTML(v.s)} (dato del simulador). Mide el largo y el ancho y escríbelos en <b>metros</b>.`,
+      campos: [{ id: 'l', label: 'Largo', ud: 'm' }, { id: 'a', label: 'Ancho', ud: 'm' }],
+      corregir: (v, r) => {
+        const d1 = diagNum(r.l, pMedida(v.w / 1000, 'm', v.s, 'una sala', [1.5, 60]));
+        const d2 = diagNum(r.a, pMedida(v.h / 1000, 'm', v.s, 'una sala', [1.5, 60]));
+        if (d1.ok && d2.ok) return { ok: true, nota: [d1.nota, d2.nota].filter(Boolean).join(' ') };
+        const m = []; if (!d1.ok) m.push('<b>Largo:</b> ' + d1.msg); else m.push('<b>Largo:</b> correcto.');
+        if (!d2.ok) m.push('<b>Ancho:</b> ' + d2.msg); else m.push('<b>Ancho:</b> correcto.');
+        return { ok: false, err: !d1.ok ? d1.err : d2.err, msg: m.join('<br>') };
+      },
+      sol: v => `Largo: ${opD2R(v.w * E(v.s), 'mm', v.s, 'm')}<br>Ancho: ${opD2R(v.h * E(v.s), 'mm', v.s, 'm')}`
+    }
+  },
+  /* ---------- M4 ---------- */
+  { id: 'M4', nombre: 'Escala gráfica', herr: 'compas',
+    demo: {
+      escena: st => escenaMapa(st, { d: 80, numerica: true }),
+      pasos: [
+        { txt: `Este mapa tiene dos escalas: la numérica del cajetín (${escHTML(S(1, 25000))}) y una <b>escala gráfica</b>: la barra graduada en kilómetros.`, compas: 'park', marcas: [{ tipo: 'caja', ...CAJ_ESC }, { tipo: 'caja', x: 28, y: 150, w: 132, h: 13 }] },
+        { txt: 'Abre el compás: la punta seca en el pueblo A y la de lápiz en el pueblo B.', compas: 'AB' },
+        { txt: 'Sin cambiar la abertura, lleva el compás a la escala gráfica y apoya la punta seca en el <b>0</b>.', compas: 'cero' },
+        { zoom: { z: 2, x: 95, y: 150 }, txt: 'La punta de lápiz cae en el <b class="c-real">2</b>: los pueblos están a <b class="c-real">2 km</b> en línea recta. No hace falta ninguna cuenta.', compas: 'cero', marcas: [{ tipo: 'lect', x: 110, y: 156, txt: '2 km', dy: -12, real: true }] },
+        { txt: 'Con la escala numérica sale lo mismo. Es el ejemplo resuelto 7 del libro: 8 cm en un mapa a 1 : 25 000.', compas: 'cero', op: `real = dibujo ÷ escala<br>${opD2R(8, 'cm', S(1, 25000), 'km')}` }
+      ]
+    },
+    tu: {
+      pool: [{ d: 56, ang: 22 }, { d: 92, ang: 12 }, { d: 104, ang: 16 }, { d: 68, ang: -8, A: { x: 50, y: 92 } }],
+      escena: (st, v) => escenaMapa(st, { d: v.d, ang: v.ang, A: v.A, numerica: false }),
+      preg: () => 'Este mapa solo tiene escala gráfica. Con el compás, averigua a qué distancia en línea recta están los dos pueblos.',
+      campos: [{ id: 'd', label: 'Distancia', ud: 'km' }],
+      corregir: (v, r) => diagNum(r.d, { V: v.d / 40, ud: 'km', tolAbs: 0.05, dir: 'otro', plaus: [0.05, 50], nombre: 'una distancia', dato: { v: v.d, ud: 'mm' },
+        msgSinEscala: 'Esa es la distancia en el papel, en milímetros. Llévala con el compás a la escala gráfica para leer los kilómetros.' }),
+      sol: v => `En el papel hay ${fmt(v.d)} mm. En la escala gráfica, 1 km ocupa 40 mm, así que la punta de lápiz cae en ${fmt(v.d / 40)} km.`
+    }
+  },
+  /* ---------- Ampliación: la fotocopia ---------- */
+  { id: 'M5', nombre: 'La fotocopia', opcional: true, herr: 'ambos',
+    demo: {
+      escena: (st, p) => {
+        const k = p && p.k ? p.k : 1;
+        const r = escenaMedir(st, piezaPlanta(9000, 6000), S(1, 50), { titulo: 'Aula (planta)', ox: 26, oy: 26 });
+        escalaGrafica(st.gCont, 26, 160, { total: 10, div: 1, sub: 0.5, mmPorUd: 20, ud: 'm' });
+        return r;
+      },
+      pasos: [
+        { txt: `Plano del aula a ${escHTML(S(1, 50))} en un A4, con una escala gráfica debajo. Con la regla: 180 mm × 50 = 9000 mm = <b class="c-real">9 m</b>.`, k: 1, regla: { x: 26, y: 146, a: 0 }, marcas: [{ tipo: 'lect', x: 206, y: 146, txt: '180 mm', dy: -12 }] },
+        { txt: 'Ahora el plano se fotocopia <b>ampliado al 141 %</b>, de A4 a A3. Todo el dibujo crece, también la escala gráfica. La regla no: es un instrumento, no forma parte del papel.', k: RAIZ2, regla: PARK_K },
+        { txt: `El cajetín sigue diciendo 1 : 50. Si medimos con la regla: <b class="c-papel">254,6 mm</b> × 50 ≈ 12,7 m. ¡Pero el aula no ha crecido! En la copia, la escala numérica ya no es cierta.`, k: RAIZ2, regla: { x: 26 * RAIZ2, y: 146 * RAIZ2, a: 0 }, marcas: [{ tipo: 'lect', x: 26 * RAIZ2 + 180 * RAIZ2, y: 146 * RAIZ2, txt: '254,6 mm', dy: -12 }],
+          op: `180 × 1,414 ≈ 254,6 mm en la copia<br>254,6 mm × 50 ≈ 12 728 mm ≈ 12,7 m ✗` },
+        { txt: 'La escala gráfica sí sirve: llevamos el largo del aula con el compás a la escala gráfica de la copia y marca <b class="c-real">9 m</b>. ✓', k: RAIZ2, regla: PARK_K, compas: 'foto' , marcas: [{ tipo: 'lect', x: 26 * RAIZ2 + 180 * RAIZ2, y: 160 * RAIZ2, txt: '9 m', dy: -14, real: true }] },
+        { txt: `Conclusión: la escala numérica solo vale si el plano conserva su tamaño original. La escala gráfica sigue siendo válida cuando se amplía o reduce proporcionalmente junto con el plano. La copia, en realidad, está a ${escHTML(S(1, 50 / RAIZ2))}: una escala válida, pero no normalizada.`, k: RAIZ2, regla: PARK_K, compas: 'foto',
+          op: `50 ÷ 1,414 ≈ 35,4 → escala real de la copia ≈ 1 : 35,4` }
+      ]
+    }
+  }
+];
+function pMedida(V, ud, s, nombre, plaus) {
+  const c = canon(s), e = E(s);
+  return { V, ud, k: c.N, dir: 'd2r', tipo: c.tipo, sHTML: escHTML(s), medida: true,
+    tolAbs: 0.55 / e / U[ud], F: 1 / e / U[ud], dato: { v: V * U[ud] * e, ud: 'mm' }, nombre, plaus };
+}
+
+function iniciarMedir() {
+  const st = MD.st = new Escenario($('#md-stage'), 'Hoja de trabajo para medir');
+  MD.regla = new Regla(st); MD.compas = new Compas(st);
+  MD.botones = barraHerr($('#md-barra'), st, [
+    { id: 'reg0', html: 'Recolocar regla', fn: () => MD.regla.irA(PARK.x * MD.k, PARK.y * MD.k, 0, 400) },
+    { id: 'bloq', html: 'Abertura del compás: libre', fn: btn => { MD.compas.bloq = !MD.compas.bloq; actualizarBloq(); } }
+  ]);
+  const lista = $('#md-lista');
+  SITUACIONES.forEach((s, i) => {
+    const b = el('button', { class: 'sit', type: 'button', 'aria-pressed': String(i === 0) }, lista,
+      `${s.opcional ? '<span class="op-t">Ampliación opcional</span>' : ''}${s.nombre}`);
+    b.addEventListener('click', () => { MD.i = i; lista.querySelectorAll('.sit').forEach((x, j) => x.setAttribute('aria-pressed', String(j === i))); MD.modo = 'demo'; MD.paso = 0; renderMedir(); });
+  });
+  $('#md-modo-demo').addEventListener('click', () => { MD.modo = 'demo'; MD.paso = 0; renderMedir(); });
+  $('#md-modo-tu').addEventListener('click', () => { if (!SITUACIONES[MD.i].tu) return; MD.modo = 'tu'; MD.var = null; renderMedir(); });
+  $('#md-ant').addEventListener('click', () => { if (MD.paso > 0) { MD.paso--; aplicarPaso(); } });
+  $('#md-sig').addEventListener('click', () => { const n = SITUACIONES[MD.i].demo.pasos.length; if (MD.paso < n - 1) { MD.paso++; aplicarPaso(); } });
+  renderMedir();
+}
+function actualizarBloq() {
+  const b = MD.botones.bloq;
+  b.textContent = 'Abertura del compás: ' + (MD.compas.bloq ? 'bloqueada' : 'libre');
+  b.setAttribute('aria-pressed', String(MD.compas.bloq));
+}
+function renderMedir() {
+  const sit = SITUACIONES[MD.i];
+  $('#md-titulo').textContent = sit.nombre;
+  $('#md-modo-demo').setAttribute('aria-pressed', String(MD.modo === 'demo'));
+  $('#md-modo-tu').setAttribute('aria-pressed', String(MD.modo === 'tu'));
+  $('#md-modo-tu').disabled = !sit.tu;
+  $('#md-modo-tu').title = sit.tu ? '' : 'Esta ampliación solo tiene demostración';
+  $('#md-demo').hidden = MD.modo !== 'demo';
+  $('#md-tu').hidden = MD.modo !== 'tu';
+  const usaCompas = sit.herr === 'compas' || sit.herr === 'ambos';
+  MD.botones.bloq.style.display = usaCompas ? '' : 'none';
+  MD.botones.reg0.style.display = (sit.herr === 'regla' || sit.herr === 'ambos') ? '' : 'none';
+  $('#md-ayuda').textContent = usaCompas
+    ? 'El compás: arrastra cada punta por separado; la cabeza (círculo gris) lo mueve entero. Con la abertura bloqueada, la punta de lápiz gira alrededor de la seca. Cerca del 0 de la escala gráfica, la punta seca se engancha.'
+    : 'Arrastra la regla; su tirador ↻ la gira (se detiene en 0° y 90°). Con el teclado: selecciona la regla con Tab, flechas para moverla y R para girarla. Usa + para acercar y leer mejor.';
+  if (MD.modo === 'demo') { MD.paso = Math.min(MD.paso, sit.demo.pasos.length - 1); aplicarPaso(true); }
+  else nuevoTu();
+}
+function fijarK(k) {
+  MD.k = k; MD.st.escalaHoja(k);
+  MD.st.setBase({ x: -12, y: -12, w: 297 * k + 24, h: 210 * k + 40 });
+}
+function aplicarPaso(inicial) {
+  const sit = SITUACIONES[MD.i], p = sit.demo.pasos[MD.paso], st = MD.st;
+  const k = p.k || 1;
+  if (k !== MD.k) fijarK(k); else if (inicial) fijarK(k);
+  st.limpiar();
+  if (p.zoom) { st.z = p.zoom.z; st.cx = p.zoom.x; st.cy = p.zoom.y; st.vista(); } else st.ajustar();
+  const esc = sit.demo.escena(st, p.estado || { k });
+  (p.marcas || []).forEach(m => marca(st, m));
+  // regla
+  const usaRegla = sit.herr === 'regla' || sit.herr === 'ambos';
+  MD.regla.mostrar(usaRegla);
+  MD.regla.puntos = esc && esc.pts ? esc.pts.map(q => ({ x: q.x * k, y: q.y * k })) : [];
+  if (usaRegla && p.regla) inicial ? MD.regla.poner(p.regla.x, p.regla.y, p.regla.a) : MD.regla.irA(p.regla.x, p.regla.y, p.regla.a);
+  // compás
+  const usaCompas = sit.herr === 'compas' || sit.herr === 'ambos';
+  const C = MD.compas;
+  C.mostrar(usaCompas && !!p.compas);
+  if (usaCompas && p.compas) {
+    let A, B;
+    if (p.compas === 'park') { A = { x: 225, y: 95 }; B = { x: 240, y: 95 }; C.bloq = false; }
+    else if (p.compas === 'AB') { A = esc.A; B = esc.B; C.bloq = true; }
+    else if (p.compas === 'cero') { const L = Math.hypot(esc.B.x - esc.A.x, esc.B.y - esc.A.y); A = { x: esc.cero.x, y: esc.cero.y }; B = { x: esc.cero.x + L, y: esc.cero.y }; C.bloq = true; }
+    else if (p.compas === 'foto') { A = { x: 26 * k, y: 160 * k }; B = { x: 26 * k + 180 * k, y: 160 * k }; C.bloq = true; }
+    inicial ? C.poner(A, B) : C.irA(A, B);
+    C.cero = esc && esc.cero ? esc.cero : null;
+    C.puntos = esc && esc.A ? [esc.A, esc.B, esc.cero] : [];
+    actualizarBloq();
+  }
+  $('#md-paso').innerHTML = `<b>Paso ${MD.paso + 1}.</b> ${p.txt}`;
+  $('#md-op').innerHTML = p.op || '';
+  $('#md-cuenta').textContent = `${MD.paso + 1} de ${sit.demo.pasos.length}`;
+  $('#md-ant').disabled = MD.paso === 0;
+  const ult = MD.paso === sit.demo.pasos.length - 1;
+  $('#md-sig').disabled = ult;
+}
+/* ---------- Ahora tú ---------- */
+function nuevoTu(otra) {
+  const sit = SITUACIONES[MD.i], T = sit.tu, st = MD.st;
+  if (MD.k !== 1) fijarK(1);
+  let v;
+  do { v = pick(T.pool); } while (otra && T.pool.length > 1 && v === MD.var);
+  MD.var = v;
+  st.limpiar(); st.ajustar();
+  const esc = T.escena(st, v);
+  const usaRegla = sit.herr === 'regla', usaCompas = sit.herr === 'compas';
+  MD.regla.mostrar(usaRegla); MD.regla.poner(PARK.x, PARK.y, 0); MD.regla.puntos = esc.pts || [];
+  MD.compas.mostrar(usaCompas);
+  if (usaCompas) {
+    MD.compas.bloq = false; MD.compas.poner({ x: 215, y: 100 }, { x: 232, y: 100 });
+    MD.compas.cero = esc.cero; MD.compas.puntos = [esc.A, esc.B, esc.cero]; actualizarBloq();
+  }
+  const box = $('#md-tu'); box.innerHTML = '';
+  el('p', { class: 'preg' }, box, T.preg(v));
+  const inputs = construirCampos(box, T.campos);
+  const acc = el('div', { class: 'acciones' }, box);
+  const bC = el('button', { class: 'btn', type: 'button' }, acc, 'Comprobar');
+  const bS = el('button', { class: 'btn sec', type: 'button', hidden: '' }, acc, 'Ver la solución');
+  const bO = el('button', { class: 'btn sec', type: 'button' }, acc, 'Otro ejercicio');
+  const f = el('div', { class: 'fb', 'aria-live': 'polite' }, box);
+  let fallos = 0;
+  bC.addEventListener('click', () => {
+    const r = leerCampos(T.campos, inputs);
+    if (r.error) { fb(f, 'aviso', 'Falta la respuesta', r.error); return; }
+    const d = T.corregir(v, r);
+    if (d.ok) fb(f, 'ok', 'Correcto', '', d.nota, T.sol(v));
+    else { fallos++; fb(f, 'err', 'Todavía no', d.msg); if (fallos >= 1) bS.hidden = false; }
+  });
+  bS.addEventListener('click', () => { fb(f, 'aviso', 'Solución', T.sol(v)); });
+  bO.addEventListener('click', () => nuevoTu(true));
+}
+/* campos de respuesta reutilizables (Medir y Retos) */
+function construirCampos(host, campos) {
+  const out = {};
+  campos.forEach((c, i) => {
+    const fila = el('div', { class: 'resp' }, host);
+    const id = 'in' + (++UID);
+    if (c.tipo === 'escala') {
+      el('label', { for: id }, fila, c.label || 'Escala');
+      const a = el('input', { type: 'text', id, class: 'e', inputmode: 'decimal', autocomplete: 'off', 'aria-label': 'Primer número de la escala (papel)' }, fila);
+      el('span', { class: 'dos-p' }, fila, ':');
+      const b = el('input', { type: 'text', class: 'e', inputmode: 'decimal', autocomplete: 'off', 'aria-label': 'Segundo número de la escala (realidad)' }, fila);
+      out[c.id] = [a, b];
+    } else {
+      el('label', { for: id }, fila, c.label);
+      out[c.id] = el('input', { type: 'text', id, inputmode: 'decimal', autocomplete: 'off' }, fila);
+      el('span', { class: 'ud' }, fila, c.ud);
     }
   });
-  realIn.addEventListener('input', () => { if (modo === 'real') calcular(); });
-  dibujoIn.addEventListener('input', () => { if (modo === 'dibujo') calcular(); });
-  realUnit.addEventListener('change', calcular);
-  dibujoUnit.addEventListener('change', calcular);
+  return out;
+}
+function leerCampos(campos, inputs) {
+  const r = {};
+  for (const c of campos) {
+    if (c.tipo === 'escala') {
+      const a = leerNumero(inputs[c.id][0].value), b = leerNumero(inputs[c.id][1].value);
+      if (!a || !b || a.value <= 0 || b.value <= 0) return { error: 'Escribe la escala con dos números mayores que 0, por ejemplo 1 : 5.' };
+      r[c.id] = [a, b];
+    } else {
+      const a = leerNumero(inputs[c.id].value);
+      if (!a) return { error: `Escribe un número en «${c.label}». Usa la coma para los decimales.` };
+      r[c.id] = a;
+    }
+  }
+  return r;
+}
 
-  // Init
-  actualizarEscalaDisplay();
-  calcular();
+/* =====================================================================
+   PANTALLA 3 · RETOS
+   ===================================================================== */
+const RT = { nivel: 0, lista: [], i: 0, stats: null };
+const CLAVE = 'laboratorio-escalas-v1';
+function cargarProg() { try { return JSON.parse(localStorage.getItem(CLAVE)) || {}; } catch (_) { return {}; } }
+function guardarProg(o) { try { localStorage.setItem(CLAVE, JSON.stringify(o)); } catch (_) {} }
+function cap(t) { return t.charAt(0).toUpperCase() + t.slice(1); }
+
+/* ---------- predicciones ---------- */
+function predR2D(s) {
+  const c = canon(s);
+  return { q: 'Antes de calcular: el dibujo será… que el objeto real', ok: c.tipo === 'amp' ? 'mayor' : c.tipo === 'red' ? 'menor' : 'igual',
+    exp: c.tipo === 'amp' ? `${escTxt(s)} es una ampliación: el dibujo sale mayor que el objeto.` : c.tipo === 'red' ? `${escTxt(s)} es una reducción: el dibujo sale menor que el objeto.` : '1 : 1 es la escala natural: el dibujo mide lo mismo.' };
+}
+function predD2R(s) {
+  const c = canon(s);
+  return { q: 'Antes de calcular: la medida real será… que la del dibujo', ok: c.tipo === 'red' ? 'mayor' : c.tipo === 'amp' ? 'menor' : 'igual',
+    exp: c.tipo === 'red' ? `${escTxt(s)} es una reducción: el dibujo es menor que la realidad, así que la realidad es mayor.` : c.tipo === 'amp' ? `${escTxt(s)} es una ampliación: el dibujo es mayor que la realidad, así que la realidad es menor.` : '1 : 1: la realidad mide lo mismo que el dibujo.' };
+}
+function expTipo(s) {
+  const c = canon(s), p = partes(s);
+  if (c.tipo === 'red') return `En ${escHTML(s)} el <span class="c-papel">${p[0]}</span> va con el papel y el <span class="c-real">${p[1]}</span> con la realidad: 1 mm del papel representa ${p[1]} mm reales. El dibujo es menor que el objeto: es una <b>reducción</b>.`;
+  if (c.tipo === 'amp') return `En ${escHTML(s)} el <span class="c-papel">${p[0]}</span> va con el papel y el <span class="c-real">${p[1]}</span> con la realidad: ${p[0]} mm del papel representan 1 mm real. El dibujo es mayor que el objeto: es una <b>ampliación</b>.`;
+  return 'En 1 : 1 el dibujo mide lo mismo que el objeto: es la <b>escala natural</b>.';
+}
+function notaNorm(s) {
+  if (esNorm(s)) return '';
+  return `${escHTML(s)} es una escala válida, pero no pertenece a la serie de escalas normalizadas.`;
+}
+/* información adicional (solo en la solución): la serie y la norma */
+function notaSerie(s) {
+  if (esNorm(s)) return '';
+  const c = canon(s);
+  return `La serie normalizada de ${c.tipo === 'amp' ? 'ampliación es 2 : 1, 5 : 1, 10 : 1, 20 : 1 y 50 : 1' : 'reducción es 1 : 2, 1 : 5, 1 : 10, 1 : 20, 1 : 50, 1 : 100…'} (norma UNE-EN ISO 5455).`;
+}
+
+/* ---------- NIVEL 1 · Reconocer ---------- */
+function rClasificar(s) {
+  const c = canon(s);
+  return {
+    enun: `¿Qué tipo de escala es ${escHTML(s)}?`,
+    opciones: [['Reducción', 'red'], ['Escala natural', 'nat'], ['Ampliación', 'amp']].map(([txt, k]) => ({ txt, ok: k === c.tipo, err: (k !== 'nat' && c.tipo !== 'nat') ? 'invertida' : 'tipo', fb: expTipo(s) })),
+    notaOk: notaNorm(s),
+    sol: () => expTipo(s)
+  };
+}
+const PARES = [{ w: 40, h: 30, n: 'placa', sa: S(2, 1), sb: S(1, 2) }, { w: 20, h: 12, n: 'pieza', sa: S(5, 1), sb: S(1, 5) }];
+function rCualEs(v) {
+  const izq = Math.random() < .5 ? v.sa : v.sb, der = izq === v.sa ? v.sb : v.sa;
+  const pide = Math.random() < .5 ? v.sa : v.sb, otra = pide === v.sa ? v.sb : v.sa;
+  const letra = pide === izq ? 'A' : 'B';
+  const pz = { w: v.w, h: v.h, ud: 'mm', geo: geoPlaca(v.w, v.h, false), cotas: [] };
+  return {
+    enun: `La ${v.n} real mide <b class="c-real">${v.w} × ${v.h} mm</b>. En la hoja está dibujada dos veces. ¿Qué dibujo está a escala ${escHTML(pide)}? Si lo necesitas, mide con la regla.`,
+    herr: 'regla',
+    escena: (st, ctx) => {
+      dibujarHoja(st, { titulo: cap(v.n), escala: '?' });
+      const P = [[izq, 30], [der, 160]];
+      ctx.pts = [];
+      P.forEach(([s, x], i) => {
+        dibujarPieza(st.gCont, pz, E(s), x, 50, { cotas: false });
+        svT(i ? 'B' : 'A', { x, y: 45, class: 'rotulo' }, st.gCont);
+        ctx.pts.push(...esquinas(x, 50, v.w * E(s), v.h * E(s)));
+        if (ctx.fantasma) sv('rect', { x, y: 50, width: v.w, height: v.h, class: 'fantasma' }, st.gCont);
+      });
+      if (ctx.fantasma) svT('Contorno discontinuo: la pieza a tamaño real', { x: 30, y: 140, class: 'rotulo-s' }, st.gCont);
+    },
+    opciones: [{ txt: 'Dibujo A', ok: letra === 'A', err: 'invertida' }, { txt: 'Dibujo B', ok: letra === 'B', err: 'invertida' }],
+    fbComun: `El dibujo ${letra} mide ${fmt(v.w * E(pide))} mm de largo para una ${v.n} de ${v.w} mm: es ${E(pide) > 1 ? 'mayor' : 'menor'} que la realidad, así que está a ${escHTML(pide)}. El otro mide ${fmt(v.w * E(otra))} mm y está a ${escHTML(otra)}.`,
+    consecuencia: (st, ctx) => { ctx.fantasma = true; },
+    sol: function () { return this.fbComun; }
+  };
+}
+const COMPLETAR = [
+  { enun: `En ${escHTML(S(1, 50))}, 1 cm del papel representa ____ cm reales.`, V: 50, ud: 'cm', s: S(1, 50), dir: 'd2r', dato: { v: 1, ud: 'cm' }, sol: '1 cm × 50 = 50 cm reales.' },
+  { enun: `En ${escHTML(S(5, 1))}, 5 mm del papel representan ____ mm reales.`, V: 1, ud: 'mm', s: S(5, 1), dir: 'd2r', dato: { v: 5, ud: 'mm' }, sol: '5 mm ÷ 5 = 1 mm real: el dibujo es 5 veces mayor que la realidad.' },
+  { enun: `En ${escHTML(S(2, 1))}, 1 mm real se dibuja con ____ mm en el papel.`, V: 2, ud: 'mm', s: S(2, 1), dir: 'r2d', dato: { v: 1, ud: 'mm' }, sol: '1 mm × 2 = 2 mm en el papel.' },
+  { enun: `En ${escHTML(S(1, 100))}, 1 m real se dibuja con ____ cm en el papel.`, V: 1, ud: 'cm', s: S(1, 100), dir: 'r2d', dato: { v: 1, ud: 'm' }, sol: '1 m ÷ 100 = 0,01 m = 1 cm en el papel.' },
+  { enun: `En ${escHTML(S(1, 20))}, 1 cm del papel representa ____ m reales.`, V: 0.2, ud: 'm', s: S(1, 20), dir: 'd2r', dato: { v: 1, ud: 'cm' }, sol: '1 cm × 20 = 20 cm = 0,2 m reales.' }
+];
+function rCompletar(c) {
+  const k = canon(c.s);
+  return {
+    enun: 'Completa: ' + c.enun,
+    campos: [{ id: 'x', label: 'Respuesta', ud: c.ud }],
+    corregir: r => diagNum(r.x, { V: c.V, ud: c.ud, k: k.N, dir: c.dir, tipo: k.tipo, sHTML: escHTML(c.s), dato: c.dato }),
+    prueba: { x: c.V },
+    sol: () => c.sol
+  };
+}
+function genN1() {
+  const L = [];
+  pickN([S(1, 20), S(5, 1), S(1, 1), S(3, 1), S(1, 50), S(2, 1), S(10, 1), S(1, 3)], 2).forEach(s => L.push(rClasificar(s)));
+  PARES.forEach(v => L.push(rCualEs(v)));
+  pickN(COMPLETAR, 2).forEach(c => L.push(rCompletar(c)));
+  return shuffle(L);
+}
+
+/* ---------- NIVEL 2 · Realidad → dibujo ---------- */
+const R2D = [
+  { n: 'Una placa', R: 60, s: S(1, 2) }, { n: 'Una pieza pequeña', R: 30, s: S(2, 1) }, { n: 'Un soporte', R: 200, s: S(1, 5) },
+  { n: 'Un engranaje', R: 15, s: S(5, 1) }, { n: 'Un microchip', R: 8, s: S(10, 1) }, { n: 'Una tapa', R: 450, s: S(1, 10) }, { n: 'Un tablero', R: 1200, s: S(1, 20) }
+];
+function consecuenciaDibujo(st, ctx, V, A, final, R) {
+  // la placa correcta (largo V) y la del alumno (largo A), con alto = largo / 2
+  dibujarHoja(st, { titulo: 'Tu dibujo', escala: ctx.s });
+  const o = HOJA.origen;
+  if (!(A > 0)) return '';
+  const pzA = { w: A, h: A / 2, geo: geoPlaca(A, A / 2, false) };
+  const ok = Math.abs(A - V) <= Math.max(0.005 * V, 1e-9);
+  if (!ok && final) {
+    dibujarPieza(st.gCont, { w: V, h: V / 2, geo: geoPlaca(V, V / 2, false) }, 1, o.x, o.y, { cotas: false, clase: 'solucion' });
+    svT(`Correcto: ${fmt(V)} mm`, { x: o.x + V + 3, y: o.y + V / 2 + 4, class: 'rotulo-s', style: 'fill:var(--papel)' }, st.gCont);
+  }
+  if (R && R <= 250 && R / 2 <= 150) {   // el objeto real, si cabe en la hoja
+    sv('rect', { x: o.x, y: o.y, width: R, height: R / 2, class: 'fantasma' }, st.gCont);
+    svT(`Objeto real: ${fmt(R)} mm`, { x: o.x, y: o.y + R / 2 + 5, class: 'rotulo-s', style: 'fill:var(--real)' }, st.gCont);
+  }
+  dibujarPieza(st.gCont, pzA, 1, o.x, o.y, { cotas: false, clase: ok ? 'correcto' : 'alumno' });
+  if (!cabe(A, A / 2)) desborde(st, st.gCont, o.x, o.y, A, A / 2);
+  svT(`Tu dibujo: ${fmt(A)} mm`, { x: o.x, y: o.y - 3, class: 'rotulo-s' }, st.gCont);
+  if (A > MAXW) { const f = formatoNecesario(A, A / 2); return `Tu dibujo mediría ${fmt(A)} mm de largo: no cabe en esta hoja A4; ${f ? `haría falta, como mínimo, un ${f}` : 'no cabría ni en un A0'}.`; }
+  if (A < 2) return `Tu dibujo mediría ${fmt(A)} mm: apenas sería un punto en la hoja.`;
+  return '';
+}
+function rR2D(v) {
+  const c = canon(v.s), V = v.R * E(v.s);
+  return {
+    enun: `${v.n} mide <b class="c-real">${fmt(v.R)} mm</b> de largo. La dibujas a escala ${escHTML(v.s)}. ¿Cuánto medirá su largo en el papel?`,
+    pred: predR2D(v.s),
+    campos: [{ id: 'x', label: 'Largo en el papel', ud: 'mm' }],
+    corregir: r => diagNum(r.x, { V, ud: 'mm', k: c.N, dir: 'r2d', tipo: c.tipo, sHTML: escHTML(v.s), dato: { v: v.R, ud: 'mm' } }),
+    prueba: { x: V, inv: v.R / E(v.s) },
+    sol: () => `dibujo = real × escala = ${opR2D(v.R, 'mm', v.s)}`,
+    consecuencia: (st, ctx, r, final) => { ctx.s = v.s; return consecuenciaDibujo(st, ctx, V, r.x.value, final, v.R); }
+  };
+}
+function geoEje(L) { const h = L * 0.14; return { w: L, h, geo: [{ t: 'rect', x: 0, y: 0, w: L, h }, { t: 'line', x1: -L * 0.04, y1: h / 2, x2: L * 1.04, y2: h / 2, c: 'eje' }] }; }
+const DIBUJAR = [{ n: 'un tornillo', R: 25, s: S(2, 1), f: geoTornillo }, { n: 'un tornillo', R: 12, s: S(5, 1), f: geoTornillo }, { n: 'un eje', R: 150, s: S(1, 2), f: geoEje }, { n: 'un eje', R: 400, s: S(1, 5), f: geoEje }];
+function rDibujar(v) {
+  const c = canon(v.s), V = v.R * E(v.s);
+  const ox = 40, oy = 60;
+  return {
+    enun: `Dibuja ${v.n} de <b class="c-real">${v.R} mm</b> de largo a escala ${escHTML(v.s)}. Arrastra el cuadrado azul hasta que el dibujo tenga el largo correcto y compruébalo con la regla.`,
+    herr: 'regla', interaccion: 'dibujo',
+    pred: predR2D(v.s),
+    escena: (st, ctx) => {
+      if (ctx.L == null) ctx.L = Math.round(Math.min(220, Math.max(12, V * (Math.random() < .5 ? 0.45 : 1.7))) * 2) / 2;
+      const g = v.f(ctx.L);
+      dibujarHoja(st, { titulo: cap(v.n.replace(/^un /, '')), escala: v.s });
+      dibujarPieza(st.gCont, g, 1, ox, oy, { cotas: false });
+      if (ctx.solucion) dibujarPieza(st.gCont, v.f(V), 1, ox, oy, { cotas: false, clase: 'solucion' });
+      ctx.pts = esquinas(ox, oy, ctx.L, g.h).concat([{ x: ox, y: oy + g.h / 2 }, { x: ox + ctx.L, y: oy + g.h / 2 }]);
+      ctx.tirador = { x: ox + ctx.L, y: oy + g.h / 2, ox, max: 250 };
+    },
+    corregir: (r, ctx) => diagNum({ value: ctx.L }, { V, ud: 'mm', tolAbs: 1, k: c.N, dir: 'r2d', tipo: c.tipo, sHTML: escHTML(v.s), dato: { v: v.R, ud: 'mm' } }),
+    prueba: { L: V, inv: v.R / E(v.s) },
+    mostrarValor: ctx => `Tu dibujo mide ${fmt(ctx.L)} mm en el papel.`,
+    consecuencia: (st, ctx, r, final) => { if (final) ctx.solucion = true; return ''; },
+    sol: () => `dibujo = real × escala = ${opR2D(v.R, 'mm', v.s)}. En la hoja, la línea azul discontinua muestra el largo correcto.`
+  };
+}
+function genN2() { return shuffle([...pickN(R2D, 4).map(rR2D), ...pickN(DIBUJAR, 2).map(rDibujar)]); }
+
+/* ---------- NIVEL 3 · Dibujo → realidad ---------- */
+const MEDIR3 = [{ w: 180, h: 120, s: S(1, 5) }, { w: 90, h: 50, s: S(1, 2) }, { w: 35, h: 20, s: S(2, 1) }, { w: 12, h: 8, s: S(5, 1) }];
+function rMedirReal(v) {
+  const e = E(v.s), D = v.w * e;
+  return {
+    enun: `Esta pieza está dibujada a escala ${escHTML(v.s)}. Mide su <b>largo</b> con la regla y escribe cuánto mide la pieza real.`,
+    herr: 'regla', pred: predD2R(v.s),
+    escena: (st, ctx) => { const r = escenaMedir(st, piezaPlaca(v.w, v.h), v.s, { titulo: 'Pieza' }); ctx.pts = r.pts; },
+    campos: [{ id: 'x', label: 'Largo real', ud: 'mm' }],
+    corregir: r => diagNum(r.x, pMedida(v.w, 'mm', v.s, 'una pieza')),
+    prueba: { x: v.w, inv: D * E(v.s), papel: D },
+    sol: () => `En el papel mide ${fmt(D)} mm.<br>real = dibujo ÷ escala = ${opD2R(D, 'mm', v.s)}`
+  };
+}
+const PLANOS = [{ s: S(1, 50), D: 18, n: 'el aula', nom: 'un aula' }, { s: S(1, 100), D: 9, n: 'el aula', nom: 'un aula' }, { s: S(1, 50), D: 16, n: 'la sala', nom: 'una sala' }, { s: S(1, 20), D: 25, n: 'la habitación', nom: 'una habitación' }];
+function rPlano(v) {
+  const c = canon(v.s), V = v.D / E(v.s) / 100;
+  return {
+    enun: `En un plano a escala ${escHTML(v.s)}, el largo de ${v.n} mide <b class="c-papel">${fmt(v.D)} cm</b>. ¿Cuánto mide en realidad, en metros?`,
+    pred: predD2R(v.s),
+    campos: [{ id: 'x', label: 'Largo real', ud: 'm' }],
+    prueba: { x: V, inv: v.D * E(v.s) / 100 },
+    corregir: r => diagNum(r.x, { V, ud: 'm', k: c.N, dir: 'd2r', tipo: c.tipo, sHTML: escHTML(v.s), dato: { v: v.D, ud: 'cm' }, plaus: [1.5, 60], nombre: v.nom }),
+    sol: () => `real = dibujo ÷ escala = ${opD2R(v.D, 'cm', v.s, 'm')}`
+  };
+}
+const MAPAS = [{ s: S(1, 25000), D: 8 }, { s: S(1, 25000), D: 5 }, { s: S(1, 25000), D: 12 }, { s: S(1, 50000), D: 6 }];
+function rMapa(v) {
+  const c = canon(v.s), V = v.D / E(v.s) / 1e5;
+  return {
+    enun: `En un mapa a escala ${escHTML(v.s)}, dos pueblos están separados <b class="c-papel">${fmt(v.D)} cm</b>. ¿Qué distancia real hay entre ellos, en kilómetros?`,
+    pred: predD2R(v.s),
+    campos: [{ id: 'x', label: 'Distancia real', ud: 'km' }],
+    prueba: { x: V, inv: v.D * E(v.s) / 1e5 },
+    corregir: r => diagNum(r.x, { V, ud: 'km', k: c.N, dir: 'd2r', tipo: c.tipo, sHTML: escHTML(v.s), dato: { v: v.D, ud: 'cm' }, plaus: [0.05, 500], nombre: 'una distancia entre pueblos' }),
+    sol: () => `real = dibujo ÷ escala = ${opD2R(v.D, 'cm', v.s, 'km')}`
+  };
+}
+function genN3() { return shuffle([...pickN(MEDIR3, 2).map(rMedirReal), ...pickN(PLANOS, 2).map(rPlano), ...pickN(MAPAS, 2).map(rMapa)]); }
+
+/* ---------- NIVEL 4 · Hallar la escala ---------- */
+const DOS = [{ n: 'Un microchip', R: 10, D: 30, s: S(3, 1) }, { n: 'Una placa', R: 40, D: 80, s: S(2, 1) }, { n: 'Un soporte', R: 200, D: 40, s: S(1, 5) }, { n: 'Una tapa', R: 600, D: 60, s: S(1, 10) }, { n: 'Un engranaje', R: 8, D: 40, s: S(5, 1) }];
+function rEscalaDos(v) {
+  return {
+    enun: `${v.n} mide <b class="c-real">${v.R} mm</b> y en el dibujo aparece con <b class="c-papel">${v.D} mm</b>. ¿A qué escala está el dibujo?`,
+    campos: [{ id: 'e', tipo: 'escala' }],
+    corregir: r => diagEsc(r.e[0].value, r.e[1].value, { s: v.s }),
+    prueba: { e: v.s },
+    sol: () => opEsc(v.D, 'mm', v.R, 'mm', v.s) + (notaSerie(v.s) ? '<br>' + notaSerie(v.s) : '')
+  };
+}
+const TRAMPAS = [
+  { n: 'Un aula', Rv: 9, Ru: 'm', Dv: 9, Du: 'cm', s: S(1, 100), trap: '9 y 9, pero uno en metros y el otro en centímetros. Antes de dividir, pasa las dos medidas a la misma unidad: 9 m = 900 cm.' },
+  { n: 'Una mesa', Rv: 1.6, Ru: 'm', Dv: 8, Du: 'cm', s: S(1, 20), trap: 'Has dividido números en unidades distintas (m y cm). Pasa las dos medidas a la misma unidad antes de dividir: 1,6 m = 160 cm.' },
+  { n: 'Un pasillo', Rv: 20, Ru: 'm', Dv: 10, Du: 'cm', s: S(1, 200), trap: 'Has dividido números en unidades distintas (m y cm). Pasa las dos medidas a la misma unidad antes de dividir: 20 m = 2000 cm.' },
+  { n: 'Un tornillo', Rv: 5, Ru: 'mm', Dv: 1, Du: 'cm', s: S(2, 1), trap: 'Has dividido números en unidades distintas (cm y mm). Pasa las dos medidas a la misma unidad antes de dividir: 1 cm = 10 mm.' }
+];
+function rTrampa(v) {
+  return {
+    enun: `${v.n} mide <b class="c-real">${fmt(v.Rv)} ${v.Ru}</b> y en el plano aparece con <b class="c-papel">${fmt(v.Dv)} ${v.Du}</b>. ¿A qué escala está el plano?`,
+    campos: [{ id: 'e', tipo: 'escala' }],
+    corregir: r => diagEsc(r.e[0].value, r.e[1].value, { s: v.s, trap: v.trap }),
+    prueba: { e: v.s, ingenua: S(v.Dv, v.Rv) },
+    sol: () => opEsc(v.Dv, v.Du, v.Rv, v.Ru, v.s)
+  };
+}
+const MEDIR4 = [{ w: 250, h: 150, s: S(1, 5) }, { w: 70, h: 40, s: S(1, 2) }, { w: 14, h: 10, s: S(5, 1) }, { w: 45, h: 30, s: S(2, 1) }];
+function rEscalaMedir(v) {
+  const D = v.w * E(v.s);
+  return {
+    enun: `La pieza real mide <b class="c-real">${v.w} mm</b> de largo. Mide su dibujo con la regla y halla la escala.`,
+    herr: 'regla',
+    escena: (st, ctx) => { const r = escenaMedir(st, piezaPlaca(v.w, v.h), v.s, { titulo: 'Pieza', cajEsc: '?' }); ctx.pts = r.pts; },
+    campos: [{ id: 'e', tipo: 'escala' }],
+    corregir: r => diagEsc(r.e[0].value, r.e[1].value, { s: v.s, tolRel: 0.04 }),
+    prueba: { e: v.s, papel: D },
+    sol: () => `En el papel mide ${fmt(D)} mm.<br>${opEsc(D, 'mm', v.w, 'mm', v.s)}`
+  };
+}
+const GRAF = [{ d: 56, ang: 22 }, { d: 92, ang: 12 }, { d: 68, ang: -8, A: { x: 50, y: 92 } }, { d: 76, ang: 28 }];
+function rGrafica(v) {
+  return {
+    enun: 'Este mapa solo tiene escala gráfica. Usa el compás: ábrelo entre los dos pueblos, bloquea la abertura y llévalo a la escala gráfica. ¿A qué distancia en línea recta están los pueblos?',
+    herr: 'compas',
+    escena: (st, ctx) => { const r = escenaMapa(st, { d: v.d, ang: v.ang, A: v.A, numerica: false }); ctx.mapa = r; },
+    campos: [{ id: 'x', label: 'Distancia', ud: 'km' }],
+    prueba: { x: v.d / 40, papel: v.d },
+    corregir: r => diagNum(r.x, { V: v.d / 40, ud: 'km', tolAbs: 0.05, dir: 'otro', plaus: [0.05, 50], nombre: 'una distancia', dato: { v: v.d, ud: 'mm' },
+      msgSinEscala: 'Esa es la distancia en el papel, en milímetros. Llévala con el compás a la escala gráfica para leer los kilómetros.' }),
+    sol: () => `En el papel hay ${fmt(v.d)} mm. En la escala gráfica, 1 km ocupa 40 mm, así que la punta de lápiz cae en ${fmt(v.d / 40)} km.`
+  };
+}
+function genN4() { return shuffle([...pickN(DOS, 2).map(rEscalaDos), ...pickN(TRAMPAS, 2).map(rTrampa), rEscalaMedir(pick(MEDIR4)), rGrafica(pick(GRAF))]); }
+
+/* ---------- NIVEL 5 · Elegir e interpretar ---------- */
+const ELEGIR = [
+  { pz: () => OBJETOS.pupitre, txt: 'el pupitre (700 × 500 mm, visto en planta)' },
+  { pz: () => OBJETOS.aula, txt: 'el aula (9 × 6 m, vista en planta)' },
+  { pz: () => PUERTA, txt: 'la puerta (820 mm de ancho y 2030 mm de alto, vista de frente)' },
+  { pz: () => OBJETOS.placa, txt: 'la placa (40 × 30 mm)' },
+  { pz: () => OBJETOS.chip, txt: 'el microchip (10 × 10 mm)' },
+  { pz: () => OBJETOS.movil, txt: 'el teléfono móvil (150 × 70 mm)' }
+];
+function siguienteMayor(s) { const L = [...SERIE_RED.slice().reverse().map(N => S(1, N)), S(1, 1), ...SERIE_AMP.map(N => S(N, 1))]; const i = L.findIndex(x => igualEsc(x, s)); return i >= 0 && i < L.length - 1 ? L[i + 1] : null; }
+function rElegir(v) {
+  const pz = v.pz(), best = mejorEscala(pz.w, pz.h), sig = siguienteMayor(best);
+  const o = HOJA.origen;
+  return {
+    enun: `Elige la <b>mayor</b> escala normalizada con la que ${v.txt} cabe con sus cotas en esta hoja A4, tal como la dispone el simulador: una sola vista en la esquina superior izquierda y sus dos cotas. Puedes probar varias: la hoja te enseña el resultado.`,
+    interaccion: 'serie',
+    escena: (st, ctx) => {
+      dibujarHoja(st, { titulo: pz.nombre, escala: ctx.s || '?', cotasEn: pz.ud === 'm' ? 'm' : 'mm' });
+      if (!ctx.s) return;
+      const e = E(ctx.s), w = pz.w * e, h = pz.h * e;
+      dibujarPieza(st.gCont, pz, e, o.x, o.y);
+      if (!cabe(w, h)) desborde(st, st.gCont, o.x, o.y, w + HOJA.reserva, h + HOJA.reserva);
+    },
+    prueba: { s: best, sig },
+    corregir: (r, ctx) => {
+      const s = ctx.s, e = E(s), w = pz.w * e, h = pz.h * e;
+      if (!cabe(w, h)) return { ok: false, err: 'nocabe', msg: `Con ${escHTML(s)} el dibujo mediría ${fmt(w, 1)} × ${fmt(h, 1)} mm: no cabe con sus cotas (mira la zona rayada). Prueba una escala menor.` };
+      if (E(s) < E(best) - 1e-12) return { ok: false, err: 'menor', msg: `Con ${escHTML(s)} cabe, pero en esta disposición también cabe una escala normalizada mayor. Busca la mayor posible: el dibujo quedará más grande y se leerá mejor.` };
+      return { ok: true };
+    },
+    sol: () => `La mayor escala que cabe en esta disposición es ${escHTML(best)}: el dibujo mide ${fmt(pz.w * E(best), 1)} × ${fmt(pz.h * E(best), 1)} mm.` + (sig ? ` Con la siguiente, ${escHTML(sig)}, mediría ${fmt(pz.w * E(sig), 1)} × ${fmt(pz.h * E(sig), 1)} mm y ya no cabría.` : '') + ' Con otra orientación, otra distribución de la hoja o más vistas y cotas, el resultado podría ser distinto.'
+  };
+}
+const COTAF = [{ s: S(1, 5), w: 200, h: 150, t: 60, f: 40 }, { s: S(1, 2), w: 120, h: 90, t: 30, f: 20 }];
+function rCotaFalta(v) {
+  const e = E(v.s), ox = 40, oy = 40;
+  const pz = { w: v.w, h: v.h, ud: 'mm', geo: geoL(v.w, v.h, v.t, v.f), cotas: [
+    { d: 'h', x1: 0, x2: v.w, y: v.h, lado: 'abajo', txt: fmt(v.w) },
+    { d: 'v', y1: 0, y2: v.h, x: 0, lado: 'izq', txt: fmt(v.h) },
+    { d: 'v', y1: v.h - v.f, y2: v.h, x: v.w, lado: 'der', txt: fmt(v.f) },
+    { d: 'h', x1: 0, x2: v.t, y: 0, lado: 'arriba', txt: '?', falta: true }] };
+  return {
+    enun: `Este plano está a escala ${escHTML(v.s)}. Le falta una cota: la marcada con «?». Mide ese tramo con la regla y escribe la medida que debe poner la cota.`,
+    herr: 'regla',
+    escena: (st, ctx) => {
+      dibujarHoja(st, { titulo: 'Escuadra', escala: v.s });
+      dibujarPieza(st.gCont, pz, e, ox, oy);
+      ctx.pts = [[0, 0], [v.t, 0], [v.t, v.h - v.f], [v.w, v.h - v.f], [v.w, v.h], [0, v.h]].map(p => ({ x: ox + p[0] * e, y: oy + p[1] * e }));
+    },
+    campos: [{ id: 'x', label: 'Cota que falta', ud: 'mm' }],
+    prueba: { x: v.t, papel: v.t * e },
+    corregir: r => diagNum(r.x, Object.assign(pMedida(v.t, 'mm', v.s, 'ese tramo'), { errSinEscala: 'cota', msgSinEscala: 'Has escrito lo que mide en el papel. Una cota indica siempre la medida <b>real</b>: aplica la escala.' })),
+    sol: () => `En el papel mide ${fmt(v.t * e)} mm.<br>real = dibujo ÷ escala = ${opD2R(v.t * e, 'mm', v.s)}<br>Puedes comprobar la escala con otra cota: ${v.w} mm reales ocupan ${fmt(v.w * e)} mm en el papel.`
+  };
+}
+const DETECTAR = [{ caj: S(1, 20), cota: 400, alto: 200, papel: 40 }, { caj: S(1, 2), cota: 60, alto: 30, papel: 60 }];
+function rDetectar(v) {
+  const real = S(v.papel, v.cota), eR = E(real), Nc = canon(v.caj).N, inv = inversa(v.caj);
+  const pz = { w: v.cota, h: v.alto, ud: 'mm', geo: geoPlaca(v.cota, v.alto, true), cotas: cotasHV({ w: v.cota, h: v.alto, ud: 'mm' }) };
+  const ops = shuffle([
+    { txt: `Dibujo y cajetín no concuerdan: ${v.papel} mm en el papel para ${v.cota} mm reales es ${escTxt(real)}, no ${escTxt(v.caj)}.`, ok: true },
+    { txt: `Todo es correcto, porque ${v.cota} ÷ ${fmtN(Nc)} = ${v.papel}.`, ok: false, err: 'calculo', fb: `Haz la cuenta: ${v.cota} ÷ ${fmtN(Nc)} = ${fmt(v.cota / Nc)}, no ${v.papel}. A ${escTxt(v.caj)} la pieza mediría ${fmt(v.cota / Nc)} mm en el papel.` },
+    { txt: `La cota está mal: debería decir ${fmt(v.cota * E(v.caj))}.`, ok: false, err: 'cota', fb: 'La cota indica siempre la medida real de la pieza, sea cual sea la escala del dibujo. Lo que no cuadra es la escala del cajetín.' },
+    { txt: `La pieza está dibujada a ${escTxt(inv)}.`, ok: false, err: 'invertida', fb: `${escTxt(inv)} sería una ampliación: la pieza mediría ${fmt(v.cota * E(inv))} mm en el papel, no ${v.papel} mm.` }
+  ]);
+  return {
+    enun: `El cajetín de este plano dice ${escHTML(v.caj)} y la cota del largo dice ${v.cota}. Mide el largo de la pieza con la regla y compáralo. ¿Qué es cierto?`,
+    herr: 'regla',
+    escena: (st, ctx) => { dibujarHoja(st, { titulo: 'Placa', escala: v.caj }); dibujarPieza(st.gCont, pz, eR, 40, 50); ctx.pts = esquinas(40, 50, v.cota * eR, v.alto * eR); },
+    opciones: ops, columna: true,
+    sol: () => `En el papel la pieza mide ${v.papel} mm y la cota dice ${v.cota} mm reales: ${opEsc(v.papel, 'mm', v.cota, 'mm', real)}. El dibujo no está a ${escTxt(v.caj)}.`
+  };
+}
+function genN5() { return shuffle([...pickN(ELEGIR, 2).map(rElegir), ...COTAF.map(rCotaFalta), ...DETECTAR.map(rDetectar)]); }
+
+const NIVELES = [
+  { nombre: 'Reconocer', gen: genN1 }, { nombre: 'Realidad → dibujo', gen: genN2 }, { nombre: 'Dibujo → realidad', gen: genN3 },
+  { nombre: 'Hallar la escala', gen: genN4 }, { nombre: 'Elegir e interpretar', gen: genN5 }
+];
+
+/* ---------- motor de retos ---------- */
+function iniciarRetos() {
+  // lámina compartida por todos los retos
+  RT.wrap = el('div', { class: 'escenario' });
+  const barra = el('div', { class: 'barra' }, RT.wrap);
+  const host = el('div', {}, RT.wrap);
+  RT.ayuda = el('p', { class: 'ayuda' }, RT.wrap);
+  const st = RT.st = new Escenario(host, 'Hoja del reto');
+  RT.regla = new Regla(st); RT.compas = new Compas(st);
+  RT.botones = barraHerr(barra, st, [
+    { id: 'reg0', html: 'Recolocar regla', fn: () => RT.regla.irA(PARK.x, PARK.y, 0, 400) },
+    { id: 'bloq', html: 'Abertura del compás: libre', fn: () => { RT.compas.bloq = !RT.compas.bloq; bloqRT(); } }
+  ]);
+  const t = RT.tirador = sv('g', { class: 'tirador horiz', 'aria-hidden': 'true' }, st.gHerr);
+  sv('circle', { r: 5, class: 'hit' }, t); sv('rect', { x: -2, y: -2, width: 4, height: 4, class: 'cuad' }, t);
+  arrastrable(st, t, {
+    mover: p => {
+      const c = RT.ctx; if (!c || !c.tirador || RT.bloqueado) return;
+      c.L = Math.round(Math.min(c.tirador.max, Math.max(3, p.x - c.tirador.ox)) * 2) / 2;
+      redibujarReto();
+    }
+  });
+  $('#rt-borrar').addEventListener('click', () => {
+    if (!confirm('¿Borrar el progreso guardado de todos los niveles?')) return;
+    try { localStorage.removeItem(CLAVE); } catch (_) {}
+    pintarNiveles();
+  });
+  pintarNiveles();
+  portadaRetos();
+}
+function bloqRT() { const b = RT.botones.bloq; b.textContent = 'Abertura del compás: ' + (RT.compas.bloq ? 'bloqueada' : 'libre'); b.setAttribute('aria-pressed', String(RT.compas.bloq)); }
+function pintarNiveles() {
+  const prog = cargarProg(), box = $('#rt-niveles'); box.innerHTML = '';
+  NIVELES.forEach((n, i) => {
+    const p = prog['n' + (i + 1)];
+    const txt = p ? `Mejor resultado: ${p.mejor} de 6` : 'Sin empezar';
+    const b = el('button', { class: 'nivel' + (p && p.mejor === 6 ? ' hecho' : ''), type: 'button', 'aria-pressed': String(RT.nivel === i + 1) }, box,
+      `<span class="num">Nivel ${i + 1}</span><span class="nom">${n.nombre}</span><span class="prog">${p && p.mejor === 6 ? '✓ ' : ''}${txt}</span>`);
+    b.addEventListener('click', () => iniciarNivel(i + 1));
+  });
+}
+function portadaRetos() {
+  $('#rt-zona').innerHTML = `<div class="caja" style="max-width:760px"><h3>Elige un nivel para empezar</h3>
+    <p>Cada nivel tiene 6 retos con datos que cambian en cada partida. Tienes dos intentos por reto: si fallas, la corrección te dice qué ha pasado.</p>
+    <p class="nota-mini">Los niveles no corresponden a ningún curso: avanza hasta donde llegues.</p></div>`;
+}
+function iniciarNivel(n) {
+  RT.nivel = n; RT.lista = NIVELES[n - 1].gen(); RT.i = 0;
+  RT.stats = { res: [], errores: {} };
+  pintarNiveles(); mostrarReto();
+}
+function redibujarReto() {
+  const r = RT.lista[RT.i], st = RT.st, c = RT.ctx;
+  st.limpiar();
+  if (r.escena) r.escena(st, c);
+  if (c.consec) c.consec();
+  RT.regla.puntos = c.pts || [];
+  if (c.tirador && r.interaccion === 'dibujo' && !RT.bloqueado) { RT.tirador.style.display = ''; RT.tirador.setAttribute('transform', `translate(${c.tirador.x} ${c.tirador.y})`); }
+  else RT.tirador.style.display = 'none';
+}
+function mostrarReto() {
+  const r = RT.lista[RT.i];
+  RT.ctx = {}; RT.intento = 0; RT.bloqueado = false;
+  const zona = $('#rt-zona'); zona.innerHTML = '';
+  const cab = el('div', { class: 'reto-cab' }, zona);
+  el('div', {}, cab, `<b>Nivel ${RT.nivel}: ${NIVELES[RT.nivel - 1].nombre}</b> <span class="cuenta">· Reto ${RT.i + 1} de ${RT.lista.length}</span>`);
+  const pts = el('div', { class: 'puntos', 'aria-hidden': 'true' }, cab);
+  RT.lista.forEach((_, j) => { const i = el('i', {}, pts); const q = RT.stats.res[j]; if (q) i.className = q; if (j === RT.i) i.classList.add('act'); });
+  const grid = RT.grid = el('div', { class: 'reto-grid' }, zona);
+  const izq = el('div', {}, grid), der = el('div', { class: 'caja' }, grid);
+  RT.izq = izq;
+  const conLamina = !!r.escena;
+  if (conLamina) izq.appendChild(RT.wrap); else grid.classList.add('sin-lamina');
+  if (!conLamina) { grid.appendChild(der); izq.remove(); }
+  // herramientas
+  const usaR = r.herr === 'regla', usaC = r.herr === 'compas';
+  RT.regla.mostrar(usaR); RT.regla.poner(PARK.x, PARK.y, 0);
+  RT.compas.mostrar(usaC); RT.botones.bloq.style.display = usaC ? '' : 'none'; RT.botones.reg0.style.display = usaR ? '' : 'none';
+  RT.st.ajustar();
+  RT.ayuda.textContent = usaC ? 'Arrastra cada punta del compás; la cabeza (círculo gris) lo mueve entero. Bloquea la abertura antes de llevarlo a la escala gráfica: la punta seca se engancha en el 0.'
+    : r.interaccion === 'dibujo' ? 'Arrastra el cuadrado azul para alargar o acortar el dibujo. Mide con la regla; usa + para acercar.'
+    : usaR ? 'Arrastra la regla; el tirador ↻ la gira. Con el teclado: Tab hasta la regla, flechas para moverla y R para girarla. Usa + para acercar.' : '';
+  redibujarReto();
+  if (usaC) { RT.compas.bloq = false; RT.compas.poner({ x: 215, y: 100 }, { x: 232, y: 100 }); const m = RT.ctx.mapa; RT.compas.cero = m.cero; RT.compas.puntos = [m.A, m.B, m.cero]; bloqRT(); }
+  // tarjeta
+  el('p', { class: 'preg' }, der, r.enun);
+  let predOk = !r.pred;
+  const zonaResp = el('div', {}, null);
+  if (r.pred) {
+    const P = el('div', { class: 'pred' }, der);
+    el('div', { class: 'q' }, P, r.pred.q);
+    const ops = el('div', { class: 'ops' }, P);
+    const pf = el('div', { class: 'pred-fb', 'aria-live': 'polite' }, P);
+    ['mayor', 'menor', 'igual'].forEach(k => {
+      const b = el('button', { class: 'opc', type: 'button' }, ops, cap(k));
+      b.addEventListener('click', () => {
+        if (predOk) return;
+        predOk = true;
+        ops.querySelectorAll('button').forEach(x => x.disabled = true);
+        if (k === r.pred.ok) { b.classList.add('bien'); pf.innerHTML = '✓ ' + r.pred.exp; }
+        else { b.classList.add('mal'); ops.querySelectorAll('button')[['mayor', 'menor', 'igual'].indexOf(r.pred.ok)].classList.add('bien'); pf.innerHTML = '✗ ' + r.pred.exp + ' Tenlo en cuenta al calcular.'; RT.stats.errores.prediccion = (RT.stats.errores.prediccion || 0) + 1; }
+        zonaResp.hidden = false;
+        const f = zonaResp.querySelector('input,button'); if (f) f.focus();
+      });
+    });
+    zonaResp.hidden = true;
+  }
+  der.appendChild(zonaResp);
+  let inputs = null, elegida = null;
+  if (r.campos) inputs = construirCampos(zonaResp, r.campos);
+  if (r.opciones) {
+    const box = el('div', { class: r.columna ? 'opc-col' : 'pred ops', style: r.columna ? '' : 'display:flex;gap:6px;flex-wrap:wrap;background:none;border:0;padding:0' }, zonaResp);
+    r.opciones.forEach((o, j) => {
+      const b = el('button', { class: 'opc', type: 'button', 'aria-pressed': 'false' }, box, o.txt);
+      b.addEventListener('click', () => { if (RT.bloqueado) return; elegida = j; box.querySelectorAll('.opc').forEach((x, i) => x.setAttribute('aria-pressed', String(i === j))); });
+    });
+    RT.opBox = box;
+  }
+  if (r.interaccion === 'serie') {
+    el('div', { class: 'q', style: 'font-size:.9rem;color:var(--tinta2);margin-bottom:4px' }, zonaResp, 'Escalas normalizadas:');
+    const sel = el('div', { class: 'selector', role: 'group', 'aria-label': 'Escalas normalizadas', style: 'flex-wrap:wrap' }, zonaResp);
+    SELECTOR.forEach(s => {
+      const p = partes(s);
+      const b = el('button', { class: 'esc-chip', type: 'button', 'aria-pressed': 'false', 'aria-label': `Escala ${p[0]} a ${p[1]}` }, sel, `<span class="c-papel">${p[0]}</span><span class="dos">:</span><span class="c-real">${p[1]}</span>`);
+      b.addEventListener('click', () => { if (RT.bloqueado) return; RT.ctx.s = s; sel.querySelectorAll('.esc-chip').forEach(x => x.setAttribute('aria-pressed', String(x === b))); redibujarReto(); });
+    });
+  }
+  const acc = el('div', { class: 'acciones' }, zonaResp);
+  const bC = el('button', { class: 'btn', type: 'button' }, acc, 'Comprobar');
+  const bN = el('button', { class: 'btn sec', type: 'button', hidden: '' }, acc, RT.i < RT.lista.length - 1 ? 'Siguiente reto' : 'Ver el resumen del nivel');
+  const f = el('div', { class: 'fb', 'aria-live': 'polite' }, zonaResp);
+  if (inputs) Object.values(inputs).flat().forEach(inp => inp.addEventListener('keydown', e => { if (e.key === 'Enter') bC.click(); }));
+  bC.addEventListener('click', () => {
+    if (RT.bloqueado) return;
+    let resp = {}, d;
+    if (r.campos) { resp = leerCampos(r.campos, inputs); if (resp.error) { fb(f, 'aviso', 'Falta la respuesta', resp.error); return; } }
+    if (r.opciones) {
+      if (elegida == null) { fb(f, 'aviso', 'Elige una opción', ''); return; }
+      const o = r.opciones[elegida];
+      d = o.ok ? { ok: true, nota: r.notaOk } : { ok: false, err: o.err, msg: o.fb || r.fbComun || '' };
+    } else if (r.interaccion === 'serie') {
+      if (!RT.ctx.s) { fb(f, 'aviso', 'Elige una escala', 'Pulsa una de las escalas normalizadas y observa la hoja.'); return; }
+      d = r.corregir(resp, RT.ctx);
+    } else d = r.corregir(resp, RT.ctx);
+    RT.intento++;
+    const final = d.ok || RT.intento >= 2;
+    let extra = '';
+    if (r.consecuencia) {
+      if (!r.escena) { // lámina que aparece solo para enseñar la consecuencia
+        if (!RT.wrap.parentNode || RT.wrap.parentNode !== RT.izq) { RT.grid.classList.remove('sin-lamina'); RT.grid.insertBefore(RT.izq, RT.grid.firstChild); RT.izq.appendChild(RT.wrap); RT.st.ajustar(); }
+        RT.st.limpiar(); RT.regla.mostrar(false); RT.tirador.style.display = 'none';
+        extra = r.consecuencia(RT.st, RT.ctx, resp, final) || '';
+      } else { extra = r.consecuencia(RT.st, RT.ctx, resp, final) || ''; if (final) RT.bloqueado = true; redibujarReto(); }
+    }
+    const valor = r.mostrarValor ? r.mostrarValor(RT.ctx) + ' ' : '';
+    if (d.ok) {
+      RT.stats.res[RT.i] = RT.intento === 1 ? 'a1' : 'a2';
+      fb(f, 'ok', RT.intento === 1 ? 'Correcto' : 'Correcto en el segundo intento', valor, [d.nota, extra].filter(Boolean).join('<br>'), r.sol());
+    } else {
+      RT.stats.errores[d.err || 'otro'] = (RT.stats.errores[d.err || 'otro'] || 0) + 1;
+      if (RT.intento < 2) fb(f, 'err', 'Todavía no · te queda un intento', valor + d.msg, extra);
+      else { RT.stats.res[RT.i] = 'f'; fb(f, 'err', 'Sin resolver', valor + d.msg, extra, '<b>Así se resuelve:</b><br>' + r.sol()); }
+    }
+    if (r.opciones && RT.opBox) {
+      const bs = RT.opBox.querySelectorAll('.opc');
+      if (final) { bs.forEach((b, i) => { b.disabled = true; if (r.opciones[i].ok) b.classList.add('bien'); else if (i === elegida) b.classList.add('mal'); }); }
+    }
+    if (final) {
+      RT.bloqueado = true; bC.disabled = true; bN.hidden = false;
+      if (inputs) Object.values(inputs).flat().forEach(i => i.disabled = true);
+      if (r.interaccion === 'dibujo') redibujarReto();
+      bN.focus();
+    }
+  });
+  bN.addEventListener('click', () => { if (RT.i < RT.lista.length - 1) { RT.i++; mostrarReto(); } else resumenNivel(); });
+  if (!r.pred) { const q = zonaResp.querySelector('input'); if (q && window.innerWidth > 980) q.focus({ preventScroll: true }); }
+}
+function resumenNivel() {
+  const res = RT.stats.res, a1 = res.filter(x => x === 'a1').length, a2 = res.filter(x => x === 'a2').length, tot = a1 + a2;
+  const prog = cargarProg(), k = 'n' + RT.nivel, prev = prog[k];
+  prog[k] = { mejor: Math.max(tot, prev ? prev.mejor : 0), ultima: tot, veces: (prev ? prev.veces : 0) + 1 };
+  guardarProg(prog);
+  const errs = Object.entries(RT.stats.errores).sort((a, b) => b[1] - a[1]);
+  const zona = $('#rt-zona');
+  zona.innerHTML = `<div class="caja resumen" style="max-width:760px"><h3>Nivel ${RT.nivel} terminado: ${NIVELES[RT.nivel - 1].nombre}</h3>
+    <p>Has resuelto <b>${tot} de ${res.length}</b> retos (${a1} a la primera${a2 ? `, ${a2} en el segundo intento` : ''}).</p>
+    ${errs.length ? `<p>Esto es lo que conviene repasar:</p><ul>${errs.map(([e, n]) => `<li>${ERR_TXT[e] || e}: ${n} ${n === 1 ? 'vez' : 'veces'}</li>`).join('')}</ul>`
+      : '<p>No has cometido ningún error.</p>'}
+    <div class="acciones"><button class="btn sec" type="button" id="rt-rep">Repetir el nivel con otros datos</button>
+    ${RT.nivel < 5 ? '<button class="btn" type="button" id="rt-sig">Ir al nivel ' + (RT.nivel + 1) + '</button>' : ''}</div></div>`;
+  $('#rt-rep').addEventListener('click', () => iniciarNivel(RT.nivel));
+  if ($('#rt-sig')) $('#rt-sig').addEventListener('click', () => iniciarNivel(RT.nivel + 1));
+  pintarNiveles();
+}
+
+/* =====================================================================
+   ARRANQUE Y PESTAÑAS
+   ===================================================================== */
+const INICIADO = {};
+function abrirPestana(id) {
+  ['explorar', 'medir', 'retos'].forEach(k => {
+    const on = k === id;
+    const t = $('#tab-' + k); t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
+    $('#p-' + k).hidden = !on;
+  });
+  if (!INICIADO[id]) { INICIADO[id] = true; ({ explorar: iniciarExplorar, medir: iniciarMedir, retos: iniciarRetos })[id](); }
+  try { history.replaceState(null, '', '#' + id); } catch (_) {}
+}
+document.querySelectorAll('[role=tab]').forEach((t, i, all) => {
+  t.addEventListener('click', () => abrirPestana(t.id.replace('tab-', '')));
+  t.addEventListener('keydown', e => {
+    let j = null;
+    if (e.key === 'ArrowRight') j = (i + 1) % all.length; else if (e.key === 'ArrowLeft') j = (i - 1 + all.length) % all.length;
+    if (j != null) { e.preventDefault(); all[j].focus(); abrirPestana(all[j].id.replace('tab-', '')); }
+  });
+});
+abrirPestana(['explorar', 'medir', 'retos'].includes(location.hash.slice(1)) ? location.hash.slice(1) : 'explorar');
+
+
 })();
 </script>
-
-<script src="../../../assets/js/common.js"></script>
-<script src="../../../assets/js/header.js"></script>
-<script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
