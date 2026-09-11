@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dibujo técnico · 2º ESO · Tecnología y Digitalización · v1.3</title>
+<title>Dibujo técnico · 2º ESO · Tecnología y Digitalización · v1.4</title>
 <meta name="description" content="Libro digital de dibujo técnico para 2º ESO: vistas, perspectivas, escalas, acotación y CAD. IES Jiménez de Quesada (Santa Fe, Granada).">
 <meta name="theme-color" content="#d2552a">
 <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
@@ -506,7 +506,7 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
 <main>
 
 <header class="hero">
-  <div class="eyebrow">Unidad 0 · Libro digital · v1.3</div>
+  <div class="eyebrow">Unidad 0 · Libro digital · v1.4</div>
   <h1>Expresión gráfica<br>y <em>representación</em></h1>
   <p class="lead">Dibujar es una manera de pensar. Aprenderás a representar objetos reales sobre el papel con precisión: a verlos desde varios lados, a respetar sus proporciones y a contar sus medidas con un lenguaje común a toda la ingeniería del mundo.</p>
   <div class="meta">
@@ -587,28 +587,30 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
     <p>Todo plano técnico lleva un <strong>cajetín</strong> en la esquina inferior derecha. Es como su DNI: indica quién lo ha dibujado, qué representa, a qué escala y cuándo. Sin cajetín, un plano queda incompleto.</p>
 
     <div class="fig">
-      <svg class="svg-fig" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg" aria-label="Hoja A4 con cajetín">
+      <svg class="svg-fig" viewBox="52 14 456 342" xmlns="http://www.w3.org/2000/svg" aria-label="Lámina A4 con su margen y su cajetín">
         <!-- hoja -->
-        <rect x="50" y="20" width="400" height="310" class="stroke-main fill-light"/>
+        <rect x="70" y="42" width="420" height="297" class="stroke-main fill-light"/>
         <!-- margen -->
-        <rect x="68" y="35" width="364" height="280" class="stroke-thin" stroke-dasharray="3 3"/>
+        <rect x="88" y="60" width="384" height="261" class="stroke-thin" stroke-dasharray="5 4"/>
         <!-- cajetín -->
-        <rect x="270" y="265" width="162" height="50" class="stroke-main" fill="#fff"/>
-        <line x1="270" y1="282" x2="432" y2="282" class="stroke-thin"/>
-        <line x1="270" y1="299" x2="432" y2="299" class="stroke-thin"/>
-        <line x1="340" y1="265" x2="340" y2="315" class="stroke-thin"/>
-        <text x="275" y="277" font-size="8">Título:</text>
-        <text x="275" y="294" font-size="8">Autor:</text>
-        <text x="275" y="311" font-size="8">Fecha:</text>
-        <text x="345" y="277" font-size="8">Escala:</text>
-        <text x="345" y="294" font-size="8">Nº plano:</text>
-        <text x="345" y="311" font-size="8">Centro:</text>
-        <!-- etiqueta -->
-        <text x="100" y="160" font-size="13" font-weight="700">Zona del dibujo</text>
-        <text x="100" y="178" font-size="11" class="lbl-teja">(aquí va la pieza)</text>
-        <!-- flecha al cajetín -->
-        <path d="M 260 290 Q 240 320 230 305" class="stroke-aux"/>
-        <text x="60" y="335" font-size="11" class="lbl-teja">↑ Cajetín: identifica el plano</text>
+        <rect x="292" y="267" width="180" height="54" style="fill:#ffffff" class="stroke-main"/>
+        <line x1="292" y1="285" x2="472" y2="285" class="stroke-thin"/>
+        <line x1="292" y1="303" x2="472" y2="303" class="stroke-thin"/>
+        <line x1="382" y1="267" x2="382" y2="321" class="stroke-thin"/>
+        <text x="298" y="280" font-size="8">Título:</text>
+        <text x="298" y="298" font-size="8">Autor:</text>
+        <text x="298" y="316" font-size="8">Fecha:</text>
+        <text x="388" y="280" font-size="8">Escala:</text>
+        <text x="388" y="298" font-size="8">Nº plano:</text>
+        <text x="388" y="316" font-size="8">Centro:</text>
+        <!-- rótulos -->
+        <text x="176" y="168" text-anchor="middle" font-size="14" font-weight="700">Zona del dibujo</text>
+        <text x="176" y="188" text-anchor="middle" font-size="11" class="lbl-teja">(aquí va la pieza)</text>
+        <text x="382" y="258" text-anchor="middle" font-size="11" class="lbl-teja">cajetín</text>
+        <line x1="122" y1="34" x2="122" y2="42" class="stroke-aux"/>
+        <text x="122" y="28" text-anchor="middle" font-size="10" class="lbl-blue">borde del papel</text>
+        <line x1="300" y1="34" x2="300" y2="60" class="stroke-aux"/>
+        <text x="300" y="28" text-anchor="middle" font-size="10" class="lbl-blue">margen</text>
       </svg>
       <div class="fig-cap">Estructura básica de una lámina técnica</div>
     </div>
@@ -652,45 +654,50 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
     </div>
 
     <div class="fig">
-      <svg class="svg-fig" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg" aria-label="Boceto, croquis y plano de una silla">
-        <!-- Boceto: muy esbozado -->
-        <g transform="translate(20,30)">
-          <path d="M 30 90 L 30 30 L 110 30 L 110 90 M 30 90 L 110 90 M 30 90 L 30 130 M 110 90 L 110 130 M 30 30 L 35 5 L 110 5 L 115 30" class="stroke-main" stroke-linecap="round" stroke-width="2.5" opacity="0.7"/>
-          <text x="70" y="160" text-anchor="middle" font-size="13" font-weight="700">Boceto</text>
-          <text x="70" y="175" text-anchor="middle" font-size="10" fill="#3a4360">A mano · sin medidas</text>
+      <svg class="svg-fig" viewBox="8 12 556 226" xmlns="http://www.w3.org/2000/svg" aria-label="La misma silla como boceto, como croquis y como plano">
+        <!-- ══ BOCETO ══ -->
+        <g transform="translate(20,0)">
+          <path d="M 11 30 C 16 29 20 27 25 27 C 24 46 23 68 23 87 C 44 85 67 85 89 84 C 88 110 87 137 87 163 C 83 162 79 163 75 163 C 76 141 77 119 77 97 C 60 98 42 99 25 99 C 26 120 26 141 26 161 C 22 162 17 162 13 163 Z" class="stroke-main" style="stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;opacity:0.62"/>
+          <text x="50" y="200" text-anchor="middle" font-size="13" font-weight="700">Boceto</text>
+          <text x="50" y="217" text-anchor="middle" font-size="10" fill="#3a4360">a mano · sin medidas</text>
         </g>
-        <!-- flecha -->
-        <text x="175" y="100" font-size="18" class="arrow-teja">→</text>
-        <!-- Croquis: más limpio, con medidas -->
-        <g transform="translate(200,30)">
-          <path d="M 30 90 L 30 30 L 110 30 L 110 90 M 30 90 L 110 90 M 30 90 L 30 130 M 110 90 L 110 130 M 30 30 L 35 5 L 110 5 L 115 30" class="stroke-main"/>
-          <!-- cotas a mano -->
-          <line x1="30" y1="145" x2="110" y2="145" class="stroke-aux"/>
-          <text x="70" y="143" text-anchor="middle" font-size="10" class="lbl-teja">≈ 45 cm</text>
-          <line x1="135" y1="30" x2="135" y2="130" class="stroke-aux"/>
-          <text x="142" y="83" font-size="10" class="lbl-teja">≈ 80 cm</text>
-          <text x="70" y="170" text-anchor="middle" font-size="13" font-weight="700">Croquis</text>
-          <text x="70" y="185" text-anchor="middle" font-size="10" fill="#3a4360">A mano · con medidas</text>
+        <text x="176" y="106" font-size="20" class="arrow-teja">→</text>
+
+        <!-- ══ CROQUIS ══ -->
+        <g transform="translate(225,0)">
+          <path d="M 12 28 L 24 28 L 24 86 L 88 86 L 88 162 L 76 162 L 76 98 L 24 98 L 24 162 L 12 162 Z" class="stroke-main fill-light"/>
+          <line x1="12" y1="178" x2="88" y2="178" class="stroke-aux"/>
+          <line x1="12" y1="172" x2="12" y2="184" class="stroke-aux"/>
+          <line x1="88" y1="172" x2="88" y2="184" class="stroke-aux"/>
+          <text x="50" y="174" text-anchor="middle" font-size="10" class="lbl-teja">≈ 45 cm</text>
+          <line x1="106" y1="28" x2="106" y2="162" class="stroke-aux"/>
+          <line x1="100" y1="28" x2="112" y2="28" class="stroke-aux"/>
+          <line x1="100" y1="162" x2="112" y2="162" class="stroke-aux"/>
+          <text x="102" y="95" text-anchor="middle" font-size="10" class="lbl-teja" transform="rotate(-90 102 95)">≈ 80 cm</text>
+          <text x="50" y="200" text-anchor="middle" font-size="13" font-weight="700">Croquis</text>
+          <text x="50" y="217" text-anchor="middle" font-size="10" fill="#3a4360">a mano · con medidas</text>
         </g>
-        <text x="380" y="100" font-size="18" class="arrow-teja">→</text>
-        <!-- Plano: limpio, con cotas norma -->
-        <g transform="translate(405,30)">
-          <rect x="30" y="30" width="80" height="60" class="stroke-main" fill="none"/>
-          <rect x="30" y="90" width="80" height="40" class="stroke-main" fill="none"/>
-          <line x1="30" y1="30" x2="35" y2="5" class="stroke-main"/>
-          <line x1="110" y1="30" x2="115" y2="5" class="stroke-main"/>
-          <line x1="35" y1="5" x2="115" y2="5" class="stroke-main"/>
-          <!-- cotas norma -->
-          <line x1="30" y1="145" x2="110" y2="145" class="stroke-thin"/>
-          <line x1="30" y1="140" x2="30" y2="150" class="stroke-thin"/>
-          <line x1="110" y1="140" x2="110" y2="150" class="stroke-thin"/>
-          <text x="70" y="143" text-anchor="middle" font-size="9" fill="#1a2238">450</text>
-          <line x1="135" y1="5" x2="135" y2="130" class="stroke-thin"/>
-          <line x1="130" y1="5" x2="140" y2="5" class="stroke-thin"/>
-          <line x1="130" y1="130" x2="140" y2="130" class="stroke-thin"/>
-          <text x="142" y="70" font-size="9" fill="#1a2238">800</text>
-          <text x="70" y="170" text-anchor="middle" font-size="13" font-weight="700">Plano</text>
-          <text x="70" y="185" text-anchor="middle" font-size="10" fill="#3a4360">A escala · con norma</text>
+        <text x="381" y="106" font-size="20" class="arrow-teja">→</text>
+
+        <!-- ══ PLANO ══ -->
+        <g transform="translate(430,0)">
+          <path d="M 12 28 L 24 28 L 24 86 L 88 86 L 88 162 L 76 162 L 76 98 L 24 98 L 24 162 L 12 162 Z" class="stroke-main fill-light"/>
+          <!-- cota horizontal -->
+          <line x1="12" y1="165" x2="12" y2="182" class="stroke-thin"/>
+          <line x1="88" y1="165" x2="88" y2="182" class="stroke-thin"/>
+          <line x1="12" y1="178" x2="88" y2="178" class="stroke-thin"/>
+          <polygon points="12,178 20,175 20,181" class="arrow"/>
+          <polygon points="88,178 80,175 80,181" class="arrow"/>
+          <text x="50" y="175" text-anchor="middle" font-size="9" font-weight="700">450</text>
+          <!-- cota vertical -->
+          <line x1="27" y1="28" x2="112" y2="28" class="stroke-thin"/>
+          <line x1="91" y1="162" x2="112" y2="162" class="stroke-thin"/>
+          <line x1="108" y1="28" x2="108" y2="162" class="stroke-thin"/>
+          <polygon points="108,28 105,36 111,36" class="arrow"/>
+          <polygon points="108,162 105,154 111,154" class="arrow"/>
+          <text x="104" y="95" text-anchor="middle" font-size="9" font-weight="700" transform="rotate(-90 104 95)">800</text>
+          <text x="50" y="200" text-anchor="middle" font-size="13" font-weight="700">Plano</text>
+          <text x="50" y="217" text-anchor="middle" font-size="10" fill="#3a4360">a escala · con norma</text>
         </g>
       </svg>
       <div class="fig-cap">Las tres fases de representación de una silla</div>
@@ -724,51 +731,38 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
     <p>De las seis caras de la caja, usamos solo las tres más importantes:</p>
 
     <div class="fig">
-      <svg class="svg-fig" viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg" aria-label="Los tres planos del sistema diédrico">
-        <!-- Plano horizontal (planta) -->
-        <polygon points="100,260 280,260 380,200 200,200" class="stroke-main fill-blue" opacity="0.5"/>
-        <text x="240" y="240" text-anchor="middle" font-size="11" class="lbl-blue" font-weight="700">Plano horizontal (PLANTA)</text>
+      <svg class="svg-fig" viewBox="95 42 520 396" xmlns="http://www.w3.org/2000/svg" aria-label="El objeto dentro del triedro: se proyecta sobre el plano vertical, el horizontal y el de perfil">
+        <!-- ── los tres planos de proyección ── -->
+        <polygon points="110,300 390,300 470,420 190,420" class="fill-light" style="stroke:#5b6478;stroke-width:1.5"/>
+        <polygon points="390,60 470,180 470,420 390,300" class="fill-yellow" style="stroke:#5b6478;stroke-width:1.5"/>
+        <polygon points="110,60 390,60 390,300 110,300" class="fill-blue" style="stroke:#5b6478;stroke-width:1.5"/>
 
-        <!-- Plano vertical (alzado) -->
-        <polygon points="100,80 280,80 280,260 100,260" class="stroke-main fill-teja" opacity="0.55"/>
-        <text x="190" y="170" text-anchor="middle" font-size="11" class="lbl-teja" font-weight="700">Plano vertical (ALZADO)</text>
+        <!-- ── las tres proyecciones ── -->
+        <polygon points="200,140 260,140 260,200 200,200" class="stroke-thin fill-teja" style="stroke-width:1.4"/>
+        <polygon points="244,366 304,366 332,408 272,408" class="stroke-thin fill-teja" style="stroke-width:1.4"/>
+        <polygon points="434,206 462,248 462,308 434,266" class="stroke-thin fill-teja" style="stroke-width:1.4"/>
 
-        <!-- Plano de perfil -->
-        <polygon points="280,80 380,20 380,200 280,260" class="stroke-main fill-yellow" opacity="0.7"/>
-        <text x="335" y="155" text-anchor="middle" font-size="11" font-weight="700" fill="#8a6d1a">PERFIL</text>
+        <!-- ── rayos proyectantes ── -->
+        <line x1="244.0" y1="266.0" x2="200" y2="200" class="stroke-aux"/>
+        <line x1="304.0" y1="206.0" x2="260" y2="140" class="stroke-aux"/>
+        <line x1="272.0" y1="308.0" x2="272.0" y2="408.0" class="stroke-aux"/>
+        <line x1="332.0" y1="308.0" x2="332.0" y2="408.0" class="stroke-aux"/>
+        <line x1="304.0" y1="206.0" x2="434.0" y2="206.0" class="stroke-aux"/>
+        <line x1="332.0" y1="308.0" x2="462.0" y2="308.0" class="stroke-aux"/>
 
-        <!-- objeto en el rincón (cubito) -->
-        <g transform="translate(160,180)">
-          <polygon points="0,30 30,30 30,0 0,0" class="stroke-main" fill="#fff"/>
-          <polygon points="0,0 30,0 45,-15 15,-15" class="stroke-main" fill="#efe7d4"/>
-          <polygon points="30,0 30,30 45,15 45,-15" class="stroke-main" fill="#d6c9ad"/>
-          <text x="22" y="50" text-anchor="middle" font-size="10" font-weight="700">objeto</text>
-        </g>
+        <!-- ── el objeto ── -->
+        <polygon points="244,206 304,206 332,248 272,248" class="stroke-main" style="fill:#ffffff"/>
+        <polygon points="244,206 244,266 272,308 272,248" class="stroke-main" style="fill:#e4ddcd"/>
+        <polygon points="272,248 332,248 332,308 272,308" class="stroke-main" style="fill:#f6f1e7"/>
 
-        <!-- líneas de proyección -->
-        <line x1="190" y1="195" x2="190" y2="265" class="stroke-aux"/>
-        <line x1="175" y1="170" x2="105" y2="170" class="stroke-aux"/>
-        <line x1="205" y1="178" x2="280" y2="143" class="stroke-aux"/>
-
-        <!-- etiquetas en planos -->
-        <text x="125" y="100" font-size="11" font-weight="600">Lo que vemos</text>
-        <text x="125" y="115" font-size="11" font-weight="600">de FRENTE</text>
-
-        <text x="160" y="280" font-size="11" font-weight="600">Lo que vemos desde ARRIBA</text>
-
-        <text x="295" y="100" font-size="10" font-weight="600">Lo que</text>
-        <text x="295" y="113" font-size="10" font-weight="600">vemos</text>
-        <text x="295" y="126" font-size="10" font-weight="600">de LADO</text>
-
-        <!-- ojo observador -->
-        <text x="60" y="300" font-size="20">👁</text>
-        <text x="35" y="320" font-size="10" font-style="italic">Observador</text>
-
-        <!-- leyenda -->
-        <text x="430" y="120" font-size="13" font-weight="700" class="lbl-teja">Tres planos</text>
-        <text x="430" y="140" font-size="11">perpendiculares entre sí.</text>
-        <text x="430" y="158" font-size="11">El objeto se proyecta</text>
-        <text x="430" y="172" font-size="11">sobre cada uno.</text>
+        <!-- ── rótulos ── -->
+        <text x="124" y="86" class="lbl-blue" font-size="12">PLANO VERTICAL</text>
+        <text x="124" y="105" class="lbl-teja" font-size="12">→ ALZADO</text>
+        <text x="136" y="324" class="lbl-blue" font-size="12">PLANO HORIZONTAL</text>
+        <text x="142" y="343" class="lbl-teja" font-size="12">→ PLANTA</text>
+        <text x="482" y="246" class="lbl-blue" font-size="12">PLANO DE PERFIL</text>
+        <text x="482" y="265" class="lbl-teja" font-size="12">→ PERFIL</text>
+        <text x="302" y="325" text-anchor="middle" font-size="11" fill="#3a4360">objeto</text>
       </svg>
       <div class="fig-cap">El objeto se proyecta sobre tres planos perpendiculares</div>
     </div>
@@ -792,43 +786,36 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
     <p>Cuando desplegamos los tres planos sobre la hoja, las vistas no se colocan en cualquier sitio: tienen que <strong>coincidir entre ellas</strong>. Esto es lo que llamamos correspondencia, y es la clave de todo el sistema diédrico.</p>
 
     <div class="fig">
-      <svg class="svg-fig" viewBox="0 0 500 380" xmlns="http://www.w3.org/2000/svg" aria-label="Disposición de alzado, planta y perfil">
-        <!-- líneas de referencia -->
-        <line x1="50" y1="170" x2="450" y2="170" class="stroke-aux"/>
-        <line x1="220" y1="20" x2="220" y2="370" class="stroke-aux"/>
-
-        <!-- Alzado (arriba izquierda) -->
-        <rect x="100" y="50" width="120" height="80" class="stroke-main fill-light"/>
-        <rect x="130" y="50" width="60" height="40" class="stroke-main fill-light"/>
+      <svg class="svg-fig" viewBox="34 18 442 356" xmlns="http://www.w3.org/2000/svg" aria-label="Alzado, planta y perfil en su posición normalizada, con las líneas de correspondencia">
+        <!-- ══ ALZADO ══ -->
+        <polygon points="100,130 100,50 130,50 130,90 190,90 190,50 220,50 220,130" class="stroke-main fill-light"/>
         <text x="160" y="40" text-anchor="middle" font-size="13" font-weight="700" class="lbl-teja">ALZADO</text>
 
-        <!-- Perfil (arriba derecha) -->
+        <!-- ══ PERFIL izquierdo ══ -->
         <rect x="270" y="50" width="80" height="80" class="stroke-main fill-light"/>
-        <rect x="270" y="50" width="40" height="40" class="stroke-main fill-light"/>
+        <line x1="270" y1="90" x2="350" y2="90" class="stroke-main"/>
         <text x="310" y="40" text-anchor="middle" font-size="13" font-weight="700" class="lbl-teja">PERFIL</text>
 
-        <!-- Planta (abajo izquierda) -->
+        <!-- ══ PLANTA ══ -->
         <rect x="100" y="200" width="120" height="80" class="stroke-main fill-light"/>
-        <rect x="130" y="200" width="60" height="40" class="stroke-main fill-light"/>
+        <line x1="130" y1="200" x2="130" y2="280" class="stroke-main"/>
+        <line x1="190" y1="200" x2="190" y2="280" class="stroke-main"/>
         <text x="160" y="300" text-anchor="middle" font-size="13" font-weight="700" class="lbl-teja">PLANTA</text>
 
-        <!-- líneas de correspondencia -->
-        <line x1="100" y1="135" x2="100" y2="200" class="stroke-aux"/>
-        <line x1="220" y1="135" x2="220" y2="200" class="stroke-aux"/>
-        <line x1="220" y1="90" x2="270" y2="90" class="stroke-aux"/>
-        <line x1="220" y1="130" x2="270" y2="130" class="stroke-aux"/>
+        <!-- ══ correspondencia alzado ↔ planta (interrumpida para el rótulo) ══ -->
+        <line x1="100" y1="134" x2="100" y2="158" class="stroke-aux"/><line x1="100" y1="180" x2="100" y2="196" class="stroke-aux"/>
+        <line x1="130" y1="134" x2="130" y2="158" class="stroke-aux"/><line x1="130" y1="180" x2="130" y2="196" class="stroke-aux"/>
+        <line x1="190" y1="134" x2="190" y2="158" class="stroke-aux"/><line x1="190" y1="180" x2="190" y2="196" class="stroke-aux"/>
+        <line x1="220" y1="134" x2="220" y2="158" class="stroke-aux"/><line x1="220" y1="180" x2="220" y2="196" class="stroke-aux"/>
+        <text x="160" y="173" text-anchor="middle" font-size="10" class="lbl-teja">misma ANCHURA</text>
 
-        <!-- medidas -->
-        <text x="160" y="155" text-anchor="middle" font-size="10" class="lbl-teja">misma ANCHURA</text>
-        <text x="310" y="155" text-anchor="middle" font-size="10" class="lbl-teja">misma ALTURA</text>
-        <line x1="240" y1="90" x2="240" y2="130" class="stroke-thin"/>
-        <text x="248" y="113" font-size="10" class="lbl-teja">altura</text>
+        <!-- ══ correspondencia alzado ↔ perfil ══ -->
+        <line x1="224" y1="50" x2="266" y2="50" class="stroke-aux"/>
+        <line x1="224" y1="90" x2="266" y2="90" class="stroke-aux"/>
+        <line x1="224" y1="130" x2="266" y2="130" class="stroke-aux"/>
+        <text x="310" y="168" text-anchor="middle" font-size="10" class="lbl-teja">misma ALTURA</text>
 
-        <!-- línea separación -->
-        <line x1="60" y1="170" x2="440" y2="170" class="stroke-main" stroke-width="2.5"/>
-        <text x="55" y="178" font-size="10" font-style="italic">línea de tierra</text>
-
-        <!-- regla mnemo -->
+        <!-- ══ regla mnemotécnica ══ -->
         <rect x="60" y="320" width="380" height="50" rx="8" fill="rgba(232,182,71,0.18)" stroke="rgba(232,182,71,0.5)"/>
         <text x="250" y="340" text-anchor="middle" font-size="12" font-weight="700">Las tres vistas comparten medidas:</text>
         <text x="250" y="358" text-anchor="middle" font-size="11">Alzado y planta → misma ANCHURA · Alzado y perfil → misma ALTURA</text>
@@ -847,50 +834,39 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
       <p>Vamos a sacar las tres vistas del siguiente objeto: una pieza con forma de "L" tumbada.</p>
 
       <div class="fig" style="margin:14px 0;">
-        <svg class="svg-fig" viewBox="0 0 520 250" xmlns="http://www.w3.org/2000/svg">
-          <!-- objeto 3D isométrico -->
-          <g transform="translate(20,40)">
-            <!-- base larga -->
-            <polygon points="0,120 100,120 100,90 0,90" class="stroke-main fill-light"/>
-            <polygon points="0,90 100,90 130,70 30,70" class="stroke-main fill-light"/>
-            <polygon points="100,120 100,90 130,70 130,100" class="stroke-main" fill="#e0d8c2"/>
-            <!-- escalón -->
-            <polygon points="60,90 100,90 100,50 60,50" class="stroke-main fill-light"/>
-            <polygon points="60,50 100,50 130,30 90,30" class="stroke-main fill-light"/>
-            <polygon points="100,50 100,90 130,70 130,30" class="stroke-main" fill="#e0d8c2"/>
-            <text x="65" y="160" font-size="11" font-weight="700">Objeto 3D</text>
-            <!-- arrow -->
-            <line x1="20" y1="140" x2="-5" y2="155" class="stroke-aux"/>
-            <text x="-30" y="170" font-size="10" class="lbl-teja">mirar</text>
-          </g>
+        <svg class="svg-fig" viewBox="10 28 452 216" xmlns="http://www.w3.org/2000/svg" aria-label="Un objeto en perspectiva y sus tres vistas: alzado, perfil y planta">
+          <!-- ══ el objeto ══ -->
+          <polygon points="60,175 21,152.5 21,122.5 60,145" class="stroke-main" style="fill:#e4ddcd"/>
+          <polygon points="105.5,118.8 66.5,96.2 66.5,58.8 105.5,81.2" class="stroke-main" style="fill:#e4ddcd"/>
+          <polygon points="60,145 105.5,118.8 66.5,96.2 21,122.5" class="stroke-main" style="fill:#ffffff"/>
+          <polygon points="105.5,81.2 137.9,62.5 99,40 66.5,58.8" class="stroke-main" style="fill:#ffffff"/>
+          <polygon points="60,175 137.9,130 137.9,62.5 105.5,81.2 105.5,118.8 60,145" class="stroke-main" style="fill:#f6f1e7"/>
+          <text x="79" y="200" text-anchor="middle" font-size="11" font-weight="700">El objeto</text>
+          <text x="79" y="215" text-anchor="middle" font-size="10" fill="#3a4360">en perspectiva</text>
 
-          <!-- separador -->
-          <text x="180" y="125" font-size="22" class="arrow-teja">→</text>
+          <text x="197" y="128" text-anchor="middle" font-size="22" class="arrow-teja">→</text>
 
-          <!-- Alzado -->
-          <g transform="translate(220,40)">
-            <rect x="0" y="40" width="80" height="40" class="stroke-main fill-light"/>
-            <rect x="40" y="0" width="40" height="40" class="stroke-main fill-light"/>
-            <text x="40" y="100" text-anchor="middle" font-size="11" font-weight="700" class="lbl-teja">ALZADO</text>
-          </g>
-          <!-- Perfil -->
-          <g transform="translate(340,40)">
-            <rect x="0" y="40" width="30" height="40" class="stroke-main fill-light"/>
-            <rect x="0" y="0" width="30" height="40" class="stroke-main fill-light"/>
-            <text x="15" y="100" text-anchor="middle" font-size="11" font-weight="700" class="lbl-teja">PERFIL</text>
-          </g>
-          <!-- Planta -->
-          <g transform="translate(220,135)">
-            <rect x="0" y="0" width="80" height="30" class="stroke-main fill-light"/>
-            <line x1="40" y1="0" x2="40" y2="30" class="stroke-aux"/>
-            <text x="40" y="55" text-anchor="middle" font-size="11" font-weight="700" class="lbl-teja">PLANTA</text>
-          </g>
+          <!-- ══ correspondencia ══ -->
+          <line x1="270.0" y1="127.5" x2="270.0" y2="160.0" class="stroke-aux"/>
+          <line x1="322.5" y1="127.5" x2="322.5" y2="160.0" class="stroke-aux"/>
+          <line x1="360.0" y1="127.5" x2="360.0" y2="160.0" class="stroke-aux"/>
+          <line x1="360.0" y1="60.0" x2="390.0" y2="60.0" class="stroke-aux"/>
+          <line x1="360.0" y1="97.5" x2="390.0" y2="97.5" class="stroke-aux"/>
+          <line x1="360.0" y1="127.5"  x2="390.0" y2="127.5"  class="stroke-aux"/>
 
-          <!-- líneas correspondencia -->
-          <line x1="220" y1="105" x2="220" y2="135" class="stroke-aux"/>
-          <line x1="300" y1="105" x2="300" y2="135" class="stroke-aux"/>
-          <line x1="300" y1="40" x2="340" y2="40" class="stroke-aux"/>
-          <line x1="300" y1="80" x2="340" y2="80" class="stroke-aux"/>
+          <!-- ══ alzado ══ -->
+          <polygon points="270,127.5 360,127.5 360,60 322.5,60 322.5,97.5 270,97.5" class="stroke-main fill-light"/>
+          <text x="315.0" y="50" text-anchor="middle" font-size="11" font-weight="700" class="lbl-teja">ALZADO</text>
+
+          <!-- ══ perfil izquierdo ══ -->
+          <rect x="390.0" y="60.0" width="45.0" height="67.5" class="stroke-main fill-light"/>
+          <line x1="390.0" y1="97.5" x2="435.0" y2="97.5" class="stroke-main"/>
+          <text x="412.5" y="50" text-anchor="middle" font-size="11" font-weight="700" class="lbl-teja">PERFIL</text>
+
+          <!-- ══ planta ══ -->
+          <rect x="270.0" y="160.0" width="90.0" height="45.0" class="stroke-main fill-light"/>
+          <line x1="322.5" y1="160.0" x2="322.5" y2="205.0" class="stroke-main"/>
+          <text x="315.0" y="223.0" text-anchor="middle" font-size="11" font-weight="700" class="lbl-teja">PLANTA</text>
         </svg>
       </div>
 
@@ -923,35 +899,43 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
 
     <div class="cols2">
       <div class="fig" style="margin:0;">
-        <svg class="svg-fig" viewBox="0 0 280 240" xmlns="http://www.w3.org/2000/svg" aria-label="Ejes isométricos">
+        <svg class="svg-fig" viewBox="0 0 280 224" xmlns="http://www.w3.org/2000/svg" aria-label="Los tres ejes isométricos a 120 grados">
           <!-- ejes -->
-          <line x1="140" y1="120" x2="140" y2="20" class="stroke-eje" stroke-width="2"/>
-          <line x1="140" y1="120" x2="50" y2="172" class="stroke-eje" stroke-width="2"/>
-          <line x1="140" y1="120" x2="230" y2="172" class="stroke-eje" stroke-width="2"/>
-          <text x="148" y="30" font-size="13" class="lbl-blue" font-weight="700">Z</text>
-          <text x="35" y="180" font-size="13" class="lbl-blue" font-weight="700">X</text>
-          <text x="235" y="180" font-size="13" class="lbl-blue" font-weight="700">Y</text>
-          <!-- arcos de ángulo -->
-          <path d="M 140 90 A 30 30 0 0 0 114 105" class="stroke-thin"/>
-          <text x="105" y="100" font-size="11" class="lbl-teja">120°</text>
-          <path d="M 140 90 A 30 30 0 0 1 166 105" class="stroke-thin"/>
-          <text x="160" y="100" font-size="11" class="lbl-teja">120°</text>
-          <path d="M 114 135 A 30 30 0 0 0 166 135" class="stroke-thin"/>
-          <text x="130" y="155" font-size="11" class="lbl-teja">120°</text>
+          <line x1="140" y1="118" x2="140" y2="28" class="stroke-eje" stroke-width="2"/>
+          <line x1="140" y1="118" x2="62" y2="163" class="stroke-eje" stroke-width="2"/>
+          <line x1="140" y1="118" x2="218" y2="163" class="stroke-eje" stroke-width="2"/>
+          <circle cx="140" cy="118" r="2.5" fill="#2c5f8d"/>
+          <!-- arcos -->
+          <path d="M 148.2 85 A 34 34 0 0 1 172.7 127.4" class="stroke-thin"/>
+          <path d="M 164.5 141.6 A 34 34 0 0 1 115.5 141.6" class="stroke-thin"/>
+          <path d="M 107.3 127.4 A 34 34 0 0 1 131.8 85" class="stroke-thin"/>
+          <text x="183" y="97" text-anchor="middle" font-size="11" class="lbl-teja">120°</text>
+          <text x="97" y="97" text-anchor="middle" font-size="11" class="lbl-teja">120°</text>
+          <text x="140" y="175" text-anchor="middle" font-size="11" class="lbl-teja">120°</text>
+          <!-- rótulos de los ejes -->
+          <text x="140" y="20" text-anchor="middle" font-size="13" class="lbl-blue" font-weight="700">Z</text>
+          <text x="164" y="52" text-anchor="middle" font-size="9" fill="#3a4360">altura</text>
+          <text x="52" y="176" text-anchor="middle" font-size="13" class="lbl-blue" font-weight="700">Y</text>
+          <text x="52" y="192" text-anchor="middle" font-size="9" fill="#3a4360">anchura</text>
+          <text x="228" y="176" text-anchor="middle" font-size="13" class="lbl-blue" font-weight="700">X</text>
+          <text x="228" y="192" text-anchor="middle" font-size="9" fill="#3a4360">profundidad</text>
         </svg>
         <div class="fig-cap">Los tres ejes a 120°</div>
       </div>
 
       <div class="fig" style="margin:0;">
-        <svg class="svg-fig" viewBox="0 0 280 240" xmlns="http://www.w3.org/2000/svg" aria-label="Cubo en isométrica">
-          <!-- cubo isométrico -->
-          <polygon points="100,170 180,170 220,140 140,140" class="stroke-main fill-light"/>
-          <polygon points="100,170 100,90 140,60 140,140" class="stroke-main" fill="#efe7d4"/>
-          <polygon points="100,90 140,60 220,60 180,90" class="stroke-main" fill="#fff"/>
-          <polygon points="180,90 220,60 220,140 180,170" class="stroke-main" fill="#d6c9ad"/>
-          <polygon points="100,170 180,170 180,90 100,90" class="stroke-main" fill="none"/>
-          <polygon points="140,140 220,140 220,60 140,60" class="stroke-main" fill="none"/>
-          <text x="160" y="220" text-anchor="middle" font-size="12" font-weight="700">Cubo en isométrica</text>
+        <svg class="svg-fig" viewBox="0 0 280 224" xmlns="http://www.w3.org/2000/svg" aria-label="Cubo dibujado en perspectiva isométrica">
+          <polygon points="140,58 200.6,93 140,128 79.4,93" style="fill:#ffffff" class="stroke-main"/>
+          <polygon points="200.6,93 200.6,163 140,198 140,128" style="fill:#e4ddcd" class="stroke-main"/>
+          <polygon points="79.4,93 140,128 140,198 79.4,163" style="fill:#f6f1e7" class="stroke-main"/>
+          <!-- las tres aristas que salen del vértice más cercano miden lo mismo -->
+          <line x1="168.3" y1="107" x2="172.3" y2="114" class="stroke-thin" stroke="#d2552a"/>
+          <line x1="111.7" y1="114" x2="107.7" y2="107" class="stroke-thin" stroke="#d2552a"/>
+          <line x1="136" y1="163" x2="144" y2="163" class="stroke-thin" stroke="#d2552a"/>
+          <text x="182" y="102" text-anchor="middle" font-size="11" class="lbl-teja" font-weight="700">a</text>
+          <text x="98" y="102" text-anchor="middle" font-size="11" class="lbl-teja" font-weight="700">a</text>
+          <text x="152" y="157" text-anchor="middle" font-size="11" class="lbl-teja" font-weight="700">a</text>
+          <text x="140" y="216" text-anchor="middle" font-size="10" fill="#3a4360">las tres aristas, con su medida real</text>
         </svg>
         <div class="fig-cap">Las medidas se conservan en los tres ejes</div>
       </div>
@@ -962,40 +946,37 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
 
     <div class="cols2">
       <div class="fig" style="margin:0;">
-        <svg class="svg-fig" viewBox="0 0 280 240" xmlns="http://www.w3.org/2000/svg" aria-label="Ejes caballera">
-          <line x1="80" y1="180" x2="220" y2="180" class="stroke-eje" stroke-width="2"/>
-          <line x1="80" y1="180" x2="80" y2="40" class="stroke-eje" stroke-width="2"/>
-          <line x1="80" y1="180" x2="180" y2="100" class="stroke-eje" stroke-width="2"/>
-          <text x="225" y="185" font-size="13" class="lbl-blue" font-weight="700">X</text>
-          <text x="72" y="35" font-size="13" class="lbl-blue" font-weight="700">Z</text>
-          <text x="185" y="98" font-size="13" class="lbl-blue" font-weight="700">Y</text>
-          <!-- ángulo recto X-Z -->
-          <rect x="80" y="170" width="10" height="10" class="stroke-thin" fill="none"/>
-          <!-- ángulo 45° -->
-          <path d="M 130 180 A 50 50 0 0 0 115 145" class="stroke-thin"/>
-          <text x="118" y="170" font-size="11" class="lbl-teja">45°</text>
+        <svg class="svg-fig" viewBox="0 0 280 214" xmlns="http://www.w3.org/2000/svg" aria-label="Ejes de la perspectiva caballera">
+          <line x1="80" y1="180" x2="228" y2="180" class="stroke-eje" stroke-width="2"/>
+          <line x1="80" y1="180" x2="80" y2="42" class="stroke-eje" stroke-width="2"/>
+          <line x1="80" y1="180" x2="157.8" y2="102.2" class="stroke-eje" stroke-width="2"/>
+          <rect x="80" y="168" width="12" height="12" class="stroke-thin" fill="none"/>
+          <path d="M 126 180 A 46 46 0 0 0 112.5 147.5" class="stroke-thin"/>
+          <text x="141" y="159" text-anchor="middle" font-size="11" class="lbl-teja">45°</text>
+          <text x="80" y="32" text-anchor="middle" font-size="13" class="lbl-blue" font-weight="700">Z</text>
+          <text x="238" y="185" text-anchor="middle" font-size="13" class="lbl-blue" font-weight="700">X</text>
+          <text x="169.8" y="98.2" text-anchor="middle" font-size="13" class="lbl-blue" font-weight="700">Y</text>
         </svg>
         <div class="fig-cap">X-Z a 90°, Y a 45°</div>
       </div>
 
       <div class="fig" style="margin:0;">
-        <svg class="svg-fig" viewBox="0 0 280 240" xmlns="http://www.w3.org/2000/svg" aria-label="Cubo caballera">
-          <!-- cara frontal real -->
-          <rect x="60" y="80" width="100" height="100" class="stroke-main" fill="#efe7d4"/>
-          <!-- aristas Y reducidas -->
-          <line x1="60" y1="80" x2="100" y2="40" class="stroke-main"/>
-          <line x1="160" y1="80" x2="200" y2="40" class="stroke-main"/>
-          <line x1="160" y1="180" x2="200" y2="140" class="stroke-main"/>
-          <line x1="60" y1="180" x2="100" y2="140" class="stroke-aux"/>
-          <!-- cara trasera -->
-          <line x1="100" y1="40" x2="200" y2="40" class="stroke-main"/>
-          <line x1="200" y1="40" x2="200" y2="140" class="stroke-main"/>
-          <line x1="100" y1="40" x2="100" y2="140" class="stroke-aux"/>
-          <line x1="100" y1="140" x2="200" y2="140" class="stroke-aux"/>
-          <!-- etiqueta -->
-          <text x="110" y="135" font-size="9" class="lbl-teja">Y · 50%</text>
-          <text x="40" y="135" font-size="9" class="lbl-teja">Z</text>
-          <text x="105" y="200" font-size="9" class="lbl-teja">X</text>
+        <svg class="svg-fig" viewBox="0 0 280 214" xmlns="http://www.w3.org/2000/svg" aria-label="Cubo en perspectiva caballera: la cara frontal es real y la profundidad se reduce a la mitad">
+          <!-- aristas ocultas -->
+          <line x1="60" y1="180" x2="95.4" y2="144.6" class="stroke-main" stroke-dasharray="5 4" style="opacity:0.55"/>
+          <line x1="95.4" y1="44.6" x2="95.4" y2="144.6" class="stroke-main" stroke-dasharray="5 4" style="opacity:0.55"/>
+          <line x1="95.4" y1="144.6" x2="195.4" y2="144.6" class="stroke-main" stroke-dasharray="5 4" style="opacity:0.55"/>
+          <!-- cara superior y lateral -->
+          <polygon points="60,80 160,80 195.4,44.6 95.4,44.6" class="stroke-main" style="fill:#ffffff"/>
+          <polygon points="160,80 195.4,44.6 195.4,144.6 160,180" class="stroke-main" style="fill:#e4ddcd"/>
+          <!-- cara frontal: real -->
+          <rect x="60" y="80" width="100" height="100" class="stroke-main" style="fill:#f6f1e7"/>
+          <!-- rótulos -->
+          <text x="110" y="196" text-anchor="middle" font-size="11" class="lbl-teja" font-weight="700">X</text>
+          <text x="48" y="112" text-anchor="middle" font-size="11" class="lbl-teja" font-weight="700">Z</text>
+          <text x="206" y="46" font-size="11" class="lbl-teja" font-weight="700">Y</text>
+          <text x="206" y="60" font-size="9" class="lbl-teja">a la mitad</text>
+          <text x="110" y="136" text-anchor="middle" font-size="9" fill="#3a4360">cara frontal real</text>
         </svg>
         <div class="fig-cap">El cubo conserva su cara frontal; las aristas en Y se reducen</div>
       </div>
@@ -1138,11 +1119,14 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
 
     <div class="cols2">
       <div class="col-card" style="display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;">
-        <svg class="svg-fig" viewBox="0 0 80 90" width="70" xmlns="http://www.w3.org/2000/svg">
-          <line x1="20" y1="80" x2="55" y2="20" class="stroke-main" stroke-width="2"/>
-          <line x1="60" y1="80" x2="55" y2="20" class="stroke-main" stroke-width="2"/>
-          <line x1="40" y1="80" x2="40" y2="78" class="stroke-thin"/>
-          <circle cx="55" cy="20" r="3" class="arrow-teja"/>
+        <svg class="svg-fig" viewBox="0 0 80 96" width="70" xmlns="http://www.w3.org/2000/svg" aria-label="Compás">
+          <path d="M 60 84 A 40 40 0 0 0 20 44" class="stroke-aux"/>
+          <line x1="40" y1="22" x2="20" y2="80" class="stroke-main" stroke-width="2.2"/>
+          <line x1="40" y1="22" x2="60" y2="80" class="stroke-main" stroke-width="2.2"/>
+          <circle cx="40" cy="16" r="6" class="stroke-main" style="fill:#f6f1e7"/>
+          <line x1="40" y1="22" x2="40" y2="26" class="stroke-main" stroke-width="2.2"/>
+          <polygon points="20,88 17,78 23,78" style="fill:#1a2238"/>
+          <polygon points="60,88 57,78 63,78" class="arrow-teja"/>
         </svg>
         <div>
           <h4>El compás</h4>
@@ -1171,10 +1155,31 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
 
     <div class="cols2">
       <div class="col-card" style="display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;">
-        <svg class="svg-fig" viewBox="0 0 90 60" width="80" xmlns="http://www.w3.org/2000/svg">
-          <path d="M 5 50 A 40 40 0 0 1 85 50 Z" class="stroke-main" fill="#efe7d4"/>
-          <line x1="5" y1="50" x2="85" y2="50" class="stroke-main"/>
-          <text x="45" y="34" text-anchor="middle" font-size="6">180°</text>
+        <svg class="svg-fig" viewBox="0 0 90 64" width="80" xmlns="http://www.w3.org/2000/svg" aria-label="Transportador de ángulos">
+          <path d="M 5 50 A 40 40 0 0 1 85 50 Z" class="stroke-main" style="fill:#f6f1e7"/>
+          <line x1="14.0" y1="50.0" x2="5.0" y2="50.0" class="stroke-thin"/>
+          <line x1="10.5" y1="43.9" x2="5.6" y2="43.1" class="stroke-thin"/>
+          <line x1="12.1" y1="38.0" x2="7.4" y2="36.3" class="stroke-thin"/>
+          <line x1="18.2" y1="34.5" x2="10.4" y2="30.0" class="stroke-thin"/>
+          <line x1="18.2" y1="27.5" x2="14.4" y2="24.3" class="stroke-thin"/>
+          <line x1="22.5" y1="23.2" x2="19.3" y2="19.4" class="stroke-thin"/>
+          <line x1="29.5" y1="23.2" x2="25.0" y2="15.4" class="stroke-thin"/>
+          <line x1="33.0" y1="17.1" x2="31.3" y2="12.4" class="stroke-thin"/>
+          <line x1="38.9" y1="15.5" x2="38.1" y2="10.6" class="stroke-thin"/>
+          <line x1="45.0" y1="19.0" x2="45.0" y2="10.0" class="stroke-thin"/>
+          <line x1="51.1" y1="15.5" x2="51.9" y2="10.6" class="stroke-thin"/>
+          <line x1="57.0" y1="17.1" x2="58.7" y2="12.4" class="stroke-thin"/>
+          <line x1="60.5" y1="23.2" x2="65.0" y2="15.4" class="stroke-thin"/>
+          <line x1="67.5" y1="23.2" x2="70.7" y2="19.4" class="stroke-thin"/>
+          <line x1="71.8" y1="27.5" x2="75.6" y2="24.3" class="stroke-thin"/>
+          <line x1="71.8" y1="34.5" x2="79.6" y2="30.0" class="stroke-thin"/>
+          <line x1="77.9" y1="38.0" x2="82.6" y2="36.3" class="stroke-thin"/>
+          <line x1="79.5" y1="43.9" x2="84.4" y2="43.1" class="stroke-thin"/>
+          <line x1="76.0" y1="50.0" x2="85.0" y2="50.0" class="stroke-thin"/>
+          <circle cx="45" cy="50" r="1.6" style="fill:#1a2238"/>
+          <text x="8" y="59" font-size="6">180</text>
+          <text x="45" y="59" text-anchor="middle" font-size="6">centro</text>
+          <text x="82" y="59" text-anchor="end" font-size="6">0</text>
         </svg>
         <div>
           <h4>El transportador</h4>
@@ -1182,14 +1187,12 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
         </div>
       </div>
       <div class="col-card" style="display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;">
-        <svg class="svg-fig" viewBox="0 0 120 70" width="100" xmlns="http://www.w3.org/2000/svg">
-          <!-- escuadra (45-45-90) -->
-          <polygon points="5,60 55,60 5,10" class="stroke-main fill-teja" opacity="0.6"/>
-          <text x="15" y="50" font-size="6">45°</text>
-          <!-- cartabón (30-60-90) -->
-          <polygon points="60,60 115,60 115,15" class="stroke-main fill-blue" opacity="0.6"/>
-          <text x="100" y="55" font-size="6">30°</text>
-          <text x="105" y="25" font-size="6">60°</text>
+        <svg class="svg-fig" viewBox="0 0 120 70" width="100" xmlns="http://www.w3.org/2000/svg" aria-label="La escuadra de 45 grados y el cartabón de 30 y 60 grados">
+          <polygon points="5,60 55,60 5,10" class="stroke-main fill-teja" style="opacity:0.75"/>
+          <text x="44" y="56" text-anchor="end" font-size="6">45°</text>
+          <polygon points="60,60 115,60 115,28.2" class="stroke-main fill-blue" style="opacity:0.75"/>
+          <text x="76" y="58" font-size="6">30°</text>
+          <text x="112" y="44" text-anchor="end" font-size="6">60°</text>
         </svg>
         <div>
           <h4>Escuadra y cartabón</h4>
@@ -1207,54 +1210,31 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
       <p>Queremos trazar varias rectas paralelas a una línea horizontal dada.</p>
 
       <div class="fig" style="margin:14px 0;">
-        <svg class="svg-fig" viewBox="0 0 640 240" xmlns="http://www.w3.org/2000/svg" aria-label="Trazado de paralelas con escuadra y cartabón en dos fotogramas">
-          <!-- ─── Fotograma 1: posición inicial ─── -->
-          <g transform="translate(20,20)">
+        <svg class="svg-fig" viewBox="0 0 620 252" xmlns="http://www.w3.org/2000/svg" aria-label="El cartabón hace de raíl y la escuadra se desliza sobre él trazando paralelas">
+          <g transform="translate(8,28)">
             <text x="0" y="0" font-size="11" font-weight="700" class="lbl-teja">① POSICIÓN INICIAL</text>
-
-            <!-- línea original (horizontal) -->
-            <line x1="20" y1="120" x2="240" y2="120" class="stroke-main" stroke-width="2.5"/>
-            <text x="135" y="138" text-anchor="middle" font-size="10" font-weight="600">línea original</text>
-
-            <!-- cartabón abajo, haciendo de guía (su hipotenusa apoya en la línea) -->
-            <polygon points="20,200 240,200 240,120" class="stroke-main" fill="rgba(44,95,141,0.18)"/>
-            <text x="180" y="180" font-size="10" class="lbl-blue" font-weight="700">CARTABÓN (fijo · guía)</text>
-            <text x="180" y="193" font-size="9" class="lbl-blue">no se mueve</text>
-
-            <!-- escuadra encima, un cateto apoyado en la línea original -->
-            <polygon points="60,120 60,60 120,120" class="stroke-main" fill="rgba(210,85,42,0.20)"/>
-            <text x="74" y="100" font-size="10" class="lbl-teja" font-weight="700">ESCUADRA</text>
-            <text x="74" y="113" font-size="9" class="lbl-teja">cateto sobre la línea</text>
+            <polygon points="90,60 230,200 255.6,104.4" class="stroke-main" style="fill:rgba(44,95,141,0.16)"/>
+            <text x="200" y="118" text-anchor="middle" font-size="10" class="lbl-blue" font-weight="700">CARTABÓN</text>
+            <text x="200" y="132" text-anchor="middle" font-size="9" class="lbl-blue">no se mueve</text>
+            <line x1="14" y1="170" x2="230" y2="170" class="stroke-main" stroke-width="2.5"/>
+            <polygon points="120,170 200,170 120,90" class="stroke-main" style="fill:rgba(210,85,42,0.20)"/>
+            <text x="114" y="116" text-anchor="end" font-size="10" class="lbl-teja" font-weight="700">ESCUADRA</text>
+            <text x="114" y="130" text-anchor="end" font-size="9" class="lbl-teja">45°·45°·90°</text>
+            <text x="70" y="188" font-size="10" font-weight="600">línea original</text>
           </g>
-
-          <!-- flecha entre fotogramas -->
-          <text x="305" y="125" font-size="26" class="arrow-teja">→</text>
-
-          <!-- ─── Fotograma 2: deslizar y trazar ─── -->
-          <g transform="translate(340,20)">
+          <text x="296" y="150" font-size="24" class="arrow-teja">→</text>
+          <g transform="translate(330,28)">
             <text x="0" y="0" font-size="11" font-weight="700" class="lbl-teja">② DESLIZAR Y TRAZAR</text>
-
-            <!-- cartabón fijo (igual) -->
-            <polygon points="20,200 240,200 240,120" class="stroke-main" fill="rgba(44,95,141,0.18)"/>
-            <text x="180" y="180" font-size="10" class="lbl-blue" font-weight="700">CARTABÓN</text>
-            <text x="180" y="193" font-size="9" class="lbl-blue">sigue fijo</text>
-
-            <!-- línea original más tenue -->
-            <line x1="20" y1="120" x2="240" y2="120" class="stroke-main" stroke-width="1.5" opacity="0.45"/>
-
-            <!-- escuadra desplazada hacia arriba-izquierda a lo largo de la hipotenusa -->
-            <polygon points="20,100 20,40 80,100" class="stroke-main" fill="rgba(210,85,42,0.20)"/>
-
-            <!-- flecha de deslizamiento -->
-            <line x1="55" y1="120" x2="40" y2="105" class="stroke-aux" stroke-width="1.5"/>
-            <polygon points="40,105 47,107 45,99" class="arrow-teja"/>
-            <text x="40" y="135" font-size="9" class="lbl-teja">desliza</text>
-
-            <!-- líneas paralelas trazadas -->
-            <line x1="20" y1="100" x2="80" y2="100" class="stroke-main" stroke-width="2.5"/>
-            <line x1="20" y1="80" x2="60" y2="80" class="stroke-main" stroke-width="1.5" opacity="0.7"/>
-            <line x1="20" y1="60" x2="40" y2="60" class="stroke-main" stroke-width="1.5" opacity="0.5"/>
-            <text x="90" y="103" font-size="9" class="lbl-teja" font-weight="700">¡paralela!</text>
+            <polygon points="90,60 230,200 255.6,104.4" class="stroke-main" style="fill:rgba(44,95,141,0.16)"/>
+            <text x="200" y="118" text-anchor="middle" font-size="10" class="lbl-blue" font-weight="700">CARTABÓN</text>
+            <text x="200" y="132" text-anchor="middle" font-size="9" class="lbl-blue">sigue fijo</text>
+            <line x1="14" y1="170" x2="230" y2="170" class="stroke-main" stroke-width="1.6" style="opacity:0.45"/>
+            <line x1="14" y1="134.6" x2="164.6" y2="134.6" class="stroke-main" stroke-width="2.5"/>
+            <polygon points="84.6,134.6 164.6,134.6 84.6,54.6" class="stroke-main" style="fill:rgba(210,85,42,0.20)"/>
+            <line x1="72" y1="166" x2="50" y2="144" class="stroke-aux" stroke-width="1.5"/>
+            <polygon points="48,142 58,145 55,152" class="arrow-teja"/>
+            <text x="34" y="184" font-size="9" class="lbl-teja">desliza</text>
+            <text x="16" y="126" font-size="10" class="lbl-teja" font-weight="700">¡paralelas!</text>
           </g>
         </svg>
         <div class="fig-cap">El cartabón hace de raíl y la escuadra dibuja una paralela en cada posición</div>
@@ -1275,47 +1255,34 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
       <p>Misma idea, pero <strong>girando la escuadra 90°</strong> sobre el cartabón.</p>
 
       <div class="fig" style="margin:14px 0;">
-        <svg class="svg-fig" viewBox="0 0 640 240" xmlns="http://www.w3.org/2000/svg" aria-label="Trazado de perpendiculares con escuadra y cartabón">
-          <!-- ─── Fotograma 1: paralela trazada ─── -->
-          <g transform="translate(20,20)">
-            <text x="0" y="0" font-size="11" font-weight="700" class="lbl-teja">① POSICIÓN PARA PARALELA</text>
-
-            <line x1="20" y1="120" x2="240" y2="120" class="stroke-main" stroke-width="2.5"/>
-            <text x="135" y="138" text-anchor="middle" font-size="10" font-weight="600">línea original</text>
-
-            <polygon points="20,200 240,200 240,120" class="stroke-main" fill="rgba(44,95,141,0.18)"/>
-            <text x="180" y="180" font-size="10" class="lbl-blue" font-weight="700">CARTABÓN</text>
-
-            <!-- escuadra con cateto horizontal (paralela) -->
-            <polygon points="60,120 60,60 120,120" class="stroke-main" fill="rgba(210,85,42,0.20)"/>
-            <text x="78" y="105" font-size="9" class="lbl-teja">cateto ↔</text>
+        <svg class="svg-fig" viewBox="0 0 620 252" xmlns="http://www.w3.org/2000/svg" aria-label="Con el cartabón en la misma posición, la escuadra traza con el otro cateto la perpendicular">
+          <g transform="translate(8,28)">
+            <text x="0" y="0" font-size="11" font-weight="700" class="lbl-teja">① SE TRAZA CON UN CATETO</text>
+            <polygon points="90,60 230,200 255.6,104.4" class="stroke-main" style="fill:rgba(44,95,141,0.16)"/>
+            <text x="200" y="118" text-anchor="middle" font-size="10" class="lbl-blue" font-weight="700">CARTABÓN</text>
+            <text x="200" y="132" text-anchor="middle" font-size="9" class="lbl-blue">no se mueve</text>
+            <line x1="14" y1="170" x2="230" y2="170" class="stroke-main" stroke-width="2.5"/>
+            <polygon points="120,170 200,170 120,90" class="stroke-main" style="fill:rgba(210,85,42,0.20)"/>
+            <line x1="120" y1="170" x2="200" y2="170" style="stroke:#d2552a;stroke-width:3.5"/>
+            <text x="114" y="130" text-anchor="end" font-size="10" class="lbl-teja" font-weight="700">cateto ↔</text>
+            <text x="70" y="188" font-size="10" font-weight="600">línea original</text>
           </g>
-
-          <!-- flecha + 90° -->
-          <g transform="translate(290,90)">
-            <text x="10" y="20" font-size="20" class="arrow-teja">↻</text>
-            <text x="5" y="42" font-size="11" font-weight="700" class="lbl-teja">90°</text>
+          <g transform="translate(288,120)">
+            <text x="6" y="0" font-size="20" class="arrow-teja">↻</text>
+            <text x="0" y="22" font-size="11" font-weight="700" class="lbl-teja">90°</text>
           </g>
-
-          <!-- ─── Fotograma 2: escuadra girada → perpendicular ─── -->
-          <g transform="translate(340,20)">
-            <text x="0" y="0" font-size="11" font-weight="700" class="lbl-teja">② ESCUADRA GIRADA 90°</text>
-
-            <line x1="20" y1="120" x2="240" y2="120" class="stroke-main" stroke-width="2.5"/>
-
-            <polygon points="20,200 240,200 240,120" class="stroke-main" fill="rgba(44,95,141,0.18)"/>
-            <text x="180" y="180" font-size="10" class="lbl-blue" font-weight="700">CARTABÓN</text>
-            <text x="180" y="193" font-size="9" class="lbl-blue">sigue fijo</text>
-
-            <!-- escuadra girada: ahora el cateto vertical apoya en la hipotenusa del cartabón -->
-            <polygon points="100,120 160,120 100,60" class="stroke-main" fill="rgba(210,85,42,0.20)"/>
-
-            <!-- recta perpendicular trazada -->
-            <line x1="100" y1="120" x2="100" y2="40" class="stroke-main" stroke-width="2.5"/>
-            <text x="108" y="55" font-size="9" class="lbl-teja" font-weight="700">¡perpendicular!</text>
-
-            <!-- símbolo del ángulo recto -->
-            <rect x="100" y="110" width="10" height="10" class="stroke-thin" fill="none"/>
+          <g transform="translate(330,28)">
+            <text x="0" y="0" font-size="11" font-weight="700" class="lbl-teja">② Y CON EL OTRO, LA PERPENDICULAR</text>
+            <polygon points="90,60 230,200 255.6,104.4" class="stroke-main" style="fill:rgba(44,95,141,0.16)"/>
+            <text x="200" y="118" text-anchor="middle" font-size="10" class="lbl-blue" font-weight="700">CARTABÓN</text>
+            <text x="200" y="132" text-anchor="middle" font-size="9" class="lbl-blue">sigue fijo</text>
+            <line x1="14" y1="170" x2="230" y2="170" class="stroke-main" stroke-width="1.6" style="opacity:0.45"/>
+            <polygon points="120,170 200,170 120,90" class="stroke-main" style="fill:rgba(210,85,42,0.20)"/>
+            <line x1="120" y1="90" x2="120" y2="170" style="stroke:#d2552a;stroke-width:3.5"/>
+            <line x1="120" y1="170" x2="120" y2="86" class="stroke-main" stroke-width="2.5"/>
+            <rect x="106" y="156" width="14" height="14" class="stroke-thin" fill="none"/>
+            <text x="114" y="130" text-anchor="end" font-size="10" class="lbl-teja" font-weight="700">cateto ↕</text>
+            <text x="112" y="100" text-anchor="end" font-size="10" class="lbl-teja" font-weight="700">¡perpendicular!</text>
           </g>
         </svg>
         <div class="fig-cap">Girando la escuadra 90° sobre el cartabón, el otro cateto dibuja la perpendicular</div>
@@ -2045,7 +2012,7 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
   <p>IES Jiménez de Quesada · Santa Fe (Granada)<br>
   TyD 2º ESO · Curso 2026-27 · Manuel Alonso Herrera</p>
   <p style="margin-top:6px;"><a href="index.html">← Volver al hub</a> · <a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a></p>
-  <p class="v" style="margin-top:8px;">Libro digital v1.3</p>
+  <p class="v" style="margin-top:8px;">Libro digital v1.4</p>
 </footer>
 
 </main>
