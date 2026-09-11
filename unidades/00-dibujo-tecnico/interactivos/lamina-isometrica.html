@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lámina 2 · Perspectiva isométrica · Dibujo técnico</title>
+<meta name="description" content="La lámina de perspectiva isométrica construida paso a paso: márgenes, cajetín, ejes a 120°, caja envolvente y pieza.">
+<style>
+:root{
+  --fondo:#eef1ee; --panel:#fff; --mesa:#c3cdc6; --mesa-borde:#aebbb2;
+  --tinta:#1c2430; --tinta2:#4b5565; --tinta3:#6b7482; --linea:#d3dad5;
+  --alzado:#1d5c9f; --planta:#2f7a4b; --perfil:#bb481b; --x:#b87800; --sel:#e89a00;
+  --foco:#e89a00;
+  --f:"Bahnschrift","DIN Alternate","D-DIN","Barlow","Roboto Condensed","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--fondo);color:var(--tinta);font-family:var(--f);font-size:16px;line-height:1.5}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--foco);outline-offset:2px}
+.saltar{position:absolute;left:-999px;top:0;background:#fff;padding:8px 12px;z-index:10}
+.saltar:focus{left:8px}
+/* cabecera */
+.cab{background:var(--panel);border-bottom:1px solid var(--linea)}
+.cab-in{max-width:1360px;margin:0 auto;padding:14px 20px 0}
+.migas{display:flex;gap:18px;flex-wrap:wrap;font-size:.9rem}
+.migas a{text-decoration:none;color:var(--tinta2)}
+.migas a:hover{color:var(--alzado);text-decoration:underline}
+.titulo{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin:6px 0 2px}
+.titulo h1{font-size:2rem;font-weight:650;margin:0;line-height:1.15;letter-spacing:-.01em}
+.lema{margin:0;color:var(--tinta2);font-size:1.05rem}
+.pestanas{max-width:1360px;margin:10px auto 0;padding:0 20px;display:flex;gap:4px}
+.pestanas button{background:none;border:0;border-bottom:3px solid transparent;padding:10px 16px 9px;font-size:1.05rem;cursor:pointer;color:var(--tinta2)}
+.pestanas button[aria-selected="true"]{color:var(--tinta);border-bottom-color:var(--tinta);font-weight:600}
+.pestanas .n{display:inline-block;width:1.4em;height:1.4em;line-height:1.4em;text-align:center;border-radius:50%;background:var(--fondo);font-size:.8rem;margin-right:6px}
+.pestanas button[aria-selected="true"] .n{background:var(--tinta);color:#fff}
+main{max-width:1360px;margin:0 auto;padding:16px 20px 30px}
+.panel[hidden]{display:none}
+.intro{margin:0 0 14px;color:var(--tinta2);max-width:78ch}
+/* colores de las vistas en el texto */
+.ta{color:var(--alzado)} .tp{color:var(--planta)} .tf{color:var(--perfil)} .tx{color:var(--x)}
+/* banco */
+.banco{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:18px;align-items:start}
+.escenario{background:var(--mesa);border:1px solid var(--mesa-borde);border-radius:4px;padding:6px}
+.barra{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:2px 2px 6px}
+.grupo{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.btn-h{border:1px solid #9aa89f;background:#f5f7f5;border-radius:3px;padding:4px 10px;cursor:pointer;font-size:.88rem}
+.btn-h:hover{background:#fff}
+.btn-h[aria-pressed="true"]{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+.abat{display:flex;align-items:center;gap:6px;font-size:.88rem;background:#f5f7f5;border:1px solid #9aa89f;border-radius:3px;padding:2px 8px}
+.abat input{width:130px;accent-color:var(--tinta)}
+.host3d{position:relative;background:#eef1ee;border-radius:2px;overflow:hidden;touch-action:none}
+.c3d{display:block;cursor:grab}
+.c3d:active{cursor:grabbing}
+.aviso-gl{padding:40px 20px;text-align:center;color:var(--tinta2)}
+.ayuda{font-size:.85rem;color:#33403a;margin:6px 4px 2px}
+.lateral{display:flex;flex-direction:column;gap:12px}
+.caja{background:var(--panel);border:1px solid var(--linea);border-radius:4px;padding:12px 14px}
+.caja h3{font-size:1.05rem;margin:0 0 8px;font-weight:650}
+.caja h4{font-size:1rem;margin:0 0 6px;font-weight:650}
+.paso-txt{font-size:1.02rem;min-height:7.5em}
+.paso-txt .nota,.nota{display:block;font-size:.84rem;color:var(--tinta2);margin-top:8px}
+.nav{display:flex;align-items:center;gap:8px;margin-top:10px}
+.nav .cuenta{flex:1;text-align:center;font-size:.85rem;color:var(--tinta2)}
+.btn{border:1px solid var(--tinta);background:var(--tinta);color:#fff;padding:7px 14px;border-radius:4px;cursor:pointer;font-weight:600}
+.btn:hover{background:#2c3747}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.btn.sec{background:var(--panel);color:var(--tinta)}
+.btn.sec:hover{background:var(--fondo)}
+.btn.peq{padding:4px 10px;font-size:.9rem;font-weight:500}
+.hoja-caja{margin-top:18px;max-width:640px}
+.hoja{display:block;width:100%;height:auto;background:#fff}
+/* hoja 2D */
+.h-papel{fill:#fff}
+.h-cuad{stroke:#dfe6ef;stroke-width:.025;fill:none}
+.h-eje{stroke:var(--tinta2);stroke-width:.04}
+.h-ejex{stroke:var(--x)}
+.h-45{stroke:var(--x);stroke-width:.03;stroke-dasharray:.25 .12}
+.h-45t{font-size:.32px;fill:var(--x)}
+.h-letra{font-size:.46px;font-weight:700;fill:var(--tinta)}
+.h-letrax{fill:var(--x)}
+.h-vis{stroke:var(--tinta);stroke-width:.075;stroke-linecap:round;fill:none}
+.h-ocu{stroke:var(--tinta);stroke-width:.05;stroke-dasharray:.2 .12;fill:none}
+.h-eje.h-vista,.h-vista .h-eje{stroke:var(--tinta2);stroke-width:.03;stroke-dasharray:.45 .1 .06 .1}
+.h-nombre{font-size:.36px;font-weight:700}
+.h-nalzado{fill:var(--alzado)} .h-nplanta{fill:var(--planta)} .h-nperfil{fill:var(--perfil)}
+.h-alzado .h-vis,.h-alzado .h-ocu{stroke:var(--alzado)}
+.h-planta .h-vis,.h-planta .h-ocu{stroke:var(--planta)}
+.h-perfil .h-vis,.h-perfil .h-ocu{stroke:var(--perfil)}
+.h-ref{stroke:#2f6db5;stroke-width:.028;stroke-dasharray:.14 .09;opacity:.75}
+.h-rlin{stroke:var(--sel);stroke-width:.2;stroke-linecap:round;opacity:.8}
+.h-rocu{stroke-dasharray:.24 .16}
+.h-rpunto{fill:var(--sel)}
+.h-rpoly{fill:var(--sel);opacity:.38}
+/* piezas */
+.fila{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.rot{font-size:.9rem;color:var(--tinta2)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--linea);background:var(--panel);padding:6px 12px;border-radius:4px;cursor:pointer;font-size:.93rem}
+.chip:hover{border-color:var(--tinta3)}
+.chip .num{display:inline-block;min-width:1.4em;font-weight:700;color:var(--tinta3)}
+.chip[aria-pressed="true"]{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+.chip[aria-pressed="true"] .num{color:#fff}
+.modo{display:flex;border:1px solid var(--tinta);border-radius:4px;overflow:hidden}
+.modo button{border:0;background:var(--panel);padding:6px 14px;cursor:pointer;font-weight:600}
+.modo button[aria-pressed="true"]{background:var(--tinta);color:#fff}
+.modo button[disabled]{color:var(--tinta3);cursor:not-allowed;font-weight:500}
+.dos{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:14px;align-items:start}
+.hoja-wrap{padding:8px}
+.hoja-wrap .cab-h{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.hoja-wrap .cab-h h3{margin:0}
+.inferior{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:14px;margin-top:14px;align-items:start}
+.datos-p{font-size:.85rem;color:var(--tinta2);margin:-4px 0 8px}
+.vacio{color:var(--tinta2);margin:0}
+.filas{list-style:none;padding:0;margin:0}
+.filas li{padding:6px 0;border-top:1px solid var(--linea)}
+.filas li:first-child{border-top:0}
+.vn{display:inline-block;font-weight:700;font-size:.85rem;padding:0 8px;border-radius:10px;color:#fff;margin-right:4px}
+.vn-alzado{background:var(--alzado)} .vn-planta{background:var(--planta)} .vn-perfil{background:var(--perfil)}
+.cab-insp{display:flex;justify-content:space-between;align-items:center}
+.pronto{max-width:760px}
+footer{max-width:1360px;margin:0 auto;padding:12px 20px 30px;font-size:.82rem;color:var(--tinta2);border-top:1px solid var(--linea)}
+@media (max-width:1050px){
+  .banco,.dos,.inferior{grid-template-columns:minmax(0,1fr)}
+  .titulo h1{font-size:1.6rem}
+}
+@media (max-width:560px){
+  main{padding:12px 10px 24px}
+  .cab-in,.pestanas{padding-left:10px;padding-right:10px}
+  .pestanas button{padding:8px 10px}
+  .abat input{width:100px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* ===== segunda entrega ===== */
+[hidden]{display:none!important}
+.dos.solo{grid-template-columns:minmax(0,.85fr) minmax(0,1.25fr)}
+.inferior.solo{grid-template-columns:minmax(0,1fr)}
+.chip .marcas{margin-left:4px}
+.mk{display:inline-block;font-size:.68rem;font-weight:700;line-height:1;padding:3px 4px;border-radius:3px;background:#2f7a4b;color:#fff;margin-left:3px;vertical-align:1px}
+.chip[aria-pressed="true"] .mk{background:#fff;color:var(--tinta)}
+.btn-link{background:none;border:0;padding:0;color:var(--alzado);text-decoration:underline;cursor:pointer;font-size:inherit}
+/* herramientas de dibujo */
+.herr{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+.herr-b{display:inline-flex;align-items:center;gap:6px}
+.herr-b svg{width:28px;height:12px}
+.editor{touch-action:none;cursor:crosshair;border:1px solid var(--linea);border-radius:2px}
+.editor:focus-visible{outline:3px solid var(--foco)}
+.ayuda-ed{font-size:.82rem;color:var(--tinta2);margin:6px 0 0}
+.u-vis,.u-ocu,.u-eje{stroke:var(--tinta);fill:none;stroke-linecap:round}
+.u-vis{stroke-width:.08}
+.u-ocu{stroke-width:.055;stroke-dasharray:.2 .12;stroke-linecap:butt}
+.u-eje{stroke-width:.035;stroke-dasharray:.45 .1 .06 .1;stroke-linecap:butt}
+.u-mal{stroke:#c62828}
+.u-tipomal{stroke:#e08a00}
+.u-bien{stroke:#2f7a4b}
+.u-falta{stroke:#2f9a55;stroke-width:.1;stroke-dasharray:.16 .1;fill:none;opacity:.9}
+.u-falta-ocu{stroke-width:.07}
+.u-falta-eje{stroke-width:.05;stroke-dasharray:.45 .1 .06 .1}
+.u-sol .u-vis,.u-sol .u-ocu,.u-sol .u-eje{stroke:#2f7a4b;opacity:.45}
+.u-inicio{fill:var(--sel)}
+.u-hover{fill:var(--tinta2);opacity:.55}
+.u-goma{stroke:var(--sel);stroke-width:.05;opacity:.8;fill:none}
+.u-gocu{stroke-dasharray:.2 .12}
+.u-geje{stroke-dasharray:.45 .1 .06 .1}
+.fb-solo{min-height:3em}
+.fb-bien{color:#256a3d;font-weight:600;margin:.3em 0}
+.fb-mal{color:#a52a1e;margin:.3em 0}
+.consigna{margin:.2em 0 .6em;color:var(--tinta2)}
+/* guiado: opciones */
+.opciones{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.op{position:relative;background:#fff;border:2px solid var(--linea);border-radius:4px;padding:6px;cursor:pointer}
+.op:hover:not([disabled]){border-color:var(--tinta3)}
+.op.bien{border-color:#2f7a4b;background:#eef7f0}
+.op.malb{border-color:#c62828;background:#fbeeee;opacity:.75;cursor:not-allowed}
+.op[disabled]:not(.malb):not(.bien){opacity:.45}
+.letra{position:absolute;left:6px;top:4px;font-weight:700;font-size:.85rem;color:var(--tinta2)}
+.mini{display:block;width:100%;height:auto;max-height:150px}
+.m-vis,.m-ocu,.m-eje{stroke:var(--c,var(--tinta));fill:none;stroke-linecap:round}
+.m-vis{stroke-width:.09}
+.m-ocu{stroke-width:.065;stroke-dasharray:.22 .13;stroke-linecap:butt}
+.m-eje{stroke-width:.04;stroke-dasharray:.45 .1 .06 .1;stroke-linecap:butt}
+.fb-g{min-height:2.6em;margin-top:8px}
+/* guiado: colocar */
+.colocar{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:12px;align-items:start}
+.bandeja{display:flex;flex-direction:column;gap:6px;min-height:80px;padding:6px;border:1px dashed var(--linea);border-radius:4px}
+.carta{background:#fff;border:2px solid var(--linea);border-radius:4px;padding:4px 6px;cursor:grab;display:flex;flex-direction:column;align-items:stretch;touch-action:none}
+.carta[aria-pressed="true"]{border-color:var(--sel);box-shadow:0 0 0 2px var(--sel)}
+.carta.bien{border-color:#2f7a4b}
+.carta.malb{border-color:#c62828;background:#fbeeee}
+.carta .cn{font-size:.8rem;font-weight:700;text-align:left}
+.carta .mini{max-height:80px}
+.fantasma{position:fixed;width:110px;pointer-events:none;opacity:.85;z-index:50;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.zonas{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:minmax(110px,auto) minmax(110px,auto);background:#fff;border:1px solid var(--linea);border-radius:4px;position:relative}
+.zonas::before{content:"";position:absolute;left:50%;top:6px;bottom:6px;border-left:2px solid var(--tinta2)}
+.zonas::after{content:"";position:absolute;top:50%;left:6px;right:6px;border-top:2px solid var(--tinta2)}
+.zona{position:relative;margin:8px;border:2px dashed #c9d3cc;border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:4px;min-height:100px}
+.zona:hover,.zona:focus-visible{border-color:var(--sel)}
+.zona .carta{width:100%}
+.z45s{position:absolute;inset:6px;width:calc(100% - 12px);height:calc(100% - 12px);pointer-events:none}
+.z45{stroke:var(--x);stroke-width:1.2;stroke-dasharray:4 3;vector-effect:non-scaling-stroke}
+/* retos */
+.trampa{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr);gap:14px;align-items:start}
+.hoja-peq{max-width:360px}
+.h-interroga{font-size:1.6px;font-weight:700;fill:var(--perfil);opacity:.7}
+.tp-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.tp-carta{display:flex;flex-direction:column;gap:6px}
+.tp-b{background:#fff;border:2px solid var(--linea);border-radius:4px;padding:8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px}
+.tp-b[aria-pressed="true"]{border-color:var(--tinta);box-shadow:inset 0 0 0 2px var(--tinta)}
+.tp-b.bien{border-color:#2f7a4b;background:#eef7f0}
+.tp-b.malb{border-color:#c62828;background:#fbeeee}
+.tp-n{font-weight:600;font-size:.92rem}
+.iso{width:100%;max-width:150px;height:auto}
+.iso-l{stroke:var(--tinta);stroke-width:.06;stroke-linecap:round}
+.tp-fb{font-size:.85rem;margin:0;color:var(--tinta2)}
+.tp-per .mini{max-width:120px}
+.mini-rot{font-size:.36px;fill:var(--tinta2)}
+.conclusion{margin-top:12px;border-left:4px solid var(--perfil);padding:4px 12px;background:#fbf4f0}
+.conclusion h4{margin:.2em 0}
+@media (max-width:1050px){
+  .dos.solo,.trampa,.colocar{grid-template-columns:minmax(0,1fr)}
+  .opciones,.tp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+/* =====================================================================
+   ACOTACIÓN
+   ===================================================================== */
+.lamina{display:block;width:100%;height:auto;max-height:78vh;background:#fff;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.l-papel{fill:#fff}
+.l-cuad{stroke:#e4eaf0;stroke-width:.14;fill:none}
+.l-eje{stroke:var(--tinta2);stroke-width:.3}
+.l-45{stroke:var(--x);stroke-width:.25;stroke-dasharray:2 1}
+.l-letra{font-size:4px;font-weight:700;fill:var(--tinta)}
+.l-letrax{fill:var(--x)}
+.f-pieza{fill:#eef2f6;stroke:var(--tinta);stroke-width:.55;stroke-linejoin:round}
+.f-vis{stroke:var(--tinta);stroke-width:.55;stroke-linecap:round;fill:none}
+.f-ocu{stroke:var(--tinta);stroke-width:.35;stroke-dasharray:1.6 .9;fill:none}
+.f-eje{stroke:var(--tinta2);stroke-width:.22;stroke-dasharray:5 1 .8 1;fill:none}
+.f-fina{stroke:var(--tinta);stroke-width:.3;fill:none}
+.f-alt{fill:rgba(29,92,159,.06);stroke:var(--alzado);stroke-width:.5;stroke-dasharray:1.6 1}
+.l-alt .f-vis,.l-alt .f-ocu{stroke:var(--alzado);stroke-width:.45;stroke-dasharray:1.6 1}
+.l-alt .f-eje{stroke:var(--alzado);opacity:.6}
+.l-alt circle{stroke:var(--alzado)}
+/* cotas */
+.c-aux,.c-lin{stroke:#26303b;stroke-width:.2;fill:none}
+.c-fl{fill:#26303b;stroke:none}
+.c-tx{font-size:3.5px;fill:#1c2430;font-family:var(--f)}
+.cota.red .c-aux,.cota.red .c-lin{stroke:#d27400;stroke-width:.35}
+.cota.red .c-fl,.cota.red .c-tx{fill:#d27400}
+.cota.red .c-tx{font-weight:700}
+.cota.mal .c-aux,.cota.mal .c-lin{stroke:#c62828;stroke-width:.35}
+.cota.mal .c-fl,.cota.mal .c-tx{fill:#c62828}
+.cota.bien .c-aux,.cota.bien .c-lin{stroke:#256a3d}
+.cota.bien .c-fl,.cota.bien .c-tx{fill:#256a3d}
+.cota.cruza .c-aux{stroke:#d27400;stroke-dasharray:1 .6;stroke-width:.3}
+.editable .cota{cursor:pointer}
+.editable .cota:hover .c-tx{fill:#c62828}
+/* carriles */
+.l-guia{stroke:#9fb0c4;stroke-width:.14;stroke-dasharray:.6 .9;opacity:.55}
+.l-guia.act{stroke:var(--x);opacity:1;stroke-width:.2}
+.l-guia.oc{stroke-dasharray:.3 1.2}
+.l-tick{fill:rgba(255,255,255,.15);stroke:#7d8795;stroke-width:.3}
+.editable .l-tick:hover{stroke:var(--x);stroke-width:.5}
+.l-tick.sel{fill:var(--x);stroke:var(--x)}
+.l-tick.oc{stroke-dasharray:.55 .45;fill:#f3f3f3}
+.l-tick.libre{fill:#cfe0f5;stroke:var(--alzado);stroke-width:.5}
+/* anatomía */
+.dos-a{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:14px;align-items:start;margin-bottom:14px}
+#a-fig{margin-top:8px}
+.anat{display:block;width:100%;max-width:560px;height:auto;background:#fff}
+.anat .c-aux,.anat .c-lin{stroke-width:.25}
+.anat .c-lin,.anat .c-aux,.anat .c-fl,.anat .c-tx{visibility:hidden}
+.anat.ver-lin .c-lin,.anat.ver-aux .c-aux,.anat.ver-fl .c-fl,.anat.ver-tx .c-tx{visibility:visible}
+.a-dist{display:none}
+.anat.ver-dist .a-dist{display:inline}
+.a-dl{stroke:var(--x);stroke-width:.35}
+.a-dt{font-size:2.6px;fill:var(--x);font-weight:700;font-family:var(--f)}
+#a-txt h4{margin-top:0}
+#a-txt p{margin:.3em 0}
+/* rondas */
+.rondas{margin-top:4px}
+.cab-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.op .letra{position:absolute;top:4px;left:6px;font-weight:700;color:var(--tinta3);font-size:.9rem}
+.op[aria-pressed="true"]{border-color:var(--tinta);box-shadow:inset 0 0 0 1px var(--tinta)}
+.op[aria-pressed="true"] .letra{color:#fff;background:var(--tinta);border-radius:3px;padding:0 5px}
+.op .mini{max-height:170px;margin-top:6px}
+.op .mini .c-tx{font-size:3.5px}
+.op-fb{display:block;font-size:.84rem;margin-top:4px;text-align:left;line-height:1.35}
+.op.malb{cursor:default;opacity:1}
+.op.malb[aria-pressed="false"]{border-color:var(--linea);background:#fff}
+.op.malb[aria-pressed="false"] .op-fb{color:var(--tinta2)}
+.op.malb[aria-pressed="true"] .op-fb{color:#a52a1e}
+.op.bien .op-fb{color:#256a3d}
+.op.bien[aria-pressed="false"]{border-style:dashed}
+.mini-rot{font-size:3px;fill:var(--tinta2);font-family:var(--f)}
+/* ¿está definida? */
+.caso-txt{margin:0 0 8px;color:var(--tinta2)}
+.resp{display:flex;flex-direction:column;gap:8px;margin-bottom:10px}
+.resp .btn{text-align:left}
+.resp .btn.bien{background:#eef7f0;border-color:#2f7a4b;color:#256a3d}
+.resp .btn.malb{background:#fbeeee;border-color:#c62828;color:#a52a1e}
+.filas li.k-mal{color:#a52a1e}
+.filas li.k-red{color:#9a5600}
+.filas li.k-libre{color:#1d4f86}
+.k-cruza{color:#9a5600}
+.nivel-intro{margin:0 0 10px;color:var(--tinta2);max-width:90ch;font-size:.95rem}
+.nota-caja{background:#fff8e6;border:1px solid #efd9a3;border-radius:4px;padding:8px 10px;margin:8px 0 0;font-size:.92rem}
+.datos-pz{margin-top:10px}
+.k-panel{margin-top:14px}
+#k-3d{aspect-ratio:1/0.85}
+@media (max-width:1050px){.dos-a{grid-template-columns:minmax(0,1fr)}}
+
+/* ¿bien acotada? */
+.normas{margin-bottom:14px}
+.normas summary{font-weight:650;font-size:1.05rem;cursor:pointer}
+.normas-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:10px}
+.ngrupo h4{margin:0 0 4px;font-size:.95rem}
+.ngrupo ol{margin:0;padding-left:1.6em;font-size:.9rem}
+.ngrupo li{margin:.3em 0}
+.ngrupo li:target{background:#fff3cf}
+.seleccionable .cota{cursor:pointer}
+.cota.sel .c-aux,.cota.sel .c-lin{stroke:var(--sel);stroke-width:.4}
+.cota.sel .c-fl,.cota.sel .c-tx{fill:var(--sel)}
+.cota.sel .c-tx{font-weight:700}
+.cota.fp .c-aux,.cota.fp .c-lin{stroke:#8a939e;stroke-dasharray:1 .7}
+.cota.fp .c-fl,.cota.fp .c-tx{fill:#8a939e}
+.filas li.k-ok{color:#256a3d}
+.filas li .nref{font-weight:700;text-decoration:none;color:inherit;border-bottom:1px dotted}
+#r-falta{margin-bottom:4px}
+@media (max-width:1050px){.normas-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.normas-grid{grid-template-columns:minmax(0,1fr)}}
+/* cinco pestañas: en pantallas estrechas se desplazan en horizontal */
+.pestanas{overflow-x:auto;scrollbar-width:none}
+.pestanas::-webkit-scrollbar{display:none}
+.pestanas button{flex:0 0 auto;white-space:nowrap}
+@media (max-width:560px){.pestanas button{padding:8px 8px;font-size:.95rem}.pestanas .n{margin-right:4px}}
+
+.l-nvista{font-size:3px;fill:#7a838e;font-family:var(--f);letter-spacing:.02em}
+/* ===================== LÁMINA ===================== */
+.lam-main{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(340px,.85fr);gap:16px;align-items:start}
+.lam-hoja{padding:10px;background:#dfe3df;position:sticky;top:8px}
+#hoja{display:block;height:calc(100vh - 110px);min-height:520px;width:auto;max-width:100%;margin:0 auto;aspect-ratio:210/297;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.lam-panel{display:flex;flex-direction:column;gap:12px}
+.lam-cab{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.lam-panel h2{font-size:1.3rem;margin:4px 0 6px}
+.lam-ctrl{margin-top:10px;margin-bottom:0}
+.vel{font-size:.9rem;display:flex;gap:6px;align-items:center}
+.lap{display:inline-block;font-weight:700;font-size:.8rem;padding:2px 7px;border-radius:3px;margin-right:4px}
+.l2h{background:#e7eaee;color:#5b6572;border:1px solid #b9c0c8}
+.lhb{background:#1c2430;color:#fff}
+.lgoma{background:#f6d8de;color:#8a2a3c;border:1px solid #e3aab6}
+#l-lapiz{font-size:.85rem;color:var(--tinta2)}
+.lam-pasos{margin:0;padding-left:1.8em;columns:2;column-gap:18px;font-size:.9rem}
+.lam-pasos li{break-inside:avoid;margin:1px 0;color:var(--tinta3)}
+.lam-pasos li.hecho{color:var(--tinta2)}
+.lam-pasos li.act{color:var(--tinta);font-weight:700}
+.lam-pasos button{background:none;border:0;padding:1px 2px;text-align:left;cursor:pointer;color:inherit;font-weight:inherit}
+.lam-pasos button:hover{text-decoration:underline}
+.lam-datos summary{font-weight:650;cursor:pointer}
+.lam-datos label{display:block;font-size:.9rem;margin:6px 0}
+.lam-datos select,.lam-datos input:not([type]){font:inherit;padding:3px 6px;border:1px solid var(--linea);border-radius:3px;width:100%}
+.lam-pz{display:grid;grid-template-columns:130px minmax(0,1fr);gap:10px;align-items:center;margin-top:8px}
+.mini-iso{width:100%;height:auto;background:#fff;border:1px solid var(--linea);border-radius:3px}
+.mi-l{stroke:var(--tinta);stroke-width:.06;stroke-linecap:round}
+.mi-fl{stroke:var(--alzado);stroke-width:.09}
+.mi-pt{fill:var(--alzado)}
+.mi-t{font-size:.42px;fill:var(--alzado);font-weight:700}
+.chk{display:flex!important;gap:6px;align-items:center}
+.aux{border:1px solid var(--linea);border-radius:4px;margin:8px 0;padding:4px 10px 6px;font-size:.9rem}
+.aux label{display:inline-flex!important;gap:5px;margin-right:12px}
+.caj-campos{display:grid;grid-template-columns:1fr 1fr;gap:0 10px;margin:8px 0}
+/* trazos de la hoja */
+.papel{fill:#fffefb}
+#hoja line,#hoja circle{fill:none;stroke-linecap:round}
+.c2{stroke:#9aa3ad;stroke-width:.25}
+.c2.aux{stroke:#b3bac2;stroke-width:.2}
+.c2.eje{stroke:#98a1ab;stroke-width:.25}
+.c2.punto{fill:#9aa3ad;stroke:none}
+.c2.arista{stroke:#646d78;stroke-width:.32}
+.c2.oculta{stroke:#646d78;stroke-width:.28;stroke-dasharray:1.6 .9}
+.c2.ejep{stroke:#8d96a0;stroke-width:.2;stroke-dasharray:5 1 .8 1}
+text.c2{fill:#7a838e;stroke:none;font-family:var(--f)}
+text.c2.letra{font-size:4px;font-weight:700;fill:#7a838e}
+text.c2.nvista{font-size:4.2px;fill:#8a929c;letter-spacing:.03em}
+text.c2.caj{fill:#6d7680}
+.lcota .c-aux,.lcota .c-lin{stroke:#7d8691;stroke-width:.2}
+.lcota .c-fl{fill:#7d8691}
+.lcota .c-tx{fill:#5b6572;font-size:3.5px}
+.hb.hb-marco{stroke:#1c2430;stroke-width:.5}
+.hb.hb-arista{stroke:#1c2430;stroke-width:.6}
+.hb.hb-oculta{stroke:#1c2430;stroke-width:.38;stroke-dasharray:1.6 .9}
+text.hb.hb-texto{fill:#1c2430}
+.aborrar{stroke:#d0344b!important;stroke-dasharray:1.2 .8;fill:#d0344b}
+.punta{fill:#c98200;stroke:#fff;stroke-width:.25}
+@media (max-width:1050px){.lam-main{grid-template-columns:minmax(0,1fr)}.lam-hoja{position:static}#hoja{height:auto;width:100%}.lam-pasos{columns:1}}
+@media print{
+  @page{size:A4 portrait;margin:0}
+  body *{visibility:hidden}
+  .lam-hoja,.lam-hoja *{visibility:visible}
+  .lam-hoja{position:fixed;left:0;top:0;padding:0;background:none;border:0}
+  #hoja{width:210mm;height:297mm;max-height:none;box-shadow:none}
+}
+
+/* ===== lámina 2 · isométrica ===== */
+#hoja .cajaenv{stroke:#7c8794;stroke-width:.22;stroke-dasharray:1.6 1.1;fill:none}
+#hoja .marca{fill:#b87800}
+#hoja .med{font-size:3.4px;fill:#b87800;font-weight:700}
+.mini-iso .mv-eje{stroke:#8b93a1;stroke-width:.05;stroke-dasharray:.4 .12 .06 .12}
+.mini-iso .mv-vis{stroke:#1c2430;stroke-width:.1;stroke-linecap:round;fill:none}
+.mini-iso .mv-ocu{stroke:#1c2430;stroke-width:.07;stroke-dasharray:.22 .14;fill:none}
+.mini-iso .mv-t{font-size:.42px;fill:#4b5565;font-weight:600}
+
+</style>
+</head>
+<body>
+<a href="#contenido" class="saltar">Saltar al contenido</a>
+<header class="cab">
+  <div class="cab-in">
+    <nav class="migas" aria-label="Navegación">
+      <a href="../index.html">Unidad de dibujo técnico</a>
+      <a href="../libro-digital.html">Libro digital</a>
+    </nav>
+    <div class="titulo">
+      <h1>Lámina 2 · Perspectiva isométrica</h1>
+      <p class="lema">De la hoja en blanco a la pieza en perspectiva, paso a paso, partiendo de la caja envolvente.</p>
+    </div>
+  </div>
+</header>
+<main id="contenido" class="lam-main">
+  <div class="lam-hoja caja">
+    <svg id="hoja" viewBox="0 -297 210 297" role="img" aria-label="Lámina A4 de perspectiva isométrica"></svg>
+  </div>
+  <div class="lam-panel">
+    <div class="caja">
+      <div class="lam-cab"><span class="datos-p" id="l-cuenta"></span><span id="l-lapiz"></span></div>
+      <h2 id="l-titulo"></h2>
+      <div class="paso-txt" id="l-txt" aria-live="polite"></div>
+      <div class="nav">
+        <button class="btn sec" id="l-ant" type="button">◀ Anterior</button>
+        <button class="btn" id="l-sig" type="button">Siguiente ▶</button>
+        <button class="btn-h" id="l-otra" type="button">↻ Dibujar otra vez</button>
+      </div>
+      <div class="fila lam-ctrl">
+        <div class="modo" id="l-modo" role="group" aria-label="Qué se ve">
+          <button type="button" data-m="nuevo" aria-pressed="false">Solo lo nuevo</button>
+          <button type="button" data-m="acumulado" aria-pressed="true">Acumulado</button>
+          <button type="button" data-m="final" aria-pressed="false">Resultado final</button>
+        </div>
+      </div>
+      <div class="fila lam-ctrl">
+        <button class="btn-h" id="l-todo" type="button">▶ Reproducir toda la lámina</button>
+        <label class="vel">Velocidad <select id="l-vel"><option value="0.5">lenta</option><option value="1" selected>normal</option><option value="2.5">rápida</option></select></label>
+      </div>
+    </div>
+    <div class="caja">
+      <h3>Los pasos</h3>
+      <ol class="lam-pasos" id="l-pasos"></ol>
+    </div>
+    <details class="caja lam-datos">
+      <summary>Datos de la lámina</summary>
+      <div class="lam-pz"><div id="l-mini"></div>
+        <div><label>Pieza <select id="l-pieza"></select></label>
+          <label>Escala <select id="l-escala"><option value="auto">Automática</option><option value="2:1">2:1</option><option value="1:1">1:1</option><option value="1:2">1:2</option></select></label>
+          <p class="datos-p" id="l-esc"></p></div></div>
+      <label class="chk"><input type="checkbox" id="l-ocu"> Dibujar las aristas ocultas</label>
+      <fieldset class="aux"><legend>Al terminar, la caja y las auxiliares:</legend>
+        <label><input type="radio" name="l-aux" value="dejar"> se dejan (muy finas)</label>
+        <label><input type="radio" name="l-aux" value="borrar" checked> se borran</label></fieldset>
+      <div class="caj-campos">
+        <label>Curso <input id="l-curso"></label><label>Apellidos y nombre <input id="l-nombre"></label><label>Fecha <input id="l-fecha"></label>
+        <label>Título <input id="l-titulo-in"></label><label>Nº de lámina <input id="l-num"></label>
+      </div>
+      <button class="btn-h" id="l-imprimir" type="button">Imprimir la lámina terminada (A4)</button>
+    </details>
+  </div>
+</main>
+<footer>
+  Lámina 2 · Perspectiva isométrica v1.0 · IES Jiménez de Quesada (Santa Fe, Granada). A4 vertical; márgenes de 20 mm a la izquierda y 5 mm en el resto; cajetín de dos filas de 10 mm (30 + 125 + 30 mm).
+  Ejes a 120°: Z vertical, Y (anchura) bajando a la izquierda y X (profundidad) bajando a la derecha. Dibujo sin reducir (isométrica normalizada).
+  Todo se dibuja con 2H; el HB, solo para el repaso final. Una perspectiva no se acota: para eso está la lámina de vistas.
+</footer>
+
+<script>
+(function(){
+'use strict';
+/* =====================================================================
+   GEOMETRÍA · piezas, aristas, proyecciones y visibilidad
+   Coordenadas internas de la pieza (en cuadros):
+     x = anchura (hacia la derecha)   → eje Y del alumno
+     y = profundidad (hacia delante)  → eje X del alumno (aparece dos veces al abatir)
+     z = altura (hacia arriba)        → eje Z del alumno
+   La pieza ocupa [0,W] × [0,D] × [0,H]. El observador del alzado está delante (+y).
+   ===================================================================== */
+const G = (() => {
+  const EPS = 1e-7;
+  const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+  const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
+  const mul = (a, k) => [a[0] * k, a[1] * k, a[2] * k];
+  const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+  const len = a => Math.hypot(a[0], a[1], a[2]);
+  const norm = a => { const l = len(a); return [a[0] / l, a[1] / l, a[2] / l]; };
+  const r6 = v => Math.round(v * 1e6) / 1e6;
+
+  /* ---------- caras ---------- */
+  function normalDe(pts) {
+    // Newell: válido para polígonos no convexos
+    let n = [0, 0, 0];
+    for (let i = 0; i < pts.length; i++) {
+      const a = pts[i], b = pts[(i + 1) % pts.length];
+      n[0] += (a[1] - b[1]) * (a[2] + b[2]); n[1] += (a[2] - b[2]) * (a[0] + b[0]); n[2] += (a[0] - b[0]) * (a[1] + b[1]);
+    }
+    return norm(n);
+  }
+  function cara(pts, holes) {
+    const n = normalDe(pts);
+    return { pts, holes: holes || [], n, d: dot(n, pts[0]) };
+  }
+  function claveCara(f) {
+    // plano sin orientación
+    let n = f.n.slice(), d = f.d;
+    const k = Math.abs(n[0]) > EPS ? 0 : Math.abs(n[1]) > EPS ? 1 : 2;
+    if (n[k] < 0) { n = mul(n, -1); d = -d; }
+    return n.map(r6).join(',') + '|' + r6(d);
+  }
+
+  /* ---------- generadores ---------- */
+  // prisma: perfil 2D extruido a lo largo de un eje entre dos cotas
+  function prisma(perfil, eje, desde, hasta) {
+    const P = (u, v, w) => eje === 'y' ? [u, w, v] : eje === 'x' ? [w, u, v] : [u, v, w];
+    const caras = [];
+    caras.push(cara(perfil.map(([u, v]) => P(u, v, desde))));
+    caras.push(cara(perfil.map(([u, v]) => P(u, v, hasta)).reverse()));
+    for (let i = 0; i < perfil.length; i++) {
+      const [u1, v1] = perfil[i], [u2, v2] = perfil[(i + 1) % perfil.length];
+      caras.push(cara([P(u1, v1, desde), P(u2, v2, desde), P(u2, v2, hasta), P(u1, v1, hasta)]));
+    }
+    return caras;
+  }
+  // mapa de alturas: h[j][i], j = fila de atrás (0) hacia delante, i = columna de izquierda a derecha
+  function alturas(h) {
+    const D = h.length, W = h[0].length, caras = [];
+    const H = (i, j) => (i < 0 || j < 0 || i >= W || j >= D) ? 0 : h[j][i];
+    for (let j = 0; j < D; j++) for (let i = 0; i < W; i++) {
+      const z = H(i, j); if (z <= 0) continue;
+      caras.push(cara([[i, j, z], [i + 1, j, z], [i + 1, j + 1, z], [i, j + 1, z]]));
+      caras.push(cara([[i, j, 0], [i, j + 1, 0], [i + 1, j + 1, 0], [i + 1, j, 0]]));
+    }
+    // paredes verticales entre celdas vecinas de distinta altura (incluido el exterior)
+    for (let j = 0; j < D; j++) for (let i = -1; i < W; i++) {          // paredes x = i+1
+      const a = H(i, j), b = H(i + 1, j); if (a === b) continue;
+      const lo = Math.min(a, b), hi = Math.max(a, b), x = i + 1;
+      caras.push(cara([[x, j, lo], [x, j + 1, lo], [x, j + 1, hi], [x, j, hi]]));
+    }
+    for (let j = -1; j < D; j++) for (let i = 0; i < W; i++) {          // paredes y = j+1
+      const a = H(i, j), b = H(i, j + 1); if (a === b) continue;
+      const lo = Math.min(a, b), hi = Math.max(a, b), y = j + 1;
+      caras.push(cara([[i, y, lo], [i + 1, y, lo], [i + 1, y, hi], [i, y, hi]]));
+    }
+    return caras;
+  }
+  // mapa de alturas con tapas planas inclinadas: celda = altura o [z(i,j), z(i+1,j), z(i+1,j+1), z(i,j+1)]
+  function alturasPlanas(h) {
+    const D = h.length, W = h[0].length, caras = [];
+    const C = (i, j) => { if (i < 0 || j < 0 || i >= W || j >= D) return [0, 0, 0, 0]; const c = h[j][i]; return Array.isArray(c) ? c : [c, c, c, c]; };
+    const poli = pts => { const u = pts.filter((p, k) => len(sub(p, pts[(k + pts.length - 1) % pts.length])) > 1e-9); return u.length >= 3 ? cara(u) : null; };
+    for (let j = 0; j < D; j++) for (let i = 0; i < W; i++) {
+      const c = C(i, j); if (Math.max(...c) <= 0) continue;
+      if (Math.abs(c[0] + c[2] - c[1] - c[3]) > 1e-9) throw new Error('tapa no plana en ' + i + ',' + j);
+      caras.push(cara([[i, j, c[0]], [i + 1, j, c[1]], [i + 1, j + 1, c[2]], [i, j + 1, c[3]]]));
+      caras.push(cara([[i, j, 0], [i, j + 1, 0], [i + 1, j + 1, 0], [i + 1, j, 0]]));
+    }
+    const pared = (P0, P1, a0, a1, b0, b1) => {
+      if (Math.abs(a0 - b0) < 1e-9 && Math.abs(a1 - b1) < 1e-9) return;
+      if ((a0 - b0) * (a1 - b1) < -1e-9) throw new Error('paredes cruzadas');
+      const f = poli([[P0[0], P0[1], Math.min(a0, b0)], [P1[0], P1[1], Math.min(a1, b1)], [P1[0], P1[1], Math.max(a1, b1)], [P0[0], P0[1], Math.max(a0, b0)]]);
+      if (f) caras.push(f);
+    };
+    for (let j = 0; j < D; j++) for (let i = -1; i < W; i++) { const A = C(i, j), B = C(i + 1, j); pared([i + 1, j], [i + 1, j + 1], A[1], A[2], B[0], B[3]); }
+    for (let j = -1; j < D; j++) for (let i = 0; i < W; i++) { const A = C(i, j), B = C(i, j + 1); pared([i, j + 1], [i + 1, j + 1], A[3], A[2], B[0], B[1]); }
+    return caras;
+  }
+  // mapa de alturas con tapas trianguladas: celda = altura, [4 esquinas] o {c:[4 esquinas], d:0|1}
+  // (si las cuatro esquinas no son coplanarias, la tapa se parte por la diagonal d: 0 = esquina 0–2, 1 = esquina 1–3)
+  function alturasTri(h) {
+    const D = h.length, W = h[0].length, caras = [];
+    const C = (i, j) => { if (i < 0 || j < 0 || i >= W || j >= D) return [0, 0, 0, 0]; const c = h[j][i]; return typeof c === 'number' ? [c, c, c, c] : Array.isArray(c) ? c : c.c; };
+    const Dg = (i, j) => { const c = h[j][i]; return c && c.d ? 1 : 0; };
+    const poli = pts => { const u = pts.filter((p, k) => len(sub(p, pts[(k + pts.length - 1) % pts.length])) > 1e-9); return u.length >= 3 ? cara(u) : null; };
+    for (let j = 0; j < D; j++) for (let i = 0; i < W; i++) {
+      const c = C(i, j); if (Math.max(...c) <= 0) continue;
+      const P = [[i, j, c[0]], [i + 1, j, c[1]], [i + 1, j + 1, c[2]], [i, j + 1, c[3]]];
+      if (Math.abs(c[0] + c[2] - c[1] - c[3]) < 1e-9) caras.push(cara(P));
+      else if (Dg(i, j)) { caras.push(cara([P[0], P[1], P[3]])); caras.push(cara([P[1], P[2], P[3]])); }
+      else { caras.push(cara([P[0], P[1], P[2]])); caras.push(cara([P[0], P[2], P[3]])); }
+      caras.push(cara([[i, j, 0], [i, j + 1, 0], [i + 1, j + 1, 0], [i + 1, j, 0]]));
+    }
+    const pared = (P0, P1, a0, a1, b0, b1) => {
+      if (Math.abs(a0 - b0) < 1e-9 && Math.abs(a1 - b1) < 1e-9) return;
+      if ((a0 - b0) * (a1 - b1) < -1e-9) throw new Error('paredes cruzadas');
+      const f = poli([[P0[0], P0[1], Math.min(a0, b0)], [P1[0], P1[1], Math.min(a1, b1)], [P1[0], P1[1], Math.max(a1, b1)], [P0[0], P0[1], Math.max(a0, b0)]]);
+      if (f) caras.push(f);
+    };
+    for (let j = 0; j < D; j++) for (let i = -1; i < W; i++) { const A = C(i, j), B = C(i + 1, j); pared([i + 1, j], [i + 1, j + 1], A[1], A[2], B[0], B[3]); }
+    for (let j = -1; j < D; j++) for (let i = 0; i < W; i++) { const A = C(i, j), B = C(i, j + 1); pared([i, j + 1], [i + 1, j + 1], A[3], A[2], B[0], B[1]); }
+    return caras;
+  }
+  // cubos: capas de abajo arriba; cada capa, filas de atrás hacia delante; '#' = cubo
+  function voxeles(capas) {
+    const H = capas.length, D = capas[0].length, W = capas[0][0].length, caras = [];
+    const V = (i, j, k) => i >= 0 && j >= 0 && k >= 0 && i < W && j < D && k < H && capas[k][j][i] === '#';
+    for (let k = 0; k < H; k++) for (let j = 0; j < D; j++) for (let i = 0; i < W; i++) {
+      if (!V(i, j, k)) continue;
+      if (!V(i - 1, j, k)) caras.push(cara([[i, j, k], [i, j + 1, k], [i, j + 1, k + 1], [i, j, k + 1]]));
+      if (!V(i + 1, j, k)) caras.push(cara([[i + 1, j, k], [i + 1, j, k + 1], [i + 1, j + 1, k + 1], [i + 1, j + 1, k]]));
+      if (!V(i, j - 1, k)) caras.push(cara([[i, j, k], [i, j, k + 1], [i + 1, j, k + 1], [i + 1, j, k]]));
+      if (!V(i, j + 1, k)) caras.push(cara([[i, j + 1, k], [i + 1, j + 1, k], [i + 1, j + 1, k + 1], [i, j + 1, k + 1]]));
+      if (!V(i, j, k - 1)) caras.push(cara([[i, j, k], [i + 1, j, k], [i + 1, j + 1, k], [i, j + 1, k]]));
+      if (!V(i, j, k + 1)) caras.push(cara([[i, j, k + 1], [i, j + 1, k + 1], [i + 1, j + 1, k + 1], [i + 1, j, k + 1]]));
+    }
+    return caras;
+  }
+  // caja recortada por un plano (n·p <= d se conserva); devuelve un poliedro convexo
+  function cajaRecortada(W, D, H, n, d) {
+    const V = (x, y, z) => [x, y, z];
+    const box = [
+      [V(0, 0, 0), V(W, 0, 0), V(W, D, 0), V(0, D, 0)], [V(0, 0, H), V(0, D, H), V(W, D, H), V(W, 0, H)],
+      [V(0, 0, 0), V(0, 0, H), V(W, 0, H), V(W, 0, 0)], [V(0, D, 0), V(W, D, 0), V(W, D, H), V(0, D, H)],
+      [V(0, 0, 0), V(0, D, 0), V(0, D, H), V(0, 0, H)], [V(W, 0, 0), V(W, 0, H), V(W, D, H), V(W, D, 0)]
+    ];
+    const caras = [], corte = [];
+    for (const poly of box) {
+      const out = [];
+      for (let i = 0; i < poly.length; i++) {
+        const a = poly[i], b = poly[(i + 1) % poly.length];
+        const da = dot(n, a) - d, db = dot(n, b) - d;
+        if (da <= EPS) out.push(a);
+        if ((da < -EPS && db > EPS) || (da > EPS && db < -EPS)) {
+          const t = da / (da - db); const p = add(a, mul(sub(b, a), t)); out.push(p); corte.push(p);
+        }
+        if (Math.abs(da) <= EPS) corte.push(a);
+      }
+      if (out.length >= 3) caras.push(cara(out));
+    }
+    // tapa: puntos del corte ordenados alrededor de su centro
+    const u = [];
+    corte.forEach(p => { if (!u.some(q => len(sub(p, q)) < 1e-6)) u.push(p); });
+    const c = mul(u.reduce((s, p) => add(s, p), [0, 0, 0]), 1 / u.length);
+    const e1 = norm(sub(u[0], c)), e2 = cross(norm(n), e1);
+    u.sort((p, q) => Math.atan2(dot(sub(p, c), e2), dot(sub(p, c), e1)) - Math.atan2(dot(sub(q, c), e2), dot(sub(q, c), e1)));
+    caras.push(cara(u));
+    return caras;
+  }
+
+  /* ---------- aristas reales ----------
+     Una arista es un tramo en el que se encuentran dos caras NO coplanarias.
+     Se agrupan los lados de todas las caras por recta, se parten en tramos
+     elementales y se comprueba qué planos tocan cada tramo (robusto ante
+     caras partidas y uniones en T). */
+  function aristas(caras) {
+    const grupos = new Map();
+    caras.forEach((f, fi) => {
+      [f.pts, ...f.holes].forEach(loop => {
+        for (let i = 0; i < loop.length; i++) {
+          const a = loop[i], b = loop[(i + 1) % loop.length];
+          let dir = norm(sub(b, a));
+          const k = Math.abs(dir[0]) > EPS ? 0 : Math.abs(dir[1]) > EPS ? 1 : 2;
+          if (dir[k] < 0) dir = mul(dir, -1);
+          const p0 = sub(a, mul(dir, dot(a, dir)));          // punto de la recta más cercano al origen
+          const key = dir.map(r6).join(',') + '|' + p0.map(r6).join(',');
+          if (!grupos.has(key)) grupos.set(key, { dir, p0, segs: [] });
+          const ta = dot(sub(a, p0), dir), tb = dot(sub(b, p0), dir);
+          grupos.get(key).segs.push({ t0: Math.min(ta, tb), t1: Math.max(ta, tb), fi });
+        }
+      });
+    });
+    const claves = caras.map(claveCara);
+    const out = [];
+    for (const g of grupos.values()) {
+      const ts = [];
+      g.segs.forEach(s => { ts.push(s.t0, s.t1); });
+      ts.sort((a, b) => a - b);
+      const u = ts.filter((t, i) => i === 0 || t - ts[i - 1] > 1e-6);
+      let actual = null;
+      for (let k = 0; k < u.length - 1; k++) {
+        const m = (u[k] + u[k + 1]) / 2;
+        const fs = [...new Set(g.segs.filter(s => s.t0 < m && s.t1 > m).map(s => s.fi))];
+        const planos = [...new Set(fs.map(fi => claves[fi]))].sort();
+        const real = planos.length >= 2;
+        const key = planos.join('#');
+        if (real && actual && actual.key === key && Math.abs(actual.t1 - u[k]) < 1e-6) { actual.t1 = u[k + 1]; continue; }
+        if (actual) { out.push(actual); actual = null; }
+        if (real) actual = { key, t0: u[k], t1: u[k + 1], g, caras: fs };
+      }
+      if (actual) out.push(actual);
+    }
+    return out.map((e, i) => ({
+      id: i, a: add(e.g.p0, mul(e.g.dir, e.t0)), b: add(e.g.p0, mul(e.g.dir, e.t1)), caras: e.caras
+    }));
+  }
+  /* agrupar caras coplanarias conectadas (para el inspector) */
+  function superficies(caras, edges) {
+    const claves = caras.map(claveCara), padre = caras.map((_, i) => i);
+    const raiz = i => padre[i] === i ? i : (padre[i] = raiz(padre[i]));
+    // dos caras coplanarias que comparten un tramo sin arista real están unidas
+    const lados = [];
+    caras.forEach((f, fi) => [f.pts, ...f.holes].forEach(loop => loop.forEach((a, i) => lados.push({ a, b: loop[(i + 1) % loop.length], fi }))));
+    for (let i = 0; i < lados.length; i++) for (let j = i + 1; j < lados.length; j++) {
+      const L = lados[i], M = lados[j];
+      if (L.fi === M.fi || claves[L.fi] !== claves[M.fi]) continue;
+      if (solapan(L, M)) padre[raiz(L.fi)] = raiz(M.fi);
+    }
+    const mapa = new Map();
+    caras.forEach((f, fi) => { const r = raiz(fi); if (!mapa.has(r)) mapa.set(r, []); mapa.get(r).push(fi); });
+    return [...mapa.values()].map((fs, i) => ({ id: i, caras: fs, n: caras[fs[0]].n }));
+  }
+  function solapan(L, M) {
+    const d = sub(L.b, L.a), l = len(d); if (l < EPS) return false;
+    const u = mul(d, 1 / l);
+    const enRecta = p => len(cross(sub(p, L.a), u)) < 1e-6;
+    if (!enRecta(M.a) || !enRecta(M.b)) return false;
+    const t1 = dot(sub(M.a, L.a), u), t2 = dot(sub(M.b, L.a), u);
+    return Math.min(Math.max(t1, t2), l) - Math.max(Math.min(t1, t2), 0) > 1e-6;
+  }
+
+  /* ---------- vistas ----------
+     u = horizontal de la vista (hacia la derecha), v = vertical (hacia arriba).
+     alzado: desde delante (+y) · planta: desde arriba (+z), el frente queda abajo · perfil izquierdo: desde la izquierda (−x), el frente queda a la derecha */
+  const VISTAS = {
+    alzado: { hacia: [0, 1, 0], uv: p => [p[0], p[2]] },
+    planta: { hacia: [0, 0, 1], uv: p => [p[0], -p[1]] },
+    perfil: { hacia: [-1, 0, 0], uv: p => [p[1], p[2]] },
+    // solo para los distractores del modo Guiado
+    derecho: { hacia: [1, 0, 0], uv: p => [-p[1], p[2]] },
+    posterior: { hacia: [0, -1, 0], uv: p => [-p[0], p[2]] },
+    inferior: { hacia: [0, 0, -1], uv: p => [p[0], p[1]] }
+  };
+  const ISO = { hacia: norm([-1, 1, 1]), uv: p => [0.8660254 * (p[0] + p[1]), 0.5 * (p[0] - p[1]) + p[2]] };
+  function dentroCara(Q, f) {
+    const n = f.n, k = Math.abs(n[0]) >= Math.abs(n[1]) && Math.abs(n[0]) >= Math.abs(n[2]) ? 0 : Math.abs(n[1]) >= Math.abs(n[2]) ? 1 : 2;
+    const ix = k === 0 ? 1 : 0, iy = k === 2 ? 1 : 2;
+    const q = [Q[ix], Q[iy]];
+    const bordeOIn = loop => {
+      let dentro = false;
+      for (let i = 0, j = loop.length - 1; i < loop.length; j = i++) {
+        const a = [loop[i][ix], loop[i][iy]], b = [loop[j][ix], loop[j][iy]];
+        // ¿sobre el borde?
+        const ab = [b[0] - a[0], b[1] - a[1]], aq = [q[0] - a[0], q[1] - a[1]];
+        const L2 = ab[0] * ab[0] + ab[1] * ab[1];
+        const t = L2 > 0 ? Math.max(0, Math.min(1, (aq[0] * ab[0] + aq[1] * ab[1]) / L2)) : 0;
+        if (Math.hypot(aq[0] - ab[0] * t, aq[1] - ab[1] * t) < 1e-6) return 'borde';
+        if (((a[1] > q[1]) !== (b[1] > q[1])) && (q[0] < (b[0] - a[0]) * (q[1] - a[1]) / (b[1] - a[1]) + a[0])) dentro = !dentro;
+      }
+      return dentro ? 'in' : 'out';
+    };
+    const o = bordeOIn(f.pts);
+    if (o === 'out') return false;
+    if (o === 'borde') return true;
+    for (const h of f.holes) { const r = bordeOIn(h); if (r === 'in') return false; }
+    return true;
+  }
+  function tapado(P, hacia, caras) {
+    for (const f of caras) {
+      const den = dot(f.n, hacia); if (Math.abs(den) < 1e-9) continue;
+      const t = (f.d - dot(f.n, P)) / den;
+      if (t <= 1e-6) continue;
+      if (dentroCara(add(P, mul(hacia, t)), f)) return true;
+    }
+    return false;
+  }
+  function interseccion2D(p, q, a, b) {
+    // parámetros t de p→q donde toca el segmento a→b (incluye extremos colineales)
+    const r = [q[0] - p[0], q[1] - p[1]], s = [b[0] - a[0], b[1] - a[1]];
+    const rxs = r[0] * s[1] - r[1] * s[0], qp = [a[0] - p[0], a[1] - p[1]];
+    const ts = [];
+    const L2 = r[0] * r[0] + r[1] * r[1];
+    if (Math.abs(rxs) < 1e-12) {
+      if (Math.abs(qp[0] * r[1] - qp[1] * r[0]) < 1e-9) { // colineales
+        [a, b].forEach(c => ts.push(((c[0] - p[0]) * r[0] + (c[1] - p[1]) * r[1]) / L2));
+      }
+      return ts;
+    }
+    const t = (qp[0] * s[1] - qp[1] * s[0]) / rxs, u = (qp[0] * r[1] - qp[1] * r[0]) / rxs;
+    if (u >= -1e-9 && u <= 1 + 1e-9) ts.push(t);
+    return ts;
+  }
+  /* proyecta cada arista y la clasifica en tramos visibles/ocultos */
+  function vista(clave, caras, edges) {
+    const V = clave === 'iso' ? ISO : VISTAS[clave];
+    const proy = edges.map(e => [V.uv(e.a), V.uv(e.b)]);
+    const res = [];
+    edges.forEach((e, i) => {
+      const [p, q] = proy[i];
+      const L = Math.hypot(q[0] - p[0], q[1] - p[1]);
+      if (L < 1e-6) { res.push({ arista: i, punto: p, tramos: [] }); return; }
+      let ts = [0, 1];
+      proy.forEach((s, j) => { if (j !== i) interseccion2D(p, q, s[0], s[1]).forEach(t => { if (t > 1e-7 && t < 1 - 1e-7) ts.push(t); }); });
+      ts.sort((a, b) => a - b);
+      ts = ts.filter((t, k) => k === 0 || t - ts[k - 1] > 1e-7);
+      const tramos = [];
+      for (let k = 0; k < ts.length - 1; k++) {
+        const m = (ts[k] + ts[k + 1]) / 2;
+        const P = add(e.a, mul(sub(e.b, e.a), m));
+        const tipo = tapado(P, V.hacia, caras) ? 'ocu' : 'vis';
+        const last = tramos[tramos.length - 1];
+        if (last && last.tipo === tipo) last.t1 = ts[k + 1]; else tramos.push({ t0: ts[k], t1: ts[k + 1], tipo });
+      }
+      res.push({ arista: i, p, q, tramos: tramos.map(t => ({ tipo: t.tipo, p: lerp2(p, q, t.t0), q: lerp2(p, q, t.t1) })) });
+    });
+    return res;
+  }
+  const lerp2 = (p, q, t) => [p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t];
+  /* líneas finales de la vista: se fusionan las superpuestas y la visible tapa a la oculta */
+  function lineasFinales(res, extra) {
+    const segs = [];
+    res.forEach(r => r.tramos.forEach(t => segs.push({ p: t.p, q: t.q, tipo: t.tipo })));
+    (extra || []).forEach(s => segs.push(s));
+    const grupos = new Map();
+    segs.forEach(s => {
+      let d = [s.q[0] - s.p[0], s.q[1] - s.p[1]]; const l = Math.hypot(d[0], d[1]); if (l < 1e-9) return;
+      d = [d[0] / l, d[1] / l];
+      if (d[0] < -1e-9 || (Math.abs(d[0]) < 1e-9 && d[1] < 0)) d = [-d[0], -d[1]];
+      const nrm = [-d[1], d[0]], c = s.p[0] * nrm[0] + s.p[1] * nrm[1];
+      const key = r6(d[0]) + ',' + r6(d[1]) + '|' + r6(c);
+      if (!grupos.has(key)) grupos.set(key, { d, o: [nrm[0] * c, nrm[1] * c], items: [] });
+      const g = grupos.get(key);
+      const t1 = (s.p[0] - g.o[0]) * d[0] + (s.p[1] - g.o[1]) * d[1], t2 = (s.q[0] - g.o[0]) * d[0] + (s.q[1] - g.o[1]) * d[1];
+      g.items.push({ t0: Math.min(t1, t2), t1: Math.max(t1, t2), tipo: s.tipo });
+    });
+    const PRI = { vis: 3, ocu: 2, eje: 1 };
+    const out = [];
+    for (const g of grupos.values()) {
+      const ts = [...new Set(g.items.flatMap(it => [r6(it.t0), r6(it.t1)]))].sort((a, b) => a - b);
+      let cur = null;
+      for (let k = 0; k < ts.length - 1; k++) {
+        const m = (ts[k] + ts[k + 1]) / 2;
+        let tipo = null;
+        g.items.forEach(it => { if (it.t0 < m && it.t1 > m && (!tipo || PRI[it.tipo] > PRI[tipo])) tipo = it.tipo; });
+        if (tipo && cur && cur.tipo === tipo && Math.abs(cur.t1 - ts[k]) < 1e-9) { cur.t1 = ts[k + 1]; continue; }
+        if (cur) out.push(cur);
+        cur = tipo ? { tipo, t0: ts[k], t1: ts[k + 1], g } : null;
+      }
+      if (cur) out.push(cur);
+    }
+    return out.map(c => ({ tipo: c.tipo, p: [c.g.o[0] + c.g.d[0] * c.t0, c.g.o[1] + c.g.d[1] * c.t0], q: [c.g.o[0] + c.g.d[0] * c.t1, c.g.o[1] + c.g.d[1] * c.t1] }));
+  }
+
+  /* ---------- las piezas ---------- */
+  const PIEZAS = [
+    { id: 1, nombre: 'Bloque en L', dims: [4, 2, 3], caras: () => prisma([[0, 0], [4, 0], [4, 3], [2, 3], [2, 1], [0, 1]], 'y', 0, 2),
+      origen: 'La pieza del ejemplo resuelto 1 del libro (las medidas en cuadros son del simulador).',
+      idea: 'Correspondencia: el alzado y la planta tienen la misma anchura (eje Y); el alzado y el perfil, la misma altura (eje Z); la planta y el perfil, la misma profundidad (eje X), que se pasa con la recta a 45°.',
+      resalta: { refs: true } },
+    { id: 2, nombre: 'Escalones en esquina', dims: [3, 3, 3], caras: () => alturas([[3, 3, 3], [2, 2, 3], [1, 2, 3]]),
+      idea: 'En el perfil izquierdo la escalera sube hacia la izquierda: la parte de atrás de la pieza queda junto al eje Z y el frente, a la derecha. Es el error más habitual: dibujarla al revés.',
+      resalta: { cara: [0.5, 2.5, 1] } },
+    { id: 3, nombre: 'Entrante en T', dims: [3, 3, 2], caras: () => prisma([[0, 0], [3, 0], [3, -1], [2, -1], [2, -3], [1, -3], [1, -1], [0, -1]].map(([u, v]) => [u, -v]), 'z', 0, 2),
+      idea: 'La concavidad (la forma en T) solo se reconoce en la planta. En el alzado y en el perfil se queda en simples líneas verticales: por eso hacen falta varias vistas.',
+      resalta: { arista: [1, 1, 1] } },
+    { id: 4, nombre: 'Ranura', dims: [4, 3, 3], caras: () => alturas([[3, 3, 3, 3], [3, 1, 1, 3], [3, 1, 1, 3]]),
+      idea: 'El fondo de la ranura no se ve desde la izquierda: en el perfil va con línea discontinua (oculta). La flecha está en este lado porque así la ranura se ve de frente; desde atrás, el alzado tendría líneas ocultas.',
+      resalta: { cara: [2, 2, 1] } },
+    { id: 5, nombre: 'Cuña', dims: [3, 3, 3], caras: () => prisma([[0, 0], [3, 0], [3, 1], [1, 3], [0, 3]], 'x', 0, 3),
+      idea: 'La cara inclinada se ve de canto en el perfil: una sola línea. En el alzado y en la planta se ve como superficie, pero más corta que en la realidad: ninguna vista muestra su forma real.',
+      resalta: { cara: [1.5, 2, 2] } },
+    { id: 6, nombre: 'Cuña girada', dims: [3, 3, 3], caras: () => prisma([[0, 0], [3, 0], [3, 3], [2, 3], [0, 1]], 'y', 0, 3),
+      idea: 'La misma idea en otra posición: ahora la cara inclinada se ve de canto en el alzado y como superficie en la planta y en el perfil. No hay un «truco»: depende de hacia dónde mira la cara.',
+      resalta: { cara: [1, 1.5, 2] } },
+    { id: 7, nombre: 'Esquina oblicua', dims: [3, 3, 3], caras: () => cajaRecortada(3, 3, 3, norm([-1, 1, 1]), dot(norm([-1, 1, 1]), [2, 3, 3])),
+      idea: 'La cara del corte está inclinada respecto a los tres ejes: se ve como triángulo en las tres vistas y en ninguna aparece con su forma real.',
+      resalta: { cara: [2 / 3, 7 / 3, 7 / 3] } },
+    { id: 8, nombre: 'Bloque con taladro', dims: [4, 4, 2], taladro: { cx: 2, cy: 2, r: 1 },
+      caras: () => alturas([[2, 2, 2, 2], [2, 2, 2, 2], [2, 2, 2, 2], [2, 2, 2, 2]]),
+      idea: 'El taladro se ve como circunferencia en la planta. En el alzado y en el perfil queda dentro del bloque: se dibuja con líneas ocultas y con su línea de eje (trazo y punto).',
+      resalta: { taladro: true } }
+  ];
+  const S0 = [1, 2, 2, 1], S1 = [2, 3, 3, 2];
+  const RETO_A = { id: 'A', nombre: 'Reto: pieza completa', dims: [5, 3, 3],
+    caras: () => alturasPlanas([[S0, S1, 3, 3, 3], [S0, S1, 3, 1, 2], [S0, S1, 3, 1, 2]]) };
+  // elementos propios del taladro (círculo, generatrices ocultas y ejes)
+  function extrasTaladro(pz) {
+    const t = pz.taladro, H = pz.dims[2], s = 0.35, out = { circulos: {} };
+    for (const k of Object.keys(VISTAS)) {
+      const V = VISTAS[k], uv = V.uv, ls = [];
+      if (Math.abs(V.hacia[2]) > 0.5) {           // mirando en la dirección del taladro: circunferencia y dos ejes
+        const c = uv([t.cx, t.cy, 0]);
+        ls.push({ tipo: 'eje', p: [c[0] - t.r - s, c[1]], q: [c[0] + t.r + s, c[1]] }, { tipo: 'eje', p: [c[0], c[1] - t.r - s], q: [c[0], c[1] + t.r + s] });
+        out.circulos[k] = [{ c, r: t.r, tipo: Math.sign(V.hacia[2]) > 0 ? 'vis' : 'vis' }];
+      } else {                                    // de lado: dos generatrices ocultas y el eje
+        const e = Math.abs(V.hacia[1]) > 0.5 ? [1, 0, 0] : [0, 1, 0];
+        [-1, 1].forEach(sg => { const a = uv([t.cx + sg * t.r * e[0], t.cy + sg * t.r * e[1], 0]), b = uv([t.cx + sg * t.r * e[0], t.cy + sg * t.r * e[1], H]); ls.push({ tipo: 'ocu', p: a, q: b }); });
+        const a = uv([t.cx, t.cy, -s]), b = uv([t.cx, t.cy, H + s]); ls.push({ tipo: 'eje', p: a, q: b });
+      }
+      out[k] = ls;
+    }
+    return out;
+  }
+  /* orienta todas las caras con la normal hacia fuera del sólido (paridad de cortes de un rayo) */
+  function puntoInterior(f) {
+    const a = f.pts[0], b = f.pts[1], m = mul(add(a, b), 0.5), ed = norm(sub(b, a)), perp = cross(f.n, ed);
+    const p1 = add(m, mul(perp, 1e-3)); return dentroCara(p1, f) ? p1 : add(m, mul(perp, -1e-3));
+  }
+  function dentroSolido(Q, caras) {
+    const r = norm([0.2137, 0.5711, 0.7925]); let n = 0;
+    for (const f of caras) {
+      const den = dot(f.n, r); if (Math.abs(den) < 1e-12) continue;
+      const t = (f.d - dot(f.n, Q)) / den; if (t <= 1e-9) continue;
+      if (dentroCara(add(Q, mul(r, t)), f)) n++;
+    }
+    return n % 2 === 1;
+  }
+  function orientar(caras) {
+    caras.forEach(f => {
+      const P = puntoInterior(f);
+      if (dentroSolido(add(P, mul(f.n, 1e-3)), caras)) { f.pts.reverse(); f.holes.forEach(h => h.reverse()); f.n = mul(f.n, -1); f.d = -f.d; }
+    });
+    return caras;
+  }
+  function preparar(pz) {
+    if (pz._listo) return pz;
+    pz.carasG = orientar(pz.caras());
+    pz.aristas = aristas(pz.carasG);
+    pz.sup = superficies(pz.carasG, pz.aristas);
+    pz.extras = pz.taladro ? extrasTaladro(pz) : null;
+    pz.vistas = {};
+    for (const k of Object.keys(VISTAS)) {
+      const res = vista(k, pz.carasG, pz.aristas);
+      pz.vistas[k] = { res, lineas: lineasFinales(res, pz.extras ? pz.extras[k] : null), circulos: pz.extras && pz.extras.circulos[k] ? pz.extras.circulos[k] : [] };
+    }
+    pz._listo = true;
+    return pz;
+  }
+  return { PIEZAS, RETO_A, VISTAS, preparar, dentroSolido, alturasPlanas, alturasTri, voxeles, aristas, superficies, vista, lineasFinales, tapado, dentroCara, claveCara, cara, prisma, alturas, cajaRecortada,
+    v: { sub, add, mul, dot, cross, len, norm } };
+})();
+
+
+/* =====================================================================
+   CATÁLOGO DE PIEZAS (fichas de clase)
+   Dimensiones en cuadros. Mapas de alturas: filas de atrás (0) hacia delante,
+   columnas de izquierda a derecha. Cubos: capas de abajo arriba.
+   ===================================================================== */
+const CATALOGO = (() => {
+  const A = (h) => () => G.alturas(h), P = (h) => () => G.alturasPlanas(h), T = (h) => () => G.alturasTri(h), V = (c) => () => G.voxeles(c);
+  const dimsH = h => [h[0].length, h.length, Math.max(...h.flat().map(c => typeof c === 'number' ? c : Math.max(...(Array.isArray(c) ? c : c.c))))];
+  const dimsV = c => [c[0][0].length, c[0].length, c.length];
+  const FS = 'ficha de vistas de libre difusión', FP = 'ficha de prácticas de vistas de libre difusión';
+  const hs = (id, nombre, h, ref) => ({ id, nombre, dims: dimsH(h), caras: A(h), origen: `Pieza de la ${FS} (${ref}).` });
+  const vx = (id, nombre, c, ref) => ({ id, nombre, dims: dimsV(c), caras: V(c), origen: `Pieza de la ${FS} (${ref}).` });
+  const L4 = (l, r) => [0, 1, 2, 3].map(j => [l[j], l[j], r[j], r[j]]);        // 4×4: dos columnas de la izquierda y dos de la derecha
+  const cp = (id, nombre, h, ref, f) => ({ id, nombre, dims: [4, 4, 4], caras: (f || P)(h), origen: `Pieza de la ${FP} (${ref}).` });
+  const Z = (a, b) => [a, a, b, b];                                              // tapa inclinada de atrás hacia delante
+  return [
+    hs('s1', 'Esquina en L', [[1, 1, 3], [1, 1, 3], [1, 1, 3]], 'ejemplo de «Vistas 1»'),
+    hs('s2', 'Pared con escalón', [[3, 3, 3], [1, 1, 2], [1, 1, 2]], '«Vistas 1», pieza 2'),
+    hs('s3', 'Escalera de tres peldaños', [[3, 3, 3], [2, 2, 2], [1, 1, 1]], '«Vistas 1», pieza 3'),
+    hs('s4', 'Bloque con esquina rebajada', [[3, 3, 3], [3, 3, 3], [1, 2, 2]], '«Vistas 1», pieza 4'),
+    Object.assign(vx('s5', 'Pared con ventana', [['###', '###', '###'], ['#.#', '...', '...'], ['###', '...', '...']], '«Vistas 1», pieza 5'), { nota: 'El hueco de la ventana atraviesa la pared de delante a atrás: en el alzado se ve su contorno, y en la planta y en el perfil, sus aristas quedan ocultas.' }),
+    hs('s6', 'Base con bloque', [[1, 1, 2], [1, 1, 2], [1, 1, 1]], '«Vistas 1», pieza 6'),
+    hs('s7', 'Base con torre', [[1, 3, 1], [1, 3, 1], [1, 1, 1]], '«Vistas 2», pieza 1'),
+    hs('s8', 'Pared con cubo', [[3, 3, 3], [1, 2, 1], [1, 1, 1]], '«Vistas 2», pieza 2'),
+    hs('s9', 'Dos columnas', [[2, 3], [2, 3], [0, 3]], '«Vistas 2», pieza 3'),
+    hs('s10', 'Escalera en esquina', [[1, 1, 3], [0, 1, 2], [0, 0, 1]], '«Vistas 2», pieza 4'),
+    { id: 's11', nombre: 'Voladizo trasero', dims: [3, 3, 3], caras: () => G.prisma([[0, 1], [2, 1], [2, 0], [3, 0], [3, 2], [1, 2], [1, 3], [0, 3]], 'x', 0, 3), origen: `Pieza de la ${FS} («Vistas 2», pieza 5).` },
+    { id: 's12', nombre: 'Pieza en T', dims: [3, 1, 3], caras: () => G.prisma([[1, 0], [2, 0], [2, 2], [3, 2], [3, 3], [0, 3], [0, 2], [1, 2]], 'y', 0, 1), nota: 'La pieza solo tiene un cuadro de profundidad: el perfil es muy estrecho, pero conserva la misma altura que el alzado.', origen: `Pieza de la ${FS} («Vistas 2», pieza 6).` },
+    hs('s13', 'Foso lateral', [[2, 2, 3], [1, 2, 3], [1, 2, 3]], '«Vistas 3», pieza 1'),
+    hs('s14', 'Cuatro torres', [[3, 1, 3], [1, 1, 1], [3, 1, 3]], '«Vistas 3», pieza 2'),
+    Object.assign(vx('s15', 'Puente en esquina', [['..#', '..#', '..#'], ['..#', '...', '...'], ['###', '...', '...']], '«Vistas 3», pieza 3'), { nota: 'Mírala desde cada lado: la barra de arriba y la de abajo van en direcciones distintas, y cada una se ve larga en una vista y como un cuadro en otra.' }),
+    hs('s16', 'Bloque con peldaños', [[2, 3, 3], [1, 3, 3], [0, 3, 3]], '«Vistas 3», pieza 4'),
+    hs('s17', 'Base con dos cubos', [[2, 1, 2], [1, 1, 1], [1, 1, 1]], '«Vistas 3», pieza 5'),
+    Object.assign(vx('s18', 'Ventana y brazo', [['###', '..#', '..#'], ['#.#', '...', '...'], ['###', '...', '...']], '«Vistas 3», pieza 6'), { nota: 'La ventana atraviesa la pared: en el alzado se ve su contorno, y en la planta y en el perfil sus aristas quedan ocultas.' }),
+    hs('s19', 'Muro en T invertida', [[1, 3, 1], [1, 3, 1], [1, 3, 1]], '«Vistas 4», pieza 1'),
+    hs('s20', 'Cubo sin una esquina', [[3, 3, 3], [3, 3, 3], [2, 3, 3]], '«Vistas 4», pieza 2'),
+    hs('s21', 'Almena', [[1, 1, 3], [1, 1, 2], [1, 1, 3]], '«Vistas 4», pieza 3'),
+    hs('s22', 'Muro con muesca', [[3, 3, 2], [1, 1, 1], [1, 0, 1]], '«Vistas 4», pieza 4'),
+    hs('s23', 'Pieza en C', [[3, 3, 3], [0, 0, 3], [3, 3, 3]], '«Vistas 4», pieza 5'),
+    Object.assign(vx('s24', 'Puerta', [['#.#', '#.#', '#.#'], ['#.#', '...', '...'], ['###', '...', '...']], '«Vistas 4», pieza 6'), { nota: 'La puerta atraviesa la pared de delante a atrás y llega hasta el suelo: por eso en el alzado el contorno de la pieza tiene un entrante.' }),
+    hs('s25', 'Escalón ancho', [[1, 3, 3], [1, 3, 3], [1, 3, 3]], '«Perspectiva isométrica 1», pieza 2'),
+    hs('s26', 'Prisma en T', [[3, 3, 3], [0, 3, 0], [0, 3, 0]], '«Perspectiva isométrica 1», pieza 3'),
+    hs('s27', 'Escalera y brazo', [[1, 2, 3], [0, 0, 1], [0, 0, 1]], '«Perspectiva isométrica 1», pieza 4'),
+    hs('s28', 'Rincón con torre', [[2, 2, 3], [1, 1, 2], [1, 1, 2]], '«Perspectiva isométrica 1», pieza 5'),
+    Object.assign(vx('s29', 'Ventana y plataforma', [['###', '.##', '.##'], ['#.#', '...', '...'], ['###', '...', '...']], '«Perspectiva isométrica 1», pieza 6'), { nota: 'La ventana atraviesa la pared: en el alzado se ve su contorno, y en la planta y en el perfil sus aristas quedan ocultas.' }),
+    { id: 'p1', nombre: 'Escalón alto', dims: [4, 4, 4], caras: () => G.prisma([[0, 0], [4, 0], [4, 2], [2, 2], [2, 4], [0, 4]], 'x', 0, 4), origen: `Pieza de la ${FP} (página 1, pieza 1).` },
+    cp('p2', 'Rebaje y chaflán', L4([4, 4, 2, 2], [4, 4, Z(4, 3), Z(3, 2)]), 'página 1, pieza 2'),
+    { id: 'p3', nombre: 'Chaflán', dims: [4, 4, 4], caras: () => G.prisma([[0, 0], [4, 0], [4, 2], [2, 4], [0, 4]], 'x', 0, 4), origen: `Pieza de la ${FP} (página 1, pieza 3).` },
+    cp('p4', 'Cubo con esquina hundida', L4([4, 4, 2, 2], [4, 4, 4, 4]), 'página 2, pieza 1'),
+    cp('p5', 'Rampa y chaflán', L4([Z(4, 3.5), Z(3.5, 3), Z(3, 2.5), Z(2.5, 2)], [4, 4, Z(4, 3), Z(3, 2)]), 'página 2, pieza 2'),
+    cp('p6', 'Rampa lateral y hueco', L4([4, 4, 2, 2], [Z(4, 3.5), Z(3.5, 3), Z(3, 2.5), Z(2.5, 2)]), 'página 2, pieza 3'),
+    cp('p7', 'Doble pendiente', L4([Z(4, 3), Z(3, 2), 2, 2], [4, 4, Z(4, 3), Z(3, 2)]), 'página 3, pieza 1'),
+    cp('p8', 'Esquina cortada en diagonal', [
+      [Z(4, 3), Z(4, 3), 4, 4], [Z(3, 2), Z(3, 2), 4, 4],
+      [{ c: [2, 2, 2, 1], d: 0 }, 2, 2, 2], [[1, 2, 1, 0], { c: [2, 2, 2, 1], d: 0 }, 2, 2]], 'página 3, pieza 2', T),
+    cp('p9', 'Dos cortes oblicuos', [
+      [Z(4, 3), Z(4, 3), { c: [4, 4, 4, 3], d: 0 }, 4], [Z(3, 2), Z(3, 2), [3, 4, 3, 2], { c: [4, 4, 4, 3], d: 0 }],
+      [{ c: [2, 2, 2, 1], d: 0 }, 2, 2, 2], [[1, 2, 1, 0], { c: [2, 2, 2, 1], d: 0 }, 2, 2]], 'página 3, pieza 3', T),
+    cp('p10', 'Chaflán y esquina oblicua', [
+      [4, 4, 4, 4], [4, 4, 4, 4],
+      [{ c: [2, 2, 2, 1], d: 0 }, 2, Z(4, 3), Z(4, 3)], [[1, 2, 1, 0], { c: [2, 2, 2, 1], d: 0 }, Z(3, 2), Z(3, 2)]], 'página 4, pieza 1', T),
+    cp('p11', 'Rampa y pirámide', [
+      [2, 2, { c: [4, 4, 4, 3], d: 0 }, 4], [2, 2, [3, 4, 3, 2], { c: [4, 4, 4, 3], d: 0 }],
+      [[0, 1, 1, 0], [1, 2, 2, 1], 2, 2], [[0, 1, 1, 0], [1, 2, 2, 1], 2, 2]], 'página 4, pieza 2', T)
+  ];
+})();
+
+
+/* =====================================================================
+   LÁMINA 2 · PERSPECTIVA ISOMÉTRICA
+   Construcción paso a paso de una lámina A4 real, como se dibuja en clase:
+   se busca el centro de la zona libre, se trazan allí los tres ejes a 120°,
+   se lleva sobre ellos la anchura, la profundidad y la altura, se cierra la
+   caja envolvente y, dentro de ella, se construye la pieza.
+   Hoja en mm, origen en la esquina inferior izquierda, y hacia arriba
+   (en SVG se usa la y negativa: viewBox 0 −297 210 297).
+
+   Ejes, con los nombres de clase:
+     Z  altura       → vertical hacia arriba
+     Y  anchura      → baja hacia la izquierda
+     X  profundidad  → baja hacia la derecha
+   El origen de los ejes es el vértice de atrás y abajo de la caja: el que
+   queda escondido, y el que cae justo en el centro del dibujo.
+   ===================================================================== */
+const NS = 'http://www.w3.org/2000/svg';
+function sv(tag, at, par) { const e = document.createElementNS(NS, tag); for (const k in at) if (at[k] != null) e.setAttribute(k, at[k]); if (par) par.appendChild(e); return e; }
+function svT(txt, at, par) { const t = sv('text', at, par); t.textContent = txt; return t; }
+const $ = s => document.querySelector(s);
+function el(tag, at, par, html) { const e = document.createElement(tag); for (const k in (at || {})) if (at[k] != null) { if (k === 'class') e.className = at[k]; else e.setAttribute(k, at[k]); } if (html != null) e.innerHTML = html; if (par) par.appendChild(e); return e; }
+
+const REC = { x0: 20, x1: 205, y0: 5, y1: 292 };
+const LIBRE = { x0: 20, x1: 205, y0: 25, y1: 292 };
+const CEN = [(LIBRE.x0 + LIBRE.x1) / 2, (LIBRE.y0 + LIBRE.y1) / 2];
+const K3 = Math.sqrt(3) / 2;
+const ESCALAS = [{ k: 2, t: '2:1' }, { k: 1, t: '1:1' }, { k: 0.5, t: '1:2' }];
+const PIEZAS_LAM = ['s1', 's25', 's19', 's20', 's3', 's15'];
+const EST = {
+  curso: '4º ESO A', nombre: 'Alonso Herrera, Manuel', fecha: '15/09/2026',
+  titulo: 'Perspectiva isométrica de una pieza', num: 'Nº 2',
+  escala: 'auto', pieza: 0, ocultas: false, aux: 'borrar', modo: 'acumulado', vel: 1, paso: 0
+};
+
+/* ---------------- pasos ---------------- */
+const PASOS = [
+  { id: 'hoja', t: 'La hoja', lap: null, txt: 'Coloca la hoja A4 <b>en vertical</b> y sujétala para que no se mueva. Mide 210 × 297 mm.' },
+  { id: 'margen', t: 'Márgenes', lap: '2H', txt: 'Traza el recuadro: <b>20 mm</b> por la izquierda (para encuadernar) y <b>5 mm</b> arriba, abajo y a la derecha. Queda un recuadro de 185 × 287 mm.' },
+  { id: 'cajetin', t: 'Cajetín', lap: '2H', txt: 'Desde el margen inferior, dos líneas paralelas a <b>10 mm</b> una de otra. Después, dos verticales a <b>30 mm</b> de cada lado: quedan tres casillas de 30, 125 y 30 mm en cada fila.' },
+  { id: 'centro', t: 'Centro de la zona de dibujo', lap: '2H', txt: 'Busca el centro de la parte libre (encima del cajetín) trazando sus <b>diagonales</b>: se cortan en el centro. Marca el punto y <b>borra las diagonales</b>. <span class="nota">Con regla basta con dos trazos cortos cerca del centro, y así casi no hay que borrar.</span>' },
+  { id: 'ejes', t: 'Ejes isométricos', lap: '2H', txt: 'Por el centro, los <b>tres ejes a 120°</b>: <b>Z</b> vertical hacia arriba (la altura), <b>Y</b> bajando hacia la izquierda (la anchura) y <b>X</b> bajando hacia la derecha (la profundidad). Los dos de abajo van a <b>30° sobre la horizontal</b>: con el cartabón salen solos.<span class="nota">Ese punto del centro es el vértice de atrás y abajo de la pieza, el que queda escondido. Poniéndolo en el centro, el dibujo queda centrado en la hoja.</span>' },
+  { id: 'general', t: 'Medidas generales', lap: '2H', txt: 'Lleva sobre cada eje, <b>a escala</b> y desde el centro, las tres medidas máximas de la pieza: la <b>anchura</b> sobre el eje Y, la <b>profundidad</b> sobre el eje X y la <b>altura</b> sobre el eje Z. Marca los tres puntos.<span class="nota">En isométrica las medidas <b>no se reducen</b>: se llevan tal cual sobre los ejes. Solo se mide en las tres direcciones; nunca en diagonal.</span>' },
+  { id: 'caja', t: 'Caja envolvente', lap: '2H', txt: 'Cierra el <b>prisma que envuelve a la pieza</b> trazando por los tres puntos paralelas a los ejes. Es la guía: dentro de esta caja cabe la pieza entera, y todas sus aristas van en una de las tres direcciones.' },
+  { id: 'cortes', t: 'Marcar las medidas', lap: '2H', txt: 'Sobre las <b>caras de la caja</b> lleva, contando desde sus bordes, las medidas de los escalones y los rebajes que ves en las vistas. Cada marca se traza paralela a un eje.' },
+  { id: 'pieza', t: 'Aristas de la pieza', lap: '2H', txt: 'Une las marcas y repasa las <b>aristas que se ven</b>. Sale la pieza dentro de la caja: lo que sobra de la caja se quedará como línea de construcción.' },
+  { id: 'ocultas', t: 'Aristas ocultas', lap: '2H', txt: 'Las aristas que existen pero quedan detrás. <b>En perspectiva normalmente no se dibujan</b>: la perspectiva enseña la pieza, no la define.' },
+  { id: 'rotulo', t: 'Rotular el cajetín', lap: '2H', txt: 'Arriba: curso, apellidos y nombre, y fecha. Abajo: escala, título de la lámina y número de lámina.' },
+  { id: 'limpia', t: 'Limpieza', lap: 'goma', txt: '' },
+  { id: 'repaso', t: 'Repaso con HB', lap: 'HB', txt: 'Con el <b>HB</b> se repasan <b>solo las aristas de la pieza</b>. Todo lo demás (recuadro, cajetín, ejes, caja envolvente y líneas de construcción) se queda como se dibujó con el 2H.<span class="nota">Una perspectiva <b>no se acota</b> para fabricar: para eso está la lámina de vistas.</span>' }
+];
+const IP = Object.fromEntries(PASOS.map((p, i) => [p.id, i]));
+
+/* ---------------- geometría de la lámina ---------------- */
+let R = null;
+/* punto de la pieza (en cuadros) → milímetros de papel, relativo al centro.
+   El origen es el vértice (W, 0, 0): el de atrás, abajo y a la derecha. */
+function pieza2papel(pz, s) {
+  const W = pz.dims[0];
+  return (x, y, z) => [K3 * (x + y - W) * s, ((x - y - W) / 2 + z) * s];
+}
+function probar(pz, k) {
+  const s = 10 * k;                                   // 1 cuadro = 10 mm en la pieza
+  const P3 = pieza2papel(pz, s);
+  const [W, D, H] = pz.dims;
+  const uv = l => [l[0] * 1, l[1] * 1];
+  // aristas de la pieza, en papel
+  const res = G.vista('iso', pz.carasG, pz.aristas);
+  const lin = G.lineasFinales(res, null);
+  const O = [K3 * W, W / 2];                          // uv del origen
+  const aPapel = ([u, v]) => [(u - O[0]) * s, (v - O[1]) * s];
+  const aristas = lin.map(l => ({ tipo: l.tipo, p: aPapel(l.p), q: aPapel(l.q) }));
+  // caja envolvente
+  const V = {};
+  [[0, 0, 0], [W, 0, 0], [W, D, 0], [0, D, 0], [0, 0, H], [W, 0, H], [W, D, H], [0, D, H]]
+    .forEach((c, i) => { V['v' + i] = P3(c[0], c[1], c[2]); V['c' + i] = c; });
+  const arista = (i, j) => ({ p: V['v' + i], q: V['v' + j] });
+  const cajaEjes = [arista(1, 0), arista(1, 2), arista(1, 5)];         // los tres que salen del origen
+  const cajaResto = [arista(0, 3), arista(3, 2), arista(0, 4), arista(3, 7), arista(2, 6), arista(4, 5), arista(5, 6), arista(6, 7), arista(7, 4)];
+  // extensión total del dibujo
+  let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+  const ext = ([x, y]) => { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); };
+  Object.keys(V).filter(k2 => k2[0] === 'v').forEach(k2 => ext(V[k2]));
+  const cabe = CEN[0] + x0 >= LIBRE.x0 + 6 && CEN[0] + x1 <= LIBRE.x1 - 6 && CEN[1] + y0 >= LIBRE.y0 + 6 && CEN[1] + y1 <= LIBRE.y1 - 6;
+  return { pz, s, P3, aristas, V, cajaEjes, cajaResto, caja: { x0, x1, y0, y1 }, cabe };
+}
+function construir() {
+  const pz = CATALOGO.find(p => p.id === PIEZAS_LAM[EST.pieza]) || CATALOGO[0];
+  G.preparar(pz);
+  let esc = null, r = null;
+  if (EST.escala === 'auto') {
+    for (const e of ESCALAS) { r = probar(pz, e.k); if (r.cabe) { esc = e; break; } }
+    if (!esc) { esc = ESCALAS[ESCALAS.length - 1]; r = probar(pz, esc.k); }
+  } else { esc = ESCALAS.find(e => e.t === EST.escala); r = probar(pz, esc.k); }
+  r.esc = esc; R = r;
+  R.hayOcultas = R.aristas.some(l => l.tipo === 'ocu');
+  R.els = elementos();
+}
+
+/* ---------------- los trazos de cada paso ---------------- */
+const P = p => [CEN[0] + p[0], CEN[1] + p[1]];
+function elementos() {
+  const L = [], pz = R.pz, [W, D, H] = pz.dims, s = R.s, P3 = R.P3;
+  const lin = (paso, p, q, cls, extra) => L.push(Object.assign({ paso: IP[paso], t: 'l', p: P(p), q: P(q), cls }, extra || {}));
+  const linA = (paso, p, q, cls, extra) => L.push(Object.assign({ paso: IP[paso], t: 'l', p, q, cls }, extra || {}));
+  const txt = (paso, t2, p, cls, extra) => L.push(Object.assign({ paso: IP[paso], t: 'x', s: t2, p, cls }, extra || {}));
+
+  // ── márgenes y cajetín (coordenadas absolutas de la hoja) ──
+  const r = REC;
+  linA('margen', [r.x0, r.y0], [r.x1, r.y0], 'c2'); linA('margen', [r.x1, r.y0], [r.x1, r.y1], 'c2');
+  linA('margen', [r.x1, r.y1], [r.x0, r.y1], 'c2'); linA('margen', [r.x0, r.y1], [r.x0, r.y0], 'c2');
+  linA('cajetin', [20, 15], [205, 15], 'c2'); linA('cajetin', [20, 25], [205, 25], 'c2');
+  linA('cajetin', [50, 5], [50, 25], 'c2'); linA('cajetin', [175, 5], [175, 25], 'c2');
+
+  // ── centro ──
+  linA('centro', [LIBRE.x0, LIBRE.y0], [LIBRE.x1, LIBRE.y1], 'c2 aux', { borraEn: IP.ejes });
+  linA('centro', [LIBRE.x0, LIBRE.y1], [LIBRE.x1, LIBRE.y0], 'c2 aux', { borraEn: IP.ejes });
+  L.push({ paso: IP.centro, t: 'o', p: CEN, cls: 'c2 punto', borraEn: IP.limpia });
+
+  // ── ejes isométricos, desde el centro ──
+  const dirs = { Z: [0, 1], Y: [-K3, -0.5], X: [K3, -0.5] };
+  const largo = { Z: H * s + 14, Y: W * s + 14, X: D * s + 14 };
+  for (const k of ['Z', 'Y', 'X']) {
+    const d = dirs[k], Lg = largo[k];
+    lin('ejes', [0, 0], [d[0] * Lg, d[1] * Lg], 'c2 eje');
+    txt('ejes', k, P([d[0] * (Lg + 5) - (k === 'Y' ? 2 : 0), d[1] * (Lg + 5) - 1.5]), 'c2 letra', { centro: true });
+  }
+
+  // ── medidas generales: los tres puntos sobre los ejes ──
+  const pY = P3(0, 0, 0), pX = P3(W, D, 0), pZ = P3(W, 0, H);
+  [pY, pX, pZ].forEach(p => L.push({ paso: IP.general, t: 'o', p: P(p), cls: 'c2 marca', borraEn: IP.limpia }));
+
+  // ── caja envolvente ──
+  R.cajaResto.forEach(a => lin('caja', a.p, a.q, 'c2 cajaenv', { borra: 'aux' }));
+  R.cajaEjes.forEach(a => lin('caja', a.p, a.q, 'c2 cajaenv', { borra: 'aux' }));
+
+  // ── marcar las medidas sobre las caras visibles de la caja ──
+  const co = { x: new Set(), y: new Set(), z: new Set() };
+  pz.aristas.forEach(e => [e.a, e.b].forEach(p => { co.x.add(+p[0].toFixed(4)); co.y.add(+p[1].toFixed(4)); co.z.add(+p[2].toFixed(4)); }));
+  const dentro = (v, max) => v > 1e-6 && v < max - 1e-6;
+  const xs = [...co.x].filter(v => dentro(v, W)).sort((a, b) => a - b);
+  const ys = [...co.y].filter(v => dentro(v, D)).sort((a, b) => a - b);
+  const zs = [...co.z].filter(v => dentro(v, H)).sort((a, b) => a - b);
+  const aux = (a, b) => lin('cortes', a, b, 'c2 aux', { borra: 'aux' });
+  xs.forEach(x => { aux(P3(x, D, 0), P3(x, D, H)); aux(P3(x, 0, H), P3(x, D, H)); });   // cara frontal y tapa
+  ys.forEach(y => { aux(P3(0, y, 0), P3(0, y, H)); aux(P3(0, y, H), P3(W, y, H)); });   // cara izquierda y tapa
+  zs.forEach(z => { aux(P3(0, 0, z), P3(0, D, z)); aux(P3(0, D, z), P3(W, D, z)); });   // cara izquierda y frontal
+
+  // ── aristas de la pieza ──
+  R.aristas.forEach(l => {
+    if (l.tipo === 'vis') lin('pieza', l.p, l.q, 'c2 arista', { hb: 'arista' });
+    else if (EST.ocultas) lin('ocultas', l.p, l.q, 'c2 oculta', { hb: 'oculta' });
+  });
+
+  // ── cajetín ──
+  const cel = (s2, x0, x1, y0, tam) => txt('rotulo', s2, [(x0 + x1) / 2, y0 + 3.4], 'c2 caj', { tam, centro: true });
+  cel(EST.curso, 20, 50, 15, 3.5); cel(EST.nombre, 50, 175, 15, 3.8); cel(EST.fecha, 175, 205, 15, 3.5);
+  cel('E ' + R.esc.t, 20, 50, 5, 3.5); cel(EST.titulo, 50, 175, 5, 3.8); cel(EST.num, 175, 205, 5, 3.5);
+  return L;
+}
+
+/* ---------------- dibujo ---------------- */
+const svg = () => $('#hoja');
+function nodo(e, par, estado) {
+  const cls = claseDe(e, estado);
+  if (e.t === 'l') return sv('line', { x1: e.p[0], y1: -e.p[1], x2: e.q[0], y2: -e.q[1], class: cls }, par);
+  if (e.t === 'o') return sv('circle', { cx: e.p[0], cy: -e.p[1], r: e.cls.includes('marca') ? 0.8 : 0.9, class: cls }, par);
+  if (e.t === 'x') return svT(e.s, { x: e.p[0], y: -e.p[1], class: cls, 'text-anchor': e.centro ? 'middle' : 'start', style: e.tam ? `font-size:${e.tam}px` : null }, par);
+}
+function claseDe(e, st) {
+  let c = e.cls || '';
+  if (st.repasado && e.hb) c += ' hb hb-' + e.hb;
+  if (st.borrar) c += ' aborrar';
+  return c;
+}
+function pasoBorrado(e) { return e.borraEn != null ? e.borraEn : e.borra === 'aux' && EST.aux === 'borrar' ? IP.limpia : null; }
+function borrado(e, hasta) { const b = pasoBorrado(e); return b != null && hasta > b; }
+let ANIM = 0;
+function pintar(animar) {
+  ANIM++;
+  const s = svg(); s.textContent = '';
+  sv('rect', { x: 0, y: -297, width: 210, height: 297, class: 'papel' }, s);
+  const paso = EST.modo === 'final' ? PASOS.length - 1 : EST.paso, modo = EST.modo;
+  const gOld = sv('g', {}, s), gNew = sv('g', {}, s), gLap = sv('g', { class: 'lapiz' }, s);
+  const nuevos = [];
+  const pid = PASOS[paso].id;
+  R.els.forEach(e => {
+    if (e.paso > paso) return;
+    const esNuevo = e.paso === paso && modo !== 'final';
+    if (modo === 'nuevo' && !esNuevo && pasoBorrado(e) !== paso && !(pid === 'repaso' && e.hb)) return;
+    if (modo !== 'final' && pasoBorrado(e) === paso) { const n = nodo(e, gNew, { borrar: true }); if (modo === 'acumulado') nuevos.unshift({ n, borrar: true }); return; }
+    if (pid === 'limpia' && modo === 'nuevo') return;
+    if (modo === 'final' && pasoBorrado(e) != null && pasoBorrado(e) <= paso) return;
+    if (borrado(e, paso)) return;
+    const repasado = paso >= IP.repaso;
+    if (pid === 'repaso' && modo !== 'final' && e.hb) {
+      if (modo === 'acumulado') nodo(e, gOld, { repasado: false });
+      const n = nodo(e, gNew, { repasado: true }); nuevos.push({ n }); return;
+    }
+    if (modo === 'nuevo' && pid === 'repaso') return;
+    const n = nodo(e, esNuevo ? gNew : gOld, { repasado });
+    if (esNuevo) nuevos.push({ n });
+  });
+  if (animar && modo !== 'final' && nuevos.length) animarNodos(nuevos, gLap, ANIM);
+}
+function hojas(n) { return n.tagName === 'g' ? [...n.querySelectorAll('line, path, text, circle')] : [n]; }
+async function animarNodos(lista, gLap, id) {
+  const todas = [];
+  lista.forEach(({ n, borrar }) => hojas(n).forEach(h => todas.push({ h, borrar })));
+  todas.forEach(({ h, borrar }) => { if (borrar) return; if (h.tagName === 'line') { h._q = [+h.getAttribute('x2'), +h.getAttribute('y2')]; h.setAttribute('x2', h.getAttribute('x1')); h.setAttribute('y2', h.getAttribute('y1')); } else h.style.opacity = 0; });
+  const vel = 170 * EST.vel;
+  const lap = sv('circle', { r: 1.1, class: 'punta', style: 'opacity:0' }, gLap);
+  for (const { h, borrar } of todas) {
+    if (id !== ANIM) return;
+    if (borrar) { await esperar(90 / EST.vel); h.style.transition = `opacity ${0.5 / EST.vel}s`; h.style.opacity = 0; continue; }
+    if (h.tagName === 'line') {
+      const x1 = +h.getAttribute('x1'), y1 = +h.getAttribute('y1'), [x2, y2] = h._q, Lg = Math.hypot(x2 - x1, y2 - y1), dur = Math.max(120, Lg / vel * 1000);
+      lap.style.opacity = 1;
+      const t0 = performance.now();
+      await new Promise(res => { const f = t => { if (id !== ANIM) return res(); const k = Math.min(1, (t - t0) / dur); const x = x1 + (x2 - x1) * k, y = y1 + (y2 - y1) * k; h.setAttribute('x2', x); h.setAttribute('y2', y); lap.setAttribute('cx', x); lap.setAttribute('cy', y); if (k < 1) requestAnimationFrame(f); else res(); }; requestAnimationFrame(f); });
+    } else { h.style.transition = 'opacity .25s'; h.style.opacity = 1; await esperar(h.tagName === 'text' ? 160 / EST.vel : 50); }
+  }
+  lap.style.opacity = 0;
+}
+const esperar = ms => new Promise(r => setTimeout(r, ms));
+
+/* ---------------- panel ---------------- */
+function textoPaso() {
+  const p = PASOS[EST.paso];
+  let t = p.txt;
+  if (p.id === 'limpia') t = 'Con la goma, borra con cuidado lo que ya no hace falta: la <b>marca del centro</b> y las marcas de las medidas. ' +
+    (EST.aux === 'borrar' ? 'También la <b>caja envolvente</b> y las líneas de construcción, para que se vea solo la pieza.' : 'La <b>caja envolvente</b> se puede dejar si está muy fina (2H sin apretar): enseña de dónde sale la pieza.') +
+    ' <span class="nota">En el modo «solo lo nuevo» se ve en rojo lo que se borra. La opción está en «Datos de la lámina».</span>';
+  if (p.id === 'ocultas' && !R.hayOcultas) t = 'Esta pieza <b>no tiene aristas ocultas</b> desde este punto de vista: no hay nada que dibujar en este paso.';
+  else if (p.id === 'ocultas' && !EST.ocultas) t = 'Las aristas ocultas están desactivadas en «Datos de la lámina», que es lo habitual en perspectiva. <span class="nota">Aunque no se dibujen, conviene fijarse en qué parte de la pieza no se está viendo.</span>';
+  if (p.id === 'general') t += ` <span class="nota">Escala ${R.esc.t}: cada milímetro de la pieza ocupa ${R.esc.k === 2 ? '2 mm' : R.esc.k === 1 ? '1 mm' : '0,5 mm'} en el papel. La pieza mide ${R.pz.dims[0] * 10} × ${R.pz.dims[1] * 10} × ${R.pz.dims[2] * 10} mm (anchura × profundidad × altura).</span>`;
+  $('#l-titulo').textContent = `${EST.paso + 1}. ${p.t}`;
+  $('#l-txt').innerHTML = t;
+  $('#l-lapiz').innerHTML = p.lap === '2H' ? '<span class="lap l2h">Lápiz 2H</span> fino, sin apretar' : p.lap === 'HB' ? '<span class="lap lhb">Lápiz HB</span> para repasar' : p.lap === 'goma' ? '<span class="lap lgoma">Goma</span>' : '';
+  $('#l-cuenta').textContent = `Paso ${EST.paso + 1} de ${PASOS.length}`;
+  $('#l-ant').disabled = EST.paso === 0; $('#l-sig').disabled = EST.paso === PASOS.length - 1;
+  document.querySelectorAll('#l-pasos li').forEach((li, i) => { li.classList.toggle('act', i === EST.paso); li.classList.toggle('hecho', i < EST.paso); });
+}
+function irPaso(i, animar) { EST.paso = Math.max(0, Math.min(PASOS.length - 1, i)); textoPaso(); pintar(animar !== false); }
+function setModo(m) { EST.modo = m; document.querySelectorAll('#l-modo button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.m === m))); pintar(m !== 'final'); }
+let AUTO = null;
+async function reproducirTodo() {
+  const b = $('#l-todo');
+  if (AUTO) { AUTO = null; b.textContent = '▶ Reproducir toda la lámina'; return; }
+  AUTO = {}; const yo = AUTO; b.textContent = '■ Parar';
+  if (EST.modo !== 'acumulado') setModo('acumulado');
+  for (let i = 0; i < PASOS.length; i++) {
+    if (AUTO !== yo) return;
+    irPaso(i, true);
+    await esperar(400);
+    const id = ANIM; while (AUTO === yo && document.querySelector('#hoja .punta') && document.querySelector('#hoja .punta').style.opacity === '1' && id === ANIM) await esperar(100);
+    await esperar(1000 / EST.vel);
+  }
+  AUTO = null; b.textContent = '▶ Reproducir toda la lámina';
+}
+/* miniatura: las tres vistas, que son el dato de partida */
+function miniatura() {
+  const pz = R.pz, host = $('#l-mini'); host.textContent = '';
+  const [W, D, H] = pz.dims, g = 1;
+  const aH = (k, [u, v]) => k === 'alzado' ? [u - W - g, -(v + g)] : k === 'planta' ? [u - W - g, -v + g] : [u + g, -(v + g)];
+  const x0 = -(W + g) - 1, x1 = D + g + 1, y0 = -(H + g) - 2.4, y1 = D + g + 2.4;
+  const s = sv('svg', { viewBox: `${x0} ${y0} ${x1 - x0} ${y1 - y0}`, class: 'mini-iso', role: 'img', 'aria-label': 'Las tres vistas de la pieza' }, host);
+  sv('line', { x1: x0 + 0.4, y1: 0, x2: x1 - 0.4, y2: 0, class: 'mv-eje' }, s);
+  sv('line', { x1: 0, y1: y0 + 0.4, x2: 0, y2: y1 - 0.4, class: 'mv-eje' }, s);
+  ['alzado', 'planta', 'perfil'].forEach(k => pz.vistas[k].lineas.forEach(l => {
+    const a = aH(k, l.p), b = aH(k, l.q);
+    sv('line', { x1: a[0], y1: a[1], x2: b[0], y2: b[1], class: l.tipo === 'vis' ? 'mv-vis' : 'mv-ocu' }, s);
+  }));
+  svT('Alzado', { x: -(W + g), y: -(H + g) - 0.7, class: 'mv-t' }, s);
+  svT('Planta', { x: -(W + g), y: D + g + 1.6, class: 'mv-t' }, s);
+  svT('Perfil izq.', { x: g, y: -(H + g) - 0.7, class: 'mv-t' }, s);
+}
+function rehacer() {
+  construir(); miniatura();
+  $('#l-esc').textContent = `Escala ${R.esc.t}${EST.escala === 'auto' ? ' (la mayor que cabe)' : ''}`;
+  textoPaso(); pintar(false);
+}
+function iniciar() {
+  const ol = $('#l-pasos');
+  PASOS.forEach((p, i) => { const li = el('li', {}, ol); const b = el('button', { type: 'button' }, li, p.t); b.addEventListener('click', () => irPaso(i)); });
+  $('#l-ant').addEventListener('click', () => irPaso(EST.paso - 1));
+  $('#l-sig').addEventListener('click', () => irPaso(EST.paso + 1));
+  $('#l-otra').addEventListener('click', () => pintar(true));
+  $('#l-todo').addEventListener('click', reproducirTodo);
+  document.querySelectorAll('#l-modo button').forEach(b => b.addEventListener('click', () => setModo(b.dataset.m)));
+  $('#l-vel').addEventListener('change', e => { EST.vel = +e.target.value; });
+  const sel = $('#l-pieza');
+  PIEZAS_LAM.forEach((id, i) => { const pz = CATALOGO.find(p => p.id === id); if (pz) el('option', { value: i }, sel, `${pz.nombre} (${pz.dims[0] * 10} × ${pz.dims[1] * 10} × ${pz.dims[2] * 10} mm)`); });
+  sel.addEventListener('change', e => { EST.pieza = +e.target.value; rehacer(); });
+  $('#l-escala').addEventListener('change', e => { EST.escala = e.target.value; rehacer(); });
+  $('#l-ocu').addEventListener('change', e => { EST.ocultas = e.target.checked; rehacer(); });
+  document.querySelectorAll('input[name="l-aux"]').forEach(r => r.addEventListener('change', e => { EST.aux = e.target.value; rehacer(); }));
+  ['curso', 'nombre', 'fecha', 'titulo', 'num'].forEach(k => { const i = $(k === 'titulo' ? '#l-titulo-in' : '#l-' + k); i.value = EST[k]; i.addEventListener('input', () => { EST[k] = i.value; construir(); pintar(false); }); });
+  $('#l-imprimir').addEventListener('click', () => { const m = EST.modo; setModo('final'); setTimeout(() => { window.print(); setModo(m); }, 150); });
+  document.addEventListener('keydown', e => { if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return; if (e.key === 'ArrowRight') irPaso(EST.paso + 1); if (e.key === 'ArrowLeft') irPaso(EST.paso - 1); });
+  rehacer();
+}
+iniciar();
+
+
+
+})();
+</script>
+</body>
+</html>

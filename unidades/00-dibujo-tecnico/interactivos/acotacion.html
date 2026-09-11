@@ -417,7 +417,7 @@ footer{max-width:1360px;margin:0 auto;padding:12px 20px 30px;font-size:.82rem;co
 </section>
 <!-- ===================== 4 · PIEZAS ===================== -->
 <section class="panel" id="p-piezas" role="tabpanel" aria-labelledby="tab-piezas" hidden>
-  <p class="intro">La finalidad: acotar una pieza dibujada en alzado, planta y perfil. Cada medida se pone una sola vez, y para no equivocarse se acota en L: <b>eje Z en el alzado, por la izquierda</b>; <b>eje X en la planta, por la izquierda</b>; <b>eje Y en la planta, por abajo</b>.</p>
+  <p class="intro">La finalidad: acotar una pieza dibujada en alzado, planta y perfil. Cada medida se pone una sola vez, y para no equivocarse se acota en L: <b>eje Z en el alzado, por la izquierda</b>; <b>eje X en la planta, por la izquierda</b>; <b>eje Y en la planta, por abajo</b>.<span class="nota">La recta a 45° que ves en la hoja es una <b>ayuda para comprobar</b> que la profundidad de la planta y la del perfil coinciden. En la lámina de clase <b>no se traza</b>.</span></p>
   <div class="fila"><div class="chips" id="k-niveles" role="group" aria-label="Niveles"></div></div>
   <p class="nivel-intro" id="k-intro"></p>
   <div class="fila"><div class="chips" id="k-lista" role="group" aria-label="Piezas"></div></div>
@@ -440,7 +440,7 @@ footer{max-width:1360px;margin:0 auto;padding:12px 20px 30px;font-size:.82rem;co
 </section>
 </main>
 <footer>
-  Acotación v1.4 · IES Jiménez de Quesada (Santa Fe, Granada). Medidas en mm. Línea de cota a 8 mm del contorno; auxiliares a 2 mm del dibujo y 2 mm más allá de la línea de cota.
+  Acotación v1.6 · IES Jiménez de Quesada (Santa Fe, Granada). Medidas en mm. Línea de cota a 8 mm del contorno; auxiliares a 2 mm del dibujo y 2 mm más allá de la línea de cota.
   El progreso se guarda solo en este navegador. <button class="btn-link" id="borrar-prog" type="button">Borrar mi progreso</button><br>
   Parte de las piezas proceden de fichas educativas de libre difusión.<br>
   Incluye three.js r128 (licencia MIT, © three.js authors).
@@ -1063,7 +1063,16 @@ class Escena {
     this.anims = []; this.sel = null; this.estado = null;
     this._raiz = new THREE.Group(); this.escena.add(this._raiz);
     this._eventos();
-    new ResizeObserver(() => this.redimensionar()).observe(host);
+    // El redimensionado cambia el tamaño del canvas, que está dentro del elemento
+    // observado: hacerlo dentro del propio callback encadena avisos y el navegador
+    // lanza «ResizeObserver loop completed with undelivered notifications».
+    // Se aplaza al siguiente fotograma y se agrupan los avisos seguidos.
+    let _ro = false;
+    new ResizeObserver(() => {
+      if (_ro) return;
+      _ro = true;
+      requestAnimationFrame(() => { _ro = false; this.redimensionar(); });
+    }).observe(host);
     this.redimensionar();
   }
   /* ---------- tamaño y cámara ---------- */
