@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#1B4F8A">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
 <title>Actividades · U00 Dibujo técnico · TyD 2º ESO</title>
-<meta name="description" content="Actividades interactivas de dibujo técnico para 2º ESO con autocorrección: vistas, perspectiva caballera, escuadra y cartabón, escalas, acotación y CAD.">
+<meta name="description" content="Actividades interactivas de dibujo técnico para 2º ESO con autocorrección: vistas, perspectiva isométrica, escuadra y cartabón, escalas, acotación y CAD.">
 <link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/00-dibujo-tecnico/actividades/">
 
 <!-- ══ Open Graph ══ -->
@@ -384,7 +384,7 @@ details.solution .step-sol::before {
   <a href="#bloque-a">A · Dibujo técnico</a>
   <a href="#bloque-b">B · Boceto · croquis · plano</a>
   <a href="#bloque-c">C · Las tres vistas</a>
-  <a href="#bloque-d">D · Caballera</a>
+  <a href="#bloque-d">D · Isométrica</a>
   <a href="#bloque-e">E · Instrumentos</a>
   <a href="#bloque-f">F · Escalas</a>
   <a href="#bloque-g">G · Acotación</a>
@@ -656,110 +656,101 @@ details.solution .step-sol::before {
 </section>
 
 <!-- ════════════════════════════════════════════════════════════════
-     BLOQUE D · PERSPECTIVA CABALLERA
+     BLOQUE D · PERSPECTIVA ISOMÉTRICA
      ════════════════════════════════════════════════════════════════ -->
 <section id="bloque-d">
-  <h2 class="bloque-titulo">D · Perspectiva caballera</h2>
-  <p class="bloque-intro">Ángulos, coeficiente de reducción y construcción a partir de vistas.</p>
+  <h2 class="bloque-titulo">D · Perspectiva isométrica</h2>
+  <p class="bloque-intro">Los ejes a 120°, las medidas sobre los ejes y la construcción a partir de la caja envolvente.</p>
 
   <!-- D1 -->
   <article class="activity-card" data-type="radio" data-id="D1">
-    <p class="statement"><span class="act-num">D1</span>En la perspectiva caballera, los ejes X y Z son <strong>perpendiculares</strong> entre sí (90°). ¿Qué ángulo forma habitualmente el eje Y con la horizontal?</p>
+    <p class="statement"><span class="act-num">D1</span>En la perspectiva isométrica, ¿qué ángulo forman <strong>entre sí</strong> los tres ejes?</p>
     <div class="options cols2">
-      <label class="option"><input type="radio" name="D1"><span class="option-label">15°</span></label>
-      <label class="option"><input type="radio" name="D1"><span class="option-label">30°</span></label>
-      <label class="option"><input type="radio" name="D1" data-correct="true"><span class="option-label">45°</span></label>
-      <label class="option"><input type="radio" name="D1"><span class="option-label">120°</span></label>
+      <label class="option"><input type="radio" name="D1"><span class="option-label">45°</span></label>
+      <label class="option"><input type="radio" name="D1"><span class="option-label">60°</span></label>
+      <label class="option"><input type="radio" name="D1"><span class="option-label">90°</span></label>
+      <label class="option"><input type="radio" name="D1" data-correct="true"><span class="option-label">120°</span></label>
     </div>
     <button class="check-btn" onclick="check(this)">Comprobar</button>
     <div class="feedback"></div>
-    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Los ángulos típicos del eje Y en caballera son <strong>30°, 45° o 60°</strong>. En clase usaremos el más habitual, <strong>45°</strong>, porque se traza directamente con la hipotenusa de la escuadra.</div></details>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Los tres ejes se reparten la vuelta completa a partes iguales: <strong>360° ÷ 3 = 120°</strong>. El eje <strong>Z</strong> queda vertical, el <strong>Y</strong> (anchura) baja hacia la izquierda y el <strong>X</strong> (profundidad) baja hacia la derecha; estos dos forman <strong>30°</strong> con la horizontal, que es justo el ángulo que da el cartabón.</div></details>
   </article>
 
   <!-- D2: numeric -->
-  <article class="activity-card" data-type="number" data-id="D2" data-answer="30" data-tol="0">
-    <p class="statement"><span class="act-num">D2</span>Una pieza tiene una <strong>profundidad real de 60 mm</strong>. Al dibujarla en perspectiva caballera con coeficiente de reducción <span class="data-pill">0,5</span>, ¿cuántos milímetros mediremos sobre el eje Y en el papel?</p>
+  <article class="activity-card" data-type="number" data-id="D2" data-answer="65" data-tol="0">
+    <p class="statement"><span class="act-num">D2</span>Una pieza tiene una base de <span class="data-pill">25 mm</span> de altura y encima un bloque de <span class="data-pill">40 mm</span>. Al dibujarla en perspectiva isométrica, ¿cuánto medirá <strong>en el papel</strong> la arista vertical completa?</p>
     <div class="answer-box">
-      <label>Profundidad en caballera =</label>
+      <label>Arista vertical en el dibujo =</label>
       <input type="number" step="any">
       <span class="unit">mm</span>
     </div>
     <button class="check-btn" onclick="check(this)">Comprobar</button>
     <div class="feedback"></div>
-    <details class="solution"><summary>Ver solución</summary><div class="sol-body">El coeficiente de reducción <strong>0,5</strong> significa que medimos en el papel <strong>la mitad</strong> de la profundidad real:
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">En isométrica las medidas se llevan <strong>directamente sobre los ejes, sin reducir</strong>:
     <div class="steps-sol">
-      <div class="step-sol">Profundidad real: 60 mm</div>
-      <div class="step-sol">Aplicamos el coeficiente: 60 × 0,5 = <strong>30 mm</strong></div>
-      <div class="step-sol">En el papel, la arista en Y mide <strong>30 mm</strong> a 45°.</div>
-    </div></div></details>
+      <div class="step-sol">Altura real: 25 + 40 = <strong>65 mm</strong></div>
+      <div class="step-sol">Sobre el eje Z se lleva esa misma medida: <strong>65 mm</strong> en el papel</div>
+      <div class="step-sol">Y lo mismo con la anchura sobre Y y la profundidad sobre X.</div>
+    </div>
+    La norma prevé un coeficiente de reducción de 0,8165, pero <strong>en la práctica no se aplica</strong>: se dibuja sin reducir y la figura queda 1,22 veces mayor. Lo que importa es que las tres direcciones se traten igual.</div></details>
   </article>
 
   <!-- D3 -->
-  <article class="activity-card" data-type="number" data-id="D3" data-answer="40" data-tol="0">
-    <p class="statement"><span class="act-num">D3</span>Misma fórmula al revés. Sobre una caballera, la arista a 45° mide <span class="data-pill">20 mm</span> en el papel. Con coeficiente <span class="data-pill">0,5</span>, ¿cuál es la <strong>profundidad real</strong> de esa arista?</p>
-    <div class="answer-box">
-      <label>Profundidad real =</label>
-      <input type="number" step="any">
-      <span class="unit">mm</span>
+  <article class="activity-card" data-type="radio" data-id="D3">
+    <p class="statement"><span class="act-num">D3</span>Para dibujar una pieza en isométrica a partir de sus vistas, ¿por dónde se empieza?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="D3"><span class="option-label">Por la pieza; la caja solo se traza si luego hace falta</span></label>
+      <label class="option"><input type="radio" name="D3" data-correct="true"><span class="option-label">Por los tres ejes y la caja envolvente, y dentro de ella se dibuja la pieza</span></label>
+      <label class="option"><input type="radio" name="D3"><span class="option-label">Por las aristas ocultas, que son las que sujetan el dibujo</span></label>
+      <label class="option"><input type="radio" name="D3"><span class="option-label">Por las cotas, y después el dibujo se ajusta a ellas</span></label>
     </div>
     <button class="check-btn" onclick="check(this)">Comprobar</button>
     <div class="feedback"></div>
-    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Si en el papel ya está reducido al 50%, para obtener la profundidad real <strong>dividimos entre el coeficiente</strong> (o multiplicamos por 2):
-    <div class="steps-sol">
-      <div class="step-sol">Medida en caballera: 20 mm</div>
-      <div class="step-sol">Profundidad real: 20 ÷ 0,5 = 20 × 2 = <strong>40 mm</strong></div>
-    </div></div></details>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">Se busca el <strong>centro de la zona libre</strong>, se trazan ahí los tres ejes a 120° y sobre ellos se llevan la anchura, la profundidad y la altura para cerrar la <strong>caja envolvente</strong>. Dentro de la caja se va quitando lo que sobra hasta dejar la pieza, y al final se borran las auxiliares. Ojo: una perspectiva <strong>no se acota</strong>; para eso está la lámina de vistas.</div></details>
   </article>
 
   <!-- D4: visual identification -->
   <article class="activity-card" data-type="radio" data-id="D4">
-    <p class="statement"><span class="act-num">D4</span>¿Cuál de estas tres perspectivas representa un <strong>cubo</strong> correctamente en perspectiva caballera (45°, coef 0,5)?</p>
+    <p class="statement"><span class="act-num">D4</span>¿Cuál de estos tres dibujos representa un <strong>cubo</strong> correctamente en perspectiva isométrica?</p>
 
     <div class="options visual">
-      <!-- A: caballera correcta (cara frontal cuadrada, profundidad reducida 50%) -->
-      <label class="option"><input type="radio" name="D4" data-correct="true">
+      <!-- A: caballera, no isométrica -->
+      <label class="option"><input type="radio" name="D4">
         <svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg" class="fig-svg">
-          <rect x="15" y="30" width="50" height="50" class="main fill"/>
-          <line x1="15" y1="30" x2="35" y2="10" class="main"/>
-          <line x1="65" y1="30" x2="85" y2="10" class="main"/>
-          <line x1="65" y1="80" x2="85" y2="60" class="main"/>
-          <line x1="35" y1="10" x2="85" y2="10" class="main"/>
-          <line x1="85" y1="10" x2="85" y2="60" class="main"/>
-          <line x1="15" y1="80" x2="35" y2="60" class="aux"/>
-          <line x1="35" y1="10" x2="35" y2="60" class="aux"/>
-          <line x1="35" y1="60" x2="85" y2="60" class="aux"/>
+          <rect x="14" y="34" width="46" height="46" class="main fill"/>
+          <line x1="14" y1="34" x2="30" y2="18" class="main"/>
+          <line x1="60" y1="34" x2="76" y2="18" class="main"/>
+          <line x1="60" y1="80" x2="76" y2="64" class="main"/>
+          <line x1="30" y1="18" x2="76" y2="18" class="main"/>
+          <line x1="76" y1="18" x2="76" y2="64" class="main"/>
+          <line x1="14" y1="80" x2="30" y2="64" class="aux"/>
+          <line x1="30" y1="18" x2="30" y2="64" class="aux"/>
+          <line x1="30" y1="64" x2="76" y2="64" class="aux"/>
         </svg>
         <span class="option-label">A</span></label>
 
-      <!-- B: isométrica (no es caballera) -->
-      <label class="option"><input type="radio" name="D4">
+      <!-- B: isométrica correcta (ejes a 120°) -->
+      <label class="option"><input type="radio" name="D4" data-correct="true">
         <svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg" class="fig-svg">
-          <polygon points="20,60 50,75 80,60 50,45" class="main fill"/>
-          <polygon points="20,60 20,30 50,15 50,45" class="main" fill="#fff"/>
-          <polygon points="50,45 80,30 80,60 50,75" class="main" fill="#e0d8c2"/>
-          <polygon points="20,30 50,15 80,30 50,45" class="main" fill="#fff"/>
+          <polygon points="50,20 76,35 50,50 24,35" class="main" fill="#fff"/>
+          <polygon points="76,35 76,65 50,80 50,50" class="main" fill="#e0d8c2"/>
+          <polygon points="24,35 50,50 50,80 24,65" class="main fill"/>
         </svg>
         <span class="option-label">B</span></label>
 
-      <!-- C: caballera con profundidad NO reducida (mal) -->
+      <!-- C: ejes horizontales a 45° en vez de a 30° -->
       <label class="option"><input type="radio" name="D4">
         <svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg" class="fig-svg">
-          <rect x="10" y="40" width="40" height="40" class="main fill"/>
-          <line x1="10" y1="40" x2="50" y2="10" class="main"/>
-          <line x1="50" y1="40" x2="90" y2="10" class="main"/>
-          <line x1="50" y1="80" x2="90" y2="50" class="main"/>
-          <line x1="50" y1="10" x2="90" y2="10" class="main"/>
-          <line x1="90" y1="10" x2="90" y2="50" class="main"/>
-          <line x1="10" y1="80" x2="50" y2="50" class="aux"/>
-          <line x1="50" y1="10" x2="50" y2="50" class="aux"/>
-          <line x1="50" y1="50" x2="90" y2="50" class="aux"/>
+          <polygon points="50,6 71,27 50,48 29,27" class="main" fill="#fff"/>
+          <polygon points="71,27 71,57 50,78 50,48" class="main" fill="#e0d8c2"/>
+          <polygon points="29,27 50,48 50,78 29,57" class="main fill"/>
         </svg>
         <span class="option-label">C</span></label>
     </div>
 
     <button class="check-btn" onclick="check(this)">Comprobar</button>
     <div class="feedback"></div>
-    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La opción <strong>A</strong>: cara frontal cuadrada (sin deformar) y aristas en Y a 45° con la mitad de longitud que las del frente. La <strong>B</strong> es perspectiva isométrica (ejes a 120°). La <strong>C</strong> es caballera pero <strong>sin reducir</strong> la profundidad — se ve un cubo "estirado" hacia atrás, que es justo lo que el coeficiente 0,5 evita.</div></details>
+    <details class="solution"><summary>Ver solución</summary><div class="sol-body">La <strong>B</strong>: los tres ejes a 120°, las tres caras que se ven salen iguales y el contorno es un hexágono regular. La <strong>A</strong> es una perspectiva <strong>caballera</strong> — conserva la cara frontal cuadrada y lleva la profundidad a 45°, reducida a la mitad. En la <strong>C</strong> los dos ejes horizontales se han trazado a <strong>45° en vez de a 30°</strong>, así que entre los ejes ya no hay 120° y el cubo sale estirado a lo alto.</div></details>
   </article>
 </section>
 
@@ -1193,7 +1184,7 @@ details.solution .step-sol::before {
   IES Jiménez de Quesada · Santa Fe (Granada)<br>
   TyD 2º ESO · Curso 2026-27 · Manuel Alonso Herrera<br>
   <a href="../index.html">← Volver al hub</a> · <a href="../libro-digital.html">📘 Libro digital</a>
-  <br><span class="version">Actividades v1.1</span>
+  <br><span class="version">Actividades v1.2</span>
 </footer>
 
 </main>
