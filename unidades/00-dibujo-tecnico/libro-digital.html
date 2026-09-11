@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dibujo técnico · 2º ESO · Tecnología y Digitalización · v1.0</title>
+<title>Dibujo técnico · 2º ESO · Tecnología y Digitalización · v1.3</title>
 <meta name="description" content="Libro digital de dibujo técnico para 2º ESO: vistas, perspectivas, escalas, acotación y CAD. IES Jiménez de Quesada (Santa Fe, Granada).">
 <meta name="theme-color" content="#d2552a">
 <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
@@ -506,7 +506,7 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
 <main>
 
 <header class="hero">
-  <div class="eyebrow">Unidad 0 · Libro digital · v1.2</div>
+  <div class="eyebrow">Unidad 0 · Libro digital · v1.3</div>
   <h1>Expresión gráfica<br>y <em>representación</em></h1>
   <p class="lead">Dibujar es una manera de pensar. Aprenderás a representar objetos reales sobre el papel con precisión: a verlos desde varios lados, a respetar sus proporciones y a contar sus medidas con un lenguaje común a toda la ingeniería del mundo.</p>
   <div class="meta">
@@ -1392,6 +1392,29 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
       </div>
     </div>
 
+    <h4>Las escalas normalizadas</h4>
+    <p>No vale cualquier número. La norma <strong>UNE-EN ISO 5455</strong> fija las escalas que pueden usarse en un plano. Todas se forman multiplicando o dividiendo por <strong>1, 2 y 5</strong>:</p>
+
+    <div class="cols3">
+      <div class="col-card">
+        <h4 style="font-size:17px;">Ampliación</h4>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--teja);font-weight:600;">2:1 · 5:1 · 10:1<br>20:1 · 50:1</p>
+      </div>
+      <div class="col-card">
+        <h4 style="font-size:17px;">Natural</h4>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--teja);font-weight:600;">1:1</p>
+      </div>
+      <div class="col-card">
+        <h4 style="font-size:17px;">Reducción</h4>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--teja);font-weight:600;">1:2 · 1:5 · 1:10<br>1:20 · 1:50 · 1:100<br>1:200 · 1:500 · 1:1000…</p>
+      </div>
+    </div>
+
+    <div class="callout callout-warn">
+      <span class="ic">⚠️</span>
+      <p>Escalas como <strong>3:1</strong>, <strong>1:3</strong> o <strong>1:75</strong> no están normalizadas: aunque el cálculo salga, no se usan en un plano. Se elige siempre la escala normalizada que permita que el dibujo quepa en la lámina aprovechándola bien. <em>Los mapas son caso aparte:</em> la cartografía usa escalas propias, como 1:25 000 o 1:50 000.</p>
+    </div>
+
     <h4>Cómo se representa la escala</h4>
     <p>Hay dos formas equivalentes:</p>
 
@@ -1403,7 +1426,8 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
       </div>
       <div class="col-card">
         <h4>Escala gráfica</h4>
-        <p>Una <strong>línea graduada</strong>: midiendo sobre ella con la regla, se obtiene directamente la medida real.</p>
+        <p>Una <strong>regla dibujada en el propio plano</strong>, rotulada con medidas <strong>reales</strong>. No se mide con la regla del estuche: se toma la distancia sobre el dibujo con el <strong>compás</strong> (o marcándola en el canto de un papel) y se lleva sobre la escala gráfica, donde se lee directamente la medida real.</p>
+        <p style="font-size:13px;color:var(--ink-soft);"><em>Su ventaja:</em> si el plano se fotocopia más grande o más pequeño, la escala gráfica se amplía o se reduce con él, así que <strong>sigue siendo válida</strong>. La escala numérica, en cambio, deja de serlo.</p>
         <svg class="svg-fig" viewBox="0 0 240 50" xmlns="http://www.w3.org/2000/svg" style="margin-top:8px;">
           <rect x="10" y="20" width="40" height="10" fill="#1a2238"/>
           <rect x="50" y="20" width="40" height="10" fill="#fff" stroke="#1a2238"/>
@@ -1440,7 +1464,7 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
             <line x1="135" y1="20" x2="135" y2="110" class="stroke-thin"/>
             <polygon points="135,20 133,26 137,26" class="arrow"/>
             <polygon points="135,110 133,104 137,104" class="arrow"/>
-            <text x="155" y="68" font-size="10" font-weight="700">30 mm</text>
+            <text x="131" y="65" text-anchor="middle" font-size="10" font-weight="700" transform="rotate(-90 131 65)">30 mm</text>
             <!-- nota -->
             <text x="60" y="170" text-anchor="middle" font-size="10" fill="#3a4360">papel = real</text>
           </g>
@@ -1540,8 +1564,8 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
         <!-- objeto -->
         <rect x="180" y="100" width="200" height="80" class="stroke-main fill-light"/>
         <!-- líneas auxiliares de cota -->
-        <line x1="180" y1="100" x2="180" y2="60" class="stroke-thin"/>
-        <line x1="380" y1="100" x2="380" y2="60" class="stroke-thin"/>
+        <line x1="180" y1="96" x2="180" y2="66" class="stroke-thin"/>
+        <line x1="380" y1="96" x2="380" y2="66" class="stroke-thin"/>
         <!-- línea de cota -->
         <line x1="180" y1="70" x2="380" y2="70" class="stroke-thin"/>
         <!-- flechas -->
@@ -1551,15 +1575,15 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
         <text x="280" y="65" text-anchor="middle" font-size="14" font-weight="700">200</text>
 
         <!-- segunda cota lateral -->
-        <line x1="180" y1="180" x2="140" y2="180" class="stroke-thin"/>
-        <line x1="180" y1="100" x2="140" y2="100" class="stroke-thin"/>
+        <line x1="176" y1="180" x2="146" y2="180" class="stroke-thin"/>
+        <line x1="176" y1="100" x2="146" y2="100" class="stroke-thin"/>
         <line x1="150" y1="100" x2="150" y2="180" class="stroke-thin"/>
         <polygon points="150,100 146,112 154,112" class="arrow"/>
         <polygon points="150,180 146,168 154,168" class="arrow"/>
-        <text x="135" y="145" text-anchor="end" font-size="14" font-weight="700">80</text>
+        <text x="145" y="140" text-anchor="middle" font-size="14" font-weight="700" transform="rotate(-90 145 140)">80</text>
 
         <!-- etiquetas explicativas -->
-        <line x1="200" y1="60" x2="200" y2="30" class="stroke-aux"/>
+        <line x1="180" y1="86" x2="200" y2="30" class="stroke-aux"/>
         <text x="200" y="25" text-anchor="middle" font-size="11" class="lbl-teja">Línea auxiliar</text>
         <text x="200" y="14" text-anchor="middle" font-size="9" fill="#3a4360">(perpendicular al objeto)</text>
 
@@ -1578,6 +1602,12 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
       <div class="fig-cap">Las cuatro partes de una cota: línea auxiliar, línea de cota, flechas y cifra</div>
     </div>
 
+    <ul>
+      <li>La <strong>línea auxiliar</strong> no toca el dibujo: <strong>empieza a unos 2 mm del contorno</strong> y <strong>sobrepasa la línea de cota otros 2 mm</strong>. Así no se confunde nunca con una arista de la pieza.</li>
+      <li>La <strong>línea de cota</strong> es paralela a lo que se mide y va <strong>fuera de la pieza</strong>, a unos 8-10 mm del contorno. Si hay varias seguidas, se separan otro tanto entre ellas.</li>
+      <li>La <strong>cifra</strong> va centrada y <strong>encima</strong> de la línea de cota, sin cortarla, y siempre en <strong>milímetros reales</strong>, aunque el dibujo esté a escala.</li>
+    </ul>
+
     <h4>Tipos de acotación</h4>
     <p>Cuando una pieza tiene varias medidas seguidas, hay tres formas de organizarlas:</p>
 
@@ -1585,10 +1615,10 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
       <div class="fig" style="margin:0;">
         <svg class="svg-fig" viewBox="0 0 220 130" xmlns="http://www.w3.org/2000/svg">
           <rect x="20" y="40" width="180" height="50" class="stroke-main fill-light"/>
-          <line x1="20" y1="40" x2="20" y2="15" class="stroke-thin"/>
-          <line x1="80" y1="40" x2="80" y2="15" class="stroke-thin"/>
-          <line x1="140" y1="40" x2="140" y2="15" class="stroke-thin"/>
-          <line x1="200" y1="40" x2="200" y2="15" class="stroke-thin"/>
+          <line x1="20" y1="37" x2="20" y2="22" class="stroke-thin"/>
+          <line x1="80" y1="37" x2="80" y2="22" class="stroke-thin"/>
+          <line x1="140" y1="37" x2="140" y2="22" class="stroke-thin"/>
+          <line x1="200" y1="37" x2="200" y2="22" class="stroke-thin"/>
           <line x1="20" y1="25" x2="80" y2="25" class="stroke-thin"/>
           <line x1="80" y1="25" x2="140" y2="25" class="stroke-thin"/>
           <line x1="140" y1="25" x2="200" y2="25" class="stroke-thin"/>
@@ -1604,10 +1634,11 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
       <div class="fig" style="margin:0;">
         <svg class="svg-fig" viewBox="0 0 220 130" xmlns="http://www.w3.org/2000/svg">
           <rect x="20" y="60" width="180" height="50" class="stroke-main fill-light"/>
-          <line x1="20" y1="60" x2="20" y2="5" class="stroke-thin"/>
-          <line x1="80" y1="60" x2="80" y2="20" class="stroke-thin"/>
-          <line x1="140" y1="60" x2="140" y2="35" class="stroke-thin"/>
-          <line x1="200" y1="60" x2="200" y2="50" class="stroke-thin"/>
+          <line x1="20" y1="57" x2="20" y2="17" class="stroke-thin"/>
+          <line x1="80" y1="57" x2="80" y2="38" class="stroke-thin"/>
+          <line x1="80" y1="25" x2="80" y2="17" class="stroke-thin"/>
+          <line x1="140" y1="57" x2="140" y2="32" class="stroke-thin"/>
+          <line x1="200" y1="57" x2="200" y2="47" class="stroke-thin"/>
           <line x1="20" y1="50" x2="200" y2="50" class="stroke-thin"/>
           <line x1="20" y1="35" x2="140" y2="35" class="stroke-thin"/>
           <line x1="20" y1="20" x2="80" y2="20" class="stroke-thin"/>
@@ -1623,10 +1654,10 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
       <div class="fig" style="margin:0;">
         <svg class="svg-fig" viewBox="0 0 220 130" xmlns="http://www.w3.org/2000/svg">
           <rect x="20" y="60" width="180" height="50" class="stroke-main fill-light"/>
-          <line x1="20" y1="60" x2="20" y2="10" class="stroke-thin"/>
-          <line x1="80" y1="60" x2="80" y2="40" class="stroke-thin"/>
-          <line x1="140" y1="60" x2="140" y2="40" class="stroke-thin"/>
-          <line x1="200" y1="60" x2="200" y2="25" class="stroke-thin"/>
+          <line x1="20" y1="57" x2="20" y2="17" class="stroke-thin"/>
+          <line x1="80" y1="57" x2="80" y2="17" class="stroke-thin"/>
+          <line x1="140" y1="57" x2="140" y2="47" class="stroke-thin"/>
+          <line x1="200" y1="57" x2="200" y2="32" class="stroke-thin"/>
           <line x1="80" y1="50" x2="140" y2="50" class="stroke-thin"/>
           <line x1="20" y1="35" x2="200" y2="35" class="stroke-thin"/>
           <line x1="20" y1="20" x2="80" y2="20" class="stroke-thin"/>
@@ -1645,7 +1676,7 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
     <p>Algunas cotas llevan un símbolo delante de la cifra para indicar qué se mide:</p>
     <ul>
       <li><strong>Ø</strong> → <strong>diámetro</strong> de una circunferencia. Ej: Ø20 significa "20 mm de diámetro".</li>
-      <li><strong>R</strong> → <strong>radio</strong> de un arco. Ej: R15 significa "15 mm de radio". Los arcos <strong>menores de 180°</strong> se acotan con el radio (R); los <strong>mayores de 180°</strong> se acotan con el diámetro (Ø).</li>
+      <li><strong>R</strong> → <strong>radio</strong> de un arco. Ej: R15 significa "15 mm de radio". Los arcos <strong>de hasta 180° incluidos</strong> se acotan con el radio (R); los <strong>de más de 180°</strong> se acotan con el diámetro (Ø).</li>
       <li><strong>□</strong> → sección <strong>cuadrada</strong>.</li>
     </ul>
 
@@ -1677,8 +1708,8 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
         <div class="nr-label lab-ok">CORRECTO</div>
         <svg class="svg-fig" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
           <rect x="20" y="35" width="80" height="35" class="stroke-main fill-light"/>
-          <line x1="20" y1="35" x2="20" y2="15" class="stroke-thin"/>
-          <line x1="100" y1="35" x2="100" y2="15" class="stroke-thin"/>
+          <line x1="20" y1="32" x2="20" y2="22" class="stroke-thin"/>
+          <line x1="100" y1="32" x2="100" y2="22" class="stroke-thin"/>
           <line x1="20" y1="25" x2="100" y2="25" class="stroke-thin"/>
           <polygon points="20,25 28,22 28,28" class="arrow"/>
           <polygon points="100,25 92,22 92,28" class="arrow"/>
@@ -1703,8 +1734,8 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
         <div class="nr-label lab-ok">CORRECTO</div>
         <svg class="svg-fig" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
           <rect x="20" y="40" width="80" height="35" class="stroke-main fill-light"/>
-          <line x1="20" y1="40" x2="20" y2="20" class="stroke-thin"/>
-          <line x1="100" y1="40" x2="100" y2="20" class="stroke-thin"/>
+          <line x1="20" y1="37" x2="20" y2="27" class="stroke-thin"/>
+          <line x1="100" y1="37" x2="100" y2="27" class="stroke-thin"/>
           <line x1="20" y1="30" x2="100" y2="30" class="stroke-thin"/>
           <polygon points="20,30 28,27 28,33" class="arrow"/>
           <polygon points="100,30 92,27 92,33" class="arrow"/>
@@ -1715,8 +1746,8 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
         <div class="nr-label lab-bad">INCORRECTO</div>
         <svg class="svg-fig" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
           <rect x="20" y="40" width="80" height="35" class="stroke-main fill-light"/>
-          <line x1="20" y1="40" x2="20" y2="20" class="stroke-thin"/>
-          <line x1="100" y1="40" x2="100" y2="20" class="stroke-thin"/>
+          <line x1="20" y1="37" x2="20" y2="27" class="stroke-thin"/>
+          <line x1="100" y1="37" x2="100" y2="27" class="stroke-thin"/>
           <line x1="20" y1="30" x2="100" y2="30" class="stroke-thin"/>
           <polygon points="20,30 28,27 28,33" class="arrow"/>
           <polygon points="100,30 92,27 92,33" class="arrow"/>
@@ -1729,28 +1760,28 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
       <div class="nr-text">No deben <strong>faltar</strong> ni <strong>sobrar</strong> cotas. Cada medida solo una vez.</div>
       <div class="nr-svg">
         <div class="nr-label lab-ok">CORRECTO</div>
-        <svg class="svg-fig" viewBox="0 0 140 100" xmlns="http://www.w3.org/2000/svg">
+        <svg class="svg-fig" viewBox="0 0 155 100" xmlns="http://www.w3.org/2000/svg">
           <rect x="20" y="40" width="100" height="40" class="stroke-main fill-light"/>
-          <line x1="20" y1="40" x2="20" y2="20" class="stroke-thin"/>
-          <line x1="120" y1="40" x2="120" y2="20" class="stroke-thin"/>
+          <line x1="20" y1="37" x2="20" y2="27" class="stroke-thin"/>
+          <line x1="120" y1="37" x2="120" y2="27" class="stroke-thin"/>
           <line x1="20" y1="30" x2="120" y2="30" class="stroke-thin"/>
           <polygon points="20,30 28,27 28,33" class="arrow"/>
           <polygon points="120,30 112,27 112,33" class="arrow"/>
           <text x="70" y="27" text-anchor="middle" font-size="10">100</text>
-          <line x1="120" y1="40" x2="135" y2="40" class="stroke-thin"/>
-          <line x1="120" y1="80" x2="135" y2="80" class="stroke-thin"/>
-          <line x1="130" y1="40" x2="130" y2="80" class="stroke-thin"/>
-          <polygon points="130,40 127,48 133,48" class="arrow"/>
-          <polygon points="130,80 127,72 133,72" class="arrow"/>
-          <text x="135" y="63" font-size="10">40</text>
+          <line x1="123" y1="40" x2="148" y2="40" class="stroke-thin"/>
+          <line x1="123" y1="80" x2="148" y2="80" class="stroke-thin"/>
+          <line x1="145" y1="40" x2="145" y2="80" class="stroke-thin"/>
+          <polygon points="145,40 142,48 148,48" class="arrow"/>
+          <polygon points="145,80 142,72 148,72" class="arrow"/>
+          <text x="141" y="60" text-anchor="middle" font-size="10" transform="rotate(-90 141 60)">40</text>
         </svg>
       </div>
       <div class="nr-svg mal">
         <div class="nr-label lab-bad">INCORRECTO</div>
-        <svg class="svg-fig" viewBox="0 0 140 100" xmlns="http://www.w3.org/2000/svg">
+        <svg class="svg-fig" viewBox="0 0 155 100" xmlns="http://www.w3.org/2000/svg">
           <rect x="20" y="40" width="100" height="40" class="stroke-main fill-light"/>
-          <line x1="20" y1="40" x2="20" y2="20" class="stroke-thin"/>
-          <line x1="120" y1="40" x2="120" y2="20" class="stroke-thin"/>
+          <line x1="20" y1="37" x2="20" y2="27" class="stroke-thin"/>
+          <line x1="120" y1="37" x2="120" y2="27" class="stroke-thin"/>
           <line x1="20" y1="30" x2="120" y2="30" class="stroke-thin"/>
           <polygon points="20,30 28,27 28,33" class="arrow"/>
           <polygon points="120,30 112,27 112,33" class="arrow"/>
@@ -1798,23 +1829,25 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
         <ul style="margin-top:6px;">
           <li>Se usa el símbolo <strong>Ø</strong> antes de la cifra cuando se acota una circunferencia.</li>
           <li>La línea de cota <strong>no coincide</strong> con los ejes de simetría: se inclina.</li>
-          <li>Si hay varias circunferencias concéntricas, no se acotan más de <strong>dos</strong> en la misma vista. El resto, en otra vista.</li>
+          <li>Si hay varias circunferencias concéntricas, sus líneas de cota se <strong>escalonan</strong> para que las cifras no se amontonen; cuando son muchas, suele quedar más claro acotarlas en otra vista o en un corte.</li>
+          <li><em>Criterio de clase:</em> no acotaremos más de <strong>dos</strong> circunferencias concéntricas en la misma vista.</li>
         </ul>
-        <svg class="svg-fig" viewBox="0 0 180 130" xmlns="http://www.w3.org/2000/svg" style="margin-top:8px;">
-          <circle cx="90" cy="65" r="50" class="stroke-main fill-light"/>
-          <circle cx="90" cy="65" r="28" class="stroke-main" fill="#fff"/>
-          <line x1="20" y1="65" x2="160" y2="65" class="stroke-eje"/>
-          <line x1="90" y1="10" x2="90" y2="120" class="stroke-eje"/>
-          <!-- cota Ø50 inclinada 30° -->
-          <line x1="56" y1="100" x2="124" y2="30" class="stroke-thin"/>
-          <polygon points="56,100 64,95 60,90" class="arrow"/>
-          <polygon points="124,30 116,35 120,40" class="arrow"/>
-          <text x="95" y="62" font-size="10" font-weight="700">Ø100</text>
-          <!-- cota interior Ø28 inclinada 60° -->
-          <line x1="75" y1="90" x2="105" y2="40" class="stroke-thin"/>
-          <polygon points="75,90 82,87 79,82" class="arrow"/>
-          <polygon points="105,40 98,43 101,48" class="arrow"/>
-          <text x="76" y="78" font-size="9" font-weight="700">Ø56</text>
+        <svg class="svg-fig" viewBox="0 0 180 150" xmlns="http://www.w3.org/2000/svg" style="margin-top:8px;" aria-label="Dos circunferencias concéntricas acotadas con cotas inclinadas y escalonadas">
+          <circle cx="95" cy="75" r="50" class="stroke-main fill-light"/>
+          <circle cx="95" cy="75" r="28" class="stroke-main" fill="#fff"/>
+          <!-- ejes de simetría -->
+          <line x1="38" y1="75" x2="152" y2="75" class="stroke-eje"/>
+          <line x1="95" y1="18" x2="95" y2="132" class="stroke-eje"/>
+          <!-- cota Ø100 : inclinada 30°, cifra fuera y en la dirección de la cota -->
+          <line x1="51.7" y1="100" x2="166" y2="34" class="stroke-thin"/>
+          <polygon points="138.3,50 133.54,55.75 130.94,51.25" class="arrow"/>
+          <polygon points="51.7,100 59.06,98.75 56.46,94.25" class="arrow"/>
+          <text x="152.9" y="39.3" text-anchor="middle" font-size="10" font-weight="700" transform="rotate(-30 152.9 39.3)">Ø100</text>
+          <!-- cota Ø56 : inclinada 30° al otro lado, escalonada respecto a la anterior -->
+          <line x1="70.75" y1="61" x2="159.1" y2="112" class="stroke-thin"/>
+          <polygon points="119.25,89 114.49,83.25 111.89,87.75" class="arrow"/>
+          <polygon points="70.75,61 78.11,62.25 75.51,66.75" class="arrow"/>
+          <text x="149.7" y="104.3" text-anchor="middle" font-size="10" font-weight="700" transform="rotate(30 149.7 104.3)">Ø56</text>
         </svg>
       </div>
       <div class="col-card">
@@ -1822,14 +1855,14 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
         <ul style="margin-top:6px;">
           <li>Se usa el símbolo <strong>R</strong> antes de la cifra cuando se acota un arco.</li>
           <li>La línea de cota parte <strong>desde el centro</strong> del arco hacia la circunferencia, con una sola flecha (la que toca el arco).</li>
-          <li>Arcos &lt; 180° → R. Arcos &gt; 180° → Ø.</li>
+          <li>Arcos <strong>de hasta 180°</strong> (incluida la media circunferencia) → <strong>R</strong>. Arcos <strong>de más de 180°</strong> → <strong>Ø</strong>.</li>
         </ul>
         <svg class="svg-fig" viewBox="0 0 180 130" xmlns="http://www.w3.org/2000/svg" style="margin-top:8px;">
           <path d="M 30 100 L 30 50 A 50 50 0 0 1 130 50 L 130 100 Z" class="stroke-main fill-light"/>
           <circle cx="80" cy="50" r="2" fill="#1a2238"/>
           <line x1="80" y1="50" x2="115" y2="15" class="stroke-thin"/>
-          <polygon points="115,15 109,15 113,20" class="arrow"/>
-          <text x="100" y="32" font-size="10" font-weight="700">R50</text>
+          <polygon points="115,15 111.89,21.79 108.21,18.11" class="arrow"/>
+          <text x="99.8" y="27.4" text-anchor="middle" font-size="10" font-weight="700" transform="rotate(-45 99.8 27.4)">R50</text>
         </svg>
       </div>
     </div>
@@ -2012,7 +2045,7 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
   <p>IES Jiménez de Quesada · Santa Fe (Granada)<br>
   TyD 2º ESO · Curso 2026-27 · Manuel Alonso Herrera</p>
   <p style="margin-top:6px;"><a href="index.html">← Volver al hub</a> · <a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a></p>
-  <p class="v" style="margin-top:8px;">Libro digital v1.2</p>
+  <p class="v" style="margin-top:8px;">Libro digital v1.3</p>
 </footer>
 
 </main>
