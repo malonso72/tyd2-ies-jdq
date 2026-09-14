@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dibujo técnico · 2º ESO · Tecnología y Digitalización · v1.6</title>
+<title>Dibujo técnico · 2º ESO · Tecnología y Digitalización · v1.7</title>
 <meta name="description" content="Libro digital de dibujo técnico para 2º ESO: vistas, perspectivas, escalas, acotación y CAD. IES Jiménez de Quesada (Santa Fe, Granada).">
 <meta name="theme-color" content="#d2552a">
 <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
@@ -506,7 +506,7 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
 <main>
 
 <header class="hero">
-  <div class="eyebrow">Unidad 0 · Libro digital · v1.6</div>
+  <div class="eyebrow">Unidad 0 · Libro digital · v1.7</div>
   <h1>Expresión gráfica<br>y <em>representación</em></h1>
   <p class="lead">Dibujar es una manera de pensar. Aprenderás a representar objetos reales sobre el papel con precisión: a verlos desde varios lados, a respetar sus proporciones y a contar sus medidas con un lenguaje común a toda la ingeniería del mundo.</p>
   <div class="meta">
@@ -742,13 +742,19 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
         <polygon points="244,366 304,366 332,408 272,408" class="stroke-thin fill-teja" style="stroke-width:1.4"/>
         <polygon points="434,206 462,248 462,308 434,266" class="stroke-thin fill-teja" style="stroke-width:1.4"/>
 
-        <!-- ── rayos proyectantes ── -->
-        <line x1="244.0" y1="266.0" x2="200" y2="200" class="stroke-aux"/>
-        <line x1="304.0" y1="206.0" x2="260" y2="140" class="stroke-aux"/>
-        <line x1="272.0" y1="308.0" x2="272.0" y2="408.0" class="stroke-aux"/>
-        <line x1="332.0" y1="308.0" x2="332.0" y2="408.0" class="stroke-aux"/>
-        <line x1="304.0" y1="206.0" x2="434.0" y2="206.0" class="stroke-aux"/>
-        <line x1="332.0" y1="308.0" x2="462.0" y2="308.0" class="stroke-aux"/>
+        <!-- ── rayos proyectantes: las cuatro aristas de cada cara ── -->
+        <line x1="244" y1="206" x2="200" y2="140" class="stroke-aux"/>
+        <line x1="304" y1="206" x2="260" y2="140" class="stroke-aux"/>
+        <line x1="304" y1="266" x2="260" y2="200" class="stroke-aux"/>
+        <line x1="244" y1="266" x2="200" y2="200" class="stroke-aux"/>
+        <line x1="244" y1="266" x2="244" y2="366" class="stroke-aux"/>
+        <line x1="304" y1="266" x2="304" y2="366" class="stroke-aux"/>
+        <line x1="332" y1="308" x2="332" y2="408" class="stroke-aux"/>
+        <line x1="272" y1="308" x2="272" y2="408" class="stroke-aux"/>
+        <line x1="304" y1="206" x2="434" y2="206" class="stroke-aux"/>
+        <line x1="332" y1="248" x2="462" y2="248" class="stroke-aux"/>
+        <line x1="332" y1="308" x2="462" y2="308" class="stroke-aux"/>
+        <line x1="304" y1="266" x2="434" y2="266" class="stroke-aux"/>
 
         <!-- ── el objeto ── -->
         <polygon points="244,206 304,206 332,248 272,248" class="stroke-main" style="fill:#ffffff"/>
@@ -2013,7 +2019,7 @@ footer.book-foot .v { font-family: 'JetBrains Mono', monospace; font-size: 11px;
   <p>IES Jiménez de Quesada · Santa Fe (Granada)<br>
   TyD 2º ESO · Curso 2026-27 · Manuel Alonso Herrera</p>
   <p style="margin-top:6px;"><a href="index.html">← Volver al hub</a> · <a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a></p>
-  <p class="v" style="margin-top:8px;">Libro digital v1.6</p>
+  <p class="v" style="margin-top:8px;">Libro digital v1.7</p>
 </footer>
 
 </main>
