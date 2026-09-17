@@ -136,6 +136,11 @@ footer{max-width:1360px;margin:0 auto;padding:12px 20px 30px;font-size:.82rem;co
 .dos.solo{grid-template-columns:minmax(0,.85fr) minmax(0,1.25fr)}
 .inferior.solo{grid-template-columns:minmax(0,1fr)}
 .chip .marcas{margin-left:4px}
+.chip .ficha-n{font-size:.72rem;opacity:.7;margin-left:3px}
+.chip[aria-pressed="true"] .ficha-n{opacity:.85}
+.f-ir{align-items:center;gap:8px;flex-wrap:wrap;font-size:.93rem}
+.f-ir input{width:72px;padding:5px 8px;border:1px solid var(--linea);border-radius:4px;background:var(--panel);color:inherit;font:inherit}
+.f-ir-msg{font-size:.88rem;opacity:.85}
 .mk{display:inline-block;font-size:.68rem;font-weight:700;line-height:1;padding:3px 4px;border-radius:3px;background:#2f7a4b;color:#fff;margin-left:3px;vertical-align:1px}
 .chip[aria-pressed="true"] .mk{background:#fff;color:var(--tinta)}
 .btn-link{background:none;border:0;padding:0;color:var(--alzado);text-decoration:underline;cursor:pointer;font-size:inherit}
@@ -404,6 +409,7 @@ footer{max-width:1360px;margin:0 auto;padding:12px 20px 30px;font-size:.82rem;co
 <section class="panel" id="p-planas" role="tabpanel" aria-labelledby="tab-planas" hidden>
   <p class="intro">Acota figuras planas con las cotas mínimas. Los niveles están siempre disponibles: empieza por donde quieras.</p>
   <div class="fila"><div class="chips" id="f-niveles" role="group" aria-label="Niveles"></div></div>
+  <div class="fila f-ir"><label for="f-num">Figura de la ficha de clase nº</label><input id="f-num" type="number" min="1" max="23" step="1" inputmode="numeric" autocomplete="off"><button class="btn-h" id="f-ir" type="button">Ir</button><span id="f-ir-msg" class="f-ir-msg" aria-live="polite"></span></div>
   <p class="nivel-intro" id="f-intro"></p>
   <div class="fila"><div class="chips" id="f-lista" role="group" aria-label="Figuras"></div></div>
   <div class="dos">
@@ -440,7 +446,7 @@ footer{max-width:1360px;margin:0 auto;padding:12px 20px 30px;font-size:.82rem;co
 </section>
 </main>
 <footer>
-  Acotación v1.6 · IES Jiménez de Quesada (Santa Fe, Granada). Medidas en mm. Línea de cota a 8 mm del contorno; auxiliares a 2 mm del dibujo y 2 mm más allá de la línea de cota.
+  Acotación v1.7 · IES Jiménez de Quesada (Santa Fe, Granada). Medidas en mm. Línea de cota a 8 mm del contorno; auxiliares a 2 mm del dibujo y 2 mm más allá de la línea de cota.
   El progreso se guarda solo en este navegador. <button class="btn-link" id="borrar-prog" type="button">Borrar mi progreso</button><br>
   Parte de las piezas proceden de fichas educativas de libre difusión.<br>
   Incluye three.js r128 (licencia MIT, © three.js authors).
@@ -1853,13 +1859,33 @@ const FIG = {
   placa2: { id: 'placa2', nombre: 'Placa con dos taladros', contorno: [[0, 0], [70, 0], [70, 30], [0, 30]], agujeros: [{ c: [15, 15], r: 5 }, { c: [55, 15], r: 5 }] },
   escuadra: { id: 'escuadra', nombre: 'Escuadra con taladros', contorno: [[0, 0], [50, 0], [50, 16], [16, 16], [16, 50], [0, 50]], agujeros: [{ c: [8, 40], r: 4 }, { c: [40, 8], r: 4 }] },
   soporte: { id: 'soporte', nombre: 'Soporte redondeado', contorno: [[0, 0], [60, 0], [60, 20], { arco: { c: [45, 20], r: 15, a0: 0, a1: 90 } }, [0, 35]], agujeros: [{ c: [45, 20], r: 6 }] },
-  entrante: { id: 'entrante', nombre: 'Entrante semicircular', contorno: [[0, 0], [60, 0], [60, 40], [0, 40], [0, 32], { arco: { c: [0, 20], r: 12, a0: 90, a1: -90 } }] }
+  entrante: { id: 'entrante', nombre: 'Entrante semicircular', contorno: [[0, 0], [60, 0], [60, 40], [0, 40], [0, 32], { arco: { c: [0, 20], r: 12, a0: 90, a1: -90 } }] },
+  /* figuras de la ficha de acotación de clase (1 cuadro = 10 mm) */
+  fc1: { id: 'fc1', nombre: 'Cuadrado', ficha: 1, contorno: [[0, 0], [40, 0], [40, 40], [0, 40]] },
+  fc2: { id: 'fc2', nombre: 'Rectángulo apaisado', ficha: 2, contorno: [[0, 0], [80, 0], [80, 40], [0, 40]] },
+  fc3: { id: 'fc3', nombre: 'Rectángulo vertical', ficha: 3, contorno: [[0, 0], [60, 0], [60, 70], [0, 70]] },
+  fc4: { id: 'fc4', nombre: 'Escalón en L', ficha: 4, contorno: [[0, 0], [70, 0], [70, 50], [30, 50], [30, 80], [0, 80]] },
+  fc5: { id: 'fc5', nombre: 'L girada', ficha: 5, contorno: [[40, 0], [80, 0], [80, 70], [0, 70], [0, 40], [40, 40]] },
+  fc6: { id: 'fc6', nombre: 'Figura en T', ficha: 6, contorno: [[0, 0], [90, 0], [90, 30], [60, 30], [60, 70], [30, 70], [30, 30], [0, 30]] },
+  fc7: { id: 'fc7', nombre: 'Trapecio rectángulo', ficha: 7, contorno: [[0, 0], [70, 0], [70, 60], [30, 60]] },
+  fc8: { id: 'fc8', nombre: 'Bloque con dos chaflanes', ficha: 8, contorno: [[0, 0], [90, 0], [90, 30], [60, 60], [30, 60], [0, 30]] },
+  fc9: { id: 'fc9', nombre: 'Paralelogramo', ficha: 9, contorno: [[0, 0], [40, 0], [80, 60], [40, 60]] },
+  fc10: { id: 'fc10', nombre: 'Ángulo en L', ficha: 10, contorno: [[50, 0], [70, 0], [70, 50], [0, 50], [0, 30], [50, 30]] },
+  fc11: { id: 'fc11', nombre: 'Base con torre', ficha: 11, contorno: [[0, 0], [80, 0], [80, 20], [60, 20], [60, 50], [40, 50], [40, 20], [0, 20]] },
+  fc12: { id: 'fc12', nombre: 'Escalera de tres peldaños', ficha: 12, contorno: [[0, 0], [60, 0], [60, 20], [40, 20], [40, 40], [20, 40], [20, 60], [0, 60]] },
+  fc13: { id: 'fc13', nombre: 'Cruz', ficha: 13, contorno: [[30, 0], [60, 0], [60, 20], [90, 20], [90, 50], [60, 50], [60, 70], [30, 70], [30, 50], [0, 50], [0, 20], [30, 20]] },
+  fc16: { id: 'fc16', nombre: 'Figura en C', ficha: 16, contorno: [[0, 0], [60, 0], [60, 20], [20, 20], [20, 40], [60, 40], [60, 60], [0, 60]] },
+  fc17: { id: 'fc17', nombre: 'Base con dos salientes', ficha: 17, contorno: [[0, 0], [90, 0], [90, 30], [70, 30], [70, 10], [40, 10], [40, 60], [20, 60], [20, 10], [0, 10]] },
+  fc18: { id: 'fc18', nombre: 'Perfil en doble T', ficha: 18, contorno: [[10, 0], [80, 0], [80, 20], [60, 20], [60, 50], [90, 50], [90, 60], [0, 60], [0, 50], [30, 50], [30, 20], [10, 20]] },
+  fc19: { id: 'fc19', nombre: 'Peine de dos ranuras', ficha: 19, contorno: [[40, 0], [50, 0], [50, 30], [70, 30], [70, 0], [80, 0], [80, 50], [0, 50], [0, 10], [10, 10], [10, 30], [40, 30]] },
+  fc21: { id: 'fc21', nombre: 'Rampa con escalón', ficha: 21, contorno: [[40, 0], [70, 0], [70, 60], [50, 60], [0, 30], [40, 30]] },
+  fc22: { id: 'fc22', nombre: 'Triángulo con muesca', ficha: 22, contorno: [[0, 0], [70, 60], [30, 60], [30, 40], [20, 40], [20, 60], [0, 60]] }
 };
 /* pestaña «Figuras planas», por niveles (siempre disponibles, sin curso asociado) */
 const NIVELES_PLANAS = [
-  { n: 1, titulo: 'Nivel 1 · Contornos rectos', ids: ['rect', 'L', 'T', 'escalera', 'ranura', 'cruz', 'horquilla', 'pedestal'],
+  { n: 1, titulo: 'Nivel 1 · Contornos rectos', ids: ['rect', 'L', 'T', 'escalera', 'ranura', 'cruz', 'horquilla', 'pedestal', 'fc1', 'fc2', 'fc3', 'fc4', 'fc5', 'fc6', 'fc10', 'fc11', 'fc12', 'fc13', 'fc16', 'fc17', 'fc18', 'fc19'],
     intro: 'Figuras con lados horizontales y verticales. En cada dirección hacen falta tantas cotas como posiciones distintas menos una.' },
-  { n: 2, titulo: 'Nivel 2 · Inclinadas y simetría', ids: ['trapecio', 'chaflanes', 'paralelo', 'casa', 'ranuraSim', 'colaMilano', 'flecha'],
+  { n: 2, titulo: 'Nivel 2 · Inclinadas y simetría', ids: ['trapecio', 'chaflanes', 'paralelo', 'casa', 'ranuraSim', 'colaMilano', 'flecha', 'fc7', 'fc8', 'fc9', 'fc21', 'fc22'],
     intro: 'Una arista inclinada se define por las posiciones de sus dos extremos. Si hay un eje de simetría dibujado, lo que está centrado no necesita cota de posición.' },
   { n: 3, titulo: 'Nivel 3 · Arcos y taladros', ids: ['arco', 'placa', 'pletina', 'entrante', 'placa2', 'escuadra', 'soporte'],
     intro: 'Una circunferencia necesita su diámetro (Ø) y la posición de su centro. Un arco tangente a las rectas fija él solo varias posiciones: fíjate en qué cotas se vuelven innecesarias.' }
@@ -2479,13 +2505,25 @@ function iniciarPlanas() {
   F.P = panelAcota('f', { consigna: 'Toca dos marcas del mismo lado para poner una cota entre ellas. Toca una circunferencia o un arco para poner su Ø o su R. Toca una cota para quitarla.', alTerminar: M => { Prog.d.planas[M.id] = true; Prog.guardar(); pintarMarcas(); } });
   const nv = $('#f-niveles');
   NIVELES_PLANAS.forEach((n, i) => { const b = el('button', { class: 'chip', type: 'button', 'aria-pressed': String(i === 0) }, nv, n.titulo); b.addEventListener('click', () => { nv.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', String(x === b))); nivelPlanas(i); }); });
+  const irFicha = num => {
+    const msg = $('#f-ir-msg');
+    const id = Object.keys(FIG).find(k => FIG[k].ficha === num);
+    const i = id ? NIVELES_PLANAS.findIndex(n => n.ids.includes(id)) : -1;
+    if (i < 0) { msg.textContent = Number.isInteger(num) ? 'La nº ' + num + ' no está en el simulador (lleva un hueco interior).' : 'Escribe el número de la figura.'; return; }
+    msg.textContent = '';
+    nv.querySelectorAll('.chip').forEach((x, k) => x.setAttribute('aria-pressed', String(k === i)));
+    nivelPlanas(i, id);
+  };
+  $('#f-ir').addEventListener('click', () => irFicha(parseInt($('#f-num').value, 10)));
+  $('#f-num').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); irFicha(parseInt($('#f-num').value, 10)); } });
   nivelPlanas(0);
 }
-function nivelPlanas(i) {
+function nivelPlanas(i, sel) {
   F.nivel = i; const n = NIVELES_PLANAS[i], box = $('#f-lista'); box.textContent = '';
+  const ini = sel && n.ids.includes(sel) ? sel : n.ids[0];
   $('#f-intro').textContent = n.intro;
-  n.ids.forEach((id, k) => { const b = el('button', { class: 'chip', type: 'button', 'aria-pressed': String(k === 0), 'data-id': id }, box, FIG[id].nombre + '<span class="marcas"></span>'); b.addEventListener('click', () => { box.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', String(x === b))); F.P.cargar(modeloPlana(FIG[id])); }); });
-  F.P.cargar(modeloPlana(FIG[n.ids[0]])); pintarMarcas();
+  n.ids.forEach((id, k) => { const b = el('button', { class: 'chip', type: 'button', 'aria-pressed': String(id === ini), 'data-id': id }, box, FIG[id].nombre + (FIG[id].ficha ? ' <span class="ficha-n">ficha nº' + FIG[id].ficha + '</span>' : '') + '<span class="marcas"></span>'); b.addEventListener('click', () => { box.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', String(x === b))); F.P.cargar(modeloPlana(FIG[id])); }); });
+  F.P.cargar(modeloPlana(FIG[ini])); pintarMarcas();
 }
 /* ---------- piezas en tres vistas ---------- */
 const K = { nivel: 0 };
