@@ -115,3 +115,9 @@ details.criterios .criterios-body{padding:14px 18px;border:1px solid var(--bd);b
   .hd-hero,.searchbar,.aviso{box-shadow:none!important}
   .bc{break-inside:avoid}
 }
+/* ===== subgrupos dentro de «Recursos de la unidad» y tarjeta del libro ===== */
+.sub-title{font-family:var(--cond);font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--t2);margin:26px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--bd)}
+.bg .bc.libro{grid-column:1/-1;display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:18px;row-gap:3px;align-items:center;padding:18px 22px;background:linear-gradient(135deg,var(--principal-bg) 0,#fff 60%)}
+.bc.libro .bi{grid-row:1/3;width:58px;height:58px;font-size:1.9rem;margin:0}
+.bc.libro .bk{grid-column:2;font-size:1.28rem;align-self:end}
+.bc.libro .bn{grid-column:2;font-size:.88rem;max-width:70ch;align-self:start}
