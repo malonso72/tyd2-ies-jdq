@@ -223,6 +223,7 @@ footer{max-width:1360px;margin:0 auto;padding:12px 20px 30px;font-size:.82rem;co
 
 .nivel-intro{margin:0 0 10px;color:var(--tinta2);max-width:90ch;font-size:.95rem}
 .cuenta-n{opacity:.7;font-size:.85em}
+#p-familias .chip{font-size:1rem;font-weight:600;padding:8px 16px}
 #p-lista .chip .num{min-width:1.7em;margin-right:3px}
 .u-nombre{opacity:.55;pointer-events:none}
 
@@ -303,7 +304,10 @@ footer{max-width:1360px;margin:0 auto;padding:12px 20px 30px;font-size:.82rem;co
 
 <!-- ===================== PIEZAS ===================== -->
 <section class="panel" id="p-piezas" role="tabpanel" aria-labelledby="tab-piezas" hidden>
-  <p class="intro">Piezas en tres niveles, siempre disponibles: empieza por donde quieras. En <b>Ver</b> se construye la perspectiva paso a paso; en <b>Guiado</b> eliges cuál de las cuatro perspectivas corresponde a las vistas; en <b>Solo</b> la dibujas tú sobre la retícula y el simulador la corrige.</p>
+  <p class="intro">Piezas en dos familias, cada una con tres niveles, siempre disponibles: empieza por donde quieras. En <b>Ver</b> se construye la perspectiva paso a paso; en <b>Guiado</b> eliges cuál de las cuatro perspectivas corresponde a las vistas; en <b>Solo</b> la dibujas tú sobre la retícula y el simulador la corrige.</p>
+  <div class="fila">
+    <div class="chips" id="p-familias" role="group" aria-label="Familias de piezas"></div>
+  </div>
   <div class="fila">
     <div class="chips" id="p-niveles" role="group" aria-label="Niveles"></div>
   </div>
@@ -879,8 +883,8 @@ const CATALOGO = (() => {
   const X = (a, b) => [a, b, b, a];                                              // tapa inclinada de izquierda a derecha
   const F = (...cs) => () => cs.map(c => G.cara(c[0], c[1]));                    // caras dadas una a una (vértices en cuadros)
   const FI = 'ficha de perspectiva isométrica';
-  const io = (n, nombre, caras) => ({ id: 'io' + n, nombre, dims: [4, 4, 4], caras, origen: `Pieza de la ${FI} con caras ortogonales (pieza ${n}).` });
-  const ii = (n, nombre, caras) => ({ id: 'ii' + n, nombre, dims: [4, 4, 4], caras, origen: `Pieza de la ${FI} con caras inclinadas (pieza ${n}).` });
+  const io = (n, nombre, caras) => ({ id: 'io' + n, nombre, dims: [4, 4, 4], caras, origen: `Pieza de la ${FI} con planos ortogonales (pieza ${n}).` });
+  const ii = (n, nombre, caras) => ({ id: 'ii' + n, nombre, dims: [4, 4, 4], caras, origen: `Pieza de la ${FI} con planos inclinados (pieza ${n}).` });
   return [
     hs('s1', 'Esquina en L', [[1, 1, 3], [1, 1, 3], [1, 1, 3]], 'ejemplo de «Vistas 1»'),
     hs('s2', 'Pared con escalón', [[3, 3, 3], [1, 1, 2], [1, 1, 2]], '«Vistas 1», pieza 2'),
@@ -1298,21 +1302,40 @@ function rasgosIso(pz) {
   const nvis = contarIso(iso.segs.filter(s => s.tipo === 'vis'));
   return (pz._rasgosI = { ocultas, inclinada, oblicua, hueco, exacta: iso.exacta, nvis });
 }
-/* Niveles, calculados a partir de la propia pieza (nunca a mano):
-   1 · todas las caras paralelas a los planos, sin huecos y pocas líneas
-   2 · las mismas con más líneas, o con una cara inclinada
-   3 · huecos que atraviesan la pieza, o caras oblicuas                    */
-function nivelIso(pz) {
-  const r = rasgosIso(pz);
-  if (r.oblicua || r.hueco || !r.exacta) return 3;
-  if (r.inclinada || r.nvis > 18) return 2;
-  return 1;
+/* Clasificación, calculada a partir de la propia pieza (nunca a mano):
+   familia · 'orto': todos los planos son paralelos a los planos de proyección.
+             'incl': algún plano es inclinado (perpendicular a un solo plano de
+             proyección) u oblicuo (no es paralelo ni perpendicular a ninguno).
+   nivel   · orto: 3 si tiene huecos o partes en voladizo (caras que miran hacia
+             abajo por encima del suelo) o más de 30 aristas visibles en la
+             perspectiva; 1 si tiene hasta 18; 2 en el resto.
+             incl: 3 si algún plano es oblicuo; 1 si tiene hasta 15 aristas
+             visibles; 2 en el resto.
+   Dentro de cada nivel, las piezas van de menos a más aristas visibles.        */
+function voladizoIso(pz) {
+  return pz.carasG.some(f => f.n[2] < -1e-6 && Math.min(...f.pts.map(q => q[2])) > 1e-6);
 }
-const NIVELES_ISO = [
-  { n: 1, t: 'Nivel 1 · Caras rectas', d: 'Piezas con todas las caras paralelas a los planos. Las tres direcciones de la retícula bastan para dibujarlas enteras.' },
-  { n: 2, t: 'Nivel 2 · Más líneas e inclinadas', d: 'Las mismas, con más escalones, y las primeras caras inclinadas: sus aristas ya no siguen ninguna de las tres direcciones.' },
-  { n: 3, t: 'Nivel 3 · Huecos y caras oblicuas', d: 'Huecos que atraviesan la pieza y caras oblicuas, que no son paralelas a ningún plano.' }
+function claseIso(pz) {
+  const r = rasgosIso(pz);
+  if (r.inclinada || r.oblicua) return { fam: 'incl', n: r.oblicua || !r.exacta ? 3 : r.nvis <= 15 ? 1 : 2 };
+  return { fam: 'orto', n: r.hueco || voladizoIso(pz) || !r.exacta || r.nvis > 30 ? 3 : r.nvis <= 18 ? 1 : 2 };
+}
+const FAMILIAS_ISO = [
+  { f: 'orto', t: 'Piezas con planos ortogonales', d: 'Todos sus planos son paralelos a los planos de proyección: las tres direcciones de la retícula bastan para dibujarlas.' },
+  { f: 'incl', t: 'Piezas con planos inclinados y oblicuos', d: 'Algún plano no es paralelo a los planos de proyección: sus aristas ya no siguen las tres direcciones de la retícula.' }
 ];
+const NIVELES_ISO = {
+  orto: [
+    { n: 1, t: 'Inicial', d: 'Nivel inicial: bloques, escalones y entrantes con pocas aristas.' },
+    { n: 2, t: 'Medio', d: 'Nivel medio: más escalones y entrantes, y por tanto más aristas que situar en la retícula.' },
+    { n: 3, t: 'Avanzado', d: 'Nivel avanzado: huecos que atraviesan la pieza, partes en voladizo o un número elevado de aristas.' }
+  ],
+  incl: [
+    { n: 1, t: 'Inicial', d: 'Nivel inicial: planos inclinados en piezas con pocas aristas. Un plano inclinado es perpendicular a un plano de proyección e inclinado respecto a los otros dos.' },
+    { n: 2, t: 'Medio', d: 'Nivel medio: varios planos inclinados combinados con escalones y entrantes.' },
+    { n: 3, t: 'Avanzado', d: 'Nivel avanzado: planos oblicuos, que no son paralelos ni perpendiculares a ningún plano de proyección. Sus aristas se dibujan uniendo vértices situados en la retícula.' }
+  ]
+};
 
 /* =====================================================================
    ESCENA 3D (three.js r128)
@@ -2102,17 +2125,19 @@ const Prog = {
   borrar() { this.d = {}; try { localStorage.removeItem(CLAVE); } catch (_) {} pintarMarcas(); }
 };
 
-/* ---- catálogo ordenado por niveles ----
+/* ---- catálogo ordenado por familias y niveles ----
    Mismas piezas que en Vistas y en Acotación: las 8 del motor (cada una con una
    idea nueva) delante y después las de las fichas. Se deja fuera la del taladro:
    su agujero se proyecta como una elipse y este simulador no trabaja curvas.
-   Al final van las 32 de la ficha de perspectiva isométrica (16 con caras
-   ortogonales y 16 con caras inclinadas), que solo están en este simulador. */
+   Al final van las 32 de la ficha de perspectiva isométrica (16 con planos
+   ortogonales y 16 con planos inclinados), que solo están en este simulador. */
 const ORIGINALES = G.PIEZAS.filter(p => !p.taladro);
 const LISTA = [...ORIGINALES, ...CATALOGO].map(p => G.preparar(p));
-LISTA.forEach(p => { p.nivelIso = nivelIso(p); });
-const PORNIVEL = { 1: [], 2: [], 3: [] };
-LISTA.forEach(p => PORNIVEL[p.nivelIso].push(p));
+LISTA.forEach(p => { const c = claseIso(p); p.famIso = c.fam; p.nivelIso = c.n; });
+const PORNIVEL = {};
+FAMILIAS_ISO.forEach(F => [1, 2, 3].forEach(n => { PORNIVEL[F.f + n] = []; }));
+LISTA.forEach(p => PORNIVEL[p.famIso + p.nivelIso].push(p));
+Object.values(PORNIVEL).forEach(l => l.sort((a, b) => rasgosIso(a).nvis - rasgosIso(b).nvis));
 
 /* =====================================================================
    PESTAÑAS
@@ -2244,18 +2269,17 @@ function dibujarHojaSistema(modo) {
 /* =====================================================================
    2 · PIEZAS
    ===================================================================== */
-const P = { nivel: 1, pz: null, modo: 'ver', paso: 0, intento: 0, ocultas: false };
+const P = { fam: 'orto', nivel: 1, pz: null, modo: 'ver', paso: 0, intento: 0, ocultas: false };
 let hojaVistas = null, hojaIso = null, editor = null, esc3d = null;
 
 function initPiezas() {
-  // niveles
-  const cn = $('#p-niveles');
-  NIVELES_ISO.forEach(N => {
-    const b = el('button', { class: 'chip', type: 'button', 'data-n': N.n }, cn);
-    el('span', { class: 'num', txt: N.n }, b);
-    b.appendChild(document.createTextNode(N.t.replace(/^Nivel \d+ · /, '')));
-    el('span', { class: 'cuenta-n', txt: ` (${PORNIVEL[N.n].length})` }, b);
-    b.addEventListener('click', () => { P.nivel = N.n; pintarNivel(); seleccionar(PORNIVEL[N.n][0]); });
+  // familias (los niveles se pintan en pintarNivel, porque dependen de la familia)
+  const cf = $('#p-familias');
+  FAMILIAS_ISO.forEach(F => {
+    const b = el('button', { class: 'chip', type: 'button', 'data-f': F.f }, cf);
+    b.appendChild(document.createTextNode(F.t));
+    el('span', { class: 'cuenta-n', txt: ` (${[1, 2, 3].reduce((s, n) => s + PORNIVEL[F.f + n].length, 0)})` }, b);
+    b.addEventListener('click', () => { P.fam = F.f; P.nivel = 1; pintarNivel(); seleccionar(PORNIVEL[F.f + 1][0]); });
   });
   $$('#p-modo button').forEach(b => b.addEventListener('click', () => setModo(b.dataset.modo)));
   $('#p-ocultas').addEventListener('change', e => { P.ocultas = e.target.checked; if (P.modo === 'solo') montarSolo(); });
@@ -2268,7 +2292,7 @@ function initPiezas() {
   $('#p-ant').addEventListener('click', () => { P.paso = Math.max(0, P.paso - 1); pintarVer(); });
   $('#p-sig').addEventListener('click', () => { const n = pasosVer(P.pz).length; if (P.paso < n - 1) { P.paso++; pintarVer(); } });
   hojaVistas = new Hoja($('#p-vistas'), { margen: 0.2 });
-  pintarNivel(); seleccionar(PORNIVEL[1][0]);
+  pintarNivel(); seleccionar(PORNIVEL[P.fam + P.nivel][0]);
 }
 function crear3D() {
   if (esc3d) return;
@@ -2280,11 +2304,21 @@ function crear3D() {
   });
 }
 function pintarNivel() {
-  $$('#p-niveles .chip').forEach(b => b.setAttribute('aria-pressed', +b.dataset.n === P.nivel ? 'true' : 'false'));
-  const N = NIVELES_ISO.find(x => x.n === P.nivel);
-  $('#p-nivel-intro').textContent = N.d;
+  $$('#p-familias .chip').forEach(b => b.setAttribute('aria-pressed', b.dataset.f === P.fam ? 'true' : 'false'));
+  const cn = $('#p-niveles'), foco = cn.contains(document.activeElement);
+  cn.textContent = '';
+  NIVELES_ISO[P.fam].forEach(N => {
+    const b = el('button', { class: 'chip', type: 'button', 'data-n': N.n, 'aria-pressed': N.n === P.nivel ? 'true' : 'false' }, cn);
+    el('span', { class: 'num', txt: N.n }, b);
+    b.appendChild(document.createTextNode(N.t));
+    el('span', { class: 'cuenta-n', txt: ` (${PORNIVEL[P.fam + N.n].length})` }, b);
+    b.addEventListener('click', () => { P.nivel = N.n; pintarNivel(); seleccionar(PORNIVEL[P.fam + N.n][0]); });
+    if (foco && N.n === P.nivel) b.focus();
+  });
+  const F = FAMILIAS_ISO.find(x => x.f === P.fam), N = NIVELES_ISO[P.fam].find(x => x.n === P.nivel);
+  $('#p-nivel-intro').textContent = F.d + ' ' + N.d;
   const c = $('#p-lista'); c.textContent = '';
-  PORNIVEL[P.nivel].forEach((pz, i) => {
+  PORNIVEL[P.fam + P.nivel].forEach((pz, i) => {
     const b = el('button', { class: 'chip', type: 'button', 'data-id': pz.id }, c);
     el('span', { class: 'num', txt: i + 1 }, b);
     b.appendChild(document.createTextNode(pz.nombre));
