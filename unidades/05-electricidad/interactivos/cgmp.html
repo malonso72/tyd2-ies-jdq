@@ -444,13 +444,13 @@
             <rect x="23" y="50" width="14" height="28" rx="2" fill="url(#gradPalanca)"/>
             <rect x="23" y="50" width="14" height="4" fill="#e8b923"/>
           </g>
-          <text x="30" y="140" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#3b3522">40 A</text>
+          <text id="icp-amp" x="30" y="140" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#3b3522">20 A</text>
           <text x="30" y="156" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#5a5443">CONTROL</text>
           <text x="30" y="167" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#5a5443">POTENCIA</text>
         </g>
 
         <!-- IGA -->
-        <g class="clickable" id="el-iga" data-id="iga" transform="translate(240,205)">
+        <g class="clickable" id="el-iga" data-id="iga" transform="translate(230,205)">
           <rect x="0" y="0" width="60" height="180" rx="3" fill="url(#gradInt)" stroke="#9c9684"/>
           <rect x="6" y="6" width="48" height="32" rx="2" fill="#1a1a1a"/>
           <text x="30" y="28" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#fff">IGA</text>
@@ -466,8 +466,23 @@
           <text x="30" y="167" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#5a5443">GENERAL</text>
         </g>
 
+
+        <!-- Protector contra sobretensiones (se conecta en paralelo: desvía los picos a tierra) -->
+        <g class="clickable" id="el-spd" data-id="spd" transform="translate(318,205)">
+          <rect x="0" y="0" width="52" height="180" rx="3" fill="url(#gradInt)" stroke="#9c9684"/>
+          <rect x="5" y="6" width="42" height="32" rx="2" fill="#1a1a1a"/>
+          <path d="M28 10 L19 24 L26 24 L22 35 L33 20 L26 20 L30 10 Z" fill="#e8b923"/>
+          <!-- Ventanita de estado: verde = protegido -->
+          <rect x="14" y="54" width="24" height="16" rx="2" fill="#1a1a1a"/>
+          <rect id="spd-win" x="17" y="57" width="18" height="10" rx="1" fill="#27a96b"/>
+          <text x="26" y="88" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#3b3522">L N</text>
+          <text x="26" y="140" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#3b3522">⏚</text>
+          <text x="26" y="156" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#5a5443">SOBRE-</text>
+          <text x="26" y="167" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#5a5443">TENSIONES</text>
+        </g>
+
         <!-- ID -->
-        <g class="clickable" id="el-id" data-id="id" transform="translate(340,205)">
+        <g class="clickable" id="el-id" data-id="id" transform="translate(392,205)">
           <rect x="0" y="0" width="78" height="180" rx="3" fill="url(#gradInt)" stroke="#9c9684"/>
           <rect x="6" y="6" width="66" height="32" rx="2" fill="#1a1a1a"/>
           <text x="39" y="28" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#27a96b">ID 30mA</text>
@@ -486,8 +501,8 @@
         </g>
 
         <!-- Separador entre protección general y circuitos -->
-        <line x1="480" y1="120" x2="480" y2="470" stroke="#bdb7a4" stroke-dasharray="3 4"/>
-        <text x="484" y="116" font-family="JetBrains Mono, monospace" font-size="9" fill="#5a5443" letter-spacing="2">CIRCUITOS INTERIORES</text>
+        <line x1="496" y1="120" x2="496" y2="470" stroke="#bdb7a4" stroke-dasharray="3 4"/>
+        <text x="500" y="116" font-family="JetBrains Mono, monospace" font-size="9" fill="#5a5443" letter-spacing="2">CIRCUITOS INTERIORES</text>
 
         <!-- PIA C1 - Iluminación -->
         <g class="clickable pia" id="el-c1" data-id="c1" transform="translate(530,205)">
@@ -598,9 +613,9 @@
 
         <!-- ============== BARRAS DE CONEXIÓN (CABLEADO) ============== -->
         <!-- Barra fase (sale del ID hacia los PIAs) -->
-        <path id="bus-live" d="M 418 230 L 1170 230" stroke="var(--wire-live)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.85"/>
+        <path id="bus-live" d="M 470 230 L 1170 230" stroke="var(--wire-live)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.85"/>
         <!-- Barra neutro -->
-        <path id="bus-neutral" d="M 418 245 L 1170 245" stroke="var(--wire-neutral)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.85"/>
+        <path id="bus-neutral" d="M 470 245 L 1170 245" stroke="var(--wire-neutral)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.85"/>
 
         <!-- Bajadas a cada PIA -->
         <g stroke-linecap="round" stroke-width="3" fill="none" opacity=".85">
@@ -631,16 +646,19 @@
 
         <!-- Conexión entrada ICP-IGA-ID -->
         <g stroke-linecap="round" stroke-width="3" fill="none" opacity=".85">
-          <path d="M 200 230 L 240 230" stroke="var(--wire-live)"/>
-          <path d="M 200 245 L 240 245" stroke="var(--wire-neutral)"/>
-          <path d="M 300 230 L 340 230" stroke="var(--wire-live)"/>
-          <path d="M 300 245 L 340 245" stroke="var(--wire-neutral)"/>
+          <path d="M 200 230 L 230 230" stroke="var(--wire-live)"/>
+          <path d="M 200 245 L 230 245" stroke="var(--wire-neutral)"/>
+          <path d="M 290 230 L 318 230" stroke="var(--wire-live)"/>
+          <path d="M 290 245 L 318 245" stroke="var(--wire-neutral)"/>
+          <path d="M 370 230 L 392 230" stroke="var(--wire-live)"/>
+          <path d="M 370 245 L 392 245" stroke="var(--wire-neutral)"/>
         </g>
 
         <!-- Toma de tierra -->
         <g>
           <path d="M 60 180 L 80 180 L 80 500" stroke="var(--wire-earth)" stroke-width="3" fill="none" stroke-linecap="round"/>
           <text x="60" y="172" font-family="JetBrains Mono, monospace" font-size="9" fill="#3b6b48" letter-spacing="1">TIERRA</text>
+          <path id="spd-earth" d="M 344 385 L 344 398 L 80 398" stroke="var(--wire-earth)" stroke-width="3" fill="none" stroke-linecap="round"/>
           <!-- símbolo tierra -->
           <g transform="translate(72,505)" stroke="#27a96b" stroke-width="2" fill="none">
             <line x1="0" y1="0" x2="16" y2="0"/>
@@ -797,6 +815,10 @@
           <span class="num">04 / AV. GENERAL</span>
           <span class="lbl">Sobrecarga total</span>
         </button>
+        <button class="sim danger" data-sim="sobretension">
+          <span class="num">05 / SOBRETENSIÓN</span>
+          <span class="lbl">Cae un rayo cerca</span>
+        </button>
       </div>
     </div>
 
@@ -812,10 +834,11 @@ const INFO = {
     crumb: "Elemento 01", code: "ICP",
     title: "ICP — Interruptor de Control de Potencia",
     sub: "Lo instala la compañía eléctrica",
-    body: `<p>El <b>ICP</b> vigila que <b>no consumamos más potencia de la contratada</b>. Si contratas 4,6 kW y enciendes a la vez horno, vitro, lavadora y secador, el ICP salta y corta toda la casa.</p>
-           <p>Hoy en día suele estar integrado dentro del <b>contador digital</b> que hay en el portal, no en el cuadro de tu vivienda.</p>`,
-    kv: { "Función":"Limitar la potencia contratada", "Intensidad":"40 A (variable)", "Lo pone":"La compañía eléctrica" },
-    note: "🔑 Es el único interruptor del cuadro que <b>no es del usuario</b>: pertenece a la compañía."
+    body: `<p>El <b>ICP</b> vigila que <b>no consumamos más potencia de la contratada</b>. Si contratas 4,6 kW y enciendes a la vez horno, vitro, lavadora y secador, salta y corta toda la casa.</p>
+           <p>Su calibre depende de la potencia contratada: con 4,6 kW, <b>20 A</b> (4600 W / 230 V ≈ 20 A). Cambia la potencia en la mesa de ensayo y verás cómo cambia.</p>
+           <p>En la mayoría de las viviendas, esta función la hace hoy el <b>contador digital</b>. Si hay ICP en el cuadro, va el primero.</p>`,
+    kv: { "Función":"Limitar la potencia contratada", "Calibre":"Según la potencia (4,6 kW → 20 A)", "Lo pone":"La compañía eléctrica" },
+    note: "🔑 Es el único elemento del cuadro que <b>no es del usuario</b>: pertenece a la compañía."
   },
   iga: {
     crumb: "Elemento 02", code: "IGA",
@@ -826,8 +849,17 @@ const INFO = {
     kv: { "Función":"Mando general + protección térmica/magnética", "Intensidad":"40 A", "Polos":"2 (fase + neutro)" },
     note: "💡 Si quieres dejar tu casa sin luz para irte de vacaciones largas, <b>este es el interruptor que bajas</b>."
   },
+  spd: {
+    crumb: "Elemento 03", code: "PROTECTOR",
+    title: "Protector contra sobretensiones",
+    sub: "Protege los aparatos",
+    body: `<p>Protege los <b>aparatos</b> conectados frente a <b>subidas de tensión</b>: picos muy breves causados por rayos o por maniobras en la red, y subidas que duran más, por ejemplo por un fallo del neutro.</p>
+           <p>No corta la corriente en funcionamiento normal: está conectado <b>en paralelo</b> y, cuando llega un pico, lo <b>desvía a tierra</b> antes de que alcance los aparatos.</p>`,
+    kv: { "Función":"Proteger los aparatos", "Conexión":"En paralelo, a tierra", "Posición":"Después del IGA", "Estado":"Ventanita verde = protege" },
+    note: "🟥 Si la ventanita se pone roja, el protector ha absorbido un pico fuerte y hay que sustituirlo."
+  },
   id: {
-    crumb: "Elemento 03", code: "ID",
+    crumb: "Elemento 04", code: "ID",
     title: "ID — Interruptor Diferencial",
     sub: "El que salva vidas",
     body: `<p>El diferencial <b>protege a las personas</b>. Compara la corriente que entra por la fase con la que vuelve por el neutro: si no son iguales, significa que algo de corriente se está "escapando" (por ejemplo, a través del cuerpo de una persona).</p>
@@ -1085,6 +1117,25 @@ function simular(tipo){
       document.querySelectorAll('.clickable').forEach(el => el.classList.remove('selected'));
       document.getElementById('el-iga').classList.add('selected');
     }
+    else if(tipo === 'sobretension'){
+      // El protector actúa: la casa sigue con luz
+      const $e = document.getElementById('spd-earth');
+      $e.style.transition = 'stroke .15s'; $e.style.stroke = '#ffd23a'; $e.style.strokeWidth = '6';
+      setTimeout(()=>{ $e.style.stroke = ''; $e.style.strokeWidth = ''; }, 900);
+      setStatus('warn', 'Sobretensión: ha actuado el protector');
+      $panel.crumb.textContent = "AVERÍA 05";
+      $panel.code.textContent = "SOBRETENSIÓN";
+      $panel.body.innerHTML = `
+        <h2>Sobretensión por un rayo</h2>
+        <h3>Actúa el protector contra sobretensiones</h3>
+        <p>Cae un rayo cerca y en la red aparece un pico de tensión de miles de voltios durante unos microsegundos.</p>
+        <p>El <b>protector contra sobretensiones</b> desvía ese pico a <b>tierra</b> antes de que llegue a los aparatos.</p>
+        <div class="note ok">✅ Resultado: la vivienda sigue con luz y los aparatos no se estropean.</div>
+        <div class="note">Si el pico es muy fuerte, el protector queda dañado: su ventanita pasa de verde a rojo y hay que cambiarlo.</div>
+      `;
+      document.querySelectorAll('.clickable').forEach(el => el.classList.remove('selected'));
+      document.getElementById('el-spd').classList.add('selected');
+    }
     abrirPanel();
   }, 60);
 }
@@ -1157,6 +1208,9 @@ const BENCH = {
 
 const $aparatos  = document.getElementById('aparatos');
 const $selKW     = document.getElementById('sel-contratada');
+const $icpAmp    = document.getElementById('icp-amp');
+function actualizarICP(){ $icpAmp.textContent = Math.round(parseInt($selKW.value, 10) / 230) + ' A'; }
+$selKW.addEventListener('change', actualizarICP); actualizarICP();
 const $meterW    = document.getElementById('meter-w');
 const $meterMax  = document.getElementById('meter-max');
 const $meterPct  = document.getElementById('meter-pct');
