@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Simulador de palancas · U04 · TyD 2º ESO</title>
+<meta name="description" content="Simulador de palancas: mueve el apoyo, la fuerza y la resistencia sobre la barra y comprueba la ley de la palanca. TyD 2º ESO.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+:root{--cF:#c44a3a;--cR:#2c5f8d;--cA:#3b3f45;--ok:#1f7a4c;--ko:#c0392b}
+.pl-wrap{max-width:1180px;margin:18px auto 50px;padding:0 18px}
+.pl-hero{text-align:center;margin-bottom:12px}
+.pl-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 4px}
+.pl-hero p{color:var(--texto2);margin:0 auto;max-width:820px;line-height:1.5}
+.pl-barra{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;margin:12px 0 10px}
+.pl-grupo{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pl-grupo b{font-family:var(--cond);color:var(--texto2);font-weight:600;margin-right:2px}
+.pl-btn{font-family:var(--cond);font-size:1rem;background:#fff;color:var(--principal);border:1.5px solid var(--principal);border-radius:7px;padding:6px 13px;cursor:pointer}
+.pl-btn:hover,.pl-btn.on{background:var(--principal);color:#fff}
+.pl-btn.verde{border-color:var(--ok);color:var(--ok)}.pl-btn.verde:hover{background:var(--ok);color:#fff}
+.pl-esc{background:linear-gradient(#f7fafd,#eef3f8);border:1px solid var(--borde);border-radius:12px;padding:6px;position:relative}
+.pl-esc svg{width:100%;height:auto;display:block;touch-action:none;user-select:none}
+.pl-tipo{position:absolute;left:14px;top:12px;font-family:var(--cond);font-size:1.35rem;font-weight:700;color:#fff;background:var(--principal);padding:5px 14px;border-radius:8px}
+.pl-tipo small{display:block;font-family:var(--sans);font-weight:500;font-size:.82rem;opacity:.9}
+.pl-ayuda{position:absolute;right:14px;top:14px;font-size:.84rem;color:var(--texto2);background:rgba(255,255,255,.85);padding:4px 9px;border-radius:6px}
+.pl-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:14px;margin-top:12px}
+@media(max-width:900px){.pl-grid{grid-template-columns:1fr}}
+.pl-card{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:14px 16px}
+.pl-card h3{font-family:var(--cond);color:var(--principal);margin:0 0 8px;font-size:1.2rem}
+.pl-sl{display:grid;grid-template-columns:120px 1fr 92px;gap:10px;align-items:center;margin:10px 0}
+.pl-sl label{font-weight:600}
+.pl-sl input[type=range]{width:100%}
+.pl-sl .v{font-family:'JetBrains Mono',monospace;font-weight:600;text-align:right;font-size:1.05rem}
+.pl-sl.F label,.pl-sl.F .v{color:var(--cF)}.pl-sl.F input{accent-color:var(--cF)}
+.pl-sl.R label,.pl-sl.R .v{color:var(--cR)}.pl-sl.R input{accent-color:var(--cR)}
+.pl-ec{font-family:'JetBrains Mono',monospace;font-size:1.12rem;line-height:1.9;text-align:center}
+.pl-ec .f{color:var(--cF);font-weight:600}.pl-ec .r{color:var(--cR);font-weight:600}
+.pl-ec .ley{font-family:var(--cond);font-size:1.5rem;color:var(--texto)}
+.pl-est{margin-top:8px;text-align:center;font-family:var(--cond);font-size:1.35rem;font-weight:700;padding:6px;border-radius:8px}
+.pl-est.eq{background:#e4f4eb;color:var(--ok)}.pl-est.no{background:#fdf0e3;color:#a35a00}
+.pl-vm{margin-top:8px;text-align:center;color:var(--texto2);font-size:.98rem}
+.pl-reto{display:none;margin-top:12px;border:2px solid #e8b647;background:#fffaf0;border-radius:12px;padding:12px 16px}
+.pl-reto.on{display:block}
+.pl-reto h3{font-family:var(--cond);color:#9a6a00;margin:0 0 6px;font-size:1.25rem}
+.pl-reto .fila{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
+.pl-reto input{font-family:'JetBrains Mono',monospace;font-size:1.1rem;width:120px;padding:6px 8px;border:1.5px solid var(--borde);border-radius:6px}
+.pl-fb{font-weight:600;margin-top:8px}.pl-fb.ok{color:var(--ok)}.pl-fb.ko{color:var(--ko)}
+.t-cm{font-family:Barlow,sans-serif;font-size:14px;fill:#55606e}
+.t-et{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px}
+.t-val{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:18px}
+.arr{cursor:ew-resize}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+<header class="curso-hd"><span class="curso-sb">U04 · Mecanismos · Simulador de palancas</span></header>
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Inicio</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub U04</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../libro-digital.html"><span>📘</span><span class="nc-lbl">Libro digital</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>⚖️</span><span class="nc-lbl">Simulador de palancas</span></span>
+</nav>
+
+<main id="main-content" class="pl-wrap">
+  <section class="pl-hero">
+    <h1>⚖️ Simulador de palancas</h1>
+    <p>Arrastra sobre la barra el <strong>punto de apoyo</strong> (▲), la <strong style="color:var(--cF)">fuerza</strong> (F) y la <strong style="color:var(--cR)">resistencia</strong> (R). La clase de palanca depende de cuál de los tres queda en el medio.</p>
+  </section>
+
+  <div class="pl-barra">
+    <div class="pl-grupo" role="group" aria-label="Ejemplos"><b>Ejemplos</b>
+      <button class="pl-btn" data-ej="1">1ª · Balancín</button>
+      <button class="pl-btn" data-ej="2">2ª · Carretilla</button>
+      <button class="pl-btn" data-ej="3">3ª · Caña de pescar</button>
+    </div>
+    <div class="pl-grupo">
+      <button class="pl-btn verde" id="b-eq">⚖️ Equilibrar</button>
+      <button class="pl-btn" id="b-reto">🎯 Reto</button>
+    </div>
+  </div>
+
+  <div class="pl-esc">
+    <div class="pl-tipo" id="tipo"></div>
+    <div class="pl-ayuda">Arrastra ▲, F y R</div>
+    <svg id="svg" viewBox="0 0 1000 430" role="img" aria-label="Palanca"></svg>
+  </div>
+
+  <div class="pl-reto" id="reto" aria-live="polite">
+    <h3>🎯 Reto</h3>
+    <div id="reto-txt"></div>
+    <div class="fila"><span id="reto-inc"></span><input type="number" id="reto-in" step="any" min="0"><span id="reto-ud"></span>
+      <button class="pl-btn" id="reto-ok">Comprobar</button><button class="pl-btn" id="reto-sol">Ver solución</button><button class="pl-btn" id="reto-fin">Salir del reto</button></div>
+    <div class="pl-fb" id="reto-fb"></div>
+  </div>
+
+  <div class="pl-grid">
+    <div class="pl-card">
+      <h3>Valores</h3>
+      <div class="pl-sl F"><label for="sF">Fuerza F</label><input type="range" id="sF" min="0" max="400" step="5"><span class="v" id="vF"></span></div>
+      <div class="pl-sl R"><label for="sR">Resistencia R</label><input type="range" id="sR" min="0" max="600" step="10"><span class="v" id="vR"></span></div>
+      <p style="margin:6px 0 0;font-size:.9rem;color:var(--texto2)">Los brazos se miden desde el punto de apoyo: <strong>BF</strong> hasta la fuerza y <strong>BR</strong> hasta la resistencia.</p>
+    </div>
+    <div class="pl-card" aria-live="polite">
+      <h3>Ley de la palanca</h3>
+      <div class="pl-ec" id="ec"></div>
+      <div class="pl-est" id="est"></div>
+      <div class="pl-vm" id="vm"></div>
+    </div>
+  </div>
+</main>
+
+<script>
+(function(){
+const NS='http://www.w3.org/2000/svg',svg=document.getElementById('svg');
+const L=100;                                  // longitud de la barra (cm)
+const X0=100,X1=900,PX=(X1-X0)/L;             // escala del dibujo
+const YB=172;                                 // altura de la barra
+const YS=302;                                 // suelo
+const S={a:50,f:90,r:20,F:100,R:200,ang:0,bloq:false,reto:null};
+const cx=c=>X0+c*PX;
+function el(t,at,p){const e=document.createElementNS(NS,t);for(const k in at)e.setAttribute(k,at[k]);(p||svg).appendChild(e);return e;}
+function tx(x,y,s,cls,at,p){const e=el('text',Object.assign({x,y,class:cls},at||{}),p);e.textContent=s;return e;}
+
+// ---------------------------------------------------------------- dibujo fijo
+el('rect',{x:0,y:YS,width:1000,height:430-YS,fill:'#d9c9a3'});el('line',{x1:0,y1:YS,x2:1000,y2:YS,stroke:'#a8926a','stroke-width':2});
+const gBarra=el('g',{});                      // la barra gira alrededor del apoyo
+el('rect',{x:X0-6,y:YB-9,width:X1-X0+12,height:18,rx:4,fill:'#b8894f',stroke:'#7a5a30','stroke-width':2},gBarra);
+for(let c=0;c<=L;c+=5){const big=c%10===0;el('line',{x1:cx(c),y1:YB-9,x2:cx(c),y2:YB-9+(big?9:5),stroke:'#5a4020','stroke-width':big?1.6:1},gBarra);}
+const gEsc=el('g',{});                        // escala en cm (fija, bajo el suelo de la barra)
+const YE=408;for(let c=0;c<=L;c+=10){tx(cx(c),YE+18,c,'t-cm',{'text-anchor':'middle'},gEsc);el('line',{x1:cx(c),y1:YE-3,x2:cx(c),y2:YE+3,stroke:'#7d6a4a'},gEsc);}
+el('line',{x1:X0,y1:YE,x2:X1,y2:YE,stroke:'#7d6a4a'},gEsc);tx(X1+12,YE+18,'cm','t-cm',{},gEsc);
+// cotas de los brazos
+const gCot=el('g',{});
+// apoyo
+const gA=el('g',{class:'arr'});el('polygon',{points:'0,0 -34,113 34,113',fill:'#5b616a',stroke:'#2b2f35','stroke-width':2},gA);
+el('rect',{x:-46,y:113,width:92,height:8,fill:'#2b2f35'},gA);tx(0,92,'apoyo','t-cm',{'text-anchor':'middle',fill:'#fff','font-weight':600},gA);
+// fuerza y resistencia (se dibujan en cada actualización)
+const gF=el('g',{class:'arr'}),gR=el('g',{class:'arr'});
+
+function dibuja(){
+  const a=S.a,ang=S.ang*Math.PI/180;
+  const pos=c=>({x:cx(a)+(c-a)*PX*Math.cos(ang),y:YB+(c-a)*PX*Math.sin(ang)});
+  gBarra.setAttribute('transform',`rotate(${S.ang} ${cx(a)} ${YB})`);
+  gA.setAttribute('transform',`translate(${cx(a)} ${YB+9})`);
+  // resistencia: carga apoyada sobre la barra (gira con ella)
+  const oculto=S.reto&&!S.reto.resuelto?S.reto.inc:null,Rd=oculto==='R'?200:S.R,Fd=oculto==='F'?150:S.F;
+  gR.innerHTML='';const pr=pos(S.r),h=22+Math.sqrt(Rd)*3.2,w=44+Math.sqrt(Rd)*1.8;
+  const gq=el('g',{transform:`rotate(${S.ang} ${pr.x} ${pr.y})`},gR);
+  el('rect',{x:pr.x-w/2,y:pr.y-9-h,width:w,height:h,rx:5,fill:'#2c5f8d',stroke:'#1b3c5a','stroke-width':2},gq);
+  tx(pr.x,pr.y-9-h/2+8,'R','t-et',{'text-anchor':'middle',fill:'#fff'},gq);
+  tx(pr.x,pr.y-9-h-10,oculto==='R'?'R = ?':S.R+' N','t-val',{'text-anchor':'middle',fill:'#2c5f8d'},gR);
+  // fuerza: hacia abajo si está al otro lado del apoyo que la resistencia; hacia arriba si está en el mismo lado
+  gF.innerHTML='';const pf=pos(S.f),abajo=Math.sign(S.f-a)!==Math.sign(S.r-a),Lf=Math.max(24,Math.min(88,20+Fd*0.3));
+  const Ftxt=oculto==='F'?'F = ?':'F = '+fmt(S.F)+' N';
+  if(Fd>0){
+    if(abajo){el('line',{x1:pf.x,y1:pf.y-12-Lf,x2:pf.x,y2:pf.y-14,stroke:'#c44a3a','stroke-width':6,'marker-end':'url(#flF)'},gF);
+      tx(pf.x+14,pf.y-14-Lf/2,Ftxt,'t-val',{'text-anchor':'start',fill:'#c44a3a'},gF);}
+    else{el('line',{x1:pf.x,y1:pf.y+12+Lf,x2:pf.x,y2:pf.y+14,stroke:'#c44a3a','stroke-width':6,'marker-end':'url(#flF)'},gF);
+      tx(pf.x+14,pf.y+20+Lf/2,Ftxt,'t-val',{'text-anchor':'start',fill:'#c44a3a'},gF);}
+  }
+  el('circle',{cx:pf.x,cy:pf.y,r:11,fill:'#fff',stroke:'#c44a3a','stroke-width':3},gF);tx(pf.x,pf.y+5,'F','t-cm',{'text-anchor':'middle',fill:'#c44a3a','font-weight':700},gF);
+  // cotas BF y BR sobre la regla
+  gCot.innerHTML='';const yc=YS+30;
+  const cota=(c1,c2,txt,col,dy)=>{if(c1===c2)return;const x1=cx(Math.min(c1,c2)),x2=cx(Math.max(c1,c2)),y=yc+dy;
+    [c1,c2].forEach(c=>el('line',{x1:cx(c),y1:y-12,x2:cx(c),y2:y+12,stroke:col,'stroke-width':1.2,'stroke-dasharray':'3 3'},gCot));
+    el('line',{x1,y1:y,x2,y2:y,stroke:col,'stroke-width':2,'marker-start':'url(#cot'+col.slice(1)+')','marker-end':'url(#cot'+col.slice(1)+')'},gCot);
+    el('rect',{x:(x1+x2)/2-58,y:y-13,width:116,height:24,rx:5,fill:'#fff',stroke:col},gCot);
+    tx((x1+x2)/2,y+5,txt,'t-cm',{'text-anchor':'middle',fill:col,'font-weight':700},gCot);};
+  cota(a,S.f,'BF = '+Math.abs(S.f-a)+' cm','#c44a3a',0);cota(a,S.r,'BR = '+Math.abs(S.r-a)+' cm','#2c5f8d',36);
+}
+const defs=el('defs',{});
+defs.innerHTML='<marker id="flF" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 z" fill="#c44a3a"/></marker>'+
+ '<marker id="flR" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 z" fill="#2c5f8d"/></marker>'+
+ '<marker id="cotc44a3a" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M4,0 L4,8" stroke="#c44a3a" stroke-width="2"/></marker>'+
+ '<marker id="cot2c5f8d" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M4,0 L4,8" stroke="#2c5f8d" stroke-width="2"/></marker>';
+
+// ---------------------------------------------------------------- cálculo
+const fmt=v=>(Math.round(v*10)/10).toString().replace('.',',');
+function clase(){const a=S.a,f=S.f,r=S.r;
+  if((a-f)*(a-r)<0)return 1;           // apoyo en el medio
+  if((r-a)*(r-f)<0)return 2;           // resistencia en el medio
+  if((f-a)*(f-r)<0)return 3;           // fuerza en el medio
+  return 0;}
+const INFO={1:['Palanca de 1ª clase','El apoyo está entre la fuerza y la resistencia · balancín, tijeras, alicates'],
+  2:['Palanca de 2ª clase','La resistencia está entre el apoyo y la fuerza · carretilla, cascanueces, abrebotellas'],
+  3:['Palanca de 3ª clase','La fuerza está entre el apoyo y la resistencia · caña de pescar, pinzas, quitagrapas'],
+  0:['Coloca los tres puntos separados','La fuerza, la resistencia y el apoyo no pueden coincidir']};
+function actualiza(){
+  const BF=Math.abs(S.f-S.a),BR=Math.abs(S.r-S.a),mF=S.F*BF,mR=S.R*BR,k=clase();
+  const [t,s]=INFO[k];document.getElementById('tipo').innerHTML=t+'<small>'+s+'</small>';
+  document.getElementById('vF').textContent=fmt(S.F)+' N';document.getElementById('vR').textContent=S.R+' N';
+  const enReto=S.reto&&!S.reto.resuelto,inc=enReto?S.reto.inc:null;
+  const Ft=inc==='F'?'?':fmt(S.F),Rt=inc==='R'?'?':S.R;
+  const eq=Math.abs(mF-mR)<=0.01*Math.max(mF,mR,1)&&mF>0;
+  document.getElementById('ec').innerHTML='<div class="ley"><span class="f">F</span> · <span class="f">BF</span> = <span class="r">R</span> · <span class="r">BR</span></div>'+
+    '<div><span class="f">'+Ft+' N · '+BF+' cm</span> '+(enReto?'=':(eq?'=':(mF>mR?'&gt;':'&lt;')))+' <span class="r">'+Rt+' N · '+BR+' cm</span></div>'+
+    (enReto?'':'<div><span class="f">'+fmt(mF)+' N·cm</span> '+(eq?'=':(mF>mR?'&gt;':'&lt;'))+' <span class="r">'+fmt(mR)+' N·cm</span></div>');
+  const est=document.getElementById('est');
+  if(enReto){est.className='pl-est no';est.textContent='Calcula el valor que falta';}
+  else if(k===0){est.className='pl-est no';est.textContent='—';}
+  else if(eq){est.className='pl-est eq';est.textContent='✔ La palanca está en equilibrio';}
+  else{est.className='pl-est no';est.textContent=mF>mR?'Gana la fuerza: la resistencia sube':'Gana la resistencia: la resistencia baja';}
+  document.getElementById('vm').innerHTML=(BR>0&&BF>0&&k)?('Ventaja mecánica = BF / BR = '+BF+' / '+BR+' = <strong>'+fmt(BF/BR)+'</strong> · '+
+    (BF>BR?'la palanca <strong>multiplica la fuerza</strong>: con menos fuerza se vence una resistencia mayor':(BF<BR?'la palanca <strong>no ahorra fuerza</strong>: se necesita más fuerza que la resistencia, pero se gana recorrido':'la fuerza y la resistencia son iguales'))):'';
+  // inclinación: momento neto (positivo = la barra gira en sentido horario)
+  const sF=Math.sign(S.f-S.a)!==Math.sign(S.r-S.a)?1:-1;
+  const tau=(enReto?0:1)*(S.R*(S.r-S.a)+sF*S.F*(S.f-S.a));
+  const dmax=Math.max(Math.abs(S.a),Math.abs(L-S.a))*PX,amax=Math.min(14,Math.asin(Math.min(1,80/dmax))*180/Math.PI);
+  S.obj=(eq||k===0||enReto)?0:Math.max(-amax,Math.min(amax,tau/(mF+mR+1)*28));
+  dibuja();}
+
+// ---------------------------------------------------------------- arrastre
+let drag=null;
+function cmDe(e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;const q=p.matrixTransform(svg.getScreenCTM().inverse());return Math.max(0,Math.min(L,Math.round((q.x-X0)/PX/5)*5));}
+[[gA,'a'],[gF,'f'],[gR,'r']].forEach(([g,k])=>g.addEventListener('pointerdown',e=>{if(S.reto&&!S.reto.resuelto)return;drag=k;svg.setPointerCapture(e.pointerId);e.preventDefault();}));
+svg.addEventListener('pointermove',e=>{if(!drag)return;const c=cmDe(e);const otros=['a','f','r'].filter(x=>x!==drag).map(x=>S[x]);
+  if(otros.includes(c)||S[drag]===c)return;S[drag]=c;actualiza();});
+svg.addEventListener('pointerup',()=>drag=null);svg.addEventListener('pointercancel',()=>drag=null);
+document.getElementById('sF').addEventListener('input',e=>{S.F=+e.target.value;actualiza();});
+document.getElementById('sR').addEventListener('input',e=>{S.R=+e.target.value;actualiza();});
+function sincroniza(){document.getElementById('sF').value=S.F;document.getElementById('sR').value=S.R;actualiza();}
+
+// ---------------------------------------------------------------- ejemplos, equilibrar y retos
+const EJ={1:{a:50,f:90,r:20,F:100,R:200},2:{a:5,f:95,r:35,F:100,R:300},3:{a:5,f:30,r:95,F:300,R:75}};
+document.querySelectorAll('[data-ej]').forEach(b=>b.addEventListener('click',()=>{finReto();Object.assign(S,EJ[b.dataset.ej]);sincroniza();}));
+document.getElementById('b-eq').addEventListener('click',()=>{if(S.reto&&!S.reto.resuelto)return;const BF=Math.abs(S.f-S.a),BR=Math.abs(S.r-S.a);if(!BF||!clase())return;
+  S.F=Math.round(S.R*BR/BF*10)/10;sincroniza();});
+const R_=n=>Math.floor(Math.random()*n);
+function nuevoReto(){
+  for(let i=0;i<500;i++){
+    const k=1+R_(3),inc=Math.random()<0.6?'F':'R',pos=[];
+    let a,f,r;
+    if(k===1){a=30+R_(5)*10;f=a+(10+R_(Math.max(1,(90-a)/10))*10);r=a-(10+R_(Math.max(1,(a-10)/10))*10);if(Math.random()<.5){f=2*a-f;r=2*a-r;}}
+    else if(k===2){a=Math.random()<.5?10:90;const d=a===10?1:-1;f=a+d*(50+R_(4)*10);r=a+d*(10+R_(4)*10);}
+    else{a=Math.random()<.5?10:90;const d=a===10?1:-1;r=a+d*(50+R_(4)*10);f=a+d*(10+R_(4)*10);}
+    if([a,f,r].some(v=>v<0||v>L)||new Set([a,f,r]).size<3)continue;
+    const BF=Math.abs(f-a),BR=Math.abs(r-a);
+    let F,Rv;
+    if(inc==='F'){Rv=(5+R_(40))*10;F=Rv*BR/BF;if(F!==Math.round(F)||F>400||F<5)continue;}
+    else{F=(2+R_(60))*5;Rv=F*BF/BR;if(Rv!==Math.round(Rv)||Rv>600||Rv<10)continue;}
+    return {k,inc,a,f,r,F,R:Rv};}
+  return {k:1,inc:'F',a:50,f:90,r:20,F:150,R:200};}
+function empiezaReto(){const t=nuevoReto();S.reto=Object.assign({resuelto:false},t);Object.assign(S,{a:t.a,f:t.f,r:t.r,F:t.inc==='F'?0:t.F,R:t.inc==='R'?0:t.R});
+  if(t.inc==='F')S.R=t.R;else S.F=t.F;
+  document.getElementById('reto').classList.add('on');
+  document.getElementById('reto-txt').innerHTML=t.inc==='F'?'¿Qué <strong style="color:var(--cF)">fuerza</strong> hay que aplicar para que la palanca esté en equilibrio?':'¿Qué <strong style="color:var(--cR)">resistencia</strong> equilibra la palanca con esa fuerza?';
+  document.getElementById('reto-inc').textContent=t.inc+' =';document.getElementById('reto-ud').textContent='N';
+  document.getElementById('reto-in').value='';document.getElementById('reto-fb').textContent='';document.getElementById('reto-fb').className='pl-fb';
+  sincroniza();document.getElementById('reto-in').focus();}
+function finReto(){S.reto=null;document.getElementById('reto').classList.remove('on');}
+document.getElementById('b-reto').addEventListener('click',empiezaReto);
+document.getElementById('reto-fin').addEventListener('click',()=>{finReto();actualiza();});
+function prueba(v,sol){const t=S.reto;t.resuelto=true;if(t.inc==='F')S.F=v;else S.R=v;sincroniza();
+  const fb=document.getElementById('reto-fb'),bien=Math.abs(v-(t.inc==='F'?t.F:t.R))<0.005*Math.max(1,v);
+  if(sol){fb.className='pl-fb ok';fb.textContent='Solución: '+t.inc+' = '+fmt(t.inc==='F'?t.F:t.R)+' N. Pulsa «Reto» para otro.';}
+  else if(bien){fb.className='pl-fb ok';fb.textContent='✔ Correcto: la palanca queda en equilibrio. Pulsa «Reto» para otro.';}
+  else{fb.className='pl-fb ko';fb.textContent='✘ Con '+fmt(v)+' N la palanca no se equilibra: mira hacia dónde se inclina y vuelve a intentarlo.';
+    setTimeout(()=>{if(S.reto&&S.reto===t){t.resuelto=false;actualiza();}},2600);}}
+document.getElementById('reto-ok').addEventListener('click',()=>{const v=parseFloat(String(document.getElementById('reto-in').value).replace(',','.'));if(isNaN(v)||!S.reto)return;prueba(v,false);});
+document.getElementById('reto-in').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('reto-ok').click();});
+document.getElementById('reto-sol').addEventListener('click',()=>{if(!S.reto)return;const t=S.reto;prueba(t.inc==='F'?t.F:t.R,true);});
+
+// ---------------------------------------------------------------- animación
+function frame(){const d=(S.obj||0)-S.ang;if(Math.abs(d)>0.01){S.ang+=d*0.12;dibuja();}requestAnimationFrame(frame);}
+sincroniza();requestAnimationFrame(frame);
+window.__plListo=true;
+})();
+</script>
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+<script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
