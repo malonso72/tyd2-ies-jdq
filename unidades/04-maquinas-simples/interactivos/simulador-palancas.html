@@ -160,12 +160,12 @@ function dibuja(){
   tx(pr.x,pr.y-9-h-10,oculto==='R'?'R = ?':S.R+' N','t-val',{'text-anchor':'middle',fill:'#2c5f8d'},gR);
   // fuerza: hacia abajo si está al otro lado del apoyo que la resistencia; hacia arriba si está en el mismo lado
   gF.innerHTML='';const pf=pos(S.f),abajo=Math.sign(S.f-a)!==Math.sign(S.r-a),Lf=Math.max(24,Math.min(88,20+Fd*0.3));
-  const Ftxt=oculto==='F'?'F = ?':'F = '+fmt(S.F)+' N';
+  const Ftxt=oculto==='F'?'F = ?':'F = '+fmt(S.F)+' N',izq=pf.x>780,dxF=izq?-14:14,anF=izq?'end':'start';
   if(Fd>0){
     if(abajo){el('line',{x1:pf.x,y1:pf.y-12-Lf,x2:pf.x,y2:pf.y-14,stroke:'#c44a3a','stroke-width':6,'marker-end':'url(#flF)'},gF);
-      tx(pf.x+14,pf.y-14-Lf/2,Ftxt,'t-val',{'text-anchor':'start',fill:'#c44a3a'},gF);}
+      tx(pf.x+dxF,pf.y-14-Lf/2,Ftxt,'t-val',{'text-anchor':anF,fill:'#c44a3a'},gF);}
     else{el('line',{x1:pf.x,y1:pf.y+12+Lf,x2:pf.x,y2:pf.y+14,stroke:'#c44a3a','stroke-width':6,'marker-end':'url(#flF)'},gF);
-      tx(pf.x+14,pf.y+20+Lf/2,Ftxt,'t-val',{'text-anchor':'start',fill:'#c44a3a'},gF);}
+      tx(pf.x+dxF,pf.y+20+Lf/2,Ftxt,'t-val',{'text-anchor':anF,fill:'#c44a3a'},gF);}
   }
   el('circle',{cx:pf.x,cy:pf.y,r:11,fill:'#fff',stroke:'#c44a3a','stroke-width':3},gF);tx(pf.x,pf.y+5,'F','t-cm',{'text-anchor':'middle',fill:'#c44a3a','font-weight':700},gF);
   // cotas BF y BR sobre la regla
@@ -173,8 +173,9 @@ function dibuja(){
   const cota=(c1,c2,txt,col,dy)=>{if(c1===c2)return;const x1=cx(Math.min(c1,c2)),x2=cx(Math.max(c1,c2)),y=yc+dy;
     [c1,c2].forEach(c=>el('line',{x1:cx(c),y1:y-12,x2:cx(c),y2:y+12,stroke:col,'stroke-width':1.2,'stroke-dasharray':'3 3'},gCot));
     el('line',{x1,y1:y,x2,y2:y,stroke:col,'stroke-width':2,'marker-start':'url(#cot'+col.slice(1)+')','marker-end':'url(#cot'+col.slice(1)+')'},gCot);
-    el('rect',{x:(x1+x2)/2-58,y:y-13,width:116,height:24,rx:5,fill:'#fff',stroke:col},gCot);
-    tx((x1+x2)/2,y+5,txt,'t-cm',{'text-anchor':'middle',fill:col,'font-weight':700},gCot);};
+    let xm=(x1+x2)/2;if(x2-x1<130)xm=x2+70<X1+40?x2+70:x1-70;
+    el('rect',{x:xm-58,y:y-13,width:116,height:24,rx:5,fill:'#fff',stroke:col},gCot);
+    tx(xm,y+5,txt,'t-cm',{'text-anchor':'middle',fill:col,'font-weight':700},gCot);};
   cota(a,S.f,'BF = '+Math.abs(S.f-a)+' cm','#c44a3a',0);cota(a,S.r,'BR = '+Math.abs(S.r-a)+' cm','#2c5f8d',36);
 }
 const defs=el('defs',{});
