@@ -5,299 +5,64 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#1B4F8A">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
-<title>Transmisión circular · U04 · TyD 2º ESO</title>
-<meta name="description" content="Interactivo de transmisión circular: ruedas de fricción, poleas con correa y engranajes. Calcula la relación de transmisión y las RPM. TyD 2º ESO.">
-<link rel="canonical" href="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/04-maquinas-simples/interactivos/transmision.html">
-
-<meta property="og:title" content="Transmisión circular · U04 · TyD 2º ESO">
-<meta property="og:description" content="3 sistemas de transmisión circular con cálculo automático.">
-<meta property="og:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
-<meta property="og:url" content="https://tyd2-ies-jdq.malonso72.workers.dev/unidades/04-maquinas-simples/interactivos/transmision.html">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="es_ES">
-<meta property="og:site_name" content="TyD 2º ESO — IES Jiménez de Quesada">
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Transmisión circular · U04 · TyD 2º ESO">
-<meta name="twitter:description" content="3 sistemas de transmisión con cálculo automático.">
-<meta name="twitter:image" content="https://tyd2-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
-
+<title>Simulador de transmisión · U04 · TyD 2º ESO</title>
+<meta name="description" content="Simulador de transmisión circular: ruedas de fricción, poleas con correa, rueda dentada con cadena y engranajes. Velocidades, relación de transmisión, sentido de giro y retos. TyD 2º ESO.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../assets/css/common.css">
 <link rel="stylesheet" href="../../../assets/css/unidad.css">
-
 <style>
-:root {
-  --ok: #2e7d4f;
-  --err: #c44536;
-  --warn: #e8b647;
-  --motriz: #c44a3a;
-  --conducida: #2c5f8d;
-}
-
-.tipos-tabs {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.4rem;
-  background: #f0f0f0;
-  padding: 4px;
-  border-radius: 10px;
-  margin: 1rem 0 1.4rem;
-}
-.tipos-tabs button {
-  background: transparent;
-  border: none;
-  padding: 0.7rem 0.5rem;
-  border-radius: 7px;
-  font-family: 'Barlow', sans-serif;
-  font-weight: 600;
-  font-size: 0.88rem;
-  cursor: pointer;
-  color: #666;
-  transition: all 0.15s;
-}
-.tipos-tabs button.active {
-  background: var(--principal, #1B4F8A);
-  color: #fff;
-  box-shadow: 0 2px 6px rgba(27,79,138,0.3);
-}
-.tipos-tabs button .tab-em { display: block; font-size: 1.2rem; margin-bottom: 4px; }
-
-.bloque {
-  background: #fff;
-  border: 1px solid #e3e3e3;
-  border-radius: 14px;
-  padding: 1.4rem 1.6rem;
-  margin: 1rem 0;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
-}
-.bloque h2 {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 1.3rem;
-  color: var(--principal, #1B4F8A);
-  margin: 0 0 0.5rem;
-  border-bottom: 2px solid var(--principal, #1B4F8A);
-  padding-bottom: 0.4rem;
-}
-
-.sistema-info {
-  background: #fafafa;
-  border-left: 4px solid var(--principal, #1B4F8A);
-  border-radius: 8px;
-  padding: 14px 18px;
-  margin: 1rem 0;
-}
-.sistema-info h3 {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 1.15rem;
-  color: #222;
-  margin: 0 0 6px;
-}
-.sistema-info p { font-size: 0.93rem; color: #555; margin: 0 0 6px; line-height: 1.5; }
-.sistema-info .formula-inline {
-  display: inline-block;
-  background: var(--principal, #1B4F8A);
-  color: #fff;
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 700;
-  padding: 4px 12px;
-  border-radius: 14px;
-  margin-top: 6px;
-  font-size: 0.92rem;
-}
-
-.calc-area {
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 1.4rem;
-  margin: 1rem 0;
-  align-items: start;
-}
-
-.svg-wrap {
-  background: linear-gradient(to bottom, #fafafa 0%, #f0f0f0 100%);
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 1rem;
-  text-align: center;
-}
-.svg-wrap svg { width: 100%; max-width: 500px; height: auto; }
-
-.controles { display: flex; flex-direction: column; gap: 12px; }
-
-.rueda-card {
-  background: #fafafa;
-  border: 1px solid #e3e3e3;
-  border-radius: 12px;
-  padding: 12px 14px;
-}
-.rueda-card.motriz { border-left: 4px solid var(--motriz); }
-.rueda-card.conducida { border-left: 4px solid var(--conducida); }
-.rueda-card .rueda-titulo {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 1rem;
-  margin: 0 0 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.rueda-card.motriz .rueda-titulo { color: var(--motriz); }
-.rueda-card.conducida .rueda-titulo { color: var(--conducida); }
-.rueda-card .rueda-titulo .badge {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  background: #fff;
-  padding: 2px 8px;
-  border-radius: 4px;
-  letter-spacing: 0.3px;
-}
-.rueda-card.motriz .badge { color: var(--motriz); border: 1px solid var(--motriz); }
-.rueda-card.conducida .badge { color: var(--conducida); border: 1px solid var(--conducida); }
-
-.input-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-top: 4px;
-}
-.input-item {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-.input-item label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 600;
-  font-size: 0.78rem;
-  color: #666;
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
-}
-.input-item input[type="number"] {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.95rem;
-  font-weight: 700;
-  padding: 0.4rem 0.5rem;
-  border: 2px solid #ddd;
-  border-radius: 6px;
-  text-align: right;
-  background: #fff;
-  color: #222;
-  width: 100%;
-}
-.input-item input:focus {
-  outline: none;
-  border-color: var(--principal, #1B4F8A);
-  box-shadow: 0 0 0 3px rgba(27,79,138,0.15);
-}
-.input-item input.calculado {
-  background: #ecf8ef;
-  border-color: var(--ok);
-  color: var(--ok);
-}
-.input-item input.locked {
-  background: #f0f0f0;
-  color: #999;
-  cursor: not-allowed;
-}
-.input-item .hint { font-size: 0.7rem; color: #999; font-style: italic; }
-
-.resultado-box {
-  background: linear-gradient(135deg, #fff7eb, #ffeed4);
-  border: 2px solid var(--principal, #1B4F8A);
-  border-radius: 12px;
-  padding: 14px 16px;
-}
-.resultado-box .res-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.78rem;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  color: #8a6d1a;
-}
-.resultado-box .res-eq {
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 700;
-  font-size: 1.4rem;
-  color: var(--principal, #1B4F8A);
-  margin: 4px 0;
-}
-.resultado-box .res-interp { font-size: 0.88rem; color: #555; line-height: 1.5; margin-top: 6px; }
-.resultado-box .res-interp strong { color: #222; }
-
-.btn-row { display: flex; gap: 10px; }
-.btn-primary {
-  background: var(--principal, #1B4F8A); color: #fff;
-  border: none; border-radius: 8px;
-  padding: 0.6rem 1.2rem; font-family: 'Barlow', sans-serif;
-  font-weight: 600; font-size: 0.9rem; cursor: pointer;
-  flex: 1;
-}
-.btn-primary:hover:not(:disabled) { background: #b85d08; }
-.btn-secondary {
-  background: #fff; color: #666; border: 1px solid #ccc; border-radius: 8px;
-  padding: 0.6rem 1.2rem; font-family: 'Barlow', sans-serif;
-  font-weight: 600; font-size: 0.9rem; cursor: pointer;
-}
-.btn-secondary:hover { background: #f5f5f5; }
-
-/* SVG transmisión */
-.svg-fig .rueda-motriz { fill: #f0d5cf; stroke: var(--motriz); stroke-width: 2.5; }
-.svg-fig .rueda-conducida { fill: #d5e0ec; stroke: var(--conducida); stroke-width: 2.5; }
-.svg-fig .eje { fill: #555; stroke: #222; stroke-width: 1; }
-.svg-fig .diente-motriz { fill: var(--motriz); stroke: #8a3326; stroke-width: 1; }
-.svg-fig .diente-conducida { fill: var(--conducida); stroke: #1a3d59; stroke-width: 1; }
-.svg-fig .correa {
-  stroke: #444;
-  stroke-width: 6;
-  fill: none;
-  stroke-linecap: round;
-}
-.svg-fig .correa-inner {
-  stroke: #888;
-  stroke-width: 4;
-  fill: none;
-  stroke-linecap: round;
-  stroke-dasharray: 6 3;
-}
-.svg-fig text { font-family: 'JetBrains Mono', monospace; font-size: 11px; fill: #444; }
-.svg-fig text.label-motriz { fill: var(--motriz); font-weight: 700; }
-.svg-fig text.label-conducida { fill: var(--conducida); font-weight: 700; }
-.svg-fig .marker-pos { stroke-width: 2; fill: #fff; stroke: #222; }
-
-.rotate-group {
-  transform-origin: center;
-  transform-box: fill-box;
-}
-
-.relacion-pill {
-  background: var(--principal, #1B4F8A);
-  color: #fff;
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 700;
-  padding: 4px 12px;
-  border-radius: 14px;
-  font-size: 0.85rem;
-  display: inline-block;
-  margin-top: 6px;
-}
-
-@media (max-width: 720px) {
-  .calc-area { grid-template-columns: 1fr; }
-}
+:root{--c1:#c44a3a;--c2:#2c5f8d;--ok:#1f7a4c;--ko:#c0392b}
+.tr-wrap{max-width:1180px;margin:18px auto 50px;padding:0 18px}
+.tr-hero{text-align:center;margin-bottom:12px}
+.tr-hero h1{font-family:var(--cond);font-size:2rem;color:var(--principal);margin:0 0 4px}
+.tr-hero p{color:var(--texto2);margin:0 auto;max-width:860px;line-height:1.5}
+.tr-barra{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;margin:12px 0 10px}
+.tr-grupo{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.tr-grupo b{font-family:var(--cond);color:var(--texto2);font-weight:600;margin-right:2px}
+.tr-btn{font-family:var(--cond);font-size:1.05rem;background:#fff;color:var(--principal);border:1.5px solid var(--principal);border-radius:7px;padding:6px 13px;cursor:pointer}
+.tr-btn:hover,.tr-btn.on{background:var(--principal);color:#fff}
+.tr-btn:disabled{opacity:.45;cursor:not-allowed}
+.tr-btn.peq{font-size:.95rem;padding:4px 10px}
+.tr-esc{background:linear-gradient(#f7fafd,#eef3f8);border:1px solid var(--borde);border-radius:12px;padding:6px;position:relative}
+.tr-esc svg{width:100%;height:auto;display:block;user-select:none}
+.tr-tipo{font-family:var(--cond);font-size:1.35rem;font-weight:700;color:#fff;background:var(--principal);padding:5px 14px;border-radius:8px;margin:4px 4px 2px;display:inline-block}
+.tr-tipo small{display:block;font-family:var(--sans);font-weight:500;font-size:.84rem;opacity:.92}
+.tr-lenta{position:absolute;right:14px;top:14px;font-size:.84rem;color:var(--texto2);background:rgba(255,255,255,.88);padding:4px 9px;border-radius:6px}
+.tr-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:14px;margin-top:12px}
+@media(max-width:900px){.tr-grid{grid-template-columns:1fr}.tr-lenta{position:static;display:inline-block;margin:0 4px}}
+.tr-card{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:14px 16px}
+.tr-card h3{font-family:var(--cond);color:var(--principal);margin:0 0 8px;font-size:1.25rem}
+.tr-sl{display:grid;grid-template-columns:150px 1fr 104px;gap:10px;align-items:center;margin:10px 0}
+.tr-sl label{font-weight:600}
+.tr-sl input[type=range]{width:100%}
+.tr-sl .v{font-family:'JetBrains Mono',monospace;font-weight:600;text-align:right;font-size:1.05rem}
+.tr-sl.a label,.tr-sl.a .v{color:var(--c1)}.tr-sl.a input{accent-color:var(--c1)}
+.tr-sl.b label,.tr-sl.b .v{color:var(--c2)}.tr-sl.b input{accent-color:var(--c2)}
+.tr-fila{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin-top:8px}
+.tr-chk{display:flex;gap:6px;align-items:center;font-weight:600;cursor:pointer}
+.tr-chk input{width:18px;height:18px}
+.tr-ec{font-family:'JetBrains Mono',monospace;font-size:1.12rem;line-height:1.85;text-align:center}
+.tr-ec .ley{font-family:var(--cond);font-size:1.75rem;color:var(--texto);line-height:1.35}
+.tr-ec .a{color:var(--c1);font-weight:600}.tr-ec .b{color:var(--c2);font-weight:600}
+.tr-ec hr{border:0;border-top:1px dashed var(--borde);margin:6px 0}
+.tr-est{margin-top:8px;text-align:center;font-family:var(--cond);font-size:1.3rem;font-weight:700;padding:6px;border-radius:8px;background:#eef3f8;color:var(--principal)}
+.tr-nota{margin-top:8px;color:var(--texto2);font-size:.98rem;line-height:1.45;text-align:center}
+.tr-reto{display:none;margin-top:12px;border:2px solid #e8b647;background:#fffaf0;border-radius:12px;padding:12px 16px}
+.tr-reto.on{display:block}
+.tr-reto h3{font-family:var(--cond);color:#9a6a00;margin:0 0 6px;font-size:1.25rem}
+.tr-reto .fila{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
+.tr-reto input{font-family:'JetBrains Mono',monospace;font-size:1.1rem;width:120px;padding:6px 8px;border:1.5px solid var(--borde);border-radius:6px}
+.tr-fb{font-weight:600;margin-top:8px}.tr-fb.ok{color:var(--ok)}.tr-fb.ko{color:var(--ko)}
+.t-rot{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:21px}
+.t-val{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:18px}
+.t-vu{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:16px;fill:#454d57}
 </style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
-
-<header class="curso-hd">
-  <span class="curso-sb">U04 · Mecanismos · Transmisión circular</span>
-</header>
-
+<header class="curso-hd"><span class="curso-sb">U04 · Mecanismos · Simulador de transmisión</span></header>
 <nav class="curso-navcross" role="navigation" aria-label="Navegación de la unidad">
   <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Inicio</span></a>
   <span class="nc-sep">·</span>
@@ -305,355 +70,273 @@
   <span class="nc-sep">·</span>
   <a href="../libro-digital.html"><span>📘</span><span class="nc-lbl">Libro digital</span></a>
   <span class="nc-sep">·</span>
-  <span class="nc-current"><span>⚙️</span><span class="nc-lbl">Transmisión</span></span>
+  <span class="nc-current"><span>⚙️</span><span class="nc-lbl">Simulador de transmisión</span></span>
 </nav>
 
-<div class="unidad-layout">
+<main id="main-content" class="tr-wrap">
+  <section class="tr-hero">
+    <h1>⚙️ Simulador de transmisión</h1>
+    <p>La rueda 1 (<strong style="color:var(--c1)">motriz</strong>) arrastra a la rueda 2 (<strong style="color:var(--c2)">conducida</strong>). Cambia los tamaños y la velocidad, cuenta las vueltas de cada rueda y comprueba que <strong>n₁ · D₁ = n₂ · D₂</strong>.</p>
+  </section>
 
-<aside class="sb-side">
-  <h3>La fórmula clave</h3>
-  <div style="padding: 0.6rem 1rem; font-size:0.88rem; color:#555; line-height:1.55;">
-    <p><strong>n₁ · D₁ = n₂ · D₂</strong></p>
-    <p>(o <strong>n₁ · Z₁ = n₂ · Z₂</strong> para engranajes)</p>
-    <p>n = velocidad de giro (RPM)<br>
-       D = diámetro (mm)<br>
-       Z = número de dientes</p>
-  </div>
-  <h3>Relación de transmisión</h3>
-  <p style="padding: 0.6rem 1rem; font-size:0.86rem; color:#555; line-height:1.55;">
-    <strong>i = n₂ / n₁</strong><br><br>
-    Si <strong>i &gt; 1</strong> → la conducida va más rápido (sistema multiplicador).<br>
-    Si <strong>i &lt; 1</strong> → la conducida va más lenta (sistema reductor).<br>
-    Si <strong>i = 1</strong> → misma velocidad.
-  </p>
-</aside>
-
-<main class="ct" id="main-content">
-
-<h1 class="unidad-titulo">⚙️ Transmisión circular</h1>
-<p class="unidad-subt">Tres sistemas para transmitir movimiento de giro: ruedas de fricción, poleas con correa y engranajes.</p>
-
-<div class="tipos-tabs" role="tablist" aria-label="Tipo de sistema">
-  <button id="tab-friccion" class="active" onclick="setSistema('friccion')">
-    <span class="tab-em">🔘</span>Ruedas fricción
-  </button>
-  <button id="tab-correa" onclick="setSistema('correa')">
-    <span class="tab-em">🪢</span>Poleas + correa
-  </button>
-  <button id="tab-engranajes" onclick="setSistema('engranajes')">
-    <span class="tab-em">⚙️</span>Engranajes
-  </button>
-</div>
-
-<div class="bloque">
-  <div class="sistema-info" id="sistema-info">
-    <h3 id="si-titulo">Ruedas de fricción</h3>
-    <p id="si-desc">Dos ruedas en <strong>contacto directo</strong>: una empuja a la otra por rozamiento. Se usan en distancias cortas.</p>
-    <p><strong>Sentido:</strong> <span id="si-sentido">opuesto</span> (las dos ruedas giran en direcciones contrarias).</p>
-    <div class="formula-inline" id="si-formula">Fórmula: n₁ · D₁ = n₂ · D₂</div>
-  </div>
-
-  <div class="calc-area">
-    <div class="svg-wrap">
-      <svg id="svg-trans" class="svg-fig" viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg" aria-label="Esquema de transmisión circular"></svg>
+  <div class="tr-barra">
+    <div class="tr-grupo" role="group" aria-label="Sistema de transmisión"><b>Sistema</b>
+      <button class="tr-btn" data-sis="fri">Ruedas de fricción</button>
+      <button class="tr-btn" data-sis="cor">Poleas y correa</button>
+      <button class="tr-btn" data-sis="cad">Rueda dentada y cadena</button>
+      <button class="tr-btn" data-sis="eng">Engranajes</button>
     </div>
-
-    <div class="controles">
-
-      <div class="rueda-card motriz">
-        <div class="rueda-titulo">
-          <span>Rueda 1 · MOTRIZ</span>
-          <span class="badge" id="badge-1">entrada</span>
-        </div>
-        <div class="input-grid">
-          <div class="input-item">
-            <label id="lbl-1a">Diámetro D₁</label>
-            <input type="number" id="in-1a" min="1" step="1" value="50">
-            <span class="hint" id="hint-1a">mm</span>
-          </div>
-          <div class="input-item">
-            <label>RPM n₁</label>
-            <input type="number" id="in-1b" min="1" step="1" value="100">
-            <span class="hint">rev/min</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="rueda-card conducida">
-        <div class="rueda-titulo">
-          <span>Rueda 2 · CONDUCIDA</span>
-          <span class="badge" id="badge-2">salida</span>
-        </div>
-        <div class="input-grid">
-          <div class="input-item">
-            <label id="lbl-2a">Diámetro D₂</label>
-            <input type="number" id="in-2a" min="1" step="1" value="100">
-            <span class="hint" id="hint-2a">mm</span>
-          </div>
-          <div class="input-item">
-            <label>RPM n₂ <span style="color:var(--ok);">(calculada)</span></label>
-            <input type="number" id="out-2b" readonly class="locked">
-            <span class="hint">rev/min</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="resultado-box">
-        <div class="res-label">Relación de transmisión</div>
-        <div class="res-eq" id="res-eq">i = —</div>
-        <div class="res-interp" id="res-interp">Introduce los datos para ver el resultado.</div>
-      </div>
-
-      <div class="btn-row">
-        <button class="btn-primary" onclick="calcular()">▶ Calcular</button>
-        <button class="btn-secondary" onclick="toggleAnimacion()" id="btn-animar">▶ Animar</button>
-      </div>
+    <div class="tr-grupo">
+      <button class="tr-btn" id="b-pausa">⏸ Pausa</button>
+      <button class="tr-btn" id="b-cero">↺ Vueltas a 0</button>
+      <button class="tr-btn" id="b-reto">🎯 Reto</button>
     </div>
   </div>
-</div>
 
-<div class="bloque">
-  <h2>📚 Recuerda</h2>
-  <p style="color:#555; line-height: 1.6;">La <strong>velocidad lineal</strong> de las ruedas en contacto (o de la correa) es la misma en ambas: <strong>v₁ = v₂</strong>. De ahí sale la fórmula <strong>n₁ · D₁ = n₂ · D₂</strong>. En los engranajes se usan los <strong>dientes Z</strong> en vez del diámetro porque deben ser del mismo módulo para engranar. Las ruedas de fricción y los engranajes giran en sentidos <strong>opuestos</strong>; las poleas con correa, en el mismo sentido (si la correa va recta).</p>
-</div>
+  <div class="tr-esc">
+    <div class="tr-tipo" id="tipo"></div>
+    <div class="tr-lenta" id="lenta"></div>
+    <svg id="svg" viewBox="0 0 1000 485" role="img" aria-label="Transmisión entre dos ruedas"></svg>
+  </div>
 
+  <div class="tr-reto" id="reto" aria-live="polite">
+    <h3>🎯 Reto</h3>
+    <div id="reto-txt"></div>
+    <div class="fila"><span id="reto-inc"></span><input type="number" id="reto-in" step="any" min="0"><span id="reto-ud"></span>
+      <button class="tr-btn" id="reto-ok">Comprobar</button><button class="tr-btn" id="reto-sol">Ver solución</button><button class="tr-btn" id="reto-fin">Salir del reto</button></div>
+    <div class="tr-fb" id="reto-fb"></div>
+  </div>
+
+  <div class="tr-grid">
+    <div class="tr-card">
+      <h3>Valores</h3>
+      <div class="tr-sl a"><label for="s1" id="l1"></label><input type="range" id="s1"><span class="v" id="v1"></span></div>
+      <div class="tr-sl b"><label for="s2" id="l2"></label><input type="range" id="s2"><span class="v" id="v2"></span></div>
+      <div class="tr-sl a"><label for="sn">Velocidad n₁</label><input type="range" id="sn" min="10" max="600" step="10"><span class="v" id="vn"></span></div>
+      <div class="tr-fila">
+        <button class="tr-btn peq" data-pre="red">Reductor</button>
+        <button class="tr-btn peq" data-pre="mul">Multiplicador</button>
+        <button class="tr-btn peq" data-pre="igu">Iguales (i = 1)</button>
+        <label class="tr-chk" id="w-cruz"><input type="checkbox" id="c-cruz"> Correa cruzada</label>
+      </div>
+    </div>
+    <div class="tr-card" aria-live="polite">
+      <h3>Velocidades y relación de transmisión</h3>
+      <div class="tr-ec" id="ec"></div>
+      <div class="tr-est" id="est"></div>
+      <div class="tr-nota" id="nota"></div>
+    </div>
+  </div>
 </main>
-</div>
 
 <script>
-const SISTEMAS = {
-  friccion: {
-    titulo: 'Ruedas de fricción',
-    desc: 'Dos ruedas en <strong>contacto directo</strong>: una empuja a la otra por rozamiento. Se usan en distancias cortas.',
-    sentido: 'opuesto (las dos ruedas giran en direcciones contrarias)',
-    formula: 'Fórmula: n₁ · D₁ = n₂ · D₂',
-    param: 'D', unidad: 'mm',
-    sentidoNum: -1
-  },
-  correa: {
-    titulo: 'Poleas con correa',
-    desc: 'Dos poleas unidas por una <strong>correa flexible</strong>. Permiten transmitir movimiento entre ejes alejados.',
-    sentido: 'mismo sentido (si la correa va recta, sin cruzar)',
-    formula: 'Fórmula: n₁ · D₁ = n₂ · D₂',
-    param: 'D', unidad: 'mm',
-    sentidoNum: 1
-  },
-  engranajes: {
-    titulo: 'Engranajes',
-    desc: 'Ruedas dentadas que <strong>engranan</strong> directamente. Son la transmisión más precisa: no deslizan ni se aflojan.',
-    sentido: 'opuesto (engranajes adyacentes giran en sentidos contrarios)',
-    formula: 'Fórmula: n₁ · Z₁ = n₂ · Z₂',
-    param: 'Z', unidad: 'dientes',
-    sentidoNum: -1
-  }
+(function(){
+const NS='http://www.w3.org/2000/svg',svg=document.getElementById('svg');
+const W=1000,CY=200,K=0.8,M=5.2,XA=290,XB=710;       // K: px de radio por mm de diámetro · M: módulo en px
+const C1='#c44a3a',C2='#2c5f8d';
+function el(t,at,p){const e=document.createElementNS(NS,t);for(const k in at)e.setAttribute(k,at[k]);(p||svg).appendChild(e);return e;}
+function tx(x,y,s,cls,at,p){const e=el('text',Object.assign({x,y,class:cls},at||{}),p);e.textContent=s;return e;}
+const fmt=(v,d=2)=>{const r=Math.round(v*Math.pow(10,d))/Math.pow(10,d);return r.toString().replace('.',',');};
+
+const SIS={
+  fri:{nom:'Ruedas de fricción',sub:'Contacto directo · giran en sentido contrario',dientes:false,inv:true,min:20,max:200,paso:10,
+       nota:'Una rueda arrastra a la otra por rozamiento en el punto de contacto: es sencillo, pero puede patinar si la carga es grande.'},
+  cor:{nom:'Poleas y correa',sub:'Ejes separados · mismo sentido (correa abierta)',dientes:false,inv:false,min:20,max:200,paso:10,
+       nota:'La correa une poleas con los ejes separados y puede patinar. Si se cruza la correa, se invierte el sentido de giro.'},
+  cad:{nom:'Rueda dentada y cadena',sub:'Ejes separados · mismo sentido',dientes:true,inv:false,min:10,max:60,paso:1,
+       nota:'La cadena engrana en los dientes de las dos ruedas: no patina. Se cuentan los dientes Z en lugar del diámetro.'},
+  eng:{nom:'Engranajes',sub:'Ruedas dentadas en contacto · sentido contrario',dientes:true,inv:true,min:8,max:60,paso:1,
+       nota:'Los dientes de una rueda encajan en los huecos de la otra: no patinan. Se cuentan los dientes Z en lugar del diámetro.'}
 };
+const S={sis:'eng',a:{fri:60,cor:60,cad:15,eng:15},b:{fri:120,cor:120,cad:45,eng:30},n1:60,cruz:false,th:0,pausa:false,reto:null,t0:null};
+const val=w=>S[w][S.sis];
+const inv=()=>SIS[S.sis].inv||(S.sis==='cor'&&S.cruz);
+const n2=()=>S.n1*val('a')/val('b');
 
-let sistemaActual = 'friccion';
-let animando = false;
-let animFrame = null;
-let angle1 = 0, angle2 = 0;
+// ------------------------------------------------------------------ dibujo
+const defs=el('defs',{});
+defs.innerHTML='<marker id="fl1" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 z" fill="'+C1+'"/></marker>'+
+ '<marker id="fl2" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 z" fill="'+C2+'"/></marker>'+
+ '<radialGradient id="gMet" cx="45%" cy="40%" r="70%"><stop offset="0" stop-color="#f1f3f6"/><stop offset="1" stop-color="#b3bcc6"/></radialGradient>';
+const gFondo=el('g',{}),gR1=el('g',{}),gR2=el('g',{}),gBanda=el('g',{}),gTxt=el('g',{});
+let geo=null,banda=null;
 
-function setSistema(s) {
-  sistemaActual = s;
-  ['friccion', 'correa', 'engranajes'].forEach(k =>
-    document.getElementById('tab-' + k).classList.toggle('active', k === s));
-  const info = SISTEMAS[s];
-  document.getElementById('si-titulo').textContent = info.titulo;
-  document.getElementById('si-desc').innerHTML = info.desc;
-  document.getElementById('si-sentido').textContent = info.sentido;
-  document.getElementById('si-formula').textContent = info.formula;
-  document.getElementById('lbl-1a').textContent = (info.param === 'D' ? 'Diámetro D₁' : 'Dientes Z₁');
-  document.getElementById('lbl-2a').textContent = (info.param === 'D' ? 'Diámetro D₂' : 'Dientes Z₂');
-  document.getElementById('hint-1a').textContent = info.unidad;
-  document.getElementById('hint-2a').textContent = info.unidad;
-  // Valores por defecto sensatos según sistema
-  if (s === 'engranajes') {
-    document.getElementById('in-1a').value = 12;
-    document.getElementById('in-2a').value = 24;
-  } else {
-    document.getElementById('in-1a').value = 50;
-    document.getElementById('in-2a').value = 100;
+function radio(v){return SIS[S.sis].dientes?M*v/2:K*v;}
+function tangente(A,B){const s1=A.r*A.w,s2=B.r*B.w,dx=B.x-A.x,dy=B.y-A.y,L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L,c=(s1-s2)/L,sn=Math.sqrt(Math.max(0,1-c*c));
+  for(const sg of [1,-1]){const mx=c*ux-sg*sn*uy,my=c*uy+sg*sn*ux,T1={x:A.x+s1*mx,y:A.y+s1*my},T2={x:B.x+s2*mx,y:B.y+s2*my},tx_=T2.x-T1.x,ty_=T2.y-T1.y;
+    const z1=(T1.x-A.x)*ty_-(T1.y-A.y)*tx_,z2=(T2.x-B.x)*ty_-(T2.y-B.y)*tx_;if(Math.sign(z1)===A.w&&Math.sign(z2)===B.w)return [T1,T2];}
+  return [{x:A.x,y:A.y-A.r},{x:B.x,y:B.y-B.r}];}
+function arco(P,T1,T2){const a1=Math.atan2(T1.y-P.y,T1.x-P.x),a2=Math.atan2(T2.y-P.y,T2.x-P.x);let d=P.w>0?a2-a1:a1-a2;while(d<0)d+=2*Math.PI;while(d>=2*Math.PI)d-=2*Math.PI;
+  return `A ${P.r} ${P.r} 0 ${d>Math.PI?1:0} ${P.w>0?1:0} ${T2.x.toFixed(2)} ${T2.y.toFixed(2)}`;}
+function rueda(g,r,col,tipo,Z){
+  g.innerHTML='';
+  if(tipo==='eng'||tipo==='cad'){
+    const ra=r+M*(tipo==='cad'?0.75:1),rf=r-M*(tipo==='cad'?0.9:1.25),p=2*Math.PI/Z;let d='';
+    for(let k=0;k<Z;k++){const a=k*p,pts=[[a-0.5*p,rf],[a-0.27*p,rf],[a-0.15*p,ra],[a+0.15*p,ra],[a+0.27*p,rf]];
+      pts.forEach(([an,rr],j)=>{d+=(k===0&&j===0?'M':'L')+(rr*Math.cos(an)).toFixed(2)+' '+(rr*Math.sin(an)).toFixed(2)+' ';});}
+    el('path',{d:d+'Z',fill:'url(#gMet)',stroke:'#4f5862','stroke-width':1.6,'stroke-linejoin':'round'},g);
+    el('circle',{cx:0,cy:0,r:Math.max(6,rf*0.62),fill:'none',stroke:'#8b949e','stroke-width':1.2},g);
+  }else if(tipo==='fri'){
+    el('circle',{cx:0,cy:0,r:r-2,fill:'url(#gMet)',stroke:'#4f5862','stroke-width':1.6},g);
+    el('circle',{cx:0,cy:0,r:r-5,fill:'none',stroke:'#33383e','stroke-width':7},g);
+  }else{
+    el('circle',{cx:0,cy:0,r:r,fill:'url(#gMet)',stroke:'#4f5862','stroke-width':1.6},g);
+    el('circle',{cx:0,cy:0,r:Math.max(4,r-7),fill:'none',stroke:'#7b848e','stroke-width':2},g);
   }
-  document.getElementById('in-1b').value = 100;
-  dibujar();
-  calcular();
+  const rr=tipo==='eng'||tipo==='cad'?r-M*1.5:r-12;
+  for(let k=0;k<4;k++){const a=k*Math.PI/2+Math.PI/4;el('line',{x1:0,y1:0,x2:(rr*0.8*Math.cos(a)).toFixed(1),y2:(rr*0.8*Math.sin(a)).toFixed(1),stroke:'#9aa3ad','stroke-width':3},g);}
+  el('line',{x1:0,y1:0,x2:0,y2:-rr,stroke:col,'stroke-width':5,'stroke-linecap':'round'},g);   // marca para contar vueltas
+  el('circle',{cx:0,cy:-rr,r:Math.max(4,Math.min(8,r*0.09)),fill:col},g);
+  el('circle',{cx:0,cy:0,r:Math.max(6,Math.min(11,r*0.12)),fill:'#2e343b'},g);
 }
-
-function leerValor(id) {
-  const v = parseFloat(document.getElementById(id).value);
-  return (isNaN(v) || v <= 0) ? null : v;
+function incog(g,r,col){g.innerHTML='';
+  el('circle',{cx:0,cy:0,r,fill:'#fff',stroke:col,'stroke-width':3,'stroke-dasharray':'10 7'},g);
+  tx(0,Math.round(Math.min(110,r*1.1)*0.36),'?','t-rot',{'text-anchor':'middle',fill:col,style:'font-size:'+Math.round(Math.min(110,r*1.1))+'px'},g);}
+function flechaGiro(cx,cy,R,cw,col,mk,lado){
+  const a1=(lado<0?-160:-105)*Math.PI/180,a2=(lado<0?-75:-20)*Math.PI/180,P=a=>[cx+R*Math.cos(a),cy+R*Math.sin(a)];
+  const [x1,y1]=P(cw?a1:a2),[x2,y2]=P(cw?a2:a1);
+  el('path',{d:`M ${x1.toFixed(1)} ${y1.toFixed(1)} A ${R} ${R} 0 0 ${cw?1:0} ${x2.toFixed(1)} ${y2.toFixed(1)}`,fill:'none',stroke:col,'stroke-width':4,'marker-end':`url(#${mk})`},gTxt);
 }
-
-function calcular() {
-  const p1 = leerValor('in-1a');
-  const n1 = leerValor('in-1b');
-  const p2 = leerValor('in-2a');
-  if (p1 === null || n1 === null || p2 === null) {
-    document.getElementById('out-2b').value = '';
-    document.getElementById('res-eq').textContent = 'i = —';
-    document.getElementById('res-interp').textContent = 'Introduce valores positivos.';
-    return;
+function monta(){
+  const s=SIS[S.sis],inc=S.reto&&!S.reto.resuelto?S.reto.inc:null,PH=s.dientes?30:100;
+  const A=inc==='a'?PH:val('a'),B=inc==='b'?PH:val('b'),r1=radio(A),r2=radio(B);
+  let x1,x2;
+  if(S.sis==='fri'||S.sis==='eng'){x1=W/2-r2;x2=W/2+r1;}else{x1=XA;x2=XB;}
+  geo={x1,x2,r1,r2};
+  if(inc==='a')incog(gR1,r1,C1);else rueda(gR1,r1,C1,S.sis,A);
+  if(inc==='b')incog(gR2,r2,C2);else rueda(gR2,r2,C2,S.sis,B);
+  gBanda.innerHTML='';banda=null;
+  if(S.sis==='cor'||S.sis==='cad'){
+    const e=S.sis==='cor'?3:0,P1={x:x1,y:CY,r:r1+e,w:1},P2={x:x2,y:CY,r:r2+e,w:(S.sis==='cor'&&S.cruz)?-1:1};
+    const [T1,T2]=tangente(P1,P2),[U1,U2]=tangente(P2,P1);
+    const d=`M ${T1.x.toFixed(2)} ${T1.y.toFixed(2)} L ${T2.x.toFixed(2)} ${T2.y.toFixed(2)} ${arco(P2,T2,U1)} L ${U2.x.toFixed(2)} ${U2.y.toFixed(2)} ${arco(P1,U2,T1)} Z`;
+    if(S.sis==='cor'){el('path',{d,fill:'none',stroke:'#2b2f33','stroke-width':8,'stroke-linejoin':'round'},gBanda);
+      banda=el('path',{d,fill:'none',stroke:'#8c96a1','stroke-width':2.5,'stroke-dasharray':'14 16'},gBanda);}
+    else{el('path',{d,fill:'none',stroke:'#3d434a','stroke-width':9,'stroke-linejoin':'round'},gBanda);
+      banda=el('path',{d,fill:'none',stroke:'#c4cad1','stroke-width':5,'stroke-dasharray':(M*Math.PI*0.5).toFixed(2)+' '+(M*Math.PI*0.5).toFixed(2)},gBanda);}
   }
-  const n2 = (n1 * p1) / p2;
-  const i = n2 / n1;
-  document.getElementById('out-2b').value = (n2 % 1 === 0) ? n2.toString() : n2.toFixed(2);
-  document.getElementById('res-eq').textContent = 'i = n₂ / n₁ = ' + (i % 1 === 0 ? i.toString() : i.toFixed(3));
+  etiquetas();pon();
+}
+function etiquetas(){
+  gTxt.innerHTML='';const s=SIS[S.sis],{x1,x2,r1,r2}=geo,ext=s.dientes?M:0;
+  const enReto=S.reto&&!S.reto.resuelto,inc=enReto?S.reto.inc:null,u=s.dientes?'':' mm',sym=s.dientes?'Z':'D';
+  flechaGiro(x1,CY,r1+ext+16,true,C1,'fl1',-1);flechaGiro(x2,CY,r2+ext+16,!inv(),C2,'fl2',1);
+  const yb=CY+Math.max(r1,r2)+ext+40;
+  const bloque=(x,col,tit,lin)=>{tx(x,yb,tit,'t-rot',{'text-anchor':'middle',fill:col},gTxt);lin.forEach((t,i)=>tx(x,yb+24+i*22,t,'t-val',{'text-anchor':'middle',fill:col},gTxt));};
+  const xl1=Math.min(x1,W/2-130),xl2=Math.max(x2,W/2+130);
+  bloque(xl1,C1,'Rueda 1 · motriz',[sym+'₁ = '+(inc==='a'?'?':val('a')+u),'n₁ = '+(inc==='n1'?'?':fmt(S.n1)+' rpm')]);
+  bloque(xl2,C2,'Rueda 2 · conducida',[sym+'₂ = '+(inc==='b'?'?':val('b')+u),'n₂ = '+(inc==='n2'?'?':fmt(n2())+' rpm')]);
+  S.vu1=tx(xl1,yb+70,'','t-vu',{'text-anchor':'middle'},gTxt);S.vu2=tx(xl2,yb+70,'','t-vu',{'text-anchor':'middle'},gTxt);
+}
+function pon(){
+  const {x1,x2,r1,r2}=geo,A=val('a'),B=val('b'),k=A/B,sg=inv()?-1:1;
+  const th1=S.th,th2=sg*th1*k;
+  let f2=0;if(S.sis==='eng'&&!(S.reto&&!S.reto.resuelto&&S.reto.inc==='b'))f2=Math.PI+Math.PI/B;                            // fase para que los dientes encajen
+  gR1.setAttribute('transform',`translate(${x1} ${CY}) rotate(${(th1*180/Math.PI).toFixed(3)})`);
+  gR2.setAttribute('transform',`translate(${x2} ${CY}) rotate(${((th2+f2)*180/Math.PI).toFixed(3)})`);
+  if(banda)banda.setAttribute('stroke-dashoffset',(-th1*(r1+(S.sis==='cor'?3:0))).toFixed(2));
+  const enReto=S.reto&&!S.reto.resuelto;
+  if(S.vu1){S.vu1.textContent=enReto?'':fmt(th1/(2*Math.PI),1)+' vueltas';S.vu2.textContent=enReto?'':fmt(Math.abs(th2)/(2*Math.PI),1)+' vueltas';}
+}
 
-  const interp = document.getElementById('res-interp');
-  if (Math.abs(i - 1) < 0.001) {
-    interp.innerHTML = '<strong>Sistema directo:</strong> la rueda 2 gira a la misma velocidad que la 1. No multiplica ni reduce.';
-  } else if (i > 1) {
-    interp.innerHTML = `<strong>Sistema multiplicador:</strong> la rueda 2 gira <strong>${i.toFixed(2)} veces más rápido</strong> que la 1, pero con menos par (menos fuerza de giro).`;
-  } else {
-    interp.innerHTML = `<strong>Sistema reductor:</strong> la rueda 2 gira <strong>${(1/i).toFixed(2)} veces más lenta</strong> que la 1, pero con más par (más fuerza de giro). Es lo que usan los coches en marchas cortas.`;
+// ------------------------------------------------------------------ panel
+function actualiza(remontar){
+  const s=SIS[S.sis],A=val('a'),B=val('b'),N2=n2(),i=N2/S.n1,sym=s.dientes?'Z':'D',u=s.dientes?' dientes':' mm';
+  const enReto=S.reto&&!S.reto.resuelto,inc=enReto?S.reto.inc:null;
+  document.getElementById('tipo').innerHTML=s.nom+'<small>'+(S.sis==='cor'&&S.cruz?'Ejes separados · sentido contrario (correa cruzada)':s.sub)+'</small>';
+  document.querySelectorAll('[data-sis]').forEach(b=>b.classList.toggle('on',b.dataset.sis===S.sis));
+  ['s1','s2'].forEach((id,j)=>{const e=document.getElementById(id);e.min=s.min;e.max=s.max;e.step=s.paso;e.value=(inc==='a'&&!j)||(inc==='b'&&j)?(s.min+s.max)/2:(j?B:A);});
+  document.getElementById('sn').value=inc==='n1'?300:S.n1;
+  document.getElementById('l1').textContent=(s.dientes?'Dientes ':'Diámetro ')+sym+'₁';
+  document.getElementById('l2').textContent=(s.dientes?'Dientes ':'Diámetro ')+sym+'₂';
+  document.getElementById('v1').textContent=inc==='a'?'?':A+(s.dientes?'':' mm');
+  document.getElementById('v2').textContent=inc==='b'?'?':B+(s.dientes?'':' mm');
+  document.getElementById('vn').textContent=inc==='n1'?'?':S.n1+' rpm';
+  document.getElementById('w-cruz').style.display=S.sis==='cor'?'':'none';document.getElementById('c-cruz').checked=S.cruz;
+  ['s1','s2','sn','c-cruz','b-pausa','b-cero'].forEach(id=>document.getElementById(id).disabled=!!enReto);
+  document.querySelectorAll('[data-pre]').forEach(b=>b.disabled=!!enReto);
+  const ec=document.getElementById('ec'),est=document.getElementById('est');
+  const ley='<div class="ley"><span class="a">n₁ · '+sym+'₁</span> = <span class="b">n₂ · '+sym+'₂</span></div>';
+  if(enReto){
+    ec.innerHTML=ley+'<hr><div><span class="b">i</span> = <span class="b">n₂</span> / <span class="a">n₁</span> = <span class="a">'+sym+'₁</span> / <span class="b">'+sym+'₂</span></div>';
+    est.textContent='Calcula el valor que falta';document.getElementById('nota').textContent='';
+  }else{
+    ec.innerHTML=ley+
+      '<div><span class="a">'+fmt(S.n1)+' · '+A+'</span> = <span class="b">n₂ · '+B+'</span> → <span class="b">n₂ = '+fmt(N2)+' rpm</span></div><hr>'+
+      '<div><span class="b">i</span> = <span class="b">n₂</span> / <span class="a">n₁</span> = <span class="a">'+sym+'₁</span> / <span class="b">'+sym+'₂</span> = '+A+' / '+B+' = <strong>'+fmt(i,3)+'</strong></div>';
+    est.textContent=Math.abs(i-1)<1e-9?'i = 1 · las dos ruedas giran a la misma velocidad':(i<1?'Reductor (i < 1) · la rueda 2 gira más despacio':'Multiplicador (i > 1) · la rueda 2 gira más deprisa');
+    document.getElementById('nota').innerHTML='<strong>Sentido de giro: '+(inv()?'contrario':'el mismo')+'.</strong> '+s.nota+
+      ' Por cada vuelta de la rueda 1, la 2 da '+fmt(i,2)+(Math.abs(i-1)<1e-9?' vuelta.':' vueltas.');
   }
-  dibujar();
+  // cámara lenta: que la rueda más rápida no pase de 1 vuelta por segundo
+  const vmax=Math.max(S.n1,N2)/60;S.f=Math.min(1,1/vmax);
+  document.getElementById('lenta').textContent=enReto?'⏸ Animación detenida':(S.f<1?'Animación a cámara lenta (×1/'+fmt(1/S.f,1)+')':'Animación a velocidad real');
+  document.getElementById('b-pausa').textContent=S.pausa?'▶ Seguir':'⏸ Pausa';
+  if(remontar!==false)monta();else etiquetas(),pon();
 }
 
-function dibujar() {
-  const svg = document.getElementById('svg-trans');
-  const info = SISTEMAS[sistemaActual];
-  const p1 = leerValor('in-1a') || 50;
-  const p2 = leerValor('in-2a') || 100;
-  // Escalado visual: mantener razón pero limitar tamaño máximo y mínimo
-  const escala = 60 / Math.max(p1, p2);
-  let r1 = p1 * escala;
-  let r2 = p2 * escala;
-  // Asegurar mínimo visible
-  r1 = Math.max(r1, 18);
-  r2 = Math.max(r2, 18);
+// ------------------------------------------------------------------ controles
+document.querySelectorAll('[data-sis]').forEach(b=>b.addEventListener('click',()=>{finReto();S.sis=b.dataset.sis;S.th=0;actualiza();}));
+document.getElementById('s1').addEventListener('input',e=>{S.a[S.sis]=+e.target.value;actualiza();});
+document.getElementById('s2').addEventListener('input',e=>{S.b[S.sis]=+e.target.value;actualiza();});
+document.getElementById('sn').addEventListener('input',e=>{S.n1=+e.target.value;actualiza(false);});
+document.getElementById('c-cruz').addEventListener('change',e=>{S.cruz=e.target.checked;actualiza();});
+document.getElementById('b-pausa').addEventListener('click',()=>{S.pausa=!S.pausa;actualiza(false);});
+document.getElementById('b-cero').addEventListener('click',()=>{S.th=0;pon();});
+const PRE={fri:{red:[60,120],mul:[160,40],igu:[100,100]},cor:{red:[60,180],mul:[180,60],igu:[100,100]},cad:{red:[15,45],mul:[48,16],igu:[30,30]},eng:{red:[12,36],mul:[40,20],igu:[24,24]}};
+document.querySelectorAll('[data-pre]').forEach(b=>b.addEventListener('click',()=>{const p=PRE[S.sis][b.dataset.pre];S.a[S.sis]=p[0];S.b[S.sis]=p[1];S.th=0;actualiza();}));
 
-  const cx1 = 130, cy = 160;
-  const cx2 = cx1 + r1 + r2 + (sistemaActual === 'correa' ? 100 : 0);
-
-  let svgContent = '';
-
-  if (sistemaActual === 'friccion') {
-    svgContent += `
-      <g class="rotate-group" transform="rotate(${angle1} ${cx1} ${cy})">
-        <circle cx="${cx1}" cy="${cy}" r="${r1}" class="rueda-motriz"/>
-        <line x1="${cx1}" y1="${cy - r1 + 4}" x2="${cx1}" y2="${cy - r1/3}" stroke="#8a3326" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="${cx1}" cy="${cy}" r="4" class="eje"/>
-      </g>
-      <g class="rotate-group" transform="rotate(${angle2} ${cx2} ${cy})">
-        <circle cx="${cx2}" cy="${cy}" r="${r2}" class="rueda-conducida"/>
-        <line x1="${cx2}" y1="${cy - r2 + 4}" x2="${cx2}" y2="${cy - r2/3}" stroke="#1a3d59" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="${cx2}" cy="${cy}" r="4" class="eje"/>
-      </g>
-      <text x="${cx1}" y="${cy + r1 + 25}" text-anchor="middle" class="label-motriz">Motriz</text>
-      <text x="${cx2}" y="${cy + r2 + 25}" text-anchor="middle" class="label-conducida">Conducida</text>
-      <text x="${cx1}" y="${cy + r1 + 40}" text-anchor="middle" class="label-motriz">D₁ = ${p1} mm</text>
-      <text x="${cx2}" y="${cy + r2 + 40}" text-anchor="middle" class="label-conducida">D₂ = ${p2} mm</text>
-    `;
-  } else if (sistemaActual === 'correa') {
-    const dist = cx2 - cx1;
-    // Correa tangente externa: aproximación con líneas rectas horizontales
-    const tangY1 = cy - r1;
-    const tangY2 = cy - r2;
-    // Para simplificar: si los radios son distintos, las tangentes están ligeramente inclinadas.
-    // Aquí usamos un arco superior y otro inferior con curvas suaves.
-    svgContent += `
-      <path d="M ${cx1} ${cy - r1} A ${r1} ${r1} 0 1 0 ${cx1} ${cy + r1}
-               L ${cx2} ${cy + r2} A ${r2} ${r2} 0 1 0 ${cx2} ${cy - r2} Z"
-            fill="#ccc" stroke="none" opacity="0.3"/>
-      <line x1="${cx1}" y1="${cy - r1}" x2="${cx2}" y2="${cy - r2}" class="correa"/>
-      <line x1="${cx1}" y1="${cy + r1}" x2="${cx2}" y2="${cy + r2}" class="correa"/>
-      <g class="rotate-group" transform="rotate(${angle1} ${cx1} ${cy})">
-        <circle cx="${cx1}" cy="${cy}" r="${r1}" class="rueda-motriz"/>
-        <line x1="${cx1}" y1="${cy - r1 + 4}" x2="${cx1}" y2="${cy - r1/3}" stroke="#8a3326" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="${cx1}" cy="${cy}" r="4" class="eje"/>
-      </g>
-      <g class="rotate-group" transform="rotate(${angle2} ${cx2} ${cy})">
-        <circle cx="${cx2}" cy="${cy}" r="${r2}" class="rueda-conducida"/>
-        <line x1="${cx2}" y1="${cy - r2 + 4}" x2="${cx2}" y2="${cy - r2/3}" stroke="#1a3d59" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="${cx2}" cy="${cy}" r="4" class="eje"/>
-      </g>
-      <text x="${cx1}" y="${cy + r1 + 25}" text-anchor="middle" class="label-motriz">Polea 1</text>
-      <text x="${cx2}" y="${cy + r2 + 25}" text-anchor="middle" class="label-conducida">Polea 2</text>
-      <text x="${cx1}" y="${cy + r1 + 40}" text-anchor="middle" class="label-motriz">D₁ = ${p1} mm</text>
-      <text x="${cx2}" y="${cy + r2 + 40}" text-anchor="middle" class="label-conducida">D₂ = ${p2} mm</text>
-    `;
-  } else if (sistemaActual === 'engranajes') {
-    // Engranajes: representamos dientes como pequeñas líneas en el contorno
-    const z1 = Math.round(p1);
-    const z2 = Math.round(p2);
-    // Para que engranen visualmente, los dientes deben tener el mismo "módulo".
-    // m = D/Z. Si forzamos m=1 visualmente, r1 = z1/2, r2 = z2/2.
-    // Pero queremos mantener escala razonable.
-    // Visualización: dibujamos cada diente como una pequeña línea radial saliente.
-    let dientes1 = '';
-    const r1_outer = r1 + 6;
-    for (let i = 0; i < z1; i++) {
-      const ang = (2 * Math.PI * i) / z1;
-      const x1 = cx1 + r1 * Math.cos(ang), y1 = cy + r1 * Math.sin(ang);
-      const x2 = cx1 + r1_outer * Math.cos(ang), y2 = cy + r1_outer * Math.sin(ang);
-      dientes1 += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#8a3326" stroke-width="2" stroke-linecap="round"/>`;
-    }
-    let dientes2 = '';
-    const r2_outer = r2 + 6;
-    for (let i = 0; i < z2; i++) {
-      const ang = (2 * Math.PI * i) / z2;
-      const x1 = cx2 + r2 * Math.cos(ang), y1 = cy + r2 * Math.sin(ang);
-      const x2 = cx2 + r2_outer * Math.cos(ang), y2 = cy + r2_outer * Math.sin(ang);
-      dientes2 += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#1a3d59" stroke-width="2" stroke-linecap="round"/>`;
-    }
-
-    svgContent += `
-      <g class="rotate-group" transform="rotate(${angle1} ${cx1} ${cy})">
-        <circle cx="${cx1}" cy="${cy}" r="${r1}" class="rueda-motriz"/>
-        ${dientes1}
-        <line x1="${cx1}" y1="${cy - r1 + 4}" x2="${cx1}" y2="${cy - r1/3}" stroke="#8a3326" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="${cx1}" cy="${cy}" r="4" class="eje"/>
-      </g>
-      <g class="rotate-group" transform="rotate(${angle2} ${cx2} ${cy})">
-        <circle cx="${cx2}" cy="${cy}" r="${r2}" class="rueda-conducida"/>
-        ${dientes2}
-        <line x1="${cx2}" y1="${cy - r2 + 4}" x2="${cx2}" y2="${cy - r2/3}" stroke="#1a3d59" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="${cx2}" cy="${cy}" r="4" class="eje"/>
-      </g>
-      <text x="${cx1}" y="${cy + r1 + 30}" text-anchor="middle" class="label-motriz">Piñón</text>
-      <text x="${cx2}" y="${cy + r2 + 30}" text-anchor="middle" class="label-conducida">Rueda</text>
-      <text x="${cx1}" y="${cy + r1 + 45}" text-anchor="middle" class="label-motriz">Z₁ = ${z1} dientes</text>
-      <text x="${cx2}" y="${cy + r2 + 45}" text-anchor="middle" class="label-conducida">Z₂ = ${z2} dientes</text>
-    `;
-  }
-
-  svg.innerHTML = svgContent;
+// ------------------------------------------------------------------ retos
+const R_=n=>Math.floor(Math.random()*n);
+function empiezaReto(){
+  finReto();const claves=Object.keys(SIS),k=claves[R_(4)],s=SIS[k],tipos=['n2','n2','n1','b','a'];
+  let t=null;
+  for(let it=0;it<2000&&!t;it++){
+    const inc=tipos[R_(tipos.length)];
+    const A=s.dientes?(k==='eng'?10+R_(41):10+R_(41)):(2+R_(19))*10,B=s.dientes?10+R_(51):(2+R_(19))*10;
+    if(A===B||A<s.min||B<s.min||A>s.max||B>s.max)continue;
+    const N1=(1+R_(30))*20,N2=N1*A/B;
+    if(N2!==Math.round(N2)||N2<10||N2>3000)continue;
+    t={inc,k,A,B,N1,N2};}
+  if(!t)t={inc:'n2',k:'eng',A:15,B:45,N1:120,N2:40};
+  S.sis=t.k;S.a[t.k]=t.A;S.b[t.k]=t.B;S.n1=t.N1;S.th=0;S.cruz=false;
+  const sym=s.dientes?'Z':'D',ud=s.dientes?'dientes':'mm',dato=(w,v)=>s.dientes?(sym+w+' = '+v+' dientes'):(sym+w+' = '+v+' mm');
+  if(t.inc==='n2'){t.sol=t.N2;t.u='rpm';t.lab='n₂';t.txt='La rueda motriz gira a <strong style="color:var(--c1)">n₁ = '+t.N1+' rpm</strong>. ¿A qué velocidad <strong style="color:var(--c2)">n₂</strong> gira la conducida?';}
+  else if(t.inc==='n1'){t.sol=t.N1;t.u='rpm';t.lab='n₁';t.txt='La rueda conducida tiene que girar a <strong style="color:var(--c2)">n₂ = '+t.N2+' rpm</strong>. ¿A qué velocidad <strong style="color:var(--c1)">n₁</strong> debe girar la motriz?';}
+  else if(t.inc==='b'){t.sol=t.B;t.u=ud;t.lab=sym+'₂';t.txt='La motriz gira a <strong style="color:var(--c1)">'+t.N1+' rpm</strong> y queremos que la conducida gire a <strong style="color:var(--c2)">'+t.N2+' rpm</strong>. ¿Qué '+(s.dientes?'número de dientes':'diámetro')+' <strong style="color:var(--c2)">'+sym+'₂</strong> necesita?';}
+  else{t.sol=t.A;t.u=ud;t.lab=sym+'₁';t.txt='La motriz gira a <strong style="color:var(--c1)">'+t.N1+' rpm</strong> y la conducida a <strong style="color:var(--c2)">'+t.N2+' rpm</strong>. ¿Qué '+(s.dientes?'número de dientes':'diámetro')+' <strong style="color:var(--c1)">'+sym+'₁</strong> tiene la motriz?';}
+  t.resuelto=false;S.reto=t;
+  document.getElementById('reto').classList.add('on');document.getElementById('reto-txt').innerHTML=t.txt;
+  document.getElementById('reto-inc').textContent=t.lab+' =';document.getElementById('reto-ud').textContent=t.u;
+  document.getElementById('reto-in').value='';const fb=document.getElementById('reto-fb');fb.textContent='';fb.className='tr-fb';
+  actualiza();document.getElementById('reto-in').focus();
 }
+function finReto(){S.reto=null;document.getElementById('reto').classList.remove('on');}
+function explica(t){const s=SIS[t.k],sym=s.dientes?'Z':'D';
+  if(t.inc==='n2')return 'n₂ = n₁ · '+sym+'₁ / '+sym+'₂ = '+t.N1+' · '+t.A+' / '+t.B+' = '+t.N2+' rpm';
+  if(t.inc==='n1')return 'n₁ = n₂ · '+sym+'₂ / '+sym+'₁ = '+t.N2+' · '+t.B+' / '+t.A+' = '+t.N1+' rpm';
+  if(t.inc==='b')return sym+'₂ = n₁ · '+sym+'₁ / n₂ = '+t.N1+' · '+t.A+' / '+t.N2+' = '+t.B+' '+t.u;
+  return sym+'₁ = n₂ · '+sym+'₂ / n₁ = '+t.N2+' · '+t.B+' / '+t.N1+' = '+t.A+' '+t.u;}
+function prueba(v,sol){const t=S.reto;if(!t)return;const fb=document.getElementById('reto-fb');
+  if(sol||Math.abs(v-t.sol)<=0.005*Math.max(1,t.sol)){fb.className='tr-fb ok';fb.textContent=(sol?'Solución: ':'✔ Correcto: ')+explica(t)+'. Pulsa «Reto» para otro.';t.resuelto=true;S.th=0;S.pausa=false;actualiza();}
+  else{fb.className='tr-fb ko';fb.textContent='✘ No es correcto. Plantea n₁ · '+(SIS[t.k].dientes?'Z₁ = n₂ · Z₂':'D₁ = n₂ · D₂')+' y despeja.';}}
+document.getElementById('b-reto').addEventListener('click',empiezaReto);
+document.getElementById('reto-fin').addEventListener('click',()=>{finReto();actualiza();});
+document.getElementById('reto-ok').addEventListener('click',()=>{const v=parseFloat(String(document.getElementById('reto-in').value).replace(',','.'));if(!isNaN(v))prueba(v,false);});
+document.getElementById('reto-in').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('reto-ok').click();});
+document.getElementById('reto-sol').addEventListener('click',()=>prueba(0,true));
 
-function toggleAnimacion() {
-  animando = !animando;
-  document.getElementById('btn-animar').textContent = animando ? '⏸ Pausar' : '▶ Animar';
-  if (animando) animar(); else cancelAnimationFrame(animFrame);
-}
-
-function animar() {
-  if (!animando) return;
-  const info = SISTEMAS[sistemaActual];
-  const p1 = leerValor('in-1a') || 50;
-  const p2 = leerValor('in-2a') || 100;
-  // Velocidad angular: la rueda 2 gira a velocidad proporcional a la relación
-  const v1 = 2; // grados por frame
-  const v2 = v1 * (p1 / p2) * info.sentidoNum;
-  angle1 = (angle1 + v1) % 360;
-  angle2 = (angle2 + v2 + 360) % 360;
-  dibujar();
-  animFrame = requestAnimationFrame(animar);
-}
-
-document.getElementById('in-1a').addEventListener('input', calcular);
-document.getElementById('in-1b').addEventListener('input', calcular);
-document.getElementById('in-2a').addEventListener('input', calcular);
-
-// Inicialización
-setSistema('friccion');
+// ------------------------------------------------------------------ animación
+function frame(t){
+  if(S.t0!==null){const dt=Math.min(0.1,(t-S.t0)/1000);
+    if(!S.pausa&&!(S.reto&&!S.reto.resuelto)){S.th+=S.n1/60*2*Math.PI*S.f*dt;pon();}}
+  S.t0=t;requestAnimationFrame(frame);}
+actualiza();requestAnimationFrame(frame);
+window.__trS=S;window.__trAct=actualiza;window.__trListo=true;
+})();
 </script>
-
-<footer style="text-align:center; padding:2rem 1rem 1rem; color:#888; font-size:0.85rem;">
-  <p>⚙️ Transmisión circular · TyD 2º ESO · Unidad 4</p>
-  <p><a href="../index.html" style="color:#1B4F8A; text-decoration:none;">← Volver al hub de la unidad</a></p>
-  <p style="margin-top:8px; font-family:'JetBrains Mono', monospace; font-size:0.72rem; opacity:0.6;">v1.0</p>
-</footer>
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
 <script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
